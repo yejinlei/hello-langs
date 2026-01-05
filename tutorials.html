@@ -85,6 +85,7 @@
             <!-- Language Selector -->
             <div class="flex flex-wrap justify-center gap-3 mb-8">
                 <button class="language-tab active px-4 py-2 rounded-lg text-sm font-medium" data-lang="python">Python</button>
+                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="c">C</button>
                 <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="cpp">C++</button>
                 <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="java">Java</button>
                 <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="csharp">C#</button>
@@ -94,7 +95,6 @@
                 <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="typescript">TypeScript</button>
                 <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="dart">Dart</button>
                 <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="rust">Rust</button>
-                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="c">C</button>
                 <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="kotlin">Kotlin</button>
                 <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="ruby">Ruby</button>
             </div>
@@ -139,6 +139,22 @@
                                 <span class="text-blue-400">int</span> <span class="text-blue-300">age</span> = <span class="text-yellow-300">25</span>;<br>
                                 <span class="text-blue-400">double</span> <span class="text-blue-300">height</span> = <span class="text-yellow-300">1.75</span>;<br>
                                 <span class="text-blue-400">bool</span> <span class="text-blue-300">is_student</span> = <span class="text-purple-300">true</span>;
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 静态类型语言，程序化编程语言</h4>
+                        <p class="text-slate-300 mb-4">特点：高效的底层编程，系统级编程，结构化编程，指针操作。注意事项：变量必须先声明后使用，需要手动管理内存，字符串以'\0'结尾。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 基本赋值</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">x</span> = <span class="text-yellow-300">10</span>;<br>
+                                <span class="text-blue-400">char</span> <span class="text-blue-300">name</span>[] = <span class="text-green-300">"张三"</span>;<br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">age</span> = <span class="text-yellow-300">25</span>;<br>
+                                <span class="text-blue-400">double</span> <span class="text-blue-300">height</span> = <span class="text-yellow-300">1.75</span>;<br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">is_student</span> = <span class="text-yellow-300">1</span>;  <span class="text-slate-400">// C语言用0和1表示布尔值</span>
                             </div>
                         </div>
                     </div>
@@ -221,6 +237,35 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 基础数据类型，直接对应硬件</h4>
+                        <p class="text-slate-300 mb-4">特点：数据类型直接对应硬件，支持无符号类型，内存布局明确，类型大小由编译器决定。注意事项：int类型大小在不同平台可能不同，使用sizeof()获取类型大小。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 基本数据类型</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 整数类型</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">num_int</span> = <span class="text-yellow-300">42</span>;<br>
+                                <span class="text-blue-400">short</span> <span class="text-blue-300">num_short</span> = <span class="text-yellow-300">1000</span>;<br>
+                                <span class="text-blue-400">long</span> <span class="text-blue-300">num_long</span> = <span class="text-yellow-300">1000000</span>;<br>
+                                <span class="text-blue-400">long long</span> <span class="text-blue-300">num_ll</span> = <span class="text-yellow-300">10000000000</span>;<br>
+                                <span class="text-blue-400">unsigned int</span> <span class="text-blue-300">num_uint</span> = <span class="text-yellow-300">4294967295</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 浮点数类型</span><br>
+                                <span class="text-blue-400">float</span> <span class="text-blue-300">num_float</span> = <span class="text-yellow-300">3.14f</span>;<br>
+                                <span class="text-blue-400">double</span> <span class="text-blue-300">num_double</span> = <span class="text-yellow-300">3.1415926535</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 字符类型</span><br>
+                                <span class="text-blue-400">char</span> <span class="text-blue-300">c</span> = <span class="text-green-300">'A'</span>;<br>
+                                <span class="text-blue-400">char</span> <span class="text-blue-300">str</span>[] = <span class="text-green-300">"Hello"</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 布尔值（用整数表示）</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">is_true</span> = <span class="text-yellow-300">1</span>;<br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">is_false</span> = <span class="text-yellow-300">0</span>;
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -275,6 +320,30 @@
                                 <span class="text-blue-400">// 三元运算符</span><br>
                                 <span class="text-green-300">std::string</span> <span class="text-blue-300">result</span> = <span class="text-purple-400">true</span> ? <span class="text-green-300">"成功"</span> : <span class="text-green-300">"失败"</span>;
                                 <span class="text-blue-300">std::cout</span> &lt;&lt; <span class="text-blue-300">result</span> &lt;&lt; <span class="text-blue-300">std::endl</span>;
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 基础条件语句，支持传统结构化编程</h4>
+                        <p class="text-slate-300 mb-4">特点：支持if-else if-else结构，支持三元运算符，支持switch-case语句，支持嵌套条件。注意事项：条件判断使用花括号区分代码块，switch-case需要break语句，C89不支持在for循环中声明变量。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 条件语句</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">age</span> = <span class="text-yellow-300">18</span>;<br>
+                                <br>
+                                <span class="text-purple-400">if</span> (<span class="text-blue-300">age</span> &lt; <span class="text-yellow-300">18</span>) {
+                                    <span class="text-blue-300">printf</span>(<span class="text-green-300">"未成年\n"</span>);
+                                } <span class="text-purple-400">else</span> <span class="text-purple-400">if</span> (<span class="text-blue-300">age</span> == <span class="text-yellow-300">18</span>) {
+                                    <span class="text-blue-300">printf</span>(<span class="text-green-300">"刚成年\n"</span>);
+                                } <span class="text-purple-400">else</span> {
+                                    <span class="text-blue-300">printf</span>(<span class="text-green-300">"成年人\n"</span>);
+                                }
+                                <br>
+                                <span class="text-blue-400">// 三元运算符</span><br>
+                                <span class="text-blue-400">char</span> *<span class="text-blue-300">result</span> = (<span class="text-blue-400">int</span>)<span class="text-yellow-300">1</span> ? <span class="text-green-300">"成功"</span> : <span class="text-green-300">"失败"</span>;
+                                <span class="text-blue-300">printf</span>(<span class="text-green-300">"%s\n"</span>, <span class="text-blue-300">result</span>);
                             </div>
                         </div>
                     </div>
@@ -342,6 +411,34 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 传统循环结构</h4>
+                        <p class="text-slate-300 mb-4">特点：支持for循环、while循环、do-while循环，支持break和continue，支持循环嵌套，支持数组遍历。注意事项：避免无限循环，for循环中注意分号使用，注意循环变量类型。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 循环语句</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// for循环</span><br>
+                                <span class="text-purple-400">for</span> (<span class="text-blue-400">int</span> <span class="text-blue-300">i</span> = <span class="text-yellow-300">0</span>; <span class="text-blue-300">i</span> &lt; <span class="text-yellow-300">5</span>; <span class="text-blue-300">i</span>++) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;printf</span>(<span class="text-green-300">"%d\n"</span>, <span class="text-blue-300">i</span>);<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 遍历数组</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">numbers</span>[] = {<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>};<br>
+                                <span class="text-purple-400">for</span> (<span class="text-blue-400">int</span> <span class="text-blue-300">i</span> = <span class="text-yellow-300">0</span>; <span class="text-blue-300">i</span> &lt; <span class="text-yellow-300">5</span>; <span class="text-blue-300">i</span>++) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;printf</span>(<span class="text-green-300">"%d\n"</span>, <span class="text-blue-300">numbers</span>[<span class="text-blue-300">i</span>]);<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// while循环</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">count</span> = <span class="text-yellow-300">0</span>;<br>
+                                <span class="text-purple-400">while</span> (<span class="text-blue-300">count</span> &lt; <span class="text-yellow-300">5</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;printf</span>(<span class="text-green-300">"%d\n"</span>, <span class="text-blue-300">count</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">count</span>++;<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -367,6 +464,37 @@
                                 <br>
                                 <span class="text-blue-300">result</span> = <span class="text-blue-300">add</span>(<span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>)<br>
                                 <span class="text-blue-300">print</span>(<span class="text-blue-300">result</span>) <span class="text-slate-500"># 输出5</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 函数定义和调用（C99）</h4>
+                        <p class="text-slate-300 mb-4">特点：支持函数声明和定义，支持返回类型，支持函数参数，支持递归调用，支持函数指针。C99支持可变参数。注意事项：函数必须在使用前声明，函数名不能重复，递归需要谨慎使用。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 函数定义</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 函数声明</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">add</span>(<span class="text-blue-400">int</span> <span class="text-blue-300">a</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">b</span>);<br>
+                                <br>
+                                <span class="text-blue-400">// 函数定义</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">add</span>(<span class="text-blue-400">int</span> <span class="text-blue-300">a</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">b</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 主函数</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">main</span>() {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;int</span> <span class="text-blue-300">result</span> = <span class="text-blue-300">add</span>(<span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;printf</span>(<span class="text-green-300">"结果：%d\n"</span>, <span class="text-blue-300">result</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-yellow-300">0</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 递归函数示例</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">factorial</span>(<span class="text-blue-400">int</span> <span class="text-blue-300">n</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> (<span class="text-blue-300">n</span> &lt;= <span class="text-yellow-300">1</span>) <span class="text-green-300">return</span> <span class="text-yellow-300">1</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">n</span> * <span class="text-blue-300">factorial</span>(<span class="text-blue-300">n</span> - <span class="text-yellow-300">1</span>);<br>
+                                }
                             </div>
                         </div>
                     </div>
@@ -400,6 +528,50 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 位置参数和指针传递（C99）</h4>
+                        <p class="text-slate-300 mb-4">特点：只支持位置参数，需要显式声明参数类型，使用指针传递复杂数据类型，支持函数指针参数。C99支持可变参数列表。注意事项：参数传递为值传递，指针传递可修改实参，注意指针安全性。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 函数参数</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 简单参数传递（值传递）</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">add</span>(<span class="text-blue-400">int</span> <span class="text-blue-300">a</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">b</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 指针传递（引用传递）</span><br>
+                                <span class="text-blue-400">void</span> <span class="text-blue-300">swap</span>(<span class="text-blue-400">int</span> *<span class="text-blue-300">x</span>, <span class="text-blue-400">int</span> *<span class="text-blue-300">y</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;int</span> <span class="text-blue-300">temp</span> = *<span class="text-blue-300">x</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>*<span class="text-blue-300">x</span> = *<span class="text-blue-300">y</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>*<span class="text-blue-300">y</span> = <span class="text-blue-300">temp</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 数组参数</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">sum_array</span>(<span class="text-blue-400">int</span> <span class="text-blue-300">arr</span>[], <span class="text-blue-400">int</span> <span class="text-blue-300">size</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;int</span> <span class="text-blue-300">sum</span> = <span class="text-yellow-300">0</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;for</span> (<span class="text-blue-400">int</span> <span class="text-blue-300">i</span> = <span class="text-yellow-300">0</span>; <span class="text-blue-300">i</span> &lt; <span class="text-blue-300">size</span>; <span class="text-blue-300">i</span>++) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">sum</span> += <span class="text-blue-300">arr</span>[<span class="text-blue-300">i</span>];<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">sum</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// C99可变参数</span><br>
+                                <span class="text-blue-400">#include</span> &lt;<span class="text-blue-300">stdarg.h</span>&gt;<br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">sum</span>(<span class="text-blue-400">int</span> <span class="text-blue-300">count</span>, ...) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;va_list</span> <span class="text-blue-300">args</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;va_start</span>(<span class="text-blue-300">args</span>, <span class="text-blue-300">count</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;int</span> <span class="text-blue-300">total</span> = <span class="text-yellow-300">0</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;for</span> (<span class="text-blue-400">int</span> <span class="text-blue-300">i</span> = <span class="text-yellow-300">0</span>; <span class="text-blue-300">i</span> &lt; <span class="text-blue-300">count</span>; <span class="text-blue-300">i</span>++) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">total</span> += <span class="text-blue-300">va_arg</span>(<span class="text-blue-300">args</span>, <span class="text-blue-400">int</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;va_end</span>(<span class="text-blue-300">args</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">total</span>;<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -424,6 +596,47 @@
                                 <br>
                                 <span class="text-blue-300">id</span>, <span class="text-blue-300">name</span>, <span class="text-blue-300">age</span> = <span class="text-blue-300">get_user</span>()<br>
                                 <span class="text-blue-300">print</span>(<span class="text-green-300">f"ID: {id}, 姓名: {name}, 年龄: {age}"</span>)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 单个返回值和结构体返回（C99）</h4>
+                        <p class="text-slate-300 mb-4">特点：只支持返回单个值，使用指针返回多个值，返回结构体类型，支持void返回类型，返回指针类型。C99支持内联函数。注意事项：不能返回局部变量的指针，返回指针时注意内存管理。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 函数返回值</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 单个返回值</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">add</span>(<span class="text-blue-400">int</span> <span class="text-blue-300">a</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">b</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 使用指针返回多个值</span><br>
+                                <span class="text-blue-400">void</span> <span class="text-blue-300">calculate</span>(<span class="text-blue-400">int</span> <span class="text-blue-300">a</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">b</span>,<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> *<span class="text-blue-300">sum</span>, <span class="text-blue-400">int</span> *<span class="text-blue-300">product</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>*<span class="text-blue-300">sum</span> = <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>*<span class="text-blue-300">product</span> = <span class="text-blue-300">a</span> * <span class="text-blue-300">b</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 结构体返回值</span><br>
+                                <span class="text-blue-400">typedef</span> <span class="text-purple-400">struct</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;int</span> <span class="text-blue-300">x</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;int</span> <span class="text-blue-300">y</span>;<br>
+                                } <span class="text-blue-300">Point</span>;<br>
+                                <br>
+                                <span class="text-blue-300">Point</span> <span class="text-blue-300">create_point</span>(<span class="text-blue-400">int</span> <span class="text-blue-300">x</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">y</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;Point</span> <span class="text-blue-300">p</span> = {<span class="text-blue-300">x</span>, <span class="text-blue-300">y</span>};<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">p</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 主函数示例</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">main</span>() {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;int</span> <span class="text-blue-300">sum</span>, <span class="text-blue-300">product</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">calculate</span>(<span class="text-yellow-300">5</span>, <span class="text-yellow-300">3</span>, &<span class="text-blue-300">sum</span>, &<span class="text-blue-300">product</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;printf</span>(<span class="text-green-300">"和：%d，积：%d\n"</span>, <span class="text-blue-300">sum</span>, <span class="text-blue-300">product</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-yellow-300">0</span>;<br>
+                                }
                             </div>
                         </div>
                     </div>
@@ -457,6 +670,45 @@
                                 <span class="text-blue-300">name</span> = <span class="text-green-300">"张三"</span><br>
                                 <span class="text-blue-300">age</span> = <span class="text-yellow-300">18</span><br>
                                 <span class="text-blue-300">print</span>(<span class="text-green-300">f"我叫{name}，今年{age}岁"</span>) <span class="text-slate-500"># 输出：我叫张三，今年18岁</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 字符数组和字符串操作（C99）</h4>
+                        <p class="text-slate-300 mb-4">特点：使用字符数组表示字符串，使用'\0'结尾，支持字符串处理函数（C99），支持宽字符串。C99支持可变长度数组。注意事项：字符串以'\0'结尾，注意数组越界，使用标准字符串函数。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 字符串操作</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 字符串声明和初始化</span><br>
+                                <span class="text-blue-400">char</span> <span class="text-blue-300">str1</span>[] = <span class="text-green-300">"Hello"</span>;<br>
+                                <span class="text-blue-400">char</span> <span class="text-blue-300">str2</span>[<span class="text-yellow-300">10</span>] = <span class="text-green-300">"World"</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 字符串复制</span><br>
+                                <span class="text-blue-400">char</span> <span class="text-blue-300">dest</span>[<span class="text-yellow-300">100</span>];<br>
+                                <span class="text-blue-300">strcpy</span>(<span class="text-blue-300">dest</span>, <span class="text-blue-300">str1</span>);<br>
+                                <br>
+                                <span class="text-blue-400">// 字符串连接</span><br>
+                                <span class="text-blue-300">strcat</span>(<span class="text-blue-300">dest</span>, <span class="text-green-300">" "</span>);<br>
+                                <span class="text-blue-300">strcat</span>(<span class="text-blue-300">dest</span>, <span class="text-blue-300">str2</span>);<br>
+                                <span class="text-blue-300">printf</span>(<span class="text-green-300">"%s\n"</span>, <span class="text-blue-300">dest</span>); <span class="text-slate-500">// 输出：Hello World</span><br>
+                                <br>
+                                <span class="text-blue-400">// 字符串比较</span><br>
+                                <span class="text-blue-400">if</span> (<span class="text-blue-300">strcmp</span>(<span class="text-blue-300">str1</span>, <span class="text-blue-300">str2</span>) == <span class="text-yellow-300">0</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;printf</span>(<span class="text-green-300">"字符串相等\n"</span>);<br>
+                                } <span class="text-purple-400">else</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;printf</span>(<span class="text-green-300">"字符串不等\n"</span>);<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 字符串长度</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">len</span> = <span class="text-blue-300">strlen</span>(<span class="text-blue-300">str1</span>);<br>
+                                <span class="text-blue-300">printf</span>(<span class="text-green-300">"长度：%d\n"</span>, <span class="text-blue-300">len</span>); <span class="text-slate-500">// 输出：5</span><br>
+                                <br>
+                                <span class="text-blue-400">// 字符数组操作（C99）</span><br>
+                                <span class="text-blue-400">char</span> <span class="text-blue-300">buffer</span>[<span class="text-yellow-300">50</span>];<br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">n</span> = <span class="text-yellow-300">10</span>;<br>
+                                <span class="text-blue-400">char</span> <span class="text-blue-300">vla</span>[<span class="text-blue-300">n</span>]; <span class="text-slate-500">// 可变长度数组（C99）</span>
                             </div>
                         </div>
                     </div>
@@ -496,6 +748,39 @@
                                 <span class="text-blue-300">numbers</span> = [<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>]<br>
                                 <span class="text-blue-300">squares</span> = [<span class="text-blue-300">x</span>**<span class="text-yellow-300">2</span> <span class="text-purple-400">for</span> <span class="text-blue-300">x</span> <span class="text-green-300">in</span> <span class="text-blue-300">numbers</span>]<br>
                                 <span class="text-blue-300">print</span>(<span class="text-blue-300">squares</span>) <span class="text-slate-500"># 输出：[1, 4, 9, 16, 25]</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 数组和手动列表管理</h4>
+                        <p class="text-slate-300 mb-4">特点：使用数组模拟列表，支持静态数组和动态数组（C99），手动管理列表大小，支持指针操作，需要手动实现列表操作函数。C99支持可变长度数组。注意事项：数组大小固定，需要手动跟踪元素数量，注意数组越界，需要手动内存管理。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 数组和列表操作</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 静态数组初始化</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">fruits</span>[] = {<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>}; <span class="text-slate-500">// 1=苹果, 2=香蕉, 3=橙子</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">fruits_size</span> = <span class="text-yellow-300">3</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 数组索引访问</span><br>
+                                <span class="text-green-300">printf</span>(<span class="text-green-300">"%d\n"</span>, <span class="text-blue-300">fruits</span>[<span class="text-yellow-300">0</span>]); <span class="text-slate-500">// 输出：1（苹果）</span><br>
+                                <span class="text-blue-300">printf</span>(<span class="text-green-300">"%d\n"</span>, <span class="text-blue-300">fruits</span>[<span class="text-blue-300">fruits_size</span> - <span class="text-yellow-300">1</span>]); <span class="text-slate-500">// 输出：3（橙子）</span><br>
+                                <br>
+                                <span class="text-blue-400">// C99可变长度数组</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">n</span> = <span class="text-yellow-300">5</span>;<br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">numbers</span>[<span class="text-blue-300">n</span>]; <span class="text-slate-500">// C99特性</span><br>
+                                <span class="text-purple-400">for</span> (<span class="text-blue-400">int</span> <span class="text-blue-300">i</span> = <span class="text-yellow-300">0</span>; <span class="text-blue-300">i</span> &lt; <span class="text-blue-300">n</span>; <span class="text-blue-300">i</span>++) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">numbers</span>[<span class="text-blue-300">i</span>] = (<span class="text-blue-300">i</span> + <span class="text-yellow-300">1</span>) * (<span class="text-blue-300">i</span> + <span class="text-yellow-300">1</span>);<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 动态数组分配（C99）</span><br>
+                                <span class="text-blue-400">int</span> *<span class="text-blue-300">dynamic_array</span> = <span class="text-green-300">malloc</span>(<span class="text-yellow-300">10</span> * <span class="text-purple-400">sizeof</span>(<span class="text-blue-400">int</span>));<br>
+                                <span class="text-purple-400">if</span> (<span class="text-blue-300">dynamic_array</span> == <span class="text-purple-400">NULL</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-green-300">printf</span>(<span class="text-green-300">"内存分配失败\n"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">1</span>;<br>
+                                }<br>
+                                <span class="text-green-300">free</span>(<span class="text-blue-300">dynamic_array</span>); <span class="text-slate-500">// 释放内存</span>
                             </div>
                         </div>
                     </div>
@@ -539,6 +824,44 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 结构体和手动哈希实现</h4>
+                        <p class="text-slate-300 mb-4">特点：使用结构体数组模拟字典，需要手动实现哈希函数，支持字符串键和数值键，支持动态扩容。C11支持匿名结构体和联合体。注意事项：需要手动管理内存，处理哈希冲突，注意键的字符串长度限制，实现查找算法。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 结构体定义和字典操作</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 定义键值对结构体</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">char</span> <span class="text-blue-300">key</span>[<span class="text-yellow-300">50</span>];<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">value</span>;<br>
+                                } <span class="text-blue-300">KeyValue</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 创建键值对数组</span><br>
+                                <span class="text-blue-300">KeyValue</span> <span class="text-blue-300">person</span>[] = {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>{<span class="text-green-300">"name"</span>, <span class="text-yellow-300">12345</span>},<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>{<span class="text-green-300">"age"</span>, <span class="text-yellow-300">18</span>},<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>{<span class="text-green-300">"gender"</span>, <span class="text-yellow-300">1</span>} <span class="text-slate-500">// 1=男, 0=女</span><br>
+                                };<br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">person_size</span> = <span class="text-yellow-300">3</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 手动查找函数</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">find_value</span>(<span class="text-blue-300">KeyValue</span> *<span class="text-blue-300">data</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">size</span>, <span class="text-blue-400">char</span> *<span class="text-blue-300">key</span>) {<br>
+                                <span class="text-purple-400">for</span> (<span class="text-blue-400">int</span> <span class="text-blue-300">i</span> = <span class="text-yellow-300">0</span>; <span class="text-blue-300">i</span> &lt; <span class="text-blue-300">size</span>; <span class="text-blue-300">i</span>++) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">strcmp</span>(<span class="text-blue-300">data</span>[<span class="text-blue-300">i</span>].<span class="text-blue-300">key</span>, <span class="text-blue-300">key</span>) == <span class="text-yellow-300">0</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">data</span>[<span class="text-blue-300">i</span>].<span class="text-blue-300">value</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                }<br>
+                                <span class="text-purple-400">return</span> <span class="text-yellow-300">-1</span>; <span class="text-slate-500">// 未找到</span><br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 使用示例</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">name_value</span> = <span class="text-blue-300">find_value</span>(<span class="text-blue-300">person</span>, <span class="text-blue-300">person_size</span>, <span class="text-green-300">"name"</span>);<br>
+                                <span class="text-green-300">printf</span>(<span class="text-green-300">"name的值：%d\n"</span>, <span class="text-blue-300">name_value</span>);
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -578,6 +901,53 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 手动集合实现</h4>
+                        <p class="text-slate-300 mb-4">特点：使用数组和位图模拟集合，支持集合运算，需要手动实现去重算法，支持整数集合和字符集合。C11支持布尔类型。注意事项：需要手动管理集合大小和容量，注意数组越界，实现集合运算算法需要额外的内存空间。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 集合操作实现</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 整数集合定义</span><br>
+                                <span class="text-blue-400">#define</span> <span class="text-blue-300">MAX_SET_SIZE</span> <span class="text-yellow-300">100</span><br>
+                                <span class="text-blue-400">typedef</span> <span class="text-purple-400">struct</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">elements</span>[<span class="text-blue-300">MAX_SET_SIZE</span>];<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">size</span>;<br>
+                                } <span class="text-blue-300">IntSet</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 初始化集合</span><br>
+                                <span class="text-blue-400">void</span> <span class="text-blue-300">init_set</span>(<span class="text-blue-300">IntSet</span> *<span class="text-blue-300">set</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">set</span>-><span class="text-blue-300">size</span> = <span class="text-yellow-300">0</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 添加元素（自动去重）</span><br>
+                                <span class="text-blue-400">void</span> <span class="text-blue-300">add_element</span>(<span class="text-blue-300">IntSet</span> *<span class="text-blue-300">set</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">value</span>) {<br>
+                                <span class="text-purple-400">for</span> (<span class="text-blue-400">int</span> <span class="text-blue-300">i</span> = <span class="text-yellow-300">0</span>; <span class="text-blue-300">i</span> &lt; <span class="text-blue-300">set</span>-><span class="text-blue-300">size</span>; <span class="text-blue-300">i</span>++) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">set</span>-><span class="text-blue-300">elements</span>[<span class="text-blue-300">i</span>] == <span class="text-blue-300">value</span>) <span class="text-purple-400">return</span>; <span class="text-slate-500">// 已存在</span><br>
+                                }<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">set</span>-><span class="text-blue-300">size</span> &lt; <span class="text-blue-300">MAX_SET_SIZE</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">set</span>-><span class="text-blue-300">elements</span>[<span class="text-blue-300">set</span>-><span class="text-blue-300">size</span>++] = <span class="text-blue-300">value</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 集合交集</span><br>
+                                <span class="text-blue-300">IntSet</span> <span class="text-blue-300">intersection</span>(<span class="text-blue-300">IntSet</span> *<span class="text-blue-300">s1</span>, <span class="text-blue-300">IntSet</span> *<span class="text-blue-300">s2</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">IntSet</span> <span class="text-blue-300">result</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">init_set</span>(&<span class="text-blue-300">result</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">for</span> (<span class="text-blue-400">int</span> <span class="text-blue-300">i</span> = <span class="text-yellow-300">0</span>; <span class="text-blue-300">i</span> &lt; <span class="text-blue-300">s1</span>-><span class="text-blue-300">size</span>; <span class="text-blue-300">i</span>++) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">for</span> (<span class="text-blue-400">int</span> <span class="text-blue-300">j</span> = <span class="text-yellow-300">0</span>; <span class="text-blue-300">j</span> &lt; <span class="text-blue-300">s2</span>-><span class="text-blue-300">size</span>; <span class="text-blue-300">j</span>++) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">s1</span>-><span class="text-blue-300">elements</span>[<span class="text-blue-300">i</span>] == <span class="text-blue-300">s2</span>-><span class="text-blue-300">elements</span>[<span class="text-blue-300">j</span>]) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">add_element</span>(&<span class="text-blue-300">result</span>, <span class="text-blue-300">s1</span>-><span class="text-blue-300">elements</span>[<span class="text-blue-300">i</span>]);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">break</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">result</span>;<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -607,6 +977,40 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 不支持函数嵌套，使用函数指针</h4>
+                        <p class="text-slate-300 mb-4">特点：C语言不支持在函数内部定义函数，但可以使用函数指针模拟类似效果，需要手动管理上下文变量。C11支持匿名联合体。注意事项：函数指针需要额外的上下文传递，无法直接访问外部函数的局部变量。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 函数指针模拟闭包</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 上下文结构体</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">base_value</span>;<br>
+                                } <span class="text-blue-300">AddContext</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 内部函数（实际是普通函数）</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">add_with_base</span>(<span class="text-blue-400">void</span> *<span class="text-blue-300">context</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">value</span>) {<br>
+                                <span class="text-blue-300">AddContext</span> *<span class="text-blue-300">ctx</span> = (<span class="text-blue-300">AddContext</span> *)<span class="text-blue-300">context</span>;<br>
+                                <span class="text-purple-400">return</span> <span class="text-blue-300">ctx</span>-><span class="text-blue-300">base_value</span> + <span class="text-blue-300">value</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 模拟outer函数</span><br>
+                                <span class="text-blue-400">typedef</span> <span class="text-purple-400">struct</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> (*<span class="text-blue-300">func</span>)(<span class="text-blue-400">void</span>*, <span class="text-blue-400">int</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">AddContext</span> <span class="text-blue-300">ctx</span>;<br>
+                                } <span class="text-blue-300">Closure</span>;<br>
+                                <br>
+                                <span class="text-blue-300">Closure</span> <span class="text-blue-300">create_adder</span>(<span class="text-blue-400">int</span> <span class="text-blue-300">base</span>) {<br>
+                                <span class="text-blue-300">Closure</span> <span class="text-blue-300">closure</span>;<br>
+                                <span class="text-blue-300">closure</span>.<span class="text-blue-300">func</span> = <span class="text-blue-300">add_with_base</span>;<br>
+                                <span class="text-blue-300">closure</span>.<span class="text-blue-300">ctx</span>.<span class="text-blue-300">base_value</span> = <span class="text-blue-300">base</span>;<br>
+                                <span class="text-purple-400">return</span> <span class="text-blue-300">closure</span>;<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -633,6 +1037,40 @@
                                 <span class="text-blue-300">numbers</span> = [<span class="text-yellow-300">3</span>, <span class="text-yellow-300">1</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">1</span>, <span class="text-yellow-300">5</span>]<br>
                                 <span class="text-blue-300">sorted_numbers</span> = <span class="text-purple-400">sorted</span>(<span class="text-blue-300">numbers</span>, <span class="text-blue-300">key</span>=<span class="text-purple-400">lambda</span> <span class="text-blue-300">x</span>: -<span class="text-blue-300">x</span>)<br>
                                 <span class="text-blue-300">print</span>(<span class="text-blue-300">sorted_numbers</span>) <span class="text-slate-500"># 输出[5, 4, 3, 1, 1]</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 使用函数指针实现</h4>
+                        <p class="text-slate-300 mb-4">特点：C语言没有内置匿名函数，但可以使用函数指针实现类似功能，支持简单的函数定义和传递。C99支持复合字面量。注意事项：需要预先定义函数，不能内联定义，函数指针类型需要匹配。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 函数指针模拟匿名函数</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 定义函数指针类型</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-blue-400">int</span> (*<span class="text-blue-300">BinaryFunc</span>)(<span class="text-blue-400">int</span>, <span class="text-blue-400">int</span>);<br>
+                                <br>
+                                <span class="text-blue-400">// 普通函数定义（模拟匿名函数）</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">add_func</span>(<span class="text-blue-400">int</span> <span class="text-blue-300">x</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">y</span>) {<br>
+                                <span class="text-purple-400">return</span> <span class="text-blue-300">x</span> + <span class="text-blue-300">y</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 函数指针变量（模拟匿名函数）</span><br>
+                                <span class="text-blue-300">BinaryFunc</span> <span class="text-blue-300">add</span> = <span class="text-blue-300">add_func</span>;<br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">result</span> = <span class="text-blue-300">add</span>(<span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>); <span class="text-slate-500">// 输出5</span><br>
+                                <br>
+                                <span class="text-blue-400">// 简单的排序比较函数</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">compare_desc</span>(<span class="text-blue-400">const</span> <span class="text-blue-400">void</span> *<span class="text-blue-300">a</span>, <span class="text-blue-400">const</span> <span class="text-blue-400">void</span> *<span class="text-blue-300">b</span>) {<br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">int_a</span> = *(<span class="text-blue-400">const</span> <span class="text-blue-400">int</span>*)<span class="text-blue-300">a</span>;<br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">int_b</span> = *(<span class="text-blue-400">const</span> <span class="text-blue-400">int</span>*)<span class="text-blue-300">b</span>;<br>
+                                <span class="text-purple-400">return</span> <span class="text-blue-300">int_b</span> - <span class="text-blue-300">int_a</span>; <span class="text-slate-500">// 降序排列</span><br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 使用函数指针进行排序</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">numbers</span>[] = {<span class="text-yellow-300">3</span>, <span class="text-yellow-300">1</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">1</span>, <span class="text-yellow-300">5</span>};<br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">n</span> = <span class="text-yellow-300">5</span>;<br>
+                                <span class="text-blue-300">qsort</span>(<span class="text-blue-300">numbers</span>, <span class="text-blue-300">n</span>, <span class="text-purple-400">sizeof</span>(<span class="text-blue-400">int</span>), <span class="text-blue-300">compare_desc</span>);
                             </div>
                         </div>
                     </div>
@@ -669,6 +1107,47 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 使用结构体模拟类</h4>
+                        <p class="text-slate-300 mb-4">特点：C语言没有内置类，使用结构体模拟对象，使用函数指针模拟方法，需要手动分配内存。C99支持复合字面量。注意事项：需要手动管理内存，没有自动析构，需要实现构造函数和析构函数模式。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 结构体模拟类和对象</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 定义结构体（模拟类）</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> <span class="text-blue-300">Person</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">char</span> <span class="text-blue-300">name</span>[<span class="text-yellow-300">50</span>];<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">age</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">void</span> (*<span class="text-blue-300">greet</span>)(<span class="text-purple-400">struct</span> <span class="text-blue-300">Person</span>* <span class="text-blue-300">self</span>); <span class="text-slate-500">// 函数指针模拟方法</span><br>
+                                } <span class="text-blue-300">Person</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 构造函数</span><br>
+                                <span class="text-blue-300">Person</span>* <span class="text-blue-300">person_create</span>(<span class="text-blue-400">char</span> *<span class="text-blue-300">name</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">age</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Person</span> *<span class="text-blue-300">p</span> = <span class="text-blue-300">malloc</span>(<span class="text-purple-400">sizeof</span>(<span class="text-blue-300">Person</span>));<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">strcpy</span>(<span class="text-blue-300">p</span>-><span class="text-blue-300">name</span>, <span class="text-blue-300">name</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">p</span>-><span class="text-blue-300">age</span> = <span class="text-blue-300">age</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">p</span>-><span class="text-blue-300">greet</span> = <span class="text-blue-300">person_greet</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">p</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 方法实现</span><br>
+                                <span class="text-purple-400">void</span> <span class="text-blue-300">person_greet</span>(<span class="text-blue-300">Person</span> *<span class="text-blue-300">self</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"你好，我是%s，今年%d岁"</span>, <span class="text-blue-300">self</span>-><span class="text-blue-300">name</span>, <span class="text-blue-300">self</span>-><span class="text-blue-300">age</span>);<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 析构函数</span><br>
+                                <span class="text-purple-400">void</span> <span class="text-blue-300">person_destroy</span>(<span class="text-blue-300">Person</span> *<span class="text-blue-300">p</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">free</span>(<span class="text-blue-300">p</span>);<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 使用示例</span><br>
+                                <span class="text-blue-300">Person</span> *<span class="text-blue-300">person</span> = <span class="text-blue-300">person_create</span>(<span class="text-green-300">"张三"</span>, <span class="text-yellow-300">18</span>);<br>
+                                <span class="text-blue-300">person</span>-><span class="text-blue-300">greet</span>(<span class="text-blue-300">person</span>);<br>
+                                <span class="text-blue-300">person_destroy</span>(<span class="text-blue-300">person</span>);
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -699,6 +1178,62 @@
                                 <br>
                                 <span class="text-blue-300">dog</span> = <span class="text-blue-300">Dog</span>()<br>
                                 <span class="text-blue-300">dog</span>.<span class="text-blue-300">speak</span>()
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 结构体嵌套模拟继承</h4>
+                        <p class="text-slate-300 mb-4">特点：C语言没有内置继承，使用结构体嵌套模拟，支持方法重写，支持函数指针调用。C11支持匿名结构体。注意事项：需要手动实现方法表结构，父类方法需要通过函数指针调用，注意类型转换。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 结构体嵌套模拟继承</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 定义父类结构体</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> <span class="text-blue-300">Animal</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">char</span> <span class="text-blue-300">name</span>[<span class="text-yellow-300">30</span>];<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">void</span> (*<span class="text-blue-300">speak</span>)(<span class="text-purple-400">struct</span> <span class="text-blue-300">Animal</span>* <span class="text-blue-300">self</span>);<br>
+                                } <span class="text-blue-300">Animal</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 父类构造函数</span><br>
+                                <span class="text-blue-300">Animal</span>* <span class="text-blue-300">animal_create</span>(<span class="text-blue-400">char</span> *<span class="text-blue-300">name</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Animal</span> *<span class="text-blue-300">a</span> = <span class="text-blue-300">malloc</span>(<span class="text-purple-400">sizeof</span>(<span class="text-blue-300">Animal</span>));<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">strcpy</span>(<span class="text-blue-300">a</span>-><span class="text-blue-300">name</span>, <span class="text-blue-300">name</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">a</span>-><span class="text-blue-300">speak</span> = <span class="text-blue-300">animal_speak</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">a</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 父类方法</span><br>
+                                <span class="text-purple-400">void</span> <span class="text-blue-300">animal_speak</span>(<span class="text-blue-300">Animal</span> *<span class="text-blue-300">self</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"动物在说话\n"</span>);<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 定义子类结构体（继承父类）</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> <span class="text-blue-300">Dog</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Animal</span> <span class="text-blue-300">base</span>; <span class="text-slate-500">// 嵌套父类</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">char</span> <span class="text-blue-300">breed</span>[<span class="text-yellow-300">20</span>];<br>
+                                } <span class="text-blue-300">Dog</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 子类构造函数</span><br>
+                                <span class="text-blue-300">Dog</span>* <span class="text-blue-300">dog_create</span>(<span class="text-blue-400">char</span> *<span class="text-blue-300">name</span>, <span class="text-blue-400">char</span> *<span class="text-blue-300">breed</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Dog</span> *<span class="text-blue-300">d</span> = <span class="text-blue-300">malloc</span>(<span class="text-purple-400">sizeof</span>(<span class="text-blue-300">Dog</span>));<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">strcpy</span>(<span class="text-blue-300">d</span>-><span class="text-blue-300">base.name</span>, <span class="text-blue-300">name</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">strcpy</span>(<span class="text-blue-300">d</span>-><span class="text-blue-300">breed</span>, <span class="text-blue-300">breed</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">d</span>-><span class="text-blue-300">base.speak</span> = <span class="text-blue-300">dog_speak</span>; <span class="text-slate-500">// 重写方法</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">d</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 子类方法（重写）</span><br>
+                                <span class="text-purple-400">void</span> <span class="text-blue-300">dog_speak</span>(<span class="text-blue-300">Animal</span> *<span class="text-blue-300">self</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">animal_speak</span>(<span class="text-blue-300">self</span>); <span class="text-slate-500">// 调用父类方法</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"汪汪汪\n"</span>);<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 使用示例</span><br>
+                                <span class="text-blue-300">Animal</span> *<span class="text-blue-300">animal</span> = <span class="text-blue-300">animal_create</span>(<span class="text-green-300">"小动物"</span>);<br>
+                                <span class="text-blue-300">Dog</span> *<span class="text-blue-300">dog</span> = <span class="text-blue-300">dog_create</span>(<span class="text-green-300">"旺财"</span>, <span class="text-green-300">"金毛"</span>);<br>
+                                <span class="text-blue-300">animal</span>-><span class="text-blue-300">speak</span>(<span class="text-blue-300">animal</span>);<br>
+                                <span class="text-blue-300">dog</span>-><span class="text-blue-300">base.speak</span>((<span class="text-blue-300">Animal</span>*)<span class="text-blue-300">dog</span>);
                             </div>
                         </div>
                     </div>
@@ -736,6 +1271,67 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 函数指针实现多态</h4>
+                        <p class="text-slate-300 mb-4">特点：C语言通过函数指针实现多态，相同函数指针调用不同函数，支持通用接口调用。注意事项：需要使用统一的函数指针类型，需要类型转换，运行时多态由函数指针决定。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 函数指针实现多态</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 定义通用动物结构体</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> <span class="text-blue-300">Animal_vtable</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">void</span> (*<span class="text-blue-300">speak</span>)(<span class="text-purple-400">void</span>* <span class="text-blue-300">self</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">char</span> *(*<span class="text-blue-300">get_name</span>)(<span class="text-purple-400">void</span>* <span class="text-blue-300">self</span>);<br>
+                                } <span class="text-blue-300">Animal_vtable</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 通用Animal接口</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> <span class="text-blue-300">Animal_interface</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Animal_vtable</span> *<span class="text-blue-300">vtable</span>;<br>
+                                } <span class="text-blue-300">Animal_interface</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 猫结构体</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> <span class="text-blue-300">Cat</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Animal_vtable</span> *<span class="text-blue-300">vtable</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">char</span> <span class="text-blue-300">name</span>[<span class="text-yellow-300">20</span>];<br>
+                                } <span class="text-blue-300">Cat</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 猫的方法实现</span><br>
+                                <span class="text-purple-400">void</span> <span class="text-blue-300">cat_speak</span>(<span class="text-purple-400">void</span> *<span class="text-blue-300">self</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Cat</span> *<span class="text-blue-300">cat</span> = (<span class="text-blue-300">Cat</span>*)<span class="text-blue-300">self</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"%s：喵喵喵\n"</span>, <span class="text-blue-300">cat</span>-><span class="text-blue-300">name</span>);<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 猫的姓名获取</span><br>
+                                <span class="text-blue-400">char</span>* <span class="text-blue-300">cat_get_name</span>(<span class="text-purple-400">void</span> *<span class="text-blue-300">self</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Cat</span> *<span class="text-blue-300">cat</span> = (<span class="text-blue-300">Cat</span>*)<span class="text-blue-300">self</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">cat</span>-><span class="text-blue-300">name</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 创建猫对象</span><br>
+                                <span class="text-blue-300">Cat</span>* <span class="text-blue-300">cat_create</span>(<span class="text-blue-400">char</span> *<span class="text-blue-300">name</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Cat</span> *<span class="text-blue-300">c</span> = <span class="text-blue-300">malloc</span>(<span class="text-purple-400">sizeof</span>(<span class="text-blue-300">Cat</span>));<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">strcpy</span>(<span class="text-blue-300">c</span>-><span class="text-blue-300">name</span>, <span class="text-blue-300">name</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">c</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 通用函数（多态）</span><br>
+                                <span class="text-purple-400">void</span> <span class="text-blue-300">make_animal_speak</span>(<span class="text-blue-300">Animal_interface</span> *<span class="text-blue-300">animal</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">animal</span>-><span class="text-blue-300">vtable</span>-><span class="text-blue-300">speak</span>(<span class="text-blue-300">animal</span>);<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 使用示例</span><br>
+                                <span class="text-blue-300">Dog</span> *<span class="text-blue-300">dog</span> = <span class="text-blue-300">dog_create</span>(<span class="text-green-300">"旺财"</span>, <span class="text-green-300">"金毛"</span>);<br>
+                                <span class="text-blue-300">Cat</span> *<span class="text-blue-300">cat</span> = <span class="text-blue-300">cat_create</span>(<span class="text-green-300">"咪咪"</span>);<br>
+                                <br>
+                                <span class="text-blue-300">Animal_interface</span> <span class="text-blue-300">dog_interface</span> = {<span class="text-green-300">&amp;dog_vtable</span>};<br>
+                                <span class="text-blue-300">Animal_interface</span> <span class="text-blue-300">cat_interface</span> = {<span class="text-green-300">&amp;cat_vtable</span>};<br>
+                                <br>
+                                <span class="text-blue-300">make_animal_speak</span>(&<span class="text-blue-300">dog_interface</span>); <span class="text-slate-500">// 输出：旺财在说话\n汪汪汪</span><br>
+                                <span class="text-blue-300">make_animal_speak</span>(&<span class="text-blue-300">cat_interface</span>); <span class="text-slate-500">// 输出：咪咪：喵喵喵</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -767,6 +1363,78 @@
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;@name.setter</span><br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">name</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">value</span>):<br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self._name</span> = <span class="text-blue-300">value</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 使用static和结构体实现封装</h4>
+                        <p class="text-slate-300 mb-4">特点：使用static关键字实现数据隐藏，使用结构体封装数据，提供公共接口函数访问数据，使用头文件和实现文件分离。C99支持复合字面量。注意事项：static函数只能在当前文件访问，结构体字段命名约定标识私有性。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// person.h - 公共接口</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">#ifndef</span> <span class="text-blue-300">PERSON_H</span><br>
+                                <span class="text-purple-400">#define</span> <span class="text-blue-300">PERSON_H</span><br>
+                                <br>
+                                <span class="text-blue-400">// 只暴露不透明指针</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> <span class="text-blue-300">Person</span> <span class="text-blue-300">Person</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 公共接口函数</span><br>
+                                <span class="text-blue-300">Person</span>* <span class="text-blue-300">person_create</span>(<span class="text-blue-400">char</span> *<span class="text-blue-300">name</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">age</span>);<br>
+                                <span class="text-blue-400">char</span>* <span class="text-blue-300">person_get_name</span>(<span class="text-blue-300">Person</span> *<span class="text-blue-300">p</span>);<br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">person_get_age</span>(<span class="text-blue-300">Person</span> *<span class="text-blue-300">p</span>);<br>
+                                <span class="text-purple-400">void</span> <span class="text-blue-300">person_set_age</span>(<span class="text-blue-300">Person</span> *<span class="text-blue-300">p</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">age</span>);<br>
+                                <span class="text-purple-400">void</span> <span class="text-blue-300">person_destroy</span>(<span class="text-blue-300">Person</span> *<span class="text-blue-300">p</span>);<br>
+                                <br>
+                                <span class="text-purple-400">#endif</span><br>
+                            </div>
+                        </div>
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2">// person.c - 私有实现</div>
+                                <span class="text-purple-400">#include</span> <span class="text-green-300">"person.h"</span><br>
+                                <span class="text-purple-400">#include</span> <span class="text-green-300">&lt;stdlib.h&gt;</span><br>
+                                <span class="text-purple-400">#include</span> <span class="text-green-300">&lt;string.h&gt;</span><br>
+                                <br>
+                                <span class="text-blue-400">// 私有结构体（隐藏实现）</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> <span class="text-blue-300">Person_private</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">char</span> <span class="text-blue-300">_name</span>[<span class="text-yellow-300">50</span>]; <span class="text-slate-500">// 下划线表示私有</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">_age</span>; <span class="text-slate-500">// 下划线表示私有</span><br>
+                                } <span class="text-blue-300">Person_private</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 私有函数（static函数）</span><br>
+                                <span class="text-purple-400">static</span> <span class="text-purple-400">void</span> <span class="text-blue-300">validate_age</span>(<span class="text-blue-400">int</span> <span class="text-blue-300">age</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">age</span> &lt; <span class="text-yellow-300">0</span> || <span class="text-blue-300">age</span> &gt; <span class="text-yellow-300">150</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">age</span> = <span class="text-yellow-300">0</span>; <span class="text-slate-500">// 简单的输入验证</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 公共函数实现</span><br>
+                                <span class="text-blue-300">Person</span>* <span class="text-blue-300">person_create</span>(<span class="text-blue-400">char</span> *<span class="text-blue-300">name</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">age</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Person_private</span> *<span class="text-blue-300">p</span> = <span class="text-blue-300">malloc</span>(<span class="text-purple-400">sizeof</span>(<span class="text-blue-300">Person_private</span>));<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">strcpy</span>(<span class="text-blue-300">p</span>-><span class="text-blue-300">_name</span>, <span class="text-blue-300">name</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">validate_age</span>(<span class="text-blue-300">age</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">p</span>-><span class="text-blue-300">_age</span> = <span class="text-blue-300">age</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> (<span class="text-blue-300">Person</span>*)<span class="text-blue-300">p</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// Getter方法</span><br>
+                                <span class="text-blue-400">char</span>* <span class="text-blue-300">person_get_name</span>(<span class="text-blue-300">Person</span> *<span class="text-blue-300">p</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Person_private</span> *<span class="text-blue-300">pp</span> = (<span class="text-blue-300">Person_private</span>*)<span class="text-blue-300">p</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">pp</span>-><span class="text-blue-300">_name</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// Setter方法（封装数据访问）</span><br>
+                                <span class="text-purple-400">void</span> <span class="text-blue-300">person_set_age</span>(<span class="text-blue-300">Person</span> *<span class="text-blue-300">p</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">age</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Person_private</span> *<span class="text-blue-300">pp</span> = (<span class="text-blue-300">Person_private</span>*)<span class="text-blue-300">p</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">validate_age</span>(<span class="text-blue-300">age</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">pp</span>-><span class="text-blue-300">_age</span> = <span class="text-blue-300">age</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 析构函数</span><br>
+                                <span class="text-purple-400">void</span> <span class="text-blue-300">person_destroy</span>(<span class="text-blue-300">Person</span> *<span class="text-blue-300">p</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">free</span>(<span class="text-blue-300">p</span>);<br>
+                                }<br>
                             </div>
                         </div>
                     </div>
@@ -807,6 +1475,58 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 函数指针模拟特殊方法</h4>
+                        <p class="text-slate-300 mb-4">特点：C语言没有内置特殊方法，使用函数指针模拟运算符重载，使用自定义函数实现__str__类似功能，使用构造函数和析构函数。C99支持复合字面量。注意事项：需要手动实现所有特殊方法，没有自动调用机制。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 函数指针模拟特殊方法</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 定义向量结构体</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> <span class="text-blue-300">Vector</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">double</span> <span class="text-blue-300">x</span>, <span class="text-blue-300">y</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Vector</span>* (*<span class="text-blue-300">add</span>)(<span class="text-blue-300">Vector</span>*, <span class="text-blue-300">Vector</span>*); <span class="text-slate-500">// 模拟__add__</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">void</span> (*<span class="text-blue-300">to_string</span>)(<span class="text-blue-300">Vector</span>*, <span class="text-blue-400">char</span>*); <span class="text-slate-500">// 模拟__str__</span><br>
+                                } <span class="text-blue-300">Vector</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 构造函数（模拟__init__）</span><br>
+                                <span class="text-blue-300">Vector</span>* <span class="text-blue-300">vector_create</span>(<span class="text-blue-400">double</span> <span class="text-blue-300">x</span>, <span class="text-blue-400">double</span> <span class="text-blue-300">y</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Vector</span> *<span class="text-blue-300">v</span> = <span class="text-blue-300">malloc</span>(<span class="text-purple-400">sizeof</span>(<span class="text-blue-300">Vector</span>));<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">v</span>-><span class="text-blue-300">x</span> = <span class="text-blue-300">x</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">v</span>-><span class="text-blue-300">y</span> = <span class="text-blue-300">y</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">v</span>-><span class="text-blue-300">add</span> = <span class="text-blue-300">vector_add</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">v</span>-><span class="text-blue-300">to_string</span> = <span class="text-blue-300">vector_to_string</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">v</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 模拟__add__方法</span><br>
+                                <span class="text-blue-300">Vector</span>* <span class="text-blue-300">vector_add</span>(<span class="text-blue-300">Vector</span> *<span class="text-blue-300">self</span>, <span class="text-blue-300">Vector</span> *<span class="text-blue-300">other</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">vector_create</span>(<span class="text-blue-300">self</span>-><span class="text-blue-300">x</span> + <span class="text-blue-300">other</span>-><span class="text-blue-300">x</span>, <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">self</span>-><span class="text-blue-300">y</span> + <span class="text-blue-300">other</span>-><span class="text-blue-300">y</span>);<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 模拟__str__方法</span><br>
+                                <span class="text-purple-400">void</span> <span class="text-blue-300">vector_to_string</span>(<span class="text-blue-300">Vector</span> *<span class="text-blue-300">self</span>, <span class="text-blue-400">char</span> *<span class="text-blue-300">buffer</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">sprintf</span>(<span class="text-blue-300">buffer</span>, <span class="text-green-300">"Vector(%.1f, %.1f)"</span>, <span class="text-blue-300">self</span>-><span class="text-blue-300">x</span>, <span class="text-blue-300">self</span>-><span class="text-blue-300">y</span>);<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 析构函数（模拟__del__）</span><br>
+                                <span class="text-purple-400">void</span> <span class="text-blue-300">vector_destroy</span>(<span class="text-blue-300">Vector</span> *<span class="text-blue-300">v</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">free</span>(<span class="text-blue-300">v</span>);<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 使用示例</span><br>
+                                <span class="text-blue-300">Vector</span> *<span class="text-blue-300">v1</span> = <span class="text-blue-300">vector_create</span>(<span class="text-yellow-300">1.0</span>, <span class="text-yellow-300">2.0</span>);<br>
+                                <span class="text-blue-300">Vector</span> *<span class="text-blue-300">v2</span> = <span class="text-blue-300">vector_create</span>(<span class="text-yellow-300">3.0</span>, <span class="text-yellow-300">4.0</span>);<br>
+                                <span class="text-blue-300">Vector</span> *<span class="text-blue-300">v3</span> = <span class="text-blue-300">v1</span>-><span class="text-blue-300">add</span>(<span class="text-blue-300">v1</span>, <span class="text-blue-300">v2</span>);<br>
+                                <br>
+                                <span class="text-blue-400">char</span> <span class="text-blue-300">str</span>[<span class="text-yellow-300">50</span>];<br>
+                                <span class="text-blue-300">v3</span>-><span class="text-blue-300">to_string</span>(<span class="text-blue-300">v3</span>, <span class="text-blue-300">str</span>);<br>
+                                <span class="text-blue-300">printf</span>(<span class="text-green-300">"%s\n"</span>, <span class="text-blue-300">str</span>); <span class="text-slate-500">// 输出：Vector(4.0, 6.0)</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -836,6 +1556,86 @@
                                 <br>
                                 <span class="text-blue-400"># 导入整个模块并起别名</span><br>
                                 <span class="text-purple-400">import</span> <span class="text-blue-300">numpy</span> <span class="text-purple-400">as</span> <span class="text-blue-300">np</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 头文件实现模块化</h4>
+                        <p class="text-slate-300 mb-4">特点：使用头文件(.h)和源文件(.c)分离实现模块化，使用#include包含头文件，使用static控制函数可见性，使用extern声明外部符号。C99支持复合字面量。注意事项：头文件包含保护，避免循环包含，注意符号可见性。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// math_utils.h - 头文件定义</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 头文件包含保护</span><br>
+                                <span class="text-purple-400">#ifndef</span> <span class="text-blue-300">MATH_UTILS_H</span><br>
+                                <span class="text-purple-400">#define</span> <span class="text-blue-300">MATH_UTILS_H</span><br>
+                                <br>
+                                <span class="text-blue-400">// 函数声明</span><br>
+                                <span class="text-purple-400">double</span> <span class="text-blue-300">add</span>(<span class="text-purple-400">double</span> <span class="text-blue-300">a</span>, <span class="text-purple-400">double</span> <span class="text-blue-300">b</span>);<br>
+                                <span class="text-purple-400">double</span> <span class="text-blue-300">multiply</span>(<span class="text-purple-400">double</span> <span class="text-blue-300">a</span>, <span class="text-purple-400">double</span> <span class="text-blue-300">b</span>);<br>
+                                <br>
+                                <span class="text-blue-400">// 外部变量声明</span><br>
+                                <span class="text-purple-400">extern</span> <span class="text-blue-400">int</span> <span class="text-blue-300">operation_count</span>;<br>
+                                <br>
+                                <span class="text-purple-400">#endif</span> <span class="text-slate-500">// MATH_UTILS_H</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 源文件实现</h4>
+                        <p class="text-slate-300 mb-4">特点：源文件包含函数实现，使用static函数限制作用域，全局变量初始化，模块内函数互访。注意事项：static函数只在当前文件可见，全局变量避免命名冲突。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// math_utils.c - 源文件实现</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdio.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">"math_utils.h"</span><br>
+                                <br>
+                                <span class="text-blue-400">// 全局变量</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">operation_count</span> = <span class="text-yellow-300">0</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 私有函数（static）</span><br>
+                                <span class="text-purple-400">static</span> <span class="text-purple-400">void</span> <span class="text-blue-300">increment_counter</span>(<span class="text-purple-400">void</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">operation_count</span>++;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 公共函数实现</span><br>
+                                <span class="text-purple-400">double</span> <span class="text-blue-300">add</span>(<span class="text-purple-400">double</span> <span class="text-blue-300">a</span>, <span class="text-purple-400">double</span> <span class="text-blue-300">b</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">increment_counter</span>();<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-purple-400">double</span> <span class="text-blue-300">multiply</span>(<span class="text-purple-400">double</span> <span class="text-blue-300">a</span>, <span class="text-purple-400">double</span> <span class="text-blue-300">b</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">increment_counter</span>();<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">a</span> * <span class="text-blue-300">b</span>;<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 使用模块</h4>
+                        <p class="text-slate-300 mb-4">特点：编译时链接多个源文件，包含多个头文件，调用模块函数，访问外部变量。注意事项：确保函数声明和定义一致，注意链接顺序，管理依赖关系。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// main.c - 主程序</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">"math_utils.h"</span><br>
+                                <br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">main</span>(<span class="text-purple-400">void</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">double</span> <span class="text-blue-300">result1</span> = <span class="text-blue-300">add</span>(<span class="text-yellow-300">3.0</span>, <span class="text-yellow-300">4.0</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">double</span> <span class="text-blue-300">result2</span> = <span class="text-blue-300">multiply</span>(<span class="text-yellow-300">2.0</span>, <span class="text-yellow-300">5.0</span>);<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"3.0 + 4.0 = %.1f\n"</span>, <span class="text-blue-300">result1</span>); <span class="text-slate-500">// 输出：3.0 + 4.0 = 7.0</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"2.0 * 5.0 = %.1f\n"</span>, <span class="text-blue-300">result2</span>); <span class="text-slate-500">// 输出：2.0 * 5.0 = 10.0</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"操作次数: %d\n"</span>, <span class="text-blue-300">operation_count</span>); <span class="text-slate-500">// 输出：操作次数: 2</span><br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 编译命令</span><br>
+                                <span class="text-slate-500">// gcc -o program main.c math_utils.c</span>
                             </div>
                         </div>
                     </div>
@@ -869,6 +1669,123 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 错误代码处理</h4>
+                        <p class="text-slate-300 mb-4">特点：C语言无内置异常处理，使用错误代码返回，使用goto进行错误清理，使用errno全局变量，使用assert进行调试。注意事项：检查所有函数返回值，优先使用错误代码而非goto，确保资源释放。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 错误代码处理方式</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdio.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdlib.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;errno.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;string.h&gt;</span><br>
+                                <br>
+                                <span class="text-blue-400">// 错误代码定义</span><br>
+                                <span class="text-purple-400">#define</span> <span class="text-blue-300">ERROR_NONE</span> <span class="text-yellow-300">0</span><br>
+                                <span class="text-purple-400">#define</span> <span class="text-blue-300">ERROR_DIVISION_BY_ZERO</span> <span class="text-yellow-300">1</span><br>
+                                <span class="text-purple-400">#define</span> <span class="text-blue-300">ERROR_MEMORY</span> <span class="text-yellow-300">2</span><br>
+                                <br>
+                                <span class="text-purple-400">double</span> <span class="text-blue-300">safe_divide</span>(<span class="text-purple-400">double</span> <span class="text-blue-300">a</span>, <span class="text-purple-400">double</span> <span class="text-blue-300">b</span>, <span class="text-blue-400">int</span> *<span class="text-blue-300">error_code</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">b</span> == <span class="text-yellow-300">0.0</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">*error_code</span> = <span class="text-blue-300">ERROR_DIVISION_BY_ZERO</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">0.0</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">*error_code</span> = <span class="text-blue-300">ERROR_NONE</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">a</span> / <span class="text-blue-300">b</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">main</span>(<span class="text-purple-400">void</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">error</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">double</span> <span class="text-blue-300">result</span> = <span class="text-blue-300">safe_divide</span>(<span class="text-yellow-300">10.0</span>, <span class="text-yellow-300">0.0</span>, &<span class="text-blue-300">error</span>);<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">error</span> == <span class="text-blue-300">ERROR_DIVISION_BY_ZERO</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"除零错误\n"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>} <span class="text-purple-400">else</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"结果: %.1f\n"</span>, <span class="text-blue-300">result</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - setjmp/longjmp模拟异常</h4>
+                        <p class="text-slate-300 mb-4">特点：使用setjmp保存执行环境，使用longjmp跳转到保存点，支持嵌套异常处理，类似try-catch机制。C99支持可变参数宏。注意事项：不要在信号处理程序中使用，变量可能失效，慎用longjmp。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// setjmp/longjmp实现异常处理</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdio.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;setjmp.h&gt;</span><br>
+                                <br>
+                                <span class="text-blue-400">// 异常类型枚举</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">enum</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">EXCEPTION_NONE</span>,<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">EXCEPTION_DIVISION</span>,<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">EXCEPTION_MEMORY</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>} <span class="text-blue-300">ExceptionType</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 异常处理上下文</span><br>
+                                <span class="text-purple-400">static</span> <span class="text-blue-300">jmp_buf</span> <span class="text-blue-300">exception_buffer</span>;<br>
+                                <span class="text-purple-400">static</span> <span class="text-blue-300">ExceptionType</span> <span class="text-blue-300">current_exception</span> = <span class="text-blue-300">EXCEPTION_NONE</span>;<br>
+                                <br>
+                                <span class="text-purple-400">void</span> <span class="text-blue-300">throw_exception</span>(<span class="text-blue-300">ExceptionType</span> <span class="text-blue-300">type</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">current_exception</span> = <span class="text-blue-300">type</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">longjmp</span>(<span class="text-blue-300">exception_buffer</span>, <span class="text-yellow-300">1</span>);<br>
+                                }<br>
+                                <br>
+                                <span class="text-purple-400">double</span> <span class="text-blue-300">divide_with_check</span>(<span class="text-purple-400">double</span> <span class="text-blue-300">a</span>, <span class="text-purple-400">double</span> <span class="text-blue-300">b</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">b</span> == <span class="text-yellow-300">0.0</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">throw_exception</span>(<span class="text-blue-300">EXCEPTION_DIVISION</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">a</span> / <span class="text-blue-300">b</span>;<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 异常处理使用示例</h4>
+                        <p class="text-slate-300 mb-4">特点：使用setjmp进入异常处理，使用longjmp抛出异常，使用switch处理不同异常，模拟try-catch-finally。注意事项：变量在longjmp后可能失效，使用静态或全局变量保存状态。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 异常处理使用示例</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">main</span>(<span class="text-purple-400">void</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">double</span> <span class="text-blue-300">result</span> = <span class="text-yellow-300">0</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">has_exception</span> = <span class="text-yellow-300">0</span>;<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 模拟try块</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">setjmp</span>(<span class="text-blue-300">exception_buffer</span>) == <span class="text-yellow-300">0</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 正常执行代码</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">result</span> = <span class="text-blue-300">divide_with_check</span>(<span class="text-yellow-300">10.0</span>, <span class="text-yellow-300">0.0</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>} <span class="text-purple-400">else</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 异常处理代码</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">has_exception</span> = <span class="text-yellow-300">1</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 模拟finally块</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">has_exception</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">switch</span> (<span class="text-blue-300">current_exception</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">case</span> <span class="text-blue-300">EXCEPTION_DIVISION</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"捕获到除零异常\n"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">break</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">default</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"未知异常\n"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">break</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>} <span class="text-purple-400">else</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"计算结果: %.1f\n"</span>, <span class="text-blue-300">result</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"清理完成\n"</span>); <span class="text-slate-500">// 类似finally块</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -897,6 +1814,116 @@
                                 <span class="text-purple-400">with</span> <span class="text-purple-400">open</span>(<span class="text-green-300">"test.txt"</span>, <span class="text-green-300">"r"</span>, <span class="text-blue-300">encoding</span>=<span class="text-green-300">"utf-8"</span>) <span class="text-purple-400">as</span> <span class="text-blue-300">f</span>:<br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;content</span> = <span class="text-blue-300">f</span>.<span class="text-blue-300">read</span>()<br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-blue-300">content</span>)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 文件指针操作</h4>
+                        <p class="text-slate-300 mb-4">特点：使用fopen()打开文件，使用fclose()关闭文件，使用fprintf()和fscanf()读写，使用fread()和fwrite()处理二进制文件。C99支持可变参数宏。注意事项：检查文件是否成功打开，务必关闭文件，注意缓冲区刷新。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 文本文件操作</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdio.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdlib.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;string.h&gt;</span><br>
+                                <br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">main</span>(<span class="text-purple-400">void</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 写入文件</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">FILE</span> *<span class="text-blue-300">file</span> = <span class="text-blue-300">fopen</span>(<span class="text-green-300">"test.txt"</span>, <span class="text-green-300">"w"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">file</span> == <span class="text-purple-400">NULL</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"无法打开文件\n"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">1</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">fprintf</span>(<span class="text-blue-300">file</span>, <span class="text-green-300">"Hello, World!\n"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">fprintf</span>(<span class="text-blue-300">file</span>, <span class="text-green-300">"你好，世界！\n"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">fclose</span>(<span class="text-blue-300">file</span>);<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 读取文件</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">file</span> = <span class="text-blue-300">fopen</span>(<span class="text-green-300">"test.txt"</span>, <span class="text-green-300">"r"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">file</span> == <span class="text-purple-400">NULL</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"无法打开文件\n"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">1</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">char</span> <span class="text-blue-300">buffer</span>[<span class="text-yellow-300">256</span>];<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">while</span> (<span class="text-blue-300">fgets</span>(<span class="text-blue-300">buffer</span>, <span class="text-yellow-300">256</span>, <span class="text-blue-300">file</span>) != <span class="text-purple-400">NULL</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"%s"</span>, <span class="text-blue-300">buffer</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">fclose</span>(<span class="text-blue-300">file</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 二进制文件操作</h4>
+                        <p class="text-slate-300 mb-4">特点：使用"rb"和"wb"模式读写二进制文件，使用fread()和fwrite()函数，支持结构体直接写入文件。C99支持复合字面量。注意事项：二进制文件不能直接用文本编辑器查看，注意字节序和对齐问题。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 二进制文件操作</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 定义数据结构</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">id</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">char</span> <span class="text-blue-300">name</span>[<span class="text-yellow-300">50</span>];<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">double</span> <span class="text-blue-300">score</span>;<br>
+                                } <span class="text-blue-300">Student</span>;<br>
+                                <br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">main</span>(<span class="text-purple-400">void</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 写入二进制文件</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">FILE</span> *<span class="text-blue-300">file</span> = <span class="text-blue-300">fopen</span>(<span class="text-green-300">"students.dat"</span>, <span class="text-green-300">"wb"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">file</span> == <span class="text-purple-400">NULL</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">1</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Student</span> <span class="text-blue-300">students</span>[] = {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{<span class="text-yellow-300">1</span>, <span class="text-green-300">"张三"</span>, <span class="text-yellow-300">95.5</span>},<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>{<span class="text-yellow-300">2</span>, <span class="text-green-300">"李四"</span>, <span class="text-yellow-300">87.0</span>}<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>};<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">count</span> = <span class="text-blue-300">sizeof</span>(<span class="text-blue-300">students</span>) / <span class="text-blue-300">sizeof</span>(<span class="text-blue-300">students</span>[<span class="text-yellow-300">0</span>]);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">fwrite</span>(<span class="text-blue-300">students</span>, <span class="text-blue-300">sizeof</span>(<span class="text-blue-300">Student</span>), <span class="text-blue-300">count</span>, <span class="text-blue-300">file</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">fclose</span>(<span class="text-blue-300">file</span>);
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 读取二进制文件</h4>
+                        <p class="text-slate-300 mb-4">特点：使用fread()读取二进制数据，使用feof()检查文件结束，使用fseek()定位文件指针，支持随机访问。C99支持可变参数宏。注意事项：检查返回值确认读取成功，使用feof()判断是否到达文件末尾。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 读取二进制文件</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">main</span>(<span class="text-purple-400">void</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 读取二进制文件</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">FILE</span> *<span class="text-blue-300">file</span> = <span class="text-blue-300">fopen</span>(<span class="text-green-300">"students.dat"</span>, <span class="text-green-300">"rb"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">file</span> == <span class="text-purple-400">NULL</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">1</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Student</span> <span class="text-blue-300">student</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">read_count</span>;<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">while</span> ((<span class="text-blue-300">read_count</span> = <span class="text-blue-300">fread</span>(&<span class="text-blue-300">student</span>, <span class="text-blue-300">sizeof</span>(<span class="text-blue-300">Student</span>), <span class="text-yellow-300">1</span>, <span class="text-blue-300">file</span>)) > <span class="text-yellow-300">0</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"学号: %d, 姓名: %s, 分数: %.1f\n"</span>,<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">student</span>.<span class="text-blue-300">id</span>, <span class="text-blue-300">student</span>.<span class="text-blue-300">name</span>, <span class="text-blue-300">student</span>.<span class="text-blue-300">score</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">fclose</span>(<span class="text-blue-300">file</span>);<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 文件定位示例</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">file</span> = <span class="text-blue-300">fopen</span>(<span class="text-green-300">"students.dat"</span>, <span class="text-green-300">"rb"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 定位到第二个学生记录</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">fseek</span>(<span class="text-blue-300">file</span>, <span class="text-blue-300">sizeof</span>(<span class="text-blue-300">Student</span>), <span class="text-blue-300">SEEK_SET</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">fread</span>(&<span class="text-blue-300">student</span>, <span class="text-blue-300">sizeof</span>(<span class="text-blue-300">Student</span>), <span class="text-yellow-300">1</span>, <span class="text-blue-300">file</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"第二个学生: %s\n"</span>, <span class="text-blue-300">student</span>.<span class="text-blue-300">name</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">fclose</span>(<span class="text-blue-300">file</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;<br>
+                                }
                             </div>
                         </div>
                     </div>
