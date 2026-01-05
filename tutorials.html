@@ -1963,6 +1963,85 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 函数指针和状态机模拟生成器</h4>
+                        <p class="text-slate-300 mb-4">特点：使用静态变量保持状态，使用函数指针模拟迭代器，使用状态机模式，支持回调机制。C99支持复合字面量，GNU C支持语句表达式。注意事项：静态变量在函数调用间保持值，注意线程安全问题，使用回调函数处理生成的值。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 使用静态变量的生成器模拟</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdio.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdlib.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdbool.h&gt;</span><br>
+                                <br>
+                                <span class="text-blue-400">// 生成器状态结构</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">current</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">max</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">bool</span> <span class="text-blue-300">finished</span>;<br>
+                                } <span class="text-blue-300">Generator</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 创建生成器</span><br>
+                                <span class="text-blue-300">Generator</span>* <span class="text-blue-300">create_generator</span>(<span class="text-blue-400">int</span> <span class="text-blue-300">max</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Generator</span>* <span class="text-blue-300">gen</span> = (<span class="text-blue-300">Generator</span>*)<span class="text-blue-300">malloc</span>(<span class="text-purple-400">sizeof</span>(<span class="text-blue-300">Generator</span>));<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">gen</span>-><span class="text-blue-300">current</span> = <span class="text-yellow-300">0</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">gen</span>-><span class="text-blue-300">max</span> = <span class="text-blue-300">max</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">gen</span>-><span class="text-blue-300">finished</span> = <span class="text-purple-400">false</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">gen</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 获取下一个值</span><br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">generator_next</span>(<span class="text-blue-300">Generator</span>* <span class="text-blue-300">gen</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">gen</span>-><span class="text-blue-300">current</span> >= <span class="text-blue-300">gen</span>-><span class="text-blue-300">max</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">gen</span>-><span class="text-blue-300">finished</span> = <span class="text-purple-400">true</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">-1</span>; <span class="text-slate-500">// 表示结束</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">gen</span>-><span class="text-blue-300">current</span>++;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 使用生成器</span><br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">main</span>(<span class="text-purple-400">void</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Generator</span>* <span class="text-blue-300">counter</span> = <span class="text-blue-300">create_generator</span>(<span class="text-yellow-300">5</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">int</span> <span class="text-blue-300">value</span>;<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">while</span> ((<span class="text-blue-300">value</span> = <span class="text-blue-300">generator_next</span>(<span class="text-blue-300">counter</span>)) != <span class="text-yellow-300">-1</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"%d\n"</span>, <span class="text-blue-300">value</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">free</span>(<span class="text-blue-300">counter</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;<br>
+                                }
+                            </div>
+                        </div>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2">// 使用宏定义的生成器风格代码</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdio.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdlib.h&gt;</span><br>
+                                <br>
+                                <span class="text-blue-400">// 斐波那契生成器宏</span><br>
+                                <span class="text-purple-400">#define</span> <span class="text-blue-300">FIBONACCI_GENERATOR</span>(<span class="text-blue-300">max</span>) \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">a</span> = <span class="text-yellow-300">0</span>, <span class="text-blue-300">b</span> = <span class="text-yellow-300">1</span>; \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">for</span> (<span class="text-blue-400">int</span> <span class="text-blue-300">i</span> = <span class="text-yellow-300">0</span>; <span class="text-blue-300">i</span> < <span class="text-blue-300">max</span>; <span class="text-blue-300">i</span>++) { \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">next</span> = <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>; \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">a</span> = <span class="text-blue-300">b</span>; \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">b</span> = <span class="text-blue-300">next</span>; \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">yield</span> <span class="text-blue-300">a</span>; \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-blue-400">// 模拟yield关键字</span><br>
+                                <span class="text-purple-400">#define</span> <span class="text-blue-300">yield</span>(<span class="text-blue-300">value</span>) <span class="text-blue-300">printf</span>(<span class="text-green-300">"%d\n"</span>, <span class="text-blue-300">value</span>)<br>
+                                <br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">main</span>(<span class="text-purple-400">void</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"斐波那契数列:\n"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">FIBONACCI_GENERATOR</span>(<span class="text-yellow-300">10</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2005,6 +2084,84 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 函数指针和结构体模拟迭代器</h4>
+                        <p class="text-slate-300 mb-4">特点：使用结构体和函数指针模拟迭代器协议，支持has_next()和next()操作，支持自定义迭代器类型，支持迭代器适配。C99支持复合字面量。注意事项：需要手动管理内存，注意迭代器状态，注意边界条件处理。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 使用函数指针的迭代器</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdio.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdlib.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdbool.h&gt;</span><br>
+                                <br>
+                                <span class="text-blue-400">// 迭代器接口定义</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> <span class="text-blue-300">Iterator</span> <span class="text-blue-300">Iterator</span>;<br>
+                                <br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">bool</span> (<span class="text-blue-300">*has_next_func</span>)(<span class="text-blue-300">Iterator</span>* <span class="text-blue-300">self</span>);<br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">void</span>* (<span class="text-blue-300">*next_func</span>)(<span class="text-blue-300">Iterator</span>* <span class="text-blue-300">self</span>);<br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">void</span> (<span class="text-blue-300">*destroy_func</span>)(<span class="text-blue-300">Iterator</span>* <span class="text-blue-300">self</span>);<br>
+                                <br>
+                                <span class="text-blue-400">// 迭代器结构</span><br>
+                                <span class="text-purple-400">struct</span> <span class="text-blue-300">Iterator</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">has_next_func</span> <span class="text-blue-300">has_next</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">next_func</span> <span class="text-blue-300">next</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">destroy_func</span> <span class="text-blue-300">destroy</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">void</span>* <span class="text-blue-300">data</span>; <span class="text-slate-500">// 迭代器内部数据</span><br>
+                                };<br>
+                                <br>
+                                <span class="text-blue-400">// 计数器迭代器实现</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">current</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">max</span>;<br>
+                                } <span class="text-blue-300">CounterIterator</span>;<br>
+                                <br>
+                                <span class="text-purple-400">bool</span> <span class="text-blue-300">counter_has_next</span>(<span class="text-blue-300">Iterator</span>* <span class="text-blue-300">self</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">CounterIterator</span>* <span class="text-blue-300">counter</span> = (<span class="text-blue-300">CounterIterator</span>*)<span class="text-blue-300">self</span>-><span class="text-blue-300">data</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">counter</span>-><span class="text-blue-300">current</span> < <span class="text-blue-300">counter</span>-><span class="text-blue-300">max</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">void</span>* <span class="text-blue-300">counter_next</span>(<span class="text-blue-300">Iterator</span>* <span class="text-blue-300">self</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">CounterIterator</span>* <span class="text-blue-300">counter</span> = (<span class="text-blue-300">CounterIterator</span>*)<span class="text-blue-300">self</span>-><span class="text-blue-300">data</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> (<span class="text-purple-400">int</span>*)&<span class="text-blue-300">counter</span>-><span class="text-blue-300">current</span>++)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 注意：这里返回的是当前值的副本</span><br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">void</span> <span class="text-blue-300">counter_destroy</span>(<span class="text-blue-300">Iterator</span>* <span class="text-blue-300">self</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">free</span>(<span class="text-blue-300">self</span>-><span class="text-blue-300">data</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">free</span>(<span class="text-blue-300">self</span>);<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 创建计数器迭代器</span><br>
+                                <span class="text-blue-300">Iterator</span>* <span class="text-blue-300">create_counter_iterator</span>(<span class="text-blue-400">int</span> <span class="text-blue-300">max</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">CounterIterator</span>* <span class="text-blue-300">counter_data</span> = (<span class="text-blue-300">CounterIterator</span>*)<span class="text-blue-300">malloc</span>(<span class="text-purple-400">sizeof</span>(<span class="text-blue-300">CounterIterator</span>));<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">counter_data</span>-><span class="text-blue-300">current</span> = <span class="text-yellow-300">0</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">counter_data</span>-><span class="text-blue-300">max</span> = <span class="text-blue-300">max</span>;<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Iterator</span>* <span class="text-blue-300">iterator</span> = (<span class="text-blue-300">Iterator</span>*)<span class="text-blue-300">malloc</span>(<span class="text-purple-400">sizeof</span>(<span class="text-blue-300">Iterator</span>));<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">iterator</span>-><span class="text-blue-300">has_next</span> = <span class="text-blue-300">counter_has_next</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">iterator</span>-><span class="text-blue-300">next</span> = <span class="text-blue-300">counter_next</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">iterator</span>-><span class="text-blue-300">destroy</span> = <span class="text-blue-300">counter_destroy</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">iterator</span>-><span class="text-blue-300">data</span> = <span class="text-blue-300">counter_data</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">iterator</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 使用迭代器</span><br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">main</span>(<span class="text-purple-400">void</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Iterator</span>* <span class="text-blue-300">counter</span> = <span class="text-blue-300">create_counter_iterator</span>(<span class="text-yellow-300">5</span>);<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">while</span> (<span class="text-blue-300">counter</span>-><span class="text-blue-300">has_next</span>(<span class="text-blue-300">counter</span>)) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span> <span class="text-blue-300">value</span> = *((<span class="text-blue-400">int</span>*)<span class="text-blue-300">counter</span>-><span class="text-blue-300">next</span>(<span class="text-blue-300">counter</span>));<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"%d\n"</span>, <span class="text-blue-300">value</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">counter</span>-><span class="text-blue-300">destroy</span>(<span class="text-blue-300">counter</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2040,6 +2197,89 @@
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>
                                 <br>
                                 <span class="text-blue-300">result</span> = <span class="text-blue-300">add</span>(<span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>) <span class="text-slate-500"># 输出：调用函数: add\n函数返回: 5</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 函数指针和宏模拟装饰器</h4>
+                        <p class="text-slate-300 mb-4">特点：使用函数指针包装原函数，使用宏简化装饰器应用，支持预处理和后处理，支持多层装饰。C99支持内联函数，GNU C支持typeof关键字。注意事项：注意函数指针的生命周期，宏参数需要正确加括号，注意类型安全。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 使用函数指针的装饰器模式</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdio.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdlib.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;string.h&gt;</span><br>
+                                <br>
+                                <span class="text-blue-400">// 装饰器结构体</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">int</span> (<span class="text-blue-300">*func</span>)(<span class="text-purple-400">int</span>, <span class="text-purple-400">int</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">char</span> <span class="text-blue-300">name</span>[<span class="text-yellow-50">50</span>];<br>
+                                } <span class="text-blue-300">DecoratedFunc</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 原函数</span><br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">add</span>(<span class="text-purple-400">int</span> <span class="text-blue-300">a</span>, <span class="text-purple-400">int</span> <span class="text-blue-300">b</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 装饰器函数</span><br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">logged_add</span>(<span class="text-purple-400">int</span> <span class="text-blue-300">a</span>, <span class="text-purple-400">int</span> <span class="text-blue-300">b</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"调用函数: add(%d, %d)\n"</span>, <span class="text-blue-300">a</span>, <span class="text-blue-300">b</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">int</span> <span class="text-blue-300">result</span> = <span class="text-blue-300">add</span>(<span class="text-blue-300">a</span>, <span class="text-blue-300">b</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"函数返回: %d\n"</span>, <span class="text-blue-300">result</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">result</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 创建装饰器</span><br>
+                                <span class="text-blue-300">DecoratedFunc</span>* <span class="text-blue-300">create_decorator</span>(<span class="text-purple-400">int</span> (<span class="text-blue-300">*func</span>)(<span class="text-purple-400">int</span>, <span class="text-purple-400">int</span>), <span class="text-blue-400">const</span> <span class="text-blue-400">char</span>* <span class="text-blue-300">name</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">DecoratedFunc</span>* <span class="text-blue-300">decorated</span> = (<span class="text-blue-300">DecoratedFunc</span>*)<span class="text-blue-300">malloc</span>(<span class="text-purple-400">sizeof</span>(<span class="text-blue-300">DecoratedFunc</span>));<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">decorated</span>-><span class="text-blue-300">func</span> = <span class="text-blue-300">func</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">strcpy</span>(<span class="text-blue-300">decorated</span>-><span class="text-blue-300">name</span>, <span class="text-blue-300">name</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">decorated</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 调用装饰函数</span><br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">call_decorated</span>(<span class="text-blue-300">DecoratedFunc</span>* <span class="text-blue-300">decorated</span>, <span class="text-purple-400">int</span> <span class="text-blue-300">a</span>, <span class="text-purple-400">int</span> <span class="text-blue-300">b</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"使用装饰器: %s\n"</span>, <span class="text-blue-300">decorated</span>-><span class="text-blue-300">name</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">decorated</span>-><span class="text-blue-300">func</span>(<span class="text-blue-300">a</span>, <span class="text-blue-300">b</span>);<br>
+                                }<br>
+                                <br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">main</span>(<span class="text-purple-400">void</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">DecoratedFunc</span>* <span class="text-blue-300">logger_add</span> = <span class="text-blue-300">create_decorator</span>(<span class="text-blue-300">logged_add</span>, <span class="text-green-300">"Logger装饰器"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">int</span> <span class="text-blue-300">result</span> = <span class="text-blue-300">call_decorated</span>(<span class="text-blue-300">logger_add</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">free</span>(<span class="text-blue-300">logger_add</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;<br>
+                                }
+                            </div>
+                        </div>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2">// 使用宏的装饰器风格代码</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdio.h&gt;</span><br>
+                                <br>
+                                <span class="text-blue-400">// 宏定义的装饰器</span><br>
+                                <span class="text-purple-400">#define</span> <span class="text-blue-300">DECORATOR_LOG</span>(<span class="text-blue-300">func_name</span>) \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">int</span> <span class="text-blue-300">func_name</span>(<span class="text-purple-400">int</span> <span class="text-blue-300">a</span>, <span class="text-purple-400">int</span> <span class="text-blue-300">b</span>) { \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"调用" #func_name "(%d, %d)\n"</span>, <span class="text-blue-300">a</span>, <span class="text-blue-300">b</span>); \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">int</span> <span class="text-blue-300">result</span> = <span class="text-blue-300">_##func_name</span>(<span class="text-blue-300">a</span>, <span class="text-blue-300">b</span>); \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"返回: %d\n"</span>, <span class="text-blue-300">result</span>); \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">result</span>; \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-blue-400">// 原始函数</span><br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">_add</span>(<span class="text-purple-400">int</span> <span class="text-blue-300">a</span>, <span class="text-purple-400">int</span> <span class="text-blue-300">b</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 应用装饰器</span><br>
+                                <span class="text-blue-300">DECORATOR_LOG</span>(<span class="text-blue-300">add</span>)<br>
+                                <br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">main</span>(<span class="text-purple-400">void</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">int</span> <span class="text-blue-300">result</span> = <span class="text-blue-300">add</span>(<span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;<br>
+                                }
                             </div>
                         </div>
                     </div>
@@ -2080,6 +2320,121 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 手动资源管理模拟上下文管理器</h4>
+                        <p class="text-slate-300 mb-4">特点：使用结构体和函数指针模拟上下文管理器，使用初始化和清理函数管理资源，支持RAII模式，使用宏简化资源管理。注意事项：C语言没有内置的上下文管理器，需要手动管理资源生命周期，注意错误处理和资源清理。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 使用结构体和函数模拟上下文管理器</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdio.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdlib.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;string.h&gt;</span><br>
+                                <br>
+                                <span class="text-blue-400">// 上下文管理器结构体</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">FILE</span>* <span class="text-blue-300">file</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">char</span> <span class="text-blue-300">filename</span>[<span class="text-yellow-50">100</span>];<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">char</span> <span class="text-blue-300">mode</span>[<span class="text-yellow-50">10</span>];<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">int</span> <span class="text-blue-300">(*cleanup)</span>(<span class="text-purple-400">struct</span> <span class="text-blue-300">FileContext</span>* <span class="text-blue-300">ctx</span>);<br>
+                                } <span class="text-blue-300">FileContext</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 初始化上下文管理器</span><br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">file_context_init</span>(<span class="text-blue-300">FileContext</span>* <span class="text-blue-300">ctx</span>, <span class="text-blue-400">const</span> <span class="text-blue-400">char</span>* <span class="text-blue-300">filename</span>, <span class="text-blue-400">const</span> <span class="text-blue-400">char</span>* <span class="text-blue-300">mode</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">strcpy</span>(<span class="text-blue-300">ctx</span>-><span class="text-blue-300">filename</span>, <span class="text-blue-300">filename</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">strcpy</span>(<span class="text-blue-300">ctx</span>-><span class="text-blue-300">mode</span>, <span class="text-blue-300">mode</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">ctx</span>-><span class="text-blue-300">file</span> = <span class="text-blue-300">fopen</span>(<span class="text-blue-300">filename</span>, <span class="text-blue-300">mode</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">ctx</span>-><span class="text-blue-300">file</span> == <span class="text-purple-300">NULL</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> -<span class="text-yellow-300">1</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">ctx</span>-><span class="text-blue-300">cleanup</span> = <span class="text-blue-300">file_context_cleanup</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// 清理函数</span><br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">file_context_cleanup</span>(<span class="text-blue-300">FileContext</span>* <span class="text-blue-300">ctx</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">ctx</span>-><span class="text-blue-300">file</span> != <span class="text-purple-300">NULL</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">fclose</span>(<span class="text-blue-300">ctx</span>-><span class="text-blue-300">file</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">ctx</span>-><span class="text-blue-300">file</span> = <span class="text-purple-300">NULL</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400">// RAII风格的宏</span><br>
+                                <span class="text-purple-400">#define</span> <span class="text-blue-300">FILE_CONTEXT_BEGIN</span>(<span class="text-blue-300">ctx</span>, <span class="text-blue-300">filename</span>, <span class="text-blue-300">mode</span>) \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">FileContext</span> <span class="text-blue-300">ctx</span>; \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">file_context_init</span>(&amp;<span class="text-blue-300">ctx</span>, <span class="text-blue-300">filename</span>, <span class="text-blue-300">mode</span>) == <span class="text-yellow-300">0</span> &amp;&amp;<br>
+                                <br>
+                                <span class="text-purple-400">#define</span> <span class="text-blue-300">FILE_CONTEXT_END</span>(<span class="text-blue-300">ctx</span>) \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">ctx</span>.<span class="text-blue-300">cleanup</span>(&amp;<span class="text-blue-300">ctx</span>)<br>
+                                <br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">main</span>(<span class="text-purple-400">void</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 使用RAII宏</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">FILE_CONTEXT_BEGIN</span>(<span class="text-blue-300">ctx</span>, <span class="text-green-300">"test.txt"</span>, <span class="text-green-300">"w"</span>)) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">fprintf</span>(<span class="text-blue-300">ctx</span>.<span class="text-blue-300">file</span>, <span class="text-green-300">"Hello, Context Manager!\n"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">FILE_CONTEXT_END</span>(<span class="text-blue-300">ctx</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 手动使用上下文管理器</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">FileContext</span> <span class="text-blue-300">ctx2</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">file_context_init</span>(&amp;<span class="text-blue-300">ctx2</span>, <span class="text-green-300">"test2.txt"</span>, <span class="text-green-300">"w"</span>) == <span class="text-yellow-300">0</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">fprintf</span>(<span class="text-blue-300">ctx2</span>.<span class="text-blue-300">file</span>, <span class="text-green-300">"Manual context management\n"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">ctx2</span>.<span class="text-blue-300">cleanup</span>(&amp;<span class="text-blue-300">ctx2</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;<br>
+                                }
+                            </div>
+                        </div>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2">// 使用goto进行错误处理的上下文管理器</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdio.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdlib.h&gt;</span><br>
+                                <br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">process_with_cleanup</span>(<span class="text-purple-400">void</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">FILE</span>* <span class="text-blue-300">file1</span> = <span class="text-purple-300">NULL</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">FILE</span>* <span class="text-blue-300">file2</span> = <span class="text-purple-300">NULL</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">int</span>* <span class="text-blue-300">data</span> = <span class="text-purple-300">NULL</span>;<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 初始化资源</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">file1</span> = <span class="text-blue-300">fopen</span>(<span class="text-green-300">"input.txt"</span>, <span class="text-green-300">"r"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">file1</span> == <span class="text-purple-300">NULL</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">goto</span> <span class="text-blue-300">cleanup</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">file2</span> = <span class="text-blue-300">fopen</span>(<span class="text-green-300">"output.txt"</span>, <span class="text-green-300">"w"</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">file2</span> == <span class="text-purple-300">NULL</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">goto</span> <span class="text-blue-300">cleanup</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">data</span> = (<span class="text-blue-400">int</span>*)<span class="text-blue-300">malloc</span>(<span class="text-purple-400">sizeof</span>(<span class="text-blue-400">int</span>) * <span class="text-yellow-300">100</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">data</span> == <span class="text-purple-300">NULL</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">goto</span> <span class="text-blue-300">cleanup</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 处理逻辑</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"处理文件...\n"</span>);<br>
+                                <br>
+                                <span class="text-blue-300">cleanup</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 清理资源（按照相反的顺序）</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">data</span> != <span class="text-purple-300">NULL</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">free</span>(<span class="text-blue-300">data</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">file2</span> != <span class="text-purple-300">NULL</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">fclose</span>(<span class="text-blue-300">file2</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">if</span> (<span class="text-blue-300">file1</span> != <span class="text-purple-300">NULL</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">fclose</span>(<span class="text-blue-300">file1</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;<br>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -2111,6 +2466,83 @@
                                 <br>
                                 <span class="text-blue-400"># 泛型类型注解</span><br>
                                 <span class="text-blue-300">numbers</span>: <span class="text-blue-300">List</span>[<span class="text-purple-400">int</span>] = [<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>]
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C -->
+                    <div class="language-content hidden" data-lang="c">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C - 静态类型系统和类型注解</h4>
+                        <p class="text-slate-300 mb-4">特点：变量声明本身就是类型注解，函数声明包含参数和返回类型，C99支持可变参数宏，C11支持_Generic选择器，支持typedef类型别名，支持结构体和联合体类型。注意事项：C语言是静态类型，类型检查在编译时进行，类型转换需要显式进行，C11的_Generic可用于类型安全的选择。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// C语言类型注解基础</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdio.h&gt;</span><br>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdlib.h&gt;</span><br>
+                                <br>
+                                <span class="text-blue-400">// 类型别名定义</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">int</span> <span class="text-blue-300">Integer</span>;<br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">char</span>* <span class="text-blue-300">String</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 结构体类型定义</span><br>
+                                <span class="text-purple-400">typedef</span> <span class="text-purple-400">struct</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">int</span> <span class="text-blue-300">id</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">String</span> <span class="text-blue-300">name</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">float</span> <span class="text-blue-300">score</span>;<br>
+                                } <span class="text-blue-300">Student</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 函数类型注解（参数和返回值类型）</span><br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">calculate_sum</span>(<span class="text-purple-400">int</span> <span class="text-blue-300">a</span>, <span class="text-purple-400">int</span> <span class="text-blue-300">b</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-300">Student</span>* <span class="text-blue-300">create_student</span>(<span class="text-purple-400">int</span> <span class="text-blue-300">id</span>, <span class="text-blue-300">String</span> <span class="text-blue-300">name</span>, <span class="text-purple-400">float</span> <span class="text-blue-300">score</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">Student</span>* <span class="text-blue-300">student</span> = (<span class="text-blue-300">Student</span>*)<span class="text-blue-300">malloc</span>(<span class="text-purple-400">sizeof</span>(<span class="text-blue-300">Student</span>));<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">student</span>-><span class="text-blue-300">id</span> = <span class="text-blue-300">id</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">student</span>-><span class="text-blue-300">name</span> = <span class="text-blue-300">name</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">student</span>-><span class="text-blue-300">score</span> = <span class="text-blue-300">score</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-blue-300">student</span>;<br>
+                                }<br>
+                                <br>
+                                <span class="text-purple-400">void</span> <span class="text-blue-300">print_student</span>(<span class="text-blue-300">Student</span>* <span class="text-blue-300">student</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"Student: %d, %s, %.2f\n"</span>, <span class="text-blue-300">student</span>-><span class="text-blue-300">id</span>, <span class="text-blue-300">student</span>-><span class="text-blue-300">name</span>, <span class="text-blue-300">student</span>-><span class="text-blue-300">score</span>);<br>
+                                }
+                            </div>
+                        </div>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2">// C11 _Generic类型选择器</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;stdio.h&gt;</span><br>
+                                <br>
+                                <span class="text-blue-400">// 使用_Generic进行类型选择（C11特性）</span><br>
+                                <span class="text-blue-400">#define</span> <span class="text-blue-300">PRINT_TYPE</span>(<span class="text-blue-300">x</span>) \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>_Generic((<span class="text-blue-300">x</span>, \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">int</span>: <span class="text-green-300">"整数"</span>, \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">float</span>: <span class="text-green-300">"浮点数"</span>, \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">char</span>*: <span class="text-green-300">"字符串"</span>, \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">default</span>: <span class="text-green-300">"未知类型"</span>))<br>
+                                <br>
+                                <span class="text-blue-400">#define</span> <span class="text-blue-300">PRINT_VALUE_AND_TYPE</span>(<span class="text-blue-300">x</span>) \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">"值: "</span>); \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>_Generic((<span class="text-blue-300">x</span>, \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">int</span>: <span class="text-blue-300">printf</span>(<span class="text-green-300">"%d"</span>, <span class="text-blue-300">x</span>), \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">float</span>: <span class="text-blue-300">printf</span>(<span class="text-green-300">"%.2f"</span>, <span class="text-blue-300">x</span>), \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">char</span>*: <span class="text-blue-300">printf</span>(<span class="text-green-300">"%s"</span>, <span class="text-blue-300">x</span>), \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">default</span>: <span class="text-blue-300">printf</span>(<span class="text-green-300">"未知类型"</span>)); \<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">printf</span>(<span class="text-green-300">", 类型: %s\n"</span>, <span class="text-blue-300">PRINT_TYPE</span>(<span class="text-blue-300">x</span>));<br>
+                                <br>
+                                <span class="text-purple-400">int</span> <span class="text-blue-300">main</span>(<span class="text-purple-400">void</span>) {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">int</span> <span class="text-blue-300">num</span> = <span class="text-yellow-300">42</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">float</span> <span class="text-blue-300">pi</span> = <span class="text-yellow-300">3.14159</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">char</span>* <span class="text-blue-300">str</span> = <span class="text-green-300">"Hello"</span>;<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">PRINT_VALUE_AND_TYPE</span>(<span class="text-blue-300">num</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">PRINT_VALUE_AND_TYPE</span>(<span class="text-blue-300">pi</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">PRINT_VALUE_AND_TYPE</span>(<span class="text-blue-300">str</span>);<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;<br>
+                                }
                             </div>
                         </div>
                     </div>
