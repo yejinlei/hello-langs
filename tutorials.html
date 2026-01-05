@@ -4955,5 +4955,95 @@
             });
         });
     </script>
-</body>
+
+    <script>
+        // Language loading functionality
+        const languageFiles = {
+            python: 'python_tutorials.html',
+            c: 'c_tutorials.html',
+            cpp: 'cpp_tutorials.html',
+            java: 'java_tutorials.html',
+            csharp: 'csharp_tutorials.html',
+            go: 'go_tutorials.html',
+            swift: 'swift_tutorials.html',
+            javascript: 'javascript_tutorials.html',
+            typescript: 'typescript_tutorials.html',
+            dart: 'dart_tutorials.html',
+            rust: 'rust_tutorials.html',
+            kotlin: 'kotlin_tutorials.html',
+            ruby: 'ruby_tutorials.html'
+        };
+        
+        // Modify language tab click handlers to load content dynamically
+        document.querySelectorAll('.language-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const selectedLang = this.getAttribute('data-lang');
+                
+                // Update active state
+                document.querySelectorAll('.language-tab').forEach(t => {
+                    t.classList.remove('active');
+                    t.classList.remove('px-4', 'py-2', 'rounded-lg', 'text-sm', 'font-medium');
+                    t.classList.add('px-4', 'py-2', 'rounded-lg', 'text-sm', 'font-medium', 'bg-slate-700', 'text-slate-300');
+                });
+                
+                this.classList.remove('bg-slate-700', 'text-slate-300');
+                this.classList.add('active', 'px-4', 'py-2', 'rounded-lg', 'text-sm', 'font-medium');
+                
+                // In a real implementation, you would load the specific language file here
+                // For now, we'll just show/hide the appropriate content
+                document.querySelectorAll('.language-content').forEach(content => {
+                    if (content.getAttribute('data-lang') === selectedLang) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        // Language loading functionality
+        const languageFiles = {
+            python: 'python_tutorials.html',
+            c: 'c_tutorials.html',
+            cpp: 'cpp_tutorials.html',
+            java: 'java_tutorials.html',
+            csharp: 'csharp_tutorials.html',
+            go: 'go_tutorials.html',
+            swift: 'swift_tutorials.html',
+            javascript: 'javascript_tutorials.html',
+            typescript: 'typescript_tutorials.html',
+            dart: 'dart_tutorials.html',
+            rust: 'rust_tutorials.html',
+            kotlin: 'kotlin_tutorials.html',
+            ruby: 'ruby_tutorials.html'
+        };
+        
+        // Modify language tab click handlers to load content dynamically
+        document.querySelectorAll('.language-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const selectedLang = this.getAttribute('data-lang');
+                
+                // Update active state
+                document.querySelectorAll('.language-tab').forEach(t => {
+                    t.classList.remove('active');
+                    t.classList.remove('px-4', 'py-2', 'rounded-lg', 'text-sm', 'font-medium');
+                    t.classList.add('px-4', 'py-2', 'rounded-lg', 'text-sm', 'font-medium', 'bg-slate-700', 'text-slate-300');
+                });
+                
+                this.classList.remove('bg-slate-700', 'text-slate-300');
+                this.classList.add('active', 'px-4', 'py-2', 'rounded-lg', 'text-sm', 'font-medium');
+                
+                // In a real implementation, you would load the specific language file here
+                // For now, we'll just show/hide the appropriate content
+                document.querySelectorAll('.language-content').forEach(content => {
+                    if (content.getAttribute('data-lang') === selectedLang) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script></body>
 </html>
