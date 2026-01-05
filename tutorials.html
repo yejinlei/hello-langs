@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语法教程 - Hello 编程语言</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .syntax-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .language-tab {
+            transition: all 0.3s ease;
+        }
+        .language-tab.active {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            color: white;
+        }
+        .code-block {
+            background: rgba(2, 6, 23, 0.9);
+            border-left: 4px solid #3B82F6;
+        }
+        .highlight {
+            background: rgba(59, 130, 246, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .language-content.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="text-2xl font-bold gradient-text">Hello 编程语言</div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-slate-300 hover:text-blue-400 transition-colors">首页</a>
+                    <a href="tutorials.html" class="text-blue-400 font-medium">语法教程</a>
+                    <!-- <a href="lab.html" class="text-slate-300 hover:text-blue-400 transition-colors">代码实验室</a> -->
+                    <!-- <a href="resources.html" class="text-slate-300 hover:text-blue-400 transition-colors">资源中心</a> -->
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="pt-24 pb-12 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h1 class="text-5xl font-bold mb-6 gradient-text">编程语法</h1>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    深入探索13种主流编程语言的完整语法体系，从基础到高级，一站式学习平台
+                </p>
+            </div>
+            
+            <!-- Language Selector -->
+            <div class="flex flex-wrap justify-center gap-3 mb-8">
+                <button class="language-tab active px-4 py-2 rounded-lg text-sm font-medium" data-lang="python">Python</button>
+                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="cpp">C++</button>
+                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="java">Java</button>
+                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="csharp">C#</button>
+                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="go">Go</button>
+                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="swift">Swift</button>
+                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="javascript">JavaScript</button>
+                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="typescript">TypeScript</button>
+                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="dart">Dart</button>
+                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="rust">Rust</button>
+                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="c">C</button>
+                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="kotlin">Kotlin</button>
+                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="ruby">Ruby</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- 1. 变量声明 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">1. 变量声明</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 动态类型语言，变量无需声明类型</h4>
+                        <p class="text-slate-300 mb-4">特点：简洁易读，支持多种数据类型，动态类型绑定，内置丰富数据结构。注意事项：变量命名区分大小写，使用下划线命名法。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 基本赋值</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">x</span> = <span class="text-yellow-300">10</span><br>
+                                <span class="text-blue-300">name</span> = <span class="text-green-300">"张三"</span><br>
+                                <span class="text-blue-300">age</span> = <span class="text-yellow-300">25</span><br>
+                                <span class="text-blue-300">height</span> = <span class="text-yellow-300">1.75</span><br>
+                                <span class="text-blue-300">is_student</span> = <span class="text-purple-300">True</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C++ -->
+                    <div class="language-content hidden" data-lang="cpp">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 静态类型语言，需要显式声明变量类型</h4>
+                        <p class="text-slate-300 mb-4">特点：强类型检查，高性能，支持多种数据类型，支持指针和引用。注意事项：变量必须先声明后使用，类型转换需要显式进行。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 基本赋值</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">x</span> = <span class="text-yellow-300">10</span>;<br>
+                                <span class="text-blue-400">std::string</span> <span class="text-blue-300">name</span> = <span class="text-green-300">"张三"</span>;<br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">age</span> = <span class="text-yellow-300">25</span>;<br>
+                                <span class="text-blue-400">double</span> <span class="text-blue-300">height</span> = <span class="text-yellow-300">1.75</span>;<br>
+                                <span class="text-blue-400">bool</span> <span class="text-blue-300">is_student</span> = <span class="text-purple-300">true</span>;
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Java -->
+                    <div class="language-content hidden" data-lang="java">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 静态类型语言，严格的类型检查</h4>
+                        <p class="text-slate-300 mb-4">特点：面向对象，强类型检查，跨平台，垃圾回收机制。注意事项：变量必须先声明后使用，所有变量都是对象的引用。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 基本赋值</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">x</span> = <span class="text-yellow-300">10</span>;<br>
+                                <span class="text-blue-400">String</span> <span class="text-blue-300">name</span> = <span class="text-green-300">"张三"</span>;<br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">age</span> = <span class="text-yellow-300">25</span>;<br>
+                                <span class="text-blue-400">double</span> <span class="text-blue-300">height</span> = <span class="text-yellow-300">1.75</span>;<br>
+                                <span class="text-blue-400">boolean</span> <span class="text-blue-300">is_student</span> = <span class="text-purple-300">true</span>;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 数据类型 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">2. 数据类型</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 内置丰富的数据类型</h4>
+                        <p class="text-slate-300 mb-4">特点：支持多种数据类型，动态类型检查，支持类型注解，内置类型转换函数。注意事项：使用type()函数查看数据类型，使用isinstance()函数检查类型。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 基本数据类型</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400"># 整数</span><br>
+                                <span class="text-blue-300">num_int</span> = <span class="text-yellow-300">42</span><br>
+                                <br>
+                                <span class="text-blue-400"># 浮点数</span><br>
+                                <span class="text-blue-300">num_float</span> = <span class="text-yellow-300">3.14159</span><br>
+                                <br>
+                                <span class="text-blue-400"># 字符串</span><br>
+                                <span class="text-blue-300">text</span> = <span class="text-green-300">"Hello, World!"</span><br>
+                                <br>
+                                <span class="text-blue-400"># 布尔值</span><br>
+                                <span class="text-blue-300">is_true</span> = <span class="text-purple-300">True</span><br>
+                                <span class="text-blue-300">is_false</span> = <span class="text-purple-300">False</span><br>
+                                <br>
+                                <span class="text-blue-400"># None值</span><br>
+                                <span class="text-blue-300">empty</span> = <span class="text-purple-300">None</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C++ -->
+                    <div class="language-content hidden" data-lang="cpp">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 静态类型系统，支持多种数据类型</h4>
+                        <p class="text-slate-300 mb-4">特点：强类型检查，支持基本数据类型和复合数据类型，支持自定义数据类型，类型转换需要显式进行。注意事项：使用sizeof()函数查看数据类型大小，使用typeid()函数获取类型信息。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 基本数据类型</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 整数</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">num_int</span> = <span class="text-yellow-300">42</span>;<br>
+                                <span class="text-blue-400">long long</span> <span class="text-blue-300">num_ll</span> = <span class="text-yellow-300">10000000000</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 浮点数</span><br>
+                                <span class="text-blue-400">float</span> <span class="text-blue-300">num_float</span> = <span class="text-yellow-300">3.14f</span>;<br>
+                                <span class="text-blue-400">double</span> <span class="text-blue-300">num_double</span> = <span class="text-yellow-300">3.1415926535</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 字符和字符串</span><br>
+                                <span class="text-blue-400">char</span> <span class="text-blue-300">c</span> = <span class="text-green-300">'A'</span>;<br>
+                                <span class="text-blue-400">std::string</span> <span class="text-blue-300">text</span> = <span class="text-green-300">"Hello, World!"</span>;<br>
+                                <br>
+                                <span class="text-blue-400">// 布尔值</span><br>
+                                <span class="text-blue-400">bool</span> <span class="text-blue-300">is_true</span> = <span class="text-purple-300">true</span>;<br>
+                                <span class="text-blue-400">bool</span> <span class="text-blue-300">is_false</span> = <span class="text-purple-300">false</span>;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 控制流 - 条件语句 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">3. 控制流 - 条件语句</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 灵活的条件语句</h4>
+                        <p class="text-slate-300 mb-4">特点：支持if-elif-else结构，支持条件表达式，支持短路求值，支持多重条件。注意事项：条件判断使用缩进区分代码块，避免使用过多的嵌套条件。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 条件语句</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">age</span> = <span class="text-yellow-300">18</span><br>
+                                <br>
+                                <span class="text-purple-400">if</span> <span class="text-blue-300">age</span> < <span class="text-yellow-300">18</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"未成年"</span>)<br>
+                                <span class="text-purple-400">elif</span> <span class="text-blue-300">age</span> == <span class="text-yellow-300">18</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"刚成年"</span>)<br>
+                                <span class="text-purple-400">else</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"成年人"</span>)<br>
+                                <br>
+                                <span class="text-blue-400"># 条件表达式</span><br>
+                                <span class="text-blue-300">result</span> = <span class="text-green-300">"成功"</span> <span class="text-purple-400">if</span> <span class="text-yellow-300">True</span> <span class="text-purple-400">else</span> <span class="text-green-300">"失败"</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C++ -->
+                    <div class="language-content hidden" data-lang="cpp">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 强大的条件语句</h4>
+                        <p class="text-slate-300 mb-4">特点：支持if-else if-else结构，支持三元运算符，支持短路求值，支持多重条件，支持switch-case语句。注意事项：条件判断使用花括号区分代码块，switch-case需要break语句，避免使用过多的嵌套条件。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 条件语句</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">age</span> = <span class="text-yellow-300">18</span>;<br>
+                                <br>
+                                <span class="text-purple-400">if</span> (<span class="text-blue-300">age</span> &lt; <span class="text-yellow-300">18</span>) {
+                                    <span class="text-blue-300">std::cout</span> &lt;&lt; <span class="text-green-300">"未成年"</span> &lt;&lt; <span class="text-blue-300">std::endl</span>;
+                                } <span class="text-purple-400">else</span> <span class="text-purple-400">if</span> (<span class="text-blue-300">age</span> == <span class="text-yellow-300">18</span>) {
+                                    <span class="text-blue-300">std::cout</span> &lt;&lt; <span class="text-green-300">"刚成年"</span> &lt;&lt; <span class="text-blue-300">std::endl</span>;
+                                } <span class="text-purple-400">else</span> {
+                                    <span class="text-blue-300">std::cout</span> &lt;&lt; <span class="text-green-300">"成年人"</span> &lt;&lt; <span class="text-blue-300">std::endl</span>;
+                                }
+                                <br>
+                                <span class="text-blue-400">// 三元运算符</span><br>
+                                <span class="text-green-300">std::string</span> <span class="text-blue-300">result</span> = <span class="text-purple-400">true</span> ? <span class="text-green-300">"成功"</span> : <span class="text-green-300">"失败"</span>;
+                                <span class="text-blue-300">std::cout</span> &lt;&lt; <span class="text-blue-300">result</span> &lt;&lt; <span class="text-blue-300">std::endl</span>;
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 控制流 - 循环语句 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">4. 控制流 - 循环语句</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 强大的循环结构</h4>
+                        <p class="text-slate-300 mb-4">特点：支持for循环和while循环，支持break和continue，支持else子句，支持循环嵌套。注意事项：避免无限循环，使用range()函数生成数字序列，使用enumerate()获取索引和值。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 循环语句</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400"># for循环</span><br>
+                                <span class="text-purple-400">for</span> <span class="text-blue-300">i</span> <span class="text-green-300">in</span> <span class="text-purple-400">range</span>(<span class="text-yellow-300">5</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-blue-300">i</span>)<br>
+                                <br>
+                                <span class="text-blue-400"># 遍历列表</span><br>
+                                <span class="text-blue-300">fruits</span> = [<span class="text-green-300">"苹果"</span>, <span class="text-green-300">"香蕉"</span>, <span class="text-green-300">"橙子"</span>]<br>
+                                <span class="text-purple-400">for</span> <span class="text-blue-300">fruit</span> <span class="text-green-300">in</span> <span class="text-blue-300">fruits</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-blue-300">fruit</span>)<br>
+                                <br>
+                                <span class="text-blue-400"># while循环</span><br>
+                                <span class="text-blue-300">count</span> = <span class="text-yellow-300">0</span><br>
+                                <span class="text-purple-400">while</span> <span class="text-blue-300">count</span> < <span class="text-yellow-300">5</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-blue-300">count</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;count</span> += <span class="text-yellow-300">1</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C++ -->
+                    <div class="language-content hidden" data-lang="cpp">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 丰富的循环语句</h4>
+                        <p class="text-slate-300 mb-4">特点：支持for循环、while循环、do-while循环，支持break和continue，支持基于范围的for循环（C++11+），支持循环嵌套。注意事项：避免无限循环，使用合适的循环类型，注意循环变量的作用域。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 循环语句</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// for循环</span><br>
+                                <span class="text-purple-400">for</span> (<span class="text-blue-400">int</span> <span class="text-blue-300">i</span> = <span class="text-yellow-300">0</span>; <span class="text-blue-300">i</span> &lt; <span class="text-yellow-300">5</span>; ++<span class="text-blue-300">i</span>) {
+                                    <span class="text-blue-300">std::cout</span> &lt;&lt; <span class="text-blue-300">i</span> &lt;&lt; <span class="text-blue-300">std::endl</span>;
+                                }
+                                <br>
+                                <span class="text-blue-400">// 遍历数组</span><br>
+                                <span class="text-green-300">std::string</span> <span class="text-blue-300">fruits</span>[] = { <span class="text-green-300">"苹果"</span>, <span class="text-green-300">"香蕉"</span>, <span class="text-green-300">"橙子"</span> };
+                                <span class="text-purple-400">for</span> (<span class="text-blue-300">auto</span>& <span class="text-blue-300">fruit</span> : <span class="text-blue-300">fruits</span>) {
+                                    <span class="text-blue-300">std::cout</span> &lt;&lt; <span class="text-blue-300">fruit</span> &lt;&lt; <span class="text-blue-300">std::endl</span>;
+                                }
+                                <br>
+                                <span class="text-blue-400">// while循环</span><br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">count</span> = <span class="text-yellow-300">0</span>;
+                                <span class="text-purple-400">while</span> (<span class="text-blue-300">count</span> &lt; <span class="text-yellow-300">5</span>) {
+                                    <span class="text-blue-300">std::cout</span> &lt;&lt; <span class="text-blue-300">count</span> &lt;&lt; <span class="text-blue-300">std::endl</span>;
+                                    ++<span class="text-blue-300">count</span>;
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 函数定义 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">5. 函数定义</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 灵活的函数定义</h4>
+                        <p class="text-slate-300 mb-4">特点：支持def关键字定义函数，支持返回值，支持文档字符串，支持嵌套函数，支持递归调用。注意事项：函数名使用下划线命名法，保持函数简洁，一个函数只做一件事。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 函数定义</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">add</span>(<span class="text-blue-300">a</span>, <span class="text-blue-300">b</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;"""两数相加"""</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span><br>
+                                <br>
+                                <span class="text-blue-300">result</span> = <span class="text-blue-300">add</span>(<span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>)<br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">result</span>) <span class="text-slate-500"># 输出5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 函数参数 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">6. 函数参数</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 多种参数类型</h4>
+                        <p class="text-slate-300 mb-4">特点：支持位置参数，支持默认参数，支持关键字参数，支持可变位置参数(*args)，支持可变关键字参数(**kwargs)。注意事项：参数顺序为位置参数、默认参数、*args、**kwargs。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 函数参数</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">func</span>(<span class="text-blue-300">a</span>, <span class="text-blue-300">b</span>, <span class="text-blue-300">c</span>=<span class="text-yellow-300">0</span>, <span class="text-purple-400">*</span><span class="text-blue-300">args</span>, <span class="text-purple-400">**</span><span class="text-blue-300">kwargs</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">f"a={a}, b={b}, c={c}"</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-blue-300">args</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-blue-300">kwargs</span>)<br>
+                                <br>
+                                <span class="text-blue-300">func</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>) <span class="text-slate-500"># 位置参数</span><br>
+                                <span class="text-blue-300">func</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>) <span class="text-slate-500"># 默认参数</span><br>
+                                <span class="text-blue-300">func</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-blue-300">d</span>=<span class="text-yellow-300">4</span>, <span class="text-blue-300">e</span>=<span class="text-yellow-300">5</span>) <span class="text-slate-500"># 关键字参数</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 函数返回值 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">7. 函数返回值</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 灵活的返回值</h4>
+                        <p class="text-slate-300 mb-4">特点：支持返回单个值，支持返回多个值（自动打包为元组），支持返回None，支持返回函数对象，支持返回生成器。注意事项：多个返回值可以直接赋值给多个变量，函数默认返回None。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 函数返回值</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">get_user</span>():<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-yellow-300">1</span>, <span class="text-green-300">"张三"</span>, <span class="text-yellow-300">18</span><br>
+                                <br>
+                                <span class="text-blue-300">id</span>, <span class="text-blue-300">name</span>, <span class="text-blue-300">age</span> = <span class="text-blue-300">get_user</span>()<br>
+                                <span class="text-blue-300">print</span>(<span class="text-green-300">f"ID: {id}, 姓名: {name}, 年龄: {age}"</span>)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. 字符串操作 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">8. 字符串操作</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 强大的字符串处理</h4>
+                        <p class="text-slate-300 mb-4">特点：支持字符串拼接，支持格式化字符串，支持字符串方法，支持正则表达式，支持字符串切片，支持多行字符串。注意事项：字符串是不可变类型，使用f-string进行格式化（Python 3.6+），注意字符串编码。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 字符串操作</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">text</span> = <span class="text-green-300">"Hello, World!"</span><br>
+                                <br>
+                                <span class="text-blue-400"># 字符串方法</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">text</span>.<span class="text-blue-300">upper</span>()) <span class="text-slate-500"># 输出：HELLO, WORLD!</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">text</span>.<span class="text-blue-300">lower</span>()) <span class="text-slate-500"># 输出：hello, world!</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">text</span>.<span class="text-blue-300">strip</span>()) <span class="text-slate-500"># 输出：Hello, World!</span><br>
+                                <br>
+                                <span class="text-blue-400"># 字符串格式化</span><br>
+                                <span class="text-blue-300">name</span> = <span class="text-green-300">"张三"</span><br>
+                                <span class="text-blue-300">age</span> = <span class="text-yellow-300">18</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-green-300">f"我叫{name}，今年{age}岁"</span>) <span class="text-slate-500"># 输出：我叫张三，今年18岁</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. 列表操作 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">9. 列表操作</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 强大的列表操作</h4>
+                        <p class="text-slate-300 mb-4">特点：支持列表创建，支持索引访问，支持切片操作，支持列表方法（append, insert, remove, pop等），支持列表推导式，支持排序和反转。注意事项：列表是可变序列，使用切片创建副本，注意索引越界问题。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 列表操作</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">fruits</span> = [<span class="text-green-300">"苹果"</span>, <span class="text-green-300">"香蕉"</span>, <span class="text-green-300">"橙子"</span>]<br>
+                                <br>
+                                <span class="text-blue-400"># 索引访问</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">fruits</span>[<span class="text-yellow-300">0</span>]) <span class="text-slate-500"># 输出：苹果</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">fruits</span>[<span class="text-yellow-300">-1</span>]) <span class="text-slate-500"># 输出：橙子</span><br>
+                                <br>
+                                <span class="text-blue-400"># 切片操作</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">fruits</span>[<span class="text-yellow-300">1</span>:]) <span class="text-slate-500"># 输出：['香蕉', '橙子']</span><br>
+                                <br>
+                                <span class="text-blue-400"># 列表方法</span><br>
+                                <span class="text-blue-300">fruits</span>.<span class="text-blue-300">append</span>(<span class="text-green-300">"葡萄"</span>)<br>
+                                <span class="text-blue-300">fruits</span>.<span class="text-blue-300">insert</span>(<span class="text-yellow-300">1</span>, <span class="text-green-300">"草莓"</span>)<br>
+                                <br>
+                                <span class="text-blue-400"># 列表推导式</span><br>
+                                <span class="text-blue-300">numbers</span> = [<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>]<br>
+                                <span class="text-blue-300">squares</span> = [<span class="text-blue-300">x</span>**<span class="text-yellow-300">2</span> <span class="text-purple-400">for</span> <span class="text-blue-300">x</span> <span class="text-green-300">in</span> <span class="text-blue-300">numbers</span>]<br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">squares</span>) <span class="text-slate-500"># 输出：[1, 4, 9, 16, 25]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. 字典操作 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">10. 字典操作</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 高效的字典操作</h4>
+                        <p class="text-slate-300 mb-4">特点：支持键值对存储，支持多种创建方式，支持索引访问，支持字典方法（get, keys, values, items等），支持字典推导式，支持字典合并。注意事项：字典键必须是不可变类型，使用get()方法避免KeyError，Python 3.7+字典保持插入顺序。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 字典操作</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">person</span> = {
+                                    <span class="text-green-300">"name"</span>: <span class="text-green-300">"张三"</span>,
+                                    <span class="text-green-300">"age"</span>: <span class="text-yellow-300">18</span>,
+                                    <span class="text-green-300">"gender"</span>: <span class="text-green-300">"男"</span>
+                                }<br>
+                                <br>
+                                <span class="text-blue-400"># 访问字典</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">person</span>[<span class="text-green-300">"name"</span>]) <span class="text-slate-500"># 输出：张三</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">person</span>.<span class="text-blue-300">get</span>(<span class="text-green-300">"address"</span>, <span class="text-green-300">"未知"</span>)) <span class="text-slate-500"># 输出：未知</span><br>
+                                <br>
+                                <span class="text-blue-400"># 字典方法</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">person</span>.<span class="text-blue-300">keys</span>()) <span class="text-slate-500"># 输出：dict_keys(['name', 'age', 'gender'])</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">person</span>.<span class="text-blue-300">values</span>()) <span class="text-slate-500"># 输出：dict_values(['张三', 18, '男'])</span><br>
+                                <br>
+                                <span class="text-blue-400"># 字典推导式</span><br>
+                                <span class="text-blue-300">numbers</span> = [<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>]<br>
+                                <span class="text-blue-300">square_dict</span> = {<span class="text-blue-300">x</span>: <span class="text-blue-300">x</span>**<span class="text-yellow-300">2</span> <span class="text-purple-400">for</span> <span class="text-blue-300">x</span> <span class="text-green-300">in</span> <span class="text-blue-300">numbers</span>}<br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">square_dict</span>) <span class="text-slate-500"># 输出：{1: 1, 2: 4, 3: 9, 4: 16, 5: 25}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. 集合操作 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">11. 集合操作</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 高效的集合操作</h4>
+                        <p class="text-slate-300 mb-4">特点：支持集合创建，支持去重，支持集合运算（交集、并集、差集、对称差集），支持集合方法，支持集合推导式。注意事项：集合元素必须是不可变类型，集合是无序的，不支持索引访问。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 集合操作</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">s1</span> = {<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>}<br>
+                                <span class="text-blue-300">s2</span> = {<span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>, <span class="text-yellow-300">6</span>}<br>
+                                <br>
+                                <span class="text-blue-400"># 集合运算</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">s1</span> & <span class="text-blue-300">s2</span>) <span class="text-slate-500"># 交集：{3, 4}</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">s1</span> | <span class="text-blue-300">s2</span>) <span class="text-slate-500"># 并集：{1, 2, 3, 4, 5, 6}</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">s1</span> - <span class="text-blue-300">s2</span>) <span class="text-slate-500"># 差集：{1, 2}</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">s1</span> ^ <span class="text-blue-300">s2</span>) <span class="text-slate-500"># 对称差集：{1, 2, 5, 6}</span><br>
+                                <br>
+                                <span class="text-blue-400"># 集合方法</span><br>
+                                <span class="text-blue-300">s1</span>.<span class="text-blue-300">add</span>(<span class="text-yellow-300">5</span>)<br>
+                                <span class="text-blue-300">s1</span>.<span class="text-blue-300">remove</span>(<span class="text-yellow-300">1</span>)<br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">s1</span>) <span class="text-slate-500"># 输出：{2, 3, 4, 5}</span><br>
+                                <br>
+                                <span class="text-blue-400"># 集合推导式</span><br>
+                                <span class="text-blue-300">s3</span> = {<span class="text-blue-300">x</span> <span class="text-purple-400">for</span> <span class="text-blue-300">x</span> <span class="text-green-300">in</span> <span class="text-purple-400">range</span>(<span class="text-yellow-300">10</span>) <span class="text-purple-400">if</span> <span class="text-blue-300">x</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span>}<br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">s3</span>) <span class="text-slate-500"># 输出：{0, 2, 4, 6, 8}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. 函数嵌套 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">12. 函数嵌套</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 支持函数嵌套</h4>
+                        <p class="text-slate-300 mb-4">特点：支持在函数内部定义函数，内部函数可以访问外部函数的变量，支持闭包。注意事项：内部函数可以捕获外部函数的变量，当外部函数返回内部函数时形成闭包。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 函数嵌套</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">outer</span>(<span class="text-blue-300">x</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">inner</span>(<span class="text-blue-300">y</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">x</span> + <span class="text-blue-300">y</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">inner</span><br>
+                                <br>
+                                <span class="text-blue-300">add5</span> = <span class="text-blue-300">outer</span>(<span class="text-yellow-300">5</span>)<br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">add5</span>(<span class="text-yellow-300">3</span>)) <span class="text-slate-500"># 输出8</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13. 匿名函数 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">13. 匿名函数</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - lambda表达式</h4>
+                        <p class="text-slate-300 mb-4">特点：使用lambda关键字创建匿名函数，只能包含一个表达式，返回表达式的结果，常用于简单的函数定义。注意事项：lambda表达式适合简单的逻辑，复杂逻辑应使用def定义函数。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 匿名函数</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">add</span> = <span class="text-purple-400">lambda</span> <span class="text-blue-300">x</span>, <span class="text-blue-300">y</span>: <span class="text-blue-300">x</span> + <span class="text-blue-300">y</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">add</span>(<span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>)) <span class="text-slate-500"># 输出5</span><br>
+                                <br>
+                                <span class="text-blue-400"># 结合内置函数使用</span><br>
+                                <span class="text-blue-300">numbers</span> = [<span class="text-yellow-300">3</span>, <span class="text-yellow-300">1</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">1</span>, <span class="text-yellow-300">5</span>]<br>
+                                <span class="text-blue-300">sorted_numbers</span> = <span class="text-purple-400">sorted</span>(<span class="text-blue-300">numbers</span>, <span class="text-blue-300">key</span>=<span class="text-purple-400">lambda</span> <span class="text-blue-300">x</span>: -<span class="text-blue-300">x</span>)<br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">sorted_numbers</span>) <span class="text-slate-500"># 输出[5, 4, 3, 1, 1]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14. 类和对象 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">14. 类和对象</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 面向对象编程</h4>
+                        <p class="text-slate-300 mb-4">特点：使用class关键字定义类，支持实例化对象，支持属性和方法，支持构造函数__init__，支持析构函数__del__。注意事项：类名使用驼峰命名法，方法第一个参数为self，代表实例本身。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 类和对象</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Person</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">name</span>, <span class="text-blue-300">age</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.name</span> = <span class="text-blue-300">name</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.age</span> = <span class="text-blue-300">age</span><br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">greet</span>(<span class="text-blue-300">self</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">f"你好，我是{self.name}，今年{self.age}岁"</span>)<br>
+                                <br>
+                                <span class="text-blue-400"># 实例化对象</span><br>
+                                <span class="text-blue-300">person</span> = <span class="text-blue-300">Person</span>(<span class="text-green-300">"张三"</span>, <span class="text-yellow-300">18</span>)<br>
+                                <span class="text-blue-300">person</span>.<span class="text-blue-300">greet</span>()
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 15. 继承 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">15. 继承</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 支持继承机制</h4>
+                        <p class="text-slate-300 mb-4">特点：支持单继承，支持多继承，支持方法重写，支持super()函数调用父类方法，支持MRO（方法解析顺序）。注意事项：多继承时注意方法名冲突，使用super()调用父类方法。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 继承</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Animal</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">speak</span>(<span class="text-blue-300">self</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"动物在说话"</span>)<br>
+                                <br>
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Dog</span>(<span class="text-blue-300">Animal</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">speak</span>(<span class="text-blue-300">self</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super</span>().<span class="text-blue-300">speak</span>()<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"汪汪汪"</span>)<br>
+                                <br>
+                                <span class="text-blue-300">dog</span> = <span class="text-blue-300">Dog</span>()<br>
+                                <span class="text-blue-300">dog</span>.<span class="text-blue-300">speak</span>()
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 16. 多态 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">16. 多态</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 支持多态</h4>
+                        <p class="text-slate-300 mb-4">特点：动态类型语言，支持鸭子类型，支持多态，不需要显式声明接口。注意事项：多态通过方法重写实现，不同类的实例可以调用相同的方法名，产生不同的行为。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 多态</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Cat</span>(<span class="text-blue-300">Animal</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">speak</span>(<span class="text-blue-300">self</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"喵喵喵"</span>)<br>
+                                <br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">make_animal_speak</span>(<span class="text-blue-300">animal</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;animal</span>.<span class="text-blue-300">speak</span>()<br>
+                                <br>
+                                <span class="text-blue-300">dog</span> = <span class="text-blue-300">Dog</span>()<br>
+                                <span class="text-blue-300">cat</span> = <span class="text-blue-300">Cat</span>()<br>
+                                <br>
+                                <span class="text-blue-300">make_animal_speak</span>(<span class="text-blue-300">dog</span>) <span class="text-slate-500"># 输出：动物在说话\n汪汪汪</span><br>
+                                <span class="text-blue-300">make_animal_speak</span>(<span class="text-blue-300">cat</span>) <span class="text-slate-500"># 输出：喵喵喵</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 17. 封装 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">17. 封装</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 支持封装机制</h4>
+                        <p class="text-slate-300 mb-4">特点：支持属性私有化（使用单下划线或双下划线），支持@property装饰器定义只读属性，支持@property和@属性名.setter装饰器定义读写属性。注意事项：双下划线属性会被名称修饰，只能通过类内部访问。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 封装</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Person</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">name</span>, <span class="text-blue-300">age</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self._name</span> = <span class="text-blue-300">name</span> <span class="text-slate-500"># 保护属性</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.__age</span> = <span class="text-blue-300">age</span> <span class="text-slate-500"># 私有属性</span><br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;@property</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">name</span>(<span class="text-blue-300">self</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">self</span>.<span class="text-blue-300">_name</span><br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;@name.setter</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">name</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">value</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self._name</span> = <span class="text-blue-300">value</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 18. 特殊方法 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">18. 特殊方法</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 丰富的特殊方法</h4>
+                        <p class="text-slate-300 mb-4">特点：支持多种特殊方法（魔术方法），用于实现运算符重载，支持自定义对象的行为，如__str__、__repr__、__add__等。注意事项：特殊方法以双下划线开头和结尾，由Python解释器自动调用。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 特殊方法</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Vector</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">x</span>, <span class="text-blue-300">y</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.x</span> = <span class="text-blue-300">x</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.y</span> = <span class="text-blue-300">y</span><br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__add__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">other</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">Vector</span>(<span class="text-blue-300">self</span>.<span class="text-blue-300">x</span> + <span class="text-blue-300">other</span>.<span class="text-blue-300">x</span>, <span class="text-blue-300">self</span>.<span class="text-blue-300">y</span> + <span class="text-blue-300">other</span>.<span class="text-blue-300">y</span>)<br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__str__</span>(<span class="text-blue-300">self</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-green-300">f"Vector({self.x}, {self.y})"</span><br>
+                                <br>
+                                <span class="text-blue-300">v1</span> = <span class="text-blue-300">Vector</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>)<br>
+                                <span class="text-blue-300">v2</span> = <span class="text-blue-300">Vector</span>(<span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>)<br>
+                                <span class="text-blue-300">v3</span> = <span class="text-blue-300">v1</span> + <span class="text-blue-300">v2</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">v3</span>) <span class="text-slate-500"># 输出：Vector(4, 6)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 19. 模块和包 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">19. 模块和包</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 模块化编程</h4>
+                        <p class="text-slate-300 mb-4">特点：支持模块导入，支持包管理，支持相对导入和绝对导入，支持__init__.py文件，支持__all__列表控制导入。注意事项：模块名使用小写字母，包是包含__init__.py文件的目录。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 模块和包</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400"># 导入模块</span><br>
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">math</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">math</span>.<span class="text-blue-300">sqrt</span>(<span class="text-yellow-300">16</span>)) <span class="text-slate-500"># 输出4.0</span><br>
+                                <br>
+                                <span class="text-blue-400"># 导入模块中的特定函数</span><br>
+                                <span class="text-purple-400">from</span> <span class="text-blue-300">math</span> <span class="text-purple-400">import</span> <span class="text-blue-300">pi</span>, <span class="text-blue-300">sin</span><br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">pi</span>) <span class="text-slate-500"># 输出3.141592653589793</span><br>
+                                <br>
+                                <span class="text-blue-400"># 导入整个模块并起别名</span><br>
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">numpy</span> <span class="text-purple-400">as</span> <span class="text-blue-300">np</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 20. 异常处理 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">20. 异常处理</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 完善的异常处理机制</h4>
+                        <p class="text-slate-300 mb-4">特点：支持try-except块捕获异常，支持except捕获特定异常，支持finally块清理资源，支持else块处理正常情况，支持raise抛出异常。注意事项：尽量捕获特定异常，避免捕获所有异常，使用finally确保资源释放。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 异常处理</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">try</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;num</span> = <span class="text-yellow-300">10</span> / <span class="text-yellow-300">0</span><br>
+                                <span class="text-purple-400">except</span> <span class="text-blue-300">ZeroDivisionError</span> <span class="text-purple-400">as</span> <span class="text-blue-300">e</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">f"除零错误: {e}"</span>)<br>
+                                <span class="text-purple-400">except</span> <span class="text-blue-300">Exception</span> <span class="text-purple-400">as</span> <span class="text-blue-300">e</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">f"其他错误: {e}"</span>)<br>
+                                <span class="text-purple-400">finally</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"不管是否发生异常，都会执行这里"</span>)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 21. 文件操作 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">21. 文件操作</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 简洁的文件操作</h4>
+                        <p class="text-slate-300 mb-4">特点：支持open()函数打开文件，支持with语句自动关闭文件，支持多种文件模式，支持读写文本文件和二进制文件，支持文件对象的多种方法。注意事项：使用with语句确保文件正确关闭，指定正确的文件编码。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 文件操作</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400"># 写入文件</span><br>
+                                <span class="text-purple-400">with</span> <span class="text-purple-400">open</span>(<span class="text-green-300">"test.txt"</span>, <span class="text-green-300">"w"</span>, <span class="text-blue-300">encoding</span>=<span class="text-green-300">"utf-8"</span>) <span class="text-purple-400">as</span> <span class="text-blue-300">f</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;f.write("Hello, World!\n")<br>
+                                f.write("你好，世界！\n")</span><br>
+                                <br>
+                                <span class="text-blue-400"># 读取文件</span><br>
+                                <span class="text-purple-400">with</span> <span class="text-purple-400">open</span>(<span class="text-green-300">"test.txt"</span>, <span class="text-green-300">"r"</span>, <span class="text-blue-300">encoding</span>=<span class="text-green-300">"utf-8"</span>) <span class="text-purple-400">as</span> <span class="text-blue-300">f</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;content</span> = <span class="text-blue-300">f</span>.<span class="text-blue-300">read</span>()<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-blue-300">content</span>)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- 22. 生成器 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">22. 生成器</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 高效的生成器</h4>
+                        <p class="text-slate-300 mb-4">特点：使用yield关键字创建生成器，支持延迟计算，支持迭代协议，支持生成器表达式，节省内存空间。注意事项：生成器只能遍历一次，使用next()函数获取下一个值，使用send()方法向生成器发送值。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 生成器</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">count_up</span>(<span class="text-blue-300">n</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">i</span> <span class="text-green-300">in</span> <span class="text-purple-400">range</span>(<span class="text-blue-300">n</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield</span> <span class="text-blue-300">i</span>
+                                <br>
+                                <span class="text-blue-300"># 使用生成器</span><br>
+                                <span class="text-blue-300">counter</span> = <span class="text-blue-300">count_up</span>(<span class="text-yellow-300">5</span>)<br>
+                                <span class="text-blue-300">for</span> <span class="text-blue-300">num</span> <span class="text-green-300">in</span> <span class="text-blue-300">counter</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-blue-300">num</span>)<br>
+                                <br>
+                                <span class="text-blue-400"># 生成器表达式</span><br>
+                                <span class="text-blue-300">squares</span> = (<span class="text-blue-300">x</span>**<span class="text-yellow-300">2</span> <span class="text-purple-400">for</span> <span class="text-blue-300">x</span> <span class="text-green-300">in</span> <span class="text-purple-400">range</span>(<span class="text-yellow-300">5</span>))<br>
+                                <span class="text-blue-300">print</span>(<span class="text-purple-400">list</span>(<span class="text-blue-300">squares</span>)) <span class="text-slate-500"># 输出：[0, 1, 4, 9, 16]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 23. 迭代器 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">23. 迭代器</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 迭代器协议</h4>
+                        <p class="text-slate-300 mb-4">特点：支持迭代器协议，支持__iter__()和__next__()方法，支持内置迭代函数，支持自定义迭代器，支持StopIteration异常。注意事项：迭代器只能遍历一次，使用iter()函数获取迭代器，使用next()函数获取下一个值。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 迭代器</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Counter</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">max_count</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.max_count</span> = <span class="text-blue-300">max_count</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.current</span> = <span class="text-yellow-300">0</span>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__iter__</span>(<span class="text-blue-300">self</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">self</span>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__next__</span>(<span class="text-blue-300">self</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">self</span>.<span class="text-blue-300">current</span> < <span class="text-blue-300">self</span>.<span class="text-blue-300">max_count</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result</span> = <span class="text-blue-300">self</span>.<span class="text-blue-300">current</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.current</span> += <span class="text-yellow-300">1</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">result</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise</span> <span class="text-blue-300">StopIteration</span>
+                                <br>
+                                <span class="text-blue-300"># 使用迭代器</span><br>
+                                <span class="text-blue-300">counter</span> = <span class="text-blue-300">Counter</span>(<span class="text-yellow-300">5</span>)<br>
+                                <span class="text-blue-300">for</span> <span class="text-blue-300">num</span> <span class="text-green-300">in</span> <span class="text-blue-300">counter</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-blue-300">num</span>)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 24. 装饰器 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">24. 装饰器</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 强大的装饰器</h4>
+                        <p class="text-slate-300 mb-4">特点：使用@符号应用装饰器，支持函数装饰器，支持类装饰器，支持装饰器嵌套，支持functools.wraps保留函数元信息。注意事项：装饰器执行顺序从下到上，需要注意装饰器的嵌套顺序。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 装饰器</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">functools</span><br>
+                                <br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">logger</span>(<span class="text-blue-300">func</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;@functools.wraps(func)</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">wrapper</span>(<span class="text-purple-400">*</span><span class="text-blue-300">args</span>, <span class="text-purple-400">**</span><span class="text-blue-300">kwargs</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">f"调用函数: {func.__name__}"</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result</span> = <span class="text-blue-300">func</span>(<span class="text-purple-400">*</span><span class="text-blue-300">args</span>, <span class="text-purple-400">**</span><span class="text-blue-300">kwargs</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">f"函数返回: {result}"</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">result</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">wrapper</span>
+                                <br>
+                                <span class="text-purple-400">@logger</span><br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">add</span>(<span class="text-blue-300">a</span>, <span class="text-blue-300">b</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>
+                                <br>
+                                <span class="text-blue-300">result</span> = <span class="text-blue-300">add</span>(<span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>) <span class="text-slate-500"># 输出：调用函数: add\n函数返回: 5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 25. 上下文管理器 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">25. 上下文管理器</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 安全的上下文管理器</h4>
+                        <p class="text-slate-300 mb-4">特点：使用with语句管理资源，支持__enter__()和__exit__()方法，支持contextlib模块简化上下文管理器创建，支持嵌套上下文管理器。注意事项：确保资源正确释放，避免资源泄漏，使用try-finally确保资源释放。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 上下文管理器</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">FileManager</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">filename</span>, <span class="text-blue-300">mode</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.filename</span> = <span class="text-blue-300">filename</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.mode</span> = <span class="text-blue-300">mode</span>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__enter__</span>(<span class="text-blue-300">self</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.file</span> = <span class="text-purple-400">open</span>(<span class="text-blue-300">self</span>.<span class="text-blue-300">filename</span>, <span class="text-blue-300">self</span>.<span class="text-blue-300">mode</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">self</span>.<span class="text-blue-300">file</span>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__exit__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">exc_type</span>, <span class="text-blue-300">exc_val</span>, <span class="text-blue-300">exc_tb</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.file</span>.<span class="text-blue-300">close</span>()
+                                <br>
+                                <span class="text-blue-400"># 使用上下文管理器</span><br>
+                                <span class="text-purple-400">with</span> <span class="text-blue-300">FileManager</span>(<span class="text-green-300">"test.txt"</span>, <span class="text-green-300">"w"</span>) <span class="text-purple-400">as</span> <span class="text-blue-300">f</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;f.write("Hello, Context Manager!\n")</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 26. 类型注解 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">26. 类型注解</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 类型注解</h4>
+                        <p class="text-slate-300 mb-4">特点：支持变量类型注解，支持函数参数类型注解，支持函数返回值类型注解，支持类型别名，支持泛型，支持Union类型。注意事项：类型注解是可选的，使用typing模块提供的类型，需要Python 3.5+支持。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 类型注解</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">from</span> <span class="text-blue-300">typing</span> <span class="text-purple-400">import</span> <span class="text-blue-300">List</span>, <span class="text-blue-300">Dict</span>, <span class="text-blue-300">Union</span>
+                                <br>
+                                <span class="text-blue-400"># 变量类型注解</span><br>
+                                <span class="text-blue-300">name</span>: <span class="text-purple-400">str</span> = <span class="text-green-300">"张三"</span><br>
+                                <span class="text-blue-300">age</span>: <span class="text-purple-400">int</span> = <span class="text-yellow-300">18</span>
+                                <br>
+                                <span class="text-blue-400"># 函数类型注解</span><br>
+                                <span class="text-blue-300">def</span> <span class="text-blue-300">add</span>(<span class="text-blue-300">a</span>: <span class="text-purple-400">int</span>, <span class="text-blue-300">b</span>: <span class="text-purple-400">int</span>) -> <span class="text-purple-400">int</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>
+                                <br>
+                                <span class="text-blue-400"># 泛型类型注解</span><br>
+                                <span class="text-blue-300">numbers</span>: <span class="text-blue-300">List</span>[<span class="text-purple-400">int</span>] = [<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 27. 正则表达式 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">27. 正则表达式</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 强大的正则表达式</h4>
+                        <p class="text-slate-300 mb-4">特点：使用re模块支持正则表达式，支持多种正则表达式方法，支持正则表达式标志，支持分组捕获，支持贪婪和非贪婪匹配。注意事项：正则表达式是字符串，需要注意转义字符，使用原始字符串（r""）避免转义。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 正则表达式</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">re</span>
+                                <br>
+                                <span class="text-blue-300">text</span> = <span class="text-green-300">"我的邮箱是: example@example.com, 电话是: 13800138000"</span>
+                                <br>
+                                <span class="text-blue-400"># 匹配邮箱</span><br>
+                                <span class="text-blue-300">email_pattern</span> = <span class="text-green-300">r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'</span><br>
+                                <span class="text-blue-300">emails</span> = <span class="text-blue-300">re</span>.<span class="text-blue-300">findall</span>(<span class="text-blue-300">email_pattern</span>, <span class="text-blue-300">text</span>)<br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">emails</span>) <span class="text-slate-500"># 输出：['example@example.com']</span>
+                                <br>
+                                <span class="text-blue-400"># 匹配电话</span><br>
+                                <span class="text-blue-300">phone_pattern</span> = <span class="text-green-300">r'1[3-9]\d{9}'</span><br>
+                                <span class="text-blue-300">phones</span> = <span class="text-blue-300">re</span>.<span class="text-blue-300">findall</span>(<span class="text-blue-300">phone_pattern</span>, <span class="text-blue-300">text</span>)<br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">phones</span>) <span class="text-slate-500"># 输出：['13800138000']</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 28. 日期和时间 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">28. 日期和时间</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 日期和时间处理</h4>
+                        <p class="text-slate-300 mb-4">特点：使用datetime模块处理日期和时间，支持日期和时间的创建，支持日期和时间的格式化，支持日期和时间的计算，支持时区处理。注意事项：datetime对象是不可变的，使用strftime()格式化日期，使用strptime()解析日期字符串。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 日期和时间</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">from</span> <span class="text-blue-300">datetime</span> <span class="text-purple-400">import</span> <span class="text-blue-300">datetime</span>, <span class="text-blue-300">date</span>, <span class="text-blue-300">time</span>, <span class="text-blue-300">timedelta</span>
+                                <br>
+                                <span class="text-blue-400"># 获取当前日期和时间</span><br>
+                                <span class="text-blue-300">now</span> = <span class="text-blue-300">datetime</span>.<span class="text-blue-300">now</span>()<br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">now</span>) <span class="text-slate-500"># 输出：当前日期和时间</span>
+                                <br>
+                                <span class="text-blue-400"># 格式化日期和时间</span><br>
+                                <span class="text-blue-300">formatted</span> = <span class="text-blue-300">now</span>.<span class="text-blue-300">strftime</span>(<span class="text-green-300">"%Y-%m-%d %H:%M:%S"</span>)<br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">formatted</span>) <span class="text-slate-500"># 输出：YYYY-MM-DD HH:MM:SS</span>
+                                <br>
+                                <span class="text-blue-400"># 日期计算</span><br>
+                                <span class="text-blue-300">tomorrow</span> = <span class="text-blue-300">date</span>.<span class="text-blue-300">today</span>() + <span class="text-blue-300">timedelta</span>(<span class="text-blue-300">days</span>=<span class="text-yellow-300">1</span>)<br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">tomorrow</span>) <span class="text-slate-500"># 输出：明天的日期</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 29. 多线程 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">29. 多线程</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 多线程编程</h4>
+                        <p class="text-slate-300 mb-4">特点：使用threading模块支持多线程，支持创建线程，支持线程同步，支持线程锁，支持线程池，支持守护线程。注意事项：Python有GIL（全局解释器锁），多线程在CPU密集型任务上效率不高，适合IO密集型任务。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 多线程</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">threading</span><br>
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">time</span>
+                                <br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">print_numbers</span>():<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">i</span> <span class="text-green-300">in</span> <span class="text-purple-400">range</span>(<span class="text-yellow-300">5</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-blue-300">i</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.sleep(0.5)</span>
+                                <br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">print_letters</span>():<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">letter</span> <span class="text-green-300">in</span> <span class="text-green-300">"ABCDE"</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-blue-300">letter</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.sleep(0.5)</span>
+                                <br>
+                                <span class="text-blue-400"># 创建线程</span><br>
+                                <span class="text-blue-300">t1</span> = <span class="text-blue-300">threading</span>.<span class="text-blue-300">Thread</span>(<span class="text-blue-300">target</span>=<span class="text-blue-300">print_numbers</span>)<br>
+                                <span class="text-blue-300">t2</span> = <span class="text-blue-300">threading</span>.<span class="text-blue-300">Thread</span>(<span class="text-blue-300">target</span>=<span class="text-blue-300">print_letters</span>)<br>
+                                <br>
+                                <span class="text-blue-400"># 启动线程</span><br>
+                                <span class="text-blue-300">t1</span>.<span class="text-blue-300">start</span>()<br>
+                                <span class="text-blue-300">t2</span>.<span class="text-blue-300">start</span>()<br>
+                                <br>
+                                <span class="text-blue-400"># 等待线程结束</span><br>
+                                <span class="text-blue-300">t1</span>.<span class="text-blue-300">join</span>()<br>
+                                <span class="text-blue-300">t2</span>.<span class="text-blue-300">join</span>()<br>
+                                <br>
+                                <span class="text-blue-300">print</span>(<span class="text-green-300">"所有线程执行完毕"</span>)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 30. 多进程 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">30. 多进程</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 多进程编程</h4>
+                        <p class="text-slate-300 mb-4">特点：使用multiprocessing模块支持多进程，支持创建进程，支持进程间通信，支持进程池，支持守护进程。注意事项：多进程可以充分利用多核CPU，适合CPU密集型任务，进程间通信需要使用特定机制。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 多进程</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">from</span> <span class="text-blue-300">multiprocessing</span> <span class="text-purple-400">import</span> <span class="text-blue-300">Process</span>, <span class="text-blue-300">Pool</span>
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">time</span>
+                                <br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">square</span>(<span class="text-blue-300">n</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;time.sleep(0.5)</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">n</span>**<span class="text-yellow-300">2</span>
+                                <br>
+                                <span class="text-blue-400"># 使用进程池</span><br>
+                                <span class="text-blue-300">if</span> <span class="text-blue-300">__name__</span> == <span class="text-green-300">"__main__"</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;numbers</span> = [<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>]<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;with</span> <span class="text-blue-300">Pool</span>(<span class="text-blue-300">processes</span>=<span class="text-yellow-300">3</span>) <span class="text-purple-400">as</span> <span class="text-blue-300">pool</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;results</span> = <span class="text-blue-300">pool</span>.<span class="text-blue-300">map</span>(<span class="text-blue-300">square</span>, <span class="text-blue-300">numbers</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-blue-300">results</span>) <span class="text-slate-500"># 输出：[1, 4, 9, 16, 25]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 31. 网络编程 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">31. 网络编程</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 网络编程</h4>
+                        <p class="text-slate-300 mb-4">特点：使用socket模块支持网络编程，支持TCP和UDP协议，支持客户端和服务器编程，支持HTTP请求，支持WebSocket。注意事项：网络编程需要处理异常，需要注意socket的关闭，需要注意并发处理。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 网络编程</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400"># 简单的HTTP请求</span><br>
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">urllib.request</span>
+                                <br>
+                                <span class="text-blue-300">url</span> = <span class="text-green-300">"https://www.example.com"</span><br>
+                                <span class="text-blue-300">response</span> = <span class="text-blue-300">urllib.request</span>.<span class="text-blue-300">urlopen</span>(<span class="text-blue-300">url</span>)<br>
+                                <span class="text-blue-300">data</span> = <span class="text-blue-300">response</span>.<span class="text-blue-300">read</span>()<br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">data</span>.<span class="text-blue-300">decode</span>(<span class="text-green-300">"utf-8"</span>)) <span class="text-slate-500"># 输出：网页内容</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 32. 数据库操作 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">32. 数据库操作</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 数据库操作</h4>
+                        <p class="text-slate-300 mb-4">特点：支持多种数据库，使用sqlite3模块支持SQLite数据库，支持MySQL、PostgreSQL等关系型数据库，支持NoSQL数据库，支持ORM框架。注意事项：数据库操作需要处理异常，需要注意连接的关闭，需要注意SQL注入安全。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 数据库操作</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">sqlite3</span>
+                                <br>
+                                <span class="text-blue-400"># 连接SQLite数据库</span><br>
+                                <span class="text-blue-300">conn</span> = <span class="text-blue-300">sqlite3</span>.<span class="text-blue-300">connect</span>(<span class="text-green-300">'test.db'</span>)<br>
+                                <span class="text-blue-300">cursor</span> = <span class="text-blue-300">conn</span>.<span class="text-blue-300">cursor</span>()
+                                <br>
+                                <span class="text-blue-400"># 创建表</span><br>
+                                <span class="text-blue-300">cursor</span>.<span class="text-blue-300">execute</span>(<span class="text-green-300">'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, age INTEGER)'</span>)
+                                <br>
+                                <span class="text-blue-400"># 插入数据</span><br>
+                                <span class="text-blue-300">cursor</span>.<span class="text-blue-300">execute</span>(<span class="text-green-300">'INSERT INTO users (name, age) VALUES (?, ?)'</span>, (<span class="text-green-300">'张三'</span>, <span class="text-yellow-300">18</span>))<br>
+                                <span class="text-blue-300">conn</span>.<span class="text-blue-300">commit</span>()
+                                <br>
+                                <span class="text-blue-400"># 查询数据</span><br>
+                                <span class="text-blue-300">cursor</span>.<span class="text-blue-300">execute</span>(<span class="text-green-300">'SELECT * FROM users'</span>)<br>
+                                <span class="text-blue-300">users</span> = <span class="text-blue-300">cursor</span>.<span class="text-blue-300">fetchall</span>()<br>
+                                <span class="text-blue-300">print</span>(<span class="text-blue-300">users</span>) <span class="text-slate-500"># 输出：[(1, '张三', 18)]</span>
+                                <br>
+                                <span class="text-blue-400"># 关闭连接</span><br>
+                                <span class="text-blue-300">cursor</span>.<span class="text-blue-300">close</span>()<br>
+                                <span class="text-blue-300">conn</span>.<span class="text-blue-300">close</span>()
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 33. 异步编程 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">33. 异步编程</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 异步编程</h4>
+                        <p class="text-slate-300 mb-4">特点：使用asyncio模块支持异步编程，支持async/await语法，支持协程，支持异步IO，支持异步HTTP请求，支持异步数据库操作。注意事项：异步代码需要在事件循环中运行，避免在异步代码中使用同步阻塞操作，使用asyncio提供的异步API。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 异步编程</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">asyncio</span>
+                                <br>
+                                <span class="text-purple-400">async</span> <span class="text-purple-400">def</span> <span class="text-blue-300">say_hello</span>():<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"Hello"</span>)<br>
+                                <span class="text-purple-400">await</span> <span class="text-blue-300">asyncio</span>.<span class="text-blue-300">sleep</span>(<span class="text-yellow-300">1</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"World"</span>)<br>
+                                <span class="text-purple-400">await</span> <span class="text-blue-300">asyncio</span>.<span class="text-blue-300">sleep</span>(<span class="text-yellow-300">1</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"!"</span>)
+                                <br>
+                                <span class="text-purple-400">async</span> <span class="text-purple-400">def</span> <span class="text-blue-300">main</span>():<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;await</span> <span class="text-blue-300">say_hello</span>()
+                                <br>
+                                <span class="text-blue-300">if</span> <span class="text-blue-300">__name__</span> == <span class="text-green-300">"__main__"</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;asyncio</span>.<span class="text-blue-300">run</span>(<span class="text-blue-300">main</span>())
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 34. 模块和包 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">34. 模块和包</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 模块化编程</h4>
+                        <p class="text-slate-300 mb-4">特点：支持模块导入，支持包管理，支持相对导入和绝对导入，支持__init__.py文件，支持__all__列表控制导入。注意事项：模块名使用小写字母，包是包含__init__.py文件的目录，使用相对导入时要注意模块的位置。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 模块和包</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400"># 导入标准库模块</span><br>
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">os</span><br>
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">sys</span>
+                                <br>
+                                <span class="text-blue-400"># 导入第三方库</span><br>
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">numpy</span> <span class="text-purple-400">as</span> <span class="text-blue-300">np</span><br>
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">pandas</span> <span class="text-purple-400">as</span> <span class="text-blue-300">pd</span>
+                                <br>
+                                <span class="text-blue-400"># 导入自定义模块</span><br>
+                                <span class="text-purple-400"># from mypackage import mymodule</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 35. 装饰器 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">35. 装饰器</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 装饰器进阶</h4>
+                        <p class="text-slate-300 mb-4">特点：支持带参数的装饰器，支持类装饰器，支持装饰器嵌套，支持functools.wraps保留函数元信息，支持装饰器工厂。注意事项：装饰器执行顺序从下到上，需要注意装饰器的嵌套顺序，使用functools.wraps保留函数元信息。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 装饰器进阶</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">functools</span>
+                                <br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">log_execution</span>(<span class="text-blue-300">level</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">decorator</span>(<span class="text-blue-300">func</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@functools.wraps(func)</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">wrapper</span>(<span class="text-purple-400">*</span><span class="text-blue-300">args</span>, <span class="text-purple-400">**</span><span class="text-blue-300">kwargs</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">f"[{level}] 执行函数: {func.__name__}"</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result</span> = <span class="text-blue-300">func</span>(<span class="text-purple-400">*</span><span class="text-blue-300">args</span>, <span class="text-purple-400">**</span><span class="text-blue-300">kwargs</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">f"[{level}] 函数返回: {result}"</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">result</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">wrapper</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">decorator</span>
+                                <br>
+                                <span class="text-blue-300">@log_execution</span>(<span class="text-green-300">"INFO"</span>)<br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">add</span>(<span class="text-blue-300">a</span>, <span class="text-blue-300">b</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>
+                                <br>
+                                <span class="text-blue-300">result</span> = <span class="text-blue-300">add</span>(<span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>) <span class="text-slate-500"># 输出：[INFO] 执行函数: add\n[INFO] 函数返回: 5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 36. 单元测试 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">36. 单元测试</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 自动化测试框架</h4>
+                        <p class="text-slate-300 mb-4">特点：内置unittest模块，支持测试用例组织，支持断言方法，支持测试套件，支持测试发现。注意事项：测试用例应该独立，覆盖各种场景，包括边界情况。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 基本单元测试</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">unittest</span>
+                                <br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">add</span>(<span class="text-blue-300">a</span>, <span class="text-blue-300">b</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>
+                                <br>
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">TestAdd</span>(<span class="text-blue-300">unittest</span>.<span class="text-blue-300">TestCase</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">test_add_integers</span>(<span class="text-blue-300">self</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.assertEqual(add(2, 3), 5)</span><br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">test_add_floats</span>(<span class="text-blue-300">self</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.assertAlmostEqual(add(0.1, 0.2), 0.3)</span><br>
+                                <br>
+                                <span class="text-purple-400">if</span> <span class="text-blue-300">__name__</span> == <span class="text-green-300">"__main__"</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;unittest.main()</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C++ -->
+                    <div class="language-content hidden" data-lang="cpp">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 使用Google Test进行单元测试</h4>
+                        <p class="text-slate-300 mb-4">特点：支持多种断言类型，支持测试用例分组，支持测试套件，支持死亡测试，支持参数化测试。注意事项：需要安装Google Test框架，测试用例应该独立，覆盖各种场景。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 使用Google Test进行单元测试</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;gtest/gtest.h&gt;</span>
+                                <br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">add</span>(<span class="text-blue-400">int</span> <span class="text-blue-300">a</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">b</span>) {
+                                    <span class="text-purple-400">return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>;
+                                }
+                                <br>
+                                <span class="text-purple-400">TEST</span>(<span class="text-blue-300">AddTest</span>, <span class="text-blue-300">AddIntegers</span>) {
+                                    <span class="text-blue-300">EXPECT_EQ</span>(<span class="text-blue-300">add</span>(<span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>), <span class="text-yellow-300">5</span>);
+                                    <span class="text-blue-300">EXPECT_EQ</span>(<span class="text-blue-300">add</span>(<span class="text-yellow-300">-1</span>, <span class="text-yellow-300">1</span>), <span class="text-yellow-300">0</span>);
+                                }
+                                <br>
+                                <span class="text-purple-400">TEST</span>(<span class="text-blue-300">AddTest</span>, <span class="text-blue-300">AddFloats</span>) {
+                                    <span class="text-blue-400">double</span> <span class="text-blue-300">result</span> = <span class="text-yellow-300">0.1</span> + <span class="text-yellow-300">0.2</span>;
+                                    <span class="text-blue-300">EXPECT_NEAR</span>(<span class="text-blue-300">result</span>, <span class="text-yellow-300">0.3</span>, <span class="text-yellow-300">1e-9</span>);
+                                }
+                                <br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">main</span>(<span class="text-blue-400">int</span> <span class="text-blue-300">argc</span>, <span class="text-blue-400">char</span>* <span class="text-blue-300">argv</span>[]) {
+                                    <span class="text-blue-300">::testing::InitGoogleTest</span>(&<span class="text-blue-300">argc</span>, <span class="text-blue-300">argv</span>);
+                                    <span class="text-purple-400">return</span> <span class="text-blue-300">RUN_ALL_TESTS</span>();
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 37. 装饰器进阶 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">37. 装饰器进阶</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 装饰器的高级用法</h4>
+                        <p class="text-slate-300 mb-4">特点：支持带参数的装饰器，支持类装饰器，支持装饰器嵌套，支持functools.wraps保留函数元信息。注意事项：装饰器执行顺序从下到上，需要注意装饰器的嵌套顺序。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 带参数的装饰器</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">functools</span>
+                                <br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">repeat</span>(<span class="text-blue-300">times</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">decorator</span>(<span class="text-blue-300">func</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@functools.wraps(func)</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">wrapper</span>(<span class="text-purple-400">*</span><span class="text-blue-300">args</span>, <span class="text-purple-400">**</span><span class="text-blue-300">kwargs</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">_</span> <span class="text-green-300">in</span> <span class="text-purple-400">range</span>(<span class="text-blue-300">times</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result</span> = <span class="text-blue-300">func</span>(<span class="text-purple-400">*</span><span class="text-blue-300">args</span>, <span class="text-purple-400">**</span><span class="text-blue-300">kwargs</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">result</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">wrapper</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">decorator</span>
+                                <br>
+                                <span class="text-purple-400">@repeat</span>(<span class="text-yellow-300">3</span>)<br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">say_hello</span>():<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"Hello!"</span>)<br>
+                                <br>
+                                <span class="text-blue-300">say_hello</span>() <span class="text-slate-500"># 输出3次"Hello!"</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C++ -->
+                    <div class="language-content hidden" data-lang="cpp">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 使用函数对象实现类似装饰器的功能</h4>
+                        <p class="text-slate-300 mb-4">特点：可以使用函数对象、模板、宏等方式实现类似装饰器的功能，支持参数化装饰，支持函数包装。注意事项：C++中没有直接的装饰器语法，需要使用其他机制模拟。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 使用函数对象实现类似装饰器的功能</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;iostream&gt;</span>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;functional&gt;</span>
+                                <br>
+                                <span class="text-blue-400">template</span>&lt;<span class="text-blue-400">typename</span> <span class="text-blue-300">Func</span>&gt;<br>
+                                <span class="text-blue-400">class</span> <span class="text-blue-300">RepeatDecorator</span> {
+                                <span class="text-blue-400">public</span>:
+                                    <span class="text-blue-300">RepeatDecorator</span>(<span class="text-blue-300">Func</span> <span class="text-blue-300">func</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">times</span>) : <span class="text-blue-300">func_</span>(<span class="text-blue-300">func</span>), <span class="text-blue-300">times_</span>(<span class="text-blue-300">times</span>) {}
+                                <br>
+                                    <span class="text-blue-400">void</span> <span class="text-blue-300">operator()</span>() {
+                                        <span class="text-blue-400">for</span> (<span class="text-blue-400">int</span> <span class="text-blue-300">i</span> = <span class="text-yellow-300">0</span>; <span class="text-blue-300">i</span> < <span class="text-blue-300">times_</span>; ++<span class="text-blue-300">i</span>) {
+                                            <span class="text-blue-300">func_</span>();
+                                        }
+                                    }
+                                <br>
+                                <span class="text-blue-400">private</span>:
+                                    <span class="text-blue-300">Func</span> <span class="text-blue-300">func_</span>;
+                                    <span class="text-blue-400">int</span> <span class="text-blue-300">times_</span>;
+                                };
+                                <br>
+                                <span class="text-blue-400">template</span>&lt;<span class="text-blue-400">typename</span> <span class="text-blue-300">Func</span>&gt;<br>
+                                <span class="text-blue-300">auto</span> <span class="text-blue-300">repeat</span>(<span class="text-blue-300">Func</span> <span class="text-blue-300">func</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">times</span>) {
+                                    <span class="text-purple-400">return</span> <span class="text-blue-300">RepeatDecorator</span>&lt;<span class="text-blue-300">Func</span>&gt;(<span class="text-blue-300">func</span>, <span class="text-blue-300">times</span>);
+                                }
+                                <br>
+                                <span class="text-blue-400">void</span> <span class="text-blue-300">say_hello</span>() {
+                                    <span class="text-blue-300">std::cout</span> &lt;&lt; <span class="text-green-300">"Hello!"</span> &lt;&lt; <span class="text-blue-300">std::endl</span>;
+                                }
+                                <br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">main</span>() {
+                                    <span class="text-blue-300">auto</span> <span class="text-blue-300">repeated_hello</span> = <span class="text-blue-300">repeat</span>(&<span class="text-blue-300">say_hello</span>, <span class="text-yellow-300">3</span>);
+                                    <span class="text-blue-300">repeated_hello</span>(); <span class="text-slate-500">// 输出3次"Hello!"</span>
+                                    <span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 38. 上下文管理器进阶 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">38. 上下文管理器进阶</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 上下文管理器的高级用法</h4>
+                        <p class="text-slate-300 mb-4">特点：使用contextlib模块简化上下文管理器创建，支持嵌套上下文管理器，支持生成器上下文管理器，支持上下文管理器链。注意事项：确保资源正确释放，避免资源泄漏。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 使用contextlib创建上下文管理器</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">from</span> <span class="text-blue-300">contextlib</span> <span class="text-purple-400">import</span> <span class="text-blue-300">contextmanager</span><br>
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">time</span>
+                                <br>
+                                <span class="text-blue-300">@contextmanager</span><br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">timer</span>():<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;start</span> = <span class="text-blue-300">time</span>.<span class="text-blue-300">time</span>()<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;try</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;finally</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end</span> = <span class="text-blue-300">time</span>.<span class="text-blue-300">time</span>()<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">f"执行时间: {end - start:.2f}秒"</span>)
+                                <br>
+                                <span class="text-purple-400">with</span> <span class="text-blue-300">timer</span>():<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;time.sleep(1)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C++ -->
+                    <div class="language-content hidden" data-lang="cpp">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 使用RAII实现上下文管理</h4>
+                        <p class="text-slate-300 mb-4">特点：通过RAII（资源获取即初始化）机制实现，构造函数获取资源，析构函数释放资源，支持自动资源管理，支持异常安全。注意事项：确保析构函数正确释放资源，避免资源泄漏。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 使用RAII实现上下文管理器</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;iostream&gt;</span>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;chrono&gt;</span>
+                                <br>
+                                <span class="text-blue-400">class</span> <span class="text-blue-300">Timer</span> {
+                                <span class="text-blue-400">public</span>:
+                                    <span class="text-blue-300">Timer</span>() {
+                                        <span class="text-blue-300">start_</span> = <span class="text-blue-300">std::chrono::high_resolution_clock::now</span>();
+                                    }
+                                <br>
+                                    <span class="text-blue-300">~Timer</span>() {
+                                        <span class="text-blue-300">auto</span> <span class="text-blue-300">end</span> = <span class="text-blue-300">std::chrono::high_resolution_clock::now</span>();
+                                        <span class="text-blue-400">auto</span> <span class="text-blue-300">duration</span> = <span class="text-blue-300">std::chrono::duration_cast</span>&lt;<span class="text-blue-300">std::chrono::milliseconds</span>&gt;(<span class="text-blue-300">end</span> - <span class="text-blue-300">start_</span>);
+                                        <span class="text-blue-300">std::cout</span> &lt;&lt; <span class="text-green-300">"执行时间: "</span> &lt;&lt; <span class="text-blue-300">duration</span>.<span class="text-blue-300">count</span>() * <span class="text-yellow-300">0.001</span> &lt;&lt; <span class="text-green-300">"秒"</span> &lt;&lt; <span class="text-blue-300">std::endl</span>;
+                                    }
+                                <br>
+                                <span class="text-blue-400">private</span>:
+                                    <span class="text-blue-300">std::chrono::high_resolution_clock::time_point</span> <span class="text-blue-300">start_</span>;
+                                };
+                                <br>
+                                <span class="text-blue-400">void</span> <span class="text-blue-300">func</span>() {
+                                    <span class="text-blue-300">// 使用Timer上下文管理器</span>
+                                    <span class="text-blue-300">Timer</span> <span class="text-blue-300">timer</span>;
+                                    <br>
+                                    <span class="text-blue-400">// 模拟耗时操作</span>
+                                    <span class="text-blue-400">for</span> (<span class="text-blue-400">volatile</span> <span class="text-blue-400">int</span> <span class="text-blue-300">i</span> = <span class="text-yellow-300">0</span>; <span class="text-blue-300">i</span> < <span class="text-yellow-300">100000000</span>; ++<span class="text-blue-300">i</span>) {
+                                        <span class="text-blue-300">// 空循环</span>
+                                    }
+                                }
+                                <br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">main</span>() {
+                                    <span class="text-blue-300">func</span>();
+                                    <span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 39. 异步编程进阶 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">39. 异步编程进阶</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 高级异步编程技术</h4>
+                        <p class="text-slate-300 mb-4">特点：支持异步上下文管理器，支持异步迭代器，支持asyncio并发运行，支持异步生成器，支持异步事件循环。注意事项：避免在异步代码中使用同步阻塞操作，使用asyncio提供的异步API。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 异步并发运行</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">asyncio</span>
+                                <br>
+                                <span class="text-purple-400">async</span> <span class="text-purple-400">def</span> <span class="text-blue-300">fetch_data</span>(<span class="text-blue-300">name</span>, <span class="text-blue-300">delay</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">f"开始获取{name}数据..."</span>)<br>
+                                <span class="text-purple-400">await</span> <span class="text-blue-300">asyncio</span>.<span class="text-blue-300">sleep</span>(<span class="text-blue-300">delay</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">f"{name}数据获取完成!"</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-green-300">f"{name}数据"</span>
+                                <br>
+                                <span class="text-purple-400">async</span> <span class="text-purple-400">def</span> <span class="text-blue-300">main</span>():<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;# 并发运行多个异步任务</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;tasks</span> = [<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fetch_data("A", 2),</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fetch_data("B", 1),</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fetch_data("C", 3)</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;]</span>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;results</span> = <span class="text-purple-400">await</span> <span class="text-blue-300">asyncio</span>.<span class="text-blue-300">gather</span>(<span class="text-purple-400">*</span><span class="text-green-300">tasks</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-blue-300">results</span>)
+                                <br>
+                                <span class="text-purple-400">if</span> <span class="text-blue-300">__name__</span> == <span class="text-green-300">"__main__"</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;asyncio</span>.<span class="text-blue-300">run</span>(<span class="text-blue-300">main</span>())
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- C++ -->
+                    <div class="language-content hidden" data-lang="cpp">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 使用标准库进行异步编程</h4>
+                        <p class="text-slate-300 mb-4">特点：支持std::async、std::future、std::promise等异步机制，支持并行执行任务，支持获取异步任务结果，支持异常处理。注意事项：需要C++11及以上版本，注意线程安全问题。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 异步并发运行</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;iostream&gt;</span>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;future&gt;</span>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;vector&gt;</span>
+                                <span class="text-blue-400">#include</span> <span class="text-green-300">&lt;chrono&gt;</span>
+                                <br>
+                                <span class="text-blue-400">using</span> <span class="text-blue-400">namespace</span> <span class="text-blue-300">std::chrono_literals</span>;
+                                <br>
+                                <span class="text-green-300">std::string</span> <span class="text-blue-300">fetch_data</span>(<span class="text-green-300">std::string</span> <span class="text-blue-300">name</span>, <span class="text-blue-400">int</span> <span class="text-blue-300">delay</span>) {
+                                    <span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-green-300">"开始获取"</span> &lt;&lt; <span class="text-blue-300">name</span> &lt;&lt; <span class="text-green-300">"数据..."</span> &lt;&lt; <span class="text-green-300">std::endl</span>;
+                                    <span class="text-blue-300">std::this_thread::sleep_for</span>(<span class="text-blue-300">delay</span> * <span class="text-yellow-300">1s</span>);
+                                    <span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-blue-300">name</span> &lt;&lt; <span class="text-green-300">"数据获取完成!"</span> &lt;&lt; <span class="text-green-300">std::endl</span>;
+                                    <span class="text-purple-400">return</span> <span class="text-blue-300">name</span> + <span class="text-green-300">"数据"</span>;
+                                }
+                                <br>
+                                <span class="text-blue-400">int</span> <span class="text-blue-300">main</span>() {
+                                    <span class="text-green-300">std::vector</span>&lt;<span class="text-green-300">std::future</span>&lt;<span class="text-green-300">std::string</span>&gt;&gt; <span class="text-blue-300">futures</span>;
+                                    <br>
+                                    <span class="text-blue-300">// 并发运行多个异步任务</span>
+                                    <span class="text-blue-300">futures</span>.<span class="text-blue-300">push_back</span>(<span class="text-green-300">std::async</span>(<span class="text-green-300">std::launch::async</span>, <span class="text-blue-300">fetch_data</span>, <span class="text-green-300">"A"</span>, <span class="text-yellow-300">2</span>));
+                                    <span class="text-blue-300">futures</span>.<span class="text-blue-300">push_back</span>(<span class="text-green-300">std::async</span>(<span class="text-green-300">std::launch::async</span>, <span class="text-blue-300">fetch_data</span>, <span class="text-green-300">"B"</span>, <span class="text-yellow-300">1</span>));
+                                    <span class="text-blue-300">futures</span>.<span class="text-blue-300">push_back</span>(<span class="text-green-300">std::async</span>(<span class="text-green-300">std::launch::async</span>, <span class="text-blue-300">fetch_data</span>, <span class="text-green-300">"C"</span>, <span class="text-yellow-300">3</span>));
+                                    <br>
+                                    <span class="text-green-300">std::vector</span>&lt;<span class="text-green-300">std::string</span>&gt; <span class="text-blue-300">results</span>;
+                                    <span class="text-blue-400">for</span> (<span class="text-green-300">auto</span>&amp; <span class="text-blue-300">future</span> : <span class="text-blue-300">futures</span>) {
+                                        <span class="text-blue-300">results</span>.<span class="text-blue-300">push_back</span>(<span class="text-blue-300">future</span>.<span class="text-blue-300">get</span>());
+                                    }
+                                    <br>
+                                    <span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-green-300">"所有数据获取完成!"</span> &lt;&lt; <span class="text-green-300">std::endl</span>;
+                                    <span class="text-blue-400">for</span> (<span class="text-green-300">auto</span>&amp; <span class="text-blue-300">result</span> : <span class="text-blue-300">results</span>) {
+                                        <span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-blue-300">result</span> &lt;&lt; <span class="text-green-300">std::endl</span>;
+                                    }
+                                    <br>
+                                    <span class="text-purple-400">return</span> <span class="text-yellow-300">0</span>;
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 40. 类型提示进阶 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">40. 类型提示进阶</span>
+            </h2>
+            
+            <div class="syntax-card rounded-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Python -->
+                    <div class="language-content" data-lang="python">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 高级类型注解</h4>
+                        <p class="text-slate-300 mb-4">特点：支持泛型，支持联合类型，支持可选类型，支持字面量类型，支持类型别名，支持Protocol。注意事项：使用typing模块提供的高级类型，需要Python 3.8+支持部分高级特性。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 高级类型提示</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">from</span> <span class="text-blue-300">typing</span> <span class="text-purple-400">import</span> <span class="text-blue-300">List</span>, <span class="text-blue-300">Dict</span>, <span class="text-blue-300">Union</span>, <span class="text-blue-300">Optional</span>, <span class="text-blue-300">Generic</span>, <span class="text-blue-300">TypeVar</span>
+                                <br>
+                                <span class="text-blue-300">T</span> = <span class="text-blue-300">TypeVar</span>(<span class="text-green-300">"T"</span>)
+                                <br>
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Box</span>(<span class="text-blue-300">Generic</span>[<span class="text-blue-300">T</span>]):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">item</span>: <span class="text-blue-300">T</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.item</span> = <span class="text-blue-300">item</span><br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">get_item</span>(<span class="text-blue-300">self</span>) -> <span class="text-blue-300">T</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">self</span>.<span class="text-blue-300">item</span>
+                                <br>
+                                <span class="text-blue-300"># 使用泛型类</span><br>
+                                <span class="text-blue-300">int_box</span> = <span class="text-blue-300">Box</span>[<span class="text-purple-400">int</span>](<span class="text-yellow-300">42</span>)<br>
+                                <span class="text-blue-300">str_box</span> = <span class="text-blue-300">Box</span>[<span class="text-purple-400">str</span>](<span class="text-green-300">"Hello"</span>)
+                                <br>
+                                <span class="text-blue-300"># 联合类型和可选类型</span><br>
+                                <span class="text-blue-300">def</span> <span class="text-blue-300">process_data</span>(<span class="text-blue-300">data</span>: <span class="text-blue-300">Union</span>[<span class="text-purple-400">int</span>, <span class="text-purple-400">str</span>, <span class="text-blue-300">None</span>]) -> <span class="text-blue-300">Optional</span>[<span class="text-purple-400">str</span>]:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">data</span> <span class="text-purple-400">is</span> <span class="text-purple-300">None</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-purple-300">None</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-purple-400">str</span>(<span class="text-blue-300">data</span>)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript -->
+    <script>
+        // Language switching
+        const languageTabs = document.querySelectorAll('.language-tab');
+        const languageContents = document.querySelectorAll('.language-content');
+        
+        languageTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const lang = tab.dataset.lang;
+                
+                // Update active tab
+                languageTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Update visible content
+                languageContents.forEach(content => {
+                    if (content.dataset.lang === lang) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

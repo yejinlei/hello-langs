@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资源中心 - Hello 编程语言</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .resource-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: all 0.3s ease;
+        }
+        .resource-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 40px rgba(2, 6, 23, 0.3);
+        }
+        .download-btn {
+            background: linear-gradient(135deg, #10B981, #059669);
+            transition: all 0.3s ease;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+        }
+        .tool-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: all 0.3s ease;
+        }
+        .tool-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            background: rgba(15, 23, 42, 0.8);
+        }
+        .language-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            color: white;
+        }
+        .python-icon { background: linear-gradient(135deg, #3776AB, #FFD43B); }
+        .javascript-icon { background: linear-gradient(135deg, #F7DF1E, #000000); color: #000; }
+        .java-icon { background: linear-gradient(135deg, #ED8B00, #5382A1); }
+        .cpp-icon { background: linear-gradient(135deg, #00599C, #004482); }
+        .csharp-icon { background: linear-gradient(135deg, #239120, #68217A); }
+        .go-icon { background: linear-gradient(135deg, #00ADD8, #007D9C); }
+        .rust-icon { background: linear-gradient(135deg, #CE422B, #000000); }
+        
+        .stats-chart {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md border-b border-slate-700 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <div class="text-2xl font-bold gradient-text">Hello 编程语言</div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-slate-300 hover:text-blue-400 transition-colors">首页</a>
+                    <a href="tutorials.html" class="text-slate-300 hover:text-blue-400 transition-colors">语法教程</a>
+                    <a href="lab.html" class="text-slate-300 hover:text-blue-400 transition-colors">代码实验室</a>
+                    <a href="resources.html" class="text-blue-400 font-medium">资源中心</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="pt-24 pb-12 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h1 class="text-5xl font-bold mb-6 gradient-text">资源中心</h1>
+                <p class="text-xl text-slate-300 max-w-3xl mx-auto">
+                    精选编程学习资源、开发工具、社区链接，助力你的编程学习之旅
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <!-- Learning Resources -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">学习资料下载</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Python Resources -->
+                <div class="resource-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="language-icon python-icon mr-4">Py</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-400">Python 学习资料</h3>
+                            <p class="text-slate-400 text-sm">包含基础到高级教程</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">Python 基础教程.pdf</span>
+                            <span class="text-slate-400 text-sm">2.5 MB</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">数据分析实战.pdf</span>
+                            <span class="text-slate-400 text-sm">4.2 MB</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">Django Web开发.pdf</span>
+                            <span class="text-slate-400 text-sm">3.8 MB</span>
+                        </div>
+                    </div>
+                    <button class="download-btn w-full py-3 rounded-lg font-medium text-white flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        <span>下载资料包</span>
+                    </button>
+                </div>
+
+                <!-- JavaScript Resources -->
+                <div class="resource-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="language-icon javascript-icon mr-4">JS</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-400">JavaScript 学习资料</h3>
+                            <p class="text-slate-400 text-sm">前端开发完整教程</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">JavaScript 权威指南.pdf</span>
+                            <span class="text-slate-400 text-sm">5.1 MB</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">React 实战开发.pdf</span>
+                            <span class="text-slate-400 text-sm">4.5 MB</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">Node.js 后端开发.pdf</span>
+                            <span class="text-slate-400 text-sm">3.9 MB</span>
+                        </div>
+                    </div>
+                    <button class="download-btn w-full py-3 rounded-lg font-medium text-white flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        <span>下载资料包</span>
+                    </button>
+                </div>
+
+                <!-- Java Resources -->
+                <div class="resource-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="language-icon java-icon mr-4">Java</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-400">Java 学习资料</h3>
+                            <p class="text-slate-400 text-sm">企业级开发指南</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">Java 核心技术.pdf</span>
+                            <span class="text-slate-400 text-sm">6.2 MB</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">Spring Boot 实战.pdf</span>
+                            <span class="text-slate-400 text-sm">5.8 MB</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">Android 开发入门.pdf</span>
+                            <span class="text-slate-400 text-sm">4.3 MB</span>
+                        </div>
+                    </div>
+                    <button class="download-btn w-full py-3 rounded-lg font-medium text-white flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        <span>下载资料包</span>
+                    </button>
+                </div>
+
+                <!-- C++ Resources -->
+                <div class="resource-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="language-icon cpp-icon mr-4">C++</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-400">C++ 学习资料</h3>
+                            <p class="text-slate-400 text-sm">系统编程指南</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">C++ Primer.pdf</span>
+                            <span class="text-slate-400 text-sm">7.8 MB</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">STL 源码剖析.pdf</span>
+                            <span class="text-slate-400 text-sm">5.2 MB</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">游戏编程模式.pdf</span>
+                            <span class="text-slate-400 text-sm">4.7 MB</span>
+                        </div>
+                    </div>
+                    <button class="download-btn w-full py-3 rounded-lg font-medium text-white flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        <span>下载资料包</span>
+                    </button>
+                </div>
+
+                <!-- Go Resources -->
+                <div class="resource-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="language-icon go-icon mr-4">Go</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-400">Go 学习资料</h3>
+                            <p class="text-slate-400 text-sm">云原生开发指南</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">Go 语言圣经.pdf</span>
+                            <span class="text-slate-400 text-sm">3.9 MB</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">Go Web 编程.pdf</span>
+                            <span class="text-slate-400 text-sm">4.1 MB</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">Go 并发编程.pdf</span>
+                            <span class="text-slate-400 text-sm">3.5 MB</span>
+                        </div>
+                    </div>
+                    <button class="download-btn w-full py-3 rounded-lg font-medium text-white flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        <span>下载资料包</span>
+                    </button>
+                </div>
+
+                <!-- Rust Resources -->
+                <div class="resource-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="language-icon rust-icon mr-4">Rust</div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-400">Rust 学习资料</h3>
+                            <p class="text-slate-400 text-sm">系统安全编程</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">Rust 权威指南.pdf</span>
+                            <span class="text-slate-400 text-sm">5.6 MB</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">Rust 实战.pdf</span>
+                            <span class="text-slate-400 text-sm">4.8 MB</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-slate-300">Tokio 异步编程.pdf</span>
+                            <span class="text-slate-400 text-sm">3.7 MB</span>
+                        </div>
+                    </div>
+                    <button class="download-btn w-full py-3 rounded-lg font-medium text-white flex items-center justify-center space-x-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        <span>下载资料包</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Development Tools -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">开发工具推荐</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- VS Code -->
+                <div class="tool-card rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-500 rounded-lg flex items-center justify-center">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M23.15 2.587L2.692.586C1.85.487 1.15 1.17 1.05 2.02l-1 7c-.1.85.55 1.6 1.4 1.7l5.3.7.7 5.3c.1.85.85 1.5 1.7 1.4l7-1c.85-.1 1.5-.85 1.4-1.7l-2-20.53c-.1-.85-.85-1.5-1.7-1.4zM6.68 15.53l-1.3-1.3 7.3-7.3 1.3 1.3-7.3 7.3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-blue-400 mb-2">Visual Studio Code</h3>
+                    <p class="text-slate-300 text-sm mb-4">微软开发的免费代码编辑器，支持多种编程语言</p>
+                    <a href="https://code.visualstudio.com/" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                        访问官网 →
+                    </a>
+                </div>
+
+                <!-- PyCharm -->
+                <div class="tool-card rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-yellow-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">Py</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-blue-400 mb-2">PyCharm</h3>
+                    <p class="text-slate-300 text-sm mb-4">JetBrains 出品的 Python 集成开发环境</p>
+                    <a href="https://www.jetbrains.com/pycharm/" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                        访问官网 →
+                    </a>
+                </div>
+
+                <!-- IntelliJ -->
+                <div class="tool-card rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-orange-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">IJ</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-blue-400 mb-2">IntelliJ IDEA</h3>
+                    <p class="text-slate-300 text-sm mb-4">Java 开发的首选 IDE，支持多种 JVM 语言</p>
+                    <a href="https://www.jetbrains.com/idea/" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                        访问官网 →
+                    </a>
+                </div>
+
+                <!-- Git -->
+                <div class="tool-card rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-red-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">Git</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-blue-400 mb-2">Git</h3>
+                    <p class="text-slate-300 text-sm mb-4">分布式版本控制系统，团队协作必备工具</p>
+                    <a href="https://git-scm.com/" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                        访问官网 →
+                    </a>
+                </div>
+
+                <!-- Docker -->
+                <div class="tool-card rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-400 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">🐳</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-blue-400 mb-2">Docker</h3>
+                    <p class="text-slate-300 text-sm mb-4">容器化平台，简化应用部署和管理</p>
+                    <a href="https://www.docker.com/" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                        访问官网 →
+                    </a>
+                </div>
+
+                <!-- Postman -->
+                <div class="tool-card rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-orange-400 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">PM</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-blue-400 mb-2">Postman</h3>
+                    <p class="text-slate-300 text-sm mb-4">API 开发和测试的协作平台</p>
+                    <a href="https://www.postman.com/" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                        访问官网 →
+                    </a>
+                </div>
+
+                <!-- Chrome DevTools -->
+                <div class="tool-card rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-green-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">🛠</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-blue-400 mb-2">Chrome DevTools</h3>
+                    <p class="text-slate-300 text-sm mb-4">浏览器内置的开发者工具，前端调试必备</p>
+                    <a href="https://developers.google.com/web/tools/chrome-devtools" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                        访问官网 →
+                    </a>
+                </div>
+
+                <!-- Jupyter -->
+                <div class="tool-card rounded-xl p-6 text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-purple-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-xl">📓</span>
+                    </div>
+                    <h3 class="text-lg font-semibold text-blue-400 mb-2">Jupyter Notebook</h3>
+                    <p class="text-slate-300 text-sm mb-4">交互式计算环境，数据科学首选</p>
+                    <a href="https://jupyter.org/" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                        访问官网 →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programming Language Statistics -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">编程语言流行度统计</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- TIOBE Index Chart -->
+                <div class="stats-chart rounded-xl p-6">
+                    <h3 class="text-xl font-semibold text-blue-400 mb-4">TIOBE Index 2025</h3>
+                    <div id="tiobe-chart" style="height: 300px;"></div>
+                </div>
+
+                <!-- GitHub Usage Chart -->
+                <div class="stats-chart rounded-xl p-6">
+                    <h3 class="text-xl font-semibold text-blue-400 mb-4">GitHub 使用统计</h3>
+                    <div id="github-chart" style="height: 300px;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community Links -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">社区与论坛</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Stack Overflow -->
+                <div class="resource-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">SO</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-400">Stack Overflow</h3>
+                            <p class="text-slate-400 text-sm">全球最大程序员问答社区</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-sm mb-4">
+                        遇到编程问题？在这里找到答案。包含各种编程语言的问题和解决方案。
+                    </p>
+                    <a href="https://stackoverflow.com/" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                        访问社区 →
+                    </a>
+                </div>
+
+                <!-- GitHub -->
+                <div class="resource-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">GH</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-400">GitHub</h3>
+                            <p class="text-slate-400 text-sm">代码托管和协作平台</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-sm mb-4">
+                        发现开源项目，学习优秀代码，与全球开发者协作。
+                    </p>
+                    <a href="https://github.com/" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                        访问社区 →
+                    </a>
+                </div>
+
+                <!-- Reddit -->
+                <div class="resource-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">R</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-400">Reddit</h3>
+                            <p class="text-slate-400 text-sm">技术讨论和新闻分享</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-sm mb-4">
+                        参与编程相关话题讨论，获取最新技术资讯。
+                    </p>
+                    <a href="https://www.reddit.com/r/programming/" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                        访问社区 →
+                    </a>
+                </div>
+
+                <!-- Hacker News -->
+                <div class="resource-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">HN</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-400">Hacker News</h3>
+                            <p class="text-slate-400 text-sm">技术新闻和讨论</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-sm mb-4">
+                        Y Combinator 旗下的技术新闻社区，关注创业和技术趋势。
+                    </p>
+                    <a href="https://news.ycombinator.com/" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                        访问社区 →
+                    </a>
+                </div>
+
+                <!-- Dev.to -->
+                <div class="resource-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">Dev</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-400">Dev.to</h3>
+                            <p class="text-slate-400 text-sm">开发者博客平台</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-sm mb-4">
+                        阅读开发者分享的技术文章和经验总结。
+                    </p>
+                    <a href="https://dev.to/" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                        访问社区 →
+                    </a>
+                </div>
+
+                <!-- Medium -->
+                <div class="resource-card rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-black rounded-lg flex items-center justify-center mr-4">
+                            <span class="text-white font-bold">M</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-400">Medium</h3>
+                            <p class="text-slate-400 text-sm">技术博客平台</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-300 text-sm mb-4">
+                        高质量的技术文章和教程，来自行业专家和开发者。
+                    </p>
+                    <a href="https://medium.com/" target="_blank" class="text-blue-400 hover:text-blue-300 text-sm font-medium">
+                        访问社区 →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 border-t border-slate-700 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-slate-400">
+                <p>&copy; 2025 Hello 编程语言. 专注于编程教育，让编程学习更简单.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize charts
+        function initCharts() {
+            // TIOBE Index Chart
+            const tiobeChart = echarts.init(document.getElementById('tiobe-chart'));
+            const tiobeOption = {
+                backgroundColor: 'transparent',
+                textStyle: {
+                    color: '#94A3B8'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                    borderColor: 'rgba(148, 163, 184, 0.2)',
+                    textStyle: {
+                        color: '#E2E8F0'
+                    }
+                },
+                xAxis: {
+                    type: 'category',
+                    data: ['Python', 'C', 'Java', 'C++', 'C#', 'JavaScript', 'Go', 'Rust', 'TypeScript', 'Swift'],
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(148, 163, 184, 0.3)'
+                        }
+                    },
+                    axisLabel: {
+                        color: '#94A3B8',
+                        rotate: 45
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '市场份额 (%)',
+                    nameTextStyle: {
+                        color: '#94A3B8'
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(148, 163, 184, 0.3)'
+                        }
+                    },
+                    axisLabel: {
+                        color: '#94A3B8'
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: 'rgba(148, 163, 184, 0.1)'
+                        }
+                    }
+                },
+                series: [{
+                    data: [15.39, 15.33, 12.84, 11.89, 6.68, 2.42, 1.82, 1.05, 0.95, 0.85],
+                    type: 'bar',
+                    itemStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            { offset: 0, color: '#3B82F6' },
+                            { offset: 1, color: '#8B5CF6' }
+                        ])
+                    },
+                    emphasis: {
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                { offset: 0, color: '#60A5FA' },
+                                { offset: 1, color: '#A78BFA' }
+                            ])
+                        }
+                    }
+                }]
+            };
+            tiobeChart.setOption(tiobeOption);
+
+            // GitHub Usage Chart
+            const githubChart = echarts.init(document.getElementById('github-chart'));
+            const githubOption = {
+                backgroundColor: 'transparent',
+                textStyle: {
+                    color: '#94A3B8'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                    borderColor: 'rgba(148, 163, 184, 0.2)',
+                    textStyle: {
+                        color: '#E2E8F0'
+                    }
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    textStyle: {
+                        color: '#94A3B8'
+                    }
+                },
+                series: [{
+                    name: 'GitHub 使用量',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [
+                        { value: 29.5, name: 'JavaScript', itemStyle: { color: '#F7DF1E' } },
+                        { value: 23.8, name: 'Python', itemStyle: { color: '#3776AB' } },
+                        { value: 20.1, name: 'Java', itemStyle: { color: '#ED8B00' } },
+                        { value: 12.3, name: 'TypeScript', itemStyle: { color: '#3178C6' } },
+                        { value: 8.7, name: 'C#', itemStyle: { color: '#239120' } },
+                        { value: 5.6, name: '其他', itemStyle: { color: '#64748B' } }
+                    ],
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }]
+            };
+            githubChart.setOption(githubOption);
+
+            // Make charts responsive
+            window.addEventListener('resize', () => {
+                tiobeChart.resize();
+                githubChart.resize();
+            });
+        }
+
+        // Download button functionality
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                alert('下载功能即将推出！敬请期待完整版资源包。');
+            });
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            alert('移动端菜单功能即将推出');
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    anime({
+                        targets: entry.target,
+                        translateY: [20, 0],
+                        opacity: [0, 1],
+                        duration: 600,
+                        easing: 'easeOutQuad'
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.resource-card, .tool-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Initialize charts when page loads
+        document.addEventListener('DOMContentLoaded', initCharts);
+    </script>
+</body>
+</html>

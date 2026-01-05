@@ -1,0 +1,611 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Hello 编程语言 - 多语言语法学习平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&amp;family=Noto+Serif+SC:wght@400;700&amp;family=Oranienbaum&amp;family=Quattrocento+Sans:wght@400;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --primary-color: #1E293B;
+            --secondary-color: #334155;
+            --accent-color: #06B6D4;
+            --bg-primary: #0F172A;
+            --bg-card: #FFFFFF;
+            --text-dark: #1E293B;
+            --text-light: #E2E8F0;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-light);
+        }
+        
+        .hero-title {
+            font-family: 'Noto Serif SC', serif;
+            background: linear-gradient(135deg, #06B6D4, #3B82F6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1));
+        }
+        
+        #p5-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-color);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            background-color: var(--accent-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #06B6D4, #3B82F6);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .language-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 0 auto 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .language-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .python { background: #3776AB; }
+        .javascript { background: #F7DF1E; color: #000; }
+        .typescript { background: #3178C6; }
+        .java { background: #ED8B00; }
+        .cpp { background: #00599C; }
+        .csharp { background: #239120; }
+        .go { background: #00ADD8; }
+        .rust { background: #DEA584; }
+        .swift { background: #FA7343; }
+        .kotlin { background: #7F52FF; }
+        .dart { background: #0175C2; }
+        .ruby { background: #CC342D; }
+        .c { background: #A8B9CC; }
+        
+        .stats-number {
+            font-family: 'Oranienbaum', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+        
+
+        
+        .code-block {
+            background: #1E293B;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 16px 0;
+            overflow-x: auto;
+        }
+        
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #334155;
+        }
+        
+        .code-language {
+            background: rgba(6, 182, 212, 0.2);
+            color: var(--accent-color);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .copy-btn {
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--accent-color);
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(6, 182, 212, 0.2);
+        }
+        
+        .mobile-menu {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+        }
+    </style>
+<script src="https://statics.moonshot.cn/sdk/preview-widgets.min.js" defer=""></script></head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 bg-slate-900/90 backdrop-blur-md z-50 border-b border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">HP</span>
+                    </div>
+                    <span class="text-xl font-bold text-white">Hello 编程语言</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link text-gray-300 hover:text-cyan-400 font-medium">首页</a>
+                    <a href="tutorials.html" class="nav-link text-gray-300 hover:text-cyan-400 font-medium">语法教程</a>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <select id="language-selector" class="px-3 py-1 border border-slate-600 bg-slate-800 text-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                        <option value="zh">中文</option>
+                        <option value="en">English</option>
+                    </select>
+                    <button class="mobile-menu p-2 rounded-md text-gray-300 hover:bg-slate-800">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 移动端菜单 -->
+    <div id="mobile-menu" class="fixed top-16 left-0 right-0 bg-slate-900 border-b border-slate-700 z-40 hidden">
+        <div class="px-4 py-4">
+            <div class="space-y-2">
+                <a href="index.html" class="block px-4 py-2 text-gray-300 hover:bg-slate-800 rounded-md">首页</a>
+                <a href="tutorials.html" class="block px-4 py-2 text-gray-300 hover:bg-slate-800 rounded-md">语法大全</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 英雄区域 -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+        <div id="p5-canvas-container" class="absolute inset-0"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-8">
+                <h1 class="hero-title text-5xl md:text-7xl font-bold mb-6 opacity-0" id="main-title">
+                    Hello 编程语言
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto opacity-0" id="subtitle">
+                    一站式多语言编程学习平台<br/>
+                    掌握13种主流编程语言的完整语法体系
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center opacity-0" id="hero-buttons">
+                    <a href="tutorials.html" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105">
+                        开始学习
+                    </a>
+                </div>
+            </div>
+            
+            <!-- 统计数据 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 opacity-0" id="stats">
+                <div class="text-center">
+                    <div class="stats-number" data-count="13">0</div>
+                    <p class="text-gray-400">编程语言</p>
+                </div>
+                <div class="text-center">
+                    <div class="stats-number" data-count="200">0</div>
+                    <p class="text-gray-400">语法示例</p>
+                </div>
+                <div class="text-center">
+                    <div class="stats-number" data-count="100">0</div>
+                    <p class="text-gray-400">练习项目</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 支持的编程语言 -->
+    <section class="py-20 bg-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">支持的编程语言</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    覆盖主流编程语言，从基础语法到高级特性，一站式学习体验
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6">
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                    <div class="language-icon python">Py</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Python</h3>
+                    <p class="text-gray-400 text-sm">简洁易学</p>
+                </div>
+                
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                    <div class="language-icon javascript">JS</div>
+                    <h3 class="text-lg font-bold text-white mb-2">JavaScript</h3>
+                    <p class="text-gray-400 text-sm">Web开发</p>
+                </div>
+                
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                    <div class="language-icon typescript">TS</div>
+                    <h3 class="text-lg font-bold text-white mb-2">TypeScript</h3>
+                    <p class="text-gray-400 text-sm">类型安全</p>
+                </div>
+                
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                    <div class="language-icon java">Ja</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Java</h3>
+                    <p class="text-gray-400 text-sm">企业级</p>
+                </div>
+                
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                    <div class="language-icon cpp">C++</div>
+                    <h3 class="text-lg font-bold text-white mb-2">C++</h3>
+                    <p class="text-gray-400 text-sm">高性能</p>
+                </div>
+                
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                    <div class="language-icon csharp">C#</div>
+                    <h3 class="text-lg font-bold text-white mb-2">C#</h3>
+                    <p class="text-gray-400 text-sm">.NET生态</p>
+                </div>
+                
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                    <div class="language-icon go">Go</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Go</h3>
+                    <p class="text-gray-400 text-sm">并发编程</p>
+                </div>
+                
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                    <div class="language-icon rust">Ru</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Rust</h3>
+                    <p class="text-gray-400 text-sm">系统编程</p>
+                </div>
+                
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                    <div class="language-icon swift">Sw</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Swift</h3>
+                    <p class="text-gray-400 text-sm">iOS开发</p>
+                </div>
+                
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                    <div class="language-icon kotlin">Kt</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Kotlin</h3>
+                    <p class="text-gray-400 text-sm">Android</p>
+                </div>
+                
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                    <div class="language-icon dart">Da</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Dart</h3>
+                    <p class="text-gray-400 text-sm">Flutter</p>
+                </div>
+                
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                    <div class="language-icon ruby">Rb</div>
+                    <h3 class="text-lg font-bold text-white mb-2">Ruby</h3>
+                    <p class="text-gray-400 text-sm">Web开发</p>
+                </div>
+                
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                    <div class="language-icon c">C</div>
+                    <h3 class="text-lg font-bold text-white mb-2">C</h3>
+                    <p class="text-gray-400 text-sm">系统级</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心功能 -->
+    <section class="py-20 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">为什么选择 Hello 编程语言</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    我们用最直观的方式，让复杂的编程语法变得简单易懂
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 gap-8">
+                <div class="card-hover bg-slate-800 rounded-xl p-8 text-center">
+                    <div class="feature-icon mx-auto">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">完整语法对比</h3>
+                    <p class="text-gray-300">并排显示13种语言的完整语法实现，一目了然地理解语言差异</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 语法示例轮播 -->
+    <section class="py-20 bg-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">语法对比示例</h2>
+                <p class="text-xl text-gray-300">同一个功能，不同语言的实现方式</p>
+            </div>
+            
+            <!-- 代码轮播 -->
+            <div class="splide" id="code-carousel">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-language">Python</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">复制代码</button>
+                                </div>
+                                <pre class="code-font text-sm text-gray-300"><code># Python - 定义函数
+def greet(name, greeting=&#34;Hello&#34;):
+    &#34;&#34;&#34;返回问候语&#34;&#34;&#34;
+    return f&#34;{greeting}, {name}!&#34;
+
+# 使用函数
+message = greet(&#34;World&#34;)
+print(message)</code></pre>
+                            </div>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-language">JavaScript</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">复制代码</button>
+                                </div>
+                                <pre class="code-font text-sm text-gray-300"><code>// JavaScript - 定义函数
+function greet(name, greeting = &#34;Hello&#34;) {
+    // 返回问候语
+    return `${greeting}, ${name}!`;
+}
+
+// 箭头函数
+const greet2 = (name, greeting = &#34;Hello&#34;) =&gt; 
+    `${greeting}, ${name}!`;
+
+// 调用函数
+const message = greet(&#34;World&#34;);
+console.log(message);</code></pre>
+                            </div>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-language">Java</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">复制代码</button>
+                                </div>
+                                <pre class="code-font text-sm text-gray-300"><code>// Java - 定义方法
+public class Hello {
+    // 实例方法
+    public String greet(String name) {
+        return greet(name, &#34;Hello&#34;);
+    }
+    
+    // 重载方法
+    public String greet(String name, String greeting) {
+        return greeting + &#34;, &#34; + name + &#34;!&#34;;
+    }
+    
+    // 静态方法
+    public static void main(String[] args) {
+        Hello hello = new Hello();
+        String message = hello.greet(&#34;World&#34;);
+        System.out.println(message);
+    }
+}</code></pre>
+                            </div>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-language">C++</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">复制代码</button>
+                                </div>
+                                <pre class="code-font text-sm text-gray-300"><code>// C++ - 定义函数
+#include <string>
+
+// 函数声明
+std::string greet(const std::string&amp; name, 
+                  const std::string&amp; greeting = &#34;Hello&#34;);
+
+// 函数定义
+std::string greet(const std::string&amp; name, 
+                  const std::string&amp; greeting) {
+    return greeting + &#34;, &#34; + name + &#34;!&#34;;
+}
+
+int main() {
+    std::string message = greet(&#34;World&#34;);
+    std::cout &lt;&lt; message &lt;&lt; std::endl;
+    return 0;
+}</string></code></pre>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 语法概念预览 -->
+    <section class="py-20 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">涵盖的语法概念</h2>
+                <p class="text-xl text-gray-300">从基础到高级，全面覆盖编程语法知识体系</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card-hover bg-slate-800 rounded-xl p-6 border border-slate-700">
+                    <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">基础语法</h3>
+                    <p class="text-gray-400 text-sm">变量声明、数据类型、运算符、注释等编程基础</p>
+                </div>
+                
+                <div class="card-hover bg-slate-800 rounded-xl p-6 border border-slate-700">
+                    <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">控制结构</h3>
+                    <p class="text-gray-400 text-sm">条件判断、循环控制、跳转语句等流程控制</p>
+                </div>
+                
+                <div class="card-hover bg-slate-800 rounded-xl p-6 border border-slate-700">
+                    <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">函数方法</h3>
+                    <p class="text-gray-400 text-sm">函数定义、参数传递、返回值、方法重载</p>
+                </div>
+                
+                <div class="card-hover bg-slate-800 rounded-xl p-6 border border-slate-700">
+                    <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">面向对象</h3>
+                    <p class="text-gray-400 text-sm">类与对象、继承、多态、封装、抽象</p>
+                </div>
+                
+                <div class="card-hover bg-slate-800 rounded-xl p-6 border border-slate-700">
+                    <div class="w-12 h-12 bg-yellow-500 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">文件操作</h3>
+                    <p class="text-gray-400 text-sm">文件读写、路径处理、序列化、异常捕获</p>
+                </div>
+                
+                <div class="card-hover bg-slate-800 rounded-xl p-6 border border-slate-700">
+                    <div class="w-12 h-12 bg-indigo-500 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">高级特性</h3>
+                    <p class="text-gray-400 text-sm">闭包、装饰器、泛型、异步编程、元编程</p>
+                </div>
+                
+                <div class="card-hover bg-slate-800 rounded-xl p-6 border border-slate-700">
+                    <div class="w-12 h-12 bg-pink-500 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">数据结构</h3>
+                    <p class="text-gray-400 text-sm">数组、列表、字典、集合、栈、队列、树</p>
+                </div>
+                
+                <div class="card-hover bg-slate-800 rounded-xl p-6 border border-slate-700">
+                    <div class="w-12 h-12 bg-teal-500 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">模块系统</h3>
+                    <p class="text-gray-400 text-sm">包管理、模块导入导出、命名空间、依赖管理</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- 页脚 -->
+    <footer class="bg-slate-900 border-t border-slate-700 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-4">
+                    <div class="w-8 h-8 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">HP</span>
+                    </div>
+                    <span class="text-xl font-bold">Hello 编程语言</span>
+                </div>
+                <p class="text-gray-400 mb-4">让编程语言学习变得简单有趣</p>
+                <p class="text-gray-500 text-sm">
+                    © 2026 Hello 编程语言. 开源项目，欢迎贡献代码和提出改进建议。
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+
+</body></html>

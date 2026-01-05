@@ -1,0 +1,19 @@
+# 备份和临时文件
+*_backup.html
+*_clean.html
+*_complete.html
+*_complete_fixed.html
+*_fixed.html
+*_reordered.html
+*_temp.html
+temp_*.txt
+
+# 开发工具和文档
+.trae/
+design.md
+outline.md
+interaction.md
+
+# 系统文件
+.DS_Store
+Thumbs.db
