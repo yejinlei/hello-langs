@@ -103,6 +103,9 @@
 
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div id="tutorial-content">
+            <!-- Content will be loaded here dynamically -->
+        </div>
         <!-- 1. 变量声明 -->
         <section class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
@@ -4974,54 +4977,42 @@
             ruby: 'ruby_tutorials.html'
         };
         
-        // Modify language tab click handlers to load content dynamically
-        document.querySelectorAll('.language-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                const selectedLang = this.getAttribute('data-lang');
+        // Function to load content dynamically
+        async function loadLanguageContent(lang) {
+            try {
+                // Show loading state
+                const contentDiv = document.getElementById('tutorial-content');
+                contentDiv.innerHTML = '<div class="text-center py-12"><div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div><p class="mt-4 text-slate-300">加载中...</p></div>';
                 
-                // Update active state
-                document.querySelectorAll('.language-tab').forEach(t => {
-                    t.classList.remove('active');
-                    t.classList.remove('px-4', 'py-2', 'rounded-lg', 'text-sm', 'font-medium');
-                    t.classList.add('px-4', 'py-2', 'rounded-lg', 'text-sm', 'font-medium', 'bg-slate-700', 'text-slate-300');
-                });
+                // Fetch the content from the corresponding language file
+                const response = await fetch(languageFiles[lang]);
+                if (!response.ok) {
+                    throw new Error(`Failed to load ${languageFiles[lang]}`);
+                }
                 
-                this.classList.remove('bg-slate-700', 'text-slate-300');
-                this.classList.add('active', 'px-4', 'py-2', 'rounded-lg', 'text-sm', 'font-medium');
+                const htmlContent = await response.text();
                 
-                // In a real implementation, you would load the specific language file here
-                // For now, we'll just show/hide the appropriate content
-                document.querySelectorAll('.language-content').forEach(content => {
-                    if (content.getAttribute('data-lang') === selectedLang) {
-                        content.classList.remove('hidden');
-                    } else {
-                        content.classList.add('hidden');
-                    }
-                });
-            });
-        });
-    </script>
-    <script>
-        // Language loading functionality
-        const languageFiles = {
-            python: 'python_tutorials.html',
-            c: 'c_tutorials.html',
-            cpp: 'cpp_tutorials.html',
-            java: 'java_tutorials.html',
-            csharp: 'csharp_tutorials.html',
-            go: 'go_tutorials.html',
-            swift: 'swift_tutorials.html',
-            javascript: 'javascript_tutorials.html',
-            typescript: 'typescript_tutorials.html',
-            dart: 'dart_tutorials.html',
-            rust: 'rust_tutorials.html',
-            kotlin: 'kotlin_tutorials.html',
-            ruby: 'ruby_tutorials.html'
-        };
+                // Parse the HTML to extract the main content
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlContent, 'text/html');
+                const mainContent = doc.querySelector('main');
+                
+                if (mainContent) {
+                    contentDiv.innerHTML = mainContent.innerHTML;
+                } else {
+                    contentDiv.innerHTML = '<div class="text-center py-12 text-red-400">内容加载失败</div>';
+                }
+            } catch (error) {
+                console.error('Error loading language content:', error);
+                document.getElementById('tutorial-content').innerHTML = '<div class="text-center py-12 text-red-400">内容加载失败，请稍后重试</div>';
+            }
+        }
         
-        // Modify language tab click handlers to load content dynamically
+        // Initialize language tabs
         document.querySelectorAll('.language-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                
                 const selectedLang = this.getAttribute('data-lang');
                 
                 // Update active state
@@ -5034,16 +5025,14 @@
                 this.classList.remove('bg-slate-700', 'text-slate-300');
                 this.classList.add('active', 'px-4', 'py-2', 'rounded-lg', 'text-sm', 'font-medium');
                 
-                // In a real implementation, you would load the specific language file here
-                // For now, we'll just show/hide the appropriate content
-                document.querySelectorAll('.language-content').forEach(content => {
-                    if (content.getAttribute('data-lang') === selectedLang) {
-                        content.classList.remove('hidden');
-                    } else {
-                        content.classList.add('hidden');
-                    }
-                });
+                // Load the selected language content
+                loadLanguageContent(selectedLang);
             });
         });
-    </script></body>
+        
+        // Load default language (Python) on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLanguageContent('python');
+        });
+    </body>
 </html>

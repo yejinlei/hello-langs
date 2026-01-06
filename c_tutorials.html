@@ -4,20 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C语言教程 - 编程语法 深入探索主流编程语言的完整语法体系</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#10b981',
-                        secondary: '#8b5cf6',
-                        dark: '#1e293b',
-                        light: '#f8fafc'
+        // 尝试加载 Tailwind CSS，如果失败则使用备用方案
+        window.tailwindCdnLoaded = false;
+        function loadTailwindCSS() {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.tailwindcss.com';
+            script.onload = function() {
+                window.tailwindCdnLoaded = true;
+                // Tailwind 配置
+                tailwind.config = {
+                    theme: {
+                        extend: {
+                            colors: {
+                                primary: '#10b981',
+                                secondary: '#8b5cf6',
+                                dark: '#1e293b',
+                                light: '#f8fafc'
+                            }
+                        }
                     }
                 }
-            }
+            };
+            script.onerror = function() {
+                console.warn('Failed to load Tailwind CSS from CDN, applying fallback styles');
+                applyFallbackStyles();
+            };
+            document.head.appendChild(script);
+        }
+        
+        function applyFallbackStyles() {
+            // 应用基本的 Tailwind 类对应的样式
+            const fallbackStyles = document.createElement('style');
+            fallbackStyles.textContent = `
+                /* 基本布局类 */
+                .container { width: 100%; margin-right: auto; margin-left: auto; padding-right: 1rem; padding-left: 1rem; }
+                .grid { display: grid; }
+                .flex { display: flex; }
+                .hidden { display: none; }
+                
+                /* 网格列类 */
+                .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+                @media (min-width: 1024px) {
+                    .lg\\\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+                }
+                
+                /* 间距类 */
+                .p-8 { padding: 2rem; }
+                .p-4 { padding: 1rem; }
+                .mb-16 { margin-bottom: 4rem; }
+                .mb-8 { margin-bottom: 2rem; }
+                .mb-4 { margin-bottom: 1rem; }
+                .mb-2 { margin-bottom: 0.5rem; }
+                .mt-4 { margin-top: 1rem; }
+                .mr-2 { margin-right: 0.5rem; }
+                .ml-2 { margin-left: 0.5rem; }
+                
+                /* 字体类 */
+                .text-3xl { font-size: 1.875rem; }
+                .text-lg { font-size: 1.125rem; }
+                .text-sm { font-size: 0.875rem; }
+                .font-bold { font-weight: 700; }
+                .font-medium { font-weight: 500; }
+                
+                /* 文本类 */
+                .text-center { text-align: center; }
+                .text-purple-400 { color: #a78bfa; }
+                .text-slate-300 { color: #cbd5e1; }
+                .text-slate-400 { color: #94a3b8; }
+                
+                /* 背景类 */
+                .bg-slate-900 { background-color: #0f172a; }
+                .bg-slate-800 { background-color: #1e293b; }
+                
+                /* 边框类 */
+                .rounded-xl { border-radius: 0.75rem; }
+                .rounded-lg { border-radius: 0.5rem; }
+                .rounded { border-radius: 0.25rem; }
+                
+                /* 其他类 */
+                .gap-8 { gap: 2rem; }
+                .items-center { align-items: center; }
+                .justify-between { justify-content: space-between; }
+                .w-full { width: 100%; }
+            `;
+            document.head.appendChild(fallbackStyles);
+        }
+        
+        // 加载 Tailwind CSS
+        loadTailwindCSS();
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         }
     </script>
     <style>

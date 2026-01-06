@@ -4,7 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Python 教程 - Hello 编程语言</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // 尝试加载 Tailwind CSS，如果失败则使用备用方案
+        window.tailwindCdnLoaded = false;
+        function loadTailwindCSS() {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.tailwindcss.com';
+            script.onload = function() {
+                window.tailwindCdnLoaded = true;
+                // Tailwind 配置
+                tailwind.config = {
+                    theme: {
+                        extend: {
+                            colors: {
+                                primary: '#10b981',
+                                secondary: '#8b5cf6',
+                                dark: '#1e293b',
+                                light: '#f8fafc'
+                            }
+                        }
+                    }
+                }
+            };
+            script.onerror = function() {
+                console.warn('Failed to load Tailwind CSS from CDN, applying fallback styles');
+                applyFallbackStyles();
+            };
+            document.head.appendChild(script);
+        }
+        
+        function applyFallbackStyles() {
+            // 应用基本的 Tailwind 类对应的样式
+            const fallbackStyles = document.createElement('style');
+            fallbackStyles.textContent = `
+                /* 基本布局类 */
+                .container { width: 100%; margin-right: auto; margin-left: auto; padding-right: 1rem; padding-left: 1rem; }
+                .grid { display: grid; }
+                .flex { display: flex; }
+                .hidden { display: none; }
+                
+                /* 网格列类 */
+                .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+                @media (min-width: 1024px) {
+                    .lg\\\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+                }
+                
+                /* 间距类 */
+                .p-8 { padding: 2rem; }
+                .p-4 { padding: 1rem; }
+                .mb-16 { margin-bottom: 4rem; }
+                .mb-8 { margin-bottom: 2rem; }
+                .mb-4 { margin-bottom: 1rem; }
+                .mb-2 { margin-bottom: 0.5rem; }
+                .mt-4 { margin-top: 1rem; }
+                .mr-2 { margin-right: 0.5rem; }
+                .ml-2 { margin-left: 0.5rem; }
+                
+                /* 字体类 */
+                .text-3xl { font-size: 1.875rem; }
+                .text-lg { font-size: 1.125rem; }
+                .text-sm { font-size: 0.875rem; }
+                .font-bold { font-weight: 700; }
+                .font-medium { font-weight: 500; }
+                
+                /* 文本类 */
+                .text-center { text-align: center; }
+                .text-purple-400 { color: #a78bfa; }
+                .text-slate-300 { color: #cbd5e1; }
+                .text-slate-400 { color: #94a3b8; }
+                
+                /* 背景类 */
+                .bg-slate-900 { background-color: #0f172a; }
+                .bg-slate-800 { background-color: #1e293b; }
+                
+                /* 边框类 */
+                .rounded-xl { border-radius: 0.75rem; }
+                .rounded-lg { border-radius: 0.5rem; }
+                .rounded { border-radius: 0.25rem; }
+                
+                /* 其他类 */
+                .gap-8 { gap: 2rem; }
+                .items-center { align-items: center; }
+                .justify-between { justify-content: space-between; }
+                .w-full { width: 100%; }
+            `;
+            document.head.appendChild(fallbackStyles);
+        }
+        
+        // 加载 Tailwind CSS
+        loadTailwindCSS();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -194,13 +283,13 @@
                 <div class="code-block rounded-lg p-4 code-font text-sm">
                     <div class="text-slate-400 mb-2"># 字典创建</div>
                     <div class="text-sm leading-6">
-                        <span class="text-blue-300">person</span> = {<span class="text-green-300">"name"</span>: <span class="text-green-300">"张三"</span>, <span class="text-green-300">"age"</span>: <span class="text-yellow-300">25</span>, <span class="text-green-300">"city"</span>: <span class="text-green-300">"北京"</span>}
+                        <span class="text-blue-300">person</span> = {<span class="text-green-300">"name"</span>: <span class="text-green-300">"张三"</span>, <span class="text-green-300">"age"</span>: <span class="text-yellow-300">25</span>, <span class="text-green-300">"city"</span>: <span class="text-green-300">"北京"</span>}<br>
                         <span class="text-blue-300">empty_dict</span> = {}
                     </div>
                     
                     <div class="text-slate-400 mt-4 mb-2"># 字典访问</div>
                     <div class="text-sm leading-6 mt-2">
-                        <span class="text-blue-300">name</span> = <span class="text-blue-300">person</span>[<span class="text-green-300">"name"</span>] <span class="text-slate-500"># 张三</span>
+                        <span class="text-blue-300">name</span> = <span class="text-blue-300">person</span>[<span class="text-green-300">"name"</span>] <span class="text-slate-500"># 张三</span><br>
                         <span class="text-blue-300">age</span> = <span class="text-blue-300">person</span>.get(<span class="text-green-300">"age"</span>) <span class="text-slate-500"># 25</span>
                     </div>
                 </div>
@@ -219,14 +308,14 @@
                 <div class="code-block rounded-lg p-4 code-font text-sm">
                     <div class="text-slate-400 mb-2"># 集合创建</div>
                     <div class="text-sm leading-6">
-                        <span class="text-blue-300">s1</span> = {<span class="text-yellow-300">1, 2, 3, 4, 5</span>}
+                        <span class="text-blue-300">s1</span> = {<span class="text-yellow-300">1, 2, 3, 4, 5</span>}<br>
                         <span class="text-blue-300">s2</span> = set([<span class="text-yellow-300">3, 4, 5, 6, 7</span>])
                     </div>
                     
                     <div class="text-slate-400 mt-4 mb-2"># 集合操作</div>
                     <div class="text-sm leading-6 mt-2">
-                        <span class="text-blue-300">union</span> = <span class="text-blue-300">s1</span> | <span class="text-blue-300">s2</span> <span class="text-slate-500"># {1, 2, 3, 4, 5, 6, 7}</span>
-                        <span class="text-blue-300">intersection</span> = <span class="text-blue-300">s1</span> & <span class="text-blue-300">s2</span> <span class="text-slate-500"># {3, 4, 5}</span>
+                        <span class="text-blue-300">union</span> = <span class="text-blue-300">s1</span> | <span class="text-blue-300">s2</span> <span class="text-slate-500"># {1, 2, 3, 4, 5, 6, 7}</span><br>
+                        <span class="text-blue-300">intersection</span> = <span class="text-blue-300">s1</span> & <span class="text-blue-300">s2</span> <span class="text-slate-500"># {3, 4, 5}</span><br>
                         <span class="text-blue-300">difference</span> = <span class="text-blue-300">s1</span> - <span class="text-blue-300">s2</span> <span class="text-slate-500"># {1, 2}</span>
                     </div>
                 </div>
@@ -318,16 +407,16 @@
                 <div class="code-block rounded-lg p-4 code-font text-sm">
                     <div class="text-slate-400 mb-2"># 类定义</div>
                     <div class="text-sm leading-6">
-                        <span class="text-purple-400">class</span> <span class="text-blue-300">Person</span>:
-                            <span class="text-purple-400">def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">name</span>, <span class="text-blue-300">age</span>):
-                                <span class="text-blue-300">self</span>.name = <span class="text-blue-300">name</span>
-                                <span class="text-blue-300">self</span>.age = <span class="text-blue-300">age</span>
-                            
-                            <span class="text-purple-400">def</span> <span class="text-blue-300">greet</span>(<span class="text-blue-300">self</span>):
-                                <span class="text-purple-400">return</span> <span class="text-green-300">f"你好，我是{self.name}，今年{self.age}岁。"</span>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Person</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">name</span>, <span class="text-blue-300">age</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.name = <span class="text-blue-300">name</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.age = <span class="text-blue-300">age</span>
                         <br>
-                        <span class="text-comment"># 对象创建和使用</span>
-                        <span class="text-blue-300">person</span> = <span class="text-blue-300">Person</span>(<span class="text-green-300">"张三"</span>, <span class="text-yellow-300">25</span>)
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">greet</span>(<span class="text-blue-300">self</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-green-300">f"你好，我是{self.name}，今年{self.age}岁。"</span>
+                        <br>
+                        <span class="text-slate-400"># 对象创建和使用</span><br>
+                        <span class="text-blue-300">person</span> = <span class="text-blue-300">Person</span>(<span class="text-green-300">"张三"</span>, <span class="text-yellow-300">25</span>)<br>
                         <span class="text-green-300">print</span>(<span class="text-blue-300">person</span>.greet()) <span class="text-slate-500"># 你好，我是张三，今年25岁。</span>
                     </div>
                 </div>
@@ -346,22 +435,22 @@
                 <div class="code-block rounded-lg p-4 code-font text-sm">
                     <div class="text-slate-400 mb-2"># 继承</div>
                     <div class="text-sm leading-6">
-                        <span class="text-purple-400">class</span> <span class="text-blue-300">Student</span>(<span class="text-blue-300">Person</span>):
-                            <span class="text-purple-400">def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">name</span>, <span class="text-blue-300">age</span>, <span class="text-blue-300">student_id</span>):
-                                <span class="text-purple-400">super</span>().<span class="text-blue-300">__init__</span>(<span class="text-blue-300">name</span>, <span class="text-blue-300">age</span>)
-                                <span class="text-blue-300">self</span>.student_id = <span class="text-blue-300">student_id</span>
-                            
-                            <span class="text-purple-400">def</span> <span class="text-blue-300">greet</span>(<span class="text-blue-300">self</span>):
-                                <span class="text-purple-400">return</span> <span class="text-green-300">f"你好，我是{self.name}，今年{self.age}岁，学号是{self.student_id}。"</span>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Student</span>(<span class="text-blue-300">Person</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">name</span>, <span class="text-blue-300">age</span>, <span class="text-blue-300">student_id</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;super</span>().<span class="text-blue-300">__init__</span>(<span class="text-blue-300">name</span>, <span class="text-blue-300">age</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.student_id = <span class="text-blue-300">student_id</span>
                         <br>
-                        <span class="text-comment"># 多态</span>
-                        <span class="text-blue-300">def</span> <span class="text-blue-300">greet_person</span>(<span class="text-blue-300">person</span>):
-                            <span class="text-purple-400">return</span> <span class="text-blue-300">person</span>.<span class="text-blue-300">greet</span>()
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">greet</span>(<span class="text-blue-300">self</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-green-300">f"你好，我是{self.name}，今年{self.age}岁，学号是{self.student_id}。"</span>
                         <br>
-                        <span class="text-blue-300">person</span> = <span class="text-blue-300">Person</span>(<span class="text-green-300">"张三"</span>, <span class="text-yellow-300">25</span>)
+                        <span class="text-slate-400"># 多态</span><br>
+                        <span class="text-blue-300">def</span> <span class="text-blue-300">greet_person</span>(<span class="text-blue-300">person</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">person</span>.<span class="text-blue-300">greet</span>()
+                        <br>
+                        <span class="text-blue-300">person</span> = <span class="text-blue-300">Person</span>(<span class="text-green-300">"张三"</span>, <span class="text-yellow-300">25</span>)<br>
                         <span class="text-blue-300">student</span> = <span class="text-blue-300">Student</span>(<span class="text-green-300">"李四"</span>, <span class="text-yellow-300">20</span>, <span class="text-green-300">"2023001"</span>)
                         <br>
-                        <span class="text-green-300">print</span>(<span class="text-blue-300">greet_person</span>(<span class="text-blue-300">person</span>))  <span class="text-slate-500"># 你好，我是张三，今年25岁。</span>
+                        <span class="text-green-300">print</span>(<span class="text-blue-300">greet_person</span>(<span class="text-blue-300">person</span>))  <span class="text-slate-500"># 你好，我是张三，今年25岁。</span><br>
                         <span class="text-green-300">print</span>(<span class="text-blue-300">greet_person</span>(<span class="text-blue-300">student</span>)) <span class="text-slate-500"># 你好，我是李四，今年20岁，学号是2023001。</span>
                     </div>
                 </div>
@@ -379,16 +468,16 @@
                         <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 异常处理</div>
                             <div class="text-sm leading-6">
-                                <span class="text-purple-400">try</span>:
-                                    <span class="text-blue-300">result</span> = <span class="text-yellow-300">10</span> / <span class="text-yellow-300">0</span>
-                                <span class="text-purple-400">except</span> <span class="text-purple-400">ZeroDivisionError</span>:
-                                    <span class="text-green-300">print</span>(<span class="text-green-300">"除数不能为零"</span>)
-                                <span class="text-purple-400">except</span> <span class="text-purple-400">Exception</span> <span class="text-purple-400">as</span> <span class="text-blue-300">e</span>:
-                                    <span class="text-green-300">print</span>(<span class="text-blue-300">e</span>)
-                                <span class="text-purple-400">else</span>:
-                                    <span class="text-green-300">print</span>(<span class="text-green-300">"计算成功"</span>)
-                                <span class="text-purple-400">finally</span>:
-                                    <span class="text-green-300">print</span>(<span class="text-green-300">"无论如何都会执行"</span>)
+                                <span class="text-purple-400">try</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;result</span> = <span class="text-yellow-300">10</span> / <span class="text-yellow-300">0</span><br>
+                                <span class="text-purple-400">except</span> <span class="text-purple-400">ZeroDivisionError</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"除数不能为零"</span>)<br>
+                                <span class="text-purple-400">except</span> <span class="text-purple-400">Exception</span> <span class="text-purple-400">as</span> <span class="text-blue-300">e</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-blue-300">e</span>)<br>
+                                <span class="text-purple-400">else</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"计算成功"</span>)<br>
+                                <span class="text-purple-400">finally</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"无论如何都会执行"</span>)
                             </div>
                         </div>
                     </div>
@@ -648,21 +737,21 @@
                         <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 使用with语句管理文件资源</div>
                             <div class="text-sm leading-6">
-                                <span class="text-purple-400">with</span> <span class="text-purple-400">open</span>(<span class="text-green-300">"test.txt"</span>, <span class="text-green-300">"w"</span>) <span class="text-purple-400">as</span> <span class="text-blue-300">f</span>:
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;f.write("Hello, Context Manager!")</span>
+                                <span class="text-purple-400">with</span> <span class="text-purple-400">open</span>(<span class="text-green-300">"test.txt"</span>, <span class="text-green-300">"w"</span>) <span class="text-purple-400">as</span> <span class="text-blue-300">f</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;f.write</span>(<span class="text-green-300">"Hello, Context Manager!"</span>)
                             </div>
                             
                             <div class="text-slate-400 mt-4 mb-2"># 自定义上下文管理器类</div>
                             <div class="text-sm leading-6 mt-2">
-                                <span class="text-purple-400">class</span> <span class="text-blue-300">MyContextManager</span>:
-                                    <span class="text-purple-400">def</span> <span class="text-blue-300">__enter__</span>(<span class="text-blue-300">self</span>):
-                                        <span class="text-green-300">print</span>(<span class="text-green-300">"进入上下文"</span>)
-                                        <span class="text-purple-400">return</span> <span class="text-green-300">"上下文资源"</span>
-                                    
-                                    <span class="text-purple-400">def</span> <span class="text-blue-300">__exit__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">exc_type</span>, <span class="text-blue-300">exc_val</span>, <span class="text-blue-300">exc_tb</span>):
-                                        <span class="text-green-300">print</span>(<span class="text-green-300">"退出上下文"</span>)
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">MyContextManager</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__enter__</span>(<span class="text-blue-300">self</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"进入上下文"</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-green-300">"上下文资源"</span>
                                 <br>
-                                <span class="text-purple-400">with</span> <span class="text-blue-300">MyContextManager</span>() <span class="text-purple-400">as</span> <span class="text-blue-300">resource</span>:
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__exit__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">exc_type</span>, <span class="text-blue-300">exc_val</span>, <span class="text-blue-300">exc_tb</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"退出上下文"</span>)
+                                <br>
+                                <span class="text-purple-400">with</span> <span class="text-blue-300">MyContextManager</span>() <span class="text-purple-400">as</span> <span class="text-blue-300">resource</span>:<br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">f"使用资源: {resource}"</span>)
                             </div>
                             
@@ -670,15 +759,15 @@
                             <div class="text-sm leading-6 mt-2">
                                 <span class="text-purple-400">from</span> <span class="text-blue-300">contextlib</span> <span class="text-purple-400">import</span> <span class="text-blue-300">contextmanager</span>
                                 <br>
-                                <span class="text-purple-400">@contextmanager</span>
-                                <span class="text-purple-400">def</span> <span class="text-blue-300">my_context</span>():
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"进入上下文"</span>)
-                                <span class="text-purple-400">try</span>:
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield</span> <span class="text-green-300">"上下文资源"</span>
-                                <span class="text-purple-400">finally</span>:
+                                <span class="text-purple-400">@contextmanager</span><br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">my_context</span>():<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"进入上下文"</span>)<br>
+                                <span class="text-purple-400">try</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield</span> <span class="text-green-300">"上下文资源"</span><br>
+                                <span class="text-purple-400">finally</span>:<br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">"退出上下文"</span>)
                                 <br>
-                                <span class="text-purple-400">with</span> <span class="text-blue-300">my_context</span>() <span class="text-purple-400">as</span> <span class="text-blue-300">resource</span>:
+                                <span class="text-purple-400">with</span> <span class="text-blue-300">my_context</span>() <span class="text-purple-400">as</span> <span class="text-blue-300">resource</span>:<br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print</span>(<span class="text-green-300">f"使用资源: {resource}"</span>)
                             </div>
                         </div>
@@ -707,17 +796,17 @@
                             
                             <div class="text-slate-400 mt-4 mb-2"># 复杂类型注解</div>
                             <div class="text-sm leading-6 mt-2">
-                                <span class="text-purple-400">from</span> <span class="text-blue-300">typing</span> <span class="text-purple-400">import</span> <span class="text-blue-300">List, Dict, Tuple, Optional</span>
+                                <span class="text-purple-400">from</span> <span class="text-blue-300">typing</span> <span class="text-purple-400">import</span> <span class="text-blue-300">List, Dict, Tuple, Optional</span><br>
                                 <br>
-                                <span class="text-blue-300">def</span> <span class="text-blue-300">process_data</span>(<span class="text-blue-300">data</span>: <span class="text-blue-300">List</span>[<span class="text-blue-400">int</span>]) -> <span class="text-blue-300">Dict</span>[<span class="text-blue-400">str</span>, <span class="text-blue-400">int</span>]:
-                                    <span class="text-purple-400">return</span> {
-                                        <span class="text-green-300">"sum"</span>: <span class="text-purple-400">sum</span>(<span class="text-blue-300">data</span>),
-                                        <span class="text-green-300">"count"</span>: <span class="text-purple-400">len</span>(<span class="text-blue-300">data</span>)
-                                    }
+                                <span class="text-blue-300">def</span> <span class="text-blue-300">process_data</span>(<span class="text-blue-300">data</span>: <span class="text-blue-300">List</span>[<span class="text-blue-400">int</span>]) -> <span class="text-blue-300">Dict</span>[<span class="text-blue-400">str</span>, <span class="text-blue-400">int</span>]:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"sum"</span>: <span class="text-purple-400">sum</span>(<span class="text-blue-300">data</span>),<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"count"</span>: <span class="text-purple-400">len</span>(<span class="text-blue-300">data</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
                                 <br>
-                                <span class="text-blue-300">person</span>: <span class="text-blue-300">Dict</span>[<span class="text-blue-400">str</span>, <span class="text-blue-300">Optional</span>[<span class="text-blue-300">Union</span>[<span class="text-blue-400">str</span>, <span class="text-blue-400">int</span>]]] = {
-                                    <span class="text-green-300">"name"</span>: <span class="text-green-300">"张三"</span>,
-                                    <span class="text-green-300">"age"</span>: <span class="text-yellow-300">25</span>
+                                <span class="text-blue-300">person</span>: <span class="text-blue-300">Dict</span>[<span class="text-blue-400">str</span>, <span class="text-blue-300">Optional</span>[<span class="text-blue-300">Union</span>[<span class="text-blue-400">str</span>, <span class="text-blue-400">int</span>]]] = {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;"name"</span>: <span class="text-green-300">"张三"</span>,<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;"age"</span>: <span class="text-yellow-300">25</span><br>
                                 }
                             </div>
                         </div>
@@ -749,24 +838,24 @@
                             
                             <div class="text-slate-400 mt-4 mb-2"># 自定义迭代器</div>
                             <div class="text-sm leading-6 mt-2">
-                                <span class="text-purple-400">class</span> <span class="text-blue-300">MyIterator</span>:
-                                    <span class="text-purple-400">def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">max_value</span>):
-                                        <span class="text-blue-300">self</span>.max_value = <span class="text-blue-300">max_value</span>
-                                        <span class="text-blue-300">self</span>.current = <span class="text-yellow-300">0</span>
-                                    
-                                    <span class="text-purple-400">def</span> <span class="text-blue-300">__iter__</span>(<span class="text-blue-300">self</span>):
-                                        <span class="text-purple-400">return</span> <span class="text-blue-300">self</span>
-                                    
-                                    <span class="text-purple-400">def</span> <span class="text-blue-300">__next__</span>(<span class="text-blue-300">self</span>):
-                                        <span class="text-purple-400">if</span> <span class="text-blue-300">self</span>.current < <span class="text-blue-300">self</span>.max_value:
-                                            <span class="text-blue-300">value</span> = <span class="text-blue-300">self</span>.current
-                                            <span class="text-blue-300">self</span>.current += <span class="text-yellow-300">1</span>
-                                            <span class="text-purple-400">return</span> <span class="text-blue-300">value</span>
-                                        <span class="text-purple-400">else</span>:
-                                            <span class="text-purple-400">raise</span> <span class="text-purple-400">StopIteration</span>
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">MyIterator</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">max_value</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.max_value = <span class="text-blue-300">max_value</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.current = <span class="text-yellow-300">0</span><br>
                                 <br>
-                                <span class="text-blue-300">for</span> <span class="text-blue-300">num</span> <span class="text-purple-400">in</span> <span class="text-blue-300">MyIterator</span>(<span class="text-yellow-300">5</span>):
-                                    <span class="text-green-300">print(num)</span> <span class="text-slate-500"># 输出: 0 1 2 3 4</span>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__iter__</span>(<span class="text-blue-300">self</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">self</span><br>
+                                <br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__next__</span>(<span class="text-blue-300">self</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">self</span>.current < <span class="text-blue-300">self</span>.max_value:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value</span> = <span class="text-blue-300">self</span>.current<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.current += <span class="text-yellow-300">1</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">value</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise</span> <span class="text-purple-400">StopIteration</span><br>
+                                <br>
+                                <span class="text-blue-300">for</span> <span class="text-blue-300">num</span> <span class="text-purple-400">in</span> <span class="text-blue-300">MyIterator</span>(<span class="text-yellow-300">5</span>):<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;print(num)</span> <span class="text-slate-500"># 输出: 0 1 2 3 4</span>
                             </div>
                         </div>
                     </div>
@@ -797,16 +886,16 @@
                             
                             <div class="text-slate-400 mt-4 mb-2"># 无限生成器</div>
                             <div class="text-sm leading-6 mt-2">
-                                <span class="text-purple-400">def</span> <span class="text-blue-300">infinite_counter</span>:
-                                    <span class="text-blue-300">num</span> = <span class="text-yellow-300">0</span>
-                                    <span class="text-purple-400">while</span> <span class="text-purple-400">True</span>:
-                                        <span class="text-purple-400">yield</span> <span class="text-blue-300">num</span>
-                                        <span class="text-blue-300">num</span> += <span class="text-yellow-300">1</span>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">infinite_counter</span>():<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;num</span> = <span class="text-yellow-300">0</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;while</span> <span class="text-purple-400">True</span>:<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yield</span> <span class="text-blue-300">num</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num</span> += <span class="text-yellow-300">1</span><br>
                                 <br>
-                                <span class="text-blue-300"># 使用无限生成器</span>
-                                <span class="text-blue-300">counter</span> = <span class="text-blue-300">infinite_counter</span>()
-                                <span class="text-green-300">print(next(counter))</span> <span class="text-slate-500"># 0</span>
-                                <span class="text-green-300">print(next(counter))</span> <span class="text-slate-500"># 1</span>
+                                <span class="text-blue-300"># 使用无限生成器</span><br>
+                                <span class="text-blue-300">counter</span> = <span class="text-blue-300">infinite_counter</span>()<br>
+                                <span class="text-green-300">print(next(counter))</span> <span class="text-slate-500"># 0</span><br>
+                                <span class="text-green-300">print(next(counter))</span> <span class="text-slate-500"># 1</span><br>
                                 <span class="text-green-300">print(next(counter))</span> <span class="text-slate-500"># 2</span>
                             </div>
                         </div>
@@ -934,12 +1023,12 @@
                         <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 列表推导式的综合应用</div>
                             <div class="text-sm leading-6">
-                                <span class="text-blue-300"># 生成1-10的平方列表</span>
-                                <span class="text-blue-300">squares</span> = [<span class="text-blue-300">x</span>*<span class="text-blue-300">x</span> <span class="text-purple-400">for</span> <span class="text-blue-300">x</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-yellow-300">1, 11</span>)]
-                                <span class="text-green-300">print(squares)</span> <span class="text-slate-500"># [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</span>
+                                <span class="text-blue-300"># 生成1-10的平方列表</span><br>
+                                <span class="text-blue-300">squares</span> = [<span class="text-blue-300">x</span>*<span class="text-blue-300">x</span> <span class="text-purple-400">for</span> <span class="text-blue-300">x</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-yellow-300">1, 11</span>)]<br>
+                                <span class="text-green-300">print(squares)</span> <span class="text-slate-500"># [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</span><br>
                                 <br>
-                                <span class="text-blue-300"># 过滤出偶数的平方</span>
-                                <span class="text-blue-300">even_squares</span> = [<span class="text-blue-300">x</span>*<span class="text-blue-300">x</span> <span class="text-purple-400">for</span> <span class="text-blue-300">x</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-yellow-300">1, 11</span>) <span class="text-purple-400">if</span> <span class="text-blue-300">x</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span>]
+                                <span class="text-blue-300"># 过滤出偶数的平方</span><br>
+                                <span class="text-blue-300">even_squares</span> = [<span class="text-blue-300">x</span>*<span class="text-blue-300">x</span> <span class="text-purple-400">for</span> <span class="text-blue-300">x</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-yellow-300">1, 11</span>) <span class="text-purple-400">if</span> <span class="text-blue-300">x</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span>]<br>
                                 <span class="text-green-300">print(even_squares)</span> <span class="text-slate-500"># [4, 16, 36, 64, 100]</span>
                             </div>
                             
