@@ -138,8 +138,40 @@
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <!-- 1. 变量声明 -->
-        <section class="mb-16">
+          <div class="flex flex-col lg:flex-row gap-8">
+              <div class="lg:w-1/4">
+                  <div class="sticky top-4 bg-slate-900 rounded-xl p-6 shadow-lg max-h-[calc(100vh-2rem)] overflow-y-auto">
+                      <h3 class="text-lg font-bold text-purple-400 mb-4">章节导航</h3>
+                      <nav class="space-y-2">
+                          <a href="#section-1" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">1. 变量声明</a>
+                          <a href="#section-2" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">2. 数据类型</a>
+                          <a href="#section-3" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">3. 控制流 - 条件语句</a>
+                          <a href="#section-4" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">4. 控制流 - 循环语句</a>
+                          <a href="#section-5" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">5. 函数定义</a>
+                          <a href="#section-6" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">6. 数组</a>
+                          <a href="#section-7" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">7. 指针</a>
+                          <a href="#section-8" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">8. 结构体和联合体</a>
+                          <a href="#section-9" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">9. 枚举</a>
+                          <a href="#section-10" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">10. 类型定义</a>
+                          <a href="#section-11" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">11. 运算符</a>
+                          <a href="#section-12" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">12. 输入输出</a>
+                          <a href="#section-13" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">13. 预处理器</a>
+                          <a href="#section-14" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">14. 内存管理</a>
+                          <a href="#section-15" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">15. 文件操作</a>
+                          <a href="#section-16" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">16. 错误处理</a>
+                          <a href="#section-17" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">17. 标准库函数</a>
+                          <a href="#section-18" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">18. 字符串处理</a>
+                          <a href="#section-19" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">19. 数学运算</a>
+                          <a href="#section-20" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">20. 时间和日期</a>
+                          <a href="#section-27" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">27. 正则表达式</a>
+                          <a href="#section-28" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">28. 日期和时间</a>
+                          <a href="#section-29" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">29. 多线程</a>
+                      </nav>
+                  </div>
+              </div>
+              <div class="lg:w-3/4">
+                  <!-- 1. 变量声明 -->
+                  <section id="section-1" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">1. 变量声明</span>
             </h2>
@@ -163,7 +195,7 @@
                         </div>
                     </div></div></div>
         </section><!-- 2. 数据类型 -->
-        <section class="mb-16">
+        <section id="section-2" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">2. 数据类型</span>
             </h2>
@@ -197,7 +229,7 @@
                     </div></div></div>
         </section>
         <!-- 3. 控制流 - 条件语句 -->
-        <section class="mb-16">
+        <section id="section-3" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">3. 控制流 - 条件语句</span>
             </h2>
@@ -225,7 +257,7 @@
                         </div>
                     </div></div></div>
         </section><!-- 4. 控制流 - 循环语句 -->
-        <section class="mb-16">
+        <section id="section-4" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">4. 控制流 - 循环语句</span>
             </h2>
@@ -262,7 +294,7 @@
                     </div></div></div>
         </section>
         <!-- 5. 函数定义 -->
-        <section class="mb-16">
+        <section id="section-5" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">5. 函数定义</span>
             </h2>
@@ -295,7 +327,7 @@
                     </div></div></div>
         </section>
         <!-- 6. 数组 -->
-        <section class="mb-16">
+        <section id="section-6" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">6. 数组</span>
             </h2>
@@ -329,7 +361,7 @@
                     </div></div></div>
         </section>
         <!-- 7. 指针 -->
-        <section class="mb-16">
+        <section id="section-7" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">7. 指针</span>
             </h2>
@@ -360,7 +392,7 @@
                     </div></div></div>
         </section>
         <!-- 8. 结构体和联合体 -->
-        <section class="mb-16">
+        <section id="section-8" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">8. 结构体和联合体</span>
             </h2>
@@ -396,7 +428,7 @@
                     </div></div></div>
         </section>
         <!-- 9. 枚举 -->
-        <section class="mb-16">
+        <section id="section-9" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">9. 枚举</span>
             </h2>
@@ -434,7 +466,7 @@
                     </div></div></div>
         </section>
         <!-- 10. 类型定义 -->
-        <section class="mb-16">
+        <section id="section-10" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">10. 类型定义</span>
             </h2>
@@ -469,7 +501,7 @@
                     </div></div></div>
         </section>
         <!-- 11. 运算符 -->
-        <section class="mb-16">
+        <section id="section-11" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">11. 运算符</span>
             </h2>
@@ -508,7 +540,7 @@
                     </div></div></div>
         </section>
         <!-- 12. 输入输出 -->
-        <section class="mb-16">
+        <section id="section-12" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">12. 输入输出</span>
             </h2>
@@ -546,7 +578,7 @@
                     </div></div></div>
         </section>
         <!-- 13. 预处理器 -->
-        <section class="mb-16">
+        <section id="section-13" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">13. 预处理器</span>
             </h2>
@@ -577,7 +609,7 @@
                     </div></div></div>
         </section>
         <!-- 14. 内存管理 -->
-        <section class="mb-16">
+        <section id="section-14" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">14. 内存管理</span>
             </h2>
@@ -626,7 +658,7 @@
                     </div></div></div>
         </section>
         <!-- 15. 文件操作 -->
-        <section class="mb-16">
+        <section id="section-15" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">15. 文件操作</span>
             </h2>
@@ -668,7 +700,7 @@
                     </div></div></div>
         </section>
         <!-- 16. 错误处理 -->
-        <section class="mb-16">
+        <section id="section-16" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">16. 错误处理</span>
             </h2>
@@ -715,7 +747,7 @@
                     </div></div></div>
         </section>
         <!-- 17. 标准库函数 -->
-        <section class="mb-16">
+        <section id="section-17" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">17. 标准库函数</span>
             </h2>
@@ -763,7 +795,7 @@
                     </div></div></div>
         </section>
         <!-- 18. 字符串处理 -->
-        <section class="mb-16">
+        <section id="section-18" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">18. 字符串处理</span>
             </h2>
@@ -820,7 +852,7 @@
                     </div></div></div>
         </section>
         <!-- 19. 数学运算 -->
-        <section class="mb-16">
+        <section id="section-19" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">19. 数学运算</span>
             </h2>
@@ -868,7 +900,7 @@
                     </div></div></div>
         </section>
         <!-- 20. 时间和日期 -->
-        <section class="mb-16">
+        <section id="section-20" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">20. 时间和日期</span>
             </h2>
@@ -925,7 +957,7 @@
         </section>
         
         <!-- 27. 正则表达式 -->
-        <section class="mb-16">
+        <section id="section-27" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">27. 正则表达式</span>
             </h2>
@@ -984,7 +1016,7 @@
         </section>
         
         <!-- 28. 日期和时间 -->
-        <section class="mb-16">
+        <section id="section-28" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">28. 日期和时间</span>
             </h2>
@@ -1047,7 +1079,7 @@
         </section>
         
         <!-- 29. 多线程 -->
-        <section class="mb-16">
+        <section id="section-29" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">29. 多线程</span>
             </h2>
@@ -1114,6 +1146,8 @@
                 </div>
             </div>
         </section>
+    </div>
+</div>
         
         <!-- 35. 装饰器 -->
         <section class="mb-16">
