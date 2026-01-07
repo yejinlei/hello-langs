@@ -36,7 +36,7 @@
 <body class="min-h-screen">
     <main class="container mx-auto px-4 py-8 max-w-6xl">
         <div class="flex flex-col lg:flex-row gap-8">
-            <div class="lg:w-1/4">
+            <div class="lg:w-1/3">
                 <div class="sticky top-4 bg-slate-900 rounded-xl p-6 shadow-lg max-h-[calc(100vh-2rem)] overflow-y-auto">
                     <h3 class="text-lg font-bold text-purple-400 mb-4">Go 教程目录</h3>
                     <nav class="space-y-2">
@@ -56,10 +56,22 @@
                         <a href="#section-14" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">14. Go 1.25 运行时改进</a>
                         <a href="#section-15" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">15. Go 1.25 实验性 JSON v2</a>
                         <a href="#section-16" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">16. Go 1.25 新的并发测试包</a>
+                        <a href="#section-17" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">17. 指针</a>
+                        <a href="#section-18" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">18. defer语句</a>
+                        <a href="#section-19" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">19. select语句</a>
+                        <a href="#section-20" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">20. 泛型</a>
+                        <a href="#section-21" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">21. 反射</a>
+                        <a href="#section-22" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">22. 上下文(Context)</a>
+                        <a href="#section-23" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">23. Go模块</a>
+                        <a href="#section-24" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">24. 标准库介绍</a>
+                        <a href="#section-25" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">25. 性能优化</a>
+                        <a href="#section-26" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">26. 并发编程</a>
+                        <a href="#section-27" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">27. 测试</a>
+                        <a href="#section-28" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">28. 错误处理</a>
                     </nav>
                 </div>
             </div>
-            <div class="lg:w-3/4">
+            <div class="lg:w-2/3">
                 <!-- 1. 变量声明与初始化 -->
         <section id="section-1" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
@@ -949,6 +961,1088 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tb.Parallel() <span class="text-blue-300">// 在气泡中并行运行</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 测试代码</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 17. 指针 -->
+        <section id="section-17" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">17. 指针</span>
+            </h2>
+            
+            <div class="language-content" data-lang="go">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Go - 指针</h4>
+                <p class="text-slate-300 mb-4">特点：指针是存储变量内存地址的变量。Go支持指针但没有指针运算，更安全。注意事项：使用&amp;获取变量地址，*解引用指针，指针可避免大对象拷贝，提高性能。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 指针的使用</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">// 基本指针操作</span><br>
+                        <span class="text-purple-400">var</span> num = <span class="text-yellow-300">42</span><br>
+                        <span class="text-purple-400">var</span> ptr *<span class="text-purple-400">int</span> = &num <span class="text-blue-300">// 获取num的地址</span><br>
+                        <br>
+                        <span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"num的值: %d\n"</span>, num) <span class="text-blue-300">// 42</span><br>
+                        <span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"num的地址: %p\n"</span>, &num) <span class="text-blue-300">// 类似 0x1040a130</span><br>
+                        <span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"ptr的值(地址): %p\n"</span>, ptr) <span class="text-blue-300">// 与&num相同</span><br>
+                        <span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"ptr指向的值: %d\n"</span>, *ptr) <span class="text-blue-300">// 42</span><br>
+                        <br>
+                        <span class="text-blue-300">// 通过指针修改值</span><br>
+                        *ptr = <span class="text-yellow-300">100</span><br>
+                        <span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"修改后num的值: %d\n"</span>, num) <span class="text-blue-300">// 100</span><br>
+                        <br>
+                        <span class="text-blue-300">// 指针作为函数参数</span><br>
+                        <span class="text-purple-400">func</span> increment(x *<span class="text-purple-400">int</span>) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;*x++<br>
+                        }<br>
+                        <br>
+                        <span class="text-purple-400">var</span> value = <span class="text-yellow-300">5</span><br>
+                        increment(&value) <span class="text-blue-300">// 传递value的地址</span><br>
+                        <span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"value: %d\n"</span>, value) <span class="text-blue-300">// 6</span><br>
+                        <br>
+                        <span class="text-blue-300">// 指针与结构体</span><br>
+                        <span class="text-purple-400">type</span> Person <span class="text-purple-400">struct</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Name <span class="text-purple-400">string</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Age <span class="text-purple-400">int</span><br>
+                        }<br>
+                        <br>
+                        person := Person{<span class="text-green-300">"Alice"</span>, <span class="text-yellow-300">30</span>}<br>
+                        personPtr := &person<br>
+                        <span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"姓名: %s, 年龄: %d\n"</span>, personPtr.Name, personPtr.Age)<br>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 18. defer语句 -->
+        <section id="section-18" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">18. defer语句</span>
+            </h2>
+            
+            <div class="language-content" data-lang="go">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Go - defer语句</h4>
+                <p class="text-slate-300 mb-4">特点：defer语句用于延迟执行函数调用，通常用于资源清理。注意事项：defer在函数结束前执行，多个defer按后进先出(LIFO)顺序执行。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># defer的使用</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">func</span> example() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"函数开始"</span>)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">defer</span> <span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"defer 1"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">defer</span> <span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"defer 2"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">defer</span> <span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"defer 3"</span>)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"函数结束"</span>)<br>
+                        }<br>
+                        <span class="textblue-300">// 输出：</span><br>
+                        <span class="textblue-300">// 函数开始</span><br>
+                        <span class="textblue-300">// 函数结束</span><br>
+                        <span class="textblue-300">// defer 3</span><br>
+                        <span class="textblue-300">// defer 2</span><br>
+                        <span class="textblue-300">// defer 1</span><br>
+                        <br>
+                        <span class="text-blue-300">// defer与文件操作</span><br>
+                        <span class="text-purple-400">func</span> readFile(filename <span class="text-purple-400">string</span>) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;file, err := os.Open(filename)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="text-green-300">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">defer</span> file.Close() <span class="textblue-300">// 函数结束前确保文件被关闭</span><br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 读取文件内容</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">var</span> data []<span class="text-purple-400">byte</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;file.Read(data)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"文件读取完成"</span>)<br>
+                        }<br>
+                        <br>
+                        <span class="textblue-300">// defer与panic/recover</span><br>
+                        <span class="text-purple-400">func</span> safeFunction() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">defer</span> <span class="text-purple-400">func</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> r := recover(); r != <span class="text-green-300">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"捕获到panic: "</span>, r)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}()<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">panic</span>(<span class="text-green-300">"发生panic"</span>)<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 19. select语句 -->
+        <section id="section-19" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">19. select语句</span>
+            </h2>
+            
+            <div class="language-content" data-lang="go">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Go - select语句</h4>
+                <p class="text-slate-300 mb-4">特点：select用于多通道操作，类似switch但专门用于channel。注意事项：当多个case就绪时随机选择，default case立即执行，可用于非阻塞channel操作。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># select的使用</div>
+                    <div class="text-sm leading-6">
+                        <span class="textblue-300">// 基本select操作</span><br>
+                        <span class="text-purple-400">func</span> selectExample() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ch1 := make(chan <span class="text-purple-400">string</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ch2 := make(chan <span class="text-purple-400">string</span>)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">go</span> <span class="text-purple-400">func</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="text-yellow-300">1</span> * time.Second)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ch1 &lt;- <span class="text-green-300">"消息1"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}()<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">go</span> <span class="text-purple-400">func</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="text-yellow-300">2</span> * time.Second)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ch2 &lt;- <span class="text-green-300">"消息2"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}()<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> i := <span class="textyellow-300">0</span>; i &lt; <span class="textyellow-300">2</span>; i++ {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">select</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> msg1 := &lt;-ch1:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"收到: "</span>, msg1)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> msg2 := &lt;-ch2:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"收到: "</span>, msg2)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }<br>
+                        <br>
+                        <span class="textblue-300">// 带default的select</span><br>
+                        <span class="text-purple-400">func</span> nonBlockingSelect() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;messages := make(chan <span class="text-purple-400">string</span>)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">select</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> msg := &lt;-messages:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"收到消息: "</span>, msg)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">default</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"没有消息"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">msg</span> := <span class="text-green-300">"Hello"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">select</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> messages &lt;- msg:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"发送消息"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">default</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"无法发送消息"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }<br>
+                        <br>
+                        <span class="textblue-300">// 超时控制</span><br>
+                        <span class="text-purple-400">func</span> timeoutExample() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ch := make(chan <span class="textpurple-400">string</span>)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">select</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">case</span> msg := &lt;-ch:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"收到: "</span>, msg)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">case</span> &lt;-time.After(<span class="textyellow-300">3</span> * time.Second):<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"超时"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 20. 泛型 -->
+        <section id="section-20" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">20. 泛型</span>
+            </h2>
+            
+            <div class="language-content" data-lang="go">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Go - 泛型</h4>
+                <p class="text-slate-300 mb-4">特点：Go 1.18引入泛型，允许编写类型安全的通用代码。注意事项：使用方括号[T any]定义类型参数，可以约束类型，提高代码复用性。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 泛型的使用</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">// 基本泛型函数</span><br>
+                        <span class="text-purple-400">func</span> GenericMax[T <span class="text-purple-400">comparable</span>](a, b T) T {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> a &gt; b {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> a<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> b<br>
+                        }<br>
+                        <br>
+                        <span class="text-purple-400">func</span> genericExample() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;maxInt := GenericMax(<span class="textyellow-300">10</span>, <span class="textyellow-300">20</span>) <span class="text-blue-300">// int</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;maxString := GenericMax(<span class="textgreen-300">"a"</span>, <span class="textgreen-300">"b"</span>) <span class="text-blue-300">// string</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"最大整数: %d, 最大字符串: %s\n"</span>, maxInt, maxString)<br>
+                        }<br>
+                        <br>
+                        <span class="text-blue-300">// 带约束的泛型</span><br>
+                        <span class="text-purple-400">type</span> Number <span class="text-purple-400">interface</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">int</span> | <span class="text-purple-400">int32</span> | <span class="text-purple-400">int64</span> | <span class="text-purple-400">float32</span> | <span class="text-purple-400">float64</span><br>
+                        }<br>
+                        <br>
+                        <span class="text-purple-400">func</span> Sum[T Number](numbers []T) T {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">var</span> total T<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> _, num := <span class="text-purple-400">range</span> numbers {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total += num<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> total<br>
+                        }<br>
+                        <br>
+                        <span class="text-blue-300">// 泛型结构体</span><br>
+                        <span class="text-purple-400">type</span> Container[T <span class="text-purple-400">any</span>] <span class="text-purple-400">struct</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;value T<br>
+                        }<br>
+                        <br>
+                        <span class="text-purple-400">func</span> (c *Container[T]) SetValue(v T) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;c.value = v<br>
+                        }<br>
+                        <br>
+                        <span class="text-purple-400">func</span> (c *Container[T]) GetValue() T {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> c.value<br>
+                        }<br>
+                        <br>
+                        <span class="text-purple-400">func</span> containerExample() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;intContainer := &Container[<span class="text-purple-400">int</span>]{value: <span class="textyellow-300">42</span>}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;stringContainer := &Container[<span class="text-purple-400">string</span>]{value: <span class="textgreen-300">"Hello"</span>}<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"整数容器: %d\n"</span>, intContainer.GetValue())<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"字符串容器: %s\n"</span>, stringContainer.GetValue())<br>
+                        }<br>
+                        <br>
+                        <span class="text-blue-300">// 泛型映射函数</span><br>
+                        <span class="text-purple-400">func</span> Map[T <span class="text-purple-400">any</span>, R <span class="text-purple-400">any</span>](slice []T, fn <span class="text-purple-400">func</span>(T) R) []R {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;result := make([]R, <span class="text-purple-400">len</span>(slice))<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> i, v := <span class="text-purple-400">range</span> slice {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result[i] = fn(v)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> result<br>
+                        }<br>
+                        <br>
+                        <span class="text-purple-400">func</span> mapExample() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;numbers := []<span class="text-purple-400">int</span>{<span class="textyellow-300">1</span>, <span class="textyellow-300">2</span>, <span class="textyellow-300">3</span>, <span class="textyellow-300">4</span>, <span class="textyellow-300">5</span>}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;strings := Map(numbers, <span class="text-purple-400">func</span>(n <span class="text-purple-400">int</span>) <span class="text-purple-400">string</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-purple-400">fmt</span>.Sprintf(<span class="text-green-300">"数字%d"</span>, n)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(strings) <span class="text-blue-300">// [数字1 数字2 数字3 数字4 数字5]</span><br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 21. 反射 -->
+        <section id="section-21" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">21. 反射</span>
+            </h2>
+            
+            <div class="language-content" data-lang="go">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Go - 反射</h4>
+                <p class="text-slate-300 mb-4">特点：反射允许程序在运行时检查类型和值。注意事项：反射性能较低，应谨慎使用，主要用于框架和库开发。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 反射的使用</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">import</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"fmt"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"reflect"</span><br>
+                        )<br>
+                        <br>
+                        <span class="text-purple-400">func</span> reflectExample() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;value := <span class="text-yellow-300">42</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;rv := reflect.ValueOf(value)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;rt := reflect.TypeOf(value)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"值: %v, 类型: %v\n"</span>, rv, rt) <span class="text-blue-300">// 值: 42, 类型: int</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"值的种类: %v\n"</span>, rv.Kind()) <span class="text-blue-300">// int</span><br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;str := <span class="text-green-300">"Hello"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;rs := reflect.ValueOf(str)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"字符串长度: %d\n"</span>, rs.Len()) <span class="text-blue-300">// 5</span><br>
+                        }<br>
+                        <br>
+                        <span class="text-blue-300">// 反射结构体</span><br>
+                        <span class="text-purple-400">type</span> Person <span class="text-purple-400">struct</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Name <span class="text-purple-400">string</span> `json:<span class="text-green-300">"name"</span>`<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Age <span class="text-purple-400">int</span> `json:<span class="text-green-300">"age"</span>`<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Email <span class="text-purple-400">string</span><br>
+                        }<br>
+                        <br>
+                        <span class="text-purple-400">func</span> reflectStruct() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;person := Person{<span class="text-green-300">"Alice"</span>, <span class="text-yellow-300">30</span>, <span class="text-green-300">"alice@example.com"</span>}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;rv := reflect.ValueOf(person)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;rt := reflect.TypeOf(person)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> i := <span class="text-yellow-300">0</span>; i &lt; rv.NumField(); i++ {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;field := rt.Field(i)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value := rv.Field(i)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"字段: %s, 类型: %v, 值: %v"</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;field.Name, field.Type, value)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 获取tag</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> jsonTag := field.Tag.Get(<span class="text-green-300">"json"</span>); jsonTag != <span class="text-green-300">""</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">", JSON tag: %s"</span>, jsonTag)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }<br>
+                        <br>
+                        <span class="text-blue-300">// 通过反射修改值</span><br>
+                        <span class="text-purple-400">func</span> modifyValue() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">var</span> x = <span class="text-yellow-300">10</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;rv := reflect.ValueOf(&x).Elem() <span class="text-blue-300">// 获取指针指向的值</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;rv.SetInt(<span class="text-yellow-300">100</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"修改后的值: %d\n"</span>, x) <span class="text-blue-300">// 100</span><br>
+                        }<br>
+                        <br>
+                        <span class="text-blue-300">// 反射函数调用</span><br>
+                        <span class="text-purple-400">func</span> multiply(a, b <span class="text-purple-400">int</span>) <span class="text-purple-400">int</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> a * b<br>
+                        }<br>
+                        <br>
+                        <span class="text-purple-400">func</span> callFunction() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;fn := reflect.ValueOf(multiply)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;args := []reflect.Value{<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reflect.ValueOf(<span class="text-yellow-300">6</span>),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reflect.ValueOf(<span class="text-yellow-300">7</span>),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;result := fn.Call(args)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"6 * 7 = %d\n"</span>, result[<span class="text-yellow-300">0</span>].Int()) <span class="text-blue-300">// 42</span><br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 22. 上下文(Context) -->
+        <section id="section-22" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">22. 上下文(Context)</span>
+            </h2>
+            
+            <div class="language-content" data-lang="go">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Go - Context</h4>
+                <p class="text-slate-300 mb-4">特点：Context用于在goroutine间传递截止时间、取消信号等。注意事项：在API边界传递Context，使用context.Background()作为根Context。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># Context的使用</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">import</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"context"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"time"</span><br>
+                        )<br>
+                        <br>
+                        <span class="text-purple-400">func</span> contextExample() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ctx := context.Background()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"基本Context创建"</span>)<br>
+                        }<br>
+                        <br>
+                        <span class="text-blue-300">// 带取消功能的Context</span><br>
+                        <span class="text-purple-400">func</span> withCancelExample() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ctx, cancel := context.WithCancel(context.Background())<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">defer</span> cancel()<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">go</span> <span class="text-purple-400">func</span>(ctx context.Context) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">select</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> &lt;-ctx.Done():<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"任务被取消"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">default</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"执行任务..."</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="text-yellow-300">500</span> * time.Millisecond)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}(ctx)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="text-yellow-300">2</span> * time.Second)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;cancel() <span class="text-blue-300">// 取消任务</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="text-yellow-300">1</span> * time.Second) <span class="text-blue-300">// 等待取消生效</span><br>
+                        }<br>
+                        <br>
+                        <span class="text-blue-300">// 带超时的Context</span><br>
+                        <span class="text-purple-400">func</span> withTimeoutExample() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ctx, cancel := context.WithTimeout(context.Background(), <span class="text-yellow-300">3</span>*time.Second)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">defer</span> cancel()<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">go</span> <span class="text-purple-400">func</span>(ctx context.Context) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">select</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> &lt;-ctx.Done():<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"超时或取消:", ctx.Err())<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">default</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(<span class="textgreen-300">"工作中..."</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="textyellow-300">1</span> * time.Second)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}(ctx)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="textyellow-300">5</span> * time.Second) <span class="textblue-300">// 等待超时</span><br>
+                        }<br>
+                        <br>
+                        <span class="textblue-300">// 带截止时间的Context</span><br>
+                        <span class="textpurple-400">func</span> withDeadlineExample() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;deadline := time.Now().Add(<span class="textyellow-300">2</span> * time.Second)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ctx, cancel := context.WithDeadline(context.Background(), deadline)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">defer</span> cancel()<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;start := time.Now()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">go</span> <span class="textpurple-400">func</span>(ctx context.Context) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">select</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">case</span> &lt;-ctx.Done():<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Printf(<span class="textgreen-300">"在%.2fs后停止: %v\n"</span>, time.Since(start).Seconds(), ctx.Err())<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">default</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="textyellow-300">100</span> * time.Millisecond)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}(ctx)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="textyellow-300">3</span> * time.Second)<br>
+                        }<br>
+                        <br>
+                        <span class="textblue-300">// 在Context中传递值</span><br>
+                        <span class="textpurple-400">func</span> withValueExample() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ctx := context.WithValue(context.Background(), <span class="textgreen-300">"user_id"</span>, <span class="textyellow-300">123</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ctx = context.WithValue(ctx, <span class="textgreen-300">"role"</span>, <span class="textgreen-300">"admin"</span>)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;userId := ctx.Value(<span class="textgreen-300">"user_id"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;role := ctx.Value(<span class="textgreen-300">"role"</span>)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Printf(<span class="textgreen-300">"用户ID: %v, 角色: %v\n"</span>, userId, role)<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 23. Go模块 -->
+        <section id="section-23" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">23. Go模块</span>
+            </h2>
+            
+            <div class="language-content" data-lang="go">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Go - Go模块</h4>
+                <p class="text-slate-300 mb-4">特点：Go模块是Go的依赖管理工具，从Go 1.11引入，Go 1.16成为默认工具。注意事项：使用go.mod文件管理依赖，支持语义化版本控制。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># Go模块的基本命令</div>
+                    <div class="text-sm leading-6">
+                        <span class="textblue-300"># 创建新模块</span><br>
+                        go mod init example.com/myproject<br>
+                        <br>
+                        <span class="textblue-300"># go.mod 文件示例</span><br>
+                        module example.com/myproject<br>
+                        <br>
+                        go <span class="textyellow-300">1.21</span><br>
+                        <br>
+                        require (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;github.com/gin-gonic/gin v1.9.1<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;github.com/gorilla/mux v1.8.0<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;rsc.io/quote v1.5.2<br>
+                        )<br>
+                        <br>
+                        require github.com/mattn/go-isatty v0.0.16 // indirect<br>
+                        <br>
+                        <span class="textblue-300"># 常用模块命令</span><br>
+                        go mod tidy          <span class="textblue-300"># 整理依赖，添加缺失的依赖并移除未使用的</span><br>
+                        go mod download      <span class="textblue-300"># 下载依赖到本地缓存</span><br>
+                        go mod vendor        <span class="textblue-300"># 将依赖复制到vendor目录</span><br>
+                        go mod graph         <span class="textblue-300"># 输出模块依赖图</span><br>
+                        go list -m all       <span class="textblue-300"># 列出所有依赖</span><br>
+                        go mod why github.com/some/package  <span class="textblue-300"># 解释为什么需要某个依赖</span><br>
+                        <br>
+                        <span class="textblue-300"># go.sum 文件</span><br>
+                        <span class="textblue-300"># go.sum 文件包含依赖的加密哈希，用于验证依赖完整性</span><br>
+                        <br>
+                        <span class="textblue-300"># 版本选择</span><br>
+                        go get github.com/gin-gonic/gin@latest    <span class="textblue-300"># 获取最新版本</span><br>
+                        go get github.com/gin-gonic/gin@v1.9.1    <span class="textblue-300"># 获取指定版本</span><br>
+                        go get github.com/gin-gonic/gin@v1.9      <span class="textblue-300"># 获取v1.9.x系列最新版本</span><br>
+                        go get github.com/gin-gonic/gin@master    <span class="textblue-300"># 获取master分支</span><br>
+                        <br>
+                        <span class="textblue-300"># 替换依赖</span><br>
+                        <span class="textblue-300"># 在go.mod中添加replace指令</span><br>
+                        replace github.com/gin-gonic/gin =&gt; github.com/myfork/gin v1.9.2<br>
+                        <br>
+                        <span class="textblue-300"># 项目结构示例</span><br>
+                        myproject/<br>
+                        ├── go.mod<br>
+                        ├── go.sum<br>
+                        ├── main.go<br>
+                        ├── internal/<br>
+                        │   ├── handlers/<br>
+                        │   │   └── user.go<br>
+                        │   └── services/<br>
+                        │       └── user_service.go<br>
+                        └── cmd/<br>
+                            └── myproject/<br>
+                                └── main.go<br>
+                        <br>
+                        <span class="textblue-300"># main.go 示例</span><br>
+                        <span class="textpurple-400">package</span> main<br>
+                        <br>
+                        <span class="textpurple-400">import</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"fmt"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"rsc.io/quote"</span><br>
+                        )<br>
+                        <br>
+                        <span class="textpurple-400">func</span> main() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(quote.Go())<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 24. 标准库介绍 -->
+        <section id="section-24" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">24. 标准库介绍</span>
+            </h2>
+            
+            <div class="language-content" data-lang="go">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Go - 标准库介绍</h4>
+                <p class="text-slate-300 mb-4">特点：Go标准库功能丰富，涵盖网络、加密、模板、测试等各个方面。注意事项：熟悉常用包可大大提高开发效率。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 重要标准库包</div>
+                    <div class="text-sm leading-6">
+                        <span class="textblue-300">// 1. fmt - 格式化I/O</span><br>
+                        <span class="textpurple-400">import</span> <span class="textgreen-300">"fmt"</span><br>
+                        <br>
+                        <span class="textpurple-400">func</span> fmtExample() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(<span class="textgreen-300">"打印到标准输出"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;name := <span class="textgreen-300">"Alice"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;age := <span class="textyellow-300">30</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Printf(<span class="textgreen-300">"姓名: %s, 年龄: %d\n"</span>, name, age)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;data := <span class="textpurple-400">fmt</span>.Sprintf(<span class="textgreen-300">"姓名: %s, 年龄: %d"</span>, name, age)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(data)<br>
+                        }<br>
+                        <br>
+                        <span class="textblue-300">// 2. net/http - HTTP客户端和服务端</span><br>
+                        <span class="textpurple-400">import</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"net/http"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"io"</span><br>
+                        )<br>
+                        <br>
+                        <span class="textpurple-400">func</span> httpExample() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">http</span>.HandleFunc(<span class="textgreen-300">"/"</span>, <span class="textpurple-400">func</span>(w <span class="textpurple-400">http</span>.ResponseWriter, r *<span class="textpurple-400">http</span>.Request) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w.WriteHeader(<span class="textpurple-400">http</span>.StatusOK)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w.Write([]<span class="textpurple-400">byte</span>(<span class="textgreen-300">"Hello, World!"</span>))<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">http</span>.ListenAndServe(<span class="textgreen-300">":8080"</span>, <span class="textgreen-300">nil</span>)<br>
+                        }<br>
+                        <br>
+                        <span class="textblue-300">// 3. encoding/json - JSON编解码</span><br>
+                        <span class="textpurple-400">import</span> <span class="textgreen-300">"encoding/json"</span><br>
+                        <br>
+                        <span class="textpurple-400">type</span> Person <span class="textpurple-400">struct</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Name <span class="textpurple-400">string</span> `json:<span class="text-green-300">"name"</span>`<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Age <span class="textpurple-400">int</span> `json:<span class="text-green-300">"age"</span>`<br>
+                        }<br>
+                        <br>
+                        <span class="textpurple-400">func</span> jsonExample() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;person := Person{<span class="textgreen-300">"Bob"</span>, <span class="textyellow-300">25</span>}<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 编码为JSON</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;jsonBytes, err := json.Marshal(person)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> err != <span class="textgreen-300">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(<span class="textgreen-300">"JSON编码错误: "</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(<span class="textgreen-300">"JSON: "</span>, <span class="textpurple-400">string</span>(jsonBytes))<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 解码JSON</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;var newPerson Person<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;jsonStr := <span class="textgreen-300">`{"name":"Charlie","age":35}`</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;err = json.Unmarshal([]<span class="textpurple-400">byte</span>(jsonStr), &newPerson)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> err != <span class="textgreen-300">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(<span class="textgreen-300">"JSON解码错误: "</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Printf(<span class="textgreen-300">"解码后: %+v\n"</span>, newPerson)<br>
+                        }<br>
+                        <br>
+                        <span class="textblue-300">// 4. time - 时间和日期</span><br>
+                        <span class="textpurple-400">import</span> <span class="textgreen-300">"time"</span><br>
+                        <br>
+                        <span class="textpurple-400">func</span> timeExample() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;now := time.Now()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(<span class="textgreen-300">"当前时间: "</span>, now)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(<span class="textgreen-300">"格式化时间: "</span>, now.Format(<span class="textgreen-300">"2006-01-02 15:04:05"</span>))<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 时间计算</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;nextWeek := now.Add(<span class="textyellow-300">7</span> * <span class="textyellow-300">24</span> * time.Hour)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(<span class="textgreen-300">"一周后: "</span>, nextWeek)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 解析时间</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;dateStr := <span class="textgreen-300">"2023-12-25 10:30:00"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;parsedTime, err := time.Parse(<span class="textgreen-300">"2006-01-02 15:04:05"</span>, dateStr)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> err != <span class="textgreen-300">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(<span class="textgreen-300">"时间解析错误: "</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(<span class="textgreen-300">"解析的时间: "</span>, parsedTime)<br>
+                        }<br>
+                        <br>
+                        <span class="textblue-300">// 5. os - 操作系统接口</span><br>
+                        <span class="textpurple-400">import</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"os"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"os/exec"</span><br>
+                        )<br>
+                        <br>
+                        <span class="textpurple-400">func</span> osExample() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 环境变量</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;homeDir := os.Getenv(<span class="textgreen-300">"HOME"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(<span class="textgreen-300">"HOME目录: "</span>, homeDir)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 创建目录</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;err := os.Mkdir(<span class="textgreen-300">"temp_dir"</span>, <span class="textyellow-300">0755</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> err != <span class="textgreen-300">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(<span class="textgreen-300">"创建目录错误: "</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 执行外部命令</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;cmd := exec.Command(<span class="textgreen-300">"echo"</span>, <span class="textgreen-300">"Hello from command"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;output, err := cmd.Output()<br>
+                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> err != <span class="textgreen-300">nil</span> {<br>
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(<span class="textgreen-300">"执行命令错误: "</span>, err)<br>
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span><br>
+                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(<span class="textgreen-300">"命令输出: "</span>, <span class="textpurple-400">string</span>(output))<br>
+                         }
+                     </div>
+                 </div>
+             </div>
+         </section>
+
+        <!-- 25. 性能优化 -->
+        <section id="section-25" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">25. 性能优化</span>
+            </h2>
+            
+            <div class="language-content" data-lang="go">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Go - 性能优化</h4>
+                <p class="text-slate-300 mb-4">特点：Go提供了多种性能分析和优化工具。注意事项：使用pprof分析性能瓶颈，预分配切片容量，避免不必要的内存分配。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 性能优化技术</div>
+                    <div class="text-sm leading-6">
+                        <span class="textblue-300">// 1. 预分配切片容量</span><br>
+                        <span class="textpurple-400">func</span> inefficientSlice() []<span class="textpurple-400">int</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">var</span> result []<span class="textpurple-400">int</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> i := <span class="textyellow-300">0</span>; i &lt; <span class="textyellow-300">1000</span>; i++ {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = append(result, i) <span class="textblue-300">// 频繁重新分配内存</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> result<br>
+                        }<br>
+                        <br>
+                        <span class="textpurple-400">func</span> efficientSlice() []<span class="textpurple-400">int</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;result := make([]<span class="textpurple-400">int</span>, <span class="textyellow-300">0</span>, <span class="textyellow-300">1000</span>) <span class="textblue-300">// 预分配容量</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> i := <span class="textyellow-300">0</span>; i &lt; <span class="textyellow-300">1000</span>; i++ {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = append(result, i)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> result<br>
+                        }<br>
+                        <br>
+                        <span class="textblue-300">// 2. 避免不必要的字符串转换</span><br>
+                        <span class="textpurple-400">func</span> inefficientString() <span class="textpurple-400">string</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;result := <span class="textgreen-300">""</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> i := <span class="textyellow-300">0</span>; i &lt; <span class="textyellow-300">100</span>; i++ {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result += <span class="textpurple-400">fmt</span>.Sprintf(<span class="textgreen-300">"item%d "</span>, i) <span class="textblue-300">// 每次都创建新字符串</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> result<br>
+                        }<br>
+                        <br>
+                        <span class="textpurple-400">func</span> efficientString() <span class="textpurple-400">string</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;var builder strings.Builder<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;builder.Grow(<span class="textyellow-300">1000</span>) <span class="textblue-300">// 预估容量</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> i := <span class="textyellow-300">0</span>; i &lt; <span class="textyellow-300">100</span>; i++ {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;builder.WriteString(<span class="textpurple-400">fmt</span>.Sprintf(<span class="textgreen-300">"item%d "</span>, i))<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> builder.String()<br>
+                        }<br>
+                        <br>
+                        <span class="textblue-300">// 3. 使用对象池减少GC压力</span><br>
+                        <span class="textpurple-400">var</span> bufferPool = sync.Pool{<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;New: <span class="textpurple-400">func</span>() <span class="textpurple-400">interface</span>{} {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> &bytes.Buffer{}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                        }<br>
+                        <br>
+                        <span class="textpurple-400">func</span> useBufferPool() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;buf := bufferPool.Get().(*bytes.Buffer)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">defer</span> bufferPool.Put(buf)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;buf.Reset() <span class="textblue-300">// 重置缓冲区</span><br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;buf.WriteString(<span class="textgreen-300">"Hello"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;buf.WriteString(<span class="textgreen-300">" "</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;buf.WriteString(<span class="textgreen-300">"World"</span>)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;result := buf.String()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(result)<br>
+                        }<br>
+                        <br>
+                        <span class="textblue-300">// 4. 使用pprof进行性能分析</span><br>
+                        <span class="textpurple-400">import</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"net/http/pprof"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"runtime/pprof"</span><br>
+                        )<br>
+                        <br>
+                        <span class="textpurple-400">func</span> performanceProfiling() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// CPU性能分析</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;f, err := os.Create(<span class="textgreen-300">"cpu.prof"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> err != <span class="textgreen-300">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(<span class="textgreen-300">"无法创建CPU profile: "</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">defer</span> f.Close()<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;pprof.StartCPUProfile(f)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">defer</span> pprof.StopCPUProfile()<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 运行需要分析的代码</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;performComputation()<br>
+                        }<br>
+                        <br>
+                        <span class="textpurple-400">func</span> performComputation() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> i := <span class="textyellow-300">0</span>; i &lt; <span class="textyellow-300">1000000</span>; i++ {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">var</span> x = i * i<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_ = x<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }<br>
+                        <br>
+                        <span class="textblue-300">// 5. 内存性能分析</span><br>
+                        <span class="textpurple-400">func</span> memoryProfiling() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;f, err := os.Create(<span class="textgreen-300">"mem.prof"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> err != <span class="textgreen-300">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">fmt</span>.Println(<span class="textgreen-300">"无法创建内存profile: "</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">defer</span> f.Close()<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 分析前的内存状态</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;pprof.WriteHeapProfile(f)<br>
+                        }<br>
+                        <br>
+                        <span class="textblue-300">// 6. 性能基准测试</span><br>
+                        <span class="textblue-300">// benchmark_test.go</span><br>
+                        <span class="textpurple-400">func</span> BenchmarkInefficientSlice(b *testing.B) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> i := <span class="textyellow-300">0</span>; i &lt; b.N; i++ {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inefficientSlice()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }<br>
+                        <br>
+                        <span class="textpurple-400">func</span> BenchmarkEfficientSlice(b *testing.B) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> i := <span class="textyellow-300">0</span>; i &lt; b.N; i++ {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;efficientSlice()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 26. 并发编程 -->
+        <section id="section-26" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">26. 并发编程</span>
+            </h2>
+            
+            <div class="language-content" data-lang="go">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Go - 并发编程</h4>
+                <p class="text-slate-300 mb-4">特点：Go的并发模型基于goroutines和channels，提供了简单而强大的并发编程能力。注意事项：理解goroutines的生命周期，合理使用channels进行通信和同步。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># Goroutines和Channels</div>
+                    <div class="text-sm leading-6">
+                        <span class="textblue-300">// 1. Goroutines基本使用</span><br>
+                        <span class="textpurple-400">package</span> main<br>
+                        <br>
+                        <span class="textpurple-400">import</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"fmt"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"time"</span><br>
+                        )<br>
+                        <br>
+                        <span class="textpurple-400">func</span> sayHello(name <span class="textpurple-400">string</span>) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> i := <span class="textyellow-300">0</span>; i &lt; <span class="textyellow-300">3</span>; i++ {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Printf(<span class="textgreen-300">"Hello %s: %d\n"</span>, name, i)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="textyellow-300">100</span> * time.Millisecond)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }<br>
+                        <br>
+                        <span class="textpurple-400">func</span> main() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 在主goroutine中启动新的goroutine</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">go</span> sayHello(<span class="textgreen-300">"Goroutine"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;sayHello(<span class="textgreen-300">"Main"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="textyellow-300">1</span> * time.Second) <span class="textblue-300">// 等待goroutine执行完成</span><br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                    <div class="text-slate-400 mb-2"># 使用Channels进行通信</div>
+                    <div class="text-sm leading-6">
+                        <span class="textblue-300">// 2. Channels通信</span><br>
+                        <span class="textpurple-400">func</span> fibonacci(n <span class="textpurple-400">int</span>, c chan <span class="textpurple-400">int</span>) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;x, y := <span class="textyellow-300">0</span>, <span class="textyellow-300">1</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> i := <span class="textyellow-300">0</span>; i &lt; n; i++ {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c &lt;- x <span class="textblue-300">// 发送数据到channel</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x, y = y, x+y<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;close(c) <span class="textblue-300">// 关闭channel</span><br>
+                        }<br>
+                        <br>
+                        <span class="textpurple-400">func</span> main() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;c := make(chan <span class="textpurple-400">int</span>, <span class="textyellow-300">10</span>) <span class="textblue-300">// 创建带缓冲的channel</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">go</span> fibonacci(cap(c), c)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> i := <span class="textpurple-400">range</span> c { <span class="textblue-300">// 从channel接收数据直到关闭</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(i)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                    <div class="text-slate-400 mb-2"># Select语句</div>
+                    <div class="text-sm leading-6">
+                        <span class="textblue-300">// 3. Select语句处理多个channel</span><br>
+                        <span class="textpurple-400">func</span> main() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;c1 := make(chan <span class="textpurple-400">string</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;c2 := make(chan <span class="textpurple-400">string</span>)<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">go</span> <span class="textpurple-400">func</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="textyellow-300">1</span> * time.Second)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c1 &lt;- <span class="textgreen-300">"消息1"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}()<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">go</span> <span class="textpurple-400">func</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="textyellow-300">2</span> * time.Second)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c2 &lt;- <span class="textgreen-300">"消息2"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}()<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> i := <span class="textyellow-300">0</span>; i &lt; <span class="textyellow-300">2</span>; i++ {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">select</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">case</span> msg1 := &lt;-c1:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="textgreen-300">"收到: "</span>, msg1)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">case</span> msg2 := &lt;-c2:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="textgreen-300">"收到: "</span>, msg2)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+             </div>
+         </section>
+
+        <!-- 27. 测试 -->
+        <section id="section-27" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">27. 测试</span>
+            </h2>
+            
+            <div class="language-content" data-lang="go">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Go - 测试</h4>
+                <p class="text-slate-300 mb-4">特点：Go内置了强大的测试框架testing包，支持单元测试、性能测试和示例测试。注意事项：编写测试时使用表驱动测试，确保覆盖率，使用子测试组织复杂测试。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 单元测试示例</div>
+                    <div class="text-sm leading-6">
+                        <span class="textblue-300">// math.go</span><br>
+                        <span class="textpurple-400">package</span> main<br>
+                        <br>
+                        <span class="textpurple-400">func</span> Add(a, b <span class="textpurple-400">int</span>) <span class="textpurple-400">int</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> a + b<br>
+                        }<br>
+                        <br>
+                        <span class="textpurple-400">func</span> Divide(a, b <span class="textpurple-400">float64</span>) (<span class="textpurple-400">float64</span>, <span class="textpurple-400">error</span>) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> b == <span class="textyellow-300">0</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> <span class="textyellow-300">0</span>, fmt.Errorf(<span class="textgreen-300">"除数不能为零"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> a / b, <span class="textpurple-400">nil</span><br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                    <div class="text-slate-400 mb-2"># 测试文件</div>
+                    <div class="text-sm leading-6">
+                        <span class="textblue-300">// math_test.go</span><br>
+                        <span class="textpurple-400">package</span> main<br>
+                        <br>
+                        <span class="textpurple-400">import</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"testing"</span><br>
+                        )<br>
+                        <br>
+                        <span class="textpurple-400">func</span> TestAdd(t *testing.T) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;result := Add(<span class="textyellow-300">2</span>, <span class="textyellow-300">3</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;expected := <span class="textyellow-300">5</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> result != expected {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Errorf(<span class="textgreen-300">"Add(2, 3) = %d; want %d"</span>, result, expected)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }<br>
+                        <br>
+                        <span class="textpurple-400">func</span> TestDivide(t *testing.T) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;result, err := Divide(<span class="textyellow-300">10</span>, <span class="textyellow-300">2</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> err != <span class="textpurple-400">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Errorf(<span class="textgreen-300">"Divide(10, 2) returned error: %v"</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> result != <span class="textyellow-300">5</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Errorf(<span class="textgreen-300">"Divide(10, 2) = %f; want %f"</span>, result, <span class="textyellow-300">5.0</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 测试错误情况</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;_, err = Divide(<span class="textyellow-300">10</span>, <span class="textyellow-300">0</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> err == <span class="textpurple-400">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Error(<span class="textgreen-300">"Divide(10, 0) should return error"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                    <div class="text-slate-400 mb-2"># 表驱动测试</div>
+                    <div class="text-sm leading-6">
+                        <span class="textpurple-400">func</span> TestAddTableDriven(t *testing.T) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;tests := []<span class="textpurple-400">struct</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name     <span class="textpurple-400">string</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a, b     <span class="textpurple-400">int</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expected <span class="textpurple-400">int</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;} {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="textgreen-300">"正数相加"</span>, <span class="textyellow-300">2</span>, <span class="textyellow-300">3</span>, <span class="textyellow-300">5</span>},<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="textgreen-300">"负数相加"</span>, -<span class="textyellow-300">1</span>, -<span class="textyellow-300">1</span>, -<span class="textyellow-300">2</span>},<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="textgreen-300">"零值相加"</span>, <span class="textyellow-300">0</span>, <span class="textyellow-300">0</span>, <span class="textyellow-300">0</span>},<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> _, tt := <span class="textpurple-400">range</span> tests {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Run(tt.name, <span class="textpurple-400">func</span>(t *testing.T) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result := Add(tt.a, tt.b)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> result != tt.expected {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Errorf(<span class="textgreen-300">"Add(%d, %d) = %d; want %d"</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tt.a, tt.b, result, tt.expected)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 28. 错误处理 -->
+        <section id="section-28" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">28. 错误处理</span>
+            </h2>
+            
+            <div class="language-content" data-lang="go">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Go - 错误处理</h4>
+                <p class="text-slate-300 mb-4">特点：Go通过返回值显式处理错误，不使用异常机制。注意事项：始终检查错误返回值，使用errors包创建自定义错误，合理处理和传播错误。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 基本错误处理</div>
+                    <div class="text-sm leading-6">
+                        <span class="textpurple-400">package</span> main<br>
+                        <br>
+                        <span class="textpurple-400">import</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"errors"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"fmt"</span><br>
+                        )<br>
+                        <br>
+                        <span class="textpurple-400">func</span> divide(a, b <span class="textpurple-400">float64</span>) (<span class="textpurple-400">float64</span>, <span class="textpurple-400">error</span>) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> b == <span class="textyellow-300">0</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> <span class="textyellow-300">0</span>, errors.New(<span class="textgreen-300">"除数不能为零"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> a / b, <span class="textpurple-400">nil</span><br>
+                        }<br>
+                        <br>
+                        <span class="textpurple-400">func</span> main() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;result, err := divide(<span class="textyellow-300">10</span>, <span class="textyellow-300">2</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> err != <span class="textpurple-400">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="textgreen-300">"错误: "</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;fmt.Printf(<span class="textgreen-300">"结果: %.2f\n"</span>, result)<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                    <div class="text-slate-400 mb-2"># 自定义错误类型</div>
+                    <div class="text-sm leading-6">
+                        <span class="textpurple-400">type</span> CustomError <span class="textpurple-400">struct</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Code <span class="textpurple-400">int</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Msg  <span class="textpurple-400">string</span><br>
+                        }<br>
+                        <br>
+                        <span class="textpurple-400">func</span> (e *CustomError) Error() <span class="textpurple-400">string</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> fmt.Sprintf(<span class="textgreen-300">"错误代码: %d, 错误信息: %s"</span>, e.Code, e.Msg)<br>
+                        }<br>
+                        <br>
+                        <span class="textpurple-400">func</span> validateAge(age <span class="textpurple-400">int</span>) <span class="textpurple-400">error</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> age &lt; <span class="textyellow-300">0</span> || age &gt; <span class="textyellow-300">150</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> &CustomError{Code: <span class="textyellow-300">400</span>, Msg: <span class="textgreen-300">"年龄不在有效范围内"</span>}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> <span class="textpurple-400">nil</span><br>
+                        }<br>
+                        <br>
+                        <span class="textpurple-400">func</span> main() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;err := validateAge(-<span class="textyellow-300">5</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> err != <span class="textpurple-400">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(err) <span class="textblue-300">// 输出自定义错误信息</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> customErr, ok := err.(*CustomError); ok {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Printf(<span class="textgreen-300">"捕获到自定义错误，代码: %d\n"</span>, customErr.Code)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                    <div class="text-slate-400 mb-2"># 错误包装</div>
+                    <div class="text-sm leading-6">
+                        <span class="textpurple-400">import</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"fmt"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"io"</span><br>
+                        )<br>
+                        <br>
+                        <span class="textblue-300">// Go 1.13+ 错误包装</span><br>
+                        <span class="textpurple-400">func</span> readFile(filename <span class="textpurple-400">string</span>) <span class="textpurple-400">error</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;data, err := os.ReadFile(filename)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> err != <span class="textpurple-400">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> fmt.Errorf(<span class="textgreen-300">"读取文件失败: %w"</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="textgreen-300">"文件内容: "</span>, <span class="textpurple-400">string</span>(data))<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> <span class="textpurple-400">nil</span><br>
+                        }<br>
+                        <br>
+                        <span class="textpurple-400">func</span> processFile(filename <span class="textpurple-400">string</span>) <span class="textpurple-400">error</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;err := readFile(filename)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> err != <span class="textpurple-400">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> fmt.Errorf(<span class="textgreen-300">"处理文件时发生错误: %w"</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> <span class="textpurple-400">nil</span><br>
+                        }<br>
+                        <br>
+                        <span class="textpurple-400">func</span> main() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;err := processFile(<span class="textgreen-300">"nonexistent.txt"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> err != <span class="textpurple-400">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="textgreen-300">"错误: "</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 检查原始错误</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> errors.Is(err, os.ErrNotExist) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="textgreen-300">"文件不存在"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         }
                     </div>
                 </div>
