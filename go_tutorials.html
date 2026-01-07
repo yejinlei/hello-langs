@@ -1102,7 +1102,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ch2 &lt;- <span class="text-green-300">"消息2"</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}()<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> i := <span class="textyellow-300">0</span>; i &lt; <span class="textyellow-300">2</span>; i++ {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> i := <span class="text-yellow-300">0</span>; i &lt; <span class="text-yellow-300">2</span>; i++ {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">select</span> {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> msg1 := &lt;-ch1:<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"收到: "</span>, msg1)<br>
@@ -1170,7 +1170,7 @@
                         }<br>
                         <br>
                         <span class="text-purple-400">func</span> genericExample() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;maxInt := GenericMax(<span class="textyellow-300">10</span>, <span class="textyellow-300">20</span>) <span class="text-blue-300">// int</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;maxInt := GenericMax(<span class="text-yellow-300">10</span>, <span class="textyellow-300">20</span>) <span class="text-blue-300">// int</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;maxString := GenericMax(<span class="text-green-300">"a"</span>, <span class="text-green-300">"b"</span>) <span class="text-blue-300">// string</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"最大整数: %d, 最大字符串: %s\n"</span>, maxInt, maxString)<br>
                         }<br>
@@ -1202,7 +1202,7 @@
                         }<br>
                         <br>
                         <span class="text-purple-400">func</span> containerExample() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;intContainer := &Container[<span class="text-purple-400">int</span>]{value: <span class="textyellow-300">42</span>}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;intContainer := &Container[<span class="text-purple-400">int</span>]{value: <span class="text-yellow-300">42</span>}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;stringContainer := &Container[<span class="text-purple-400">string</span>]{value: <span class="text-green-300">"Hello"</span>}<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"整数容器: %d\n"</span>, intContainer.GetValue())<br>
@@ -1439,7 +1439,7 @@
                         <span class="text-blue-300"># go.mod 文件示例</span><br>
                         module example.com/myproject<br>
                         <br>
-                        go <span class="textyellow-300">1.21</span><br>
+                        go <span class="text-yellow-300">1.21</span><br>
                         <br>
                         require (<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;github.com/gin-gonic/gin v1.9.1<br>
