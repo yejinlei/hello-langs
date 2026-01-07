@@ -91,8 +91,40 @@
 
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <!-- 1. 变量声明 -->
-        <section class="mb-16">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Sidebar Navigation -->
+            <aside class="lg:w-1/4">
+                <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 sticky top-24 border border-slate-700">
+                    <h3 class="text-lg font-bold mb-4 gradient-text">章节导航</h3>
+                    <nav class="space-y-2">
+                        <a href="#section-1" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">1. 变量声明</a>
+                        <a href="#section-2" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">2. 数据类型</a>
+                        <a href="#section-3" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">3. 控制流 - 条件语句</a>
+                        <a href="#section-4" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">4. 控制流 - 循环语句</a>
+                        <a href="#section-5" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">5. 函数定义</a>
+                        <a href="#section-6" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">6. 函数参数</a>
+                        <a href="#section-7" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">7. 函数返回值</a>
+                        <a href="#section-8" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">8. 字符串操作</a>
+                        <a href="#section-9" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">9. 列表操作</a>
+                        <a href="#section-10" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">10. 字典操作</a>
+                        <a href="#section-11" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">11. 所有权</a>
+                        <a href="#section-12" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">12. 错误处理</a>
+                        <a href="#section-13" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">13. 模块和可见性</a>
+                        <a href="#section-14" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">14. Trait</a>
+                        <a href="#section-15" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">15. 泛型</a>
+                        <a href="#section-16" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">16. 生命周期</a>
+                        <a href="#section-17" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">17. 智能指针</a>
+                        <a href="#section-18" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">18. 并发编程</a>
+                        <a href="#section-19" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">19. 宏</a>
+                        <a href="#section-20" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">20. 迭代器</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="lg:w-3/4">
+                <!-- 1. 变量声明 -->
+        <section id="section-1" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">1. 变量声明</span>
             </h2>
@@ -123,7 +155,7 @@
         </section>
 
         <!-- 2. 数据类型 -->
-        <section class="mb-16">
+        <section id="section-2" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">2. 数据类型</span>
             </h2>
@@ -168,7 +200,7 @@
         </section>
 
         <!-- 3. 控制流 - 条件语句 -->
-        <section class="mb-16">
+        <section id="section-3" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">3. 控制流 - 条件语句</span>
             </h2>
@@ -212,7 +244,7 @@
         </section>
 
         <!-- 4. 控制流 - 循环语句 -->
-        <section class="mb-16">
+        <section id="section-4" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">4. 控制流 - 循环语句</span>
             </h2>
@@ -270,7 +302,7 @@
         </section>
 
         <!-- 5. 函数定义 -->
-        <section class="mb-16">
+        <section id="section-5" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">5. 函数定义</span>
             </h2>
@@ -315,7 +347,7 @@
         </section>
 
         <!-- 6. 函数参数 -->
-        <section class="mb-16">
+        <section id="section-6" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">6. 函数参数</span>
             </h2>
@@ -361,7 +393,7 @@
         </section>
 
         <!-- 7. 函数返回值 -->
-        <section class="mb-16">
+        <section id="section-7" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">7. 函数返回值</span>
             </h2>
@@ -411,7 +443,7 @@
         </section>
 
         <!-- 8. 字符串操作 -->
-        <section class="mb-16">
+        <section id="section-8" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">8. 字符串操作</span>
             </h2>
@@ -453,7 +485,7 @@
         </section>
 
         <!-- 9. 列表操作 -->
-        <section class="mb-16">
+        <section id="section-9" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">9. 列表操作</span>
             </h2>
@@ -503,7 +535,7 @@
         </section>
 
         <!-- 10. 字典操作 -->
-        <section class="mb-16">
+        <section id="section-10" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">10. 字典操作</span>
             </h2>
@@ -548,7 +580,7 @@
         </section>
 
         <!-- 11. 所有权 -->
-        <section class="mb-16">
+        <section id="section-11" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">11. 所有权</span>
             </h2>
@@ -605,7 +637,7 @@
          </section>
 
         <!-- 12. 错误处理 -->
-        <section class="mb-16">
+        <section id="section-12" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">12. 错误处理</span>
             </h2>
@@ -678,7 +710,7 @@
         </section>
 
         <!-- 13. 模块和可见性 -->
-        <section class="mb-16">
+        <section id="section-13" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">13. 模块和可见性</span>
             </h2>
@@ -752,7 +784,7 @@
         </section>
 
         <!-- 14. Trait -->
-        <section class="mb-16">
+        <section id="section-14" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">14. Trait</span>
             </h2>
@@ -881,7 +913,8 @@
         </section>
 
         <!-- 15. 泛型 -->
-        <section class="mb-16">
+        <!-- 15. 泛型 -->
+        <section id="section-15" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">15. 泛型</span>
             </h2>
@@ -958,7 +991,8 @@
         </section>
 
         <!-- 16. 生命周期 -->
-        <section class="mb-16">
+        <!-- 16. 生命周期 -->
+        <section id="section-16" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">16. 生命周期</span>
             </h2>
@@ -1030,7 +1064,8 @@
         </section>
 
         <!-- 17. 智能指针 -->
-        <section class="mb-16">
+        <!-- 17. 智能指针 -->
+        <section id="section-17" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">17. 智能指针</span>
             </h2>
@@ -1146,7 +1181,8 @@
         </section>
 
         <!-- 18. 并发编程 -->
-        <section class="mb-16">
+        <!-- 18. 并发编程 -->
+        <section id="section-18" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">18. 并发编程</span>
             </h2>
@@ -1256,7 +1292,8 @@
         </section>
 
         <!-- 19. 宏 -->
-        <section class="mb-16">
+        <!-- 19. 宏 -->
+        <section id="section-19" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">19. 宏</span>
             </h2>
@@ -1323,7 +1360,7 @@
         </section>
 
         <!-- 20. 迭代器 -->
-        <section class="mb-16">
+        <section id="section-20" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">20. 迭代器</span>
             </h2>
@@ -1343,68 +1380,68 @@
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 基本迭代器操作</span><br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">let</span> <span class="text-blue-300">numbers</span> = <span class="text-blue-400">vec!</span>[<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>];<br>
                                 <br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">// 映射和过滤</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 映射和过滤</span><br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">let</span> <span class="text-blue-300">squared_even</span>: <span class="text-blue-300">Vec&lt;i32&gt;</span> = <span class="text-blue-300">numbers</span><br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.<span class="text-blue-400">iter</span>()<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.<span class="text-blue-400">filter</span>(<span class="textblue-400">|&amp;x|</span> <span class="text-blue-300">x</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span>)<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.<span class="text-blue-400">map</span>(<span class="textblue-400">|&amp;x|</span> <span class="text-blue-300">x</span> * <span class="text-blue-300">x</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.<span class="text-blue-400">filter</span>(<span class="text-blue-400">|&amp;x|</span> <span class="text-blue-300">x</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.<span class="text-blue-400">map</span>(<span class="text-blue-400">|&amp;x|</span> <span class="text-blue-300">x</span> * <span class="text-blue-300">x</span>)<br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>.<span class="text-blue-400">collect</span>();<br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">println!</span>(<span class="text-green-300">"偶数的平方: {:?}"</span>, <span class="text-blue-300">squared_even</span>);<br>
                                 <br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">// 折叠操作</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 折叠操作</span><br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">let</span> <span class="text-blue-300">sum</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-400">iter</span>().<span class="text-blue-400">sum::&lt;i32&gt;</span>();<br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">println!</span>(<span class="text-green-300">"总和: {}"</span>, <span class="text-blue-300">sum</span>);<br>
                                 <br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">// 查找元素</span><br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">let</span> <span class="text-blue-300">found</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-400">iter</span>().<span class="text-blue-400">find</span>(<span class="textblue-400">|&amp;&amp;x|</span> <span class="text-blue-300">x</span> == <span class="text-yellow-300">3</span>);<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">match</span> <span class="text-blue-300">found</span> {<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">Some</span>(<span class="text-blue-300">value</span>) => <span class="text-blue-300">println!</span>(<span class="text-green-300">"找到值: {}"</span>, <span class="text-blue-300">value</span>),<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">None</span> => <span class="text-blue-300">println!</span>(<span class="text-green-300">"未找到值"</span>),<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 查找元素</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">let</span> <span class="text-blue-300">found</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-400">iter</span>().<span class="text-blue-400">find</span>(<span class="text-blue-400">|&amp;&amp;x|</span> <span class="text-blue-300">x</span> == <span class="text-yellow-300">3</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">match</span> <span class="text-blue-300">found</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">Some</span>(<span class="text-blue-300">value</span>) => <span class="text-blue-300">println!</span>(<span class="text-green-300">"找到值: {}"</span>, <span class="text-blue-300">value</span>),<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">None</span> => <span class="text-blue-300">println!</span>(<span class="text-green-300">"未找到值"</span>),<br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
                                 <br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">// 遍历键值对</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 遍历键值对</span><br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">let</span> <span class="text-blue-300">mut</span> <span class="text-blue-300">map</span> = <span class="text-blue-400">HashMap::new</span>();<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">map</span>.<span class="text-blue-400">insert</span>(<span class="textgreen-300">"a"</span>, <span class="text-yellow-300">1</span>);<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">map</span>.<span class="text-blue-400">insert</span>(<span class="textgreen-300">"b"</span>, <span class="text-yellow-300">2</span>);<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">map</span>.<span class="text-blue-400">insert</span>(<span class="textgreen-300">"c"</span>, <span class="text-yellow-300">3</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">map</span>.<span class="text-blue-400">insert</span>(<span class="text-green-300">"a"</span>, <span class="text-yellow-300">1</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">map</span>.<span class="text-blue-400">insert</span>(<span class="text-green-300">"b"</span>, <span class="text-yellow-300">2</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">map</span>.<span class="text-blue-400">insert</span>(<span class="text-green-300">"c"</span>, <span class="text-yellow-300">3</span>);<br>
                                 <br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">for</span> (<span class="text-blue-300">key</span>, <span class="text-blue-300">value</span>) <span class="purple-400">in</span> <span class="text-blue-300">map</span>.<span class="text-blue-400">iter</span>() {<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">println!</span>(<span class="textgreen-300">"{}: {}"</span>, <span class="text-blue-300">key</span>, <span class="text-blue-300">value</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">for</span> (<span class="text-blue-300">key</span>, <span class="text-blue-300">value</span>) <span class="purple-400">in</span> <span class="text-blue-300">map</span>.<span class="text-blue-400">iter</span>() {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">println!</span>(<span class="text-green-300">"{}: {}"</span>, <span class="text-blue-300">key</span>, <span class="text-blue-300">value</span>);<br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
                                 <br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">// 自定义迭代器</span><br>
-                                <span class="textblue-400">struct</span> <span class="textgreen-400">Counter</span> {<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">count</span>: <span class="text-blue-300">i32</span>,<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 自定义迭代器</span><br>
+                                <span class="text-blue-400">struct</span> <span class="text-green-400">Counter</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">count</span>: <span class="text-blue-300">i32</span>,<br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
                                 <br>
-                                <span class="textgreen-300">impl</span> <span class="textblue-400">Counter</span> {<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">fn</span> <span class="textgreen-400">new</span>() -> <span class="textblue-400">Self</span> {<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">Counter</span> { <span class="textblue-400">count</span>: <span class="text-yellow-300">0</span> }<br>
+                                <span class="text-green-300">impl</span> <span class="text-blue-400">Counter</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">fn</span> <span class="text-green-400">new</span>() -> <span class="text-blue-400">Self</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">Counter</span> { <span class="text-blue-400">count</span>: <span class="text-yellow-300">0</span> }<br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
-                                <span class="textgreen-300">}</span><br>
+                                <span class="text-green-300">}</span><br>
                                 <br>
-                                <span class="textgreen-300">impl</span> <span class="textblue-400">Iterator</span> <span class="textgreen-300">for</span> <span class="textblue-400">Counter</span> {<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">type</span> <span class="textgreen-400">Item</span> = <span class="textblue-300">i32</span>;<br>
+                                <span class="text-green-300">impl</span> <span class="text-blue-400">Iterator</span> <span class="text-blue-400">for</span> <span class="text-blue-400">Counter</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">type</span> <span class="text-green-400">Item</span> = <span class="text-blue-300">i32</span>;<br>
                                 <br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">fn</span> <span class="textgreen-400">next</span>(&<span class="textblue-400">mut</span> <span class="textblue-300">self</span>) -> <span class="textblue-400">Option&lt;Self::Item&gt;</span> {<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">if</span> <span class="textblue-400">self</span>.<span class="textblue-400">count</span> &lt; <span class="text-yellow-300">5</span> {<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">self</span>.<span class="textblue-400">count</span> += <span class="text-yellow-300">1</span>;<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">Some</span>(<span class="textblue-400">self</span>.<span class="textblue-400">count</span>)<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>} <span class="textblue-400">else</span> {<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">None</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">fn</span> <span class="text-green-400">next</span>(&<span class="text-blue-400">mut</span> <span class="text-blue-300">self</span>) -> <span class="text-blue-400">Option&lt;Self::Item&gt;</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">if</span> <span class="text-blue-400">self</span>.<span class="text-blue-400">count</span> &lt; <span class="text-yellow-300">5</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">self</span>.<span class="text-blue-400">count</span> += <span class="text-yellow-300">1</span>;<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">Some</span>(<span class="text-blue-400">self</span>.<span class="text-blue-400">count</span>)<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>} <span class="text-blue-400">else</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">None</span><br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
-                                <span class="textgreen-300">}</span><br>
+                                <span class="text-green-300">}</span><br>
                                 <br>
-                                <span class="textgreen-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">// 使用自定义迭代器</span><br>
-                                <span class="textgreen-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">let</span> <span class="textblue-300">counter</span> = <span class="textblue-400">Counter::new</span>();<br>
-                                <span class="textgreen-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">for</span> <span class="textblue-300">num</span> <span class="purple-400">in</span> <span class="textblue-300">counter</span> {<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-300">println!</span>(<span class="textgreen-300">"自定义迭代器: {}"</span>, <span class="textblue-300">num</span>);<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">// 使用自定义迭代器</span><br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">let</span> <span class="text-blue-300">counter</span> = <span class="text-blue-400">Counter::new</span>();<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">for</span> <span class="text-blue-300">num</span> <span class="purple-400">in</span> <span class="text-blue-300">counter</span> {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-300">println!</span>(<span class="text-green-300">"自定义迭代器: {}"</span>, <span class="text-blue-300">num</span>);<br>
                                 <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span>}<br>
                                 }<br>
                                 <br>
-                                <span class="textblue-400">fn</span> <span class="textgreen-400">main</span>() {<br>
-                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="textblue-400">iterator_examples</span>();<br>
+                                <span class="text-blue-400">fn</span> <span class="text-green-400">main</span>() {<br>
+                                <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="text-blue-400">iterator_examples</span>();<br>
                                 }<br>
                             </div>
                         </div>
