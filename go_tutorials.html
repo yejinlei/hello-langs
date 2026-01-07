@@ -1517,28 +1517,28 @@
                         <span class="text-purple-400">import</span> <span class="text-green-300">"fmt"</span><br>
                         <br>
                         <span class="text-purple-400">func</span> fmtExample() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"打印到标准输出"</span>)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;name := <span class="textgreen-300">"Alice"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"打印到标准输出"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;name := <span class="text-green-300">"Alice"</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;age := <span class="textyellow-300">30</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Printf(<span class="textgreen-300">"姓名: %s, 年龄: %d\n"</span>, name, age)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"姓名: %s, 年龄: %d\n"</span>, name, age)<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;data := <span class="text-purple-400">fmt</span>.Sprintf(<span class="textgreen-300">"姓名: %s, 年龄: %d"</span>, name, age)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;data := <span class="text-purple-400">fmt</span>.Sprintf(<span class="text-green-300">"姓名: %s, 年龄: %d"</span>, name, age)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(data)<br>
                         }<br>
                         <br>
                         <span class="text-blue-300">// 2. net/http - HTTP客户端和服务端</span><br>
                         <span class="text-purple-400">import</span> (<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"net/http"</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"io"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"net/http"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"io"</span><br>
                         )<br>
                         <br>
                         <span class="text-purple-400">func</span> httpExample() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">http</span>.HandleFunc(<span class="text-green-300">"/"</span>, <span class="text-purple-400">func</span>(w <span class="text-purple-400">http</span>.ResponseWriter, r *<span class="text-purple-400">http</span>.Request) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w.WriteHeader(<span class="text-purple-400">http</span>.StatusOK)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w.Write([]<span class="text-purple-400">byte</span>(<span class="textgreen-300">"Hello, World!"</span>))<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w.Write([]<span class="text-purple-400">byte</span>(<span class="text-green-300">"Hello, World!"</span>))<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;})<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">http</span>.ListenAndServe(<span class="textgreen-300">":8080"</span>, <span class="textgreen-300">nil</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">http</span>.ListenAndServe(<span class="text-green-300">":8080"</span>, <span class="text-green-300">nil</span>)<br>
                         }<br>
                         <br>
                         <span class="text-blue-300">// 3. encoding/json - JSON编解码</span><br>
@@ -1550,41 +1550,41 @@
                         }<br>
                         <br>
                         <span class="text-purple-400">func</span> jsonExample() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;person := Person{<span class="textgreen-300">"Bob"</span>, <span class="textyellow-300">25</span>}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;person := Person{<span class="text-green-300">"Bob"</span>, <span class="textyellow-300">25</span>}<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 编码为JSON</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;jsonBytes, err := json.Marshal(person)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="textgreen-300">nil</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"JSON编码错误: "</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="text-green-300">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"JSON编码错误: "</span>, err)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"JSON: "</span>, <span class="text-purple-400">string</span>(jsonBytes))<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"JSON: "</span>, <span class="text-purple-400">string</span>(jsonBytes))<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 解码JSON</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;var newPerson Person<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;jsonStr := <span class="textgreen-300">`{"name":"Charlie","age":35}`</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;jsonStr := <span class="text-green-300">`{"name":"Charlie","age":35}`</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;err = json.Unmarshal([]<span class="text-purple-400">byte</span>(jsonStr), &newPerson)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="textgreen-300">nil</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"JSON解码错误: "</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="text-green-300">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"JSON解码错误: "</span>, err)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Printf(<span class="textgreen-300">"解码后: %+v\n"</span>, newPerson)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Printf(<span class="text-green-300">"解码后: %+v\n"</span>, newPerson)<br>
                         }<br>
                         <br>
                         <span class="text-blue-300">// 4. time - 时间和日期</span><br>
-                        <span class="text-purple-400">import</span> <span class="textgreen-300">"time"</span><br>
+                        <span class="text-purple-400">import</span> <span class="text-green-300">"time"</span><br>
                         <br>
                         <span class="text-purple-400">func</span> timeExample() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;now := time.Now()<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"当前时间: "</span>, now)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"格式化时间: "</span>, now.Format(<span class="textgreen-300">"2006-01-02 15:04:05"</span>))<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"当前时间: "</span>, now)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"格式化时间: "</span>, now.Format(<span class="text-green-300">"2006-01-02 15:04:05"</span>))<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 时间计算</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;nextWeek := now.Add(<span class="textyellow-300">7</span> * <span class="textyellow-300">24</span> * time.Hour)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"一周后: "</span>, nextWeek)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"一周后: "</span>, nextWeek)<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 解析时间</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;dateStr := <span class="textgreen-300">"2023-12-25 10:30:00"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;dateStr := <span class="text-green-300">"2023-12-25 10:30:00"</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;parsedTime, err := time.Parse(<span class="textgreen-300">"2006-01-02 15:04:05"</span>, dateStr)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="textgreen-300">nil</span> {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"时间解析错误: "</span>, err)<br>
@@ -1611,13 +1611,13 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 执行外部命令</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;cmd := exec.Command(<span class="textgreen-300">"echo"</span>, <span class="textgreen-300">"Hello from command"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;cmd := exec.Command(<span class="text-green-300">"echo"</span>, <span class="text-green-300">"Hello from command"</span>)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;output, err := cmd.Output()<br>
-                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="textgreen-300">nil</span> {<br>
-                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"执行命令错误: "</span>, err)<br>
+                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="text-green-300">nil</span> {<br>
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"执行命令错误: "</span>, err)<br>
                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span><br>
                          &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"命令输出: "</span>, <span class="text-purple-400">string</span>(output))<br>
+                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"命令输出: "</span>, <span class="text-purple-400">string</span>(output))<br>
                          }
                      </div>
                  </div>
@@ -1656,9 +1656,9 @@
                         <br>
                         <span class="text-blue-300">// 2. 避免不必要的字符串转换</span><br>
                         <span class="text-purple-400">func</span> inefficientString() <span class="text-purple-400">string</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;result := <span class="textgreen-300">""</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;result := <span class="text-green-300">""</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> i := <span class="textyellow-300">0</span>; i &lt; <span class="textyellow-300">100</span>; i++ {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result += <span class="text-purple-400">fmt</span>.Sprintf(<span class="textgreen-300">"item%d "</span>, i) <span class="text-blue-300">// 每次都创建新字符串</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result += <span class="text-purple-400">fmt</span>.Sprintf(<span class="text-green-300">"item%d "</span>, i) <span class="text-blue-300">// 每次都创建新字符串</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> result<br>
                         }<br>
@@ -1667,7 +1667,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;var builder strings.Builder<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;builder.Grow(<span class="textyellow-300">1000</span>) <span class="text-blue-300">// 预估容量</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> i := <span class="textyellow-300">0</span>; i &lt; <span class="textyellow-300">100</span>; i++ {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;builder.WriteString(<span class="text-purple-400">fmt</span>.Sprintf(<span class="textgreen-300">"item%d "</span>, i))<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;builder.WriteString(<span class="text-purple-400">fmt</span>.Sprintf(<span class="text-green-300">"item%d "</span>, i))<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> builder.String()<br>
                         }<br>
@@ -1684,9 +1684,9 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">defer</span> bufferPool.Put(buf)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;buf.Reset() <span class="text-blue-300">// 重置缓冲区</span><br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;buf.WriteString(<span class="textgreen-300">"Hello"</span>)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;buf.WriteString(<span class="textgreen-300">" "</span>)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;buf.WriteString(<span class="textgreen-300">"World"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;buf.WriteString(<span class="text-green-300">"Hello"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;buf.WriteString(<span class="text-green-300">" "</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;buf.WriteString(<span class="text-green-300">"World"</span>)<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;result := buf.String()<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(result)<br>
@@ -1769,21 +1769,21 @@
                         <span class="text-purple-400">package</span> main<br>
                         <br>
                         <span class="text-purple-400">import</span> (<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"fmt"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"fmt"</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"time"</span><br>
                         )<br>
                         <br>
                         <span class="text-purple-400">func</span> sayHello(name <span class="text-purple-400">string</span>) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> i := <span class="textyellow-300">0</span>; i &lt; <span class="textyellow-300">3</span>; i++ {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Printf(<span class="textgreen-300">"Hello %s: %d\n"</span>, name, i)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Printf(<span class="text-green-300">"Hello %s: %d\n"</span>, name, i)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="textyellow-300">100</span> * time.Millisecond)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         }<br>
                         <br>
                         <span class="text-purple-400">func</span> main() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 在主goroutine中启动新的goroutine</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">go</span> sayHello(<span class="textgreen-300">"Goroutine"</span>)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;sayHello(<span class="textgreen-300">"Main"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">go</span> sayHello(<span class="text-green-300">"Goroutine"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;sayHello(<span class="text-green-300">"Main"</span>)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="textyellow-300">1</span> * time.Second) <span class="text-blue-300">// 等待goroutine执行完成</span><br>
                         }
                     </div>
@@ -1823,20 +1823,20 @@
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">go</span> <span class="text-purple-400">func</span>() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="textyellow-300">1</span> * time.Second)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c1 &lt;- <span class="textgreen-300">"消息1"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c1 &lt;- <span class="text-green-300">"消息1"</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}()<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">go</span> <span class="text-purple-400">func</span>() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time.Sleep(<span class="textyellow-300">2</span> * time.Second)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c2 &lt;- <span class="textgreen-300">"消息2"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;c2 &lt;- <span class="text-green-300">"消息2"</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}()<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> i := <span class="textyellow-300">0</span>; i &lt; <span class="textyellow-300">2</span>; i++ {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">select</span> {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> msg1 := &lt;-c1:<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="textgreen-300">"收到: "</span>, msg1)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="text-green-300">"收到: "</span>, msg1)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> msg2 := &lt;-c2:<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="textgreen-300">"收到: "</span>, msg2)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="text-green-300">"收到: "</span>, msg2)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         }
@@ -1867,7 +1867,7 @@
                         <br>
                         <span class="text-purple-400">func</span> Divide(a, b <span class="text-purple-400">float64</span>) (<span class="text-purple-400">float64</span>, <span class="text-purple-400">error</span>) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> b == <span class="textyellow-300">0</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="textyellow-300">0</span>, fmt.Errorf(<span class="textgreen-300">"除数不能为零"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="textyellow-300">0</span>, fmt.Errorf(<span class="text-green-300">"除数不能为零"</span>)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> a / b, <span class="text-purple-400">nil</span><br>
                         }
@@ -1881,14 +1881,14 @@
                         <span class="text-purple-400">package</span> main<br>
                         <br>
                         <span class="text-purple-400">import</span> (<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"testing"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"testing"</span><br>
                         )<br>
                         <br>
                         <span class="text-purple-400">func</span> TestAdd(t *testing.T) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;result := Add(<span class="textyellow-300">2</span>, <span class="textyellow-300">3</span>)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;expected := <span class="textyellow-300">5</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> result != expected {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Errorf(<span class="textgreen-300">"Add(2, 3) = %d; want %d"</span>, result, expected)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Errorf(<span class="text-green-300">"Add(2, 3) = %d; want %d"</span>, result, expected)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         }<br>
                         <br>
@@ -1969,10 +1969,10 @@
                         <span class="text-purple-400">func</span> main() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;result, err := divide(<span class="textyellow-300">10</span>, <span class="textyellow-300">2</span>)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="text-purple-400">nil</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="textgreen-300">"错误: "</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="text-green-300">"错误: "</span>, err)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;fmt.Printf(<span class="textgreen-300">"结果: %.2f\n"</span>, result)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;fmt.Printf(<span class="text-green-300">"结果: %.2f\n"</span>, result)<br>
                         }
                     </div>
                 </div>
@@ -1986,12 +1986,12 @@
                         }<br>
                         <br>
                         <span class="text-purple-400">func</span> (e *CustomError) Error() <span class="text-purple-400">string</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> fmt.Sprintf(<span class="textgreen-300">"错误代码: %d, 错误信息: %s"</span>, e.Code, e.Msg)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> fmt.Sprintf(<span class="text-green-300">"错误代码: %d, 错误信息: %s"</span>, e.Code, e.Msg)<br>
                         }<br>
                         <br>
                         <span class="text-purple-400">func</span> validateAge(age <span class="text-purple-400">int</span>) <span class="text-purple-400">error</span> {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> age &lt; <span class="textyellow-300">0</span> || age &gt; <span class="textyellow-300">150</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> &CustomError{Code: <span class="textyellow-300">400</span>, Msg: <span class="textgreen-300">"年龄不在有效范围内"</span>}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> &CustomError{Code: <span class="textyellow-300">400</span>, Msg: <span class="text-green-300">"年龄不在有效范围内"</span>}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-purple-400">nil</span><br>
                         }<br>
@@ -2001,7 +2001,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="text-purple-400">nil</span> {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(err) <span class="text-blue-300">// 输出自定义错误信息</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> customErr, ok := err.(*CustomError); ok {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Printf(<span class="textgreen-300">"捕获到自定义错误，代码: %d\n"</span>, customErr.Code)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Printf(<span class="text-green-300">"捕获到自定义错误，代码: %d\n"</span>, customErr.Code)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         }
