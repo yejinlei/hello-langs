@@ -1585,29 +1585,29 @@
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 解析时间</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;dateStr := <span class="text-green-300">"2023-12-25 10:30:00"</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;parsedTime, err := time.Parse(<span class="textgreen-300">"2006-01-02 15:04:05"</span>, dateStr)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="textgreen-300">nil</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"时间解析错误: "</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;parsedTime, err := time.Parse(<span class="text-green-300">"2006-01-02 15:04:05"</span>, dateStr)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="text-green-300">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"时间解析错误: "</span>, err)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"解析的时间: "</span>, parsedTime)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"解析的时间: "</span>, parsedTime)<br>
                         }<br>
                         <br>
                         <span class="text-blue-300">// 5. os - 操作系统接口</span><br>
                         <span class="text-purple-400">import</span> (<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"os"</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"os/exec"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"os"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"os/exec"</span><br>
                         )<br>
                         <br>
                         <span class="text-purple-400">func</span> osExample() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 环境变量</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;homeDir := os.Getenv(<span class="textgreen-300">"HOME"</span>)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"HOME目录: "</span>, homeDir)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;homeDir := os.Getenv(<span class="text-green-300">"HOME"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"HOME目录: "</span>, homeDir)<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 创建目录</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;err := os.Mkdir(<span class="textgreen-300">"temp_dir"</span>, <span class="textyellow-300">0755</span>)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="textgreen-300">nil</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"创建目录错误: "</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;err := os.Mkdir(<span class="text-green-300">"temp_dir"</span>, <span class="textyellow-300">0755</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="text-green-300">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"创建目录错误: "</span>, err)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 执行外部命令</span><br>
@@ -1694,15 +1694,15 @@
                         <br>
                         <span class="text-blue-300">// 4. 使用pprof进行性能分析</span><br>
                         <span class="text-purple-400">import</span> (<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"net/http/pprof"</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"runtime/pprof"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"net/http/pprof"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"runtime/pprof"</span><br>
                         )<br>
                         <br>
                         <span class="text-purple-400">func</span> performanceProfiling() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// CPU性能分析</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;f, err := os.Create(<span class="textgreen-300">"cpu.prof"</span>)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="textgreen-300">nil</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"无法创建CPU profile: "</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;f, err := os.Create(<span class="text-green-300">"cpu.prof"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="text-green-300">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"无法创建CPU profile: "</span>, err)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">defer</span> f.Close()<br>
@@ -1723,9 +1723,9 @@
                         <br>
                         <span class="text-blue-300">// 5. 内存性能分析</span><br>
                         <span class="text-purple-400">func</span> memoryProfiling() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;f, err := os.Create(<span class="textgreen-300">"mem.prof"</span>)<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="textgreen-300">nil</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="textgreen-300">"无法创建内存profile: "</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;f, err := os.Create(<span class="text-green-300">"mem.prof"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="text-green-300">nil</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">fmt</span>.Println(<span class="text-green-300">"无法创建内存profile: "</span>, err)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">defer</span> f.Close()<br>
@@ -1770,7 +1770,7 @@
                         <br>
                         <span class="text-purple-400">import</span> (<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"fmt"</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"time"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"time"</span><br>
                         )<br>
                         <br>
                         <span class="text-purple-400">func</span> sayHello(name <span class="text-purple-400">string</span>) {<br>
@@ -1895,16 +1895,16 @@
                         <span class="text-purple-400">func</span> TestDivide(t *testing.T) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;result, err := Divide(<span class="textyellow-300">10</span>, <span class="textyellow-300">2</span>)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="text-purple-400">nil</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Errorf(<span class="textgreen-300">"Divide(10, 2) returned error: %v"</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Errorf(<span class="text-green-300">"Divide(10, 2) returned error: %v"</span>, err)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> result != <span class="textyellow-300">5</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Errorf(<span class="textgreen-300">"Divide(10, 2) = %f; want %f"</span>, result, <span class="textyellow-300">5.0</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Errorf(<span class="text-green-300">"Divide(10, 2) = %f; want %f"</span>, result, <span class="textyellow-300">5.0</span>)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 测试错误情况</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;_, err = Divide(<span class="textyellow-300">10</span>, <span class="textyellow-300">0</span>)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err == <span class="text-purple-400">nil</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Error(<span class="textgreen-300">"Divide(10, 0) should return error"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Error(<span class="text-green-300">"Divide(10, 0) should return error"</span>)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         }
                     </div>
@@ -1919,16 +1919,16 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a, b     <span class="text-purple-400">int</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expected <span class="text-purple-400">int</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;} {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="textgreen-300">"正数相加"</span>, <span class="textyellow-300">2</span>, <span class="textyellow-300">3</span>, <span class="textyellow-300">5</span>},<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="textgreen-300">"负数相加"</span>, -<span class="textyellow-300">1</span>, -<span class="textyellow-300">1</span>, -<span class="textyellow-300">2</span>},<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="textgreen-300">"零值相加"</span>, <span class="textyellow-300">0</span>, <span class="textyellow-300">0</span>, <span class="textyellow-300">0</span>},<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="text-green-300">"正数相加"</span>, <span class="textyellow-300">2</span>, <span class="textyellow-300">3</span>, <span class="textyellow-300">5</span>},<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="text-green-300">"负数相加"</span>, -<span class="textyellow-300">1</span>, -<span class="textyellow-300">1</span>, -<span class="textyellow-300">2</span>},<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="text-green-300">"零值相加"</span>, <span class="textyellow-300">0</span>, <span class="textyellow-300">0</span>, <span class="textyellow-300">0</span>},<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> _, tt := <span class="text-purple-400">range</span> tests {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Run(tt.name, <span class="text-purple-400">func</span>(t *testing.T) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result := Add(tt.a, tt.b)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> result != tt.expected {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Errorf(<span class="textgreen-300">"Add(%d, %d) = %d; want %d"</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.Errorf(<span class="text-green-300">"Add(%d, %d) = %d; want %d"</span>,<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tt.a, tt.b, result, tt.expected)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})<br>
@@ -1955,13 +1955,13 @@
                         <span class="text-purple-400">package</span> main<br>
                         <br>
                         <span class="text-purple-400">import</span> (<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"errors"</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"fmt"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"errors"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"fmt"</span><br>
                         )<br>
                         <br>
                         <span class="text-purple-400">func</span> divide(a, b <span class="text-purple-400">float64</span>) (<span class="text-purple-400">float64</span>, <span class="text-purple-400">error</span>) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> b == <span class="textyellow-300">0</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="textyellow-300">0</span>, errors.New(<span class="textgreen-300">"除数不能为零"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="textyellow-300">0</span>, errors.New(<span class="text-green-300">"除数不能为零"</span>)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> a / b, <span class="text-purple-400">nil</span><br>
                         }<br>
@@ -2012,35 +2012,35 @@
                     <div class="text-slate-400 mb-2"># 错误包装</div>
                     <div class="text-sm leading-6">
                         <span class="text-purple-400">import</span> (<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"fmt"</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textgreen-300">"io"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"fmt"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"io"</span><br>
                         )<br>
                         <br>
                         <span class="text-blue-300">// Go 1.13+ 错误包装</span><br>
                         <span class="text-purple-400">func</span> readFile(filename <span class="text-purple-400">string</span>) <span class="text-purple-400">error</span> {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;data, err := os.ReadFile(filename)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="text-purple-400">nil</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> fmt.Errorf(<span class="textgreen-300">"读取文件失败: %w"</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> fmt.Errorf(<span class="text-green-300">"读取文件失败: %w"</span>, err)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="textgreen-300">"文件内容: "</span>, <span class="text-purple-400">string</span>(data))<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="text-green-300">"文件内容: "</span>, <span class="text-purple-400">string</span>(data))<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-purple-400">nil</span><br>
                         }<br>
                         <br>
                         <span class="text-purple-400">func</span> processFile(filename <span class="text-purple-400">string</span>) <span class="text-purple-400">error</span> {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;err := readFile(filename)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="text-purple-400">nil</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> fmt.Errorf(<span class="textgreen-300">"处理文件时发生错误: %w"</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> fmt.Errorf(<span class="text-green-300">"处理文件时发生错误: %w"</span>, err)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-purple-400">nil</span><br>
                         }<br>
                         <br>
                         <span class="text-purple-400">func</span> main() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;err := processFile(<span class="textgreen-300">"nonexistent.txt"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;err := processFile(<span class="text-green-300">"nonexistent.txt"</span>)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> err != <span class="text-purple-400">nil</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="textgreen-300">"错误: "</span>, err)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="text-green-300">"错误: "</span>, err)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 检查原始错误</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> errors.Is(err, os.ErrNotExist) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="textgreen-300">"文件不存在"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fmt.Println(<span class="text-green-300">"文件不存在"</span>)<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         }
