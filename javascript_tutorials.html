@@ -1365,7 +1365,7 @@
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">error</span>: <span class="text-blue-300">error</span> => {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-red-300">error</span>(<span class="text-green-300">'编码错误：'</span>, <span class="text-blue-300">error</span>);
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
                 <div class="code-line"></div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">await</span> <span class="text-blue-300">encoder</span>.<span class="text-blue-300">configure</span>({
@@ -1380,7 +1380,7 @@
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-blue-300">encoder</span>;
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">catch</span> (<span class="text-blue-300">error</span>) {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-red-300">error</span>(<span class="text-green-300">'配置编码器失败：'</span>, <span class="text-blue-300">error</span>);
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
                 <div class="code-line">}
                 <div class="code-line"></div>
             </div>
@@ -1399,7 +1399,7 @@
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">error</span>: <span class="text-blue-300">error</span> => {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-red-300">error</span>(<span class="text-green-300">'解码错误：'</span>, <span class="text-blue-300">error</span>);
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
                 <div class="code-line"></div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">await</span> <span class="text-blue-300">decoder</span>.<span class="text-blue-300">configure</span>({
@@ -1412,7 +1412,7 @@
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-blue-300">decoder</span>;
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">catch</span> (<span class="text-blue-300">error</span>) {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-red-300">error</span>(<span class="text-green-300">'配置解码器失败：'</span>, <span class="text-blue-300">error</span>);
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
                 <div class="code-line">}
                 <div class="code-line"></div>
             </div>
@@ -1420,33 +1420,33 @@
             <h3 class="text-2xl font-semibold mb-4 gradient-text">18.3 音频编码器</h3>
             <div class="code-block rounded-lg p-4 code-font text-sm">
                 <div class="text-slate-400 mb-2"># WebCodecs 音频编码器</div>
-                <div class="code-line"><span class="text-blue-400">// 配置音频编码器</span>
-                <div class="code-line"><span class="text-purple-400">async function</span> <span class="text-yellow-300">configureAudioEncoder</span>() {
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">try</span> {
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">const</span> <span class="text-blue-300">encoder</span> = <span class="text-purple-400">new</span> <span class="text-blue-300">AudioEncoder</span>({
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">output</span>: <span class="text-blue-300">chunk</span> => {
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">'编码后的音频帧：'</span>, <span class="text-blue-300">chunk</span>);
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">error</span>: <span class="text-blue-300">error</span> => {
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-red-300">error</span>(<span class="text-green-300">'编码错误：'</span>, <span class="text-blue-300">error</span>);
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+                <div class="code-line"><span class="text-blue-400">// 配置音频编码器</span></div>
+                <div class="code-line"><span class="text-purple-400">async function</span> <span class="text-yellow-300">configureAudioEncoder</span>() {</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">try</span> {</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">const</span> <span class="text-blue-300">encoder</span> = <span class="text-purple-400">new</span> <span class="text-blue-300">AudioEncoder</span>({</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">output</span>: <span class="text-blue-300">chunk</span> => {</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">'编码后的音频帧：\'</span>, <span class="text-blue-300">chunk</span>);</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">error</span>: <span class="text-blue-300">error</span> => {</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-red-300">error</span>(<span class="text-green-300">'编码错误：\'</span>, <span class="text-blue-300">error</span>);</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</div>
                 <div class="code-line"></div>
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">await</span> <span class="text-blue-300">encoder</span>.<span class="text-blue-300">configure</span>({
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">codec</span>: <span class="text-green-300">'opus'</span>,
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">sampleRate</span>: <span class="text-yellow-300">48000</span>,
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">numberOfChannels</span>: <span class="text-yellow-300">2</span>,
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">bitrate</span>: <span class="text-yellow-300">128000</span> <span class="text-blue-400">// 128 kbps</span>
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">await</span> <span class="text-blue-300">encoder</span>.<span class="text-blue-300">configure</span>({</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">codec</span>: <span class="text-green-300">'opus\'</span>,</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">sampleRate</span>: <span class="text-yellow-300">48000</span>,</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">numberOfChannels</span>: <span class="text-yellow-300">2</span>,</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">bitrate</span>: <span class="text-yellow-300">128000</span> <span class="text-blue-400">// 128 kbps</span></div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</div>
                 <div class="code-line"></div>
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-400">// 返回配置好的编码器</span>
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-blue-300">encoder</span>;
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">catch</span> (<span class="text-blue-300">error</span>) {
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-red-300">error</span>(<span class="text-green-300">'配置编码器失败：'</span>, <span class="text-blue-300">error</span>);
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;
-                <div class="code-line">}
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-400">// 返回配置好的编码器</span></div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-blue-300">encoder</span>;</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">catch</span> (<span class="text-blue-300">error</span>) {</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-red-300">error</span>(<span class="text-green-300">'配置编码器失败：\'</span>, <span class="text-blue-300">error</span>);</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                <div class="code-line">}</div>
                 <div class="code-line"></div>
-            <!-- </div> -->
+            </div>
 
             <h3 class="text-2xl font-semibold mb-4 gradient-text">18.4 视频处理管道</h3>
             <div class="code-block rounded-lg p-4 code-font text-sm">
@@ -1474,7 +1474,7 @@
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">error</span>: <span class="text-blue-300">error</span> => {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-red-300">error</span>(<span class="text-green-300">'编码错误：'</span>, <span class="text-blue-300">error</span>);
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">reject</span>(<span class="text-blue-300">error</span>);
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">encoder</span>.<span class="text-blue-300">configure</span>({
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">codec</span>: <span class="text-green-300">'avc1.42001E'</span>,
@@ -1497,7 +1497,7 @@
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">error</span>: <span class="text-blue-300">error</span> => {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-red-300">error</span>(<span class="text-green-300">'解码错误：'</span>, <span class="text-blue-300">error</span>);
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">reject</span>(<span class="text-blue-300">error</span>);
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">decoder</span>.<span class="text-blue-300">configure</span>({
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">codec</span>: <span class="text-green-300">'avc1.42001E'</span>,
@@ -1536,13 +1536,14 @@
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">close</span>() {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (<span class="text-blue-300">this</span>.<span class="text-blue-300">encoder</span>) {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">this</span>.<span class="text-blue-300">encoder</span>.<span class="text-blue-300">close</span>();
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (<span class="text-blue-300">this</span>.<span class="text-blue-300">decoder</span>) {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">this</span>.<span class="text-blue-300">decoder</span>.<span class="text-blue-300">close</span>();
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (<span class="text-blue-300">this</span>.<span class="text-blue-300">videoTrack</span>) {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">this</span>.<span class="text-blue-300">videoTrack</span>.<span class="text-blue-300">stop</span>();
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
                 <div class="code-line">}
                 <div class="code-line"></div>
                 <div class="code-line"><span class="text-blue-400">// 使用示例</span>
