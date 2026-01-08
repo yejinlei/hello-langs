@@ -104,6 +104,11 @@
         .word-wrap {
             word-wrap: break-word;
         }
+        /* 强制取消多列与并排布局，纵向堆叠显示 */
+        body, main, #main-content {
+            column-count: 1 !important;
+            column-gap: 0 !important;
+        }
         .code-block {
             background: rgba(2, 6, 23, 0.9);
             border-left: 4px solid #3B82F6;
@@ -112,6 +117,9 @@
             margin: 1rem 0;
             overflow-x: auto;
             font-family: 'JetBrains Mono', 'Monaco', 'Consolas', 'Courier New', monospace;
+            box-sizing: border-box !important;
+            width: 100% !important;
+            max-width: none !important;
         }
         .code-line {
             display: block;
@@ -123,6 +131,22 @@
         }
         .nav-link {
             transition: all 0.3s ease;
+        }
+        #main-content {
+            display: grid !important;
+            grid-template-columns: 1fr !important;
+            gap: 2rem !important;
+        }
+        /* 章节内容块占满整行 */
+        section,
+        #main-content section,
+        #main-content .language-content,
+        .language-content {
+            display: block !important;
+            width: 100% !important;
+            max-width: none !important;
+            float: none !important;
+            clear: both !important;
         }
         
         .gradient-text {
@@ -149,49 +173,59 @@
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex flex-col gap-8">
             <!-- Sidebar Navigation -->
-            <aside class="lg:w-1/4">
+            <aside class="w-full">
                 <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 sticky top-24 border border-slate-700">
                     <h3 class="text-lg font-bold mb-4 gradient-text">章节导航</h3>
                     <nav class="space-y-2">
-                        <a href="#section1" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">1. 变量 (Variables)</a>
-                        <a href="#section2" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">2. 数据类型 (Data Types)</a>
-                        <a href="#section3" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">3. 操作符 (Operators)</a>
-                        <a href="#section4" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">4. 条件语句 (Conditionals)</a>
-                        <a href="#section5" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">5. 循环 (Loops)</a>
-                        <a href="#section6" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">6. 函数 (Functions)</a>
-                        <a href="#section7" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">7. 数组 (Arrays)</a>
-                        <a href="#section8" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">8. 对象 (Objects)</a>
-                        <a href="#section9" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">9. DOM操作 (DOM Manipulation)</a>
-                        <a href="#section10" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">10. 事件 (Events)</a>
-                        <a href="#section11" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">11. 异步编程 (Asynchronous)</a>
-                        <a href="#section12" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">12. 错误处理 (Error Handling)</a>
-                        <a href="#section13" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">13. 模块化 (Modularity)</a>
-                        <a href="#section14" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">14. ES6+ 特性 (ES6+ Features)</a>
-                        <a href="#section15" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">15. 浏览器 API (Browser APIs)</a>
-                        <a href="#section16" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">16. 浏览器：文档，事件，接口 (Browser: Document, Events, Interfaces)</a>
-                        <a href="#section17" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">17. WebTransport 数据传输</a>
-                        <a href="#section18" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">18. WebCodecs 编解码</a>
-                        <a href="#section19" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">19. WebAssembly 汇编</a>
-                        <a href="#section20" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">20. WebGPU 计算与渲染</a>
-                        <a href="#section21" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">21. WebXR 虚拟/增强/混合现实</a>
+                        <a href="#section-1" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">1. 变量 (Variables)</a>
+                        <a href="#section-2" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">2. 数据类型 (Data Types)</a>
+                        <a href="#section-3" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">3. 操作符 (Operators)</a>
+                        <a href="#section-4" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">4. 条件语句 (Conditionals)</a>
+                        <a href="#section-5" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">5. 循环 (Loops)</a>
+                        <a href="#section-6" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">6. 函数 (Functions)</a>
+                        <a href="#section-7" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">7. 数组 (Arrays)</a>
+                        <a href="#section-8" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">8. 对象 (Objects)</a>
+                        <a href="#section-9" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">9. DOM操作 (DOM Manipulation)</a>
+                        <a href="#section-10" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">10. 事件 (Events)</a>
+                        <a href="#section-11" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">11. 异步编程 (Asynchronous)</a>
+                        <a href="#section-12" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">12. 错误处理 (Error Handling)</a>
+                        <a href="#section-13" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">13. 模块化 (Modularity)</a>
+                        <a href="#section-14" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">14. ES6+ 特性 (ES6+ Features)</a>
+                        <a href="#section-15" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">15. 浏览器 API (Browser APIs)</a>
+                        <a href="#section-16" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">16. 浏览器：文档，事件，接口 (Browser: Document, Events, Interfaces)</a>
+                        <a href="#section-17" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">17. WebTransport 数据传输</a>
+                        <a href="#section-18" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">18. WebCodecs 编解码</a>
+                        <a href="#section-19" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">19. WebAssembly 汇编</a>
+                        <a href="#section-20" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">20. WebGPU 计算与渲染</a>
+                        <a href="#section-21" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">21. WebXR 虚拟/增强/混合现实</a>
                     </nav>
                 </div>
             </aside>
 
             <!-- Main Content -->
-            <div class="lg:w-3/4">
+            <div id="main-content" class="w-full">
                 <!-- 1. 变量 (Variables) -->
-        <section id="section1" class="mb-16">
+        <section id="section-1" class="mb-16">
+
             <h2 class="text-3xl font-bold mb-8 text-center">
+
                 <span class="gradient-text">1. 变量 (Variables)</span>
+
             </h2>
+
+            
+
+            <div class="language-content" data-lang="javascript">
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - 支持 var, let, const 变量声明</h4>
+
             <p class="mb-4">JavaScript 中有三种声明变量的方式：<code class="bg-slate-800 px-2 py-1 rounded text-yellow-300">var</code>、<code class="bg-slate-800 px-2 py-1 rounded text-yellow-300">let</code> 和 <code class="bg-slate-800 px-2 py-1 rounded text-yellow-300">const</code>。</p>
             <p class="mb-4">变量是存储数据的容器。每个变量都有一个唯一的名称（标识符）。</p>
             <p class="mb-4">在现代JavaScript中，我们主要使用 <code class="bg-slate-800 px-2 py-1 rounded text-yellow-300">let</code> 和 <code class="bg-slate-800 px-2 py-1 rounded text-yellow-300">const</code> 来声明变量：</p>
             <div class="code-block">
-<span class="text-purple-400">let</span> <span class="text-blue-300">name</span> = <span class="text-green-300">"张三"</span>; <span class="text-blue-400">// 可变变量</span></div>
+                <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">name</span> = <span class="text-green-300">"张三"</span>; <span class="text-blue-400">// 可变变量</span></div>
                 <div class="code-line"><span class="text-purple-400">const</span> <span class="text-blue-300">age</span> = <span class="text-yellow-400">25</span>; <span class="text-blue-400">// 常量</span></div>
                 <div class="code-line"><span class="text-purple-400">var</span> <span class="text-blue-300">city</span> = <span class="text-green-300">"北京"</span>; <span class="text-blue-400">// 旧式声明（不推荐）</span></div>
             </div>
@@ -200,23 +234,7 @@
 
 
 
-                <div class="code-line">
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">await</span> <span class="text-blue-300">encoder</span>.<span class="text-blue-300">configure</span>({
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">codec</span>: <span class="text-green-300">'avc1.42001E'</span>,
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">width</span>: <span class="text-yellow-300">1280</span>,
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">height</span>: <span class="text-yellow-300">720</span>,
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">bitrate</span>: <span class="text-yellow-300">5000000</span>, <span class="text-blue-400">// 5 Mbps</span>
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">framerate</span>: <span class="text-yellow-300">30</span>
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});
-                <div class="code-line">
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-400">// 返回配置好的编码器</span>
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-blue-300">encoder</span>;
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">catch</span> (<span class="text-blue-300">error</span>) {
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-red-300">error</span>(<span class="text-green-300">'配置编码器失败：'</span>, <span class="text-blue-300">error</span>);
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}"><span class="text-purple-400">let</span> <span class="text-blue-300">name</span> = <span class="text-green-300">"张三"</span>; <span class="text-blue-400">// 可变变量</span></div>
-                <div class="code-line"><span class="text-purple-400">const</span> <span class="text-blue-300">age</span> = <span class="text-yellow-400">25</span>; <span class="text-blue-400">// 常量</span></div>
-                <div class="code-line"><span class="text-purple-400">var</span> <span class="text-blue-300">city</span> = <span class="text-green-300">"北京"</span>; <span class="text-blue-400">// 旧式声明（不推荐）</span></div>
-            </div>
+            
             <p class="mb-4 mt-6"><strong>使用 <code class="bg-slate-800 px-2 py-1 rounded text-yellow-300">let</code> 声明变量：</strong></p>
             <div class="code-block">
                 <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">message</span>;</div>
@@ -237,12 +255,31 @@
                 <li>区分大小写</li>
                 <li>使用驼峰命名法（camelCase）</li>
             </ul>
+        
+            </div>
+
         </section>
 
-        <section id="section2" class="mb-16">
+        <section id="section-2" class="mb-16">
+
+
             <h2 class="text-3xl font-bold mb-8 text-center">
+
+
                 <span class="gradient-text">2. 数据类型 (Data Types)</span>
+
+
             </h2>
+
+
+            
+
+
+            <div class="language-content" data-lang="javascript">
+
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - 动态类型，支持多种基本数据类型</h4>
+
             <p class="mb-4">JavaScript 中的基本数据类型包括：数字、字符串、布尔值、null、undefined、symbol 和 bigint。JavaScript 是动态类型语言，变量类型在运行时确定。</p>
             <div class="code-block">
                 <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">number</span> = <span class="text-yellow-400">42</span>; <span class="text-blue-400">// 数字</span></div>
@@ -288,12 +325,33 @@
                 <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">id</span> = <span class="text-purple-400">Symbol</span>(<span class="text-green-300">"id"</span>); <span class="text-blue-400">// Symbol</span></div>
                 <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">bigInt</span> = <span class="text-blue-300">1234567890123456789012345678901234567890n</span>; <span class="text-blue-400">// BigInt</span></div>
             </div>
+        
+
+            </div>
+
+
         </section>
 
-        <section id="section3" class="section mb-12">
-            <h2 class="text-3xl font-bold mb-6">
+        <section id="section-3" class="mb-16">
+
+
+            <h2 class="text-3xl font-bold mb-8 text-center">
+
+
                 <span class="gradient-text">3. 操作符 (Operators)</span>
+
+
             </h2>
+
+
+            
+
+
+            <div class="language-content" data-lang="javascript">
+
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - 丰富的操作符支持</h4>
+
             <p class="mb-4">JavaScript 支持多种操作符，包括算术、比较、逻辑等操作符。</p>
             <div class="code-block">
                 <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">a</span> = <span class="text-yellow-400">10</span>;</div>
@@ -354,12 +412,33 @@
                 <div class="code-line"><span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(<span class="text-blue-300">true</span> || <span class="text-blue-300">false</span>); <span class="text-blue-400">// true</span></div>
                 <div class="code-line"><span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(!<span class="text-blue-300">true</span>); <span class="text-blue-400">// false</span></div>
             </div>
+        
+
+            </div>
+
+
         </section>
 
-        <section id="section4" class="mb-16">
+        <section id="section-4" class="mb-16">
+
+
             <h2 class="text-3xl font-bold mb-8 text-center">
+
+
                 <span class="gradient-text">4. 条件语句 (Conditional Statements)</span>
+
+
             </h2>
+
+
+            
+
+
+            <div class="language-content" data-lang="javascript">
+
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - 灵活的条件控制语句</h4>
+
             <p class="mb-4">使用 if...else 和 switch 语句来执行条件判断。</p>
             <div class="code-block">
                 <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">score</span> = <span class="text-yellow-400">85</span>;</div>
@@ -386,12 +465,33 @@
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">"未知"</span>);</div>
                 <div class="code-line">}</div>
             </div>
+        
+
+            </div>
+
+
         </section>
 
-        <section id="section5" class="section mb-12">
-            <h2 class="text-3xl font-bold mb-6">
+        <section id="section-5" class="mb-16">
+
+
+            <h2 class="text-3xl font-bold mb-8 text-center">
+
+
                 <span class="gradient-text">5. 循环 (Loops)</span>
+
+
             </h2>
+
+
+            
+
+
+            <div class="language-content" data-lang="javascript">
+
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - 多种循环结构</h4>
+
             <p class="mb-4">JavaScript 提供多种循环结构来重复执行代码块。</p>
             <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// for 循环</span></div>
@@ -418,12 +518,33 @@
                 <div class="code-line">    <span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(<span class="text-blue-300">key</span> + <span class="text-green-300">": "</span> + <span class="text-blue-300">person</span>[<span class="text-blue-300">key</span>]);</div>
                 <div class="code-line">}</div>
             </div>
+        
+
+            </div>
+
+
         </section>
 
-        <section id="section6" class="section mb-12">
-            <h2 class="text-3xl font-bold mb-6">
+        <section id="section-6" class="mb-16">
+
+
+            <h2 class="text-3xl font-bold mb-8 text-center">
+
+
                 <span class="gradient-text">6. 函数 (Functions)</span>
+
+
             </h2>
+
+
+            
+
+
+            <div class="language-content" data-lang="javascript">
+
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - 函数是一等公民</h4>
+
             <p class="mb-4">函数是执行特定任务的可重用代码块。</p>
             <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 函数声明</span></div>
@@ -444,12 +565,33 @@
                 <div class="code-line"><span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(<span class="text-blue-300">add</span>(<span class="text-yellow-400">5</span>, <span class="text-yellow-400">3</span>)); <span class="text-blue-400">// 输出: 8</span></div>
                 <div class="code-line"><span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(<span class="text-blue-300">multiply</span>(<span class="text-yellow-400">4</span>, <span class="text-yellow-400">6</span>)); <span class="text-blue-400">// 输出: 24</span></div>
             </div>
+        
+
+            </div>
+
+
         </section>
 
-        <section id="section7" class="mb-16">
+        <section id="section-7" class="mb-16">
+
+
             <h2 class="text-3xl font-bold mb-8 text-center">
+
+
                 <span class="gradient-text">7. 数组 (Arrays)</span>
+
+
             </h2>
+
+
+            
+
+
+            <div class="language-content" data-lang="javascript">
+
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - 灵活的数组操作</h4>
+
             <p class="mb-4">数组用于存储多个值的有序集合。</p>
             <div class="code-block">
                 <div class="code-line"><span class="text-purple-400">const</span> <span class="text-blue-300">numbers</span> = [<span class="text-yellow-400">1</span>, <span class="text-yellow-400">2</span>, <span class="text-yellow-400">3</span>, <span class="text-yellow-400">4</span>, <span class="text-yellow-400">5</span>];</div>
@@ -473,12 +615,33 @@
                 <div class="code-line"><span class="text-purple-400">const</span> <span class="text-blue-300">doubled</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">map</span>((<span class="text-blue-300">num</span>) => <span class="text-blue-300">num</span> * <span class="text-yellow-400">2</span>);</div>
                 <div class="code-line"><span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(<span class="text-blue-300">doubled</span>); <span class="text-blue-400">// [0, 4, 6, 8]</span></div>
             </div>
+        
+
+            </div>
+
+
         </section>
 
-        <section id="section8" class="mb-16">
+        <section id="section-8" class="mb-16">
+
+
             <h2 class="text-3xl font-bold mb-8 text-center">
+
+
                 <span class="gradient-text">8. 对象 (Objects)</span>
+
+
             </h2>
+
+
+            
+
+
+            <div class="language-content" data-lang="javascript">
+
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - 基于原型的对象系统</h4>
+
             <p class="mb-4">对象是键值对的集合，用于存储相关数据和功能。</p>
             <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 创建对象</span></div>
@@ -516,12 +679,33 @@
                 <div class="code-line"><span class="text-purple-400">const</span> <span class="text-blue-300">student1</span> = <span class="text-purple-400">new</span> <span class="text-blue-300">Student</span>(<span class="text-green-300">"小明"</span>, <span class="text-green-300">"高一"</span>);</div>
                 <div class="code-line"><span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(<span class="text-blue-300">student1</span>.<span class="text-blue-300">introduce</span>());</div>
             </div>
+        
+
+            </div>
+
+
         </section>
 
-        <section id="section9" class="section mb-12">
-            <h2 class="text-3xl font-bold mb-6">
+        <section id="section-9" class="mb-16">
+
+
+            <h2 class="text-3xl font-bold mb-8 text-center">
+
+
                 <span class="gradient-text">9. DOM 操作 (DOM Manipulation)</span>
+
+
             </h2>
+
+
+            
+
+
+            <div class="language-content" data-lang="javascript">
+
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - 强大的 DOM 操作能力</h4>
+
             <p class="mb-4">DOM (文档对象模型) 允许 JavaScript 操作 HTML 元素。</p>
             <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 选择元素</span></div>
@@ -544,12 +728,33 @@
                 <div class="code-line"><span class="text-blue-300">newDiv</span>.<span class="text-blue-300">textContent</span> = <span class="text-green-300">"动态添加的元素"</span>;</div>
                 <div class="code-line"><span class="text-blue-300">document</span>.<span class="text-blue-300">body</span>.<span class="text-blue-300">appendChild</span>(<span class="text-blue-300">newDiv</span>);</div>
             </div>
+        
+
+            </div>
+
+
         </section>
 
-        <section id="section10" class="mb-16">
+        <section id="section-10" class="mb-16">
+
+
             <h2 class="text-3xl font-bold mb-8 text-center">
+
+
                 <span class="gradient-text">10. 事件 (Events)</span>
+
+
             </h2>
+
+
+            
+
+
+            <div class="language-content" data-lang="javascript">
+
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - 事件驱动编程模型</h4>
+
             <p class="mb-4">JavaScript 可以响应用户交互和浏览器事件。</p>
             <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 获取按钮元素</span></div>
@@ -580,12 +785,33 @@
                 <div class="code-line">    <span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">"表单提交被拦截"</span>);</div>
                 <div class="code-line">});</div>
             </div>
+        
+
+            </div>
+
+
         </section>
 
-        <section id="section11" class="mb-16">
+        <section id="section-11" class="mb-16">
+
+
             <h2 class="text-3xl font-bold mb-8 text-center">
+
+
                 <span class="gradient-text">11. 异步编程 (Asynchronous)</span>
+
+
             </h2>
+
+
+            
+
+
+            <div class="language-content" data-lang="javascript">
+
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - 单线程异步编程模型</h4>
+
             <p class="mb-4">JavaScript 的异步编程模型允许非阻塞操作。</p>
             <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// Promise 示例</span></div>
@@ -629,12 +855,33 @@
                 <div class="code-line">    }</div>
                 <div class="code-line">}</div>
             </div>
+        
+
+            </div>
+
+
         </section>
 
-        <section id="section12" class="section mb-12">
-            <h2 class="text-3xl font-bold mb-6">
+        <section id="section-12" class="mb-16">
+
+
+            <h2 class="text-3xl font-bold mb-8 text-center">
+
+
                 <span class="gradient-text">12. 错误处理 (Error Handling)</span>
+
+
             </h2>
+
+
+            
+
+
+            <div class="language-content" data-lang="javascript">
+
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - 完善的错误处理机制</h4>
+
             <p class="mb-4">JavaScript 提供 try-catch-finally 语句来处理错误。</p>
             <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 基本错误处理</span></div>
@@ -675,12 +922,33 @@
                 <div class="code-line"><span class="text-blue-300">processUserData</span>({<span class="text-blue-300">name</span>: <span class="text-green-300">"张三"</span>, <span class="text-blue-300">age</span>: <span class="text-yellow-400">25</span>});</div>
                 <div class="code-line"><span class="text-blue-300">processUserData</span>({<span class="text-blue-300">name</span>: <span class="text-green-300">"李四"</span>, <span class="text-blue-300">age</span>: -<span class="text-yellow-400">5</span>}); <span class="text-blue-400">// 触发错误</span></div>
             </div>
+        
+
+            </div>
+
+
         </section>
 
-        <section id="section13" class="section mb-12">
-            <h2 class="text-3xl font-bold mb-6">
+        <section id="section-13" class="mb-16">
+
+
+            <h2 class="text-3xl font-bold mb-8 text-center">
+
+
                 <span class="gradient-text">13. 模块化 (Modularity)</span>
+
+
             </h2>
+
+
+            
+
+
+            <div class="language-content" data-lang="javascript">
+
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - ES6 模块化支持</h4>
+
             <p class="mb-4">JavaScript 模块化有助于组织和重用代码。</p>
             <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// math.js (ES6 模块示例)</span></div>
@@ -703,12 +971,33 @@
                 <div class="code-line"><span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(<span class="text-blue-300">multiply</span>(<span class="text-yellow-400">4</span>, <span class="text-yellow-400">7</span>)); <span class="text-blue-400">// 28</span></div>
                 <div class="code-line"><span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(<span class="text-blue-300">PI</span>); <span class="text-blue-400">// 3.14159</span></div>
             </div>
+        
+
+            </div>
+
+
         </section>
 
-        <section id="section14" class="mb-16">
+        <section id="section-14" class="mb-16">
+
+
             <h2 class="text-3xl font-bold mb-8 text-center">
+
+
                 <span class="gradient-text">14. ES6+ 特性 (ES6+ Features)</span>
+
+
             </h2>
+
+
+            
+
+
+            <div class="language-content" data-lang="javascript">
+
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - 现代 ES6+ 语法特性</h4>
+
             <p class="mb-4">ES6 及更高版本引入了许多现代 JavaScript 特性。</p>
             <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 解构赋值</span></div>
@@ -735,12 +1024,33 @@
                 <div class="code-line"><span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(<span class="text-blue-300">greet</span>()); <span class="text-blue-400">// "你好, 访客!"</span></div>
                 <div class="code-line"><span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(<span class="text-blue-300">greet</span>(<span class="text-green-300">"李四"</span>)); <span class="text-blue-400">// "你好, 李四!"</span></div>
             </div>
+        
+
+            </div>
+
+
         </section>
 
-        <section id="section15" class="mb-16">
+        <section id="section-15" class="mb-16">
+
+
             <h2 class="text-3xl font-bold mb-8 text-center">
+
+
                 <span class="gradient-text">15. 浏览器 API (Browser APIs)</span>
+
+
             </h2>
+
+
+            
+
+
+            <div class="language-content" data-lang="javascript">
+
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - 丰富的浏览器 API</h4>
+
             <p class="mb-4">现代浏览器提供了丰富的 API 来实现各种功能。</p>
             <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// localStorage 和 sessionStorage</span></div>
@@ -779,12 +1089,33 @@
                 <div class="code-line"></div>
                 <div class="code-line"><span class="text-blue-300">clearTimeout</span>(<span class="text-blue-300">timerId</span>); <span class="text-blue-400">// 取消计时器</span></div>
             </div>
+        
+
+            </div>
+
+
         </section>
 
-        <section id="section16" class="section mb-12">
-            <h2 class="text-3xl font-bold mb-6">
+        <section id="section-16" class="mb-16">
+
+
+            <h2 class="text-3xl font-bold mb-8 text-center">
+
+
                 <span class="gradient-text">16. 浏览器：文档，事件，接口 (Browser: Document, Events, Interfaces)</span>
+
+
             </h2>
+
+
+            
+
+
+            <div class="language-content" data-lang="javascript">
+
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - 文档、事件与接口</h4>
+
             <p class="mb-4">浏览器提供了丰富的API来操作文档、处理事件和实现各种接口。</p>
             
             <h3 class="text-2xl font-semibold mb-4 text-blue-300">文档对象模型 (DOM)</h3>
@@ -944,22 +1275,31 @@
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">subtree</span>: <span class="text-purple-400">true</span></div>
                 <div class="code-line">});</div>
             </div>
+        
+
+            </div>
+
+
         </section>
 
         <!-- 17. WebTransport 数据传输 -->
-        <section id="section17" class="mb-16">
-            <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">17. WebTransport 数据传输</span>
-            </h2>
-            <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 border border-slate-700 mb-8">
-                <p class="text-slate-300 mb-4">
-                    WebTransport 是基于 HTTP/3 的现代传输协议，提供双向、加密、低延迟的数据传输，适用于实时应用如游戏、视频会议和金融交易。
-                </p>
-            </div>
+        <section id="section-17" class="mb-16">
 
-            <h3 class="text-2xl font-semibold mb-4 gradient-text">17.1 基本连接</h3>
+            <h2 class="text-3xl font-bold mb-8 text-center">
+
+                <span class="gradient-text">17. WebTransport 数据传输</span>
+
+            </h2>
+
+            
+
+            <div class="language-content" data-lang="javascript">
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - WebTransport 高效数据传输</h4>
+
+            <p class="text-slate-300 mb-4">WebTransport 是基于 HTTP/3 的现代传输协议，提供双向、加密、低延迟的数据传输，适用于实时应用如游戏、视频会议和金融交易。</p>
+
             <div class="code-block rounded-lg p-4 code-font text-sm">
-                <div class="text-slate-400 mb-2"># WebTransport 基本连接</div>
                 <div class="code-line"><span class="text-blue-400">// 创建 WebTransport 连接</span></div>
                 <div class="code-line"><span class="text-purple-400">async function</span> <span class="text-yellow-300">connectWebTransport</span>() {</div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">try</span> {</div>
@@ -976,9 +1316,7 @@
                 <div class="code-line">}</div>
             </div>
 
-            <h3 class="text-2xl font-semibold mb-4 gradient-text">17.2 双向流</h3>
             <div class="code-block rounded-lg p-4 code-font text-sm">
-                <div class="text-slate-400 mb-2"># WebTransport 双向流</div>
                 <div class="code-line"><span class="text-blue-400">// 创建双向流</span></div>
                 <div class="code-line"><span class="text-purple-400">async function</span> <span class="text-yellow-300">createBidirectionalStream</span>(<span class="text-blue-300">transport</span>) {</div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">try</span> {
@@ -1004,9 +1342,7 @@
                 <div class="code-line">}</div>
             </div>
 
-            <h3 class="text-2xl font-semibold mb-4 gradient-text">17.3 数据报传输</h3>
             <div class="code-block rounded-lg p-4 code-font text-sm">
-                <div class="text-slate-400 mb-2"># WebTransport 数据报传输</div>
                 <div class="code-line"><span class="text-blue-400">// 发送和接收数据报</span></div>
                 <div class="code-line"><span class="text-purple-400">async function</span> <span class="text-yellow-300">setupDatagrams</span>(<span class="text-blue-300">transport</span>) {</div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">try</span> {
@@ -1031,13 +1367,26 @@
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
                 <div class="code-line">}</div>
             </div>
+        
+            </div>
+
         </section>
 
         <!-- 18. WebCodecs 编解码 -->
-        <section id="section18" class="mb-16">
+        <section id="section-18" class="mb-16">
+
             <h2 class="text-3xl font-bold mb-8 text-center">
+
                 <span class="gradient-text">18. WebCodecs 编解码</span>
+
             </h2>
+
+            
+
+            <div class="language-content" data-lang="javascript">
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - WebCodecs 音视频编解码</h4>
+
             <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 border border-slate-700 mb-8">
                 <p class="text-slate-300 mb-4">
                     WebCodecs API 提供了对视频和音频编解码器的直接访问，允许开发者对媒体流进行精细控制，适用于视频编辑、实时流媒体和图像处理等场景。
@@ -1244,13 +1593,26 @@
                 <div class="code-line">}
                 <div class="code-line"></div>
             </div>
+        
+            </div>
+
         </section>
 
         <!-- 19. WebAssembly 汇编 -->
-        <section id="section19" class="mb-16">
+        <section id="section-19" class="mb-16">
+
             <h2 class="text-3xl font-bold mb-8 text-center">
+
                 <span class="gradient-text">19. WebAssembly 汇编</span>
+
             </h2>
+
+            
+
+            <div class="language-content" data-lang="javascript">
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - WebAssembly 高性能计算</h4>
+
             <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 border border-slate-700 mb-8">
                 <p class="text-slate-300 mb-4">
                     WebAssembly (Wasm) 是一种低级的类汇编语言，提供了接近原生的执行速度，适用于高性能计算、游戏、图像处理等场景。
@@ -1373,13 +1735,26 @@
                 <div class="code-line"></div>
                 <div class="code-line"><span class="text-blue-400">// 编译命令：emcc example.c -o example.js -s EXPORTED_FUNCTIONS='["_add", "_multiply"]' -s EXPORTED_RUNTIME_METHODS='["cwrap"]'</span></div>
             </div>
+        
+            </div>
+
         </section>
 
         <!-- 20. WebGPU 计算与渲染 -->
-        <section id="section20" class="mb-16">
+        <section id="section-20" class="mb-16">
+
             <h2 class="text-3xl font-bold mb-8 text-center">
+
                 <span class="gradient-text">20. WebGPU 计算与渲染</span>
+
             </h2>
+
+            
+
+            <div class="language-content" data-lang="javascript">
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - WebGPU 下一代图形计算</h4>
+
             <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 border border-slate-700 mb-8">
                 <p class="text-slate-300 mb-4">
                     WebGPU 是下一代 Web 图形 API，提供高性能的 3D 图形渲染和通用计算能力，支持现代 GPU 特性如 ray tracing 和 compute shaders。
@@ -1701,13 +2076,26 @@
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">resultBuffer</span>.<span class="text-blue-300">unmap</span>();</div>
                 <div class="code-line">}
             </div>
+        
+            </div>
+
         </section>
 
         <!-- 21. WebXR 虚拟/增强/混合现实 -->
-        <section id="section21" class="mb-16">
+        <section id="section-21" class="mb-16">
+
             <h2 class="text-3xl font-bold mb-8 text-center">
+
                 <span class="gradient-text">21. WebXR 虚拟/增强/混合现实</span>
+
             </h2>
+
+            
+
+            <div class="language-content" data-lang="javascript">
+
+                <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - WebXR 沉浸式体验</h4>
+
             <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 border border-slate-700 mb-8">
                 <p class="text-slate-300 mb-4">
                     WebXR API 为 Web 应用提供了访问虚拟现实（VR）、增强现实（AR）和混合现实（MR）设备的能力，包括头显、控制器和传感器。
@@ -1896,6 +2284,9 @@
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;});</div>
                 <div class="code-line">}
             </div>
+        
+            </div>
+
         </section>
 
         </div>
