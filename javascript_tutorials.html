@@ -1347,15 +1347,12 @@
 
                 <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - WebCodecs 音视频编解码</h4>
 
-            <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 border border-slate-700 mb-8">
-                <p class="text-slate-300 mb-4">
-                    WebCodecs API 提供了对视频和音频编解码器的直接访问，允许开发者对媒体流进行精细控制，适用于视频编辑、实时流媒体和图像处理等场景。
-                </p>
-            </div>
+            <p class="mb-4">
+                WebCodecs API 提供了对视频和音频编解码器的直接访问，允许开发者对媒体流进行精细控制，适用于视频编辑、实时流媒体和图像处理等场景。
+            </p>
 
-            <h3 class="text-2xl font-semibold mb-4 gradient-text">18.1 视频编码器</h3>
-            <div class="code-block rounded-lg p-4 code-font text-sm">
-                <div class="text-slate-400 mb-2"># WebCodecs 视频编码器</div>
+            <h3 class="text-2xl font-semibold mb-4 text-blue-300">18.1 视频编码器</h3>
+            <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 配置视频编码器</span></div>
                 <div class="code-line"><span class="text-purple-400">async function</span> <span class="text-yellow-300">configureVideoEncoder</span>() {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">try</span> {
@@ -1385,10 +1382,9 @@
                 <div class="code-line"></div>
             </div>
         
-            <h3 class="text-2xl font-semibold mb-4 gradient-text">18.2 视频解码器</h3>
-            <div class="code-block rounded-lg p-4 code-font text-sm">
-                <div class="text-slate-400 mb-2"># WebCodecs 视频解码器</div>
-                <div class="code-line"><span class="text-blue-400">// 配置视频解码器</span>
+            <h3 class="text-2xl font-semibold mb-4 text-blue-300">18.2 视频解码器</h3>
+            <div class="code-block">
+                <div class="code-line"><span class="text-blue-400">// 配置视频解码器</span></div>
                 <div class="code-line"><span class="text-purple-400">async function</span> <span class="text-yellow-300">configureVideoDecoder</span>() {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">try</span> {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">const</span> <span class="text-blue-300">decoder</span> = <span class="text-purple-400">new</span> <span class="text-blue-300">VideoDecoder</span>({
@@ -1417,23 +1413,22 @@
                 <div class="code-line"></div>
             </div>
 
-            <h3 class="text-2xl font-semibold mb-4 gradient-text">18.3 音频编码器</h3>
-            <div class="code-block rounded-lg p-4 code-font text-sm">
-                <div class="text-slate-400 mb-2"># WebCodecs 音频编码器</div>
+            <h3 class="text-2xl font-semibold mb-4 text-blue-300">18.3 音频编码器</h3>
+            <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 配置音频编码器</span></div>
                 <div class="code-line"><span class="text-purple-400">async function</span> <span class="text-yellow-300">configureAudioEncoder</span>() {</div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">try</span> {</div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">const</span> <span class="text-blue-300">encoder</span> = <span class="text-purple-400">new</span> <span class="text-blue-300">AudioEncoder</span>({</div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">output</span>: <span class="text-blue-300">chunk</span> => {</div>
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">'编码后的音频帧：\'</span>, <span class="text-blue-300">chunk</span>);</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">'编码后的音频帧：'</span>, <span class="text-blue-300">chunk</span>);</div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">error</span>: <span class="text-blue-300">error</span> => {</div>
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-red-300">error</span>(<span class="text-green-300">'编码错误：\'</span>, <span class="text-blue-300">error</span>);</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-red-300">error</span>(<span class="text-green-300">'编码错误：'</span>, <span class="text-blue-300">error</span>);</div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</div>
                 <div class="code-line"></div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">await</span> <span class="text-blue-300">encoder</span>.<span class="text-blue-300">configure</span>({</div>
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">codec</span>: <span class="text-green-300">'opus\'</span>,</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">codec</span>: <span class="text-green-300">'opus'</span>,</div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">sampleRate</span>: <span class="text-yellow-300">48000</span>,</div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">numberOfChannels</span>: <span class="text-yellow-300">2</span>,</div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">bitrate</span>: <span class="text-yellow-300">128000</span> <span class="text-blue-400">// 128 kbps</span></div>
@@ -1442,16 +1437,15 @@
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-400">// 返回配置好的编码器</span></div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-blue-300">encoder</span>;</div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">catch</span> (<span class="text-blue-300">error</span>) {</div>
-                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-red-300">error</span>(<span class="text-green-300">'配置编码器失败：\'</span>, <span class="text-blue-300">error</span>);</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">console</span>.<span class="text-red-300">error</span>(<span class="text-green-300">'配置编码器失败：'</span>, <span class="text-blue-300">error</span>);</div>
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
                 <div class="code-line">}</div>
                 <div class="code-line"></div>
             </div>
 
-            <h3 class="text-2xl font-semibold mb-4 gradient-text">18.4 视频处理管道</h3>
-            <div class="code-block rounded-lg p-4 code-font text-sm">
-                <div class="text-slate-400 mb-2"># WebCodecs 完整视频处理管道</div>
-                <div class="code-line"><span class="text-blue-400">// 创建完整的视频处理管道</span>
+            <h3 class="text-2xl font-semibold mb-4 text-blue-300">18.4 视频处理管道</h3>
+            <div class="code-block">
+                <div class="code-line"><span class="text-blue-400">// 创建完整的视频处理管道</span></div>
                 <div class="code-line"><span class="text-purple-400">class</span> <span class="text-yellow-300">VideoProcessingPipeline</span> {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">constructor</span>() {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">this</span>.<span class="text-blue-300">encoder</span> = <span class="text-purple-400">null</span>;
@@ -1574,15 +1568,12 @@
 
                 <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - WebAssembly 高性能计算</h4>
 
-            <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 border border-slate-700 mb-8">
-                <p class="text-slate-300 mb-4">
-                    WebAssembly (Wasm) 是一种低级的类汇编语言，提供了接近原生的执行速度，适用于高性能计算、游戏、图像处理等场景。
-                </p>
-            </div>
+            <p class="mb-4">
+                WebAssembly (Wasm) 是一种低级的类汇编语言，提供了接近原生的执行速度，适用于高性能计算、游戏、图像处理等场景。
+            </p>
 
-            <h3 class="text-2xl font-semibold mb-4 gradient-text">19.1 WebAssembly 模块加载</h3>
-            <div class="code-block rounded-lg p-4 code-font text-sm">
-                <div class="text-slate-400 mb-2"># 加载 WebAssembly 模块</div>
+            <h3 class="text-2xl font-semibold mb-4 text-blue-300">19.1 WebAssembly 模块加载</h3>
+            <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 从 URL 加载 WebAssembly 模块</span></div>
                 <div class="code-line"><span class="text-purple-400">async function</span> <span class="text-yellow-300">loadWebAssemblyModule</span>(<span class="text-blue-300">url</span>) {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">try</span> {
@@ -1624,9 +1615,8 @@
                 <div class="code-line">}</div>
             </div>
 
-            <h3 class="text-2xl font-semibold mb-4 gradient-text">19.2 WebAssembly 内存管理</h3>
-            <div class="code-block rounded-lg p-4 code-font text-sm">
-                <div class="text-slate-400 mb-2"># WebAssembly 内存操作</div>
+            <h3 class="text-2xl font-semibold mb-4 text-blue-300">19.2 WebAssembly 内存管理</h3>
+            <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 创建 WebAssembly 内存</span></div>
                 <div class="code-line"><span class="text-purple-400">const</span> <span class="text-blue-300">memory</span> = <span class="text-purple-400">new</span> <span class="text-blue-300">WebAssembly</span>.<span class="text-blue-300">Memory</span>({ 
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">initial</span>: <span class="text-yellow-300">1</span>, <span class="text-blue-400">// 初始内存页数（1页 = 64KB）</span></div>
@@ -1649,9 +1639,8 @@
                 <div class="code-line">}</div>
             </div>
 
-            <h3 class="text-2xl font-semibold mb-4 gradient-text">19.3 从 JavaScript 调用 WebAssembly</h3>
-            <div class="code-block rounded-lg p-4 code-font text-sm">
-                <div class="text-slate-400 mb-2"># JavaScript 与 WebAssembly 交互</div>
+            <h3 class="text-2xl font-semibold mb-4 text-blue-300">19.3 从 JavaScript 调用 WebAssembly</h3>
+            <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 完整的 WebAssembly 交互示例</span></div>
                 <div class="code-line"><span class="text-purple-400">async function</span> <span class="text-yellow-300">wasmInteractionExample</span>() {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-400">// 创建内存</span></div>
@@ -1716,15 +1705,12 @@
 
                 <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - WebGPU 下一代图形计算</h4>
 
-            <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 border border-slate-700 mb-8">
-                <p class="text-slate-300 mb-4">
-                    WebGPU 是下一代 Web 图形 API，提供高性能的 3D 图形渲染和通用计算能力，支持现代 GPU 特性如 ray tracing 和 compute shaders。
-                </p>
-            </div>
+            <p class="mb-4">
+                WebGPU 是下一代 Web 图形 API，提供高性能的 3D 图形渲染和通用计算能力，支持现代 GPU 特性如 ray tracing 和 compute shaders。
+            </p>
 
-            <h3 class="text-2xl font-semibold mb-4 gradient-text">20.1 WebGPU 设备初始化</h3>
-            <div class="code-block rounded-lg p-4 code-font text-sm">
-                <div class="text-slate-400 mb-2"># WebGPU 设备初始化</div>
+            <h3 class="text-2xl font-semibold mb-4 text-blue-300">20.1 WebGPU 设备初始化</h3>
+            <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 初始化 WebGPU 设备</span></div>
                 <div class="code-line"><span class="text-purple-400">async function</span> <span class="text-yellow-300">initializeWebGPU</span>() {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">const</span> <span class="text-blue-300">canvas</span> = <span class="text-blue-300">document</span>.<span class="text-blue-300">getElementById</span>(<span class="text-green-300">'gpuCanvas'</span>);</div>
@@ -1769,9 +1755,8 @@
                 <div class="code-line">}
             </div>
 
-            <h3 class="text-2xl font-semibold mb-4 gradient-text">20.2 渲染三角形</h3>
-            <div class="code-block rounded-lg p-4 code-font text-sm">
-                <div class="text-slate-400 mb-2"># WebGPU 渲染三角形</div>
+            <h3 class="text-2xl font-semibold mb-4 text-blue-300">20.2 渲染三角形</h3>
+            <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 绘制三角形示例</span></div>
                 <div class="code-line"><span class="text-purple-400">async function</span> <span class="text-yellow-300">drawTriangle</span>() {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-400">// 初始化设备</span></div>
@@ -1887,9 +1872,8 @@
                 <div class="code-line">}</div>
             </div>
 
-            <h3 class="text-2xl font-semibold mb-4 gradient-text">20.3 计算管线示例</h3>
-            <div class="code-block rounded-lg p-4 code-font text-sm">
-                <div class="text-slate-400 mb-2"># WebGPU 计算管线</div>
+            <h3 class="text-2xl font-semibold mb-4 text-blue-300">20.3 计算管线示例</h3>
+            <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 使用 WebGPU 进行向量加法</span></div>
                 <div class="code-line"><span class="text-purple-400">async function</span> <span class="text-yellow-300">vectorAddition</span>() {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-400">// 初始化设备</span></div>
@@ -2057,15 +2041,12 @@
 
                 <h4 class="text-lg font-medium mb-4 text-purple-400">JavaScript - WebXR 沉浸式体验</h4>
 
-            <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 border border-slate-700 mb-8">
-                <p class="text-slate-300 mb-4">
-                    WebXR API 为 Web 应用提供了访问虚拟现实（VR）、增强现实（AR）和混合现实（MR）设备的能力，包括头显、控制器和传感器。
-                </p>
-            </div>
+            <p class="mb-4">
+                WebXR API 为 Web 应用提供了访问虚拟现实（VR）、增强现实（AR）和混合现实（MR）设备的能力，包括头显、控制器和传感器。
+            </p>
 
-            <h3 class="text-2xl font-semibold mb-4 gradient-text">21.1 WebXR 基础设置</h3>
-            <div class="code-block rounded-lg p-4 code-font text-sm">
-                <div class="text-slate-400 mb-2"># WebXR 基础设置</div>
+            <h3 class="text-2xl font-semibold mb-4 text-blue-300">21.1 WebXR 基础设置</h3>
+            <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 检查浏览器是否支持 WebXR</span></div>
                 <div class="code-line"><span class="text-purple-400">if</span> (!<span class="text-blue-300">navigator</span>.<span class="text-blue-300">xr</span>) {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">alert</span>(<span class="text-green-300">'您的浏览器不支持 WebXR'</span>);
@@ -2089,9 +2070,8 @@
                 <div class="code-line">}
             </div>
 
-            <h3 class="text-2xl font-semibold mb-4 gradient-text">21.2 创建 XR 会话</h3>
-            <div class="code-block rounded-lg p-4 code-font text-sm">
-                <div class="text-slate-400 mb-2"># 创建 XR 会话</div>
+            <h3 class="text-2xl font-semibold mb-4 text-blue-300">21.2 创建 XR 会话</h3>
+            <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 请求创建 VR 会话</span></div>
                 <div class="code-line"><span class="text-purple-400">async function</span> <span class="text-yellow-300">createVRSession</span>() {
                 <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">try</span> {
@@ -2175,9 +2155,8 @@
                 <div class="code-line">}
             </div>
 
-            <h3 class="text-2xl font-semibold mb-4 gradient-text">21.4 处理控制器输入</h3>
-            <div class="code-block rounded-lg p-4 code-font text-sm">
-                <div class="text-slate-400 mb-2"># 处理控制器输入</div>
+            <h3 class="text-2xl font-semibold mb-4 text-blue-300">21.4 处理控制器输入</h3>
+            <div class="code-block">
                 <div class="code-line"><span class="text-blue-400">// 追踪 XR 输入源</span></div>
                 <div class="code-line"><span class="text-purple-400">const</span> <span class="text-blue-300">inputSources</span> = [];</div>
                 <div class="code-line"></div>
