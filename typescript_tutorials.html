@@ -204,6 +204,180 @@
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-green-300">`Hello, ${</span><span class="text-blue-300">userName</span><span class="text-green-300">!`</span>;</div>
                             <div class="code-line">}</div>
                             <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 交叉类型</span></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Person</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">age</span>: <span class="text-purple-400">number</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Employee</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">company</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">position</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">type</span> <span class="text-yellow-300">EmployeePerson</span> = <span class="text-yellow-300">Person</span> <span class="text-purple-400</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 交叉类型</span></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Person</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">age</span>: <span class="text-purple-400">number</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Employee</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">id</span>: <span class="text-purple-400">number</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">department</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">type</span> <span class="text-yellow-300">EmployeePerson</span> = <span class="text-yellow-300">Person</span> & <span class="text-yellow-300">Employee</span>;
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">const</span> <span class="text-blue-300">employee</span>: <span class="text-yellow-300">EmployeePerson</span> = {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-green-300">"John Doe"</span>,
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">age</span>: <span class="text-purple-400">30</span>,
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">id</span>: <span class="text-purple-400">123</span>,
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">department</span>: <span class="text-green-300">"IT"</span>
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// app.ts - 使用命名空间</span></div>
+                            <div class="code-line"><span class="text-purple-400">/// &lt;reference path="geometry.ts" /&gt;</span></div>
+                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">circle</span> = <span class="text-purple-400">new</span> <span class="text-yellow-300">Geometry</span>.<span class="text-yellow-300">Circle</span>(<span class="text-yellow-400">5</span>);
+                            <div class="code-line"><span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`Circle area: ${</span><span class="text-blue-300">circle</span>.<span class="text-blue-300">area</span>()<span class="text-green-300">`</span>);
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">rectangle</span> = <span class="text-purple-400">new</span> <span class="text-yellow-300">Geometry</span>.<span class="text-yellow-300">Rectangle</span>(<span class="text-yellow-400">10</span>, <span class="text-yellow-400">20</span>);
+                            <div class="code-line"><span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`Rectangle area: ${</span><span class="text-blue-300">rectangle</span>.<span class="text-blue-300">area</span>()<span class="text-green-300">`</span>);
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 嵌套命名空间</span></div>
+                            <div class="code-line"><span class="text-purple-400">namespace</span> <span class="text-yellow-300">MyApp</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">export</span> <span class="text-purple-400">namespace</span> <span class="text-yellow-300">Utils</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">export</span> <span class="text-purple-400">function</span> <span class="text-yellow-300">log</span>(<span class="text-blue-300">message</span>: <span class="text-purple-400">string</span>): <span class="text-purple-400">void</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`[LOG]: ${</span><span class="text-blue-300">message</span><span class="text-green-300">`</span>);
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">MyApp</span>.<span class="text-yellow-300">Utils</span>.<span class="text-yellow-300">log</span>(<span class="text-green-300">"Hello from nested namespace!"</span>);
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 别名导入</span></div>
+                            <div class="code-line"><span class="text-purple-400">import</span> <span class="text-yellow-300">Geo</span> = <span class="text-yellow-300">Geometry</span>;
+                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">geoCircle</span> = <span class="text-purple-400">new</span> <span class="text-yellow-300">Geo</span>.<span class="text-yellow-300">Circle</span>(<span class="text-yellow-400">10</span>);
+                            <div class="code-line"><span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`Circle area (with alias): ${</span><span class="text-blue-300">geoCircle</span>.<span class="text-blue-300">area</span>()<span class="text-green-300">`</span>);
+                        </div>
+                        <p class="mb-4 mt-6">命名空间是 TypeScript 早期版本的特性，用于组织代码。在现代 TypeScript 开发中，推荐使用 ES6 模块而不是命名空间，但命名空间仍然可以用于特定场景，特别是当需要将多个文件合并为一个文件时。</p>
+                    </div>
+                </section>
+
+                <!-- 12. 装饰器 (Decorators) -->
+                <section id="section-12" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">12. 装饰器 (Decorators)</span>
+                    </h2>
+                    <div class="language-content" data-lang="typescript">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">TypeScript - 使用装饰器增强类和方法</h4>
+                        <p class="mb-4">装饰器是一种特殊类型的声明，它可以被附加到类声明、方法、访问器、属性或参数上。装饰器使用 <code>@expression</code> 语法，其中 expression 必须求值为一个函数，该函数会在运行时被调用，被装饰的声明信息作为参数传入。</p>
+                        <p class="mb-4">要使用装饰器，需要在 tsconfig.json 中启用 <code>experimentalDecorators</code> 选项。</p>
+                        <div class="code-block">
+                            <div class="code-line"><span class="text-blue-400">// 类装饰器</span></div>
+                            <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">sealed</span>(<span class="text-blue-300">target</span>: <span class="text-purple-400">Function</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">Object</span>.<span class="text-blue-300">seal</span>(<span class="text-blue-300">target</span>);
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">Object</span>.<span class="text-blue-300">seal</span>(<span class="text-blue-300">target</span>.<span class="text-blue-300">prototype</span>);
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-yellow-300">@sealed</span></div>
+                            <div class="code-line"><span class="text-purple-400">class</span> <span class="text-yellow-300">Person</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">constructor</span>(<span class="text-purple-400">public</span> <span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>, <span class="text-purple-400">public</span> <span class="text-blue-300">age</span>: <span class="text-purple-400">number</span>) {}
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 带参数的类装饰器</span></div>
+                            <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">classDecorator</span>(<span class="text-blue-300">params</span>: <span class="text-purple-400">any</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-purple-400">function</span>(<span class="text-blue-300">target</span>: <span class="text-purple-400">Function</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`Class decorator with params: ${</span><span class="text-blue-300">JSON</span>.<span class="text-blue-300">stringify</span>(<span class="text-blue-300">params</span>)<span class="text-green-300">`</span>);
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`Target class: ${</span><span class="text-blue-300">target</span>.<span class="text-blue-300">name</span><span class="text-green-300">`</span>);
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;};
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-yellow-300">@classDecorator</span>({ <span class="text-blue-300">name</span>: <span class="text-green-300">"MyClass"</span>, <span class="text-blue-300">version</span>: <span class="text-yellow-400">1.0</span> })</div>
+                            <div class="code-line"><span class="text-purple-400">class</span> <span class="text-yellow-300">MyClass</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">message</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">constructor</span>() {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">this</span>.<span class="text-blue-300">message</span> = <span class="text-green-300">"Hello"</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 索引类型</span></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Person</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">age</span>: <span class="text-purple-400">number</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">location</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">type</span> <span class="text-yellow-300">PersonKeys</span> = keyof <span class="text-yellow-300">Person</span>; <span class="text-blue-400">// "name" | "age" | "location"</span></div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">getProperty</span>&lt;<span class="text-yellow-300">T</span>, <span class="text-yellow-300">K</span> <span class="text-purple-400">extends</span> keyof <span class="text-yellow-300">T</span>&gt;(<span class="text-blue-300">obj</span>: <span class="text-yellow-300">T</span>, <span class="text-blue-300">key</span>: <span class="text-yellow-300">K</span>): <span class="text-yellow-300">T</span>[<span class="text-yellow-300">K</span>] {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-blue-300">obj</span>[<span class="text-blue-300">key</span>];
+                            <div class="code-line">};
+
+                            <div class="code-line"><span class="text-blue-400">// 使用命名空间</span></div>
+                            <div class="code-line"><span class="text-purple-400">namespace</span> <span class="text-yellow-300">MyApp</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">export</span> <span class="text-purple-400">namespace</span> <span class="text-yellow-300">Utils</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">export</span> <span class="text-purple-400">function</span> <span class="text-yellow-300">log</span>(<span class="text-blue-300">message</span>: <span class="text-purple-400">string</span>): <span class="text-purple-400">void</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`[LOG]: ${</span><span class="text-blue-300">message</span><span class="text-green-300">`</span>);
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">}
+
+                            <div class="code-line"><span class="text-purple-400">// 导入命名空间</span></div>
+                            <div class="code-line"><span class="text-purple-400">import</span> <span class="text-yellow-300">Geo</span> = <span class="text-yellow-300">Geometry</span>;
+                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">circle</span> = <span class="text-purple-400">new</span> <span class="text-yellow-300">Geo</span>.<span class="text-yellow-300">Circle</span>(<span class="text-yellow-400">5</span>);
+                            <div class="code-line"><span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`Circle area: ${</span><span class="text-blue-300">circle</span>.<span class="text-blue-300">area</span>()<span class="text-green-300">`</span>);
+                        </div>
+                        <p class="mb-4 mt-6">命名空间是 TypeScript 早期版本的特性，用于组织代码。在现代 TypeScript 开发中，推荐使用 ES6 模块而不是命名空间，但命名空间仍然可以用于特定场景，特别是当需要将多个文件合并为一个文件时。</p>
+                    </div>
+                </section>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">const</span> <span class="text-blue-300">person</span>: <span class="text-yellow-300">Person</span> = {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-green-300">"Jane Doe"</span>,
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">age</span>: <span class="text-purple-400">25</span>,
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">location</span>: <span class="text-green-300">"New York"</span>
+                            <div class="code-line">};
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">const</span> <span class="text-blue-300">name</span> = <span class="text-yellow-300">getProperty</span>(<span class="text-blue-300">person</span>, <span class="text-green-300">"name"</span>); <span class="text-blue-400">// string</span></div>
+                            <div class="code-line"><span class="text-purple-400">const</span> <span class="text-blue-300">age</span> = <span class="text-yellow-300">getProperty</span>(<span class="text-blue-300">person</span>, <span class="text-green-300">"age"</span>); <span class="text-blue-400">// number</span></div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 映射类型</span></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">User</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">age</span>: <span class="text-purple-400">number</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">type</span> <span class="text-yellow-300">ReadonlyUser</span> = { <span class="text-purple-400">readonly</span> [K <span class="text-purple-400">in</span> keyof <span class="text-yellow-300">User</span>]: <span class="text-yellow-300">User</span>[K]; };</div>
+                            <div class="code-line"><span class="text-purple-400">type</span> <span class="text-yellow-300">PartialUser</span> = { [K <span class="text-purple-400">in</span> keyof <span class="text-yellow-300">User</span>]?: <span class="text-yellow-300">User</span>[K]; };</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">const</span> <span class="text-blue-300">readonlyUser</span>: <span class="text-yellow-300">ReadonlyUser</span> = {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-green-300">"Bob Smith"</span>,
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">age</span>: <span class="text-purple-400">35</span>
+                            <div class="code-line">};</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">const</span> <span class="text-blue-300">partialUser</span>: <span class="text-yellow-300">PartialUser</span> = {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-green-300">"Alice Johnson"</span>
+                            <div class="code-line">};</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 类型参数默认值</span></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">CacheEntry</span>&lt;<span class="text-yellow-300">T</span> = <span class="text-purple-400">any</span>&gt; {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">value</span>: <span class="text-yellow-300">T</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">expires</span>?: <span class="text-purple-400">Date</span>;
+                            <div class="code-line">};
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">const</span> <span class="text-blue-300">stringCache</span>: <span class="text-yellow-300">CacheEntry</span>&lt;<span class="text-purple-400">string</span>&gt; = {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">value</span>: <span class="text-green-300">"Hello World"</span>
+                            <div class="code-line">};</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">const</span> <span class="text-blue-300">anyCache</span>: <span class="text-yellow-300">CacheEntry</span> = {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">value</span>: <span class="text-purple-400">42</span>
+                            <div class="code-line">};</div>
+                        </div>
+                        <p class="mb-4 mt-6">TypeScript 的高级类型系统允许我们构建复杂且灵活的类型定义，以满足各种编程需求。类型别名和可辨识联合类型是其中最常用的高级类型之一。</p>
+                    </div>
+                </section></div>
+                            <div class="code-line"></div>
                             <div class="code-line"><span class="text-blue-300">greet</span>(<span class="text-green-300">"李四"</span>); <span class="text-blue-400">// 正确：传入字符串类型</span></div>
                             <div class="code-line"><span class="text-blue-300">greet</span>(<span class="text-yellow-400">123</span>); <span class="text-blue-400">// 错误：传入数字类型，预期字符串类型</span></div>
                         </div>
@@ -298,32 +472,32 @@
                     </h2>
                     <div class="language-content" data-lang="typescript">
                         <h4 class="text-lg font-medium mb-4 text-purple-400">TypeScript - 使用接口定义对象结构</h4>
-                        <p class="mb-4">接口是 TypeScript 的核心概念之一，它允许我们定义对象的结构和类型，实现代码的结构化和类型安全。</p>
+                        <p class="mb-4">接口用于定义对象的类型，描述对象的形状和结构。接口可以包含属性、方法和索引签名等。</p>
                         <div class="code-block">
-                            <div class="code-line"><span class="text-blue-400">// 基本接口定义</span></div>
-                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">User</span> {
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">id</span>: <span class="text-purple-400">number</span>;</div>
+                            <div class="code-line"><span class="text-blue-400">// 基本接口</span></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Person</span> {
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>;</div>
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">email</span>: <span class="text-purple-400">string</span>;</div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">age</span>: <span class="text-purple-400">number</span>;</div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">isStudent</span>: <span class="text-purple-400">boolean</span>;</div>
                             <div class="code-line">}</div>
                             <div class="code-line"></div>
-                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">user</span>: <span class="text-yellow-300">User</span> = {
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">id</span>: <span class="text-yellow-400">1</span>,</div>
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-green-300">"张三"</span>,</div>
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">email</span>: <span class="text-green-300">"zhangsan@example.com"</span></div>
+                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">person</span>: <span class="text-yellow-300">Person</span> = {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-green-300">"李四"</span>,</div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">age</span>: <span class="text-yellow-400">20</span>,</div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">isStudent</span>: <span class="text-purple-400">true</span></div>
                             <div class="code-line">};</div>
                             <div class="code-line"></div>
                             <div class="code-line"><span class="text-blue-400">// 可选属性</span></div>
                             <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Car</span> {
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">brand</span>: <span class="text-purple-400">string</span>;</div>
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">model</span>: <span class="text-purple-400">string</span>;</div>
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">year</span>?: <span class="text-purple-400">number</span>; <span class="text-blue-400">// 可选属性</span></div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">color</span>?: <span class="text-purple-400">string</span>; <span class="text-blue-400">// 可选属性</span></div>
                             <div class="code-line">}</div>
                             <div class="code-line"></div>
-                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">myCar</span>: <span class="text-yellow-300">Car</span> = {
+                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">car1</span>: <span class="text-yellow-300">Car</span> = {
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">brand</span>: <span class="text-green-300">"Toyota"</span>,</div>
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">model</span>: <span class="text-green-300">"Camry"</span></div>
-                            <div class="code-line">}; <span class="text-blue-400">// 正确：year 是可选的</span></div>
+                            <div class="code-line">};</div>
                             <div class="code-line"></div>
                             <div class="code-line"><span class="text-blue-400">// 只读属性</span></div>
                             <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Point</span> {
@@ -331,10 +505,10 @@
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">readonly</span> <span class="text-blue-300">y</span>: <span class="text-purple-400">number</span>;</div>
                             <div class="code-line">}</div>
                             <div class="code-line"></div>
-                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">origin</span>: <span class="text-yellow-300">Point</span> = { <span class="text-blue-300">x</span>: <span class="text-yellow-400">0</span>, <span class="text-blue-300">y</span>: <span class="text-yellow-400">0</span> };</div>
-                            <div class="code-line"><span class="text-blue-300">origin</span>.<span class="text-blue-300">x</span> = <span class="text-yellow-400">10</span>; <span class="text-blue-400">// 错误：x 是只读属性</span></div>
+                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">point</span>: <span class="text-yellow-300">Point</span> = { <span class="text-blue-300">x</span>: <span class="text-yellow-400">10</span>, <span class="text-blue-300">y</span>: <span class="text-yellow-400">20</span> };</div>
+                            <div class="code-line"><span class="text-blue-300">// point.x = 30; // 错误：只读属性不能被修改</span></div>
                         </div>
-                        <p class="mb-4 mt-6">接口可以被类实现，也可以扩展其他接口，从而实现代码的复用和扩展。</p>
+                        <p class="mb-4 mt-6">接口还可以描述函数类型、索引类型等，是 TypeScript 中定义类型的重要工具。</p>
                     </div>
                 </section>
 
@@ -345,49 +519,48 @@
                     </h2>
                     <div class="language-content" data-lang="typescript">
                         <h4 class="text-lg font-medium mb-4 text-purple-400">TypeScript - 支持面向对象编程</h4>
-                        <p class="mb-4">TypeScript 支持类的概念，允许我们使用面向对象的方式编写代码。类可以实现接口，支持继承、访问修饰符等特性。</p>
+                        <p class="mb-4">TypeScript 提供了完整的类支持，包括继承、访问修饰符、抽象类等面向对象特性。</p>
                         <div class="code-block">
-                            <div class="code-line"><span class="text-blue-400">// 基本类定义</span></div>
+                            <div class="code-line"><span class="text-blue-400">// 基本类</span></div>
                             <div class="code-line"><span class="text-purple-400">class</span> <span class="text-yellow-300">Person</span> {
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">public</span> <span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>; <span class="text-blue-400">// 公共属性</span></div>
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">private</span> <span class="text-blue-300">age</span>: <span class="text-purple-400">number</span>; <span class="text-blue-400">// 私有属性</span></div>
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">protected</span> <span class="text-blue-300">email</span>: <span class="text-purple-400">string</span>; <span class="text-blue-400">// 受保护属性</span></div>
-                            <div class="code-line"></div>
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">constructor</span>(<span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>, <span class="text-blue-300">age</span>: <span class="text-purple-400">number</span>, <span class="text-blue-300">email</span>: <span class="text-purple-400">string</span>) {
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">this</span>.<span class="text-blue-300">name</span> = <span class="text-blue-300">name</span>;</div>
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">this</span>.<span class="text-blue-300">age</span> = <span class="text-blue-300">age</span>;</div>
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">this</span>.<span class="text-blue-300">email</span> = <span class="text-blue-300">email</span>;</div>
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">constructor</span>(<span class="text-purple-400">public</span> <span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>, <span class="text-purple-400">public</span> <span class="text-blue-300">age</span>: <span class="text-purple-400">number</span>) {}</div>
                             <div class="code-line"></div>
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">public</span> <span class="text-blue-300">greet</span>(): <span class="text-purple-400">string</span> {
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-green-300">`Hello, my name is ${</span><span class="text-purple-400">this</span>.<span class="text-blue-300">name</span><span class="text-green-300">.`</span>;</div>
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
-                            <div class="code-line"></div>
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">private</span> <span class="text-blue-300">getAge</span>(): <span class="text-purple-400">number</span> {
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-purple-400">this</span>.<span class="text-blue-300">age</span>;</div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-green-300">`Hello, my name is ${</span><span class="text-purple-400">this</span>.<span class="text-blue-300">name</span><span class="text-green-300">`</span>;</div>
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
                             <div class="code-line">}</div>
                             <div class="code-line"></div>
-                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">person</span> = <span class="text-purple-400">new</span> <span class="text-yellow-300">Person</span>(<span class="text-green-300">"李四"</span>, <span class="text-yellow-400">30</span>, <span class="text-green-300">"lisi@example.com"</span>);</div>
-                            <div class="code-line"><span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-blue-300">person</span>.<span class="text-blue-300">name</span>); <span class="text-blue-400">// 正确：name 是公共属性</span></div>
-                            <div class="code-line"><span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-blue-300">person</span>.<span class="text-blue-300">greet</span>()); <span class="text-blue-400">// 正确：greet 是公共方法</span></div>
-                            <div class="code-line"><span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-blue-300">person</span>.<span class="text-blue-300">age</span>); <span class="text-blue-400">// 错误：age 是私有属性</span></div>
+                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">person</span> = <span class="text-purple-400">new</span> <span class="text-yellow-300">Person</span>(<span class="text-green-300">"张三"</span>, <span class="text-yellow-400">25</span>);</div>
+                            <div class="code-line"><span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-blue-300">person</span>.<span class="text-blue-300">greet</span>()); <span class="text-blue-400">// 输出: Hello, my name is 张三</span></div>
                             <div class="code-line"></div>
                             <div class="code-line"><span class="text-blue-400">// 继承</span></div>
-                            <div class="code-line"><span class="text-purple-400">class</span> <span class="text-yellow-300">Employee</span> <span class="text-purple-400">extends</span> <span class="text-yellow-300">Person</span> {
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">private</span> <span class="text-blue-300">employeeId</span>: <span class="text-purple-400">string</span>;</div>
-                            <div class="code-line"></div>
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">constructor</span>(<span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>, <span class="text-blue-300">age</span>: <span class="text-purple-400">number</span>, <span class="text-blue-300">email</span>: <span class="text-purple-400">string</span>, <span class="text-blue-300">employeeId</span>: <span class="text-purple-400">string</span>) {
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">super</span>(<span class="text-blue-300">name</span>, <span class="text-blue-300">age</span>, <span class="text-blue-300">email</span>); <span class="text-blue-400">// 调用父类构造函数</span></div>
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">this</span>.<span class="text-blue-300">employeeId</span> = <span class="text-blue-300">employeeId</span>;</div>
+                            <div class="code-line"><span class="text-purple-400">class</span> <span class="text-yellow-300">Student</span> <span class="text-purple-400">extends</span> <span class="text-yellow-300">Person</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">constructor</span>(<span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>, <span class="text-blue-300">age</span>: <span class="text-purple-400">number</span>, <span class="text-purple-400">public</span> <span class="text-blue-300">studentId</span>: <span class="text-purple-400">string</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">super</span>(<span class="text-blue-300">name</span>, <span class="text-blue-300">age</span>);</div>
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
                             <div class="code-line"></div>
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">public</span> <span class="text-blue-300">getEmployeeInfo</span>(): <span class="text-purple-400">string</span> {
-                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-green-300">`${</span><span class="text-purple-400">this</span>.<span class="text-blue-300">greet</span>()} My employee ID is ${</span><span class="text-purple-400">this</span>.<span class="text-blue-300">employeeId</span><span class="text-green-300">.`</span>;</div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">public</span> <span class="text-blue-300">study</span>(): <span class="text-purple-400">void</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`Student ${</span><span class="text-purple-400">this</span>.<span class="text-blue-300">name</span><span class="text-green-300"> is studying`</span>);</div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">student</span> = <span class="text-purple-400">new</span> <span class="text-yellow-300">Student</span>(<span class="text-green-300">"李四"</span>, <span class="text-yellow-400">20</span>, <span class="text-green-300">"S12345"</span>);</div>
+                            <div class="code-line"><span class="text-blue-300">student</span>.<span class="text-blue-300">study</span>(); <span class="text-blue-400">// 输出: Student 李四 is studying</span></div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 访问修饰符</span></div>
+                            <div class="code-line"><span class="text-purple-400">class</span> <span class="text-yellow-300">Employee</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">private</span> <span class="text-blue-300">salary</span>: <span class="text-purple-400">number</span>;</div>
+                            <div class="code-line"></div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">constructor</span>(<span class="text-purple-400">public</span> <span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>, <span class="text-purple-400">protected</span> <span class="text-blue-300">department</span>: <span class="text-purple-400">string</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">this</span>.<span class="text-blue-300">salary</span> = <span class="text-yellow-400">0</span>;</div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">public</span> <span class="text-blue-300">setSalary</span>(<span class="text-blue-300">amount</span>: <span class="text-purple-400">number</span>): <span class="text-purple-400">void</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">this</span>.<span class="text-blue-300">salary</span> = <span class="text-blue-300">amount</span>;</div>
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
                             <div class="code-line">}</div>
                         </div>
-                        <p class="mb-4 mt-6">TypeScript 支持公共（public）、私有（private）和受保护（protected）访问修饰符，用于控制类成员的可访问性。</p>
+                        <p class="mb-4 mt-6">TypeScript 支持三种访问修饰符：<code class="bg-slate-800 px-2 py-1 rounded text-yellow-300">public</code>（公开）、<code class="bg-slate-800 px-2 py-1 rounded text-yellow-300">protected</code>（保护）和 <code class="bg-slate-800 px-2 py-1 rounded text-yellow-300">private</code>（私有）。</p>
                     </div>
                 </section>
 
@@ -497,4 +670,277 @@
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
                             <div class="code-line">}</div>
                             <div class="code-line"></div>
-                            <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">makeSound</span>(<span class="text-blue-300">animal</span>: <span class="text-yellow-300">Animal</span>): <span class="text-purple-400">void</span
+                            <div class="code-line"><span class="text-purple-400">class</span> <span class="text-yellow-300">Dog</span> <span class="text-purple-400">extends</span> <span class="text-yellow-300">Animal</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">bark</span>(): <span class="text-purple-400">void</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">"Woof!"</span>);</div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">makeSound</span>(<span class="text-blue-300">animal</span>: <span class="text-yellow-300">Animal</span>): <span class="text-purple-400">void</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (<span class="text-blue-300">animal</span> <span class="text-purple-400">instanceof</span> <span class="text-yellow-300">Cat</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">animal</span>.<span class="text-blue-300">meow</span>();
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">else</span> <span class="text-purple-400">if</span> (<span class="text-blue-300">animal</span> <span class="text-purple-400">instanceof</span> <span class="text-yellow-300">Dog</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">animal</span>.<span class="text-blue-300">bark</span>();
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">else</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">"Unknown animal sound"</span>);
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// in 类型守卫</span>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Bird</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">fly</span>(): <span class="text-purple-400">void</span>;
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Fish</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">swim</span>(): <span class="text-purple-400">void</span>;
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">moveAnimal</span>(<span class="text-blue-300">animal</span>: <span class="text-yellow-300">Bird</span> | <span class="text-yellow-300">Fish</span>): <span class="text-purple-400">void</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (<span class="text-green-300">"fly"</span> <span class="text-purple-400">in</span> <span class="text-blue-300">animal</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">animal</span>.<span class="text-blue-300">fly</span>();
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">else</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">animal</span>.<span class="text-blue-300">swim</span>();
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 自定义类型守卫</span>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Square</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">kind</span>: <span class="text-green-300">"square"</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">sideLength</span>: <span class="text-purple-400">number</span>;
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Circle</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">kind</span>: <span class="text-green-300">"circle"</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">radius</span>: <span class="text-purple-400">number</span>;
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">type</span> <span class="text-yellow-300">Shape</span> = <span class="text-yellow-300">Square</span> | <span class="text-yellow-300">Circle</span>;
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">isSquare</span>(<span class="text-blue-300">shape</span>: <span class="text-yellow-300">Shape</span>): <span class="text-blue-300">shape</span> <span class="text-purple-400">is</span> <span class="text-yellow-300">Square</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-blue-300">shape</span>.<span class="text-blue-300">kind</span> === <span class="text-green-300">"square"</span>;
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">getArea</span>(<span class="text-blue-300">shape</span>: <span class="text-yellow-300">Shape</span>): <span class="text-purple-400">number</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (<span class="text-yellow-300">isSquare</span>(<span class="text-blue-300">shape</span>)) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-blue-300">shape</span>.<span class="text-blue-300">sideLength</span> * <span class="text-blue-300">shape</span>.<span class="text-blue-300">sideLength</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">else</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-purple-400">Math</span>.<span class="text-blue-300">PI</span> * <span class="text-blue-300">shape</span>.<span class="text-blue-300">radius</span> * <span class="text-blue-300">shape</span>.<span class="text-blue-300">radius</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">}
+                        </div>
+                        <p class="mb-4 mt-6">类型守卫是 TypeScript 中处理联合类型的重要工具，它可以帮助我们在运行时安全地访问特定类型的属性和方法。</p>
+                    </div>
+                </section>
+
+                <!-- 9. 高级类型 (Advanced Types) -->
+                <section id="section-9" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">9. 高级类型 (Advanced Types)</span>
+                    </h2>
+                    <div class="language-content" data-lang="typescript">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">TypeScript - 高级类型系统</h4>
+                        <p class="mb-4">TypeScript 提供了多种高级类型，用于处理复杂的类型场景。这些高级类型包括类型别名、类型参数默认值、条件类型等。</p>
+                        <div class="code-block">
+                            <div class="code-line"><span class="text-blue-400">// 类型别名</span></div>
+                            <div class="code-line"><span class="text-purple-400">type</span> <span class="text-yellow-300">StringOrNumber</span> = <span class="text-purple-400">string</span> | <span class="text-purple-400">number</span>;
+                            <div class="code-line"><span class="text-purple-400">type</span> <span class="text-yellow-300">User</span> = {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">id</span>: <span class="text-yellow-300">StringOrNumber</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">email</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">};
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 可辨识联合类型</span></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">SuccessResponse</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">success</span>: <span class="text-purple-400">true</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">data</span>: <span class="text-purple-400">any</span>;
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">ErrorResponse</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">success</span>: <span class="text-purple-400">false</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">error</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">type</span> <span class="text-yellow-300">Response</span> = <span class="text-yellow-300">SuccessResponse</span> | <span class="text-yellow-300">ErrorResponse</span>;
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">handleResponse</span>(<span class="text-blue-300">response</span>: <span class="text-yellow-300">Response</span>): <span class="text-purple-400">void</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (<span class="text-blue-300">response</span>.<span class="text-blue-300">success</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">"Success:"</span>, <span class="text-blue-300">response</span>.<span class="text-blue-300">data</span>);
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">else</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">"Error:"</span>, <span class="text-blue-300">response</span>.<span class="text-blue-300">error</span>);
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 交叉类型</span></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Person</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">age</span>: <span class="text-purple-400">number</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Employee</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">employeeId</span>: <span class="text-purple-400">number</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">department</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">type</span> <span class="text-yellow-300">EmployeePerson</span> = <span class="text-yellow-300">Person</span> & <span class="text-yellow-300">Employee</span>;
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">emp</span>: <span class="text-yellow-300">EmployeePerson</span> = {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-green-300">"John Doe"</span>,
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">age</span>: <span class="text-yellow-400">30</span>,
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">employeeId</span>: <span class="text-yellow-400">12345</span>,
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">department</span>: <span class="text-green-300">"IT"</span>
+                            <div class="code-line">};
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 索引类型</span></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Person</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">age</span>: <span class="text-purple-400">number</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">address</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">type</span> <span class="text-yellow-300">PersonKeys</span> = <span class="text-purple-400">keyof</span> <span class="text-yellow-300">Person</span>; <span class="text-blue-400">// "name" | "age" | "address"
+                            <div class="code-line"><span class="text-purple-400">type</span> <span class="text-yellow-300">PersonValues</span> = <span class="text-yellow-300">Person</span>[<span class="text-purple-400">keyof</span> <span class="text-yellow-300">Person</span>]; <span class="text-blue-400">// string | number</span></div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">getValue</span>&lt;<span class="text-yellow-300">T</span>, <span class="text-yellow-300">K</span> <span class="text-purple-400">extends</span> <span class="text-purple-400">keyof</span> <span class="text-yellow-300">T</span>&gt;(<span class="text-blue-300">obj</span>: <span class="text-yellow-300">T</span>, <span class="text-blue-300">key</span>: <span class="text-yellow-300">K</span>): <span class="text-yellow-300">T</span>[<span class="text-yellow-300">K</span>] {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-blue-300">obj</span>[<span class="text-blue-300">key</span>];
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">person</span>: <span class="text-yellow-300">Person</span> = {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-green-300">"John"</span>,
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">age</span>: <span class="text-yellow-400">25</span>,
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">address</span>: <span class="text-green-300">"123 Main St"</span>
+                            <div class="code-line">};
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">name</span> = <span class="text-yellow-300">getValue</span>(<span class="text-blue-300">person</span>, <span class="text-green-300">"name"</span>); <span class="text-blue-400">// string
+                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">age</span> = <span class="text-yellow-300">getValue</span>(<span class="text-blue-300">person</span>, <span class="text-green-300">"age"</span>); <span class="text-blue-400">// number</span></div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 映射类型</span></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">User</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">name</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">age</span>: <span class="text-purple-400">number</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">email</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 只读映射类型
+                            <div class="code-line"><span class="text-purple-400">type</span> <span class="text-yellow-300">ReadonlyUser</span> = {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">readonly</span> [<span class="text-yellow-300">P</span> <span class="text-purple-400">in</span> <span class="text-purple-400">keyof</span> <span class="text-yellow-300">User</span>]: <span class="text-yellow-300">User</span>[<span class="text-yellow-300">P</span>];
+                            <div class="code-line">};
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 可选映射类型
+                            <div class="code-line"><span class="text-purple-400">type</span> <span class="text-yellow-300">PartialUser</span> = {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;[<span class="text-yellow-300">P</span> <span class="text-purple-400">in</span> <span class="text-purple-400">keyof</span> <span class="text-yellow-300">User</span>]?: <span class="text-yellow-300">User</span>[<span class="text-yellow-300">P</span>];
+                            <div class="code-line">};
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 类型参数默认值</span></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">CacheEntry</span>&lt;<span class="text-yellow-300">T</span> = <span class="text-purple-400">any</span>&gt; {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">key</span>: <span class="text-purple-400">string</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">value</span>: <span class="text-yellow-300">T</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">expiresAt</span>: <span class="text-purple-400">Date</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">stringCache</span>: <span class="text-yellow-300">CacheEntry</span>&lt;<span class="text-purple-400">string</span>&gt; = {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">key</span>: <span class="text-green-300">"name"</span>,
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">value</span>: <span class="text-green-300">"John"</span>,
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">expiresAt</span>: <span class="text-purple-400">new</span> <span class="text-purple-400">Date</span>(<span class="text-yellow-400">2024</span>, <span class="text-yellow-400">12</span>, <span class="text-yellow-400">31</span>)
+                            <div class="code-line">};
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">anyCache</span>: <span class="text-yellow-300">CacheEntry</span> = {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">key</span>: <span class="text-green-300">"data"</span>,
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">value</span>: { <span class="text-blue-300">id</span>: <span class="text-yellow-400">1</span>, <span class="text-blue-300">name</span>: <span class="text-green-300">"Test"</span> },
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">expiresAt</span>: <span class="text-purple-400">new</span> <span class="text-purple-400">Date</span>(<span class="text-yellow-400">2024</span>, <span class="text-yellow-400">12</span>, <span class="text-yellow-400">31</span>)
+                            <div class="code-line">}</div>
+                        </div>
+                        <p class="mb-4 mt-6">高级类型是 TypeScript 中强大的特性，它们允许我们创建复杂的类型定义，解决各种类型问题。通过学习和使用这些高级类型，我们可以编写更安全、更灵活的 TypeScript 代码。</p>
+                    </div>
+                </section>
+
+                <!-- 10. 模块 (Modules) -->
+                <section id="section-10" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">10. 模块 (Modules)</span>
+                    </h2>
+                    <div class="language-content" data-lang="typescript">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">TypeScript - 使用模块组织代码</h4>
+                        <p class="mb-4">TypeScript 支持使用模块来组织代码，模块可以帮助我们将代码分割成可重用的部分，并控制代码的可见性。TypeScript 使用 ES6 模块语法，包括 import 和 export 语句。</p>
+                        <div class="code-block">
+                            <div class="code-line"><span class="text-blue-400">// math.ts - 导出模块</span></div>
+                            <div class="code-line"><span class="text-purple-400">export</span> <span class="text-purple-400">const</span> <span class="text-blue-300">PI</span> = <span class="text-yellow-400">3.14159</span>;
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">export</span> <span class="text-purple-400">function</span> <span class="text-yellow-300">add</span>(<span class="text-blue-300">a</span>: <span class="text-purple-400">number</span>, <span class="text-blue-300">b</span>: <span class="text-purple-400">number</span>): <span class="text-purple-400">number</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>;
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">export</span> <span class="text-purple-400">function</span> <span class="text-yellow-300">multiply</span>(<span class="text-blue-300">a</span>: <span class="text-purple-400">number</span>, <span class="text-blue-300">b</span>: <span class="text-purple-400">number</span>): <span class="text-purple-400">number</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-blue-300">a</span> * <span class="text-blue-300">b</span>;
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">export</span> <span class="text-purple-400">interface</span> <span class="text-yellow-300">Shape</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">area</span>(): <span class="text-purple-400">number</span>;
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">class</span> <span class="text-yellow-300">Circle</span> <span class="text-purple-400">implements</span> <span class="text-yellow-300">Shape</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">constructor</span>(<span class="text-purple-400">private</span> <span class="text-blue-300">radius</span>: <span class="text-purple-400">number</span>) {}
+                            <div class="code-line"></div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">area</span>(): <span class="text-purple-400">number</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-blue-300">PI</span> * <span class="text-blue-300">this</span>.<span class="text-blue-300">radius</span> * <span class="text-blue-300">this</span>.<span class="text-blue-300">radius</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">}
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">export</span> { <span class="text-yellow-300">Circle</span> };
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// app.ts - 导入模块</span></div>
+                            <div class="code-line"><span class="text-purple-400">import</span> { <span class="text-blue-300">PI</span>, <span class="text-yellow-300">add</span>, <span class="text-yellow-300">multiply</span>, <span class="text-yellow-300">Circle</span>, <span class="text-yellow-300">Shape</span> } <span class="text-purple-400">from</span> <span class="text-green-300">"./math"</span>;
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`PI: ${</span><span class="text-blue-300">PI</span><span class="text-green-300">`</span>);
+                            <div class="code-line"><span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`1 + 2 = ${</span><span class="text-yellow-300">add</span>(<span class="text-yellow-400">1</span>, <span class="text-yellow-400">2</span>)<span class="text-green-300">`</span>);
+                            <div class="code-line"><span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`3 * 4 = ${</span><span class="text-yellow-300">multiply</span>(<span class="text-yellow-400">3</span>, <span class="text-yellow-400">4</span>)<span class="text-green-300">`</span>);
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">let</span> <span class="text-blue-300">circle</span> = <span class="text-purple-400">new</span> <span class="text-yellow-300">Circle</span>(<span class="text-yellow-400">5</span>);
+                            <div class="code-line"><span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`Circle area: ${</span><span class="text-blue-300">circle</span>.<span class="text-blue-300">area</span>()<span class="text-green-300">`</span>);
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 重命名导入</span></div>
+                            <div class="code-line"><span class="text-purple-400">import</span> { <span class="text-yellow-300">add</span> <span class="text-purple-400">as</span> <span class="text-yellow-300">sum</span> } <span class="text-purple-400">from</span> <span class="text-green-300">"./math"</span>;
+                            <div class="code-line"><span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`Sum: ${</span><span class="text-yellow-300">sum</span>(<span class="text-yellow-400">5</span>, <span class="text-yellow-400">6</span>)<span class="text-green-300">`</span>);
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-blue-400">// 导入所有内容</span></div>
+                            <div class="code-line"><span class="text-purple-400">import</span> * <span class="text-purple-400">as</span> <span class="text-yellow-300">MathUtils</span> <span class="text-purple-400">from</span> <span class="text-green-300">"./math"</span>;
+                            <div class="code-line"><span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`PI from MathUtils: ${</span><span class="text-yellow-300">MathUtils</span>.<span class="text-blue-300">PI</span><span class="text-green-300">`</span>);
+                        </div>
+                        <p class="mb-4 mt-6">TypeScript 模块支持多种导出方式，包括命名导出和默认导出。模块系统是组织大型 TypeScript 应用程序的重要工具。</p>
+                    </div>
+                </section>
+
+                <!-- 11. 命名空间 (Namespaces) -->
+                <section id="section-11" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">11. 命名空间 (Namespaces)</span>
+                    </h2>
+                    <div class="language-content" data-lang="typescript">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">TypeScript - 使用命名空间组织代码</h4>
+                        <p class="mb-4">命名空间是 TypeScript 中用于组织代码的另一种方式，它允许我们将相关的代码组合在一起，并避免命名冲突。命名空间可以包含接口、类、函数和变量等。</p>
+                        <div class="code-block">
+                            <div class="code-line"><span class="text-blue-400">// geometry.ts</span></div>
+                            <div class="code-line"><span class="text-purple-400">namespace</span> <span class="text-yellow-300">Geometry</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">export</span> <span class="text-purple-400">const</span> <span class="text-blue-300">PI</span> = <span class="text-yellow-400">3.14159</span>;
+                            <div class="code-line"></div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">export</span> <span class="text-purple-400">interface</span> <span class="text-yellow-300">Shape</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">area</span>(): <span class="text-purple-400">number</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line"></div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">export</span> <span class="text-purple-400">class</span> <span class="text-yellow-300">Circle</span> <span class="text-purple-400">implements</span> <span class="text-yellow-300">Shape</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">constructor</span>(<span class="text-purple-400">private</span> <span class="text-blue-300">radius</span>: <span class="text-purple-400">number</span>) {}
+                            <div class="code-line"></div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">area</span>(): <span class="text-purple-400">number</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-blue-300">PI</span> * <span class="text-blue-300">this</span>.<span class="text-blue-300">radius</span> * <span class="text-blue-300">this</span>.<span class="text-blue-300">radius</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line"></div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">export</span> <span class="text-purple-400">class</span> <span class="text-yellow-300">Rectangle</span> <span class="text-purple-400">implements</span> <span class="text-yellow-300">Shape</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">constructor</span>(<span class="text-purple-400">private</span> <span class="text-blue-300">width</span>: <span class="text-purple-400">number</span>, <span class="text-purple-400">private</span> <span class="text-blue-300">height</span>: <span class="text-purple-400">number</span>) {}
+                            <div class="code-line"></div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">area</span>(): <span class="text-purple-400">number</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-blue-300">this</span>.<span class="text-blue-300">width</span> * <span class="text-blue-300">this</span>.<span class="text-blue-300">height</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">};
