@@ -324,6 +324,108 @@
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-slate-300">Math</span>.<span class="text-slate-300">PI</span> * <span class="text-purple-400">this</span>.<span class="text-yellow-300">radius</span> * <span class="text-purple-400">this</span>.<span class="text-yellow-300">radius</span>;
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
                             <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">// instanceof 类型守卫</span></div>
+                            <div class="code-line"><span class="text-purple-400">class</span> <span class="text-yellow-300">Shape</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">abstract</span> <span class="text-purple-400">getArea</span>(): <span class="text-purple-400">number</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">class</span> <span class="text-yellow-300">Circle</span> <span class="text-purple-400">extends</span> <span class="text-yellow-300">Shape</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-yellow-300">radius</span>: <span class="text-purple-400">number</span>;
+                            <div class="code-line"></div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">constructor</span>(<span class="text-blue-300">radius</span>: <span class="text-purple-400">number</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">super</span>();
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">this</span>.<span class="text-yellow-300">radius</span> = <span class="text-blue-300">radius</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line"></div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">getArea</span>(): <span class="text-purple-400">number</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-slate-300">Math</span>.<span class="text-slate-300">PI</span> * <span class="text-purple-400">this</span>.<span class="text-yellow-300">radius</span> ** <span class="text-slate-300">2</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">class</span> <span class="text-yellow-300">Square</span> <span class="text-purple-400">extends</span> <span class="text-yellow-300">Shape</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-yellow-300">side</span>: <span class="text-purple-400">number</span>;
+                            <div class="code-line"></div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">constructor</span>(<span class="text-blue-300">side</span>: <span class="text-purple-400">number</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">super</span>();
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">this</span>.<span class="text-yellow-300">side</span> = <span class="text-blue-300">side</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line"></div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">getArea</span>(): <span class="text-purple-400">number</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-purple-400">this</span>.<span class="text-yellow-300">side</span> ** <span class="text-slate-300">2</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">describeShape</span>(<span class="text-blue-300">shape</span>: <span class="text-yellow-300">Shape</span>): <span class="text-purple-400">string</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (<span class="text-blue-300">shape</span> <span class="text-purple-400">instanceof</span> <span class="text-yellow-300">Circle</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-green-300">`Circle with radius ${</span><span class="text-blue-300">shape</span>.<span class="text-yellow-300">radius</span><span class="text-green-300">`</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">else</span> <span class="text-purple-400">if</span> (<span class="text-blue-300">shape</span> <span class="text-purple-400">instanceof</span> <span class="text-yellow-300">Square</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-green-300">`Square with side ${</span><span class="text-blue-300">shape</span>.<span class="text-yellow-300">side</span><span class="text-green-300">`</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">else</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-green-300">"Unknown shape"</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">// in 操作符类型守卫</span></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Bird</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-yellow-300">fly</span>(): <span class="text-purple-400">void</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-yellow-300">chirp</span>(): <span class="text-purple-400">void</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Fish</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-yellow-300">swim</span>(): <span class="text-purple-400">void</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-yellow-300">bubble</span>(): <span class="text-purple-400">void</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">moveAnimal</span>(<span class="text-blue-300">animal</span>: <span class="text-yellow-300">Bird</span> | <span class="text-yellow-300">Fish</span>): <span class="text-purple-400">void</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (<span class="text-green-300">"fly"</span> <span class="text-purple-400">in</span> <span class="text-blue-300">animal</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">animal</span>.<span class="text-yellow-300">fly</span>();
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">else</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">animal</span>.<span class="text-yellow-300">swim</span>();
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">// instanceof 类型守卫</span></div>
+                            <div class="code-line"><span class="text-purple-400">class</span> <span class="text-yellow-300">Shape</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">abstract</span> <span class="text-purple-400">getArea</span>(): <span class="text-purple-400">number</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"><span class="text-purple-400">class</span> <span class="text-yellow-300">Circle</span> <span class="text-purple-400">extends</span> <span class="text-yellow-300">Shape</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">constructor</span>(<span class="text-blue-300">public</span> <span class="text-yellow-300">radius</span>: <span class="text-purple-400">number</span>) { <span class="text-purple-400">super</span>(); }
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">getArea</span>(): <span class="text-purple-400">number</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-slate-300">Math</span>.<span class="text-slate-300">PI</span> * <span class="text-purple-400">this</span>.<span class="text-yellow-300">radius</span> ** <span class="text-slate-300">2</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">}</div>
+                            <div class="code-line"><span class="text-purple-400">class</span> <span class="text-yellow-300">Square</span> <span class="text-purple-400">extends</span> <span class="text-yellow-300">Shape</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">constructor</span>(<span class="text-blue-300">public</span> <span class="text-yellow-300">side</span>: <span class="text-purple-400">number</span>) { <span class="text-purple-400">super</span>(); }
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">getArea</span>(): <span class="text-purple-400">number</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-purple-400">this</span>.<span class="text-yellow-300">side</span> ** <span class="text-slate-300">2</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">}</div>
+                            <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">printArea</span>(<span class="text-blue-300">shape</span>: <span class="text-yellow-300">Shape</span>): <span class="text-purple-400">void</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`Area: ${</span><span class="text-blue-300">shape</span>.<span class="text-yellow-300">getArea</span>()<span class="text-green-300">`</span>);</div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (<span class="text-blue-300">shape</span> <span class="text-purple-400">instanceof</span> <span class="text-yellow-300">Circle</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`Radius: ${</span><span class="text-blue-300">shape</span>.<span class="text-yellow-300">radius</span><span class="text-green-300">`</span>);</div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">else</span> <span class="text-purple-400">if</span> (<span class="text-blue-300">shape</span> <span class="text-purple-400">instanceof</span> <span class="text-yellow-300">Square</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-green-300">`Side: ${</span><span class="text-blue-300">shape</span>.<span class="text-yellow-300">side</span><span class="text-green-300">`</span>);</div>
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">}</div>
+                            <div class="code-line"></div>
+                            <div class="code-line"><span class="text-purple-400">// in 操作符类型守卫</span></div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Bird</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-yellow-300">fly</span>(): <span class="text-purple-400">void</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-yellow-300">chirp</span>(): <span class="text-purple-400">void</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">Fish</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-yellow-300">swim</span>(): <span class="text-purple-400">void</span>;
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-yellow-300">bubble</span>(): <span class="text-purple-400">void</span>;
+                            <div class="code-line">}</div>
+                            <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">moveAnimal</span>(<span class="text-blue-300">animal</span>: <span class="text-yellow-300">Bird</span> | <span class="text-yellow-300">Fish</span>): <span class="text-purple-400">void</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (<span class="text-green-300">"fly"</span> <span class="text-purple-400">in</span> <span class="text-blue-300">animal</span>) {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">animal</span>.<span class="text-yellow-300">fly</span>();
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">else</span> {
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">animal</span>.<span class="text-yellow-300">swim</span>();
+                            <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;}
+                            <div class="code-line">}</div>
                         </div>
                     </div>
                 </section>
