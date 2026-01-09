@@ -78,25 +78,35 @@
             <div class="text-center mb-12">
                 <h1 class="text-5xl font-bold mb-6 gradient-text">编程语法</h1>
                 <p class="text-xl text-slate-300 max-w-3xl mx-auto">
-                    深入探索13种主流编程语言的完整语法体系，从基础到高级，一站式学习平台
+                    深入探索21种主流编程语言的完整语法体系，从基础到高级，一站式学习平台
                 </p>
             </div>
             
             <!-- Language Selector -->
-            <div class="flex flex-wrap justify-center gap-3 mb-8">
-                <button class="language-tab active px-4 py-2 rounded-lg text-sm font-medium" data-lang="python">Python</button>
-                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="c">C</button>
-                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="cpp">C++</button>
-                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="java">Java</button>
-                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="csharp">C#</button>
-                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="go">Go</button>
-                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="swift">Swift</button>
-                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="javascript">JavaScript</button>
-                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="typescript">TypeScript</button>
-                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="dart">Dart</button>
-                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="rust">Rust</button>
-                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="kotlin">Kotlin</button>
-                <button class="language-tab px-4 py-2 rounded-lg text-sm font-medium bg-slate-700 text-slate-300" data-lang="ruby">Ruby</button>
+            <div class="mb-8">
+                <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3 px-4">
+                    <button class="language-tab active px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="python">Python</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="c">C</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="cpp">C++</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="java">Java</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="kotlin">Kotlin</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="go">Go</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="rust">Rust</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="javascript">JavaScript</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="typescript">TypeScript</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="csharp">C#</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="swift">Swift</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="dart">Dart</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="ruby">Ruby</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="php">PHP</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="htmlcss">HTML/CSS</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="sql">SQL</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="r">R</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="scala">Scala</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="julia">Julia</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="lua">Lua</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="shell">Shell/Bash</button>
+                </div>
             </div>
         </div>
     </section>
@@ -124,7 +134,15 @@
             dart: 'dart_tutorials.html',
             rust: 'rust_tutorials.html',
             kotlin: 'kotlin_tutorials.html',
-            ruby: 'ruby_tutorials.html'
+            ruby: 'ruby_tutorials.html',
+            php: 'php_tutorials.html',
+            htmlcss: 'htmlcss_tutorials.html',
+            sql: 'sql_tutorials.html',
+            r: 'r_tutorials.html',
+            scala: 'scala_tutorials.html',
+            julia: 'julia_tutorials.html',
+            lua: 'lua_tutorials.html',
+            shell: 'shell_tutorials.html'
         };
         
         // Function to load content dynamically
@@ -169,12 +187,11 @@
                 // Update active state
                 document.querySelectorAll('.language-tab').forEach(t => {
                     t.classList.remove('active');
-                    t.classList.remove('px-4', 'py-2', 'rounded-lg', 'text-sm', 'font-medium');
-                    t.classList.add('px-4', 'py-2', 'rounded-lg', 'text-sm', 'font-medium', 'bg-slate-700', 'text-slate-300');
+                    t.classList.add('bg-slate-700', 'text-slate-300');
                 });
                 
                 this.classList.remove('bg-slate-700', 'text-slate-300');
-                this.classList.add('active', 'px-4', 'py-2', 'rounded-lg', 'text-sm', 'font-medium');
+                this.classList.add('active');
                 
                 // Load the selected language content
                 loadLanguageContent(selectedLang);
