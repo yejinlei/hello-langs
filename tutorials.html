@@ -45,6 +45,203 @@
         .language-content.hidden {
             display: none;
         }
+        
+        /* Scratch 积木容器 */
+        .scratch-blocks-container {
+            background: rgba(30, 41, 59, 0.95);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 16px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        
+        /* 积木分类标题 */
+        .scratch-category-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 16px;
+            color: #e2e8f0;
+            border-bottom: 2px solid rgba(148, 163, 184, 0.2);
+            padding-bottom: 8px;
+        }
+        
+        /* 基本积木样式 */
+        .scratch-block {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 6px 0;
+            font-weight: 500;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            min-height: 40px;
+            line-height: 40px;
+            border-radius: 20px;
+            background-color: #4A90E2;
+            white-space: nowrap;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        /* 积木悬浮效果 */
+        .scratch-block:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* 不同类型积木的颜色 - 标准Scratch颜色 */
+        .scratch-motion {
+            background-color: #4A90E2;
+        }
+        
+        .scratch-looks {
+            background-color: #9B59B6;
+        }
+        
+        .scratch-sound {
+            background-color: #E91E63;
+        }
+        
+        .scratch-events {
+            background-color: #F39C12;
+        }
+        
+        .scratch-control {
+            background-color: #F39C12;
+        }
+        
+        .scratch-sensing {
+            background-color: #50C8D7;
+        }
+        
+        .scratch-operators {
+            background-color: #78CC5C;
+        }
+        
+        .scratch-variables {
+            background-color: #FF8C1A;
+        }
+        
+        .scratch-lists {
+            background-color: #FF661A;
+        }
+        
+        .scratch-my-blocks {
+            background-color: #FF66B2;
+        }
+        
+        /* 积木参数 */
+        .scratch-parameter {
+            display: inline-block;
+            background: white;
+            border-radius: 15px;
+            padding: 4px 10px;
+            margin: 0 4px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            color: #1e293b;
+            font-weight: 500;
+            min-width: 30px;
+            text-align: center;
+            font-size: 0.95rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 圆形参数 - 数值、字符串等 */
+        .scratch-parameter.circle {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+            line-height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 六边形参数 - 条件、布尔值等 */
+        .scratch-parameter.hexagon {
+            background: #FFD166;
+            color: #1e293b;
+            border-radius: 8px;
+            font-weight: bold;
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            padding: 8px 12px;
+            min-width: 50px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 下拉菜单参数 */
+        .scratch-parameter.dropdown {
+            padding-right: 24px;
+            position: relative;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 6px center;
+        }
+        
+        /* 颜色选择器参数 */
+        .scratch-parameter.color-picker {
+            width: 24px;
+            height: 24px;
+            padding: 0;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+        
+        /* 自制积木特殊形状 */
+        .scratch-my-blocks {
+            position: relative;
+        }
+        
+        .scratch-my-blocks::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 12px;
+            background-color: #FF66B2;
+            border-radius: 6px 6px 0 0;
+            z-index: -1;
+        }
+        
+        /* 复选框参数 */
+        .scratch-parameter.checkbox {
+            width: 18px;
+            height: 18px;
+            padding: 0;
+            border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .scratch-parameter.checkbox.checked::after {
+            content: '✓';
+            color: #333;
+            font-weight: bold;
+        }
+        
+        /* 积木堆叠 */
+        .scratch-stack {
+            margin-left: 24px;
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+        
+        /* 有凹槽的积木（用于容纳其他积木） */
+        .scratch-block.with-groove {
+            min-height: 52px;
+            padding-bottom: 20px;
+            background-image: linear-gradient(to bottom, currentColor 0%, currentColor 60%, rgba(255, 255, 255, 0.1) 60%, rgba(255, 255, 255, 0.1) 100%);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">
@@ -85,6 +282,7 @@
             <!-- Language Selector -->
             <div class="mb-8">
                 <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3 px-4">
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600 text-center" data-lang="scratch">Scratch</button>
                     <button class="language-tab active px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="python">Python</button>
                     <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="c">C</button>
                     <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="cpp">C++</button>
@@ -120,20 +318,21 @@
 
     <!-- JavaScript -->
     <script>
-        // Language loading functionality
+        // Map of language to their respective files
         const languageFiles = {
             python: 'python_tutorials.html',
+            scratch: 'scratch_tutorials.html',
             c: 'c_tutorials.html',
             cpp: 'cpp_tutorials.html',
             java: 'java_tutorials.html',
-            csharp: 'csharp_tutorials.html',
+            kotlin: 'kotlin_tutorials.html',
             go: 'go_tutorials.html',
-            swift: 'swift_tutorials.html',
+            rust: 'rust_tutorials.html',
             javascript: 'javascript_tutorials.html',
             typescript: 'typescript_tutorials.html',
+            csharp: 'csharp_tutorials.html',
+            swift: 'swift_tutorials.html',
             dart: 'dart_tutorials.html',
-            rust: 'rust_tutorials.html',
-            kotlin: 'kotlin_tutorials.html',
             ruby: 'ruby_tutorials.html',
             php: 'php_tutorials.html',
             htmlcss: 'htmlcss_tutorials.html',
