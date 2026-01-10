@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scala 教程 - Hello 编程语言</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .syntax-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .code-block {
+            background: rgba(2, 6, 23, 0.9);
+            border-left: 4px solid #3B82F6;
+        }
+        .highlight {
+            background: rgba(59, 130, 246, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- 1. Scala 简介 -->
+        <section id="section-1" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">1. Scala 简介</span>
+            </h2>
+            
+            <div class="language-content" data-lang="scala">
+                <h4 class="text-lg font-medium mb-4 text-red-400">Scala - 融合面向对象与函数式编程的现代语言</h4>
+                <p class="text-slate-300 mb-4">Scala是一门多范式编程语言，融合了面向对象编程和函数式编程的特性。它运行在Java虚拟机上，与Java高度互操作，同时提供了更简洁、更强大的语法和功能。</p>
+                
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card">
+                    <h5 class="text-lg font-medium mb-4 text-red-300">Scala 语言特点</h5>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2">
+                        <li>融合面向对象和函数式编程范式</li>
+                        <li>静态类型系统，支持类型推断</li>
+                        <li>简洁优雅的语法设计</li>
+                        <li>与Java高度互操作</li>
+                        <li>支持模式匹配</li>
+                        <li>强大的集合库</li>
+                        <li>隐式转换和参数</li>
+                        <li>高阶函数和闭包</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Scala 基础语法 -->
+        <section id="section-2" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">2. Scala 基础语法</span>
+            </h2>
+            
+            <div class="language-content" data-lang="scala">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-red-300">Hello World 示例</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// Hello World 程序
+object HelloWorld {
+  def main(args: Array[String]): Unit = {
+    println("Hello, Scala!")
+  }
+}
+
+// 简洁版
+@main def hello = println("Hello, Scala!")
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-red-300">基本数据类型和变量</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 变量定义
+val x: Int = 10        // 不可变变量
+var y: String = "Hello" // 可变变量
+
+// 类型推断
+val a = 20              // Int类型
+val b = 3.14            // Double类型
+val c = "World"         // String类型
+
+// 字符串操作
+val greeting = s"$y $c!" // 字符串插值: "Hello World!"
+val repeated = "Scala" * 3 // 重复字符串: "ScalaScalaScala"
+
+// 多行字符串
+val multiLine = """
+  This is a
+  multi-line
+  string
+"""
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Scala 函数和方法 -->
+        <section id="section-3" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">3. Scala 函数和方法</span>
+            </h2>
+            
+            <div class="language-content" data-lang="scala">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-red-300">函数定义</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 标准函数定义
+def add(a: Int, b: Int): Int = a + b
+
+// 多行函数
+def multiply(a: Int, b: Int): Int = {
+  val result = a * b
+  result
+}
+
+// 匿名函数
+val subtract = (a: Int, b: Int) => a - b
+
+// 高阶函数
+def applyFunction(f: (Int, Int) => Int, x: Int, y: Int): Int = f(x, y)
+
+val sum = applyFunction(add, 5, 3)     // 8
+val diff = applyFunction(subtract, 5, 3) // 2
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-red-300">柯里化函数</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 柯里化函数
+def curriedAdd(a: Int)(b: Int): Int = a + b
+
+val add5 = curriedAdd(5) _   // 偏应用函数
+val result = add5(3)         // 8
+
+// 隐式参数
+def greet(name: String)(implicit greeting: String): String = {
+  s"$greeting, $name!"
+}
+
+implicit val defaultGreeting = "Hello"
+greet("Scala") // "Hello, Scala!"
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Scala 控制流 -->
+        <section id="section-4" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">4. Scala 控制流</span>
+            </h2>
+            
+            <div class="language-content" data-lang="scala">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-red-300">条件表达式</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// if-else 表达式
+val x = 10
+val result = if (x > 5) "大于5" else "小于等于5"
+
+// 多条件表达式
+val y = 15
+val category = if (y < 10) "小" else if (y < 20) "中" else "大"
+
+// 模式匹配
+val day = "Monday"
+val message = day match {
+  case "Monday" => "周一，开始新的一周"
+  case "Friday" => "周五，周末快到了"
+  case _ => "普通的一天"
+}
+
+// 类型匹配
+def process(value: Any): String = value match {
+  case i: Int => s"整数: $i"
+  case d: Double => s"浮点数: $d"
+  case s: String => s"字符串: $s"
+  case _ => "其他类型"
+}
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-red-300">循环结构</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// for循环
+for (i <- 1 to 5) {
+  println(i)
+}
+
+// 带条件的for循环
+for (i <- 1 to 10 if i % 2 == 0) {
+  println(i)
+}
+
+// 多重for循环
+for {
+  i <- 1 to 3
+  j <- 1 to 2
+} println(s"i=$i, j=$j")
+
+// while循环
+var i = 1
+while (i <= 5) {
+  println(i)
+  i += 1
+}
+
+// do-while循环
+var j = 1
+do {
+  println(j)
+  j += 1
+} while (j <= 5)
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Scala 集合 -->
+        <section id="section-5" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">5. Scala 集合</span>
+            </h2>
+            
+            <div class="language-content" data-lang="scala">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-red-300">不可变集合</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 列表
+val numbers = List(1, 2, 3, 4, 5)
+val emptyList = Nil
+val anotherList = 0 :: numbers // 前缀操作: List(0, 1, 2, 3, 4, 5)
+
+// 集合
+val uniqueNumbers = Set(1, 2, 3, 2, 1) // Set(1, 2, 3)
+
+// 元组
+val tuple = (1, "Hello", 3.14) // Tuple3[Int, String, Double]
+val first = tuple._1 // 1
+val second = tuple._2 // "Hello"
+
+// 映射
+val map = Map("name" -> "Scala", "version" -> "3.0")
+val name = map("name") // "Scala"
+val optionalVersion = map.get("version") // Some("3.0")
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-red-300">集合操作</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 转换操作
+val doubled = numbers.map(_ * 2) // List(2, 4, 6, 8, 10)
+val evenNumbers = numbers.filter(_ % 2 == 0) // List(2, 4)
+val summed = numbers.reduce(_ + _) // 15
+val sortedDesc = numbers.sorted(Ordering[Int].reverse) // List(5, 4, 3, 2, 1)
+
+// 折叠操作
+val sumWithStart = numbers.fold(0)(_ + _) // 15
+val sumLeft = numbers.foldLeft(0)(_ + _) // 15
+val sumRight = numbers.foldRight(0)(_ + _) // 15
+
+// 扁平化
+val nested = List(List(1, 2), List(3, 4))
+val flattened = nested.flatten // List(1, 2, 3, 4)
+
+// 扁平映射
+val flatMapped = nested.flatMap(list => list.map(_ * 2)) // List(2, 4, 6, 8)
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Scala 面向对象编程 -->
+        <section id="section-6" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">6. Scala 面向对象编程</span>
+            </h2>
+            
+            <div class="language-content" data-lang="scala">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-red-300">类和对象</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 类定义
+class Person(var name: String, var age: Int) {
+  // 辅助构造函数
+  def this(name: String) = this(name, 0)
+  
+  // 方法
+  def greet(): String = s"Hello, my name is $name and I'm $age years old."
+}
+
+// 对象实例化
+val person1 = new Person("Alice", 30)
+val person2 = new Person("Bob")
+
+person1.age = 31 // 修改属性
+println(person1.greet()) // "Hello, my name is Alice and I'm 31 years old."
+
+// 单例对象
+object MyApp {
+  def main(args: Array[String]): Unit = {
+    println("Hello from singleton object!")
+  }
+}
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-red-300">继承和特质</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 特质（类似接口）
+trait Greeting {
+  def greet(): String
+}
+
+// 抽象类
+abstract class Animal {
+  def sound(): String
+}
+
+// 类继承抽象类并实现特质
+class Dog extends Animal with Greeting {
+  override def sound(): String = "Woof!"
+  override def greet(): String = "Hello, I'm a dog!"
+}
+
+val dog = new Dog()
+println(dog.sound()) // "Woof!"
+println(dog.greet()) // "Hello, I'm a dog!"
+
+// 密封类（只能在当前文件中被继承）
+sealed trait Shape
+case class Circle(radius: Double) extends Shape
+case class Rectangle(width: Double, height: Double) extends Shape
+
+// 模式匹配使用密封类
+def area(shape: Shape): Double = shape match {
+  case Circle(r) => Math.PI * r * r
+  case Rectangle(w, h) => w * h
+}
+</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
