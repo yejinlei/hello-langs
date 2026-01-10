@@ -4,8 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C++ 语言教程</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // 尝试加载 Tailwind CSS，如果失败则使用备用方案
+        window.tailwindCdnLoaded = false;
+        function loadTailwindCSS() {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.tailwindcss.com';
+            script.onload = function() {
+                window.tailwindCdnLoaded = true;
+                // Tailwind 配置
+                tailwind.config = {
+                    theme: {
+                        extend: {
+                            colors: {
+                                primary: '#10b981',
+                                secondary: '#8b5cf6',
+                                dark: '#1e293b',
+                                light: '#f8fafc'
+                            }
+                        }
+                    }
+                }
+            };
+            script.onerror = function() {
+                console.warn('Failed to load Tailwind CSS from CDN, applying fallback styles');
+                applyFallbackStyles();
+            };
+            document.head.appendChild(script);
+        }
+        
+        function applyFallbackStyles() {
+            // 应用基本的 Tailwind 类对应的样式
+            const fallbackStyles = document.createElement('style');
+            fallbackStyles.textContent = `
+                /* 基本布局类 */
+                .container { width: 100%; margin-right: auto; margin-left: auto; padding-right: 1rem; padding-left: 1rem; }
+                .grid { display: grid; }
+                .flex { display: flex; }
+                .hidden { display: none; }
+                
+                /* 网格列类 */
+                .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+                @media (min-width: 1024px) {
+                    .lg\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+                }
+                
+                /* 间距类 */
+                .p-8 { padding: 2rem; }
+                .p-4 { padding: 1rem; }
+                .mb-16 { margin-bottom: 4rem; }
+                .mb-8 { margin-bottom: 2rem; }
+                .mb-4 { margin-bottom: 1rem; }
+                .mb-2 { margin-bottom: 0.5rem; }
+                .mt-4 { margin-top: 1rem; }
+                .mr-2 { margin-right: 0.5rem; }
+                .ml-2 { margin-left: 0.5rem; }
+                
+                /* 字体类 */
+                .text-3xl { font-size: 1.875rem; }
+                .text-lg { font-size: 1.125rem; }
+                .text-sm { font-size: 0.875rem; }
+                .font-bold { font-weight: 700; }
+                .font-medium { font-weight: 500; }
+                
+                /* 文本类 */
+                .text-center { text-align: center; }
+                .text-purple-400 { color: #a78bfa; }
+                .text-slate-300 { color: #cbd5e1; }
+                .text-slate-400 { color: #94a3b8; }
+                
+                /* 背景类 */
+                .bg-slate-900 { background-color: #0f172a; }
+                .bg-slate-800 { background-color: #1e293b; }
+                
+                /* 边框类 */
+                .rounded-xl { border-radius: 0.75rem; }
+                .rounded-lg { border-radius: 0.5rem; }
+                .rounded { border-radius: 0.25rem; }
+                
+                /* 其他类 */
+                .gap-8 { gap: 2rem; }
+                .items-center { align-items: center; }
+                .justify-between { justify-content: space-between; }
+                .w-full { width: 100%; }
+            `;
+            document.head.appendChild(fallbackStyles);
+        }
+        
+        // 加载 Tailwind CSS
+        loadTailwindCSS();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
         .gradient-text {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
@@ -15,12 +110,37 @@
         }
         
         .code-font {
-            font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
         }
         
         .syntax-card {
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(148, 163, 184, 0.3);
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        
+        .language-tab {
+            transition: all 0.3s ease;
+        }
+        
+        .language-tab.active {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            color: white;
+        }
+        
+        .code-block {
+            background: rgba(2, 6, 23, 0.9);
+            border-left: 4px solid #3B82F6;
+        }
+        
+        .highlight {
+            background: rgba(59, 130, 246, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .language-content.hidden {
+            display: none;
         }
         
         body {
@@ -32,7 +152,7 @@
     <main class="container mx-auto px-4 py-8 max-w-6xl">
           <div class="flex flex-col lg:flex-row gap-8">
               <div class="lg:w-1/4">
-                  <div class="sticky top-4 bg-slate-900 rounded-xl p-6 shadow-lg max-h-[calc(100vh-2rem)] overflow-y-auto">
+                  <div class="sticky top-4 bg-slate-900 rounded-xl p-6 shadow-lg max-h-[calc(100vh-2rem)]">
                       <h3 class="text-lg font-bold text-purple-400 mb-4">章节导航</h3>
                       <nav class="space-y-2">
                           <a href="#section-1" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">1. 变量声明与初始化</a>
@@ -58,7 +178,7 @@
                           <a href="#section-21" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">21. 可变参数模板</a>
                           <a href="#section-22" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">22. 线程库</a>
                           <a href="#section-23" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">23. 正则表达式库</a>
-                          <a href="#section-24" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">24. std::function和std::bind</a>
+                          <a href="#section-24" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">24. <span class="text-green-300">std::function</span>和std::bind</a>
                           <a href="#section-25" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">25. 新的字符串字面量</a>
                           <a href="#section-26" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">26. 委托构造函数和继承构造函数</a>
                           <a href="#section-27" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">27. final/override控制</a>
@@ -366,12 +486,12 @@
                         <br>
                         <span class="text-blue-300">// 强类型枚举的优势示例</span><br>
                         <span class="text-purple-400">void</span> <span class="text-yellow-300">SetColor</span>(ColorClass c) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> (c == ColorClass::RED) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (c == ColorClass::RED) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"设置颜色为红色"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         }<br>
                         <br>
-                        <span class="textblue-300">// SetColor(RED); // 编译错误，类型不匹配</span><br>
+                        <span class="text-blue-300">// SetColor(RED); // 编译错误，类型不匹配</span><br>
                         SetColor(ColorClass::RED); <span class="text-blue-300">// 正确的调用方式</span>
                     </div>
                 </div>
@@ -395,7 +515,7 @@
                         <span class="text-purple-400">template</span>&lt;<span class="text-purple-400">typename</span>... Args&gt;<br>
                         <span class="text-purple-400">void</span> <span class="text-yellow-300">Print</span>(Args... args) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"参数数量: "</span> &lt;&lt; <span class="text-purple-400">sizeof</span>...(args) &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;(<span class="textpurple-400">void</span>)std::initializer_list&lt;<span class="textpurple-400">int</span>&gt;{ ((std::cout &lt;&lt; args &lt;&lt; <span class="textgreen-300">" "</span>), 0)... };<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;(<span class="text-purple-400">void</span>)std::initializer_list&lt;<span class="text-purple-400">int</span>&gt;{ ((std::cout &lt;&lt; args &lt;&lt; <span class="text-green-300">" "</span>), 0)... };<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; std::endl;<br>
                         }<br>
                         <br>
@@ -419,10 +539,10 @@
                         };<br>
                         <br>
                         <span class="text-blue-300">// 使用示例</span><br>
-                        Print(1, 2.5, <span class="text-green-300">"hello"</span>, <span class="textgreen-300">'c'</span>);<br>
-                        PrintRecursive(10, <span class="textgreen-300">"world"</span>, 3.14);<br>
+                        Print(1, 2.5, <span class="text-green-300">"hello"</span>, <span class="text-green-300">'c'</span>);<br>
+                        PrintRecursive(10, <span class="text-green-300">"world"</span>, 3.14);<br>
                         <br>
-                        Tuple&lt;<span class="textpurple-400">int</span>, <span class="textpurple-400">double</span>, std::string&gt; t(42, 3.14, <span class="textgreen-300">"example"</span>);
+                        Tuple&lt;<span class="text-purple-400">int</span>, <span class="text-purple-400">double</span>, std::string&gt; t(42, 3.14, <span class="text-green-300">"example"</span>);
                     </div>
                 </div>
             </div>
@@ -441,53 +561,53 @@
                 <div class="code-block rounded-lg p-4 code-font text-sm">
                     <div class="text-slate-400 mb-2"># 线程库的使用</div>
                     <div class="text-sm leading-6">
-                        <span class="textblue-300">#include &lt;thread&gt;</span><br>
-                        <span class="textblue-300">#include &lt;mutex&gt;</span><br>
-                        <span class="textblue-300">#include &lt;condition_variable&gt;</span><br>
-                        <span class="textblue-300">#include &lt;iostream&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;thread&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;mutex&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;condition_variable&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;iostream&gt;</span><br>
                         <br>
-                        <span class="textpurple-400">int</span> shared_data = 0;<br>
+                        <span class="text-purple-400">int</span> shared_data = 0;<br>
                         std::mutex mtx;<br>
                         <br>
-                        <span class="textpurple-400">void</span> <span class="textyellow-300">worker</span>(<span class="textpurple-400">int</span> id) {<br>
+                        <span class="text-purple-400">void</span> <span class="text-yellow-300">worker</span>(<span class="text-purple-400">int</span> id) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::lock_guard&lt;std::mutex&gt; lock(mtx);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"线程 "</span> &lt;&lt; id &lt;&lt; <span class="textgreen-300">" 修改数据: "</span> &lt;&lt; ++shared_data &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"线程 "</span> &lt;&lt; id &lt;&lt; <span class="text-green-300">" 修改数据: "</span> &lt;&lt; ++shared_data &lt;&lt; std::endl;<br>
                         }<br>
                         <br>
-                        <span class="textpurple-400">void</span> <span class="textyellow-300">producer</span>(std::condition_variable&amp; cv, <span class="textpurple-400">bool</span>& ready) {<br>
+                        <span class="text-purple-400">void</span> <span class="text-yellow-300">producer</span>(std::condition_variable&amp; cv, <span class="text-purple-400">bool</span>& ready) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::this_thread::sleep_for(std::chrono::seconds(1));<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;{<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::lock_guard&lt;std::mutex&gt; lock(mtx);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ready = <span class="textpurple-400">true</span>;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"生产者: 数据已准备"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ready = <span class="text-purple-400">true</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"生产者: 数据已准备"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;cv.notify_one();<br>
                         }<br>
                         <br>
-                        <span class="textpurple-400">void</span> <span class="textyellow-300">consumer</span>(std::condition_variable&amp; cv, <span class="textpurple-400">bool</span>& ready) {<br>
+                        <span class="text-purple-400">void</span> <span class="text-yellow-300">consumer</span>(std::condition_variable&amp; cv, <span class="text-purple-400">bool</span>& ready) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;{<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::unique_lock&lt;std::mutex&gt; lock(mtx);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cv.wait(lock, [&amp;]{ <span class="textpurple-400">return</span> ready; });<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"消费者: 数据已接收"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cv.wait(lock, [&amp;]{ <span class="text-purple-400">return</span> ready; });<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"消费者: 数据已接收"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         }<br>
                         <br>
-                        <span class="textblue-300">// 使用示例</span><br>
-                        <span class="textpurple-400">int</span> main() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"主线程 ID: "</span> &lt;&lt; std::this_thread::get_id() &lt;&lt; std::endl;<br>
+                        <span class="text-blue-300">// 使用示例</span><br>
+                        <span class="text-purple-400">int</span> main() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"主线程 ID: "</span> &lt;&lt; std::this_thread::get_id() &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 创建线程</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 创建线程</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::thread t1(worker, 1);<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::thread t2(worker, 2);<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 等待线程完成</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 等待线程完成</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;t1.join();<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;t2.join();<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"共享数据最终值: "</span> &lt;&lt; shared_data &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"共享数据最终值: "</span> &lt;&lt; shared_data &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 条件变量示例</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">bool</span> ready = <span class="textpurple-400">false</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 条件变量示例</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">bool</span> ready = <span class="text-purple-400">false</span>;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::condition_variable cv;<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::thread producer_thread(producer, std::ref(cv), std::ref(ready));<br>
@@ -496,7 +616,7 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;producer_thread.join();<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;consumer_thread.join();<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> 0;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> 0;<br>
                         }
                     </div>
                 </div>
@@ -516,56 +636,56 @@
                 <div class="code-block rounded-lg p-4 code-font text-sm">
                     <div class="text-slate-400 mb-2"># 正则表达式库的使用</div>
                     <div class="text-sm leading-6">
-                        <span class="textblue-300">#include &lt;regex&gt;</span><br>
-                        <span class="textblue-300">#include &lt;iostream&gt;</span><br>
-                        <span class="textblue-300">#include &lt;string&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;regex&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;iostream&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;string&gt;</span><br>
                         <br>
-                        <span class="textpurple-400">void</span> <span class="textyellow-300">regex_examples</span>() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::string text = <span class="textgreen-300">"Email: example@domain.com and phone: 123-456-7890"</span>;<br>
+                        <span class="text-purple-400">void</span> <span class="text-yellow-300">regex_examples</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::string text = <span class="text-green-300">"Email: example@domain.com and phone: 123-456-7890"</span>;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 邮箱匹配</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::regex email_pattern(<span class="textgreen-300">R"(\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b)"</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 邮箱匹配</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::regex email_pattern(<span class="text-green-300">R"(\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b)"</span>);<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::smatch email_match;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> (std::regex_search(text, email_match, email_pattern)) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"找到邮箱: "</span> &lt;&lt; email_match[0] &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (std::regex_search(text, email_match, email_pattern)) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"找到邮箱: "</span> &lt;&lt; email_match[0] &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 电话号码匹配</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::regex phone_pattern(<span class="textgreen-300">R"(\b\d{3}-\d{3}-\d{4}\b)"</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 电话号码匹配</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::regex phone_pattern(<span class="text-green-300">R"(\b\d{3}-\d{3}-\d{4}\b)"</span>);<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::smatch phone_match;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::string::const_iterator search_start(text.cbegin());<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">while</span> (std::regex_search(search_start, text.cend(), phone_match, phone_pattern)) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"找到电话: "</span> &lt;&lt; phone_match[0] &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">while</span> (std::regex_search(search_start, text.cend(), phone_match, phone_pattern)) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"找到电话: "</span> &lt;&lt; phone_match[0] &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;search_start = phone_match.suffix().first;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 完全匹配</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::string date = <span class="textgreen-300">"2023-12-25"</span>;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::regex date_pattern(<span class="textgreen-300">R"(^\d{4}-\d{2}-\d{2}$)"</span>);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> (std::regex_match(date, date_pattern)) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"日期格式正确"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 完全匹配</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::string date = <span class="text-green-300">"2023-12-25"</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::regex date_pattern(<span class="text-green-300">R"(^\d{4}-\d{2}-\d{2}$)"</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (std::regex_match(date, date_pattern)) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"日期格式正确"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 替换操作</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::string original = <span class="textgreen-300">"Hello, World! Welcome to World!"</span>;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::regex world_pattern(<span class="textgreen-300">"World"</span>);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::string replaced = std::regex_replace(original, world_pattern, <span class="textgreen-300">"C++"</span>);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"替换后: "</span> &lt;&lt; replaced &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 替换操作</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::string original = <span class="text-green-300">"Hello, World! Welcome to World!"</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::regex world_pattern(<span class="text-green-300">"World"</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::string replaced = std::regex_replace(original, world_pattern, <span class="text-green-300">"C++"</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"替换后: "</span> &lt;&lt; replaced &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 捕获组示例</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::string url = <span class="textgreen-300">"https://www.example.com/path/to/page"</span>;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::regex url_pattern(<span class="textgreen-300">R"(https?)://([^/]+)/(.*)"</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 捕获组示例</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::string url = <span class="text-green-300">"https://www.example.com/path/to/page"</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::regex url_pattern(<span class="text-green-300">R"(https?)://([^/]+)/(.*)"</span>);<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::smatch url_match;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> (std::regex_match(url, url_match, url_pattern)) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"协议: "</span> &lt;&lt; url_match[1] &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"域名: "</span> &lt;&lt; url_match[2] &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"路径: "</span> &lt;&lt; url_match[3] &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (std::regex_match(url, url_match, url_pattern)) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"协议: "</span> &lt;&lt; url_match[1] &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"域名: "</span> &lt;&lt; url_match[2] &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"路径: "</span> &lt;&lt; url_match[3] &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         }<br>
                         <br>
-                        <span class="textpurple-400">int</span> main() {<br>
+                        <span class="text-purple-400">int</span> main() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;regex_examples();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> 0;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> 0;<br>
                         }
                     </div>
                 </div>
@@ -585,65 +705,65 @@
                 <div class="code-block rounded-lg p-4 code-font text-sm">
                     <div class="text-slate-400 mb-2"># std::function和std::bind的使用</div>
                     <div class="text-sm leading-6">
-                        <span class="textblue-300">#include &lt;functional&gt;</span><br>
-                        <span class="textblue-300">#include &lt;iostream&gt;</span><br>
-                        <span class="textblue-300">#include &lt;vector&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;functional&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;iostream&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;vector&gt;</span><br>
                         <br>
-                        <span class="textpurple-400">int</span> <span class="textyellow-300">add</span>(<span class="textpurple-400">int</span> a, <span class="textpurple-400">int</span> b) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> a + b;<br>
+                        <span class="text-purple-400">int</span> <span class="text-yellow-300">add</span>(<span class="text-purple-400">int</span> a, <span class="text-purple-400">int</span> b) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> a + b;<br>
                         }<br>
                         <br>
-                        <span class="textpurple-400">class</span> <span class="textblue-300">Calculator</span> {<br>
-                        <span class="textpurple-400">public</span>:<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">int</span> <span class="textyellow-300">multiply</span>(<span class="textpurple-400">int</span> x, <span class="textpurple-400">int</span> y) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> x * y;<br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Calculator</span> {<br>
+                        <span class="text-purple-400">public</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">int</span> <span class="text-yellow-300">multiply</span>(<span class="text-purple-400">int</span> x, <span class="text-purple-400">int</span> y) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> x * y;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">int</span> <span class="textyellow-300">calculate</span>(<span class="textpurple-400">int</span> a, <span class="textpurple-400">int</span> b, <span class="textpurple-400">int</span> c) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> (a + b) * c;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">int</span> <span class="text-yellow-300">calculate</span>(<span class="text-purple-400">int</span> a, <span class="text-purple-400">int</span> b, <span class="text-purple-400">int</span> c) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> (a + b) * c;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         };<br>
                         <br>
-                        <span class="textpurple-400">void</span> <span class="textyellow-300">function_bind_examples</span>() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// std::function示例</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::function&lt;<span class="textpurple-400">int</span>(<span class="textpurple-400">int</span>, <span class="textpurple-400">int</span>)&gt; func;<br>
+                        <span class="text-purple-400">void</span> <span class="text-yellow-300">function_bind_examples</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// std::function示例</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::function&lt;<span class="text-purple-400">int</span>(<span class="text-purple-400">int</span>, <span class="text-purple-400">int</span>)&gt; func;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 绑定普通函数</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 绑定普通函数</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;func = add;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"add(5, 3) = "</span> &lt;&lt; func(5, 3) &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"add(5, 3) = "</span> &lt;&lt; func(5, 3) &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 绑定lambda表达式</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;func = [](<span class="textpurple-400">int</span> a, <span class="textpurple-400">int</span> b) { <span class="textpurple-400">return</span> a * b; };<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"lambda(5, 3) = "</span> &lt;&lt; func(5, 3) &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 绑定lambda表达式</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;func = [](<span class="text-purple-400">int</span> a, <span class="text-purple-400">int</span> b) { <span class="text-purple-400">return</span> a * b; };<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"lambda(5, 3) = "</span> &lt;&lt; func(5, 3) &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 绑定成员函数</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 绑定成员函数</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;Calculator calc;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;func = std::bind(&amp;Calculator::multiply, &amp;calc, std::placeholders::_1, std::placeholders::_2);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"multiply(5, 3) = "</span> &lt;&lt; func(5, 3) &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"multiply(5, 3) = "</span> &lt;&lt; func(5, 3) &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 使用bind创建部分应用函数</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 使用bind创建部分应用函数</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;auto multiply_by_10 = std::bind(&amp;Calculator::multiply, &amp;calc, 10, std::placeholders::_1);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"multiply_by_10(5) = "</span> &lt;&lt; multiply_by_10(5) &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"multiply_by_10(5) = "</span> &lt;&lt; multiply_by_10(5) &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 绑定带默认参数的函数</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 绑定带默认参数的函数</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;auto calc_partial = std::bind(&amp;Calculator::calculate, &amp;calc, std::placeholders::_1, 5, std::placeholders::_2);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"calc_partial(3, 2) = "</span> &lt;&lt; calc_partial(3, 2) &lt;&lt; std::endl; <span class="textblue-300">// (3+5)*2 = 16</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"calc_partial(3, 2) = "</span> &lt;&lt; calc_partial(3, 2) &lt;&lt; std::endl; <span class="text-blue-300">// (3+5)*2 = 16</span><br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 在容器中存储不同类型的可调用对象</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::vector&lt;std::function&lt;<span class="textpurple-400">int</span>(<span class="textpurple-400">int</span>, <span class="textpurple-400">int</span>)&gt;&gt; operations;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 在容器中存储不同类型的可调用对象</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::vector&lt;std::function&lt;<span class="text-purple-400">int</span>(<span class="text-purple-400">int</span>, <span class="text-purple-400">int</span>)&gt;&gt; operations;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;operations.push_back(add);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;operations.push_back([](<span class="textpurple-400">int</span> a, <span class="textpurple-400">int</span> b) { <span class="textpurple-400">return</span> a - b; });<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;operations.push_back([](<span class="text-purple-400">int</span> a, <span class="text-purple-400">int</span> b) { <span class="text-purple-400">return</span> a - b; });<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;operations.push_back(std::bind(&amp;Calculator::multiply, &amp;calc, std::placeholders::_1, std::placeholders::_2));<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"\n操作列表:"</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">size_t</span> i = 0; i &lt; operations.size(); ++i) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"操作 "</span> &lt;&lt; i + 1 &lt;&lt; <span class="textgreen-300">": "</span> &lt;&lt; operations[i](10, 5) &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"\n操作列表:"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">size_t</span> i = 0; i &lt; operations.size(); ++i) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"操作 "</span> &lt;&lt; i + 1 &lt;&lt; <span class="text-green-300">": "</span> &lt;&lt; operations[i](10, 5) &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         }<br>
                         <br>
-                        <span class="textpurple-400">int</span> main() {<br>
+                        <span class="text-purple-400">int</span> main() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;function_bind_examples();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> 0;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> 0;<br>
                         }
                     </div>
                 </div>
@@ -663,64 +783,64 @@
                 <div class="code-block rounded-lg p-4 code-font text-sm">
                     <div class="text-slate-400 mb-2"># 新的字符串字面量的使用</div>
                     <div class="text-sm leading-6">
-                        <span class="textblue-300">#include &lt;iostream&gt;</span><br>
-                        <span class="textblue-300">#include &lt;string&gt;</span><br>
-                        <span class="textblue-300">#include &lt;chrono&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;iostream&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;string&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;chrono&gt;</span><br>
                         <br>
-                        <span class="textpurple-400">void</span> <span class="textyellow-300">string_literal_examples</span>() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 原始字符串字面量</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::string raw_string = R<span class="textgreen-300">"(
+                        <span class="text-purple-400">void</span> <span class="text-yellow-300">string_literal_examples</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 原始字符串字面量</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::string raw_string = R<span class="text-green-300">"(
                         &nbsp;&nbsp;&nbsp;&nbsp;这是多行字符串，
                         &nbsp;&nbsp;&nbsp;&nbsp;包含"引号"和\转义字符\，
                         &nbsp;&nbsp;&nbsp;&nbsp;无需转义！
                         )"</span>;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"原始字符串:\n"</span> &lt;&lt; raw_string &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"原始字符串:\n"</span> &lt;&lt; raw_string &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 原始字符串中的正则表达式</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::string regex_pattern = R<span class="textgreen-300">"(\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b)"</span>;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"\n正则表达式: "</span> &lt;&lt; regex_pattern &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 原始字符串中的正则表达式</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::string regex_pattern = R<span class="text-green-300">"(\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b)"</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"\n正则表达式: "</span> &lt;&lt; regex_pattern &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 原始字符串用于SQL查询</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::string sql_query = R<span class="textgreen-300">"(SELECT * FROM users WHERE name = "John" AND age &gt; 18)"</span>;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"\nSQL查询: "</span> &lt;&lt; sql_query &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 原始字符串用于SQL查询</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::string sql_query = R<span class="text-green-300">"(SELECT * FROM users WHERE name = "John" AND age &gt; 18)"</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"\nSQL查询: "</span> &lt;&lt; sql_query &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 不同分隔符的原始字符串</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::string custom_delim = R<span class="textgreen-300">"delimiter(This string contains " and ) characters without escaping)delimiter"</span>;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"\n自定义分隔符: "</span> &lt;&lt; custom_delim &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 不同分隔符的原始字符串</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::string custom_delim = R<span class="text-green-300">"delimiter(This string contains " and ) characters without escaping)delimiter"</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"\n自定义分隔符: "</span> &lt;&lt; custom_delim &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 用户定义字面量示例</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">long</span> <span class="textpurple-400">long</span> <span class="textpurple-400">operator</span><span class="textpurple-400">""</span>_km(<span class="textpurple-400">unsigned</span> <span class="textpurple-400">long</span> <span class="textpurple-400">long</span> value) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> value * 1000; <span class="textblue-300">// 转换为米</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 用户定义字面量示例</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">long</span> <span class="text-purple-400">long</span> <span class="text-purple-400">operator</span><span class="text-purple-400">""</span>_km(<span class="text-purple-400">unsigned</span> <span class="text-purple-400">long</span> <span class="text-purple-400">long</span> value) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> value * 1000; <span class="text-blue-300">// 转换为米</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">long</span> <span class="textpurple-400">long</span> <span class="textpurple-400">operator</span><span class="textpurple-400">""</span>_m(<span class="textpurple-400">unsigned</span> <span class="textpurple-400">long</span> <span class="textpurple-400">long</span> value) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> value; <span class="textblue-300">// 保持米单位</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">long</span> <span class="text-purple-400">long</span> <span class="text-purple-400">operator</span><span class="text-purple-400">""</span>_m(<span class="text-purple-400">unsigned</span> <span class="text-purple-400">long</span> <span class="text-purple-400">long</span> value) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> value; <span class="text-blue-300">// 保持米单位</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">double</span> <span class="textpurple-400">operator</span><span class="textpurple-400">""</span>_cm(<span class="textpurple-400">long</span> <span class="textpurple-400">double</span> value) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> value / 100.0; <span class="textblue-300">// 转换为米</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">double</span> <span class="text-purple-400">operator</span><span class="text-purple-400">""</span>_cm(<span class="text-purple-400">long</span> <span class="text-purple-400">double</span> value) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> value / 100.0; <span class="text-blue-300">// 转换为米</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 使用用户定义字面量</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">auto</span> distance1 = 5_km; <span class="textblue-300">// 5000米</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">auto</span> distance2 = 10_m; <span class="textblue-300">// 10米</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">auto</span> distance3 = 150.0_cm; <span class="textblue-300">// 1.5米</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 使用用户定义字面量</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">auto</span> distance1 = 5_km; <span class="text-blue-300">// 5000米</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">auto</span> distance2 = 10_m; <span class="text-blue-300">// 10米</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">auto</span> distance3 = 150.0_cm; <span class="text-blue-300">// 1.5米</span><br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"\n距离计算:"</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"5_km = "</span> &lt;&lt; distance1 &lt;&lt; <span class="textgreen-300">" 米"</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"10_m = "</span> &lt;&lt; distance2 &lt;&lt; <span class="textgreen-300">" 米"</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"150.0_cm = "</span> &lt;&lt; distance3 &lt;&lt; <span class="textgreen-300">" 米"</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"总距离: "</span> &lt;&lt; (distance1 + distance2 + distance3) &lt;&lt; <span class="textgreen-300">" 米"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"\n距离计算:"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"5_km = "</span> &lt;&lt; distance1 &lt;&lt; <span class="text-green-300">" 米"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"10_m = "</span> &lt;&lt; distance2 &lt;&lt; <span class="text-green-300">" 米"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"150.0_cm = "</span> &lt;&lt; distance3 &lt;&lt; <span class="text-green-300">" 米"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"总距离: "</span> &lt;&lt; (distance1 + distance2 + distance3) &lt;&lt; <span class="text-green-300">" 米"</span> &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 时间字面量示例</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">using</span> <span class="textpurple-400">namespace</span> std::chrono_literals;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">auto</span> duration = 24h + 30min + 45s; <span class="textblue-300">// C++14风格，需要#include &lt;chrono&gt;</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"\n时间计算示例（需要C++14）"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 时间字面量示例</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">using</span> <span class="text-purple-400">namespace</span> std::chrono_literals;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">auto</span> duration = 24h + 30min + 45s; <span class="text-blue-300">// C++14风格，需要#include &lt;chrono&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"\n时间计算示例（需要C++14）"</span> &lt;&lt; std::endl;<br>
                         }<br>
                         <br>
-                        <span class="textpurple-400">int</span> main() {<br>
+                        <span class="text-purple-400">int</span> main() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;string_literal_examples();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> 0;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> 0;<br>
                         }
                     </div>
                 </div>
@@ -740,95 +860,95 @@
                 <div class="code-block rounded-lg p-4 code-font text-sm">
                     <div class="text-slate-400 mb-2"># 委托构造函数和继承构造函数的使用</div>
                     <div class="text-sm leading-6">
-                        <span class="textblue-300">#include &lt;iostream&gt;</span><br>
-                        <span class="textblue-300">#include &lt;string&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;iostream&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;string&gt;</span><br>
                         <br>
-                        <span class="textpurple-400">class</span> <span class="textblue-300">Rectangle</span> {<br>
-                        <span class="textpurple-400">private</span>:<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">double</span> width, height;<br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Rectangle</span> {<br>
+                        <span class="text-purple-400">private</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">double</span> width, height;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::string color;<br>
                         <br>
-                        <span class="textpurple-400">public</span>:<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 基础构造函数</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Rectangle(<span class="textpurple-400">double</span> w, <span class="textpurple-400">double</span> h, <span class="textpurple-400">const</span> std::string&amp; c) : width(w), height(h), color(c) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"创建矩形: "</span> &lt;&lt; width &lt;&lt; <span class="textgreen-300">"x"</span> &lt;&lt; height &lt;&lt; <span class="textgreen-300">" 颜色: "</span> &lt;&lt; color &lt;&lt; std::endl;<br>
+                        <span class="text-purple-400">public</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 基础构造函数</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Rectangle(<span class="text-purple-400">double</span> w, <span class="text-purple-400">double</span> h, <span class="text-purple-400">const</span> std::string&amp; c) : width(w), height(h), color(c) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"创建矩形: "</span> &lt;&lt; width &lt;&lt; <span class="text-green-300">"x"</span> &lt;&lt; height &lt;&lt; <span class="text-green-300">" 颜色: "</span> &lt;&lt; color &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 委托构造函数 - 使用默认颜色</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Rectangle(<span class="textpurple-400">double</span> w, <span class="textpurple-400">double</span> h) : Rectangle(w, h, <span class="textgreen-300">"白色"</span>) {}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 委托构造函数 - 使用默认颜色</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Rectangle(<span class="text-purple-400">double</span> w, <span class="text-purple-400">double</span> h) : Rectangle(w, h, <span class="text-green-300">"白色"</span>) {}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 委托构造函数 - 创建正方形</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Rectangle(<span class="textpurple-400">double</span> side) : Rectangle(side, side, <span class="textgreen-300">"白色"</span>) {}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 委托构造函数 - 创建正方形</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Rectangle(<span class="text-purple-400">double</span> side) : Rectangle(side, side, <span class="text-green-300">"白色"</span>) {}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 默认构造函数 - 委托给其他构造函数</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Rectangle() : Rectangle(1.0, 1.0, <span class="textgreen-300">"白色"</span>) {}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 默认构造函数 - 委托给其他构造函数</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Rectangle() : Rectangle(1.0, 1.0, <span class="text-green-300">"白色"</span>) {}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 获取信息的方法</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">double</span> getArea() <span class="textpurple-400">const</span> { <span class="textpurple-400">return</span> width * height; }<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">double</span> getPerimeter() <span class="textpurple-400">const</span> { <span class="textpurple-400">return</span> 2 * (width + height); }<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">void</span> printInfo() <span class="textpurple-400">const</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"矩形: "</span> &lt;&lt; width &lt;&lt; <span class="textgreen-300">"x"</span> &lt;&lt; height &lt;&lt; <span class="textgreen-300">" 颜色: "</span> &lt;&lt; color<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt; <span class="textgreen-300">" 面积: "</span> &lt;&lt; getArea() &lt;&lt; <span class="textgreen-300">" 周长: "</span> &lt;&lt; getPerimeter() &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 获取信息的方法</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">double</span> getArea() <span class="text-purple-400">const</span> { <span class="text-purple-400">return</span> width * height; }<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">double</span> getPerimeter() <span class="text-purple-400">const</span> { <span class="text-purple-400">return</span> 2 * (width + height); }<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> printInfo() <span class="text-purple-400">const</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"矩形: "</span> &lt;&lt; width &lt;&lt; <span class="text-green-300">"x"</span> &lt;&lt; height &lt;&lt; <span class="text-green-300">" 颜色: "</span> &lt;&lt; color<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;&lt; <span class="text-green-300">" 面积: "</span> &lt;&lt; getArea() &lt;&lt; <span class="text-green-300">" 周长: "</span> &lt;&lt; getPerimeter() &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         };<br>
                         <br>
-                        <span class="textpurple-400">class</span> <span class="textblue-300">Shape</span> {<br>
-                        <span class="textpurple-400">protected</span>:<br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Shape</span> {<br>
+                        <span class="text-purple-400">protected</span>:<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::string name;<br>
-                        <span class="textpurple-400">public</span>:<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Shape(<span class="textpurple-400">const</span> std::string&amp; n) : name(n) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"创建形状: "</span> &lt;&lt; name &lt;&lt; std::endl;<br>
+                        <span class="text-purple-400">public</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Shape(<span class="text-purple-400">const</span> std::string&amp; n) : name(n) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"创建形状: "</span> &lt;&lt; name &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Shape(<span class="textpurple-400">const</span> std::string&amp; n, <span class="textpurple-400">int</span> id) : name(n + <span class="textgreen-300">"-"</span> + std::to_string(id)) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"创建形状: "</span> &lt;&lt; name &lt;&lt; <span class="textgreen-300">" (ID: "</span> + std::to_string(id) + <span class="textgreen-300">")"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Shape(<span class="text-purple-400">const</span> std::string&amp; n, <span class="text-purple-400">int</span> id) : name(n + <span class="text-green-300">"-"</span> + std::to_string(id)) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"创建形状: "</span> &lt;&lt; name &lt;&lt; <span class="text-green-300">" (ID: "</span> + std::to_string(id) + <span class="text-green-300">")"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::string getName() <span class="textpurple-400">const</span> { <span class="textpurple-400">return</span> name; }<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::string getName() <span class="text-purple-400">const</span> { <span class="text-purple-400">return</span> name; }<br>
                         };<br>
                         <br>
-                        <span class="textpurple-400">class</span> <span class="textblue-300">Circle</span> : <span class="textpurple-400">public</span> Shape {<br>
-                        <span class="textpurple-400">private</span>:<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">double</span> radius;<br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Circle</span> : <span class="text-purple-400">public</span> Shape {<br>
+                        <span class="text-purple-400">private</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">double</span> radius;<br>
                         <br>
-                        <span class="textpurple-400">public</span>:<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 继承基类的构造函数</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">using</span> Shape::Shape;<br>
+                        <span class="text-purple-400">public</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 继承基类的构造函数</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">using</span> Shape::Shape;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 特定的Circle构造函数</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Circle(<span class="textpurple-400">double</span> r) : Shape(<span class="textgreen-300">"圆形"</span>), radius(r) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"半径: "</span> &lt;&lt; radius &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 特定的Circle构造函数</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Circle(<span class="text-purple-400">double</span> r) : Shape(<span class="text-green-300">"圆形"</span>), radius(r) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"半径: "</span> &lt;&lt; radius &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Circle(<span class="textpurple-400">const</span> std::string&amp; n, <span class="textpurple-400">double</span> r) : Shape(n), radius(r) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"半径: "</span> &lt;&lt; radius &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Circle(<span class="text-purple-400">const</span> std::string&amp; n, <span class="text-purple-400">double</span> r) : Shape(n), radius(r) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"半径: "</span> &lt;&lt; radius &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">double</span> getArea() <span class="textpurple-400">const</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> 3.14159 * radius * radius;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">double</span> getArea() <span class="text-purple-400">const</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> 3.14159 * radius * radius;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         };<br>
                         <br>
-                        <span class="textpurple-400">void</span> <span class="textyellow-300">constructor_examples</span>() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"=== 委托构造函数示例 ==="</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Rectangle rect1; <span class="textblue-300">// 调用默认构造函数，委托给三参数构造函数</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Rectangle rect2(5.0); <span class="textblue-300">// 调用单参数构造函数，委托创建正方形</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Rectangle rect3(3.0, 4.0); <span class="textblue-300">// 调用两参数构造函数，委托给三参数构造函数</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Rectangle rect4(2.0, 3.0, <span class="textgreen-300">"红色"</span>); <span class="textblue-300">// 直接调用三参数构造函数</span><br>
+                        <span class="text-purple-400">void</span> <span class="text-yellow-300">constructor_examples</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"=== 委托构造函数示例 ==="</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Rectangle rect1; <span class="text-blue-300">// 调用默认构造函数，委托给三参数构造函数</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Rectangle rect2(5.0); <span class="text-blue-300">// 调用单参数构造函数，委托创建正方形</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Rectangle rect3(3.0, 4.0); <span class="text-blue-300">// 调用两参数构造函数，委托给三参数构造函数</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Rectangle rect4(2.0, 3.0, <span class="text-green-300">"红色"</span>); <span class="text-blue-300">// 直接调用三参数构造函数</span><br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"\n=== 继承构造函数示例 ==="</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Circle circle1(<span class="textgreen-300">"圆形A"</span>); <span class="textblue-300">// 使用继承的构造函数</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Circle circle2(<span class="textgreen-300">"圆形B"</span>, 123); <span class="textblue-300">// 使用继承的构造函数</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;Circle circle3(5.0); <span class="textblue-300">// 使用Circle自己的构造函数</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"\n=== 继承构造函数示例 ==="</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Circle circle1(<span class="text-green-300">"圆形A"</span>); <span class="text-blue-300">// 使用继承的构造函数</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Circle circle2(<span class="text-green-300">"圆形B"</span>, 123); <span class="text-blue-300">// 使用继承的构造函数</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Circle circle3(5.0); <span class="text-blue-300">// 使用Circle自己的构造函数</span><br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"\n=== 矩形信息 ==="</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"\n=== 矩形信息 ==="</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;rect1.printInfo();<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;rect2.printInfo();<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;rect3.printInfo();<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;rect4.printInfo();<br>
                         }<br>
                         <br>
-                        <span class="textpurple-400">int</span> main() {<br>
+                        <span class="text-purple-400">int</span> main() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;constructor_examples();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> 0;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> 0;<br>
                         }
                     </div>
                 </div>
@@ -848,130 +968,130 @@
                 <div class="code-block rounded-lg p-4 code-font text-sm">
                     <div class="text-slate-400 mb-2"># final/override控制的使用</div>
                     <div class="text-sm leading-6">
-                        <span class="textblue-300">#include &lt;iostream&gt;</span><br>
-                        <span class="textblue-300">#include &lt;string&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;iostream&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;string&gt;</span><br>
                         <br>
-                        <span class="textpurple-400">class</span> <span class="textblue-300">Animal</span> {<br>
-                        <span class="textpurple-400">public</span>:<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">virtual</span> <span class="textpurple-400">void</span> speak() <span class="textpurple-400">const</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"动物发出声音"</span> &lt;&lt; std::endl;<br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Animal</span> {<br>
+                        <span class="text-purple-400">public</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">virtual</span> <span class="text-purple-400">void</span> speak() <span class="text-purple-400">const</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"动物发出声音"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">virtual</span> <span class="textpurple-400">void</span> move() <span class="textpurple-400">const</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"动物移动"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">virtual</span> <span class="text-purple-400">void</span> move() <span class="text-purple-400">const</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"动物移动"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">virtual</span> <span class="textpurple-400">std::string</span> getName() <span class="textpurple-400">const</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> <span class="textgreen-300">"未知动物"</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">virtual</span> <span class="text-purple-400">std::string</span> getName() <span class="text-purple-400">const</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-green-300">"未知动物"</span>;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">virtual</span> ~Animal() = <span class="textpurple-400">default</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">virtual</span> ~Animal() = <span class="text-purple-400">default</span>;<br>
                         };<br>
                         <br>
-                        <span class="textpurple-400">class</span> <span class="textblue-300">Dog</span> : <span class="textpurple-400">public</span> Animal {<br>
-                        <span class="textpurple-400">public</span>:<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">void</span> speak() <span class="textpurple-400">const</span> <span class="textpurple-400">override</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"狗: 汪汪!"</span> &lt;&lt; std::endl;<br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Dog</span> : <span class="text-purple-400">public</span> Animal {<br>
+                        <span class="text-purple-400">public</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> speak() <span class="text-purple-400">const</span> <span class="text-purple-400">override</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"狗: 汪汪!"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">void</span> move() <span class="textpurple-400">const</span> <span class="textpurple-400">override</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"狗跑得很快"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> move() <span class="text-purple-400">const</span> <span class="text-purple-400">override</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"狗跑得很快"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">std::string</span> getName() <span class="textpurple-400">const</span> <span class="textpurple-400">override</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> <span class="textgreen-300">"狗"</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">std::string</span> getName() <span class="text-purple-400">const</span> <span class="text-purple-400">override</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-green-300">"狗"</span>;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 使用final防止这个函数被进一步重写</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">void</span> bark() <span class="textpurple-400">const</span> <span class="textpurple-400">final</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"特定的狗叫声"</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                        };<br>
-                        <br>
-                        <span class="textpurple-400">class</span> <span class="textblue-300">Cat</span> : <span class="textpurple-400">public</span> Animal {<br>
-                        <span class="textpurple-400">public</span>:<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">void</span> speak() <span class="textpurple-400">const</span> <span class="textpurple-400">override</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"猫: 喵喵!"</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                        <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">void</span> move() <span class="textpurple-400">const</span> <span class="textpurple-400">override</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"猫优雅地走"</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                        <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">std::string</span> getName() <span class="textpurple-400">const</span> <span class="textpurple-400">override</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> <span class="textgreen-300">"猫"</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 使用final防止这个函数被进一步重写</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> bark() <span class="text-purple-400">const</span> <span class="text-purple-400">final</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"特定的狗叫声"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         };<br>
                         <br>
-                        <span class="textpurple-400">class</span> <span class="textblue-300">GoldenRetriever</span> : <span class="textpurple-400">public</span> Dog {<br>
-                        <span class="textpurple-400">public</span>:<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">void</span> speak() <span class="textpurple-400">const</span> <span class="textpurple-400">override</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"金毛: 汪汪汪!"</span> &lt;&lt; std::endl;<br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Cat</span> : <span class="text-purple-400">public</span> Animal {<br>
+                        <span class="text-purple-400">public</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> speak() <span class="text-purple-400">const</span> <span class="text-purple-400">override</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"猫: 喵喵!"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">void</span> move() <span class="textpurple-400">const</span> <span class="textpurple-400">override</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"金毛跑得特别开心"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> move() <span class="text-purple-400">const</span> <span class="text-purple-400">override</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"猫优雅地走"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 不能重写Dog的bark()函数，因为它是final的</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// void bark() const override { } // 这会引发编译错误</span><br>
-                        };<br>
-                        <br>
-                        <span class="textpurple-400">class</span> <span class="textblue-300">SpecialDog</span> : <span class="textpurple-400">public</span> Dog {<br>
-                        <span class="textpurple-400">public</span>:<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">void</span> speak() <span class="textpurple-400">const</span> <span class="textpurple-400">override</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"特殊狗: 汪!"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">std::string</span> getName() <span class="text-purple-400">const</span> <span class="text-purple-400">override</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-green-300">"猫"</span>;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         };<br>
                         <br>
-                        <span class="textpurple-400">class</span> <span class="textblue-300">FinalDog</span> final : <span class="textpurple-400">public</span> SpecialDog {<br>
-                        <span class="textpurple-400">public</span>:<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">void</span> speak() <span class="textpurple-400">const</span> <span class="textpurple-400">override</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"终极狗: 汪汪汪汪!"</span> &lt;&lt; std::endl;<br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">GoldenRetriever</span> : <span class="text-purple-400">public</span> Dog {<br>
+                        <span class="text-purple-400">public</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> speak() <span class="text-purple-400">const</span> <span class="text-purple-400">override</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"金毛: 汪汪汪!"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// FinalDog不能被继承，因为它是final的</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> move() <span class="text-purple-400">const</span> <span class="text-purple-400">override</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"金毛跑得特别开心"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 不能重写Dog的bark()函数，因为它是final的</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// void bark() const override { } // 这会引发编译错误</span><br>
                         };<br>
                         <br>
-                        <span class="textpurple-400">void</span> <span class="textyellow-300">override_final_examples</span>() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"=== 基类Animal示例 ==="</span> &lt;&lt; std::endl;<br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">SpecialDog</span> : <span class="text-purple-400">public</span> Dog {<br>
+                        <span class="text-purple-400">public</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> speak() <span class="text-purple-400">const</span> <span class="text-purple-400">override</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"特殊狗: 汪!"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        };<br>
+                        <br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">FinalDog</span> final : <span class="text-purple-400">public</span> SpecialDog {<br>
+                        <span class="text-purple-400">public</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> speak() <span class="text-purple-400">const</span> <span class="text-purple-400">override</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"终极狗: 汪汪汪汪!"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// FinalDog不能被继承，因为它是final的</span><br>
+                        };<br>
+                        <br>
+                        <span class="text-purple-400">void</span> <span class="text-yellow-300">override_final_examples</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"=== 基类Animal示例 ==="</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;Animal animal;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;animal.speak();<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;animal.move();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"名称: "</span> &lt;&lt; animal.getName() &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"名称: "</span> &lt;&lt; animal.getName() &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"\n=== Dog类示例 ==="</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"\n=== Dog类示例 ==="</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;Dog dog;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;dog.speak();<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;dog.move();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"名称: "</span> &lt;&lt; dog.getName() &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"名称: "</span> &lt;&lt; dog.getName() &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;dog.bark();<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"\n=== Cat类示例 ==="</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"\n=== Cat类示例 ==="</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;Cat cat;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;cat.speak();<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;cat.move();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"名称: "</span> &lt;&lt; cat.getName() &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"名称: "</span> &lt;&lt; cat.getName() &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"\n=== GoldenRetriever类示例 ==="</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"\n=== GoldenRetriever类示例 ==="</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;GoldenRetriever golden;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;golden.speak();<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;golden.move();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"名称: "</span> &lt;&lt; golden.getName() &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"名称: "</span> &lt;&lt; golden.getName() &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"\n=== 多态性示例 ==="</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"\n=== 多态性示例 ==="</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;Animal* animals[] = {&amp;animal, &amp;dog, &amp;cat, &amp;golden};<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">int</span> i = 0; i &lt; 4; ++i) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> i = 0; i &lt; 4; ++i) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animals[i]-&gt;speak();<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animals[i]-&gt;move();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"名称: "</span> &lt;&lt; animals[i]-&gt;getName() &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"---"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"名称: "</span> &lt;&lt; animals[i]-&gt;getName() &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"---"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         }<br>
                         <br>
-                        <span class="textpurple-400">int</span> main() {<br>
+                        <span class="text-purple-400">int</span> main() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;override_final_examples();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> 0;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> 0;<br>
                         }
                     </div>
                 </div>
@@ -991,117 +1111,117 @@
                 <div class="code-block rounded-lg p-4 code-font text-sm">
                     <div class="text-slate-400 mb-2"># 原子操作的使用</div>
                     <div class="text-sm leading-6">
-                        <span class="textblue-300">#include &lt;iostream&gt;</span><br>
-                        <span class="textblue-300">#include &lt;thread&gt;</span><br>
-                        <span class="textblue-300">#include &lt;vector&gt;</span><br>
-                        <span class="textblue-300">#include &lt;atomic&gt;</span><br>
-                        <span class="textblue-300">#include &lt;chrono&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;iostream&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;thread&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;vector&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;atomic&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;chrono&gt;</span><br>
                         <br>
-                        <span class="textpurple-400">class</span> <span class="textblue-300">Counter</span> {<br>
-                        <span class="textpurple-400">private</span>:<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;<span class="textpurple-400">int</span>&gt; count{0};<br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Counter</span> {<br>
+                        <span class="text-purple-400">private</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;<span class="text-purple-400">int</span>&gt; count{0};<br>
                         <br>
-                        <span class="textpurple-400">public</span>:<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">void</span> increment() {<br>
+                        <span class="text-purple-400">public</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> increment() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count.fetch_add(1, std::memory_order_relaxed);<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">int</span> get() <span class="textpurple-400">const</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> count.load();<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">int</span> get() <span class="text-purple-400">const</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> count.load();<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">void</span> reset() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> reset() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count.store(0);<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         };<br>
                         <br>
-                        <span class="textpurple-400">void</span> <span class="textyellow-300">atomic_examples</span>() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"=== 原子操作示例 ==="</span> &lt;&lt; std::endl;<br>
+                        <span class="text-purple-400">void</span> <span class="text-yellow-300">atomic_examples</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"=== 原子操作示例 ==="</span> &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 基本原子类型操作</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;<span class="textpurple-400">int</span>&gt; atomic_int{0};<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;<span class="textpurple-400">bool</span>&gt; atomic_bool{<span class="textpurple-400">false</span>};<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;<span class="textpurple-400">long</span>&gt; atomic_long{100};<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 基本原子类型操作</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;<span class="text-purple-400">int</span>&gt; atomic_int{0};<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;<span class="text-purple-400">bool</span>&gt; atomic_bool{<span class="text-purple-400">false</span>};<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;<span class="text-purple-400">long</span>&gt; atomic_long{100};<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 原子加法操作</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 原子加法操作</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;atomic_int.fetch_add(5);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"原子加法后: "</span> &lt;&lt; atomic_int.load() &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"原子加法后: "</span> &lt;&lt; atomic_int.load() &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 原子减法操作</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 原子减法操作</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;atomic_int.fetch_sub(2);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"原子减法后: "</span> &lt;&lt; atomic_int.load() &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"原子减法后: "</span> &lt;&lt; atomic_int.load() &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 原子比较交换操作</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">int</span> expected = 3;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">int</span> desired = 10;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">bool</span> success = atomic_int.compare_exchange_strong(expected, desired);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"比较交换: "</span> &lt;&lt; (success ? <span class="textgreen-300">"成功"</span> : <span class="textgreen-300">"失败"</span>) &lt;&lt; <span class="textgreen-300">", 值: "</span> &lt;&lt; atomic_int.load() &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 原子比较交换操作</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">int</span> expected = 3;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">int</span> desired = 10;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">bool</span> success = atomic_int.compare_exchange_strong(expected, desired);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"比较交换: "</span> &lt;&lt; (success ? <span class="text-green-300">"成功"</span> : <span class="text-green-300">"失败"</span>) &lt;&lt; <span class="text-green-300">", 值: "</span> &lt;&lt; atomic_int.load() &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 使用自定义Counter类</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 使用自定义Counter类</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;Counter counter;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::vector&lt;std::thread&gt; threads;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 创建多个线程来增加计数器</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">const</span> <span class="textpurple-400">int</span> num_threads = 5;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">const</span> <span class="textpurple-400">int</span> increments_per_thread = 1000;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 创建多个线程来增加计数器</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">const</span> <span class="text-purple-400">int</span> num_threads = 5;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">const</span> <span class="text-purple-400">int</span> increments_per_thread = 1000;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">int</span> i = 0; i &lt; num_threads; ++i) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> i = 0; i &lt; num_threads; ++i) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;threads.emplace_back([&amp;counter]() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">int</span> j = 0; j &lt; increments_per_thread; ++j) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> j = 0; j &lt; increments_per_thread; ++j) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;counter.increment();<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 等待所有线程完成</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">auto</span>&amp; t : threads) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 等待所有线程完成</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">auto</span>&amp; t : threads) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;t.join();<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"多线程计数器结果: "</span> &lt;&lt; counter.get() &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"预期结果: "</span> &lt;&lt; num_threads * increments_per_thread &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"多线程计数器结果: "</span> &lt;&lt; counter.get() &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"预期结果: "</span> &lt;&lt; num_threads * increments_per_thread &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 原子标志示例</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 原子标志示例</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::atomic_flag flag = ATOMIC_FLAG_INIT;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> (flag.test_and_set()) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"标志已被设置"</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;} <span class="textpurple-400">else</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"标志未被设置，现在设置"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (flag.test_and_set()) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"标志已被设置"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">else</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"标志未被设置，现在设置"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flag.clear();<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 内存顺序示例</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;<span class="textpurple-400">int</span>&gt; relaxed_counter{0};<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;<span class="textpurple-400">int</span>&gt; acquire_counter{0};<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;<span class="textpurple-400">int</span>&gt; release_counter{0};<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 内存顺序示例</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;<span class="text-purple-400">int</span>&gt; relaxed_counter{0};<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;<span class="text-purple-400">int</span>&gt; acquire_counter{0};<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;<span class="text-purple-400">int</span>&gt; release_counter{0};<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;relaxed_counter.store(1, std::memory_order_relaxed);<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;acquire_counter.store(2, std::memory_order_acquire);<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;release_counter.store(3, std::memory_order_release);<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"内存顺序示例 - Relaxed: "</span> &lt;&lt; relaxed_counter.load(std::memory_order_relaxed) &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"内存顺序示例 - Acquire: "</span> &lt;&lt; acquire_counter.load(std::memory_order_acquire) &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"内存顺序示例 - Release: "</span> &lt;&lt; release_counter.load(std::memory_order_release) &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"内存顺序示例 - Relaxed: "</span> &lt;&lt; relaxed_counter.load(std::memory_order_relaxed) &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"内存顺序示例 - Acquire: "</span> &lt;&lt; acquire_counter.load(std::memory_order_acquire) &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"内存顺序示例 - Release: "</span> &lt;&lt; release_counter.load(std::memory_order_release) &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 使用原子操作实现简单的锁</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;<span class="textpurple-400">bool</span>&gt; lock_flag{<span class="textpurple-400">false</span>};<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">auto</span> lock_func = [&amp;lock_flag]() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">bool</span> expected = <span class="textpurple-400">false</span>;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">while</span> (!lock_flag.compare_exchange_weak(expected, <span class="textpurple-400">true</span>)) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expected = <span class="textpurple-400">false</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 使用原子操作实现简单的锁</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::atomic&lt;<span class="text-purple-400">bool</span>&gt; lock_flag{<span class="text-purple-400">false</span>};<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">auto</span> lock_func = [&amp;lock_flag]() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">bool</span> expected = <span class="text-purple-400">false</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">while</span> (!lock_flag.compare_exchange_weak(expected, <span class="text-purple-400">true</span>)) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expected = <span class="text-purple-400">false</span>;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::this_thread::sleep_for(std::chrono::microseconds(1));<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;};<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">auto</span> unlock_func = [&amp;lock_flag]() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lock_flag.store(<span class="textpurple-400">false</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">auto</span> unlock_func = [&amp;lock_flag]() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lock_flag.store(<span class="text-purple-400">false</span>);<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;};<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"原子锁示例 - 锁定/解锁操作演示完成"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"原子锁示例 - 锁定/解锁操作演示完成"</span> &lt;&lt; std::endl;<br>
                         }<br>
                         <br>
-                        <span class="textpurple-400">int</span> main() {<br>
+                        <span class="text-purple-400">int</span> main() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;atomic_examples();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> 0;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> 0;<br>
                         }
                     </div>
                 </div>
@@ -1121,103 +1241,103 @@
                 <div class="code-block rounded-lg p-4 code-font text-sm">
                     <div class="text-slate-400 mb-2"># chrono时间库的使用</div>
                     <div class="text-sm leading-6">
-                        <span class="textblue-300">#include &lt;iostream&gt;</span><br>
-                        <span class="textblue-300">#include &lt;chrono&gt;</span><br>
-                        <span class="textblue-300">#include &lt;thread&gt;</span><br>
-                        <span class="textblue-300">#include &lt;ctime&gt;</span><br>
-                        <span class="textblue-300">#include &lt;ratio&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;iostream&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;chrono&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;thread&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;ctime&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;ratio&gt;</span><br>
                         <br>
-                        <span class="textpurple-400">void</span> <span class="textyellow-300">chrono_examples</span>() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"=== chrono时间库示例 ==="</span> &lt;&lt; std::endl;<br>
+                        <span class="text-purple-400">void</span> <span class="text-yellow-300">chrono_examples</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"=== chrono时间库示例 ==="</span> &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 基本duration类型</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::duration&lt;<span class="textpurple-400">int</span>&gt; one_second(1);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::duration&lt;<span class="textpurple-400">double</span>, std::ratio&lt;1, 1000&gt;&gt; one_millisecond(1000.0);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 基本duration类型</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::duration&lt;<span class="text-purple-400">int</span>&gt; one_second(1);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::duration&lt;<span class="text-purple-400">double</span>, std::ratio&lt;1, 1000&gt;&gt; one_millisecond(1000.0);<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"1秒 = "</span> &lt;&lt; one_second.count() &lt;&lt; <span class="textgreen-300">" 秒"</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"1毫秒 = "</span> &lt;&lt; one_millisecond.count() &lt;&lt; <span class="textgreen-300">" 毫秒"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"1秒 = "</span> &lt;&lt; one_second.count() &lt;&lt; <span class="text-green-300">" 秒"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"1毫秒 = "</span> &lt;&lt; one_millisecond.count() &lt;&lt; <span class="text-green-300">" 毫秒"</span> &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 使用预定义的时间单位</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 使用预定义的时间单位</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::seconds sec(5);<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::milliseconds ms(5000);<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::microseconds us(5000000);<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::nanoseconds ns(5000000000);<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"5秒 = "</span> &lt;&lt; ms.count() &lt;&lt; <span class="textgreen-300">" 毫秒"</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"5秒 = "</span> &lt;&lt; us.count() &lt;&lt; <span class="textgreen-300">" 微秒"</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"5秒 = "</span> &lt;&lt; ns.count() &lt;&lt; <span class="textgreen-300">" 纳秒"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"5秒 = "</span> &lt;&lt; ms.count() &lt;&lt; <span class="text-green-300">" 毫秒"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"5秒 = "</span> &lt;&lt; us.count() &lt;&lt; <span class="text-green-300">" 微秒"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"5秒 = "</span> &lt;&lt; ns.count() &lt;&lt; <span class="text-green-300">" 纳秒"</span> &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 时间单位转换</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::duration&lt;<span class="textpurple-400">double</span>, std::ratio&lt;60&gt;&gt; one_minute(1.5);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::duration&lt;<span class="textpurple-400">double</span>&gt; in_seconds = one_minute;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"1.5分钟 = "</span> &lt;&lt; in_seconds.count() &lt;&lt; <span class="textgreen-300">" 秒"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 时间单位转换</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::duration&lt;<span class="text-purple-400">double</span>, std::ratio&lt;60&gt;&gt; one_minute(1.5);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::duration&lt;<span class="text-purple-400">double</span>&gt; in_seconds = one_minute;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"1.5分钟 = "</span> &lt;&lt; in_seconds.count() &lt;&lt; <span class="text-green-300">" 秒"</span> &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 使用time_point</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">auto</span> start = std::chrono::high_resolution_clock::now();<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 使用time_point</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">auto</span> start = std::chrono::high_resolution_clock::now();<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 模拟一些工作</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 模拟一些工作</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::this_thread::sleep_for(std::chrono::milliseconds(100));<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">auto</span> end = std::chrono::high_resolution_clock::now();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::duration&lt;<span class="textpurple-400">double</span>, std::milli&gt; elapsed = end - start;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"执行时间: "</span> &lt;&lt; elapsed.count() &lt;&lt; <span class="textgreen-300">" 毫秒"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">auto</span> end = std::chrono::high_resolution_clock::now();<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::duration&lt;<span class="text-purple-400">double</span>, std::milli&gt; elapsed = end - start;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"执行时间: "</span> &lt;&lt; elapsed.count() &lt;&lt; <span class="text-green-300">" 毫秒"</span> &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 不同时钟类型</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">auto</span> system_time = std::chrono::system_clock::now();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">auto</span> steady_time = std::chrono::steady_clock::now();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">auto</span> high_res_time = std::chrono::high_resolution_clock::now();<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 不同时钟类型</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">auto</span> system_time = std::chrono::system_clock::now();<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">auto</span> steady_time = std::chrono::steady_clock::now();<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">auto</span> high_res_time = std::chrono::high_resolution_clock::now();<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::time_t system_time_t = std::chrono::system_clock::to_time_t(system_time);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"系统时间: "</span> &lt;&lt; std::ctime(&amp;system_time_t);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"系统时间: "</span> &lt;&lt; std::ctime(&amp;system_time_t);<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// duration的算术运算</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// duration的算术运算</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::seconds duration1(10);<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::milliseconds duration2(5000);<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::milliseconds total = duration1 + duration2;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"总时间: "</span> &lt;&lt; total.count() &lt;&lt; <span class="textgreen-300">" 毫秒"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"总时间: "</span> &lt;&lt; total.count() &lt;&lt; <span class="text-green-300">" 毫秒"</span> &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 比较duration</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">if</span> (duration1 &gt; duration2) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"duration1 大于 duration2"</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;} <span class="textpurple-400">else</span> {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"duration1 不大于 duration2"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 比较duration</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (duration1 &gt; duration2) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"duration1 大于 duration2"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;} <span class="text-purple-400">else</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"duration1 不大于 duration2"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 使用ratio进行自定义时间单位</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::duration&lt;<span class="textpurple-400">int</span>, std::ratio&lt;3600&gt;&gt; one_hour(1);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::duration&lt;<span class="textpurple-400">int</span>, std::ratio&lt;60&gt;&gt; two_minutes(2);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"1小时 = "</span> &lt;&lt; one_hour.count() &lt;&lt; <span class="textgreen-300">" 秒"</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"2分钟 = "</span> &lt;&lt; two_minutes.count() &lt;&lt; <span class="textgreen-300">" 秒"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 使用ratio进行自定义时间单位</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::duration&lt;<span class="text-purple-400">int</span>, std::ratio&lt;3600&gt;&gt; one_hour(1);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::duration&lt;<span class="text-purple-400">int</span>, std::ratio&lt;60&gt;&gt; two_minutes(2);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"1小时 = "</span> &lt;&lt; one_hour.count() &lt;&lt; <span class="text-green-300">" 秒"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"2分钟 = "</span> &lt;&lt; two_minutes.count() &lt;&lt; <span class="text-green-300">" 秒"</span> &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 精确计时示例</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"\n=== 精确计时示例 ==="</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">auto</span> precise_start = std::chrono::high_resolution_clock::now();<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 精确计时示例</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"\n=== 精确计时示例 ==="</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">auto</span> precise_start = std::chrono::high_resolution_clock::now();<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 计算简单循环的执行时间</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">volatile</span> <span class="textpurple-400">int</span> sum = 0;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">int</span> i = 0; i &lt; 1000000; ++i) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 计算简单循环的执行时间</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">volatile</span> <span class="text-purple-400">int</span> sum = 0;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> i = 0; i &lt; 1000000; ++i) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum += i;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">auto</span> precise_end = std::chrono::high_resolution_clock::now();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::duration&lt;<span class="textpurple-400">double</span>, std::nano&gt; precise_elapsed = precise_end - precise_start;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"循环执行时间: "</span> &lt;&lt; precise_elapsed.count() &lt;&lt; <span class="textgreen-300">" 纳秒"</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"循环执行时间: "</span> &lt;&lt; std::chrono::duration_cast&lt;std::chrono::microseconds&gt;(precise_elapsed).count() &lt;&lt; <span class="textgreen-300">" 微秒"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">auto</span> precise_end = std::chrono::high_resolution_clock::now();<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::duration&lt;<span class="text-purple-400">double</span>, std::nano&gt; precise_elapsed = precise_end - precise_start;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"循环执行时间: "</span> &lt;&lt; precise_elapsed.count() &lt;&lt; <span class="text-green-300">" 纳秒"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"循环执行时间: "</span> &lt;&lt; std::chrono::duration_cast&lt;std::chrono::microseconds&gt;(precise_elapsed).count() &lt;&lt; <span class="text-green-300">" 微秒"</span> &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 时间点计算</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 时间点计算</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::time_point&lt;std::chrono::system_clock&gt; now = std::chrono::system_clock::now();<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::time_point&lt;std::chrono::system_clock&gt; one_hour_later = now + std::chrono::hours(1);<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::chrono::time_point&lt;std::chrono::system_clock&gt; two_hours_earlier = now - std::chrono::hours(2);<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::time_t now_time = std::chrono::system_clock::to_time_t(now);<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::time_t later_time = std::chrono::system_clock::to_time_t(one_hour_later);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"当前时间: "</span> &lt;&lt; std::ctime(&amp;now_time);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"一小时后: "</span> &lt;&lt; std::ctime(&amp;later_time);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"当前时间: "</span> &lt;&lt; std::ctime(&amp;now_time);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"一小时后: "</span> &lt;&lt; std::ctime(&amp;later_time);<br>
                         }<br>
                         <br>
-                        <span class="textpurple-400">int</span> main() {<br>
+                        <span class="text-purple-400">int</span> main() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;chrono_examples();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> 0;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> 0;<br>
                         }
                     </div>
                 </div>
@@ -1237,124 +1357,124 @@
                 <div class="code-block rounded-lg p-4 code-font text-sm">
                     <div class="text-slate-400 mb-2"># 随机数库的使用</div>
                     <div class="text-sm leading-6">
-                        <span class="textblue-300">#include &lt;iostream&gt;</span><br>
-                        <span class="textblue-300">#include &lt;random&gt;</span><br>
-                        <span class="textblue-300">#include &lt;vector&gt;</span><br>
-                        <span class="textblue-300">#include &lt;map&gt;</span><br>
-                        <span class="textblue-300">#include &lt;chrono&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;iostream&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;random&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;vector&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;map&gt;</span><br>
+                        <span class="text-blue-300">#include &lt;chrono&gt;</span><br>
                         <br>
-                        <span class="textpurple-400">void</span> <span class="textyellow-300">random_examples</span>() {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"=== 随机数库示例 ==="</span> &lt;&lt; std::endl;<br>
+                        <span class="text-purple-400">void</span> <span class="text-yellow-300">random_examples</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"=== 随机数库示例 ==="</span> &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 使用不同的随机数引擎</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 使用不同的随机数引擎</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::default_random_engine engine1;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::mt19937 engine2; <span class="textblue-300">// 梅森旋转算法</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::ranlux24_base engine3; <span class="textblue-300">// 高质量但较慢的引擎</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::mt19937 engine2; <span class="text-blue-300">// 梅森旋转算法</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::ranlux24_base engine3; <span class="text-blue-300">// 高质量但较慢的引擎</span><br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 设置种子</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::random_device rd; <span class="textblue-300">// 真随机数设备</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 设置种子</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::random_device rd; <span class="text-blue-300">// 真随机数设备</span><br>
                         &nbsp;&nbsp;&nbsp;&nbsp;engine1.seed(rd());<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;engine2.seed(std::chrono::high_resolution_clock::now().time_since_epoch().count());<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 均匀整数分布</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::uniform_int_distribution&lt;<span class="textpurple-400">int</span>&gt; uniform_dist(1, 100);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"均匀整数分布 (1-100): "</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">int</span> i = 0; i &lt; 5; ++i) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; uniform_dist(engine1) &lt;&lt; <span class="textgreen-300">" "</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 均匀整数分布</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::uniform_int_distribution&lt;<span class="text-purple-400">int</span>&gt; uniform_dist(1, 100);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"均匀整数分布 (1-100): "</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> i = 0; i &lt; 5; ++i) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; uniform_dist(engine1) &lt;&lt; <span class="text-green-300">" "</span>;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 均匀实数分布</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::uniform_real_distribution&lt;<span class="textpurple-400">double</span>&gt; real_dist(0.0, 1.0);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"均匀实数分布 (0.0-1.0): "</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">int</span> i = 0; i &lt; 5; ++i) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; real_dist(engine2) &lt;&lt; <span class="textgreen-300">" "</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 均匀实数分布</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::uniform_real_distribution&lt;<span class="text-purple-400">double</span>&gt; real_dist(0.0, 1.0);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"均匀实数分布 (0.0-1.0): "</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> i = 0; i &lt; 5; ++i) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; real_dist(engine2) &lt;&lt; <span class="text-green-300">" "</span>;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 正态分布</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::normal_distribution&lt;<span class="textpurple-400">double</span>&gt; normal_dist(0.0, 1.0); <span class="textblue-300">// 均值0，标准差1</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"正态分布 (均值0，标准差1): "</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">int</span> i = 0; i &lt; 5; ++i) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; normal_dist(engine1) &lt;&lt; <span class="textgreen-300">" "</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 正态分布</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::normal_distribution&lt;<span class="text-purple-400">double</span>&gt; normal_dist(0.0, 1.0); <span class="text-blue-300">// 均值0，标准差1</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"正态分布 (均值0，标准差1): "</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> i = 0; i &lt; 5; ++i) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; normal_dist(engine1) &lt;&lt; <span class="text-green-300">" "</span>;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 伯努利分布</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::bernoulli_distribution bernoulli_dist(0.3); <span class="textblue-300">// 30%概率为true</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"伯努利分布 (30%概率): "</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">int</span> i = 0; i &lt; 10; ++i) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; (bernoulli_dist(engine2) ? <span class="textgreen-300">"true"</span> : <span class="textgreen-300">"false"</span>) &lt;&lt; <span class="textgreen-300">" "</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 伯努利分布</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::bernoulli_distribution bernoulli_dist(0.3); <span class="text-blue-300">// 30%概率为true</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"伯努利分布 (30%概率): "</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> i = 0; i &lt; 10; ++i) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; (bernoulli_dist(engine2) ? <span class="text-green-300">"true"</span> : <span class="text-green-300">"false"</span>) &lt;&lt; <span class="text-green-300">" "</span>;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 二项分布</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::binomial_distribution&lt;<span class="textpurple-400">int</span>&gt; binomial_dist(10, 0.5); <span class="textblue-300">// 10次试验，成功率0.5</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"二项分布 (10次试验，成功率0.5): "</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">int</span> i = 0; i &lt; 5; ++i) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; binomial_dist(engine1) &lt;&lt; <span class="textgreen-300">" "</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 二项分布</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::binomial_distribution&lt;<span class="text-purple-400">int</span>&gt; binomial_dist(10, 0.5); <span class="text-blue-300">// 10次试验，成功率0.5</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"二项分布 (10次试验，成功率0.5): "</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> i = 0; i &lt; 5; ++i) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; binomial_dist(engine1) &lt;&lt; <span class="text-green-300">" "</span>;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 泊松分布</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::poisson_distribution&lt;<span class="textpurple-400">int</span>&gt; poisson_dist(2.5); <span class="textblue-300">// 平均值2.5</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"泊松分布 (平均值2.5): "</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">int</span> i = 0; i &lt; 5; ++i) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; poisson_dist(engine2) &lt;&lt; <span class="textgreen-300">" "</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 泊松分布</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::poisson_distribution&lt;<span class="text-purple-400">int</span>&gt; poisson_dist(2.5); <span class="text-blue-300">// 平均值2.5</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"泊松分布 (平均值2.5): "</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> i = 0; i &lt; 5; ++i) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; poisson_dist(engine2) &lt;&lt; <span class="text-green-300">" "</span>;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 指数分布</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::exponential_distribution&lt;<span class="textpurple-400">double</span>&gt; exponential_dist(1.0);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"指数分布 (λ=1.0): "</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">int</span> i = 0; i &lt; 5; ++i) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; exponential_dist(engine1) &lt;&lt; <span class="textgreen-300">" "</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 指数分布</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::exponential_distribution&lt;<span class="text-purple-400">double</span>&gt; exponential_dist(1.0);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"指数分布 (λ=1.0): "</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> i = 0; i &lt; 5; ++i) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; exponential_dist(engine1) &lt;&lt; <span class="text-green-300">" "</span>;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 洗牌算法示例</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::vector&lt;<span class="textpurple-400">int</span>&gt; numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"原始数组: "</span>;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">int</span> n : numbers) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; n &lt;&lt; <span class="textgreen-300">" "</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 洗牌算法示例</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::vector&lt;<span class="text-purple-400">int</span>&gt; numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"原始数组: "</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> n : numbers) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; n &lt;&lt; <span class="text-green-300">" "</span>;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; std::endl;<br>
                         <br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::shuffle(numbers.begin(), numbers.end(), engine2);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"洗牌后数组: "</span>;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">int</span> n : numbers) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; n &lt;&lt; <span class="textgreen-300">" "</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"洗牌后数组: "</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> n : numbers) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; n &lt;&lt; <span class="text-green-300">" "</span>;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 随机选择示例</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::vector&lt;std::string&gt; options = {<span class="textgreen-300">"苹果"</span>, <span class="textgreen-300">"香蕉"</span>, <span class="textgreen-300">"橙子"</span>, <span class="textgreen-300">"葡萄"</span>, <span class="textgreen-300">"草莓"</span>};<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::uniform_int_distribution&lt;&span class="textpurple-400">int</span>&gt; option_dist(0, options.size() - 1);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"随机选择的水果: "</span> &lt;&lt; options[option_dist(engine1)] &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 随机选择示例</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::vector&lt;std::string&gt; options = {<span class="text-green-300">"苹果"</span>, <span class="text-green-300">"香蕉"</span>, <span class="text-green-300">"橙子"</span>, <span class="text-green-300">"葡萄"</span>, <span class="text-green-300">"草莓"</span>};<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::uniform_int_distribution&lt;&span class="text-purple-400">int</span>&gt; option_dist(0, options.size() - 1);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"随机选择的水果: "</span> &lt;&lt; options[option_dist(engine1)] &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 模拟掷骰子</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::uniform_int_distribution&lt;<span class="textpurple-400">int</span>&gt; dice_dist(1, 6);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"掷骰子10次: "</span>;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">int</span> i = 0; i &lt; 10; ++i) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; dice_dist(engine2) &lt;&lt; <span class="textgreen-300">" "</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 模拟掷骰子</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::uniform_int_distribution&lt;<span class="text-purple-400">int</span>&gt; dice_dist(1, 6);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"掷骰子10次: "</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> i = 0; i &lt; 10; ++i) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; dice_dist(engine2) &lt;&lt; <span class="text-green-300">" "</span>;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; std::endl;<br>
                         <br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textblue-300">// 统计分布示例</span><br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::map&lt;<span class="textpurple-400">int</span>, <span class="textpurple-400">int</span>&gt; counts;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::uniform_int_distribution&lt;<span class="textpurple-400">int</span>&gt; stats_dist(1, 6);<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">int</span> i = 0; i &lt; 1000; ++i) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">// 统计分布示例</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::map&lt;<span class="text-purple-400">int</span>, <span class="text-purple-400">int</span>&gt; counts;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::uniform_int_distribution&lt;<span class="text-purple-400">int</span>&gt; stats_dist(1, 6);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> i = 0; i &lt; 1000; ++i) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;counts[stats_dist(engine1)]++;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"1000次掷骰子统计: "</span> &lt;&lt; std::endl;<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">for</span> (<span class="textpurple-400">const</span> <span class="textpurple-400">auto</span>&amp; pair : counts) {<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="textgreen-300">"点数 "</span> &lt;&lt; pair.first &lt;&lt; <span class="textgreen-300">": "</span> &lt;&lt; pair.second &lt;&lt; <span class="textgreen-300">" 次"</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"1000次掷骰子统计: "</span> &lt;&lt; std::endl;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> (<span class="text-purple-400">const</span> <span class="text-purple-400">auto</span>&amp; pair : counts) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;std::cout &lt;&lt; <span class="text-green-300">"点数 "</span> &lt;&lt; pair.first &lt;&lt; <span class="text-green-300">": "</span> &lt;&lt; pair.second &lt;&lt; <span class="text-green-300">" 次"</span> &lt;&lt; std::endl;<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                         }<br>
                         <br>
-                        <span class="textpurple-400">int</span> main() {<br>
+                        <span class="text-purple-400">int</span> main() {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;random_examples();<br>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="textpurple-400">return</span> 0;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> 0;<br>
                         }
                     </div>
                 </div>
