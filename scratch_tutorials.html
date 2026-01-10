@@ -354,6 +354,10 @@
                           <a href="#section-4" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">4. 事件积木</a>
                           <a href="#section-5" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">5. 控制积木</a>
                           <a href="#section-6" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">6. 变量与列表</a>
+                          <a href="#section-7" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">7. 声音积木</a>
+                          <a href="#section-8" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">8. 侦测积木</a>
+                          <a href="#section-9" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">9. 运算积木</a>
+                          <a href="#section-10" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">10. 自制积木</a>
                       </nav>
                   </div>
               </div>
@@ -801,13 +805,13 @@
                             <div class="scratch-block scratch-looks mb-2">
                                 移到最前面
                             </div>
-                            <p class="text-slate-300 ml-4">将角色移到最前面的图层。</p>
+                            <p class="text-slate-300 ml-4">将角色移动到所有角色的最前面。</p>
                         </div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-looks mb-2">
                                 移到最后面
                             </div>
-                            <p class="text-slate-300 ml-4">将角色移到最后面的图层。</p>
+                            <p class="text-slate-300 ml-4">将角色移动到所有角色的最后面。</p>
                         </div>
                     </div>
                 </div>
@@ -822,43 +826,46 @@
             
             <div class="language-content" data-lang="scratch">
                 <h4 class="text-lg font-medium mb-4 text-purple-400">Scratch - 事件积木</h4>
-                <p class="text-slate-300 mb-4">事件积木用于触发角色的动作和交互，是Scratch程序的入口点。这些积木可以响应各种事件，如绿旗点击、键盘按键、角色点击等。</p>
+                <p class="text-slate-300 mb-4">事件积木用于触发脚本的执行，是Scratch程序的起点。这些积木可以响应各种事件，如按下键盘、点击鼠标、角色被点击等。</p>
                 
                 <div class="scratch-blocks-container">
                     <div class="scratch-group">
                         <div class="scratch-group-title">所有事件积木</div>
-                        <div class="scratch-block scratch-events">
-                            当绿旗被点击
+                        <div class="scratch-block scratch-events with-groove">
+                            当 <span class="scratch-parameter dropdown">绿旗</span> 被点击
                         </div>
-                        <div class="scratch-block scratch-events">
+                        <div class="scratch-block scratch-events with-groove">
                             当角色被点击
                         </div>
-                        <div class="scratch-block scratch-events">
-                            当背景切换为 <span class="scratch-parameter dropdown">背景1</span>
+                        <div class="scratch-block scratch-events with-groove">
+                            当 <span class="scratch-parameter dropdown">背景</span> 切换为 <span class="scratch-parameter dropdown">背景1</span>
+                        </div>
+                        <div class="scratch-block scratch-events with-groove">
+                            当接收到 <span class="scratch-parameter">消息1</span>
                         </div>
                         <div class="scratch-block scratch-events">
-                            当 <span class="scratch-parameter dropdown">l</span> 键被按下
+                            广播 <span class="scratch-parameter">消息1</span>
                         </div>
                         <div class="scratch-block scratch-events">
-                            当 <span class="scratch-parameter dropdown">上箭头</span> 键被按下
+                            广播 <span class="scratch-parameter">消息1</span> 并等待
                         </div>
-                        <div class="scratch-block scratch-events">
-                            当接收到 <span class="scratch-parameter dropdown">消息1</span>
+                        <div class="scratch-block scratch-events with-groove">
+                            当 <span class="scratch-parameter dropdown">空格键</span> 被按下
                         </div>
-                        <div class="scratch-block scratch-events">
-                            广播 <span class="scratch-parameter dropdown">消息1</span>
+                        <div class="scratch-block scratch-events with-groove">
+                            当 <span class="scratch-parameter circle">1</span> 秒过去
                         </div>
-                        <div class="scratch-block scratch-events">
-                            广播 <span class="scratch-parameter dropdown">消息1</span> 并等待
-                        </div>
-                        <div class="scratch-block scratch-events">
-                            当舞台被点击
-                        </div>
-                        <div class="scratch-block scratch-events">
-                            当 <span class="scratch-parameter dropdown">音量</span> > <span class="scratch-parameter circle">10</span>
-                        </div>
-                        <div class="scratch-block scratch-events">
+                        <div class="scratch-block scratch-events with-groove">
                             当计时器 > <span class="scratch-parameter circle">10</span>
+                        </div>
+                        <div class="scratch-block scratch-events with-groove">
+                            当 <span class="scratch-parameter dropdown">角色1</span> 碰到 <span class="scratch-parameter dropdown">边缘</span>
+                        </div>
+                        <div class="scratch-block scratch-events with-groove">
+                            当 <span class="scratch-parameter dropdown">音量</span> > <span class="scratch-parameter circle">30</span>
+                        </div>
+                        <div class="scratch-block scratch-events with-groove">
+                            当 <span class="scratch-parameter dropdown">颜色</span> <span class="scratch-parameter color-picker" style="background-color: #FF0000;"></span> 碰到 <span class="scratch-parameter color-picker" style="background-color: #00FF00;"></span>
                         </div>
                     </div>
                     
@@ -866,69 +873,39 @@
                         <div class="scratch-group-title">积木含义说明</div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-events mb-2">
-                                当绿旗被点击
+                                当 <span class="scratch-parameter dropdown">绿旗</span> 被点击
                             </div>
-                            <p class="text-slate-300 ml-4">程序的入口点，当用户点击绿旗时触发后续代码执行。</p>
+                            <p class="text-slate-300 ml-4">当用户点击绿旗时，执行下面的脚本。</p>
                         </div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-events mb-2">
                                 当角色被点击
                             </div>
-                            <p class="text-slate-300 ml-4">当用户点击角色时触发后续代码执行。</p>
+                            <p class="text-slate-300 ml-4">当用户点击角色时，执行下面的脚本。</p>
                         </div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-events mb-2">
-                                当背景切换为 <span class="scratch-parameter dropdown">背景1</span>
+                                当接收到 <span class="scratch-parameter">消息1</span>
                             </div>
-                            <p class="text-slate-300 ml-4">当舞台背景切换为指定背景时触发后续代码执行。</p>
+                            <p class="text-slate-300 ml-4">当接收到指定的消息时，执行下面的脚本。</p>
                         </div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-events mb-2">
-                                当 <span class="scratch-parameter dropdown">l</span> 键被按下
+                                广播 <span class="scratch-parameter">消息1</span>
                             </div>
-                            <p class="text-slate-300 ml-4">当用户按下指定字母键时触发后续代码执行。</p>
+                            <p class="text-slate-300 ml-4">向所有角色广播指定的消息。</p>
                         </div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-events mb-2">
-                                当 <span class="scratch-parameter dropdown">上箭头</span> 键被按下
+                                广播 <span class="scratch-parameter">消息1</span> 并等待
                             </div>
-                            <p class="text-slate-300 ml-4">当用户按下指定方向键时触发后续代码执行。</p>
+                            <p class="text-slate-300 ml-4">向所有角色广播指定的消息，并等待所有接收该消息的脚本执行完毕。</p>
                         </div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-events mb-2">
-                                当接收到 <span class="scratch-parameter dropdown">消息1</span>
+                                当 <span class="scratch-parameter dropdown">空格键</span> 被按下
                             </div>
-                            <p class="text-slate-300 ml-4">当接收到其他角色或脚本发送的消息时触发后续代码执行。</p>
-                        </div>
-                        <div class="mb-4">
-                            <div class="scratch-block scratch-events mb-2">
-                                广播 <span class="scratch-parameter dropdown">消息1</span>
-                            </div>
-                            <p class="text-slate-300 ml-4">向所有角色和脚本发送消息，触发对应的接收消息事件。</p>
-                        </div>
-                        <div class="mb-4">
-                            <div class="scratch-block scratch-events mb-2">
-                                广播 <span class="scratch-parameter dropdown">消息1</span> 并等待
-                            </div>
-                            <p class="text-slate-300 ml-4">向所有角色和脚本发送消息，等待所有接收者执行完成后再继续。</p>
-                        </div>
-                        <div class="mb-4">
-                            <div class="scratch-block scratch-events mb-2">
-                                当舞台被点击
-                            </div>
-                            <p class="text-slate-300 ml-4">当用户点击舞台时触发后续代码执行。</p>
-                        </div>
-                        <div class="mb-4">
-                            <div class="scratch-block scratch-events mb-2">
-                                当 <span class="scratch-parameter dropdown">音量</span> > <span class="scratch-parameter circle">10</span>
-                            </div>
-                            <p class="text-slate-300 ml-4">当指定传感器值超过阈值时触发后续代码执行。</p>
-                        </div>
-                        <div class="mb-4">
-                            <div class="scratch-block scratch-events mb-2">
-                                当计时器 > <span class="scratch-parameter circle">10</span>
-                            </div>
-                            <p class="text-slate-300 ml-4">当计时器超过指定时间时触发后续代码执行。</p>
+                            <p class="text-slate-300 ml-4">当用户按下指定的按键时，执行下面的脚本。</p>
                         </div>
                     </div>
                 </div>
@@ -943,61 +920,72 @@
             
             <div class="language-content" data-lang="scratch">
                 <h4 class="text-lg font-medium mb-4 text-purple-400">Scratch - 控制积木</h4>
-                <p class="text-slate-300 mb-4">控制积木用于控制程序的流程和执行顺序，包括条件判断、循环、等待等。这些积木是构建复杂程序逻辑的基础。</p>
+                <p class="text-slate-300 mb-4">控制积木用于控制脚本的执行流程，包括条件判断、循环、等待等功能。这些积木可以让程序更加灵活和智能。</p>
                 
                 <div class="scratch-blocks-container">
                     <div class="scratch-group">
                         <div class="scratch-group-title">所有控制积木</div>
-                        <div class="scratch-block scratch-control">
-                            重复 <span class="scratch-parameter circle">10</span> 次
-                        </div>
-                        <div class="scratch-block scratch-control">
-                            重复直到 <span class="scratch-parameter hexagon">条件</span>
-                        </div>
-                        <div class="scratch-block scratch-control">
-                            等待 <span class="scratch-parameter circle">1</span> 秒
-                        </div>
-                        <div class="scratch-block scratch-control">
-                            等待 <span class="scratch-parameter hexagon">条件</span>
-                        </div>
-                        <div class="scratch-block scratch-control">
+                        <div class="scratch-block scratch-control with-groove">
                             如果 <span class="scratch-parameter hexagon">条件</span> 那么
                         </div>
-                        <div class="scratch-block scratch-control">
+                        <div class="scratch-block scratch-control with-groove">
                             如果 <span class="scratch-parameter hexagon">条件</span> 那么
                         </div>
-                        <div class="scratch-block scratch-control">
-                            否则
+                        <div class="scratch-stack">
+                            <div class="scratch-block scratch-control with-groove">
+                                否则
+                            </div>
+                        </div>
+                        <div class="scratch-block scratch-control with-groove">
+                            重复执行 <span class="scratch-parameter circle">10</span> 次
+                        </div>
+                        <div class="scratch-block scratch-control with-groove">
+                            重复执行
                         </div>
                         <div class="scratch-block scratch-control">
                             停止 <span class="scratch-parameter dropdown">全部</span>
                         </div>
                         <div class="scratch-block scratch-control">
-                            当 <span class="scratch-parameter hexagon">条件</span> 为真
+                            等待 <span class="scratch-parameter circle">1</span> 秒
+                        </div>
+                        <div class="scratch-block scratch-control">
+                            等待直到 <span class="scratch-parameter hexagon">条件</span>
                         </div>
                         <div class="scratch-block scratch-control">
                             创建克隆体 <span class="scratch-parameter dropdown">自己</span>
                         </div>
-                        <div class="scratch-block scratch-control">
+                        <div class="scratch-block scratch-control with-groove">
                             当作为克隆体启动时
                         </div>
                         <div class="scratch-block scratch-control">
                             删除此克隆体
                         </div>
                         <div class="scratch-block scratch-control">
-                            等待 <span class="scratch-parameter dropdown">下一个背景</span> 切换
+                            全部擦除
                         </div>
                         <div class="scratch-block scratch-control">
-                            等待 <span class="scratch-parameter dropdown">下一个造型</span> 切换
+                            移到 <span class="scratch-parameter dropdown">最前面</span>
                         </div>
                         <div class="scratch-block scratch-control">
-                            等待 <span class="scratch-parameter dropdown">下一个声音</span> 结束
+                            移到 <span class="scratch-parameter dropdown">最后面</span>
                         </div>
                         <div class="scratch-block scratch-control">
-                            循环 <span class="scratch-parameter circle">10</span> 次
+                            图章
                         </div>
                         <div class="scratch-block scratch-control">
-                            当 <span class="scratch-parameter hexagon">条件</span> 为真时重复执行
+                            将计时器重置
+                        </div>
+                        <div class="scratch-block scratch-control">
+                            计时器
+                        </div>
+                        <div class="scratch-block scratch-control">
+                            方向
+                        </div>
+                        <div class="scratch-block scratch-control">
+                            x 坐标
+                        </div>
+                        <div class="scratch-block scratch-control">
+                            y 坐标
                         </div>
                     </div>
                     
@@ -1005,90 +993,68 @@
                         <div class="scratch-group-title">积木含义说明</div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-control mb-2">
-                                重复 <span class="scratch-parameter circle">10</span> 次
+                                如果 <span class="scratch-parameter hexagon">条件</span> 那么
                             </div>
-                            <p class="text-slate-300 ml-4">重复执行后续的代码块指定的次数。</p>
-                        </div>
-                        <div class="mb-4">
-                            <div class="scratch-block scratch-control mb-2">
-                                重复直到 <span class="scratch-parameter hexagon">条件</span>
-                            </div>
-                            <p class="text-slate-300 ml-4">重复执行后续的代码块，直到指定条件为真。</p>
-                        </div>
-                        <div class="mb-4">
-                            <div class="scratch-block scratch-control mb-2">
-                                等待 <span class="scratch-parameter circle">1</span> 秒
-                            </div>
-                            <p class="text-slate-300 ml-4">暂停程序执行指定的秒数。</p>
-                        </div>
-                        <div class="mb-4">
-                            <div class="scratch-block scratch-control mb-2">
-                                等待 <span class="scratch-parameter hexagon">条件</span>
-                            </div>
-                            <p class="text-slate-300 ml-4">暂停程序执行，直到指定条件为真。</p>
+                            <p class="text-slate-300 ml-4">如果条件成立，则执行下面的脚本。</p>
                         </div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-control mb-2">
                                 如果 <span class="scratch-parameter hexagon">条件</span> 那么
                             </div>
-                            <p class="text-slate-300 ml-4">如果指定条件为真，执行后续的代码块。</p>
+                            <div class="scratch-stack">
+                                <div class="scratch-block scratch-control mb-2">
+                                    否则
+                                </div>
+                            </div>
+                            <p class="text-slate-300 ml-4">如果条件成立，则执行第一个分支的脚本；否则，执行第二个分支的脚本。</p>
                         </div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-control mb-2">
-                                如果 <span class="scratch-parameter hexagon">条件</span> 那么
+                                重复执行 <span class="scratch-parameter circle">10</span> 次
                             </div>
+                            <p class="text-slate-300 ml-4">重复执行下面的脚本指定的次数。</p>
+                        </div>
+                        <div class="mb-4">
                             <div class="scratch-block scratch-control mb-2">
-                                否则
+                                重复执行
                             </div>
-                            <p class="text-slate-300 ml-4">如果指定条件为真，执行第一个代码块；否则执行第二个代码块。</p>
+                            <p class="text-slate-300 ml-4">无限重复执行下面的脚本。</p>
                         </div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-control mb-2">
                                 停止 <span class="scratch-parameter dropdown">全部</span>
                             </div>
-                            <p class="text-slate-300 ml-4">停止程序的执行，可以选择停止当前脚本、当前角色的所有脚本或全部脚本。</p>
+                            <p class="text-slate-300 ml-4">停止指定的脚本执行。</p>
                         </div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-control mb-2">
-                                当 <span class="scratch-parameter hexagon">条件</span> 为真
+                                等待 <span class="scratch-parameter circle">1</span> 秒
                             </div>
-                            <p class="text-slate-300 ml-4">当指定条件为真时，重复执行后续的代码块。</p>
+                            <p class="text-slate-300 ml-4">暂停脚本执行指定的秒数。</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-control mb-2">
+                                等待直到 <span class="scratch-parameter hexagon">条件</span>
+                            </div>
+                            <p class="text-slate-300 ml-4">暂停脚本执行，直到条件成立。</p>
                         </div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-control mb-2">
                                 创建克隆体 <span class="scratch-parameter dropdown">自己</span>
                             </div>
-                            <p class="text-slate-300 ml-4">创建当前角色的一个克隆体。</p>
+                            <p class="text-slate-300 ml-4">创建角色的一个克隆体。</p>
                         </div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-control mb-2">
                                 当作为克隆体启动时
                             </div>
-                            <p class="text-slate-300 ml-4">当克隆体被创建时触发后续代码执行。</p>
+                            <p class="text-slate-300 ml-4">当克隆体被创建时，执行下面的脚本。</p>
                         </div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-control mb-2">
                                 删除此克隆体
                             </div>
-                            <p class="text-slate-300 ml-4">删除当前克隆体。</p>
-                        </div>
-                        <div class="mb-4">
-                            <div class="scratch-block scratch-control mb-2">
-                                等待 <span class="scratch-parameter dropdown">下一个背景</span> 切换
-                            </div>
-                            <p class="text-slate-300 ml-4">暂停程序执行，直到背景切换完成。</p>
-                        </div>
-                        <div class="mb-4">
-                            <div class="scratch-block scratch-control mb-2">
-                                等待 <span class="scratch-parameter dropdown">下一个造型</span> 切换
-                            </div>
-                            <p class="text-slate-300 ml-4">暂停程序执行，直到造型切换完成。</p>
-                        </div>
-                        <div class="mb-4">
-                            <div class="scratch-block scratch-control mb-2">
-                                等待 <span class="scratch-parameter dropdown">下一个声音</span> 结束
-                            </div>
-                            <p class="text-slate-300 ml-4">暂停程序执行，直到声音播放完成。</p>
+                            <p class="text-slate-300 ml-4">删除当前的克隆体。</p>
                         </div>
                     </div>
                 </div>
@@ -1103,171 +1069,447 @@
             
             <div class="language-content" data-lang="scratch">
                 <h4 class="text-lg font-medium mb-4 text-purple-400">Scratch - 变量与列表</h4>
-                <p class="text-slate-300 mb-4">变量和列表用于存储和管理数据，是Scratch程序中处理数据的重要工具。变量用于存储单个值，列表用于存储多个值。</p>
+                <p class="text-slate-300 mb-4">变量与列表用于存储和管理数据。变量可以存储单个值，而列表可以存储多个值。这些积木可以让程序处理和管理数据。</p>
                 
                 <div class="scratch-blocks-container">
                     <div class="scratch-group">
                         <div class="scratch-group-title">所有变量与列表积木</div>
-                        <!-- 变量积木 -->
                         <div class="scratch-block scratch-variables">
-                            将 <span class="scratch-parameter dropdown">我的变量</span> 设置为 <span class="scratch-parameter circle">0</span>
+                            <span class="scratch-parameter">变量</span>
                         </div>
                         <div class="scratch-block scratch-variables">
-                            将 <span class="scratch-parameter dropdown">我的变量</span> 增加 <span class="scratch-parameter circle">1</span>
+                            将 <span class="scratch-parameter">变量</span> 设定为 <span class="scratch-parameter circle">0</span>
                         </div>
                         <div class="scratch-block scratch-variables">
-                            <span class="scratch-parameter dropdown">我的变量</span>
+                            将 <span class="scratch-parameter">变量</span> 增加 <span class="scratch-parameter circle">1</span>
                         </div>
                         <div class="scratch-block scratch-variables">
-                            显示变量 <span class="scratch-parameter dropdown">我的变量</span>
+                            显示变量 <span class="scratch-parameter">变量</span>
                         </div>
                         <div class="scratch-block scratch-variables">
-                            隐藏变量 <span class="scratch-parameter dropdown">我的变量</span>
+                            隐藏变量 <span class="scratch-parameter">变量</span>
                         </div>
-                        
-                        <!-- 列表积木 -->
-                        <div class="scratch-block scratch-variables">
-                            将 <span class="scratch-parameter">东西</span> 加入 <span class="scratch-parameter dropdown">我的列表</span>
+                        <div class="scratch-block scratch-lists">
+                            <span class="scratch-parameter">列表</span>
                         </div>
-                        <div class="scratch-block scratch-variables">
-                            删除 <span class="scratch-parameter dropdown">我的列表</span> 的第 <span class="scratch-parameter circle">1</span> 项
+                        <div class="scratch-block scratch-lists">
+                            加入 <span class="scratch-parameter">列表</span> <span class="scratch-parameter">项目</span>
                         </div>
-                        <div class="scratch-block scratch-variables">
-                            删除 <span class="scratch-parameter dropdown">我的列表</span> 的全部项目
+                        <div class="scratch-block scratch-lists">
+                            删除 <span class="scratch-parameter">列表</span> 的第 <span class="scratch-parameter circle">1</span> 项
                         </div>
-                        <div class="scratch-block scratch-variables">
-                            在 <span class="scratch-parameter dropdown">我的列表</span> 的第 <span class="scratch-parameter circle">1</span> 项前插入 <span class="scratch-parameter">东西</span>
+                        <div class="scratch-block scratch-lists">
+                            插入 <span class="scratch-parameter">项目</span> 到 <span class="scratch-parameter">列表</span> 的第 <span class="scratch-parameter circle">1</span> 项
                         </div>
-                        <div class="scratch-block scratch-variables">
-                            将 <span class="scratch-parameter dropdown">我的列表</span> 的第 <span class="scratch-parameter circle">1</span> 项替换为 <span class="scratch-parameter">东西</span>
+                        <div class="scratch-block scratch-lists">
+                            将 <span class="scratch-parameter">列表</span> 的第 <span class="scratch-parameter circle">1</span> 项设定为 <span class="scratch-parameter">新项目</span>
                         </div>
-                        <div class="scratch-block scratch-variables">
-                            <span class="scratch-parameter dropdown">我的列表</span> 的第 <span class="scratch-parameter circle">1</span> 项
+                        <div class="scratch-block scratch-lists">
+                            <span class="scratch-parameter">列表</span> 的第 <span class="scratch-parameter circle">1</span> 项
                         </div>
-                        <div class="scratch-block scratch-variables">
-                            <span class="scratch-parameter dropdown">我的列表</span> 中第一个 <span class="scratch-parameter">东西</span> 的编号
+                        <div class="scratch-block scratch-lists">
+                            <span class="scratch-parameter">列表</span> 的项目数
                         </div>
-                        <div class="scratch-block scratch-variables">
-                            <span class="scratch-parameter dropdown">我的列表</span> 的项目数
+                        <div class="scratch-block scratch-lists">
+                            <span class="scratch-parameter">列表</span> 包含 <span class="scratch-parameter">项目</span> ？
                         </div>
-                        <div class="scratch-block scratch-variables">
-                            <span class="scratch-parameter dropdown">我的列表</span> 包含 <span class="scratch-parameter">东西</span> ？
+                        <div class="scratch-block scratch-lists">
+                            <span class="scratch-parameter">列表</span> 中 <span class="scratch-parameter">项目</span> 的索引
                         </div>
-                        <div class="scratch-block scratch-variables">
-                            显示列表 <span class="scratch-parameter dropdown">我的列表</span>
+                        <div class="scratch-block scratch-lists">
+                            清空 <span class="scratch-parameter">列表</span>
                         </div>
-                        <div class="scratch-block scratch-variables">
-                            隐藏列表 <span class="scratch-parameter dropdown">我的列表</span>
+                        <div class="scratch-block scratch-lists">
+                            显示列表 <span class="scratch-parameter">列表</span>
+                        </div>
+                        <div class="scratch-block scratch-lists">
+                            隐藏列表 <span class="scratch-parameter">列表</span>
                         </div>
                     </div>
                     
                     <div class="scratch-group">
-                        <div class="scratch-group-title">变量积木含义说明</div>
+                        <div class="scratch-group-title">积木含义说明</div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-variables mb-2">
-                                将 <span class="scratch-parameter dropdown">我的变量</span> 设置为 <span class="scratch-parameter circle">0</span>
-                            </div>
-                            <p class="text-slate-300 ml-4">设置变量的初始值或修改变量的值。</p>
-                        </div>
-                        <div class="mb-4">
-                            <div class="scratch-block scratch-variables mb-2">
-                                将 <span class="scratch-parameter dropdown">我的变量</span> 增加 <span class="scratch-parameter circle">1</span>
-                            </div>
-                            <p class="text-slate-300 ml-4">将变量的值增加指定的数值。</p>
-                        </div>
-                        <div class="mb-4">
-                            <div class="scratch-block scratch-variables mb-2">
-                                <span class="scratch-parameter dropdown">我的变量</span>
+                                <span class="scratch-parameter">变量</span>
                             </div>
                             <p class="text-slate-300 ml-4">获取变量的当前值。</p>
                         </div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-variables mb-2">
-                                显示变量 <span class="scratch-parameter dropdown">我的变量</span>
+                                将 <span class="scratch-parameter">变量</span> 设定为 <span class="scratch-parameter circle">0</span>
                             </div>
-                            <p class="text-slate-300 ml-4">在舞台上显示指定变量的值。</p>
+                            <p class="text-slate-300 ml-4">设置变量的值。</p>
                         </div>
                         <div class="mb-4">
                             <div class="scratch-block scratch-variables mb-2">
-                                隐藏变量 <span class="scratch-parameter dropdown">我的变量</span>
+                                将 <span class="scratch-parameter">变量</span> 增加 <span class="scratch-parameter circle">1</span>
                             </div>
-                            <p class="text-slate-300 ml-4">在舞台上隐藏指定变量的值。</p>
+                            <p class="text-slate-300 ml-4">增加变量的值。</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-lists mb-2">
+                                加入 <span class="scratch-parameter">列表</span> <span class="scratch-parameter">项目</span>
+                            </div>
+                            <p class="text-slate-300 ml-4">向列表中添加一个项目。</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-lists mb-2">
+                                删除 <span class="scratch-parameter">列表</span> 的第 <span class="scratch-parameter circle">1</span> 项
+                            </div>
+                            <p class="text-slate-300 ml-4">删除列表中指定位置的项目。</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-lists mb-2">
+                                <span class="scratch-parameter">列表</span> 的项目数
+                            </div>
+                            <p class="text-slate-300 ml-4">获取列表中的项目数量。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 声音积木 -->
+        <section id="section-7" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">7. 声音积木</span>
+            </h2>
+            
+            <div class="language-content" data-lang="scratch">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Scratch - 声音积木</h4>
+                <p class="text-slate-300 mb-4">声音积木用于播放和控制声音效果。这些积木可以让角色发出声音，增强程序的互动性和趣味性。</p>
+                
+                <div class="scratch-blocks-container">
+                    <div class="scratch-group">
+                        <div class="scratch-group-title">所有声音积木</div>
+                        <div class="scratch-block scratch-sound">
+                            播放声音 <span class="scratch-parameter dropdown">声音1</span>
+                        </div>
+                        <div class="scratch-block scratch-sound">
+                            播放声音 <span class="scratch-parameter dropdown">声音1</span> 并等待播完
+                        </div>
+                        <div class="scratch-block scratch-sound">
+                            停止所有声音
+                        </div>
+                        <div class="scratch-block scratch-sound">
+                            播放鼓 <span class="scratch-parameter dropdown">鼓1</span>
+                        </div>
+                        <div class="scratch-block scratch-sound">
+                            播放音符 <span class="scratch-parameter circle">60</span> 持续 <span class="scratch-parameter circle">0.5</span> 拍
+                        </div>
+                        <div class="scratch-block scratch-sound">
+                            设定乐器为 <span class="scratch-parameter dropdown">钢琴</span>
+                        </div>
+                        <div class="scratch-block scratch-sound">
+                            设定音量为 <span class="scratch-parameter circle">100</span>%
+                        </div>
+                        <div class="scratch-block scratch-sound">
+                            增加音量 <span class="scratch-parameter circle">10</span>
+                        </div>
+                        <div class="scratch-block scratch-sound">
+                            音量
                         </div>
                     </div>
                     
                     <div class="scratch-group">
-                        <div class="scratch-group-title">列表积木含义说明</div>
+                        <div class="scratch-group-title">积木含义说明</div>
                         <div class="mb-4">
-                            <div class="scratch-block scratch-variables mb-2">
-                                将 <span class="scratch-parameter">东西</span> 加入 <span class="scratch-parameter dropdown">我的列表</span>
+                            <div class="scratch-block scratch-sound mb-2">
+                                播放声音 <span class="scratch-parameter dropdown">声音1</span>
                             </div>
-                            <p class="text-slate-300 ml-4">将指定元素添加到列表的末尾。</p>
+                            <p class="text-slate-300 ml-4">播放指定的声音。</p>
                         </div>
                         <div class="mb-4">
-                            <div class="scratch-block scratch-variables mb-2">
-                                删除 <span class="scratch-parameter dropdown">我的列表</span> 的第 <span class="scratch-parameter circle">1</span> 项
+                            <div class="scratch-block scratch-sound mb-2">
+                                播放声音 <span class="scratch-parameter dropdown">声音1</span> 并等待播完
                             </div>
-                            <p class="text-slate-300 ml-4">删除列表中指定位置的元素。</p>
+                            <p class="text-slate-300 ml-4">播放指定的声音，并等待声音播放完毕后再继续执行后面的脚本。</p>
                         </div>
                         <div class="mb-4">
-                            <div class="scratch-block scratch-variables mb-2">
-                                删除 <span class="scratch-parameter dropdown">我的列表</span> 的全部项目
+                            <div class="scratch-block scratch-sound mb-2">
+                                停止所有声音
                             </div>
-                            <p class="text-slate-300 ml-4">删除列表中的所有元素。</p>
+                            <p class="text-slate-300 ml-4">停止所有正在播放的声音。</p>
                         </div>
                         <div class="mb-4">
-                            <div class="scratch-block scratch-variables mb-2">
-                                在 <span class="scratch-parameter dropdown">我的列表</span> 的第 <span class="scratch-parameter circle">1</span> 项前插入 <span class="scratch-parameter">东西</span>
+                            <div class="scratch-block scratch-sound mb-2">
+                                设定音量为 <span class="scratch-parameter circle">100</span>%
                             </div>
-                            <p class="text-slate-300 ml-4">在列表的指定位置前插入新元素。</p>
+                            <p class="text-slate-300 ml-4">设置音量的大小。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. 侦测积木 -->
+        <section id="section-8" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">8. 侦测积木</span>
+            </h2>
+            
+            <div class="language-content" data-lang="scratch">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Scratch - 侦测积木</h4>
+                <p class="text-slate-300 mb-4">侦测积木用于检测各种条件和获取信息，包括角色状态、鼠标位置、键盘输入等。这些积木可以让程序与用户和环境进行交互。</p>
+                
+                <div class="scratch-blocks-container">
+                    <div class="scratch-group">
+                        <div class="scratch-group-title">所有侦测积木</div>
+                        <div class="scratch-block scratch-sensing">
+                            碰到 <span class="scratch-parameter dropdown">边缘</span>？
+                        </div>
+                        <div class="scratch-block scratch-sensing">
+                            碰到 <span class="scratch-parameter dropdown">角色1</span>？
+                        </div>
+                        <div class="scratch-block scratch-sensing">
+                            颜色 <span class="scratch-parameter color-picker" style="background-color: #FF0000;"></span> 碰到颜色 <span class="scratch-parameter color-picker" style="background-color: #00FF00;"></span>？
+                        </div>
+                        <div class="scratch-block scratch-sensing">
+                            距离 <span class="scratch-parameter dropdown">角色1</span> 有多远？
+                        </div>
+                        <div class="scratch-block scratch-sensing">
+                            <span class="scratch-parameter dropdown">角色1</span> 的 x 坐标
+                        </div>
+                        <div class="scratch-block scratch-sensing">
+                            <span class="scratch-parameter dropdown">角色1</span> 的 y 坐标
+                        </div>
+                        <div class="scratch-block scratch-sensing">
+                            询问 <span class="scratch-parameter">你叫什么名字？</span> 并等待
+                        </div>
+                        <div class="scratch-block scratch-sensing">
+                            回答
+                        </div>
+                        <div class="scratch-block scratch-sensing">
+                            按下 <span class="scratch-parameter dropdown">空格键</span>？
+                        </div>
+                        <div class="scratch-block scratch-sensing">
+                            鼠标指针的 x 坐标
+                        </div>
+                        <div class="scratch-block scratch-sensing">
+                            鼠标指针的 y 坐标
+                        </div>
+                        <div class="scratch-block scratch-sensing">
+                            按下鼠标？
+                        </div>
+                        <div class="scratch-block scratch-sensing">
+                            计时器
+                        </div>
+                        <div class="scratch-block scratch-sensing">
+                            重置计时器
+                        </div>
+                        <div class="scratch-block scratch-sensing">
+                            <span class="scratch-parameter dropdown">音量</span> 是多少？
+                        </div>
+                    </div>
+                    
+                    <div class="scratch-group">
+                        <div class="scratch-group-title">积木含义说明</div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-sensing mb-2">
+                                碰到 <span class="scratch-parameter dropdown">边缘</span>？
+                            </div>
+                            <p class="text-slate-300 ml-4">检测角色是否碰到舞台边缘。</p>
                         </div>
                         <div class="mb-4">
-                            <div class="scratch-block scratch-variables mb-2">
-                                将 <span class="scratch-parameter dropdown">我的列表</span> 的第 <span class="scratch-parameter circle">1</span> 项替换为 <span class="scratch-parameter">东西</span>
+                            <div class="scratch-block scratch-sensing mb-2">
+                                询问 <span class="scratch-parameter">你叫什么名字？</span> 并等待
                             </div>
-                            <p class="text-slate-300 ml-4">替换列表中指定位置的元素。</p>
+                            <p class="text-slate-300 ml-4">显示询问框，等待用户输入回答。</p>
                         </div>
                         <div class="mb-4">
-                            <div class="scratch-block scratch-variables mb-2">
-                                <span class="scratch-parameter dropdown">我的列表</span> 的第 <span class="scratch-parameter circle">1</span> 项
+                            <div class="scratch-block scratch-sensing mb-2">
+                                按下 <span class="scratch-parameter dropdown">空格键</span>？
                             </div>
-                            <p class="text-slate-300 ml-4">获取列表中指定位置的元素。</p>
+                            <p class="text-slate-300 ml-4">检测指定的按键是否被按下。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. 运算积木 -->
+        <section id="section-9" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">9. 运算积木</span>
+            </h2>
+            
+            <div class="language-content" data-lang="scratch">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Scratch - 运算积木</h4>
+                <p class="text-slate-300 mb-4">运算积木用于进行数学运算、逻辑判断和字符串操作，是编程中处理数据的重要工具。</p>
+                
+                <div class="scratch-blocks-container">
+                    <div class="scratch-group">
+                        <div class="scratch-group-title">所有运算积木</div>
+                        <!-- 算术运算 -->
+                        <div class="scratch-block scratch-operators"><span class="scratch-parameter circle">10</span> + <span class="scratch-parameter circle">5</span></div>
+                        <div class="scratch-block scratch-operators"><span class="scratch-parameter circle">10</span> - <span class="scratch-parameter circle">5</span></div>
+                        <div class="scratch-block scratch-operators"><span class="scratch-parameter circle">10</span> * <span class="scratch-parameter circle">5</span></div>
+                        <div class="scratch-block scratch-operators"><span class="scratch-parameter circle">10</span> / <span class="scratch-parameter circle">5</span></div>
+                        <div class="scratch-block scratch-operators">在 <span class="scratch-parameter circle">1</span> 和 <span class="scratch-parameter circle">10</span> 之间取随机数</div>
+                        <div class="scratch-block scratch-operators"><span class="scratch-parameter circle">10</span> 除以 <span class="scratch-parameter circle">3</span> 的余数</div>
+                        <div class="scratch-block scratch-operators">四舍五入 <span class="scratch-parameter circle">3.14</span></div>
+                        <div class="scratch-block scratch-operators">绝对值 <span class="scratch-parameter circle">-5</span></div>
+                        <!-- 比较运算 -->
+                        <div class="scratch-block scratch-operators"><span class="scratch-parameter circle">10</span> > <span class="scratch-parameter circle">50</span></div>
+                        <div class="scratch-block scratch-operators"><span class="scratch-parameter circle">10</span> < <span class="scratch-parameter circle">50</span></div>
+                        <div class="scratch-block scratch-operators"><span class="scratch-parameter circle">10</span> = <span class="scratch-parameter circle">50</span></div>
+                        <!-- 逻辑运算 -->
+                        <div class="scratch-block scratch-operators"><span class="scratch-parameter hexagon">条件1</span> 与 <span class="scratch-parameter hexagon">条件2</span></div>
+                        <div class="scratch-block scratch-operators"><span class="scratch-parameter hexagon">条件1</span> 或 <span class="scratch-parameter hexagon">条件2</span></div>
+                        <div class="scratch-block scratch-operators">不成立 <span class="scratch-parameter hexagon">条件</span></div>
+                        <!-- 字符串运算 -->
+                        <div class="scratch-block scratch-operators">连接 <span class="scratch-parameter">苹果</span> 和 <span class="scratch-parameter">香蕉</span></div>
+                        <div class="scratch-block scratch-operators"><span class="scratch-parameter">苹果</span> 的第 <span class="scratch-parameter circle">1</span> 个字符</div>
+                        <div class="scratch-block scratch-operators"><span class="scratch-parameter">苹果</span> 的字符数</div>
+                        <div class="scratch-block scratch-operators"><span class="scratch-parameter">苹果</span> 包含 <span class="scratch-parameter">果</span> ？</div>
+                    </div>
+                    
+                    <div class="scratch-group">
+                        <div class="scratch-group-title">积木含义说明</div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-operators mb-2">
+                                <span class="scratch-parameter circle">10</span> + <span class="scratch-parameter circle">5</span>
+                            </div>
+                            <p class="text-slate-300 ml-4">进行加法运算。</p>
                         </div>
                         <div class="mb-4">
-                            <div class="scratch-block scratch-variables mb-2">
-                                <span class="scratch-parameter dropdown">我的列表</span> 中第一个 <span class="scratch-parameter">东西</span> 的编号
+                            <div class="scratch-block scratch-operators mb-2">
+                                <span class="scratch-parameter circle">10</span> - <span class="scratch-parameter circle">5</span>
                             </div>
-                            <p class="text-slate-300 ml-4">获取元素在列表中第一次出现的位置。</p>
+                            <p class="text-slate-300 ml-4">进行减法运算。</p>
                         </div>
                         <div class="mb-4">
-                            <div class="scratch-block scratch-variables mb-2">
-                                <span class="scratch-parameter dropdown">我的列表</span> 的项目数
+                            <div class="scratch-block scratch-operators mb-2">
+                                <span class="scratch-parameter circle">10</span> * <span class="scratch-parameter circle">5</span>
                             </div>
-                            <p class="text-slate-300 ml-4">获取列表中元素的数量。</p>
+                            <p class="text-slate-300 ml-4">进行乘法运算。</p>
                         </div>
                         <div class="mb-4">
-                            <div class="scratch-block scratch-variables mb-2">
-                                <span class="scratch-parameter dropdown">我的列表</span> 包含 <span class="scratch-parameter">东西</span> ？
+                            <div class="scratch-block scratch-operators mb-2">
+                                <span class="scratch-parameter circle">10</span> / <span class="scratch-parameter circle">5</span>
                             </div>
-                            <p class="text-slate-300 ml-4">检查列表中是否包含指定元素。</p>
+                            <p class="text-slate-300 ml-4">进行除法运算。</p>
                         </div>
                         <div class="mb-4">
-                            <div class="scratch-block scratch-variables mb-2">
-                                显示列表 <span class="scratch-parameter dropdown">我的列表</span>
+                            <div class="scratch-block scratch-operators mb-2">
+                                在 <span class="scratch-parameter circle">1</span> 和 <span class="scratch-parameter circle">10</span> 之间取随机数
                             </div>
-                            <p class="text-slate-300 ml-4">在舞台上显示指定列表。</p>
+                            <p class="text-slate-300 ml-4">在指定范围内生成一个随机数。</p>
                         </div>
                         <div class="mb-4">
-                            <div class="scratch-block scratch-variables mb-2">
-                                隐藏列表 <span class="scratch-parameter dropdown">我的列表</span>
+                            <div class="scratch-block scratch-operators mb-2">
+                                <span class="scratch-parameter circle">10</span> 除以 <span class="scratch-parameter circle">3</span> 的余数
                             </div>
-                            <p class="text-slate-300 ml-4">在舞台上隐藏指定列表。</p>
+                            <p class="text-slate-300 ml-4">计算除法运算的余数。</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-operators mb-2">
+                                四舍五入 <span class="scratch-parameter circle">3.14</span>
+                            </div>
+                            <p class="text-slate-300 ml-4">对数值进行四舍五入取整。</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-operators mb-2">
+                                绝对值 <span class="scratch-parameter circle">-5</span>
+                            </div>
+                            <p class="text-slate-300 ml-4">获取数值的绝对值。</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-operators mb-2">
+                                <span class="scratch-parameter circle">10</span> > <span class="scratch-parameter circle">50</span>
+                            </div>
+                            <p class="text-slate-300 ml-4">比较两个数值的大小，判断是否大于。</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-operators mb-2">
+                                <span class="scratch-parameter circle">10</span> < <span class="scratch-parameter circle">50</span>
+                            </div>
+                            <p class="text-slate-300 ml-4">比较两个数值的大小，判断是否小于。</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-operators mb-2">
+                                <span class="scratch-parameter circle">10</span> = <span class="scratch-parameter circle">50</span>
+                            </div>
+                            <p class="text-slate-300 ml-4">比较两个数值是否相等。</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-operators mb-2">
+                                <span class="scratch-parameter hexagon">条件1</span> 与 <span class="scratch-parameter hexagon">条件2</span>
+                            </div>
+                            <p class="text-slate-300 ml-4">逻辑与运算，当两个条件都成立时结果为真。</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-operators mb-2">
+                                <span class="scratch-parameter hexagon">条件1</span> 或 <span class="scratch-parameter hexagon">条件2</span>
+                            </div>
+                            <p class="text-slate-300 ml-4">逻辑或运算，当至少一个条件成立时结果为真。</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-operators mb-2">
+                                不成立 <span class="scratch-parameter hexagon">条件</span>
+                            </div>
+                            <p class="text-slate-300 ml-4">逻辑非运算，取条件的相反结果。</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-operators mb-2">
+                                连接 <span class="scratch-parameter">苹果</span> 和 <span class="scratch-parameter">香蕉</span>
+                            </div>
+                            <p class="text-slate-300 ml-4">连接两个字符串。</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-operators mb-2">
+                                <span class="scratch-parameter">苹果</span> 的第 <span class="scratch-parameter circle">1</span> 个字符
+                            </div>
+                            <p class="text-slate-300 ml-4">获取字符串中指定位置的字符。</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-operators mb-2">
+                                <span class="scratch-parameter">苹果</span> 的字符数
+                            </div>
+                            <p class="text-slate-300 ml-4">获取字符串的长度。</p>
+                        </div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-operators mb-2">
+                                <span class="scratch-parameter">苹果</span> 包含 <span class="scratch-parameter">果</span> ？
+                            </div>
+                            <p class="text-slate-300 ml-4">判断一个字符串是否包含另一个字符串。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. 自制积木 -->
+        <section id="section-10" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">10. 自制积木</span>
+            </h2>
+            
+            <div class="language-content" data-lang="scratch">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Scratch - 自制积木</h4>
+                <p class="text-slate-300 mb-4">自制积木用于创建自定义的编程积木，可以将常用的代码组合在一起，提高编程效率。</p>
+                
+                <div class="scratch-blocks-container">
+                    <div class="scratch-group">
+                        <div class="scratch-group-title">所有自制积木</div>
+                        <div class="scratch-block scratch-my-blocks">我的积木</div>
+                    </div>
+                    
+                    <div class="scratch-group">
+                        <div class="scratch-group-title">积木含义说明</div>
+                        <div class="mb-4">
+                            <div class="scratch-block scratch-my-blocks mb-2">
+                                我的积木
+                            </div>
+                            <p class="text-slate-300 ml-4">自定义的编程积木，可以包含多个指令。</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </div>
+</div>
 </main>
 </body>
 </html>
