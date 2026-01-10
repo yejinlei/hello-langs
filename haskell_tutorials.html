@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haskell 教程 - Hello 编程语言</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .syntax-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .code-block {
+            background: rgba(2, 6, 23, 0.9);
+            border-left: 4px solid #3B82F6;
+        }
+        .highlight {
+            background: rgba(59, 130, 246, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- 1. Haskell 简介 -->
+        <section id="section-1" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">1. Haskell 简介</span>
+            </h2>
+            
+            <div class="language-content" data-lang="haskell">
+                <h4 class="text-lg font-medium mb-4 text-green-400">Haskell - 优雅的纯函数式编程语言</h4>
+                <p class="text-slate-300 mb-4">Haskell是一种静态类型的纯函数式编程语言，以其数学般的严谨性、强大的类型系统和惰性求值特性而闻名。它是函数式编程的典范，被广泛用于教学、研究和实际开发中，特别适合需要高度可靠性和正确性的应用。</p>
+                
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">Haskell 语言特点</h5>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2">
+                        <li>纯函数式编程范式</li>
+                        <li>静态类型系统，支持类型推断</li>
+                        <li>惰性求值策略</li>
+                        <li>强大的模式匹配</li>
+                        <li>类型类系统</li>
+                        <li>单子（Monad）用于处理副作用</li>
+                        <li>代数数据类型</li>
+                        <li>高阶函数和柯里化</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Haskell 基础语法 -->
+        <section id="section-2" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">2. Haskell 基础语法</span>
+            </h2>
+            
+            <div class="language-content" data-lang="haskell">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">Hello World 示例</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- Hello World 程序
+main :: IO ()
+main = putStrLn "Hello, Haskell!"
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">基本数据类型和表达式</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 整数
+42
+-100
+
+-- 浮点数
+3.14
+-2.5e10
+
+-- 布尔值
+True
+False
+
+-- 字符
+'a'
+'Z'
+
+-- 字符串
+"Hello, World!"
+
+-- 列表
+[1, 2, 3, 4, 5]
+["apple", "banana", "cherry"]
+
+-- 元组
+(1, "hello")
+(True, 3.14, 'c')
+
+-- 算术表达式
+1 + 2
+5 - 3
+4 * 2
+10 / 3
+10 `div` 3  -- 整数除法
+10 `mod` 3  -- 取余
+
+-- 布尔表达式
+True && False  -- 逻辑与
+True || False  -- 逻辑或
+not True       -- 逻辑非
+
+-- 比较表达式
+1 == 1
+1 /= 2
+1 < 2
+1 <= 1
+1 > 2
+1 >= 1
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">函数定义</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 简单函数定义
+add :: Int -> Int -> Int
+add x y = x + y
+
+-- 递归函数
+factorial :: Integer -> Integer
+factorial 0 = 1
+factorial n = n * factorial (n - 1)
+
+-- 条件函数
+absolute :: Int -> Int
+absolute x = if x < 0 then -x else x
+
+-- 模式匹配函数
+fibonacci :: Int -> Int
+fibonacci 0 = 0
+fibonacci 1 = 1
+fibonacci n = fibonacci (n - 1) + fibonacci (n - 2)
+
+-- 守卫表达式
+grade :: Int -> String
+grade score
+    | score >= 90 = "A"
+    | score >= 80 = "B"
+    | score >= 70 = "C"
+    | score >= 60 = "D"
+    | otherwise   = "F"
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Haskell 列表操作 -->
+        <section id="section-3" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">3. Haskell 列表操作</span>
+            </h2>
+            
+            <div class="language-content" data-lang="haskell">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">列表构造</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 空列表
+emptyList = []
+
+-- 列表构造符
+numbers = 1 : 2 : 3 : []  -- 等价于 [1, 2, 3]
+
+-- 列表范围
+oneToFive = [1..5]        -- [1, 2, 3, 4, 5]
+evens = [2, 4..10]        -- [2, 4, 6, 8, 10]
+countdown = [10, 9..1]     -- [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+-- 无限列表（惰性求值）
+allEvens = [2, 4..]       -- 所有偶数
+firstTenEvens = take 10 allEvens  -- [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">列表推导式</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 基本列表推导式
+evenNumbers = [x | x <- [1..10], even x]  -- [2, 4, 6, 8, 10]
+
+-- 带多个条件的列表推导式
+squaresOfEven = [x*x | x <- [1..10], even x, x > 5]  -- [36, 64, 100]
+
+-- 多重生成器
+pairs = [(x, y) | x <- [1..3], y <- ['a'..'c']]  -- [(1,'a'), (1,'b'), (1,'c'), (2,'a'), (2,'b'), (2,'c'), (3,'a'), (3,'b'), (3,'c')]
+
+-- 列表推导式中的函数应用
+uppercaseStrings = [map toUpper s | s <- ["hello", "world"]]  -- ["HELLO", "WORLD"]
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">内置列表函数</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 列表长度
+length [1, 2, 3, 4, 5]  -- 5
+
+-- 列表反转
+reverse [1, 2, 3]  -- [3, 2, 1]
+
+-- 列表排序
+sort [3, 1, 2]  -- [1, 2, 3]
+
+-- 列表求和
+sum [1, 2, 3]  -- 6
+
+-- 列表乘积
+product [1, 2, 3, 4]  -- 24
+
+-- 取列表前 n 个元素
+take 3 [1, 2, 3, 4, 5]  -- [1, 2, 3]
+
+-- 丢弃列表前 n 个元素
+drop 3 [1, 2, 3, 4, 5]  -- [4, 5]
+
+-- 检查元素是否在列表中
+elem 3 [1, 2, 3, 4, 5]  -- True
+
+-- 列表映射
+map (*2) [1, 2, 3]  -- [2, 4, 6]
+
+-- 列表过滤
+filter even [1, 2, 3, 4, 5]  -- [2, 4]
+
+-- 列表折叠（左折叠）
+foldl (+) 0 [1, 2, 3, 4]  -- 10
+
+-- 列表折叠（右折叠）
+foldr (+) 0 [1, 2, 3, 4]  -- 10
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Haskell 函数式编程特性 -->
+        <section id="section-4" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">4. Haskell 函数式编程特性</span>
+            </h2>
+            
+            <div class="language-content" data-lang="haskell">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">高阶函数</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 接收函数作为参数的函数
+applyTwice :: (a -> a) -> a -> a
+applyTwice f x = f (f x)
+
+-- 使用示例
+applyTwice (*2) 3  -- 12
+applyTwice (++ "!") "hello"  -- "hello!!"
+
+-- 返回函数的函数
+makeAdder :: Int -> (Int -> Int)
+makeAdder x = \y -> x + y
+
+-- 使用示例
+add5 = makeAdder 5
+add5 3  -- 8
+
+-- 柯里化函数
+add :: Int -> Int -> Int
+add x y = x + y
+
+-- 等价于
+add' :: Int -> (Int -> Int)
+add' x = \y -> x + y
+
+-- 部分应用
+add10 = add 10
+add10 5  -- 15
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">匿名函数</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 使用匿名函数的 map
+map (\x -> x * 2) [1, 2, 3]  -- [2, 4, 6]
+
+-- 使用匿名函数的 filter
+filter (\x -> x > 5 && even x) [1..10]  -- [6, 8, 10]
+
+-- 多参数匿名函数
+foldr (\x acc -> x : acc) [] [1, 2, 3]  -- [1, 2, 3]
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">递归与尾递归</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 普通递归
+sumList :: [Int] -> Int
+sumList [] = 0
+sumList (x:xs) = x + sumList xs
+
+-- 尾递归（使用累加器）
+sumListTailRec :: [Int] -> Int
+sumListTailRec xs = sumHelper xs 0
+  where
+    sumHelper [] acc = acc
+    sumHelper (x:xs) acc = sumHelper xs (x + acc)
+
+-- 快速排序（递归）
+quickSort :: Ord a => [a] -> [a]
+quickSort [] = []
+quickSort (x:xs) = 
+  let smallerOrEqual = [y | y <- xs, y <= x]
+      larger = [y | y <- xs, y > x]
+  in quickSort smallerOrEqual ++ [x] ++ quickSort larger
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Haskell 类型系统 -->
+        <section id="section-5" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">5. Haskell 类型系统</span>
+            </h2>
+            
+            <div class="language-content" data-lang="haskell">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">类型声明和类型推断</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 显式类型声明
+x :: Int
+x = 42
+
+s :: String
+s = "Hello"
+
+add :: Int -> Int -> Int
+add x y = x + y
+
+-- 多态类型
+id :: a -> a
+id x = x
+
+const :: a -> b -> a
+const x _ = x
+
+length' :: [a] -> Int
+length' [] = 0
+length' (_:xs) = 1 + length' xs
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">代数数据类型</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 简单的代数数据类型
+data Bool = True | False
+
+data Maybe a = Nothing | Just a
+
+-- 使用示例
+value :: Maybe Int
+value = Just 42
+
+emptyValue :: Maybe String
+emptyValue = Nothing
+
+-- 记录类型
+data Person = Person {
+    name :: String,
+    age :: Int,
+    email :: String
+}
+
+-- 使用示例
+alice :: Person
+alice = Person {
+    name = "Alice",
+    age = 30,
+    email = "alice@example.com"
+}
+
+-- 模式匹配使用记录类型
+greet :: Person -> String
+greet (Person name _ _) = "Hello, " ++ name ++ "!"
+
+-- 递归数据类型
+data List a = Nil | Cons a (List a)
+
+data Tree a = Leaf a | Node (Tree a) a (Tree a)
+
+-- 树的遍历
+preorder :: Tree a -> [a]
+preorder (Leaf x) = [x]
+preorder (Node left x right) = [x] ++ preorder left ++ preorder right
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">类型类</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 类型类定义
+typeclass Eq a where
+    (==) :: a -> a -> Bool
+    (/=) :: a -> a -> Bool
+    x /= y = not (x == y)
+
+-- 类型类实例
+instance Eq Bool where
+    True == True = True
+    False == False = True
+    _ == _ = False
+
+-- 内置类型类示例
+-- Eq: 相等性比较
+-- Ord: 排序
+-- Show: 转换为字符串
+-- Read: 从字符串转换
+-- Num: 数值类型
+-- Integral: 整数类型
+-- Fractional: 分数类型
+
+-- 使用类型类约束
+max' :: (Ord a) => a -> a -> a
+max' x y
+    | x > y     = x
+    | otherwise = y
+
+-- 多类型类约束
+doubleAndShow :: (Num a, Show a) => a -> String
+doubleAndShow x = show (x * 2)
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Haskell IO 和副作用 -->
+        <section id="section-6" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">6. Haskell IO 和副作用</span>
+            </h2>
+            
+            <div class="language-content" data-lang="haskell">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">基本 IO 操作</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 输出
+main :: IO ()
+main = do
+    putStrLn "Hello, Haskell!"
+    putStr "Enter your name: "
+    
+    -- 输入
+    name <- getLine
+    
+    -- 格式化输出
+    putStrLn $ "Nice to meet you, " ++ name ++ "!"
+
+-- IO 组合
+readAndDouble :: IO ()
+readAndDouble = do
+    putStr "Enter a number: "
+    input <- getLine
+    let number = read input :: Int
+    putStrLn $ "Double of " ++ show number ++ " is " ++ show (number * 2)
+
+-- 纯函数与 IO 结合
+calculateSum :: [Int] -> Int
+calculateSum = sum
+
+printSum :: IO ()
+printSum = do
+    let numbers = [1, 2, 3, 4, 5]
+        total = calculateSum numbers
+    putStrLn $ "Sum of " ++ show numbers ++ " is " ++ show total
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">Monad 简介</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- Maybe Monad 示例
+safeDivide :: Double -> Double -> Maybe Double
+safeDivide _ 0 = Nothing
+safeDivide x y = Just (x / y)
+
+-- 使用 Maybe Monad 链式操作
+result :: Maybe Double
+result = do
+    x <- safeDivide 10 2
+    y <- safeDivide 20 4
+    safeDivide x y  -- Just 1.25
+
+-- 使用绑定操作符 (>>=)
+result' :: Maybe Double
+result' = safeDivide 10 2 >>= \x ->
+          safeDivide 20 4 >>= \y ->
+          safeDivide x y
+
+-- IO Monad 是 Haskell 处理副作用的方式
+-- IO 操作被组织成一个 Monad 链
+-- 每个 IO 操作都返回一个包含结果的 IO 动作
+main :: IO ()
+main = do
+    putStrLn "Enter first number:"
+    num1 <- getLine
+    putStrLn "Enter second number:"
+    num2 <- getLine
+    let result = read num1 + read num2
+    putStrLn $ "Sum: " ++ show result
+</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
