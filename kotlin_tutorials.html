@@ -581,60 +581,61 @@
                         <li>类可以实现多个接口</li>
                         <li>接口中的属性必须是抽象的，或者提供getter实现</li>
                     </ul>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 接口定义
-interface Shape {
-    val area: Double
-    fun draw()
-}
-
-// 实现接口
-class Rectangle(val width: Double, val height: Double) : Shape {
-    override val area: Double
-        get() = width * height
-    
-    override fun draw() {
-        println("Drawing a rectangle with width $width and height $height")
-    }
-}
-
-class Circle(val radius: Double) : Shape {
-    override val area: Double
-        get() = Math.PI * radius * radius
-    
-    override fun draw() {
-        println("Drawing a circle with radius $radius")
-    }
-}
-
-// 使用接口
-val shapes: List&lt;Shape&gt; = listOf(
-    Rectangle(5.0, 3.0),
-    Circle(2.5)
-)
-
-for (shape in shapes) {
-    shape.draw()
-    println("Area: ${shape.area}")
-}
-
-// 接口中的默认方法
-interface Movable {
-    fun move() {
-        println("Moving")
-    }
-}
-
-class Car : Movable {
-    // 可以覆盖默认方法
-    override fun move() {
-        println("Car is driving")
-    }
-}
-
-class Bicycle : Movable {
-    // 使用默认方法
-}
-</code></pre>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 接口定义</div>
+                        <div><span class="text-purple-300">interface</span> <span class="text-blue-300">Shape</span> {
+                            <span class="text-purple-300">val</span> <span class="text-blue-300">area</span>: <span class="text-blue-400">Double</span>
+                            <span class="text-purple-300">fun</span> <span class="text-blue-300">draw</span>()
+                        }</div>
+                        <div></div>
+                        <div class="text-slate-400">// 实现接口</div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">Rectangle</span>(<span class="text-purple-300">val</span> <span class="text-blue-300">width</span>: <span class="text-blue-400">Double</span>, <span class="text-purple-300">val</span> <span class="text-blue-300">height</span>: <span class="text-blue-400">Double</span>) : <span class="text-blue-300">Shape</span> {
+                            <span class="text-purple-300">override</span> <span class="text-purple-300">val</span> <span class="text-blue-300">area</span>: <span class="text-blue-400">Double</span>
+                                <span class="text-purple-300">get</span>() = <span class="text-blue-300">width</span> * <span class="text-blue-300">height</span>
+                            
+                            <span class="text-purple-300">override</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">draw</span>() {
+                                <span class="text-blue-300">println</span>(<span class="text-green-300">"Drawing a rectangle with width $width and height $height"</span>)
+                            }
+                        }</div>
+                        <div></div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">Circle</span>(<span class="text-purple-300">val</span> <span class="text-blue-300">radius</span>: <span class="text-blue-400">Double</span>) : <span class="text-blue-300">Shape</span> {
+                            <span class="text-purple-300">override</span> <span class="text-purple-300">val</span> <span class="text-blue-300">area</span>: <span class="text-blue-400">Double</span>
+                                <span class="text-purple-300">get</span>() = <span class="text-blue-300">Math.PI</span> * <span class="text-blue-300">radius</span> * <span class="text-blue-300">radius</span>
+                            
+                            <span class="text-purple-300">override</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">draw</span>() {
+                                <span class="text-blue-300">println</span>(<span class="text-green-300">"Drawing a circle with radius $radius"</span>)
+                            }
+                        }</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用接口</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">shapes</span>: <span class="text-blue-400">List</span>&lt;<span class="text-blue-300">Shape</span>&gt; = <span class="text-blue-300">listOf</span>(
+                            <span class="text-blue-300">Rectangle</span>(<span class="text-yellow-300">5.0</span>, <span class="text-yellow-300">3.0</span>),
+                            <span class="text-blue-300">Circle</span>(<span class="text-yellow-300">2.5</span>)
+                        )</div>
+                        <div></div>
+                        <div><span class="text-purple-300">for</span> (<span class="text-blue-300">shape</span> <span class="text-purple-300">in</span> <span class="text-blue-300">shapes</span>) {
+                            <span class="text-blue-300">shape</span>.<span class="text-blue-300">draw</span>()
+                            <span class="text-blue-300">println</span>(<span class="text-green-300">"Area: ${shape.area}"</span>)
+                        }</div>
+                        <div></div>
+                        <div class="text-slate-400">// 接口中的默认方法</div>
+                        <div><span class="text-purple-300">interface</span> <span class="text-blue-300">Movable</span> {
+                            <span class="text-purple-300">fun</span> <span class="text-blue-300">move</span>() {
+                                <span class="text-blue-300">println</span>(<span class="text-green-300">"Moving"</span>)
+                            }
+                        }</div>
+                        <div></div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">Car</span> : <span class="text-blue-300">Movable</span> {
+                            <span class="text-slate-400">// 可以覆盖默认方法</span>
+                            <span class="text-purple-300">override</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">move</span>() {
+                                <span class="text-blue-300">println</span>(<span class="text-green-300">"Car is driving"</span>)
+                            }
+                        }</div>
+                        <div></div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">Bicycle</span> : <span class="text-blue-300">Movable</span> {
+                            <span class="text-slate-400">// 使用默认方法</span>
+                        }</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -659,48 +660,49 @@ class Bicycle : Movable {
                         <li>when表达式不需要break，每个分支默认是互斥的</li>
                         <li>when表达式可以有一个else分支处理默认情况</li>
                     </ul>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// if 表达式（Kotlin 中 if 是表达式，不是语句）
-val a = 10
-val b = 20
-val max = if (a > b) a else b
-
-// 多行 if 表达式
-val result = if (a > b) {
-    println("a is larger")
-    a
-} else {
-    println("b is larger")
-    b
-}
-
-// when 表达式（替代 switch）
-val day = 3
-val dayName = when (day) {
-    1 -> "Monday"
-    2 -> "Tuesday"
-    3 -> "Wednesday"
-    4 -> "Thursday"
-    5 -> "Friday"
-    6 -> "Saturday"
-    7 -> "Sunday"
-    else -> "Invalid day"
-}
-
-// when 表达式的其他用法
-when {
-    a < 10 -> println("a is less than 10")
-    a < 20 -> println("a is less than 20")
-    else -> println("a is 20 or more")
-}
-
-// when 用于类型检查
-val obj: Any = "Hello"
-when (obj) {
-    is String -> println("It's a string: ${obj.length}")
-    is Int -> println("It's an integer: $obj")
-    else -> println("It's something else")
-}
-</code></pre>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// if 表达式（Kotlin 中 if 是表达式，不是语句）</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">a</span> = <span class="text-yellow-300">10</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">b</span> = <span class="text-yellow-300">20</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">max</span> = <span class="text-purple-300">if</span> (<span class="text-blue-300">a</span> > <span class="text-blue-300">b</span>) <span class="text-blue-300">a</span> <span class="text-purple-300">else</span> <span class="text-blue-300">b</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 多行 if 表达式</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">result</span> = <span class="text-purple-300">if</span> (<span class="text-blue-300">a</span> > <span class="text-blue-300">b</span>) {
+                            <span class="text-blue-300">println</span>(<span class="text-green-300">"a is larger"</span>)
+                            <span class="text-blue-300">a</span>
+                        } <span class="text-purple-300">else</span> {
+                            <span class="text-blue-300">println</span>(<span class="text-green-300">"b is larger"</span>)
+                            <span class="text-blue-300">b</span>
+                        }</div>
+                        <div></div>
+                        <div class="text-slate-400">// when 表达式（替代 switch）</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">day</span> = <span class="text-yellow-300">3</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">dayName</span> = <span class="text-purple-300">when</span> (<span class="text-blue-300">day</span>) {
+                            <span class="text-yellow-300">1</span> -> <span class="text-green-300">"Monday"</span>
+                            <span class="text-yellow-300">2</span> -> <span class="text-green-300">"Tuesday"</span>
+                            <span class="text-yellow-300">3</span> -> <span class="text-green-300">"Wednesday"</span>
+                            <span class="text-yellow-300">4</span> -> <span class="text-green-300">"Thursday"</span>
+                            <span class="text-yellow-300">5</span> -> <span class="text-green-300">"Friday"</span>
+                            <span class="text-yellow-300">6</span> -> <span class="text-green-300">"Saturday"</span>
+                            <span class="text-yellow-300">7</span> -> <span class="text-green-300">"Sunday"</span>
+                            <span class="text-purple-300">else</span> -> <span class="text-green-300">"Invalid day"</span>
+                        }</div>
+                        <div></div>
+                        <div class="text-slate-400">// when 表达式的其他用法</div>
+                        <div><span class="text-purple-300">when</span> {
+                            <span class="text-blue-300">a</span> < <span class="text-yellow-300">10</span> -> <span class="text-blue-300">println</span>(<span class="text-green-300">"a is less than 10"</span>)
+                            <span class="text-blue-300">a</span> < <span class="text-yellow-300">20</span> -> <span class="text-blue-300">println</span>(<span class="text-green-300">"a is less than 20"</span>)
+                            <span class="text-purple-300">else</span> -> <span class="text-blue-300">println</span>(<span class="text-green-300">"a is 20 or more"</span>)
+                        }</div>
+                        <div></div>
+                        <div class="text-slate-400">// when 用于类型检查</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">obj</span>: <span class="text-blue-400">Any</span> = <span class="text-green-300">"Hello"</span></div>
+                        <div><span class="text-purple-300">when</span> (<span class="text-blue-300">obj</span>) {
+                            <span class="text-purple-300">is</span> <span class="text-blue-400">String</span> -> <span class="text-blue-300">println</span>(<span class="text-green-300">"It's a string: ${obj.length}"</span>)
+                            <span class="text-purple-300">is</span> <span class="text-blue-400">Int</span> -> <span class="text-blue-300">println</span>(<span class="text-green-300">"It's an integer: $obj"</span>)
+                            <span class="text-purple-300">else</span> -> <span class="text-blue-300">println</span>(<span class="text-green-300">"It's something else"</span>)
+                        }</div>
+                    </div>
                 </div>
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
@@ -824,30 +826,31 @@ numbers.forEach {
                         <li>setOf()会自动去重重复元素</li>
                         <li>mapOf()使用to关键字创建键值对</li>
                     </ul>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// List - 有序集合，允许重复元素
-val numbers: List&lt;Int&gt; = listOf(1, 2, 3, 4, 5)
-val mutableNumbers: MutableList&lt;Int&gt; = mutableListOf(1, 2, 3)
-mutableNumbers.add(4)
-
-// Set - 无序集合，不允许重复元素
-val uniqueNumbers: Set&lt;Int&gt; = setOf(1, 2, 3, 2, 1)  // {1, 2, 3}
-val mutableSet: MutableSet&lt;Int&gt; = mutableSetOf(1, 2, 3)
-mutableSet.add(4)
-
-// Map - 键值对集合
-val map: Map&lt;String, Int&gt; = mapOf("one" to 1, "two" to 2, "three" to 3)
-val mutableMap: MutableMap&lt;String, Int&gt; = mutableMapOf("one" to 1)
-mutableMap["two"] = 2
-
-// 空安全集合
-val emptyList: List&lt;Int&gt; = emptyList()
-val emptySet: Set&lt;String&gt; = emptySet()
-val emptyMap: Map&lt;String, Int&gt; = emptyMap()
-
-// 类型推断的集合
-val inferredList = listOf(1, 2, 3)  // List&lt;Int&gt;
-val inferredMap = mapOf("a" to 1, "b" to 2)  // Map&lt;String, Int&gt;
-</code></pre>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// List - 有序集合，允许重复元素</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">numbers</span>: <span class="text-blue-400">List</span>&lt;<span class="text-blue-400">Int</span>&gt; = <span class="text-blue-300">listOf</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>)</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">mutableNumbers</span>: <span class="text-blue-400">MutableList</span>&lt;<span class="text-blue-400">Int</span>&gt; = <span class="text-blue-300">mutableListOf</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>)</div>
+                        <div><span class="text-blue-300">mutableNumbers</span>.<span class="text-blue-300">add</span>(<span class="text-yellow-300">4</span>)</div>
+                        <div></div>
+                        <div class="text-slate-400">// Set - 无序集合，不允许重复元素</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">uniqueNumbers</span>: <span class="text-blue-400">Set</span>&lt;<span class="text-blue-400">Int</span>&gt; = <span class="text-blue-300">setOf</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">1</span>)  <span class="text-slate-400">// {1, 2, 3}</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">mutableSet</span>: <span class="text-blue-400">MutableSet</span>&lt;<span class="text-blue-400">Int</span>&gt; = <span class="text-blue-300">mutableSetOf</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>)</div>
+                        <div><span class="text-blue-300">mutableSet</span>.<span class="text-blue-300">add</span>(<span class="text-yellow-300">4</span>)</div>
+                        <div></div>
+                        <div class="text-slate-400">// Map - 键值对集合</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">map</span>: <span class="text-blue-400">Map</span>&lt;<span class="text-blue-400">String</span>, <span class="text-blue-400">Int</span>&gt; = <span class="text-blue-300">mapOf</span>(<span class="text-green-300">"one"</span> <span class="text-purple-300">to</span> <span class="text-yellow-300">1</span>, <span class="text-green-300">"two"</span> <span class="text-purple-300">to</span> <span class="text-yellow-300">2</span>, <span class="text-green-300">"three"</span> <span class="text-purple-300">to</span> <span class="text-yellow-300">3</span>)</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">mutableMap</span>: <span class="text-blue-400">MutableMap</span>&lt;<span class="text-blue-400">String</span>, <span class="text-blue-400">Int</span>&gt; = <span class="text-blue-300">mutableMapOf</span>(<span class="text-green-300">"one"</span> <span class="text-purple-300">to</span> <span class="text-yellow-300">1</span>)</div>
+                        <div><span class="text-blue-300">mutableMap</span>[<span class="text-green-300">"two"</span>] = <span class="text-yellow-300">2</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 空安全集合</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">emptyList</span>: <span class="text-blue-400">List</span>&lt;<span class="text-blue-400">Int</span>&gt; = <span class="text-blue-300">emptyList</span>()</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">emptySet</span>: <span class="text-blue-400">Set</span>&lt;<span class="text-blue-400">String</span>&gt; = <span class="text-blue-300">emptySet</span>()</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">emptyMap</span>: <span class="text-blue-400">Map</span>&lt;<span class="text-blue-400">String</span>, <span class="text-blue-400">Int</span>&gt; = <span class="text-blue-300">emptyMap</span>()</div>
+                        <div></div>
+                        <div class="text-slate-400">// 类型推断的集合</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">inferredList</span> = <span class="text-blue-300">listOf</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>)  <span class="text-slate-400">// List&lt;Int&gt;</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">inferredMap</span> = <span class="text-blue-300">mapOf</span>(<span class="text-green-300">"a"</span> <span class="text-purple-300">to</span> <span class="text-yellow-300">1</span>, <span class="text-green-300">"b"</span> <span class="text-purple-300">to</span> <span class="text-yellow-300">2</span>)  <span class="text-slate-400">// Map&lt;String, Int&gt;</span></div>
+                    </div>
                 </div>
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
