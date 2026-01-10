@@ -716,46 +716,47 @@
                         <li>可以使用step指定步长</li>
                         <li>while和do-while循环与Java类似</li>
                     </ul>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// for 循环遍历范围
-for (i in 1..5) {
-    println(i)
-}
-
-// 倒序遍历
-for (i in 5 downTo 1) {
-    println(i)
-}
-
-// 步长
-for (i in 1..10 step 2) {
-    println(i)  // 1, 3, 5, 7, 9
-}
-
-// for 循环遍历集合
-val numbers = listOf(1, 2, 3, 4, 5)
-for (number in numbers) {
-    println(number)
-}
-
-// 遍历带索引
-for ((index, value) in numbers.withIndex()) {
-    println("Index $index: $value")
-}
-
-// while 循环
-var i = 1
-while (i <= 5) {
-    println(i)
-    i++
-}
-
-// do-while 循环
-var j = 1
-do {
-    println(j)
-    j++
-} while (j <= 5)
-</code></pre>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// for 循环遍历范围</div>
+                        <div><span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">5</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">i</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 倒序遍历</div>
+                        <div><span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">5</span> <span class="text-purple-300">downTo</span> <span class="text-yellow-300">1</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">i</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 步长</div>
+                        <div><span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">10</span> <span class="text-purple-300">step</span> <span class="text-yellow-300">2</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">i</span>)  <span class="text-slate-400">// 1, 3, 5, 7, 9</span></div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// for 循环遍历集合</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">numbers</span> = <span class="text-blue-300">listOf</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>)</div>
+                        <div><span class="text-purple-300">for</span> (<span class="text-blue-300">number</span> <span class="text-purple-300">in</span> <span class="text-blue-300">numbers</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">number</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 遍历带索引</div>
+                        <div><span class="text-purple-300">for</span> ((<span class="text-blue-300">index</span>, <span class="text-blue-300">value</span>) <span class="text-purple-300">in</span> <span class="text-blue-300">numbers</span>.<span class="text-blue-300">withIndex</span>()) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Index $index: $value"</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// while 循环</div>
+                        <div><span class="text-purple-300">var</span> <span class="text-blue-300">i</span> = <span class="text-yellow-300">1</span></div>
+                        <div><span class="text-purple-300">while</span> (<span class="text-blue-300">i</span> <= <span class="text-yellow-300">5</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">i</span>)</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">i</span>++</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// do-while 循环</div>
+                        <div><span class="text-purple-300">var</span> <span class="text-blue-300">j</span> = <span class="text-yellow-300">1</span></div>
+                        <div><span class="text-purple-300">do</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">j</span>)</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">j</span>++</div>
+                        <div>} <span class="text-purple-300">while</span> (<span class="text-blue-300">j</span> <= <span class="text-yellow-300">5</span>)</div>
+                    </div>
                 </div>
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
@@ -768,40 +769,41 @@ do {
                         <li>可以使用标签控制break和continue的作用范围</li>
                         <li>return@label用于从lambda表达式返回，而不是从包含函数返回</li>
                     </ul>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// break 和 continue
-for (i in 1..10) {
-    if (i == 5) break  // 终止循环
-    println(i)
-}
-
-for (i in 1..10) {
-    if (i % 2 == 0) continue  // 跳过当前迭代
-    println(i)
-}
-
-// 标签
-outer@ for (i in 1..3) {
-    for (j in 1..3) {
-        if (i * j > 4) break@outer  // 跳出外层循环
-        println("i = $i, j = $j")
-    }
-}
-
-// return 表达式
-fun findFirstPositive(numbers: List&lt;Int&gt;): Int? {
-    for (number in numbers) {
-        if (number > 0) return number  // 从函数返回
-    }
-    return null
-}
-
-// return@label 从 lambda 返回
-val numbers = listOf(1, -2, 3, -4, 5)
-numbers.forEach { 
-    if (it < 0) return@forEach  // 从 lambda 返回，不是从函数
-    println(it)
-}
-</code></pre>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// break 和 continue</div>
+                        <div><span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">10</span>) {
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">if</span> (<span class="text-blue-300">i</span> == <span class="text-yellow-300">5</span>) <span class="text-purple-300">break</span>  <span class="text-slate-400">// 终止循环</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">i</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div><span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">10</span>) {
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">if</span> (<span class="text-blue-300">i</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span>) <span class="text-purple-300">continue</span>  <span class="text-slate-400">// 跳过当前迭代</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">i</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 标签</div>
+                        <div><span class="text-purple-300">outer@</span> <span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">3</span>) {
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">for</span> (<span class="text-blue-300">j</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">3</span>) {
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">if</span> (<span class="text-blue-300">i</span> * <span class="text-blue-300">j</span> > <span class="text-yellow-300">4</span>) <span class="text-purple-300">break@outer</span>  <span class="text-slate-400">// 跳出外层循环</span></div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"i = $i, j = $j"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// return 表达式</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">findFirstPositive</span>(<span class="text-blue-300">numbers</span>: <span class="text-blue-400">List</span>&lt;<span class="text-blue-400">Int</span>&gt;): <span class="text-blue-400">Int</span>? {
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">for</span> (<span class="text-blue-300">number</span> <span class="text-purple-300">in</span> <span class="text-blue-300">numbers</span>) {
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">if</span> (<span class="text-blue-300">number</span> > <span class="text-yellow-300">0</span>) <span class="text-purple-300">return</span> <span class="text-blue-300">number</span>  <span class="text-slate-400">// 从函数返回</span></div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">return</span> <span class="text-purple-300">null</span></div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// return@label 从 lambda 返回</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">numbers</span> = <span class="text-blue-300">listOf</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">-2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">-4</span>, <span class="text-yellow-300">5</span>)</div>
+                        <div><span class="text-blue-300">numbers</span>.<span class="text-blue-300">forEach</span> {
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">if</span> (<span class="text-blue-300">it</span> < <span class="text-yellow-300">0</span>) <span class="text-purple-300">return@forEach</span>  <span class="text-slate-400">// 从 lambda 返回，不是从函数</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">it</span>)</div>
+                        <div>}</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -863,44 +865,45 @@ numbers.forEach {
                         <li>reduce()和fold()的区别是fold()有初始值</li>
                         <li>first()如果没有匹配元素会抛出异常，firstOrNull()会返回null</li>
                     </ul>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">val numbers = listOf(1, 2, 3, 4, 5)
-
-// 过滤
-val evenNumbers = numbers.filter { it % 2 == 0 }  // [2, 4]
-val oddNumbers = numbers.filterNot { it % 2 == 0 }  // [1, 3, 5]
-val greaterThanTwo = numbers.filter { it > 2 }  // [3, 4, 5]
-
-// 映射
-val doubled = numbers.map { it * 2 }  // [2, 4, 6, 8, 10]
-val squared = numbers.map { it * it }  // [1, 4, 9, 16, 25]
-
-// 扁平化
-val nestedList = listOf(listOf(1, 2), listOf(3, 4), listOf(5))
-val flattened = nestedList.flatten()  // [1, 2, 3, 4, 5]
-val flatMapped = nestedList.flatMap { it.map { it * 2 } }  // [2, 4, 6, 8, 10]
-
-// 折叠和归约
-val sum = numbers.reduce { acc, number -> acc + number }  // 15
-val sumWithInitial = numbers.fold(10) { acc, number -> acc + number }  // 25
-
-// 排序
-val unsorted = listOf(3, 1, 4, 1, 5, 9, 2, 6)
-val sorted = unsorted.sorted()  // [1, 1, 2, 3, 4, 5, 6, 9]
-val sortedDescending = unsorted.sortedDescending()  // [9, 6, 5, 4, 3, 2, 1, 1]
-val sortedByLength = listOf("apple", "banana", "cherry").sortedBy { it.length }  // [apple, cherry, banana]
-
-// 分组
-val words = listOf("apple", "banana", "cherry", "date", "elderberry")
-val groupedByLength = words.groupBy { it.length }  // {5=[apple], 6=[banana, cherry], 4=[date], 10=[elderberry]}
-
-// 元素检查
-val hasEven = numbers.any { it % 2 == 0 }  // true
-val allPositive = numbers.all { it > 0 }  // true
-val noneNegative = numbers.none { it < 0 }  // true
-val firstEven = numbers.first { it % 2 == 0 }  // 2
-val lastEven = numbers.last { it % 2 == 0 }  // 4
-val firstOrNull = numbers.firstOrNull { it > 10 }  // null
-</code></pre>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">numbers</span> = <span class="text-blue-300">listOf</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>)</div>
+                        <div></div>
+                        <div class="text-slate-400">// 过滤</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">evenNumbers</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">filter</span> { <span class="text-purple-300">it</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span> }  <span class="text-slate-400">// [2, 4]</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">oddNumbers</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">filterNot</span> { <span class="text-purple-300">it</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span> }  <span class="text-slate-400">// [1, 3, 5]</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">greaterThanTwo</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">filter</span> { <span class="text-purple-300">it</span> > <span class="text-yellow-300">2</span> }  <span class="text-slate-400">// [3, 4, 5]</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 映射</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">doubled</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">map</span> { <span class="text-purple-300">it</span> * <span class="text-yellow-300">2</span> }  <span class="text-slate-400">// [2, 4, 6, 8, 10]</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">squared</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">map</span> { <span class="text-purple-300">it</span> * <span class="text-purple-300">it</span> }  <span class="text-slate-400">// [1, 4, 9, 16, 25]</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 扁平化</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">nestedList</span> = <span class="text-blue-300">listOf</span>(<span class="text-blue-300">listOf</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>), <span class="text-blue-300">listOf</span>(<span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>), <span class="text-blue-300">listOf</span>(<span class="text-yellow-300">5</span>))</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">flattened</span> = <span class="text-blue-300">nestedList</span>.<span class="text-blue-300">flatten</span>()  <span class="text-slate-400">// [1, 2, 3, 4, 5]</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">flatMapped</span> = <span class="text-blue-300">nestedList</span>.<span class="text-blue-300">flatMap</span> { <span class="text-purple-300">it</span>.<span class="text-blue-300">map</span> { <span class="text-purple-300">it</span> * <span class="text-yellow-300">2</span> } }  <span class="text-slate-400">// [2, 4, 6, 8, 10]</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 折叠和归约</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">sum</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">reduce</span> { <span class="text-blue-300">acc</span>, <span class="text-blue-300">number</span> -> <span class="text-blue-300">acc</span> + <span class="text-blue-300">number</span> }  <span class="text-slate-400">// 15</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">sumWithInitial</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">fold</span>(<span class="text-yellow-300">10</span>) { <span class="text-blue-300">acc</span>, <span class="text-blue-300">number</span> -> <span class="text-blue-300">acc</span> + <span class="text-blue-300">number</span> }  <span class="text-slate-400">// 25</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 排序</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">unsorted</span> = <span class="text-blue-300">listOf</span>(<span class="text-yellow-300">3</span>, <span class="text-yellow-300">1</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">1</span>, <span class="text-yellow-300">5</span>, <span class="text-yellow-300">9</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">6</span>)</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">sorted</span> = <span class="text-blue-300">unsorted</span>.<span class="text-blue-300">sorted</span>()  <span class="text-slate-400">// [1, 1, 2, 3, 4, 5, 6, 9]</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">sortedDescending</span> = <span class="text-blue-300">unsorted</span>.<span class="text-blue-300">sortedDescending</span>()  <span class="text-slate-400">// [9, 6, 5, 4, 3, 2, 1, 1]</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">sortedByLength</span> = <span class="text-blue-300">listOf</span>(<span class="text-green-300">"apple"</span>, <span class="text-green-300">"banana"</span>, <span class="text-green-300">"cherry"</span>).<span class="text-blue-300">sortedBy</span> { <span class="text-purple-300">it</span>.<span class="text-blue-300">length</span> }  <span class="text-slate-400">// [apple, cherry, banana]</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 分组</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">words</span> = <span class="text-blue-300">listOf</span>(<span class="text-green-300">"apple"</span>, <span class="text-green-300">"banana"</span>, <span class="text-green-300">"cherry"</span>, <span class="text-green-300">"date"</span>, <span class="text-green-300">"elderberry"</span>)</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">groupedByLength</span> = <span class="text-blue-300">words</span>.<span class="text-blue-300">groupBy</span> { <span class="text-purple-300">it</span>.<span class="text-blue-300">length</span> }  <span class="text-slate-400">// {5=[apple], 6=[banana, cherry], 4=[date], 10=[elderberry]}</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 元素检查</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">hasEven</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">any</span> { <span class="text-purple-300">it</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span> }  <span class="text-slate-400">// true</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">allPositive</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">all</span> { <span class="text-purple-300">it</span> > <span class="text-yellow-300">0</span> }  <span class="text-slate-400">// true</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">noneNegative</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">none</span> { <span class="text-purple-300">it</span> < <span class="text-yellow-300">0</span> }  <span class="text-slate-400">// true</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">firstEven</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">first</span> { <span class="text-purple-300">it</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span> }  <span class="text-slate-400">// 2</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">lastEven</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">last</span> { <span class="text-purple-300">it</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span> }  <span class="text-slate-400">// 4</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">firstOrNull</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">firstOrNull</span> { <span class="text-purple-300">it</span> > <span class="text-yellow-300">10</span> }  <span class="text-slate-400">// null</span></div>
+                    </div>
                 </div>
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
@@ -913,25 +916,26 @@ val firstOrNull = numbers.firstOrNull { it > 10 }  // null
                         <li>associateWith()将集合元素作为键，生成的值作为值</li>
                         <li>zip()可以将两个集合合并为键值对</li>
                     </ul>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">val numbers = listOf(1, 2, 3, 4, 5)
-
-// 转换为其他集合类型
-val array = numbers.toTypedArray()  // Array&lt;Int&gt;
-val set = numbers.toSet()  // Set&lt;Int&gt;
-val hashSet = numbers.toHashSet()  // HashSet&lt;Int&gt;
-
-// 转换为字符串
-val joined = numbers.joinToString()  // "1, 2, 3, 4, 5"
-val customJoined = numbers.joinToString(separator = "|", prefix = "[", postfix = "]")  // "[1|2|3|4|5]"
-
-// 映射到其他类型
-val stringList = numbers.map { it.toString() }  // List&lt;String&gt;
-val mapFromList = numbers.associateWith { it * 2 }  // Map&lt;Int, Int&gt; {1=2, 2=4, 3=6, 4=8, 5=10}
-val mapFromPairs = numbers.zip(numbers.map { it * 2 }).toMap()  // Map&lt;Int, Int&gt; {1=2, 2=4, 3=6, 4=8, 5=10}
-
-// 过滤并转换
-val evenSquares = numbers.filter { it % 2 == 0 }.map { it * it }  // [4, 16]
-</code></pre>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">numbers</span> = <span class="text-blue-300">listOf</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>)</div>
+                        <div></div>
+                        <div class="text-slate-400">// 转换为其他集合类型</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">array</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">toTypedArray</span>()  <span class="text-slate-400">// Array&lt;Int&gt;</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">set</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">toSet</span>()  <span class="text-slate-400">// Set&lt;Int&gt;</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">hashSet</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">toHashSet</span>()  <span class="text-slate-400">// HashSet&lt;Int&gt;</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 转换为字符串</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">joined</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">joinToString</span>()  <span class="text-slate-400">// "1, 2, 3, 4, 5"</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">customJoined</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">joinToString</span>(<span class="text-blue-300">separator</span> = <span class="text-green-300">"|"</span>, <span class="text-blue-300">prefix</span> = <span class="text-green-300">"["</span>, <span class="text-blue-300">postfix</span> = <span class="text-green-300">"]"</span>)  <span class="text-slate-400">// "[1|2|3|4|5]"</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 映射到其他类型</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">stringList</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">map</span> { <span class="text-purple-300">it</span>.<span class="text-blue-300">toString</span>() }  <span class="text-slate-400">// List&lt;String&gt;</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">mapFromList</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">associateWith</span> { <span class="text-purple-300">it</span> * <span class="text-yellow-300">2</span> }  <span class="text-slate-400">// Map&lt;Int, Int&gt; {1=2, 2=4, 3=6, 4=8, 5=10}</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">mapFromPairs</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">zip</span>(<span class="text-blue-300">numbers</span>.<span class="text-blue-300">map</span> { <span class="text-purple-300">it</span> * <span class="text-yellow-300">2</span> }).<span class="text-blue-300">toMap</span>()  <span class="text-slate-400">// Map&lt;Int, Int&gt; {1=2, 2=4, 3=6, 4=8, 5=10}</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 过滤并转换</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">evenSquares</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">filter</span> { <span class="text-purple-300">it</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span> }.<span class="text-blue-300">map</span> { <span class="text-purple-300">it</span> * <span class="text-purple-300">it</span> }  <span class="text-slate-400">// [4, 16]</span></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -956,43 +960,44 @@ val evenSquares = numbers.filter { it % 2 == 0 }.map { it * it }  // [4, 16]
                         <li>可以自定义异常类继承Exception或RuntimeException</li>
                         <li>Kotlin不区分检查异常和非检查异常</li>
                     </ul>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 抛出异常
-fun divide(a: Int, b: Int): Int {
-    if (b == 0) {
-        throw ArithmeticException("Division by zero")
-    }
-    return a / b
-}
-
-// 捕获异常
-try {
-    val result = divide(10, 0)
-    println("Result: $result")
-} catch (e: ArithmeticException) {
-    println("Error: ${e.message}")
-} catch (e: Exception) {
-    println("Unexpected error: ${e.message}")
-} finally {
-    println("This block always executes")
-}
-
-// try 作为表达式
-val result = try {
-    divide(10, 2)
-} catch (e: ArithmeticException) {
-    0  // 默认值
-}
-
-// 自定义异常
-class InvalidInputException(message: String) : Exception(message)
-
-fun processInput(input: String) {
-    if (input.isEmpty()) {
-        throw InvalidInputException("Input cannot be empty")
-    }
-    // 处理输入
-}
-</code></pre>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 抛出异常</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">divide</span>(<span class="text-blue-300">a</span>: <span class="text-blue-400">Int</span>, <span class="text-blue-300">b</span>: <span class="text-blue-400">Int</span>): <span class="text-blue-400">Int</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">if</span> (<span class="text-blue-300">b</span> == <span class="text-yellow-300">0</span>) {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">throw</span> <span class="text-blue-300">ArithmeticException</span>(<span class="text-green-300">"Division by zero"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">return</span> <span class="text-blue-300">a</span> / <span class="text-blue-300">b</span></div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 捕获异常</div>
+                        <div><span class="text-purple-300">try</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">result</span> = <span class="text-blue-300">divide</span>(<span class="text-yellow-300">10</span>, <span class="text-yellow-300">0</span>)</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Result: $result"</span>)</div>
+                        <div>} <span class="text-purple-300">catch</span> (<span class="text-blue-300">e</span>: <span class="text-blue-300">ArithmeticException</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Error: ${e.message}"</span>)</div>
+                        <div>} <span class="text-purple-300">catch</span> (<span class="text-blue-300">e</span>: <span class="text-blue-300">Exception</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Unexpected error: ${e.message}"</span>)</div>
+                        <div>} <span class="text-purple-300">finally</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"This block always executes"</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// try 作为表达式</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">result</span> = <span class="text-purple-300">try</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">divide</span>(<span class="text-yellow-300">10</span>, <span class="text-yellow-300">2</span>)</div>
+                        <div>} <span class="text-purple-300">catch</span> (<span class="text-blue-300">e</span>: <span class="text-blue-300">ArithmeticException</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-yellow-300">0</span>  <span class="text-slate-400">// 默认值</span></div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 自定义异常</div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">InvalidInputException</span>(<span class="text-blue-300">message</span>: <span class="text-blue-400">String</span>) : <span class="text-blue-300">Exception</span>(<span class="text-blue-300">message</span>)</div>
+                        <div></div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">processInput</span>(<span class="text-blue-300">input</span>: <span class="text-blue-400">String</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">if</span> (<span class="text-blue-300">input</span>.<span class="text-blue-300">isEmpty</span>()) {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">throw</span> <span class="text-blue-300">InvalidInputException</span>(<span class="text-green-300">"Input cannot be empty"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// 处理输入</span></div>
+                        <div>}</div>
+                    </div>
                 </div>
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
@@ -1006,33 +1011,34 @@ fun processInput(input: String) {
                         <li>安全转换操作符as?在转换失败时返回null，而不是抛出异常</li>
                         <li>let函数与安全调用操作符结合使用，可以在对象不为空时执行代码块</li>
                     </ul>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 安全调用操作符 ?.
-val str: String? = null
-val length = str?.length  // null
-
-// Elvis 操作符 ?: 
-val safeLength = str?.length ?: 0  // 0
-
-// 非空断言操作符 !!.（不推荐使用）
-val unsafeLength = str!!.length  // 抛出 NullPointerException
-
-// 安全转换操作符 as?
-val obj: Any = "Hello"
-val string: String? = obj as? String
-val number: Int? = obj as? Int  // null
-
-// let 函数与空安全
-str?.let { 
-    println("Length: ${it.length}")  // 只有当 str 不为 null 时执行
-}
-
-// 空安全类型参数
-fun &lt;T: Any&gt; printLength(obj: T?) {
-    obj?.let {
-        println("Length: ${it.toString().length}")
-    }
-}
-</code></pre>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 安全调用操作符 ?.</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">str</span>: <span class="text-blue-400">String</span>? = <span class="text-purple-300">null</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">length</span> = <span class="text-blue-300">str</span>?.<span class="text-blue-300">length</span>  <span class="text-slate-400">// null</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// Elvis 操作符 ?: </div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">safeLength</span> = <span class="text-blue-300">str</span>?.<span class="text-blue-300">length</span> <span class="text-purple-300">?:</span> <span class="text-yellow-300">0</span>  <span class="text-slate-400">// 0</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 非空断言操作符 !!.（不推荐使用）</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">unsafeLength</span> = <span class="text-blue-300">str</span>!!.<span class="text-blue-300">length</span>  <span class="text-slate-400">// 抛出 NullPointerException</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 安全转换操作符 as?</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">obj</span>: <span class="text-blue-400">Any</span> = <span class="text-green-300">"Hello"</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">string</span>: <span class="text-blue-400">String</span>? = <span class="text-blue-300">obj</span> <span class="text-purple-300">as?</span> <span class="text-blue-400">String</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">number</span>: <span class="text-blue-400">Int</span>? = <span class="text-blue-300">obj</span> <span class="text-purple-300">as?</span> <span class="text-blue-400">Int</span>  <span class="text-slate-400">// null</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// let 函数与空安全</div>
+                        <div><span class="text-blue-300">str</span>?.<span class="text-blue-300">let</span> { </div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Length: ${it.length}"</span>)  <span class="text-slate-400">// 只有当 str 不为 null 时执行</span></div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 空安全类型参数</div>
+                        <div><span class="text-purple-300">fun</span> &lt;<span class="text-blue-400">T</span>: <span class="text-blue-400">Any</span>&gt; <span class="text-blue-300">printLength</span>(<span class="text-blue-300">obj</span>: <span class="text-blue-400">T</span>?) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">obj</span>?.<span class="text-blue-300">let</span> {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Length: ${it.toString().length}"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>}</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1107,46 +1113,47 @@ fun &lt;T: Any&gt; printLength(obj: T?) {
                         <li>Dispatchers.Unconfined：不受限的调度器，在当前线程执行</li>
                         <li>NewSingleThreadContext：创建一个新的单线程上下文</li>
                     </ul>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">import kotlinx.coroutines.*
-
-fun main() = runBlocking {
-    // 默认调度器（与调用者相同的线程）
-    launch {
-        println("Default: ${Thread.currentThread().name}")
-    }
-    
-    // 主线程调度器
-    launch(Dispatchers.Main) {
-        println("Main: ${Thread.currentThread().name}")
-    }
-    
-    // IO 调度器（用于网络、文件操作等）
-    launch(Dispatchers.IO) {
-        println("IO: ${Thread.currentThread().name}")
-    }
-    
-    // 默认调度器（线程池）
-    launch(Dispatchers.Default) {
-        println("Default: ${Thread.currentThread().name}")
-    }
-    
-    // 新线程调度器
-    launch(Dispatchers.NewSingleThreadContext("MyThread")) {
-        println("NewSingleThreadContext: ${Thread.currentThread().name}")
-    }
-}
-
-// 切换调度器
-fun main() = runBlocking {
-    launch(Dispatchers.Default) {
-        println("Starting in ${Thread.currentThread().name}")
-        withContext(Dispatchers.IO) {
-            println("Working in ${Thread.currentThread().name}")
-        }
-        println("Back to ${Thread.currentThread().name}")
-    }
-}
-</code></pre>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div><span class="text-blue-400">import</span> <span class="text-green-300">kotlinx.coroutines.*</span></div>
+                        <div></div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">main</span>() = <span class="text-purple-300">runBlocking</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// 默认调度器（与调用者相同的线程）</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">launch</span> {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Default: ${Thread.currentThread().name}"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// 主线程调度器</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">launch</span>(<span class="text-blue-300">Dispatchers</span>.<span class="text-blue-300">Main</span>) {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Main: ${Thread.currentThread().name}"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// IO 调度器（用于网络、文件操作等）</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">launch</span>(<span class="text-blue-300">Dispatchers</span>.<span class="text-blue-300">IO</span>) {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"IO: ${Thread.currentThread().name}"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// 默认调度器（线程池）</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">launch</span>(<span class="text-blue-300">Dispatchers</span>.<span class="text-blue-300">Default</span>) {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Default: ${Thread.currentThread().name}"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// 新线程调度器</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">launch</span>(<span class="text-blue-300">Dispatchers</span>.<span class="text-blue-300">NewSingleThreadContext</span>(<span class="text-green-300">"MyThread"</span>)) {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"NewSingleThreadContext: ${Thread.currentThread().name}"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>}</div>
+                        <div></div>
+                        <div><span class="text-slate-400">// 切换调度器</span></div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">main</span>() = <span class="text-purple-300">runBlocking</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">launch</span>(<span class="text-blue-300">Dispatchers</span>.<span class="text-blue-300">Default</span>) {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Starting in ${Thread.currentThread().name}"</span>)</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">withContext</span>(<span class="text-blue-300">Dispatchers</span>.<span class="text-blue-300">IO</span>) {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Working in ${Thread.currentThread().name}"</span>)</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Back to ${Thread.currentThread().name}"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>}</div>
+                    </div>
                 </div>
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
@@ -1159,53 +1166,54 @@ fun main() = runBlocking {
                         <li>async(start = CoroutineStart.LAZY)创建惰性协程，只有在需要时才会执行</li>
                         <li>并发执行可以提高程序的性能，但要注意线程安全问题</li>
                     </ul>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">import kotlinx.coroutines.*
-import kotlin.system.measureTimeMillis
-
-// 异步函数
-suspend fun doSomethingUsefulOne(): Int {
-    delay(1000L)
-    return 13
-}
-
-suspend fun doSomethingUsefulTwo(): Int {
-    delay(1000L)
-    return 29
-}
-
-// 顺序执行
-fun main() = runBlocking {
-    val time = measureTimeMillis {
-        val one = doSomethingUsefulOne()
-        val two = doSomethingUsefulTwo()
-        println("The answer is ${one + two}")
-    }
-    println("Completed in $time ms")  // ~2000 ms
-}
-
-// 并发执行
-fun main() = runBlocking {
-    val time = measureTimeMillis {
-        val one = async { doSomethingUsefulOne() }
-        val two = async { doSomethingUsefulTwo() }
-        println("The answer is ${one.await() + two.await()}")
-    }
-    println("Completed in $time ms")  // ~1000 ms
-}
-
-// 惰性异步
-fun main() = runBlocking {
-    val time = measureTimeMillis {
-        val one = async(start = CoroutineStart.LAZY) { doSomethingUsefulOne() }
-        val two = async(start = CoroutineStart.LAZY) { doSomethingUsefulTwo() }
-        // 启动协程
-        one.start()
-        two.start()
-        println("The answer is ${one.await() + two.await()}")
-    }
-    println("Completed in $time ms")  // ~1000 ms
-}
-</code></pre>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div><span class="text-blue-400">import</span> <span class="text-green-300">kotlinx.coroutines.*</span></div>
+                        <div><span class="text-blue-400">import</span> <span class="text-green-300">kotlin.system.measureTimeMillis</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 异步函数</div>
+                        <div><span class="text-purple-300">suspend</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">doSomethingUsefulOne</span>(): <span class="text-blue-400">Int</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">delay</span>(<span class="text-yellow-300">1000L</span>)</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">return</span> <span class="text-yellow-300">13</span></div>
+                        <div>}</div>
+                        <div></div>
+                        <div><span class="text-purple-300">suspend</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">doSomethingUsefulTwo</span>(): <span class="text-blue-400">Int</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">delay</span>(<span class="text-yellow-300">1000L</span>)</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">return</span> <span class="text-yellow-300">29</span></div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 顺序执行</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">main</span>() = <span class="text-purple-300">runBlocking</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">time</span> = <span class="text-blue-300">measureTimeMillis</span> {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">one</span> = <span class="text-blue-300">doSomethingUsefulOne</span>()</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">two</span> = <span class="text-blue-300">doSomethingUsefulTwo</span>()</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"The answer is ${one + two}"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Completed in $time ms"</span>)  <span class="text-slate-400">// ~2000 ms</span></div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 并发执行</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">main</span>() = <span class="text-purple-300">runBlocking</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">time</span> = <span class="text-blue-300">measureTimeMillis</span> {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">one</span> = <span class="text-purple-300">async</span> { <span class="text-blue-300">doSomethingUsefulOne</span>() }</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">two</span> = <span class="text-purple-300">async</span> { <span class="text-blue-300">doSomethingUsefulTwo</span>() }</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"The answer is ${one.await() + two.await()}"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Completed in $time ms"</span>)  <span class="text-slate-400">// ~1000 ms</span></div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 惰性异步</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">main</span>() = <span class="text-purple-300">runBlocking</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">time</span> = <span class="text-blue-300">measureTimeMillis</span> {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">one</span> = <span class="text-purple-300">async</span>(<span class="text-blue-300">start</span> = <span class="text-blue-300">CoroutineStart</span>.<span class="text-blue-300">LAZY</span>) { <span class="text-blue-300">doSomethingUsefulOne</span>() }</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">two</span> = <span class="text-purple-300">async</span>(<span class="text-blue-300">start</span> = <span class="text-blue-300">CoroutineStart</span>.<span class="text-blue-300">LAZY</span>) { <span class="text-blue-300">doSomethingUsefulTwo</span>() }</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-slate-400">// 启动协程</span></div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">one</span>.<span class="text-blue-300">start</span>()</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">two</span>.<span class="text-blue-300">start</span>()</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"The answer is ${one.await() + two.await()}"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Completed in $time ms"</span>)  <span class="text-slate-400">// ~1000 ms</span></div>
+                        <div>}</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1231,53 +1239,54 @@ fun main() = runBlocking {
                         <li>Delegates.observable用于监听属性值的变化</li>
                         <li>映射委托可以将属性值存储在Map中</li>
                     </ul>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 委托模式
-interface Base {
-    fun print()
-}
-
-class BaseImpl(val x: Int) : Base {
-    override fun print() {
-        println(x)
-    }
-}
-
-// 委托给 BaseImpl
-class Derived(b: Base) : Base by b
-
-// 使用委托
-val base = BaseImpl(10)
-val derived = Derived(base)
-derived.print()  // 10
-
-// 属性委托
-class Example {
-    // 延迟属性
-    val lazyValue: String by lazy {
-        println("Computed!")
-        "Hello"
-    }
-    
-    // 可观察属性
-    var observableValue: String by Delegates.observable("Initial value") { _, old, new ->
-        println("Changed from $old to $new")
-    }
-    
-    // 映射委托
-    val map = mapOf(
-        "name" to "Alice",
-        "age" to 30
-    )
-    val name: String by map
-    val age: Int by map
-}
-
-val example = Example()
-println(example.lazyValue)  // 打印 "Computed!" 和 "Hello"
-example.observableValue = "New value"  // 打印 "Changed from Initial value to New value"
-println(example.name)  // "Alice"
-println(example.age)  // 30
-</code></pre>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 委托模式</div>
+                        <div><span class="text-purple-300">interface</span> <span class="text-blue-300">Base</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">fun</span> <span class="text-blue-300">print</span>()</div>
+                        <div>}</div>
+                        <div></div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">BaseImpl</span>(<span class="text-purple-300">val</span> <span class="text-blue-300">x</span>: <span class="text-blue-400">Int</span>) : <span class="text-blue-300">Base</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">override</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">print</span>() {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">x</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 委托给 BaseImpl</div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">Derived</span>(<span class="text-blue-300">b</span>: <span class="text-blue-300">Base</span>) : <span class="text-blue-300">Base</span> <span class="text-purple-300">by</span> <span class="text-blue-300">b</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用委托</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">base</span> = <span class="text-blue-300">BaseImpl</span>(<span class="text-yellow-300">10</span>)</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">derived</span> = <span class="text-blue-300">Derived</span>(<span class="text-blue-300">base</span>)</div>
+                        <div><span class="text-blue-300">derived</span>.<span class="text-blue-300">print</span>()  <span class="text-slate-400">// 10</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 属性委托</div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">Example</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// 延迟属性</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">lazyValue</span>: <span class="text-blue-400">String</span> <span class="text-purple-300">by</span> <span class="text-blue-300">lazy</span> {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Computed!"</span>)</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"Hello"</span></div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// 可观察属性</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">var</span> <span class="text-blue-300">observableValue</span>: <span class="text-blue-400">String</span> <span class="text-purple-300">by</span> <span class="text-blue-300">Delegates</span>.<span class="text-blue-300">observable</span>(<span class="text-green-300">"Initial value"</span>) { _, <span class="text-blue-300">old</span>, <span class="text-blue-300">new</span> -></div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Changed from $old to $new"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// 映射委托</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">map</span> = <span class="text-blue-300">mapOf</span>(</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"name"</span> <span class="text-purple-300">to</span> <span class="text-green-300">"Alice"</span>,</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"age"</span> <span class="text-purple-300">to</span> <span class="text-yellow-300">30</span></div>
+                        <div>&nbsp;&nbsp;)</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">name</span>: <span class="text-blue-400">String</span> <span class="text-purple-300">by</span> <span class="text-blue-300">map</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">age</span>: <span class="text-blue-400">Int</span> <span class="text-purple-300">by</span> <span class="text-blue-300">map</span></div>
+                        <div>}</div>
+                        <div></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">example</span> = <span class="text-blue-300">Example</span>()</div>
+                        <div><span class="text-blue-300">println</span>(<span class="text-blue-300">example</span>.<span class="text-blue-300">lazyValue</span>)  <span class="text-slate-400">// 打印 "Computed!" 和 "Hello"</span></div>
+                        <div><span class="text-blue-300">example</span>.<span class="text-blue-300">observableValue</span> = <span class="text-green-300">"New value"</span>  <span class="text-slate-400">// 打印 "Changed from Initial value to New value"</span></div>
+                        <div><span class="text-blue-300">println</span>(<span class="text-blue-300">example</span>.<span class="text-blue-300">name</span>)  <span class="text-slate-400">// "Alice"</span></div>
+                        <div><span class="text-blue-300">println</span>(<span class="text-blue-300">example</span>.<span class="text-blue-300">age</span>)  <span class="text-slate-400">// 30</span></div>
+                    </div>
                 </div>
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
@@ -1291,40 +1300,41 @@ println(example.age)  // 30
                         <li>星投影&lt;*&gt;用于表示未知类型参数</li>
                         <li>Kotlin的泛型是实化的，可以在运行时获取类型信息</li>
                     </ul>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 泛型类
-class Box&lt;T&gt;(val value: T) {
-    fun getValue(): T {
-        return value
-    }
-}
-
-// 使用泛型类
-val intBox = Box(10)
-val stringBox = Box("Hello")
-val intValue: Int = intBox.getValue()
-val stringValue: String = stringBox.getValue()
-
-// 泛型函数
-fun &lt;T&gt; printValue(value: T) {
-    println(value)
-}
-
-// 使用泛型函数
-printValue(10)
-printValue("Hello")
-
-// 泛型约束
-fun &lt;T : Comparable&lt;T&gt;&gt; max(first: T, second: T): T {
-    return if (first > second) first else second
-}
-
-// 使用带约束的泛型函数
-val maxInt = max(10, 20)  // 20
-val maxString = max("apple", "banana")  // "banana"
-
-// 星投影
-val boxes: List&lt;Box&lt;*&gt;&gt; = listOf(intBox, stringBox)
-</code></pre>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 泛型类</div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">Box</span>&lt;<span class="text-blue-400">T</span>&gt;(<span class="text-purple-300">val</span> <span class="text-blue-300">value</span>: <span class="text-blue-400">T</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">fun</span> <span class="text-blue-300">getValue</span>(): <span class="text-blue-400">T</span> {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">return</span> <span class="text-blue-300">value</span></div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用泛型类</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">intBox</span> = <span class="text-blue-300">Box</span>(<span class="text-yellow-300">10</span>)</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">stringBox</span> = <span class="text-blue-300">Box</span>(<span class="text-green-300">"Hello"</span>)</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">intValue</span>: <span class="text-blue-400">Int</span> = <span class="text-blue-300">intBox</span>.<span class="text-blue-300">getValue</span>()</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">stringValue</span>: <span class="text-blue-400">String</span> = <span class="text-blue-300">stringBox</span>.<span class="text-blue-300">getValue</span>()</div>
+                        <div></div>
+                        <div class="text-slate-400">// 泛型函数</div>
+                        <div><span class="text-purple-300">fun</span> &lt;<span class="text-blue-400">T</span>&gt; <span class="text-blue-300">printValue</span>(<span class="text-blue-300">value</span>: <span class="text-blue-400">T</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">value</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用泛型函数</div>
+                        <div><span class="text-blue-300">printValue</span>(<span class="text-yellow-300">10</span>)</div>
+                        <div><span class="text-blue-300">printValue</span>(<span class="text-green-300">"Hello"</span>)</div>
+                        <div></div>
+                        <div class="text-slate-400">// 泛型约束</div>
+                        <div><span class="text-purple-300">fun</span> &lt;<span class="text-blue-400">T</span> : <span class="text-blue-300">Comparable</span>&lt;<span class="text-blue-400">T</span>&gt;&gt; <span class="text-blue-300">max</span>(<span class="text-blue-300">first</span>: <span class="text-blue-400">T</span>, <span class="text-blue-300">second</span>: <span class="text-blue-400">T</span>): <span class="text-blue-400">T</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">return</span> <span class="text-purple-300">if</span> (<span class="text-blue-300">first</span> > <span class="text-blue-300">second</span>) <span class="text-blue-300">first</span> <span class="text-purple-300">else</span> <span class="text-blue-300">second</span></div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用带约束的泛型函数</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">maxInt</span> = <span class="text-blue-300">max</span>(<span class="text-yellow-300">10</span>, <span class="text-yellow-300">20</span>)  <span class="text-slate-400">// 20</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">maxString</span> = <span class="text-blue-300">max</span>(<span class="text-green-300">"apple"</span>, <span class="text-green-300">"banana"</span>)  <span class="text-slate-400">// "banana"</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 星投影</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">boxes</span>: <span class="text-blue-300">List</span>&lt;<span class="text-blue-300">Box</span>&lt;*&gt;&gt; = <span class="text-blue-300">listOf</span>(<span class="text-blue-300">intBox</span>, <span class="text-blue-300">stringBox</span>)</div>
+                    </div>
                 </div>
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
@@ -1338,37 +1348,41 @@ val boxes: List&lt;Box&lt;*&gt;&gt; = listOf(intBox, stringBox)
                         <li>反射操作可能会影响性能，应谨慎使用</li>
                         <li>反射可以突破访问控制，访问私有成员</li>
                     </ul>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 需要添加反射依赖
-// implementation 'org.jetbrains.kotlin:kotlin-reflect:1.9.20'
-
-import kotlin.reflect.full.memberProperties
-import kotlin.reflect.full.primaryConstructor
-
-class Person(val name: String, val age: Int) {
-    fun greet() {
-        println("Hello, my name is $name")
-    }
-}
-
-// 获取类的 KClass
-val personClass = Person::class
-
-// 获取主构造函数
-val constructor = personClass.primaryConstructor
-val person = constructor?.call("Alice", 30)
-
-// 获取属性
-for (property in personClass.memberProperties) {
-    println("${property.name} = ${property.get(person)}")
-}
-
-// 调用方法
-val greetMethod = personClass.members.find { it.name == "greet" }
-greetMethod?.call(person)
-</code></pre>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 需要添加反射依赖</div>
+                        <div class="text-slate-400">// implementation 'org.jetbrains.kotlin:kotlin-reflect:1.9.20'</div>
+                        <div></div>
+                        <div><span class="text-blue-400">import</span> <span class="text-green-300">kotlin.reflect.full.memberProperties</span></div>
+                        <div><span class="text-blue-400">import</span> <span class="text-green-300">kotlin.reflect.full.primaryConstructor</span></div>
+                        <div></div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">Person</span>(<span class="text-purple-300">val</span> <span class="text-blue-300">name</span>: <span class="text-blue-400">String</span>, <span class="text-purple-300">val</span> <span class="text-blue-300">age</span>: <span class="text-blue-400">Int</span>) {
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">fun</span> <span class="text-blue-300">greet</span>() {
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Hello, my name is $name"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 获取类的 KClass</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">personClass</span> = <span class="text-blue-300">Person</span>::class</div>
+                        <div></div>
+                        <div class="text-slate-400">// 获取主构造函数</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">constructor</span> = <span class="text-blue-300">personClass</span>.<span class="text-blue-300">primaryConstructor</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">person</span> = <span class="text-blue-300">constructor</span>?.<span class="text-blue-300">call</span>(<span class="text-green-300">"Alice"</span>, <span class="text-yellow-300">30</span>)</div>
+                        <div></div>
+                        <div class="text-slate-400">// 获取属性</div>
+                        <div><span class="text-purple-300">for</span> (<span class="text-blue-300">property</span> <span class="text-purple-300">in</span> <span class="text-blue-300">personClass</span>.<span class="text-blue-300">memberProperties</span>) {
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"${property.name} = ${property.get(person)}"</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 调用方法</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">greetMethod</span> = <span class="text-blue-300">personClass</span>.<span class="text-blue-300">members</span>.<span class="text-blue-300">find</span> { <span class="text-purple-300">it</span>.<span class="text-blue-300">name</span> == <span class="text-green-300">"greet"</span> }</div>
+                        <div><span class="text-blue-300">greetMethod</span>?.<span class="text-blue-300">call</span>(<span class="text-blue-300">person</span>)</div>
+                    </div>
                 </div>
-
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+               
+            </div>
+            
+        </section>
+                        <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-blue-300">与 Java 互操作</h5>
                     <p class="text-slate-300 mb-4">Kotlin与Java有很好的互操作性，可以在Kotlin中使用Java类，也可以在Java中使用Kotlin类。</p>
                     <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
@@ -1379,55 +1393,52 @@ greetMethod?.call(person)
                         <li>@JvmStatic用于生成静态方法</li>
                         <li>@JvmField用于生成静态字段</li>
                     </ul>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 在 Kotlin 中使用 Java 类
-import java.util.ArrayList
-import java.util.HashMap
-
-fun main() {
-    // 使用 Java 集合
-    val arrayList = ArrayList&lt;String&gt;()
-    arrayList.add("Java ArrayList")
-    
-    val hashMap = HashMap&lt;String, Int&gt;()
-    hashMap["one"] = 1
-    
-    // 使用 Java 类和方法
-    val system = java.lang.System
-    println(system.getProperty("java.version"))
-    
-    // 处理 Java 空值
-    val javaObject: String? = java.lang.String("Hello")
-    println(javaObject?.length)
-}
-
-// 在 Java 中使用 Kotlin 类
-// Kotlin 类
-class KotlinClass {
-    // @JvmOverloads 生成重载构造函数
-    @JvmOverloads
-    fun greet(name: String = "World") {
-        println("Hello, $name!")
-    }
-    
-    // @JvmStatic 生成静态方法
-    companion object {
-        @JvmStatic
-        fun create(): KotlinClass {
-            return KotlinClass()
-        }
-    }
-}
-
-// Java 代码中使用
-// KotlinClass instance = KotlinClass.create();
-// instance.greet();  // 使用默认参数
-// instance.greet("Java");  // 使用自定义参数
-</code></pre>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 在 Kotlin 中使用 Java 类</div>
+                        <div><span class="text-blue-400">import</span> <span class="text-green-300">java.util.ArrayList</span></div>
+                        <div><span class="text-blue-400">import</span> <span class="text-green-300">java.util.HashMap</span></div>
+                        <div></div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">main</span>() {
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// 使用 Java 集合</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">arrayList</span> = <span class="text-blue-300">ArrayList</span>&lt;<span class="text-blue-400">String</span>&gt;()</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">arrayList</span>.<span class="text-blue-300">add</span>(<span class="text-green-300">"Java ArrayList"</span>)</div>
+                        <div>&nbsp;&nbsp;</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">hashMap</span> = <span class="text-blue-300">HashMap</span>&lt;<span class="text-blue-400">String</span>, <span class="text-blue-400">Int</span>&gt;()</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">hashMap</span>[<span class="text-green-300">"one"</span>] = <span class="text-yellow-300">1</span></div>
+                        <div>&nbsp;&nbsp;</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// 使用 Java 类和方法</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">system</span> = <span class="text-blue-300">java</span>.<span class="text-blue-300">lang</span>.<span class="text-blue-300">System</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">system</span>.<span class="text-blue-300">getProperty</span>(<span class="text-green-300">"java.version"</span>))</div>
+                        <div>&nbsp;&nbsp;</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// 处理 Java 空值</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">javaObject</span>: <span class="text-blue-400">String</span>? = <span class="text-blue-300">java</span>.<span class="text-blue-300">lang</span>.<span class="text-blue-300">String</span>(<span class="text-green-300">"Hello"</span>)</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">javaObject</span>?.<span class="text-blue-300">length</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 在 Java 中使用 Kotlin 类</div>
+                        <div class="text-slate-400">// Kotlin 类</div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">KotlinClass</span> {
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// @JvmOverloads 生成重载构造函数</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">@JvmOverloads</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">fun</span> <span class="text-blue-300">greet</span>(<span class="text-blue-300">name</span>: <span class="text-blue-400">String</span> = <span class="text-green-300">"World"</span>) {
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Hello, $name!"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// @JvmStatic 生成静态方法</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">companion</span> <span class="text-purple-300">object</span> {
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">@JvmStatic</span></div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">fun</span> <span class="text-blue-300">create</span>(): <span class="text-blue-300">KotlinClass</span> {
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">return</span> <span class="text-blue-300">KotlinClass</span>()</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// Java 代码中使用</div>
+                        <div class="text-slate-400">// KotlinClass instance = KotlinClass.create();</div>
+                        <div class="text-slate-400">// instance.greet();  // 使用默认参数</div>
+                        <div class="text-slate-400">// instance.greet("Java");  // 使用自定义参数</div>
+                    </div>
                 </div>
-            </div>
-        </section>
-            </div>
-        </div>
     </main>
 </body>
 </html>
