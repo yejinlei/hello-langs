@@ -26,13 +26,6 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(148, 163, 184, 0.1);
         }
-        .language-tab {
-            transition: all 0.3s ease;
-        }
-        .language-tab.active {
-            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
-            color: white;
-        }
         .code-block {
             background: rgba(2, 6, 23, 0.9);
             border-left: 4px solid #3B82F6;
@@ -42,16 +35,1395 @@
             padding: 2px 4px;
             border-radius: 3px;
         }
-        .language-content.hidden {
-            display: none;
-        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="text-center py-20">
-            <h3 class="text-xl font-medium text-slate-300 mb-4">Kotlin 教程内容正在开发中</h3>
-            <p class="text-slate-500">敬请期待完整的 Kotlin 语法教程内容</p>
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- 左侧章节导航 -->
+            <aside class="lg:w-1/4">
+                <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 sticky top-24 border border-slate-700">
+                    <h3 class="text-lg font-bold mb-4 gradient-text">章节导航</h3>
+                    <nav class="space-y-2">
+                        <a href="#section-1" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">1. Kotlin 简介</a>
+                        <a href="#section-2" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">2. Kotlin 基础语法</a>
+                        <a href="#section-3" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">3. Kotlin 函数</a>
+                        <a href="#section-4" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">4. Kotlin 类和对象</a>
+                        <a href="#section-5" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">5. Kotlin 继承和接口</a>
+                        <a href="#section-6" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">6. Kotlin 控制流</a>
+                        <a href="#section-7" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">7. Kotlin 集合</a>
+                        <a href="#section-8" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">8. Kotlin 异常处理</a>
+                        <a href="#section-9" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">9. Kotlin 协程</a>
+                        <a href="#section-10" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">10. Kotlin 高级特性</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- 主要内容 -->
+            <div class="lg:w-3/4">
+        <!-- 1. Kotlin 简介 -->
+        <section id="section-1" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">1. Kotlin 简介</span>
+            </h2>
+            
+            <div class="language-content" data-lang="kotlin">
+                <h4 class="text-lg font-medium mb-4 text-blue-400">Kotlin - 现代化的跨平台编程语言</h4>
+                <p class="text-slate-300 mb-4">Kotlin是由JetBrains开发的一种静态类型、跨平台的编程语言，它运行在Java虚拟机(JVM)上，也可以编译为JavaScript或本地代码。Kotlin结合了面向对象编程和函数式编程的特性，以其简洁性、安全性和与Java的互操作性而闻名。</p>
+                
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">Kotlin 语言特点</h5>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2">
+                        <li>简洁的语法，减少样板代码</li>
+                        <li>空安全设计，避免空指针异常</li>
+                        <li>与Java 100%互操作</li>
+                        <li>支持面向对象和函数式编程范式</li>
+                        <li>扩展函数和属性</li>
+                        <li>协程支持异步编程</li>
+                        <li>类型推断，减少显式类型声明</li>
+                        <li>数据类、密封类等现代特性</li>
+                        <li>跨平台开发能力（JVM、JS、Native）</li>
+                        <li>智能转换和类型检查</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Kotlin 基础语法 -->
+        <section id="section-2" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">2. Kotlin 基础语法</span>
+            </h2>
+            
+            <div class="language-content" data-lang="kotlin">
+                <h4 class="text-lg font-medium mb-4 text-blue-400">Kotlin - 简洁优雅的基础语法</h4>
+                <p class="text-slate-300 mb-4">Kotlin的基础语法设计注重简洁性和可读性，同时保持了与Java的互操作性。以下是Kotlin基础语法的核心特性。</p>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">Hello World 示例</h5>
+                    <p class="text-slate-300 mb-4">Kotlin的入口点函数是main()，可以接受命令行参数也可以不接受。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong>Kotlin使用分号作为可选分隔符，通常不需要显式添加分号。</p>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// Hello World 程序</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">main</span>() {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Hello, Kotlin!"</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 带参数的 main 函数</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">main</span>(<span class="text-blue-300">args</span>: <span class="text-blue-400">Array</span>&lt;<span class="text-blue-400">String</span>&gt;) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Hello, Kotlin with args!"</span>)</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">args</span>.<span class="text-blue-300">forEach</span> { <span class="text-blue-300">println</span>(<span class="text-green-300">"Argument: $it"</span>) }</div>
+                        <div>}</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">变量和常量</h5>
+                    <p class="text-slate-300 mb-4">Kotlin提供了两种变量声明方式：var（可变）和val（不可变）。推荐优先使用val来提高代码的稳定性和可读性。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>var声明的变量可以被重新赋值</li>
+                        <li>val声明的变量一旦初始化就不能被修改（类似于Java的final）</li>
+                        <li>lateinit只能用于var，不能用于val</li>
+                        <li>lazy委托只能用于val，不能用于var</li>
+                    </ul>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 可变变量 (var)</div>
+                        <div><span class="text-purple-300">var</span> <span class="text-blue-300">age</span>: <span class="text-blue-400">Int</span> = <span class="text-yellow-300">30</span></div>
+                        <div><span class="text-blue-300">age</span> = <span class="text-yellow-300">31</span>  <span class="text-slate-400">// 可以修改</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 不可变变量 (val) - 推荐使用</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">name</span>: <span class="text-blue-400">String</span> = <span class="text-green-300">"Alice"</span></div>
+                        <div class="text-slate-400">// name = "Bob"  // 编译错误，val 不可修改</div>
+                        <div></div>
+                        <div class="text-slate-400">// 类型推断</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">message</span> = <span class="text-green-300">"Hello"</span>  <span class="text-slate-400">// 推断为 String</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">count</span> = <span class="text-yellow-300">42</span>         <span class="text-slate-400">// 推断为 Int</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">price</span> = <span class="text-yellow-300">19.99</span>      <span class="text-slate-400">// 推断为 Double</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">isActive</span> = <span class="text-yellow-300">true</span>    <span class="text-slate-400">// 推断为 Boolean</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 延迟初始化</div>
+                        <div><span class="text-purple-300">lateinit</span> <span class="text-purple-300">var</span> <span class="text-blue-300">lateVar</span>: <span class="text-blue-400">String</span></div>
+                        <div><span class="text-blue-300">lateVar</span> = <span class="text-green-300">"Initialized later"</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 惰性求值</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">lazyValue</span>: <span class="text-blue-400">String</span> <span class="text-purple-300">by</span> <span class="text-blue-300">lazy</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Computed!"</span>)</div>
+                        <div>&nbsp;&nbsp;<span class="text-green-300">"Lazy value"</span></div>
+                        <div>}</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">基本数据类型</h5>
+                    <p class="text-slate-300 mb-4">Kotlin提供了丰富的基本数据类型，包括数字、字符、布尔和字符串。与Java不同，Kotlin的基本数据类型都是对象，可以调用方法。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>数字类型有明确的大小限制，避免溢出</li>
+                        <li>Long类型需要后缀L，Float类型需要后缀F</li>
+                        <li>字符串模板使用$符号，表达式需要用${}包裹</li>
+                        <li>多行字符串使用三重引号"""，可以保留格式</li>
+                    </ul>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 数字类型</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">byte</span>: <span class="text-blue-400">Byte</span> = <span class="text-yellow-300">127</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">short</span>: <span class="text-blue-400">Short</span> = <span class="text-yellow-300">32767</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">int</span>: <span class="text-blue-400">Int</span> = <span class="text-yellow-300">2147483647</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">long</span>: <span class="text-blue-400">Long</span> = <span class="text-yellow-300">9223372036854775807L</span>  <span class="text-slate-400">// 后缀 L</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">float</span>: <span class="text-blue-400">Float</span> = <span class="text-yellow-300">3.14F</span>                <span class="text-slate-400">// 后缀 F</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">double</span>: <span class="text-blue-400">Double</span> = <span class="text-yellow-300">3.141592653589793</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 字符类型</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">char</span>: <span class="text-blue-400">Char</span> = <span class="text-green-300">'A'</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">unicodeChar</span>: <span class="text-blue-400">Char</span> = <span class="text-green-300">'\u0041'</span>  <span class="text-slate-400">// Unicode 编码</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 布尔类型</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">trueValue</span>: <span class="text-blue-400">Boolean</span> = <span class="text-yellow-300">true</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">falseValue</span>: <span class="text-blue-400">Boolean</span> = <span class="text-yellow-300">false</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 字符串类型</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">string</span>: <span class="text-blue-400">String</span> = <span class="text-green-300">"Hello, Kotlin!"</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">multiLineString</span> = <span class="text-green-300">"""</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-green-300">This is a</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-green-300">multi-line</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-green-300">string</span></div>
+                        <div><span class="text-green-300">"""</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 字符串模板</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">name</span> = <span class="text-green-300">"Alice"</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">greeting</span> = <span class="text-green-300">"Hello, $name!"</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">age</span> = <span class="text-yellow-300">30</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">info</span> = <span class="text-green-300">"$name is $age years old."</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">expression</span> = <span class="text-green-300">"${2 + 2} is the result."</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Kotlin 函数 -->
+        <section id="section-3" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">3. Kotlin 函数</span>
+            </h2>
+            
+            <div class="language-content" data-lang="kotlin">
+                <h4 class="text-lg font-medium mb-4 text-blue-400">Kotlin - 强大灵活的函数系统</h4>
+                <p class="text-slate-300 mb-4">Kotlin的函数系统非常强大，支持多种函数定义方式和高级特性，如默认参数、命名参数、扩展函数和Lambda表达式等。</p>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">函数定义</h5>
+                    <p class="text-slate-300 mb-4">Kotlin的函数使用fun关键字定义，可以有不同的形式：</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>函数参数可以有默认值，提高代码复用性</li>
+                        <li>使用命名参数可以提高代码可读性，尤其是在参数较多时</li>
+                        <li>单行函数可以使用表达式函数体简化语法</li>
+                    </ul>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 基本函数定义</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">add</span>(<span class="text-blue-300">a</span>: <span class="text-blue-400">Int</span>, <span class="text-blue-300">b</span>: <span class="text-blue-400">Int</span>): <span class="text-blue-400">Int</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span></div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 表达式函数体（单行函数）</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">subtract</span>(<span class="text-blue-300">a</span>: <span class="text-blue-400">Int</span>, <span class="text-blue-300">b</span>: <span class="text-blue-400">Int</span>): <span class="text-blue-400">Int</span> = <span class="text-blue-300">a</span> - <span class="text-blue-300">b</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 类型推断的表达式函数体</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">multiply</span>(<span class="text-blue-300">a</span>: <span class="text-blue-400">Int</span>, <span class="text-blue-300">b</span>: <span class="text-blue-400">Int</span>) = <span class="text-blue-300">a</span> * <span class="text-blue-300">b</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 默认参数</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">greet</span>(<span class="text-blue-300">name</span>: <span class="text-blue-400">String</span>, <span class="text-blue-300">message</span>: <span class="text-blue-400">String</span> = <span class="text-green-300">"Hello"</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"$message, $name!"</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用默认参数</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">main</span>() {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">greet</span>(<span class="text-green-300">"Alice"</span>)  <span class="text-slate-400">// 使用默认 message</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">greet</span>(<span class="text-green-300">"Bob"</span>, <span class="text-green-300">"Hi"</span>)  <span class="text-slate-400">// 提供自定义 message</span></div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 命名参数</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">format</span>(<span class="text-blue-300">userName</span>: <span class="text-blue-400">String</span>, <span class="text-blue-300">age</span>: <span class="text-blue-400">Int</span>, <span class="text-blue-300">email</span>: <span class="text-blue-400">String</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Name: $userName, Age: $age, Email: $email"</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用命名参数</div>
+                        <div><span class="text-blue-300">format</span>(<span class="text-blue-300">userName</span> = <span class="text-green-300">"Alice"</span>, <span class="text-blue-300">age</span> = <span class="text-yellow-300">30</span>, <span class="text-blue-300">email</span> = <span class="text-green-300">"alice@example.com"</span>)</div>
+                        <div><span class="text-blue-300">format</span>(<span class="text-blue-300">email</span> = <span class="text-green-300">"bob@example.com"</span>, <span class="text-blue-300">userName</span> = <span class="text-green-300">"Bob"</span>, <span class="text-blue-300">age</span> = <span class="text-yellow-300">25</span>)  <span class="text-slate-400">// 可以改变顺序</span></div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">可变参数和扩展函数</h5>
+                    <p class="text-slate-300 mb-4">可变参数允许函数接收任意数量的参数，扩展函数允许为现有类型添加新功能。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>一个函数只能有一个可变参数，且通常放在参数列表最后</li>
+                        <li>展开数组时需要使用*运算符</li>
+                        <li>扩展函数不能访问私有或受保护的成员</li>
+                        <li>扩展属性需要提供getter和setter实现</li>
+                    </ul>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 可变参数</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">sum</span>(<span class="text-purple-300">vararg</span> <span class="text-blue-300">numbers</span>: <span class="text-blue-400">Int</span>): <span class="text-blue-400">Int</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">var</span> <span class="text-blue-300">result</span> = <span class="text-yellow-300">0</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">for</span> (<span class="text-blue-300">number</span> <span class="text-purple-300">in</span> <span class="text-blue-300">numbers</span>) {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">result</span> += <span class="text-blue-300">number</span></div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">return</span> <span class="text-blue-300">result</span></div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用可变参数</div>
+                        <div><span class="text-blue-300">sum</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>)  <span class="text-slate-400">// 6</span></div>
+                        <div><span class="text-blue-300">sum</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>)  <span class="text-slate-400">// 15</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 展开数组</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">array</span> = <span class="text-blue-300">intArrayOf</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>)</div>
+                        <div><span class="text-blue-300">sum</span>(*<span class="text-blue-300">array</span>)  <span class="text-slate-400">// 6</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 扩展函数 - 为现有类型添加新功能</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-400">String</span>.<span class="text-blue-300">isPalindrome</span>(): <span class="text-blue-400">Boolean</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">clean</span> = <span class="text-purple-300">this</span>.<span class="text-blue-300">toLowerCase</span>().<span class="text-blue-300">replace</span>(<span class="text-green-300">"\s"</span>, <span class="text-green-300">""</span>)</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">return</span> <span class="text-blue-300">clean</span> == <span class="text-blue-300">clean</span>.<span class="text-blue-300">reversed</span>()</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用扩展函数</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">word</span> = <span class="text-green-300">"level"</span></div>
+                        <div><span class="text-blue-300">println</span>(<span class="text-blue-300">word</span>.<span class="text-blue-300">isPalindrome</span>())  <span class="text-slate-400">// true</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 扩展属性</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-400">String</span>.<span class="text-blue-300">lengthTimesTwo</span>: <span class="text-blue-400">Int</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">get</span>() = <span class="text-purple-300">this</span>.<span class="text-blue-300">length</span> * <span class="text-yellow-300">2</span></div>
+                        <div></div>
+                        <div><span class="text-blue-300">println</span>(<span class="text-green-300">"hello"</span>.<span class="text-blue-300">lengthTimesTwo</span>)  <span class="text-slate-400">// 10</span></div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">Lambda 表达式和高阶函数</h5>
+                    <p class="text-slate-300 mb-4">Lambda表达式是一种简洁的函数表示方式，高阶函数可以接收函数作为参数或返回函数。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>Lambda表达式的参数类型可以推断，除非编译器无法确定</li>
+                        <li>如果Lambda是函数的最后一个参数，可以放在括号外面</li>
+                        <li>只有一个参数的Lambda可以使用it关键字代替参数名</li>
+                        <li>标准库提供了丰富的高阶函数，如map、filter、reduce等</li>
+                    </ul>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// Lambda 表达式基本语法</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">add</span> = { <span class="text-blue-300">a</span>: <span class="text-blue-400">Int</span>, <span class="text-blue-300">b</span>: <span class="text-blue-400">Int</span> -> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span> }</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">result</span> = <span class="text-blue-300">add</span>(<span class="text-yellow-300">5</span>, <span class="text-yellow-300">3</span>)  <span class="text-slate-400">// 8</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 高阶函数 - 接收函数作为参数</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">operate</span>(<span class="text-blue-300">a</span>: <span class="text-blue-400">Int</span>, <span class="text-blue-300">b</span>: <span class="text-blue-400">Int</span>, <span class="text-blue-300">operation</span>: (<span class="text-blue-400">Int</span>, <span class="text-blue-400">Int</span>) -> <span class="text-blue-400">Int</span>): <span class="text-blue-400">Int</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">return</span> <span class="text-blue-300">operation</span>(<span class="text-blue-300">a</span>, <span class="text-blue-300">b</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用高阶函数</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">sum</span> = <span class="text-blue-300">operate</span>(<span class="text-yellow-300">5</span>, <span class="text-yellow-300">3</span>) { <span class="text-blue-300">x</span>, <span class="text-blue-300">y</span> -> <span class="text-blue-300">x</span> + <span class="text-blue-300">y</span> }</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">product</span> = <span class="text-blue-300">operate</span>(<span class="text-yellow-300">5</span>, <span class="text-yellow-300">3</span>) { <span class="text-blue-300">x</span>, <span class="text-blue-300">y</span> -> <span class="text-blue-300">x</span> * <span class="text-blue-300">y</span> }</div>
+                        <div></div>
+                        <div class="text-slate-400">// 高阶函数 - 返回函数</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">makeMultiplier</span>(<span class="text-blue-300">factor</span>: <span class="text-blue-400">Int</span>): (<span class="text-blue-400">Int</span>) -> <span class="text-blue-400">Int</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">return</span> { <span class="text-blue-300">number</span> -> <span class="text-blue-300">number</span> * <span class="text-blue-300">factor</span> }</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用返回函数的高阶函数</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">double</span> = <span class="text-blue-300">makeMultiplier</span>(<span class="text-yellow-300">2</span>)</div>
+                        <div><span class="text-blue-300">double</span>(<span class="text-yellow-300">5</span>)  <span class="text-slate-400">// 10</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 标准库中的高阶函数</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">numbers</span> = <span class="text-blue-300">listOf</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>)</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">doubled</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">map</span> { <span class="text-purple-300">it</span> * <span class="text-yellow-300">2</span> }  <span class="text-slate-400">// [2, 4, 6, 8, 10]</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">evenNumbers</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">filter</span> { <span class="text-purple-300">it</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span> }  <span class="text-slate-400">// [2, 4]</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">sum</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">reduce</span> { <span class="text-blue-300">acc</span>, <span class="text-blue-300">number</span> -> <span class="text-blue-300">acc</span> + <span class="text-blue-300">number</span> }  <span class="text-slate-400">// 15</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Kotlin 类和对象 -->
+        <section id="section-4" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">4. Kotlin 类和对象</span>
+            </h2>
+            
+            <div class="language-content" data-lang="kotlin">
+                <h4 class="text-lg font-medium mb-4 text-blue-400">Kotlin - 简洁高效的面向对象编程</h4>
+                <p class="text-slate-300 mb-4">Kotlin的面向对象编程支持类、对象、继承、接口等特性，同时提供了数据类、密封类等现代特性，使代码更加简洁高效。</p>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">类的定义和实例化</h5>
+                    <p class="text-slate-300 mb-4">Kotlin的类使用class关键字定义，可以包含属性、方法、初始化块和构造函数。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>类可以有一个主要构造函数和多个次要构造函数</li>
+                        <li>初始化块在构造函数执行时被调用</li>
+                        <li>次要构造函数必须调用主要构造函数或其他次要构造函数</li>
+                    </ul>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 基本类定义</div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">Person</span> {</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// 属性</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">var</span> <span class="text-blue-300">name</span>: <span class="text-blue-400">String</span> = <span class="text-green-300">""</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">var</span> <span class="text-blue-300">age</span>: <span class="text-blue-400">Int</span> = <span class="text-yellow-300">0</span></div>
+                        <div>&nbsp;&nbsp;</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// 初始化块</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">init</span> {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Person initialized"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// 次要构造函数</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">constructor</span>(<span class="text-blue-300">name</span>: <span class="text-blue-400">String</span>) {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">this</span>.<span class="text-blue-300">name</span> = <span class="text-blue-300">name</span></div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// 主要构造函数和次要构造函数</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">constructor</span>(<span class="text-blue-300">name</span>: <span class="text-blue-400">String</span>, <span class="text-blue-300">age</span>: <span class="text-blue-400">Int</span>) : <span class="text-purple-300">this</span>(<span class="text-blue-300">name</span>) {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">this</span>.<span class="text-blue-300">age</span> = <span class="text-blue-300">age</span></div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;</div>
+                        <div>&nbsp;&nbsp;<span class="text-slate-400">// 方法</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">fun</span> <span class="text-blue-300">greet</span>() {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Hello, my name is $name and I'm $age years old."</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用主要构造函数实例化</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">person1</span> = <span class="text-blue-300">Person</span>(<span class="text-green-300">"Alice"</span>, <span class="text-yellow-300">30</span>)</div>
+                        <div><span class="text-blue-300">person1</span>.<span class="text-blue-300">greet</span>()  <span class="text-slate-400">// Hello, my name is Alice and I'm 30 years old.</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用次要构造函数实例化</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">person2</span> = <span class="text-blue-300">Person</span>(<span class="text-green-300">"Bob"</span>)</div>
+                        <div><span class="text-blue-300">person2</span>.<span class="text-blue-300">age</span> = <span class="text-yellow-300">25</span></div>
+                        <div><span class="text-blue-300">person2</span>.<span class="text-blue-300">greet</span>()  <span class="text-slate-400">// Hello, my name is Bob and I'm 25 years old.</span></div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">简化的类定义</h5>
+                    <p class="text-slate-300 mb-4">Kotlin提供了多种简化类定义的方式，如将主要构造函数放在类头中，使用数据类等。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>数据类自动生成equals()、hashCode()、toString()和copy()方法</li>
+                        <li>密封类用于受限的类层次结构，只能在同一文件中继承</li>
+                        <li>数据类的主构造函数至少需要一个参数</li>
+                    </ul>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 主要构造函数在类头中定义</div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">Person</span>(<span class="text-purple-300">val</span> <span class="text-blue-300">name</span>: <span class="text-blue-400">String</span>, <span class="text-purple-300">var</span> <span class="text-blue-300">age</span>: <span class="text-blue-400">Int</span>) {
+                            <span class="text-purple-300">fun</span> <span class="text-blue-300">greet</span>() {
+                                <span class="text-blue-300">println</span>(<span class="text-green-300">"Hello, my name is $name and I'm $age years old."</span>)
+                            }
+                        }</div>
+                        <div></div>
+                        <div class="text-slate-400">// 实例化</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">person</span> = <span class="text-blue-300">Person</span>(<span class="text-green-300">"Alice"</span>, <span class="text-yellow-300">30</span>)</div>
+                        <div><span class="text-blue-300">person</span>.<span class="text-blue-300">greet</span>()</div>
+                        <div></div>
+                        <div class="text-slate-400">// 数据类 - 自动生成 equals(), hashCode(), toString(), copy()</div>
+                        <div><span class="text-purple-300">data</span> <span class="text-purple-300">class</span> <span class="text-blue-300">User</span>(<span class="text-purple-300">val</span> <span class="text-blue-300">id</span>: <span class="text-blue-400">Int</span>, <span class="text-purple-300">val</span> <span class="text-blue-300">name</span>: <span class="text-blue-400">String</span>, <span class="text-purple-300">val</span> <span class="text-blue-300">email</span>: <span class="text-blue-400">String</span>)</div>
+                        <div></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">user1</span> = <span class="text-blue-300">User</span>(<span class="text-yellow-300">1</span>, <span class="text-green-300">"Alice"</span>, <span class="text-green-300">"alice@example.com"</span>)</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">user2</span> = <span class="text-blue-300">User</span>(<span class="text-yellow-300">1</span>, <span class="text-green-300">"Alice"</span>, <span class="text-green-300">"alice@example.com"</span>)</div>
+                        <div></div>
+                        <div><span class="text-blue-300">println</span>(<span class="text-blue-300">user1</span>)  <span class="text-slate-400">// User(id=1, name=Alice, email=alice@example.com)</span></div>
+                        <div><span class="text-blue-300">println</span>(<span class="text-blue-300">user1</span> == <span class="text-blue-300">user2</span>)  <span class="text-slate-400">// true</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 复制数据类</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">user3</span> = <span class="text-blue-300">user1</span>.<span class="text-blue-300">copy</span>(<span class="text-blue-300">email</span> = <span class="text-green-300">"alice.new@example.com"</span>)</div>
+                        <div></div>
+                        <div class="text-slate-400">// 密封类 - 用于受限的类层次结构</div>
+                        <div><span class="text-purple-300">sealed</span> <span class="text-purple-300">class</span> <span class="text-blue-300">Result</span> {
+                            <span class="text-purple-300">data</span> <span class="text-purple-300">class</span> <span class="text-blue-300">Success</span>(<span class="text-purple-300">val</span> <span class="text-blue-300">data</span>: <span class="text-blue-400">String</span>) : <span class="text-blue-300">Result</span>()
+                            <span class="text-purple-300">data</span> <span class="text-purple-300">class</span> <span class="text-blue-300">Error</span>(<span class="text-purple-300">val</span> <span class="text-blue-300">message</span>: <span class="text-blue-400">String</span>) : <span class="text-blue-300">Result</span>()
+                            <span class="text-purple-300">object</span> <span class="text-blue-300">Loading</span> : <span class="text-blue-300">Result</span>()
+                        }</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用密封类</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">handleResult</span>(<span class="text-blue-300">result</span>: <span class="text-blue-300">Result</span>) {
+                            <span class="text-purple-300">when</span> (<span class="text-blue-300">result</span>) {
+                                <span class="text-purple-300">is</span> <span class="text-blue-300">Result.Success</span> -> <span class="text-blue-300">println</span>(<span class="text-green-300">"Success: ${result.data}"</span>)
+                                <span class="text-purple-300">is</span> <span class="text-blue-300">Result.Error</span> -> <span class="text-blue-300">println</span>(<span class="text-green-300">"Error: ${result.message}"</span>)
+                                <span class="text-blue-300">Result.Loading</span> -> <span class="text-blue-300">println</span>(<span class="text-green-300">"Loading..."</span>)
+                            }
+                        }</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">对象表达式和伴生对象</h5>
+                    <p class="text-slate-300 mb-4">Kotlin提供了对象表达式和对象声明两种方式来创建单例对象。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>对象表达式用于创建匿名类实例</li>
+                        <li>伴生对象是类级别的单例，可以访问类的私有成员</li>
+                        <li>单例对象在第一次被访问时初始化</li>
+                    </ul>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 对象表达式 - 匿名类实例</div>
+                        <div><span class="text-purple-300">interface</span> <span class="text-blue-300">Greeter</span> {
+                            <span class="text-purple-300">fun</span> <span class="text-blue-300">greet</span>()
+                        }</div>
+                        <div></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">greeter</span> = <span class="text-purple-300">object</span> : <span class="text-blue-300">Greeter</span> {
+                            <span class="text-purple-300">override</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">greet</span>() {
+                                <span class="text-blue-300">println</span>(<span class="text-green-300">"Hello from object expression!"</span>)
+                            }
+                        }</div>
+                        <div></div>
+                        <div><span class="text-blue-300">greeter</span>.<span class="text-blue-300">greet</span>()</div>
+                        <div></div>
+                        <div class="text-slate-400">// 伴生对象 - 类级别的单例</div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">MyClass</span> {
+                            <span class="text-purple-300">companion</span> <span class="text-purple-300">object</span> {
+                                <span class="text-purple-300">const</span> <span class="text-purple-300">val</span> <span class="text-blue-300">CONSTANT</span> = <span class="text-green-300">"Value"</span>
+                                
+                                <span class="text-purple-300">fun</span> <span class="text-blue-300">create</span>(): <span class="text-blue-300">MyClass</span> {
+                                    <span class="text-purple-300">return</span> <span class="text-blue-300">MyClass</span>()
+                                }
+                            }
+                        }</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用伴生对象</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">value</span> = <span class="text-blue-300">MyClass</span>.<span class="text-blue-300">CONSTANT</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">instance</span> = <span class="text-blue-300">MyClass</span>.<span class="text-blue-300">create</span>()</div>
+                        <div></div>
+                        <div class="text-slate-400">// 单例对象</div>
+                        <div><span class="text-purple-300">object</span> <span class="text-blue-300">Singleton</span> {
+                            <span class="text-purple-300">var</span> <span class="text-blue-300">count</span> = <span class="text-yellow-300">0</span>
+                            
+                            <span class="text-purple-300">fun</span> <span class="text-blue-300">increment</span>() {
+                                <span class="text-blue-300">count</span>++
+                            }
+                        }</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用单例对象</div>
+                        <div><span class="text-blue-300">Singleton</span>.<span class="text-blue-300">increment</span>()</div>
+                        <div><span class="text-blue-300">println</span>(<span class="text-blue-300">Singleton</span>.<span class="text-blue-300">count</span>)  <span class="text-slate-400">// 1</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Kotlin 继承和接口 -->
+        <section id="section-5" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">5. Kotlin 继承和接口</span>
+            </h2>
+            
+            <div class="language-content" data-lang="kotlin">
+                <h4 class="text-lg font-medium mb-4 text-blue-400">Kotlin - 灵活的继承和接口系统</h4>
+                <p class="text-slate-300 mb-4">Kotlin支持继承和接口，同时通过开放类和智能转换等特性，使面向对象编程更加灵活和安全。</p>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">继承</h5>
+                    <p class="text-slate-300 mb-4">Kotlin的类默认是final的，需要使用open关键字才能被继承。子类通过:符号继承父类。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>类、方法和属性默认都是final的，需要使用open关键字才能被继承或重写</li>
+                        <li>子类必须调用父类的构造函数</li>
+                        <li>Kotlin支持智能转换，无需显式转换类型</li>
+                        <li>as?操作符提供安全的类型转换，失败时返回null</li>
+                    </ul>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 开放类 - 默认情况下类是 final 的，需要用 open 关键字才能被继承</div>
+                        <div><span class="text-purple-300">open</span> <span class="text-purple-300">class</span> <span class="text-blue-300">Animal</span>(<span class="text-purple-300">val</span> <span class="text-blue-300">name</span>: <span class="text-blue-400">String</span>) {
+                            <span class="text-purple-300">open</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">makeSound</span>() {
+                                <span class="text-blue-300">println</span>(<span class="text-green-300">"Animal makes sound"</span>)
+                            }
+                        }</div>
+                        <div></div>
+                        <div class="text-slate-400">// 继承 Animal 类</div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">Dog</span>(<span class="text-blue-300">name</span>: <span class="text-blue-400">String</span>) : <span class="text-blue-300">Animal</span>(<span class="text-blue-300">name</span>) {
+                            <span class="text-purple-300">override</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">makeSound</span>() {
+                                <span class="text-blue-300">println</span>(<span class="text-green-300">"Woof!"</span>)
+                            }
+                        }</div>
+                        <div></div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">Cat</span>(<span class="text-blue-300">name</span>: <span class="text-blue-400">String</span>) : <span class="text-blue-300">Animal</span>(<span class="text-blue-300">name</span>) {
+                            <span class="text-purple-300">override</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">makeSound</span>() {
+                                <span class="text-blue-300">println</span>(<span class="text-green-300">"Meow!"</span>)
+                            }
+                        }</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用继承</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">dog</span> = <span class="text-blue-300">Dog</span>(<span class="text-green-300">"Buddy"</span>)</div>
+                        <div><span class="text-blue-300">dog</span>.<span class="text-blue-300">makeSound</span>()  <span class="text-slate-400">// Woof!</span></div>
+                        <div></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">cat</span> = <span class="text-blue-300">Cat</span>(<span class="text-green-300">"Whiskers"</span>)</div>
+                        <div><span class="text-blue-300">cat</span>.<span class="text-blue-300">makeSound</span>()  <span class="text-slate-400">// Meow!</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 类型检查和转换</div>
+                        <div><span class="text-purple-300">if</span> (<span class="text-blue-300">dog</span> <span class="text-purple-300">is</span> <span class="text-blue-300">Animal</span>) {
+                            <span class="text-blue-300">println</span>(<span class="text-green-300">"Dog is an animal"</span>)
+                        }</div>
+                        <div></div>
+                        <div class="text-slate-400">// 智能转换</div>
+                        <div><span class="text-purple-300">if</span> (<span class="text-blue-300">dog</span> <span class="text-purple-300">is</span> <span class="text-blue-300">Dog</span>) {
+                            <span class="text-blue-300">dog</span>.<span class="text-blue-300">makeSound</span>()  <span class="text-slate-400">// 无需显式转换</span>
+                        }</div>
+                        <div></div>
+                        <div class="text-slate-400">// 显式转换</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">animal</span>: <span class="text-blue-300">Animal</span> = <span class="text-blue-300">Dog</span>(<span class="text-green-300">"Rex"</span>)</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">dog2</span> = <span class="text-blue-300">animal</span> <span class="text-purple-300">as</span> <span class="text-blue-300">Dog</span>  <span class="text-slate-400">// 不安全的转换，如果不是 Dog 会抛出异常</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">dog3</span> = <span class="text-blue-300">animal</span> <span class="text-purple-300">as?</span> <span class="text-blue-300">Dog</span>  <span class="text-slate-400">// 安全的转换，如果不是 Dog 会返回 null</span></div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">接口</h5>
+                    <p class="text-slate-300 mb-4">Kotlin的接口使用interface关键字定义，可以包含抽象方法和属性，也可以有默认实现。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>接口中的方法默认是抽象的，无需显式声明abstract</li>
+                        <li>接口可以有默认方法实现</li>
+                        <li>类可以实现多个接口</li>
+                        <li>接口中的属性必须是抽象的，或者提供getter实现</li>
+                    </ul>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 接口定义
+interface Shape {
+    val area: Double
+    fun draw()
+}
+
+// 实现接口
+class Rectangle(val width: Double, val height: Double) : Shape {
+    override val area: Double
+        get() = width * height
+    
+    override fun draw() {
+        println("Drawing a rectangle with width $width and height $height")
+    }
+}
+
+class Circle(val radius: Double) : Shape {
+    override val area: Double
+        get() = Math.PI * radius * radius
+    
+    override fun draw() {
+        println("Drawing a circle with radius $radius")
+    }
+}
+
+// 使用接口
+val shapes: List&lt;Shape&gt; = listOf(
+    Rectangle(5.0, 3.0),
+    Circle(2.5)
+)
+
+for (shape in shapes) {
+    shape.draw()
+    println("Area: ${shape.area}")
+}
+
+// 接口中的默认方法
+interface Movable {
+    fun move() {
+        println("Moving")
+    }
+}
+
+class Car : Movable {
+    // 可以覆盖默认方法
+    override fun move() {
+        println("Car is driving")
+    }
+}
+
+class Bicycle : Movable {
+    // 使用默认方法
+}
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Kotlin 控制流 -->
+        <section id="section-6" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">6. Kotlin 控制流</span>
+            </h2>
+            
+            <div class="language-content" data-lang="kotlin">
+                <h4 class="text-lg font-medium mb-4 text-blue-400">Kotlin - 强大的控制流语句</h4>
+                <p class="text-slate-300 mb-4">Kotlin提供了丰富的控制流语句，包括if表达式、when表达式（替代switch）、for循环、while循环等，使代码的流程控制更加灵活和简洁。</p>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">条件表达式</h5>
+                    <p class="text-slate-300 mb-4">Kotlin的if是表达式而不是语句，它可以返回值。when表达式是switch的替代，功能更强大。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>if表达式可以用作三元运算符的替代</li>
+                        <li>when表达式可以匹配值、类型、范围等</li>
+                        <li>when表达式不需要break，每个分支默认是互斥的</li>
+                        <li>when表达式可以有一个else分支处理默认情况</li>
+                    </ul>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// if 表达式（Kotlin 中 if 是表达式，不是语句）
+val a = 10
+val b = 20
+val max = if (a > b) a else b
+
+// 多行 if 表达式
+val result = if (a > b) {
+    println("a is larger")
+    a
+} else {
+    println("b is larger")
+    b
+}
+
+// when 表达式（替代 switch）
+val day = 3
+val dayName = when (day) {
+    1 -> "Monday"
+    2 -> "Tuesday"
+    3 -> "Wednesday"
+    4 -> "Thursday"
+    5 -> "Friday"
+    6 -> "Saturday"
+    7 -> "Sunday"
+    else -> "Invalid day"
+}
+
+// when 表达式的其他用法
+when {
+    a < 10 -> println("a is less than 10")
+    a < 20 -> println("a is less than 20")
+    else -> println("a is 20 or more")
+}
+
+// when 用于类型检查
+val obj: Any = "Hello"
+when (obj) {
+    is String -> println("It's a string: ${obj.length}")
+    is Int -> println("It's an integer: $obj")
+    else -> println("It's something else")
+}
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">循环结构</h5>
+                    <p class="text-slate-300 mb-4">Kotlin支持多种循环结构，包括for循环（用于遍历范围、集合等）、while循环和do-while循环。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>for循环可以遍历范围、集合、数组等任何可迭代对象</li>
+                        <li>范围使用..操作符创建，如1..5表示1到5（包含）</li>
+                        <li>可以使用downTo创建倒序范围</li>
+                        <li>可以使用step指定步长</li>
+                        <li>while和do-while循环与Java类似</li>
+                    </ul>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// for 循环遍历范围
+for (i in 1..5) {
+    println(i)
+}
+
+// 倒序遍历
+for (i in 5 downTo 1) {
+    println(i)
+}
+
+// 步长
+for (i in 1..10 step 2) {
+    println(i)  // 1, 3, 5, 7, 9
+}
+
+// for 循环遍历集合
+val numbers = listOf(1, 2, 3, 4, 5)
+for (number in numbers) {
+    println(number)
+}
+
+// 遍历带索引
+for ((index, value) in numbers.withIndex()) {
+    println("Index $index: $value")
+}
+
+// while 循环
+var i = 1
+while (i <= 5) {
+    println(i)
+    i++
+}
+
+// do-while 循环
+var j = 1
+do {
+    println(j)
+    j++
+} while (j <= 5)
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">跳转表达式</h5>
+                    <p class="text-slate-300 mb-4">Kotlin支持break、continue和return跳转表达式，可以控制程序的执行流程。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>break用于终止当前循环</li>
+                        <li>continue用于跳过当前迭代，进入下一次循环</li>
+                        <li>可以使用标签控制break和continue的作用范围</li>
+                        <li>return@label用于从lambda表达式返回，而不是从包含函数返回</li>
+                    </ul>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// break 和 continue
+for (i in 1..10) {
+    if (i == 5) break  // 终止循环
+    println(i)
+}
+
+for (i in 1..10) {
+    if (i % 2 == 0) continue  // 跳过当前迭代
+    println(i)
+}
+
+// 标签
+outer@ for (i in 1..3) {
+    for (j in 1..3) {
+        if (i * j > 4) break@outer  // 跳出外层循环
+        println("i = $i, j = $j")
+    }
+}
+
+// return 表达式
+fun findFirstPositive(numbers: List&lt;Int&gt;): Int? {
+    for (number in numbers) {
+        if (number > 0) return number  // 从函数返回
+    }
+    return null
+}
+
+// return@label 从 lambda 返回
+val numbers = listOf(1, -2, 3, -4, 5)
+numbers.forEach { 
+    if (it < 0) return@forEach  // 从 lambda 返回，不是从函数
+    println(it)
+}
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Kotlin 集合 -->
+        <section id="section-7" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">7. Kotlin 集合</span>
+            </h2>
+            
+            <div class="language-content" data-lang="kotlin">
+                <h4 class="text-lg font-medium mb-4 text-blue-400">Kotlin - 丰富的集合框架</h4>
+                <p class="text-slate-300 mb-4">Kotlin的集合框架提供了丰富的集合类型和操作方法，包括List、Set、Map等，支持不可变和可变两种形式，使集合操作更加安全和高效。</p>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">集合类型</h5>
+                    <p class="text-slate-300 mb-4">Kotlin提供了三种基本的集合类型：List（有序，允许重复）、Set（无序，不允许重复）和Map（键值对）。每种类型都有不可变和可变两种形式。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>不可变集合是线程安全的，推荐优先使用</li>
+                        <li>可变集合允许修改，但不是线程安全的</li>
+                        <li>setOf()会自动去重重复元素</li>
+                        <li>mapOf()使用to关键字创建键值对</li>
+                    </ul>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// List - 有序集合，允许重复元素
+val numbers: List&lt;Int&gt; = listOf(1, 2, 3, 4, 5)
+val mutableNumbers: MutableList&lt;Int&gt; = mutableListOf(1, 2, 3)
+mutableNumbers.add(4)
+
+// Set - 无序集合，不允许重复元素
+val uniqueNumbers: Set&lt;Int&gt; = setOf(1, 2, 3, 2, 1)  // {1, 2, 3}
+val mutableSet: MutableSet&lt;Int&gt; = mutableSetOf(1, 2, 3)
+mutableSet.add(4)
+
+// Map - 键值对集合
+val map: Map&lt;String, Int&gt; = mapOf("one" to 1, "two" to 2, "three" to 3)
+val mutableMap: MutableMap&lt;String, Int&gt; = mutableMapOf("one" to 1)
+mutableMap["two"] = 2
+
+// 空安全集合
+val emptyList: List&lt;Int&gt; = emptyList()
+val emptySet: Set&lt;String&gt; = emptySet()
+val emptyMap: Map&lt;String, Int&gt; = emptyMap()
+
+// 类型推断的集合
+val inferredList = listOf(1, 2, 3)  // List&lt;Int&gt;
+val inferredMap = mapOf("a" to 1, "b" to 2)  // Map&lt;String, Int&gt;
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">集合操作</h5>
+                    <p class="text-slate-300 mb-4">Kotlin的集合提供了丰富的操作方法，如过滤、映射、排序、分组等，支持函数式编程风格。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>不可变集合的操作会返回新的集合，不会修改原集合</li>
+                        <li>可变集合的操作可以修改原集合</li>
+                        <li>reduce()和fold()的区别是fold()有初始值</li>
+                        <li>first()如果没有匹配元素会抛出异常，firstOrNull()会返回null</li>
+                    </ul>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">val numbers = listOf(1, 2, 3, 4, 5)
+
+// 过滤
+val evenNumbers = numbers.filter { it % 2 == 0 }  // [2, 4]
+val oddNumbers = numbers.filterNot { it % 2 == 0 }  // [1, 3, 5]
+val greaterThanTwo = numbers.filter { it > 2 }  // [3, 4, 5]
+
+// 映射
+val doubled = numbers.map { it * 2 }  // [2, 4, 6, 8, 10]
+val squared = numbers.map { it * it }  // [1, 4, 9, 16, 25]
+
+// 扁平化
+val nestedList = listOf(listOf(1, 2), listOf(3, 4), listOf(5))
+val flattened = nestedList.flatten()  // [1, 2, 3, 4, 5]
+val flatMapped = nestedList.flatMap { it.map { it * 2 } }  // [2, 4, 6, 8, 10]
+
+// 折叠和归约
+val sum = numbers.reduce { acc, number -> acc + number }  // 15
+val sumWithInitial = numbers.fold(10) { acc, number -> acc + number }  // 25
+
+// 排序
+val unsorted = listOf(3, 1, 4, 1, 5, 9, 2, 6)
+val sorted = unsorted.sorted()  // [1, 1, 2, 3, 4, 5, 6, 9]
+val sortedDescending = unsorted.sortedDescending()  // [9, 6, 5, 4, 3, 2, 1, 1]
+val sortedByLength = listOf("apple", "banana", "cherry").sortedBy { it.length }  // [apple, cherry, banana]
+
+// 分组
+val words = listOf("apple", "banana", "cherry", "date", "elderberry")
+val groupedByLength = words.groupBy { it.length }  // {5=[apple], 6=[banana, cherry], 4=[date], 10=[elderberry]}
+
+// 元素检查
+val hasEven = numbers.any { it % 2 == 0 }  // true
+val allPositive = numbers.all { it > 0 }  // true
+val noneNegative = numbers.none { it < 0 }  // true
+val firstEven = numbers.first { it % 2 == 0 }  // 2
+val lastEven = numbers.last { it % 2 == 0 }  // 4
+val firstOrNull = numbers.firstOrNull { it > 10 }  // null
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">集合转换</h5>
+                    <p class="text-slate-300 mb-4">Kotlin的集合提供了多种转换方法，可以将集合转换为其他类型或格式。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>toTypedArray()将集合转换为数组</li>
+                        <li>joinToString()可以自定义分隔符、前缀和后缀</li>
+                        <li>associateWith()将集合元素作为键，生成的值作为值</li>
+                        <li>zip()可以将两个集合合并为键值对</li>
+                    </ul>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">val numbers = listOf(1, 2, 3, 4, 5)
+
+// 转换为其他集合类型
+val array = numbers.toTypedArray()  // Array&lt;Int&gt;
+val set = numbers.toSet()  // Set&lt;Int&gt;
+val hashSet = numbers.toHashSet()  // HashSet&lt;Int&gt;
+
+// 转换为字符串
+val joined = numbers.joinToString()  // "1, 2, 3, 4, 5"
+val customJoined = numbers.joinToString(separator = "|", prefix = "[", postfix = "]")  // "[1|2|3|4|5]"
+
+// 映射到其他类型
+val stringList = numbers.map { it.toString() }  // List&lt;String&gt;
+val mapFromList = numbers.associateWith { it * 2 }  // Map&lt;Int, Int&gt; {1=2, 2=4, 3=6, 4=8, 5=10}
+val mapFromPairs = numbers.zip(numbers.map { it * 2 }).toMap()  // Map&lt;Int, Int&gt; {1=2, 2=4, 3=6, 4=8, 5=10}
+
+// 过滤并转换
+val evenSquares = numbers.filter { it % 2 == 0 }.map { it * it }  // [4, 16]
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Kotlin 异常处理 -->
+        <section id="section-8" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">8. Kotlin 异常处理</span>
+            </h2>
+            
+            <div class="language-content" data-lang="kotlin">
+                <h4 class="text-lg font-medium mb-4 text-blue-400">Kotlin - 安全的异常处理机制</h4>
+                <p class="text-slate-300 mb-4">Kotlin的异常处理机制与Java类似，但提供了空安全特性来避免空指针异常，使代码更加安全可靠。</p>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">抛出和捕获异常</h5>
+                    <p class="text-slate-300 mb-4">Kotlin使用throw关键字抛出异常，使用try-catch-finally块捕获和处理异常。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>try可以作为表达式使用，返回值是try块或catch块的最后一个表达式</li>
+                        <li>finally块无论是否发生异常都会执行</li>
+                        <li>可以自定义异常类继承Exception或RuntimeException</li>
+                        <li>Kotlin不区分检查异常和非检查异常</li>
+                    </ul>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 抛出异常
+fun divide(a: Int, b: Int): Int {
+    if (b == 0) {
+        throw ArithmeticException("Division by zero")
+    }
+    return a / b
+}
+
+// 捕获异常
+try {
+    val result = divide(10, 0)
+    println("Result: $result")
+} catch (e: ArithmeticException) {
+    println("Error: ${e.message}")
+} catch (e: Exception) {
+    println("Unexpected error: ${e.message}")
+} finally {
+    println("This block always executes")
+}
+
+// try 作为表达式
+val result = try {
+    divide(10, 2)
+} catch (e: ArithmeticException) {
+    0  // 默认值
+}
+
+// 自定义异常
+class InvalidInputException(message: String) : Exception(message)
+
+fun processInput(input: String) {
+    if (input.isEmpty()) {
+        throw InvalidInputException("Input cannot be empty")
+    }
+    // 处理输入
+}
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">空安全和异常</h5>
+                    <p class="text-slate-300 mb-4">Kotlin的空安全特性通过类型系统来避免空指针异常，提供了多种操作符来安全地处理可能为空的值。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>安全调用操作符?.在对象不为空时调用方法或属性，否则返回null</li>
+                        <li>Elvis操作符?:在左侧表达式为null时使用右侧的默认值</li>
+                        <li>非空断言操作符!!强制断言对象不为空，为空时会抛出异常，不推荐使用</li>
+                        <li>安全转换操作符as?在转换失败时返回null，而不是抛出异常</li>
+                        <li>let函数与安全调用操作符结合使用，可以在对象不为空时执行代码块</li>
+                    </ul>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 安全调用操作符 ?.
+val str: String? = null
+val length = str?.length  // null
+
+// Elvis 操作符 ?: 
+val safeLength = str?.length ?: 0  // 0
+
+// 非空断言操作符 !!.（不推荐使用）
+val unsafeLength = str!!.length  // 抛出 NullPointerException
+
+// 安全转换操作符 as?
+val obj: Any = "Hello"
+val string: String? = obj as? String
+val number: Int? = obj as? Int  // null
+
+// let 函数与空安全
+str?.let { 
+    println("Length: ${it.length}")  // 只有当 str 不为 null 时执行
+}
+
+// 空安全类型参数
+fun &lt;T: Any&gt; printLength(obj: T?) {
+    obj?.let {
+        println("Length: ${it.toString().length}")
+    }
+}
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Kotlin 协程 -->
+        <section id="section-9" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">9. Kotlin 协程</span>
+            </h2>
+            
+            <div class="language-content" data-lang="kotlin">
+                <h4 class="text-lg font-medium mb-4 text-blue-400">Kotlin - 轻量级的协程并发编程</h4>
+                <p class="text-slate-300 mb-4">Kotlin的协程是一种轻量级的并发编程解决方案，允许以顺序代码的方式编写异步代码，使并发编程更加简单和安全。</p>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">协程基础</h5>
+                    <p class="text-slate-300 mb-4">协程是可以暂停和恢复的计算过程，比线程更轻量级，可以创建大量协程而不会消耗太多资源。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>协程需要添加kotlinx-coroutines-core依赖</li>
+                        <li>runBlocking会阻塞当前线程，主要用于测试和main函数</li>
+                        <li>launch启动一个新的协程，不阻塞当前线程</li>
+                        <li>delay是一个挂起函数，不会阻塞线程</li>
+                    </ul>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400 mb-2">// 协程依赖</div>
+                        <div class="text-slate-400 mb-2">// implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'</div>
+                        <div class="mb-2"></div>
+                        <div class="text-blue-400 mb-2">import</div> <span class="text-green-300">kotlinx.coroutines.*</span><br>
+                        <div class="mb-2"></div>
+                        <div class="text-slate-400 mb-2">// 简单的协程</div>
+                        <span class="text-purple-300">fun</span> <span class="text-blue-300">main</span>() = <span class="text-purple-300">runBlocking</span> {  <span class="text-slate-400">// 这会阻塞主线程，直到协程完成</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-300">launch</span> {  <span class="text-slate-400">// 在后台启动一个新的协程</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">delay</span>(<span class="text-yellow-300">1000L</span>)  <span class="text-slate-400">// 非阻塞延迟 1 秒</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"World!"</span>)<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Hello"</span>)  <span class="text-slate-400">// 立即执行</span><br>
+                        }<br>
+                        <div class="mb-2"></div>
+                        <div class="text-slate-400 mb-2">// 等待协程完成</div>
+                        <span class="text-purple-300">fun</span> <span class="text-blue-300">main</span>() = <span class="text-purple-300">runBlocking</span> {<br>
+                        &nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">job</span> = <span class="text-purple-300">launch</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">delay</span>(<span class="text-yellow-300">1000L</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"World!"</span>)<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Hello"</span>)<br>
+                        &nbsp;&nbsp;<span class="text-blue-300">job</span>.<span class="text-blue-300">join</span>()  <span class="text-slate-400">// 等待协程完成</span><br>
+                        &nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Done"</span>)<br>
+                        }<br>
+                        <div class="mb-2"></div>
+                        <div class="text-slate-400 mb-2">// 协程作用域</div>
+                        <span class="text-purple-300">fun</span> <span class="text-blue-300">main</span>() = <span class="text-purple-300">runBlocking</span> {<br>
+                        &nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">scope</span> = <span class="text-purple-300">CoroutineScope</span>(<span class="text-purple-300">Dispatchers</span>.<span class="text-purple-300">Default</span>)<br>
+                        &nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">job</span> = <span class="text-blue-300">scope</span>.<span class="text-purple-300">launch</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">delay</span>(<span class="text-yellow-300">1000L</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"World!"</span>)<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Hello"</span>)<br>
+                        &nbsp;&nbsp;<span class="text-blue-300">job</span>.<span class="text-blue-300">join</span>()<br>
+                        }<br>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">协程上下文和调度器</h5>
+                    <p class="text-slate-300 mb-4">协程上下文包含协程的运行环境信息，调度器决定协程在哪个线程上执行。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>Dispatchers.Main：在主线程运行，主要用于UI操作</li>
+                        <li>Dispatchers.IO：用于IO操作，如网络请求、文件读写</li>
+                        <li>Dispatchers.Default：用于CPU密集型操作</li>
+                        <li>Dispatchers.Unconfined：不受限的调度器，在当前线程执行</li>
+                        <li>NewSingleThreadContext：创建一个新的单线程上下文</li>
+                    </ul>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">import kotlinx.coroutines.*
+
+fun main() = runBlocking {
+    // 默认调度器（与调用者相同的线程）
+    launch {
+        println("Default: ${Thread.currentThread().name}")
+    }
+    
+    // 主线程调度器
+    launch(Dispatchers.Main) {
+        println("Main: ${Thread.currentThread().name}")
+    }
+    
+    // IO 调度器（用于网络、文件操作等）
+    launch(Dispatchers.IO) {
+        println("IO: ${Thread.currentThread().name}")
+    }
+    
+    // 默认调度器（线程池）
+    launch(Dispatchers.Default) {
+        println("Default: ${Thread.currentThread().name}")
+    }
+    
+    // 新线程调度器
+    launch(Dispatchers.NewSingleThreadContext("MyThread")) {
+        println("NewSingleThreadContext: ${Thread.currentThread().name}")
+    }
+}
+
+// 切换调度器
+fun main() = runBlocking {
+    launch(Dispatchers.Default) {
+        println("Starting in ${Thread.currentThread().name}")
+        withContext(Dispatchers.IO) {
+            println("Working in ${Thread.currentThread().name}")
+        }
+        println("Back to ${Thread.currentThread().name}")
+    }
+}
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">异步编程和协程</h5>
+                    <p class="text-slate-300 mb-4">协程可以简化异步编程，使异步代码看起来像同步代码一样易于理解和维护。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>suspend关键字标记的函数只能在协程或其他挂起函数中调用</li>
+                        <li>async启动一个新协程并返回一个Deferred对象，可以通过await()获取结果</li>
+                        <li>async(start = CoroutineStart.LAZY)创建惰性协程，只有在需要时才会执行</li>
+                        <li>并发执行可以提高程序的性能，但要注意线程安全问题</li>
+                    </ul>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">import kotlinx.coroutines.*
+import kotlin.system.measureTimeMillis
+
+// 异步函数
+suspend fun doSomethingUsefulOne(): Int {
+    delay(1000L)
+    return 13
+}
+
+suspend fun doSomethingUsefulTwo(): Int {
+    delay(1000L)
+    return 29
+}
+
+// 顺序执行
+fun main() = runBlocking {
+    val time = measureTimeMillis {
+        val one = doSomethingUsefulOne()
+        val two = doSomethingUsefulTwo()
+        println("The answer is ${one + two}")
+    }
+    println("Completed in $time ms")  // ~2000 ms
+}
+
+// 并发执行
+fun main() = runBlocking {
+    val time = measureTimeMillis {
+        val one = async { doSomethingUsefulOne() }
+        val two = async { doSomethingUsefulTwo() }
+        println("The answer is ${one.await() + two.await()}")
+    }
+    println("Completed in $time ms")  // ~1000 ms
+}
+
+// 惰性异步
+fun main() = runBlocking {
+    val time = measureTimeMillis {
+        val one = async(start = CoroutineStart.LAZY) { doSomethingUsefulOne() }
+        val two = async(start = CoroutineStart.LAZY) { doSomethingUsefulTwo() }
+        // 启动协程
+        one.start()
+        two.start()
+        println("The answer is ${one.await() + two.await()}")
+    }
+    println("Completed in $time ms")  // ~1000 ms
+}
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Kotlin 高级特性 -->
+        <section id="section-10" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">10. Kotlin 高级特性</span>
+            </h2>
+            
+            <div class="language-content" data-lang="kotlin">
+                <h4 class="text-lg font-medium mb-4 text-blue-400">Kotlin - 强大的高级特性</h4>
+                <p class="text-slate-300 mb-4">Kotlin提供了多种高级特性，如委托、泛型、反射和Java互操作等，使代码更加灵活和强大。</p>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">委托</h5>
+                    <p class="text-slate-300 mb-4">委托是一种设计模式，Kotlin内置了对委托的支持，包括类委托和属性委托。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>类委托使用by关键字将接口实现委托给另一个对象</li>
+                        <li>属性委托可以实现延迟加载、可观察属性等功能</li>
+                        <li>lazy委托用于延迟初始化属性，只有在第一次访问时才会计算</li>
+                        <li>Delegates.observable用于监听属性值的变化</li>
+                        <li>映射委托可以将属性值存储在Map中</li>
+                    </ul>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 委托模式
+interface Base {
+    fun print()
+}
+
+class BaseImpl(val x: Int) : Base {
+    override fun print() {
+        println(x)
+    }
+}
+
+// 委托给 BaseImpl
+class Derived(b: Base) : Base by b
+
+// 使用委托
+val base = BaseImpl(10)
+val derived = Derived(base)
+derived.print()  // 10
+
+// 属性委托
+class Example {
+    // 延迟属性
+    val lazyValue: String by lazy {
+        println("Computed!")
+        "Hello"
+    }
+    
+    // 可观察属性
+    var observableValue: String by Delegates.observable("Initial value") { _, old, new ->
+        println("Changed from $old to $new")
+    }
+    
+    // 映射委托
+    val map = mapOf(
+        "name" to "Alice",
+        "age" to 30
+    )
+    val name: String by map
+    val age: Int by map
+}
+
+val example = Example()
+println(example.lazyValue)  // 打印 "Computed!" 和 "Hello"
+example.observableValue = "New value"  // 打印 "Changed from Initial value to New value"
+println(example.name)  // "Alice"
+println(example.age)  // 30
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">泛型</h5>
+                    <p class="text-slate-300 mb-4">泛型允许在定义类、函数和接口时使用类型参数，使代码更加通用和可复用。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>泛型类使用&lt;T&gt;语法定义类型参数</li>
+                        <li>泛型函数可以在函数名前声明类型参数</li>
+                        <li>泛型约束可以限制类型参数的范围</li>
+                        <li>星投影&lt;*&gt;用于表示未知类型参数</li>
+                        <li>Kotlin的泛型是实化的，可以在运行时获取类型信息</li>
+                    </ul>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 泛型类
+class Box&lt;T&gt;(val value: T) {
+    fun getValue(): T {
+        return value
+    }
+}
+
+// 使用泛型类
+val intBox = Box(10)
+val stringBox = Box("Hello")
+val intValue: Int = intBox.getValue()
+val stringValue: String = stringBox.getValue()
+
+// 泛型函数
+fun &lt;T&gt; printValue(value: T) {
+    println(value)
+}
+
+// 使用泛型函数
+printValue(10)
+printValue("Hello")
+
+// 泛型约束
+fun &lt;T : Comparable&lt;T&gt;&gt; max(first: T, second: T): T {
+    return if (first > second) first else second
+}
+
+// 使用带约束的泛型函数
+val maxInt = max(10, 20)  // 20
+val maxString = max("apple", "banana")  // "banana"
+
+// 星投影
+val boxes: List&lt;Box&lt;*&gt;&gt; = listOf(intBox, stringBox)
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">反射</h5>
+                    <p class="text-slate-300 mb-4">反射允许在运行时获取类的信息、调用方法和访问属性，是一种强大的元编程技术。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>反射需要添加kotlin-reflect依赖</li>
+                        <li>使用::class获取类的KClass对象</li>
+                        <li>可以获取构造函数、属性和方法的信息</li>
+                        <li>反射操作可能会影响性能，应谨慎使用</li>
+                        <li>反射可以突破访问控制，访问私有成员</li>
+                    </ul>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 需要添加反射依赖
+// implementation 'org.jetbrains.kotlin:kotlin-reflect:1.9.20'
+
+import kotlin.reflect.full.memberProperties
+import kotlin.reflect.full.primaryConstructor
+
+class Person(val name: String, val age: Int) {
+    fun greet() {
+        println("Hello, my name is $name")
+    }
+}
+
+// 获取类的 KClass
+val personClass = Person::class
+
+// 获取主构造函数
+val constructor = personClass.primaryConstructor
+val person = constructor?.call("Alice", 30)
+
+// 获取属性
+for (property in personClass.memberProperties) {
+    println("${property.name} = ${property.get(person)}")
+}
+
+// 调用方法
+val greetMethod = personClass.members.find { it.name == "greet" }
+greetMethod?.call(person)
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">与 Java 互操作</h5>
+                    <p class="text-slate-300 mb-4">Kotlin与Java有很好的互操作性，可以在Kotlin中使用Java类，也可以在Java中使用Kotlin类。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>在Kotlin中可以直接使用Java类和方法</li>
+                        <li>Java的null值在Kotlin中会被视为可空类型</li>
+                        <li>@JvmOverloads用于生成重载构造函数</li>
+                        <li>@JvmStatic用于生成静态方法</li>
+                        <li>@JvmField用于生成静态字段</li>
+                    </ul>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 在 Kotlin 中使用 Java 类
+import java.util.ArrayList
+import java.util.HashMap
+
+fun main() {
+    // 使用 Java 集合
+    val arrayList = ArrayList&lt;String&gt;()
+    arrayList.add("Java ArrayList")
+    
+    val hashMap = HashMap&lt;String, Int&gt;()
+    hashMap["one"] = 1
+    
+    // 使用 Java 类和方法
+    val system = java.lang.System
+    println(system.getProperty("java.version"))
+    
+    // 处理 Java 空值
+    val javaObject: String? = java.lang.String("Hello")
+    println(javaObject?.length)
+}
+
+// 在 Java 中使用 Kotlin 类
+// Kotlin 类
+class KotlinClass {
+    // @JvmOverloads 生成重载构造函数
+    @JvmOverloads
+    fun greet(name: String = "World") {
+        println("Hello, $name!")
+    }
+    
+    // @JvmStatic 生成静态方法
+    companion object {
+        @JvmStatic
+        fun create(): KotlinClass {
+            return KotlinClass()
+        }
+    }
+}
+
+// Java 代码中使用
+// KotlinClass instance = KotlinClass.create();
+// instance.greet();  // 使用默认参数
+// instance.greet("Java");  // 使用自定义参数
+</code></pre>
+                </div>
+            </div>
+        </section>
+            </div>
         </div>
     </main>
 </body>
