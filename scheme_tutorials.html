@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheme 教程 - Hello 编程语言</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .syntax-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .code-block {
+            background: rgba(2, 6, 23, 0.9);
+            border-left: 4px solid #3B82F6;
+        }
+        .highlight {
+            background: rgba(59, 130, 246, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- 1. Scheme 简介 -->
+        <section id="section-1" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">1. Scheme 简介</span>
+            </h2>
+            
+            <div class="language-content" data-lang="scheme">
+                <h4 class="text-lg font-medium mb-4 text-blue-400">Scheme - 简洁优雅的函数式编程语言</h4>
+                <p class="text-slate-300 mb-4">Scheme是Lisp编程语言家族的一个方言，以其简洁的语法、强大的函数式编程能力和数学般的优雅而著称。它是计算机科学教育的重要语言，被广泛用于编程语言理论和算法教学。</p>
+                
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">Scheme 语言特点</h5>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2">
+                        <li>极简的语法设计（仅包含少数核心结构）</li>
+                        <li>纯粹的函数式编程范式</li>
+                        <li>强大的宏系统（卫生宏）</li>
+                        <li>尾递归优化支持</li>
+                        <li>动态类型系统</li>
+                        <li>垃圾回收机制</li>
+                        <li>闭包和第一类函数</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Scheme 基础语法 -->
+        <section id="section-2" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">2. Scheme 基础语法</span>
+            </h2>
+            
+            <div class="language-content" data-lang="scheme">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">Hello World 示例</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; Hello World 程序
+(display "Hello, World!")
+(newline)
+
+; 也可以使用简单的表达式
+"Hello, Scheme!"
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">基本表达式</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 算术表达式（前缀表示法）
+(+ 1 2 3)     ; 6
+(- 10 5)      ; 5
+(* 2 3 4)     ; 24
+(/ 10 2)      ; 5
+(remainder 10 3) ; 1
+
+; 比较表达式
+(= 1 1)       ; #t (真)
+(> 5 3)       ; #t
+(< 2 4)       ; #t
+(not (= 1 2)) ; #t
+(and #t #t)   ; #t
+(or #t #f)    ; #t
+(not #t)      ; #f (假)
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Scheme 变量和函数 -->
+        <section id="section-3" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">3. Scheme 变量和函数</span>
+            </h2>
+            
+            <div class="language-content" data-lang="scheme">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">变量定义</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 使用 define 定义变量
+(define x 10)
+(define y 20)
+(display (+ x y)) ; 30
+(newline)
+
+; 使用 let 定义局部变量
+(let ((a 5) (b 3))
+  (display (+ a b)) ; 8
+  (newline))
+
+; let* 允许变量之间相互引用
+(let* ((a 2)
+       (b (* a 3))) ; b = 6
+  (display b)
+  (newline))
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">函数定义</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 使用 define 定义函数
+(define (add a b)
+  "计算两个数的和"
+  (+ a b))
+
+(display (add 5 3)) ; 8
+(newline)
+
+; 尾递归函数（会被优化为循环）
+(define (factorial n)
+  "计算阶乘（尾递归版本）"
+  (define (fact-iter product counter max-count)
+    (if (> counter max-count)
+        product
+        (fact-iter (* product counter) (+ counter 1) max-count)))
+  (fact-iter 1 1 n))
+
+(display (factorial 5)) ; 120
+(newline)
+
+; 高阶函数 - 返回函数的函数
+(define (make-adder x)
+  (lambda (y) (+ x y)))
+
+(define add5 (make-adder 5))
+(display (add5 3)) ; 8
+(newline)
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Scheme 控制流 -->
+        <section id="section-4" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">4. Scheme 控制流</span>
+            </h2>
+            
+            <div class="language-content" data-lang="scheme">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">条件表达式</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; if 条件表达式
+(define (abs x)
+  (if (< x 0)
+      (- x)
+      x))
+
+(display (abs -5)) ; 5
+(newline)
+
+; cond 多分支条件
+(define (grade score)
+  (cond ((>= score 90) "A")
+        ((>= score 80) "B")
+        ((>= score 70) "C")
+        ((>= score 60) "D")
+        (else "F")))
+
+(display (grade 85)) ; B
+(newline)
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">循环结构</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 使用递归实现循环
+(define (countdown n)
+  (if (> n 0)
+      (begin
+        (display n)
+        (newline)
+        (countdown (- n 1)))
+      (display "Blast off!")
+      (newline)))
+
+(countdown 3)
+; 输出:
+; 3
+; 2
+; 1
+; Blast off!
+
+; 使用 do 循环
+(do ((i 0 (+ i 1)))
+    ((>= i 3))
+  (display i)
+  (newline))
+; 输出:
+; 0
+; 1
+; 2
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Scheme 数据结构 -->
+        <section id="section-5" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">5. Scheme 数据结构</span>
+            </h2>
+            
+            <div class="language-content" data-lang="scheme">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">列表操作</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 创建列表
+(define numbers (list 1 2 3 4 5))
+(define empty-list '())
+
+; 列表操作
+(display (car numbers))   ; 1 (第一个元素)
+(newline)
+(display (cdr numbers))   ; (2 3 4 5) (剩余元素)
+(newline)
+(display (cons 0 numbers)) ; (0 1 2 3 4 5) (添加到开头)
+(newline)
+(display (append numbers (list 6 7))) ; (1 2 3 4 5 6 7) (连接列表)
+(newline)
+(display (length numbers)) ; 5 (列表长度)
+(newline)
+(display (reverse numbers)) ; (5 4 3 2 1) (反转列表)
+(newline)
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">其他数据类型</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 字符串
+(define greeting "Hello, Scheme!")
+(display greeting)
+(newline)
+(display (string-length greeting)) ; 14
+(newline)
+
+; 符号
+(define symbol 'my-symbol)
+(display symbol)
+(newline)
+
+; 向量（固定大小的数组）
+(define vector1 #(1 2 3 4 5))
+(display (vector-ref vector1 2)) ; 3
+(newline)
+(vector-set! vector1 2 10)
+(display (vector-ref vector1 2)) ; 10
+(newline)
+</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

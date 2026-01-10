@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lisp 教程 - Hello 编程语言</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .syntax-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .code-block {
+            background: rgba(2, 6, 23, 0.9);
+            border-left: 4px solid #3B82F6;
+        }
+        .highlight {
+            background: rgba(59, 130, 246, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- 1. Lisp 简介 -->
+        <section id="section-1" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">1. Lisp 简介</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lisp">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Lisp - 列表处理语言</h4>
+                <p class="text-slate-300 mb-4">Lisp是一种功能强大的函数式编程语言，以其独特的括号语法和强大的宏系统而闻名。它广泛应用于人工智能、符号计算、教育等领域。</p>
+                
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">Lisp 语言特点</h5>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2">
+                        <li>独特的括号语法（前缀表示法）</li>
+                        <li>强大的宏系统</li>
+                        <li>函数式编程范式</li>
+                        <li>动态类型系统</li>
+                        <li>垃圾回收机制</li>
+                        <li>丰富的符号处理能力</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Lisp 基础语法 -->
+        <section id="section-2" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">2. Lisp 基础语法</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lisp">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">Hello World 示例</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; Hello World 程序
+(print "Hello, World!")
+
+; 也可以使用 format 函数
+(format t "Hello, Lisp!~%")
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">基本表达式</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 算术表达式（前缀表示法）
+(+ 1 2 3)     ; 6
+(- 10 5)      ; 5
+(* 2 3 4)     ; 24
+(/ 10 2)      ; 5
+
+; 比较表达式
+(= 1 1)       ; T (真)
+(> 5 3)       ; T
+(< 2 4)       ; T
+(/= 1 2)      ; T
+
+; 逻辑表达式
+(and T T)     ; T
+(or T nil)    ; T
+(not T)       ; nil (假)
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Lisp 变量和函数 -->
+        <section id="section-3" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">3. Lisp 变量和函数</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lisp">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">变量定义</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 使用 setq 定义变量
+(setq x 10)
+(setq y 20)
+(print (+ x y))  ; 30
+
+; 使用 defvar 定义全局变量
+(defvar *name* "Lisp")
+(print *name*)
+
+; 使用 let 定义局部变量
+(let ((a 5) (b 3))
+  (print (+ a b)))  ; 8
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">函数定义</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 使用 defun 定义函数
+(defun add (a b)
+  "计算两个数的和"
+  (+ a b))
+
+(print (add 5 3))  ; 8
+
+; 递归函数
+(defun factorial (n)
+  "计算阶乘"
+  (if (<= n 1)
+      1
+      (* n (factorial (- n 1)))))
+
+(print (factorial 5))  ; 120
+</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

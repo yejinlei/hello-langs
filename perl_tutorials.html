@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perl 教程 - Hello 编程语言</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .syntax-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .code-block {
+            background: rgba(2, 6, 23, 0.9);
+            border-left: 4px solid #3B82F6;
+        }
+        .highlight {
+            background: rgba(59, 130, 246, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- 1. Perl 简介 -->
+        <section id="section-1" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">1. Perl 简介</span>
+            </h2>
+            
+            <div class="language-content" data-lang="perl">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Perl - 实用提取与报告语言</h4>
+                <p class="text-slate-300 mb-4">Perl是一种功能强大的脚本语言，擅长文本处理和系统管理任务。它具有灵活的语法和丰富的模块库，广泛应用于Web开发、系统管理、网络编程等领域。</p>
+                
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">Perl 语言特点</h5>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2">
+                        <li>强大的正则表达式支持</li>
+                        <li>灵活的语法和丰富的运算符</li>
+                        <li>丰富的CPAN模块库</li>
+                        <li>跨平台兼容性</li>
+                        <li>擅长文本处理和字符串操作</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Perl 基础语法 -->
+        <section id="section-2" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">2. Perl 基础语法</span>
+            </h2>
+            
+            <div class="language-content" data-lang="perl">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">Hello World 示例</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">#!/usr/bin/perl
+use strict;
+use warnings;
+
+print "Hello, World!\n";
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">变量</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">#!/usr/bin/perl
+use strict;
+use warnings;
+
+# 标量变量
+my $name = "Perl";
+my $age = 30;
+my $price = 19.99;
+
+print "Name: $name\n";
+print "Age: $age\n";
+print "Price: $price\n";
+
+# 数组
+my @fruits = ("apple", "banana", "orange");
+print "Fruits: @fruits\n";
+
+# 哈希
+my %person = (
+    "name" => "John",
+    "age" => 25,
+    "city" => "New York"
+);
+print "Person: $person{name}, $person{age}, $person{city}\n";
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Perl 控制流 -->
+        <section id="section-3" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">3. Perl 控制流</span>
+            </h2>
+            
+            <div class="language-content" data-lang="perl">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">条件语句</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">#!/usr/bin/perl
+use strict;
+use warnings;
+
+my $score = 85;
+
+if ($score >= 90) {
+    print "A\n";
+} elsif ($score >= 80) {
+    print "B\n";
+} elsif ($score >= 70) {
+    print "C\n";
+} else {
+    print "D\n";
+}
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">循环语句</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">#!/usr/bin/perl
+use strict;
+use warnings;
+
+# for 循环
+print "For 循环:\n";
+for (my $i = 1; $i <= 5; $i++) {
+    print "$i\n";
+}
+
+# while 循环
+print "\nWhile 循环:\n";
+my $j = 1;
+while ($j <= 5) {
+    print "$j\n";
+    $j++;
+}
+
+# foreach 循环
+print "\nForeach 循环:\n";
+my @numbers = (1, 2, 3, 4, 5);
+foreach my $num (@numbers) {
+    print "$num\n";
+}
+</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

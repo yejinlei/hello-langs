@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zig 教程 - Hello 编程语言</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .syntax-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .code-block {
+            background: rgba(2, 6, 23, 0.9);
+            border-left: 4px solid #3B82F6;
+        }
+        .highlight {
+            background: rgba(59, 130, 246, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- 1. Zig 简介 -->
+        <section id="section-1" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">1. Zig 简介</span>
+            </h2>
+            
+            <div class="language-content" data-lang="zig">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Zig - 现代系统编程语言</h4>
+                <p class="text-slate-300 mb-4">Zig是一种现代系统编程语言，专注于安全性、性能和可维护性。它设计为C语言的替代品，提供了更好的内存安全和错误处理机制。</p>
+                
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">Zig 语言特点</h5>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2">
+                        <li>无运行时开销</li>
+                        <li>显式内存管理</li>
+                        <li>强大的错误处理机制</li>
+                        <li>编译时泛型</li>
+                        <li>与C语言的无缝交互</li>
+                        <li>简洁的语法</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Zig 基础语法 -->
+        <section id="section-2" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">2. Zig 基础语法</span>
+            </h2>
+            
+            <div class="language-content" data-lang="zig">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">Hello World 示例</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">const std = @import("std");
+
+pub fn main() !void {
+    const stdout = std.io.getStdOut().writer();
+    try stdout.print("Hello, World!\n", .{});
+}
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">变量和常量</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">const std = @import("std");
+
+pub fn main() !void {
+    const stdout = std.io.getStdOut().writer();
+    
+    // 常量定义
+    const answer: u32 = 42;
+    
+    // 变量定义
+    var count: u32 = 10;
+    var name: []const u8 = "Zig";
+    var price: f64 = 19.99;
+    
+    try stdout.print("Answer: {}\n", .{answer});
+    try stdout.print("Count: {}\n", .{count});
+    try stdout.print("Name: {s}\n", .{name});
+    try stdout.print("Price: {d:.2}\n", .{price});
+    
+    // 更新变量
+    count += 1;
+    try stdout.print("Updated Count: {}\n", .{count});
+}
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Zig 函数和控制流 -->
+        <section id="section-3" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">3. Zig 函数和控制流</span>
+            </h2>
+            
+            <div class="language-content" data-lang="zig">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">函数定义</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">const std = @import("std");
+
+// 函数定义
+fn add(a: i32, b: i32) i32 {
+    return a + b;
+}
+
+// 带错误返回的函数
+fn divide(a: f64, b: f64) !f64 {
+    if (b == 0.0) {
+        return error.DivisionByZero;
+    }
+    return a / b;
+}
+
+pub fn main() !void {
+    const stdout = std.io.getStdOut().writer();
+    
+    const sum = add(5, 3);
+    try stdout.print("Sum: {}\n", .{sum});
+    
+    // 错误处理
+    const result = divide(10.0, 2.0) catch |err| {
+        try stdout.print("Error: {}\n", .{err});
+        return err;
+    };
+    
+    try stdout.print("Result: {d}\n", .{result});
+}
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">控制流</h5>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">const std = @import("std");
+
+pub fn main() !void {
+    const stdout = std.io.getStdOut().writer();
+    
+    // 条件语句
+    const score: u32 = 85;
+    if (score >= 90) {
+        try stdout.print("A\n", .{});
+    } else if (score >= 80) {
+        try stdout.print("B\n", .{});
+    } else if (score >= 70) {
+        try stdout.print("C\n", .{});
+    } else {
+        try stdout.print("D\n", .{});
+    }
+    
+    // for 循环
+    try stdout.print("For 循环:\n", .{});
+    for (0..5) |i| {
+        try stdout.print("{}\n", .{i});
+    }
+    
+    // while 循环
+    try stdout.print("While 循环:\n", .{});
+    var i: u32 = 0;
+    while (i < 5) : (i += 1) {
+        try stdout.print("{}\n", .{i});
+    }
+}
+</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
