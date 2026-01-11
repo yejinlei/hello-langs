@@ -646,7 +646,7 @@
                 <span class="gradient-text">6. Kotlin 控制流</span>
             </h2>
             
-            <div class="language-content" data-lang="kotlin">
+            <div class="language-content" data-lang="kotlin"></div>
                 <h4 class="text-lg font-medium mb-4 text-blue-400">Kotlin - 强大的控制流语句</h4>
                 <p class="text-slate-300 mb-4">Kotlin提供了丰富的控制流语句，包括if表达式、when表达式（替代switch）、for循环、while循环等，使代码的流程控制更加灵活和简洁。</p>
 
@@ -771,19 +771,19 @@
                     </ul>
                     <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
                         <div class="text-slate-400">// break 和 continue</div>
-                        <div><span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">10</span>) {
+                        <div></div><span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">10</span>) {
                         <div>&nbsp;&nbsp;<span class="text-purple-300">if</span> (<span class="text-blue-300">i</span> == <span class="text-yellow-300">5</span>) <span class="text-purple-300">break</span>  <span class="text-slate-400">// 终止循环</span></div>
                         <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">i</span>)</div>
                         <div>}</div>
                         <div></div>
-                        <div><span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">10</span>) {
+                        <div></div><span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">10</span>) {
                         <div>&nbsp;&nbsp;<span class="text-purple-300">if</span> (<span class="text-blue-300">i</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span>) <span class="text-purple-300">continue</span>  <span class="text-slate-400">// 跳过当前迭代</span></div>
                         <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">i</span>)</div>
                         <div>}</div>
                         <div></div>
                         <div class="text-slate-400">// 标签</div>
-                        <div><span class="text-purple-300">outer@</span> <span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">3</span>) {
-                        <div>&nbsp;&nbsp;<span class="text-purple-300">for</span> (<span class="text-blue-300">j</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">3</span>) {
+                        <div></div><span class="text-purple-300">outer@</span> <span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">3</span>) {
+                        <div></div>&nbsp;&nbsp;<span class="text-purple-300">for</span> (<span class="text-blue-300">j</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">3</span>) {
                         <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">if</span> (<span class="text-blue-300">i</span> * <span class="text-blue-300">j</span> > <span class="text-yellow-300">4</span>) <span class="text-purple-300">break@outer</span>  <span class="text-slate-400">// 跳出外层循环</span></div>
                         <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"i = $i, j = $j"</span>)</div>
                         <div>&nbsp;&nbsp;}</div>
@@ -1355,7 +1355,7 @@
                         <div><span class="text-blue-400">import</span> <span class="text-green-300">kotlin.reflect.full.memberProperties</span></div>
                         <div><span class="text-blue-400">import</span> <span class="text-green-300">kotlin.reflect.full.primaryConstructor</span></div>
                         <div></div>
-                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">Person</span>(<span class="text-purple-300">val</span> <span class="text-blue-300">name</span>: <span class="text-blue-400">String</span>, <span class="text-purple-300">val</span> <span class="text-blue-300">age</span>: <span class="text-blue-400">Int</span>) {
+                        <div></div><span class="text-purple-300">class</span> <span class="text-blue-300">Person</span>(<span class="text-purple-300">val</span> <span class="text-blue-300">name</span>: <span class="text-blue-400">String</span>, <span class="text-purple-300">val</span> <span class="text-blue-300">age</span>: <span class="text-blue-400">Int</span>) {
                         <div>&nbsp;&nbsp;<span class="text-purple-300">fun</span> <span class="text-blue-300">greet</span>() {
                         <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Hello, my name is $name"</span>)</div>
                         <div>&nbsp;&nbsp;}</div>
@@ -1379,10 +1379,7 @@
                     </div>
                 </div>
                
-            </div>
-            
-        </section>
-                        <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-blue-300">与 Java 互操作</h5>
                     <p class="text-slate-300 mb-4">Kotlin与Java有很好的互操作性，可以在Kotlin中使用Java类，也可以在Java中使用Kotlin类。</p>
                     <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
@@ -1398,7 +1395,7 @@
                         <div><span class="text-blue-400">import</span> <span class="text-green-300">java.util.ArrayList</span></div>
                         <div><span class="text-blue-400">import</span> <span class="text-green-300">java.util.HashMap</span></div>
                         <div></div>
-                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">main</span>() {
+                        <div></div><span class="text-purple-300">fun</span> <span class="text-blue-300">main</span>() {
                         <div>&nbsp;&nbsp;<span class="text-slate-400">// 使用 Java 集合</span></div>
                         <div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">arrayList</span> = <span class="text-blue-300">ArrayList</span>&lt;<span class="text-blue-400">String</span>&gt;()</div>
                         <div>&nbsp;&nbsp;<span class="text-blue-300">arrayList</span>.<span class="text-blue-300">add</span>(<span class="text-green-300">"Java ArrayList"</span>)</div>
@@ -1417,10 +1414,10 @@
                         <div></div>
                         <div class="text-slate-400">// 在 Java 中使用 Kotlin 类</div>
                         <div class="text-slate-400">// Kotlin 类</div>
-                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">KotlinClass</span> {
+                        <div></div><span class="text-purple-300">class</span> <span class="text-blue-300">KotlinClass</span> {
                         <div>&nbsp;&nbsp;<span class="text-slate-400">// @JvmOverloads 生成重载构造函数</span></div>
                         <div>&nbsp;&nbsp;<span class="text-purple-300">@JvmOverloads</span></div>
-                        <div>&nbsp;&nbsp;<span class="text-purple-300">fun</span> <span class="text-blue-300">greet</span>(<span class="text-blue-300">name</span>: <span class="text-blue-400">String</span> = <span class="text-green-300">"World"</span>) {
+                        <div></div>&nbsp;&nbsp;<span class="text-purple-300">fun</span> <span class="text-blue-300">greet</span>(<span class="text-blue-300">name</span>: <span class="text-blue-400">String</span> = <span class="text-green-300">"World"</span>) {
                         <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Hello, $name!"</span>)</div>
                         <div>&nbsp;&nbsp;}</div>
                         <div>&nbsp;&nbsp;</div>
@@ -1439,6 +1436,223 @@
                         <div class="text-slate-400">// instance.greet("Java");  // 使用自定义参数</div>
                     </div>
                 </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">内联函数</h5>
+                    <p class="text-slate-300 mb-4">内联函数允许将函数的字节码直接插入到调用点，减少函数调用的开销，特别适用于高阶函数。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>使用inline关键字声明内联函数</li>
+                        <li>内联函数会增加生成的字节码大小</li>
+                        <li>crossinline关键字用于禁止在Lambda表达式中使用非局部返回</li>
+                        <li>noinline关键字用于防止某些参数被内联</li>
+                        <li>内联函数适用于简单的高阶函数，复杂函数不适合内联</li>
+                    </ul>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 内联函数 - 减少函数调用开销</div>
+                        <div><span class="text-purple-300">inline</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">measureTime</span>(<span class="text-blue-300">block</span>: () -> <span class="text-purple-300">Unit</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">start</span> = <span class="text-blue-300">System</span>.<span class="text-blue-300">nanoTime</span>()</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">block</span>()</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">end</span> = <span class="text-blue-300">System</span>.<span class="text-blue-300">nanoTime</span>()</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Execution time: ${(end - start) / 1000000} ms"</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用内联函数</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">main</span>() {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">measureTime</span> {</div>
+                        <div></div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">1000000</span>) {
+                        <div></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">sum</span> = <span class="text-yellow-300">i</span> + <span class="text-yellow-300">i</span>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;}
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// crossinline - 禁止非局部返回</div>
+                        <div><span class="text-purple-300">inline</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">inlineFunction</span>(<span class="text-purple-300">crossinline</span> <span class="text-blue-300">block</span>: () -> <span class="text-purple-300">Unit</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Before block"</span>)</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">block</span>()</div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"After block"</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// noinline - 防止某些参数被内联</div>
+                        <div><span class="text-purple-300">inline</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">mixedInlineFunction</span>(<span class="text-blue-300">inlineBlock</span>: () -> <span class="text-purple-300">Unit</span>, <span class="text-purple-300">noinline</span> <span class="text-blue-300">nonInlineBlock</span>: () -> <span class="text-purple-300">Unit</span>) {
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">inlineBlock</span>()  <span class="text-slate-400">// 会被内联</span></div>
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">nonInlineBlock</span>()  <span class="text-slate-400">// 不会被内联</span></div>
+                        <div>}</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">类型别名、运算符重载和中缀函数</h5>
+                    <p class="text-slate-300 mb-4">Kotlin提供了类型别名、运算符重载和中缀函数等特性，使代码更加灵活和易读。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>类型别名使用typealias关键字定义</li>
+                        <li>运算符重载使用operator关键字声明</li>
+                        <li>中缀函数使用infix关键字声明，调用时可以省略点和括号</li>
+                        <li>中缀函数必须是成员函数或扩展函数</li>
+                        <li>中缀函数必须只有一个参数</li>
+                    </ul>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 类型别名 - 为现有类型提供新名称</div>
+                        <div><span class="text-purple-300">typealias</span> <span class="text-blue-300">UserMap</span> = <span class="text-blue-400">HashMap</span>&lt;<span class="text-blue-400">String</span>, <span class="text-blue-300">User</span>&gt;</div>
+                        <div><span class="text-purple-300">typealias</span> <span class="text-blue-300">ClickHandler</span> = (<span class="text-blue-400">String</span>) -> <span class="text-purple-300">Unit</span></div>
+                        <div></div>
+                        <div><span class="text-purple-300">data</span> <span class="text-purple-300">class</span> <span class="text-blue-300">User</span>(<span class="text-purple-300">val</span> <span class="text-blue-300">id</span>: <span class="text-blue-400">Int</span>, <span class="text-purple-300">val</span> <span class="text-blue-300">name</span>: <span class="text-blue-400">String</span>)</div>
+                        <div></div>
+                        <div><span class="text-slate-400">// 使用类型别名</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">users</span>: <span class="text-blue-300">UserMap</span> = <span class="text-blue-300">HashMap</span>()</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">clickHandler</span>: <span class="text-blue-300">ClickHandler</span> = { <span class="text-blue-300">println</span>(<span class="text-green-300">"Clicked: $it"</span>) }</div>
+                        <div></div>
+                        <div class="text-slate-400">// 运算符重载 - 为类型定义自定义运算符</div>
+                        <div><span class="text-purple-300">data</span> <span class="text-purple-300">class</span> <span class="text-blue-300">Point</span>(<span class="text-purple-300">val</span> <span class="text-blue-300">x</span>: <span class="text-blue-400">Int</span>, <span class="text-purple-300">val</span> <span class="text-blue-300">y</span>: <span class="text-blue-400">Int</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">operator</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">plus</span>(<span class="text-blue-300">other</span>: <span class="text-blue-300">Point</span>): <span class="text-blue-300">Point</span> {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">return</span> <span class="text-blue-300">Point</span>(<span class="text-blue-300">x</span> + <span class="text-blue-300">other</span>.<span class="text-blue-300">x</span>, <span class="text-blue-300">y</span> + <span class="text-blue-300">other</span>.<span class="text-blue-300">y</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">operator</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">times</span>(<span class="text-blue-300">factor</span>: <span class="text-blue-400">Int</span>): <span class="text-blue-300">Point</span> {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">return</span> <span class="text-blue-300">Point</span>(<span class="text-blue-300">x</span> * <span class="text-blue-300">factor</span>, <span class="text-blue-300">y</span> * <span class="text-blue-300">factor</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div></div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">operator</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">get</span>(<span class="text-blue-300">index</span>: <span class="text-blue-400">Int</span>): <span class="text-blue-400">Int</span> {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">return</span> <span class="text-purple-300">when</span> (<span class="text-blue-300">index</span>) {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-yellow-300">0</span> -> <span class="text-blue-300">x</span></div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-yellow-300">1</span> -> <span class="text-blue-300">y</span></div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">else</span> -> <span class="text-yellow-300">0</span></div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 使用运算符重载</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">p1</span> = <span class="text-blue-300">Point</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>)</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">p2</span> = <span class="text-blue-300">Point</span>(<span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>)</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">sum</span> = <span class="text-blue-300">p1</span> + <span class="text-blue-300">p2</span>  <span class="text-slate-400">// Point(x=4, y=6)</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">product</span> = <span class="text-blue-300">p1</span> * <span class="text-yellow-300">2</span>  <span class="text-slate-400">// Point(x=2, y=4)</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">xCoord</span> = <span class="text-blue-300">p1</span>[<span class="text-yellow-300">0</span>]  <span class="text-slate-400">// 1</span></div>
+                        <div></div>
+                        <div class="text-slate-400">// 中缀函数 - 允许更简洁的函数调用方式</div>
+                        <div><span class="text-purple-300">infix</span> <span class="text-purple-300">fun</span> <span class="text-blue-400">Int</span>.<span class="text-blue-300">timesRepeat</span>(<span class="text-blue-300">action</span>: () -> <span class="text-purple-300">Unit</span>) {</div>
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-blue-300">this</span>) {</div>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">action</span>()</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>}</div>
+                        <div></div>
+                        <div><span class="text-slate-400">// 使用中缀函数</span></div>
+                        <div><span class="text-yellow-300">3</span> <span class="text-blue-300">timesRepeat</span> {
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Hello!"</span>)</div>
+                        <div>}</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">解构声明、范围表达式和注解</h5>
+                    <p class="text-slate-300 mb-4">Kotlin提供了解构声明、范围表达式和注解等特性，使代码更加简洁和强大。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>解构声明允许同时声明多个变量</li>
+                        <li>范围表达式使用..操作符创建</li>
+                        <li>注解使用@符号标记，可以应用于类、函数、属性等</li>
+                        <li>解构声明需要componentN()函数的支持</li>
+                        <li>注解可以有参数和默认值</li>
+                    </ul>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm">
+                        <div class="text-slate-400">// 解构声明 - 同时声明多个变量</div>
+                        <div><span class="text-purple-300">data</span> <span class="text-purple-300">class</span> <span class="text-blue-300">Person</span>(<span class="text-purple-300">val</span> <span class="text-blue-300">name</span>: <span class="text-blue-400">String</span>, <span class="text-purple-300">val</span> <span class="text-blue-300">age</span>: <span class="text-blue-400">Int</span>)</div>
+                        <div></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">person</span> = <span class="text-blue-300">Person</span>(<span class="text-green-300">"Alice"</span>, <span class="text-yellow-300">30</span>)</div>
+                        <div><span class="text-purple-300">val</span> (<span class="text-blue-300">name</span>, <span class="text-blue-300">age</span>) = <span class="text-blue-300">person</span>  <span class="text-slate-400">// 解构声明</span></div>
+                        <div><span class="text-blue-300">println</span>(<span class="text-green-300">"Name: $name, Age: $age"</span>)</div>
+                        <div></div>
+                        <div class="text-slate-400">// 解构声明用于集合</div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">map</span> = <span class="text-blue-300">mapOf</span>(<span class="text-green-300">"one"</span> <span class="text-purple-300">to</span> <span class="text-yellow-300">1</span>, <span class="text-green-300">"two"</span> <span class="text-purple-300">to</span> <span class="text-yellow-300">2</span>)</div>
+                        <div></div><span class="text-purple-300">for</span> ((<span class="text-blue-300">key</span>, <span class="text-blue-300">value</span>) <span class="text-purple-300">in</span> <span class="text-blue-300">map</span>) {
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"$key: $value"</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 范围表达式</div>
+                        <div></div><span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">5</span>) {
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">i</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div></div><span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">10</span> <span class="text-purple-300">downTo</span> <span class="text-yellow-300">1</span> <span class="text-purple-300">step</span> <span class="text-yellow-300">2</span>) {
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-blue-300">i</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div><span class="text-slate-400">// 检查是否在范围内</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">x</span> = <span class="text-yellow-300">3</span></div>
+                        <div></div><span class="text-purple-300">if</span> (<span class="text-blue-300">x</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span>..<span class="text-yellow-300">10</span>) {
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"x is between 1 and 10"</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 注解 - 用于为代码添加元数据</div>
+                        <div><span class="text-purple-300">annotation</span> <span class="text-purple-300">class</span> <span class="text-blue-300">Test</span>(<span class="text-purple-300">val</span> <span class="text-blue-300">value</span>: <span class="text-blue-400">String</span> = <span class="text-green-300">"default"</span>)</div>
+                        <div></div>
+                        <div><span class="text-purple-300">@Test</span>(<span class="text-green-300">"MyTest"</span>)</div>
+                        <div></div><span class="text-purple-300">fun</span> <span class="text-blue-300">testFunction</span>() {
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Test function"</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div><span class="text-purple-300">@Test</span></div>
+                        <div><span class="text-purple-300">class</span> <span class="text-blue-300">TestClass</span> {
+                        <div>&nbsp;&nbsp;<span class="text-purple-300">fun</span> <span class="text-blue-300">anotherTest</span>() {
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"Another test"</span>)</div>
+                        <div>&nbsp;&nbsp;}</div>
+                        <div>}</div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6"></div>
+                    <h5 class="text-lg font-medium mb-4 text-blue-300">枚举类、文件级函数和可见性修饰符</h5>
+                    <p class="text-slate-300 mb-4">Kotlin提供了枚举类、文件级函数和可见性修饰符等特性，使代码更加灵活和安全。</p>
+                    <p class="text-slate-300 mb-4"><strong>注意事项：</strong></p>
+                    <ul class="text-slate-300 list-disc pl-6 space-y-2 mb-4">
+                        <li>枚举类使用enum关键字声明</li>
+                        <li>文件级函数可以直接在文件中定义，不需要类的包裹</li>
+                        <li>Kotlin有4种可见性修饰符：private、protected、internal和public</li>
+                        <li>枚举类可以包含属性和方法</li>
+                        <li>internal修饰符表示在同一模块内可见</li>
+                    </ul>
+                    <div class="code-block p-4 rounded-lg overflow-x-auto code-font text-sm"></div>
+                        <div class="text-slate-400">// 枚举类 - 表示一组固定的常量</div>
+                        <div></div><span class="text-purple-300">enum</span> <span class="text-purple-300">class</span> <span class="text-blue-300">Direction</span>(
+                        <div></div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">x</span>: <span class="text-blue-400">Int</span>,
+                        <div></div>&nbsp;&nbsp;<span class="text-purple-300">val</span> <span class="text-blue-300">y</span>: <span class="text-blue-400">Int</span>
+                        <div></div>) {
+                        <div></div>&nbsp;&nbsp;<span class="text-blue-300">NORTH</span>(<span class="text-yellow-300">0</span>, <span class="text-yellow-300">1</span>),
+                        <div></div>&nbsp;&nbsp;<span class="text-blue-300">EAST</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">0</span>),
+                        <div></div>&nbsp;&nbsp;<span class="text-blue-300">SOUTH</span>(<span class="text-yellow-300">0</span>, <span class="text-yellow-300">-1</span>),
+                        <div></div>&nbsp;&nbsp;<span class="text-blue-300">WEST</span>(<span class="text-yellow-300">-1</span>, <span class="text-yellow-300">0</span>);
+                        <div></div>
+                        <div></div>&nbsp;&nbsp;<span class="text-purple-300">fun</span> <span class="text-blue-300">turnRight</span>(): <span class="text-blue-300">Direction</span> {
+                        <div></div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">return</span> <span class="text-purple-300">when</span> (<span class="text-purple-300">this</span>) {
+                        <div></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">NORTH</span> -> <span class="text-blue-300">EAST</span>
+                        <div></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">EAST</span> -> <span class="text-blue-300">SOUTH</span>
+                        <div></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">SOUTH</span> -> <span class="text-blue-300">WEST</span>
+                        <div></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">WEST</span> -> <span class="text-blue-300">NORTH</span>
+                        <div>&nbsp;&nbsp;&nbsp;&nbsp;}
+                        <div>&nbsp;&nbsp;}
+                        <div>}
+                        <div></div>
+                        <div><span class="text-slate-400">// 使用枚举类</span></div>
+                        <div><span class="text-purple-300">val</span> <span class="text-blue-300">direction</span> = <span class="text-blue-300">Direction</span>.<span class="text-blue-300">NORTH</span></div>
+                        <div><span class="text-blue-300">println</span>(<span class="text-green-300">"Direction: $direction"</span>)</div>
+                        <div><span class="text-blue-300">println</span>(<span class="text-green-300">"Next direction: ${direction.turnRight()}"</span>)</div>
+                        <div></div>
+                        <div class="text-slate-400">// 文件级函数 - 直接在文件中定义</div>
+                        <div><span class="text-purple-300">fun</span> <span class="text-blue-300">fileLevelFunction</span>() {
+                        <div>&nbsp;&nbsp;<span class="text-blue-300">println</span>(<span class="text-green-300">"This function is defined at file level"</span>)</div>
+                        <div>}</div>
+                        <div></div>
+                        <div class="text-slate-400">// 可见性修饰符</div>
+                        <div><span class="text-purple-300">private</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">privateFunction</span>() { <span class="text-slate-400">// 仅在当前类或文件可见</span> }
+                        <div><span class="text-purple-300">protected</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">protectedFunction</span>() { <span class="text-slate-400">// 在当前类和子类可见</span> }</div>
+                        <div><span class="text-purple-300">internal</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">internalFunction</span>() { <span class="text-slate-400">// 在当前模块可见</span> }</div>
+                        <div><span class="text-purple-300">public</span> <span class="text-purple-300">fun</span> <span class="text-blue-300">publicFunction</span>() { <span class="text-slate-400">// 任何地方可见</span> }</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
     </main>
 </body>
 </html>
