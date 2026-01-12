@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R语言教程</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        .code-font {
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-white min-h-screen">
+    <header class="sticky top-0 z-50 bg-slate-800 border-b border-slate-700">
+        <div class="container mx-auto px-4 py-4">
+            <h1 class="text-3xl font-bold">
+                <span class="gradient-text">R语言教程</span>
+            </h1>
+            <p class="text-slate-400 mt-1">学习R语言的核心概念和数据科学应用</p>
+        </div>
+    </header>
+    
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <aside class="sticky top-24 lg:w-1/4">
+                <div class="bg-slate-800 rounded-xl p-4 border border-slate-700">
+                    <h2 class="text-xl font-bold mb-4 gradient-text">章节列表</h2>
+                    <nav class="space-y-1">
+                        <a href="#section-1" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">1. 变量声明</a>
+                        <a href="#section-2" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">2. 数据类型</a>
+                        <a href="#section-3" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">3. 向量和矩阵</a>
+                        <a href="#section-4" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">4. 列表</a>
+                        <a href="#section-5" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">5. 数据框</a>
+                        <a href="#section-6" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">6. 控制流 - 条件语句</a>
+                        <a href="#section-7" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">7. 控制流 - 循环</a>
+                        <a href="#section-8" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">8. 函数</a>
+                        <a href="#section-9" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">9. 数据操作</a>
+                        <a href="#section-10" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">10. 绘图基础</a>
+                        <a href="#section-11" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">11. 高级绘图</a>
+                        <a href="#section-12" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">12. 统计分析</a>
+                        <a href="#section-13" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">13. 数据导入导出</a>
+                        <a href="#section-14" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">14. 字符串操作</a>
+                        <a href="#section-15" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">15. 日期和时间</a>
+                        <a href="#section-16" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">16. 正则表达式</a>
+                        <a href="#section-17" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">17. 异常处理</a>
+                        <a href="#section-18" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">18. 包的使用</a>
+                        <a href="#section-19" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">19. 面向对象编程</a>
+                        <a href="#section-20" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">20. 并行计算</a>
+                    </nav>
+                </div>
+            </aside>
+            
+            <div class="lg:w-3/4">
+                <div class="bg-slate-800 rounded-xl p-8 border border-slate-700">
+                    <section id="section-1" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">1. 变量声明</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 变量声明和赋值</h4>
+                            <p class="text-slate-300 mb-4">特点：R语言使用&lt;-或=进行赋值，变量名区分大小写，支持动态类型。注意事项：R语言是解释型语言，不需要显式声明变量类型。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># 基本变量赋值</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">age</span> &lt;- <span class="text-yellow-300">25</span>  <span class="text-slate-400"># 使用&lt;-赋值（推荐）</span><br>
+                                    <span class="text-purple-300">name</span> = <span class="text-green-300">"张三"</span>  <span class="text-slate-400"># 使用=赋值</span><br>
+                                    <span class="text-purple-300">salary</span> &lt;- <span class="text-yellow-300">5000.50</span>  <span class="text-slate-400"># 数值类型</span><br>
+                                    <span class="text-purple-300">is_active</span> &lt;- <span class="text-purple-300">TRUE</span>  <span class="text-slate-400"># 布尔类型</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 变量运算和重新赋值</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">x</span> &lt;- <span class="text-yellow-300">10</span><br>
+                                    <span class="text-purple-300">y</span> &lt;- <span class="text-yellow-300">5</span><br>
+                                    <span class="text-purple-300">result</span> &lt;- <span class="text-purple-300">x</span> + <span class="text-purple-300">y</span>  <span class="text-slate-400"># 15</span><br>
+                                    <span class="text-purple-300">x</span> &lt;- <span class="text-purple-300">x</span> * <span class="text-yellow-300">2</span>  <span class="text-slate-400"># 更新变量值</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-2" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">2. 数据类型</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 基本数据类型</h4>
+                            <p class="text-slate-300 mb-4">特点：R语言包含多种基本数据类型，包括数值、字符、逻辑、因子等。注意事项：可以使用class()函数查看变量类型。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># 数值类型</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">numeric_var</span> &lt;- <span class="text-yellow-300">3.14</span><br>
+                                    <span class="text-purple-300">integer_var</span> &lt;- <span class="text-yellow-300">42L</span>  <span class="text-slate-400"># 使用L后缀表示整数</span><br>
+                                    <span class="text-purple-300">complex_var</span> &lt;- <span class="text-yellow-300">1</span> + <span class="text-yellow-300">2i</span>  <span class="text-slate-400"># 复数</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 其他基本类型</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">char_var</span> &lt;- <span class="text-green-300">"Hello R"</span>  <span class="text-slate-400"># 字符串</span><br>
+                                    <span class="text-purple-300">logical_var</span> &lt;- <span class="text-purple-300">FALSE</span>  <span class="text-slate-400"># 布尔值</span><br>
+                                    <span class="text-purple-300">factor_var</span> &lt;- <span class="text-purple-300">factor</span>(c(<span class="text-green-300">"A"</span>, <span class="text-green-300">"B"</span>, <span class="text-green-300">"A"</span>))  <span class="text-slate-400"># 因子类型</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 查看变量类型</span><br>
+                                    <span class="text-purple-300">class</span>(<span class="text-purple-300">numeric_var</span>)  <span class="text-slate-400"># "numeric"</span><br>
+                                    <span class="text-purple-300">class</span>(<span class="text-purple-300">char_var</span>)  <span class="text-slate-400"># "character"</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-3" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">3. 向量和矩阵</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 向量和矩阵操作</h4>
+                            <p class="text-slate-300 mb-4">特点：向量是R语言的基本数据结构，矩阵是二维的向量。注意事项：向量中的元素必须是相同类型，矩阵的维度必须一致。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># 向量创建</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 使用c()函数创建向量</span><br>
+                                    <span class="text-purple-300">numeric_vec</span> &lt;- <span class="text-purple-300">c</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>)<br>
+                                    <span class="text-purple-300">char_vec</span> &lt;- <span class="text-purple-300">c</span>(<span class="text-green-300">"A"</span>, <span class="text-green-300">"B"</span>, <span class="text-green-300">"C"</span>)<br>
+                                    <span class="text-purple-300">logical_vec</span> &lt;- <span class="text-purple-300">c</span>(<span class="text-purple-300">TRUE</span>, <span class="text-purple-300">FALSE</span>, <span class="text-purple-300">TRUE</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用序列函数创建向量</span><br>
+                                    <span class="text-purple-300">seq_vec</span> &lt;- <span class="text-purple-300">seq</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">10</span>, <span class="text-blue-300">by</span> = <span class="text-yellow-300">2</span>)  <span class="text-slate-400"># 1, 3, 5, 7, 9</span><br>
+                                    <span class="text-purple-300">rep_vec</span> &lt;- <span class="text-purple-300">rep</span>(<span class="text-yellow-300">5</span>, <span class="text-blue-300">times</span> = <span class="text-yellow-300">3</span>)  <span class="text-slate-400"># 5, 5, 5</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 矩阵创建和操作</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 创建矩阵</span><br>
+                                    <span class="text-purple-300">mat</span> &lt;- <span class="text-purple-300">matrix</span>(<span class="text-purple-300">1</span>:<span class="text-purple-300">6</span>, <span class="text-blue-300">nrow</span> = <span class="text-yellow-300">2</span>, <span class="text-blue-300">ncol</span> = <span class="text-yellow-300">3</span>)<br>
+                                    <span class="text-purple-300">mat</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 指定行列名</span><br>
+                                    <span class="text-purple-300">rownames</span>(<span class="text-purple-300">mat</span>) &lt;- <span class="text-purple-300">c</span>(<span class="text-green-300">"行1"</span>, <span class="text-green-300">"行2"</span>)<br>
+                                    <span class="text-purple-300">colnames</span>(<span class="text-purple-300">mat</span>) &lt;- <span class="text-purple-300">c</span>(<span class="text-green-300">"列1"</span>, <span class="text-green-300">"列2"</span>, <span class="text-green-300">"列3"</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 矩阵运算</span><br>
+                                    <span class="text-purple-300">mat</span> + <span class="text-yellow-300">2</span>  <span class="text-slate-400"># 所有元素加2</span><br>
+                                    <span class="text-purple-300">mat</span> * <span class="text-yellow-300">3</span>  <span class="text-slate-400"># 所有元素乘3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-4" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">4. 列表</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 列表的创建和操作</h4>
+                            <p class="text-slate-300 mb-4">特点：列表是R语言中最灵活的数据结构，可以包含不同类型的元素。注意事项：列表中的元素可以通过名称或索引访问。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># 列表创建</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 创建一个包含不同类型元素的列表</span><br>
+                                    <span class="text-purple-300">my_list</span> &lt;- <span class="text-purple-300">list</span>(<br>
+                                        <span class="text-blue-300">name</span> = <span class="text-green-300">"张三"</span>,<br>
+                                        <span class="text-blue-300">age</span> = <span class="text-yellow-300">25</span>,<br>
+                                        <span class="text-blue-300">scores</span> = <span class="text-purple-300">c</span>(<span class="text-yellow-300">90</span>, <span class="text-yellow-300">85</span>, <span class="text-yellow-300">95</span>),<br>
+                                        <span class="text-blue-300">is_active</span> = <span class="text-purple-300">TRUE</span><br>
+                                    )<br>
+                                    <br>
+                                    <span class="text-purple-300"># 查看列表结构</span><br>
+                                    <span class="text-purple-300">str</span>(<span class="text-purple-300">my_list</span>)
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 列表元素访问</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 通过名称访问</span><br>
+                                    <span class="text-purple-300">my_list</span>$<span class="text-blue-300">name</span>  <span class="text-slate-400"># "张三"</span><br>
+                                    <span class="text-purple-300">my_list</span>[[<span class="text-green-300">"age"</span>]]  <span class="text-slate-400"># 25</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 通过索引访问</span><br>
+                                    <span class="text-purple-300">my_list</span>[[<span class="text-yellow-300">1</span>]]  <span class="text-slate-400"># "张三"</span><br>
+                                    <span class="text-purple-300">my_list</span>[[<span class="text-yellow-300">3</span>]]  <span class="text-slate-400"># 90 85 95</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 修改列表元素</span><br>
+                                    <span class="text-purple-300">my_list</span>$<span class="text-blue-300">age</span> &lt;- <span class="text-yellow-300">26</span><br>
+                                    <span class="text-purple-300">my_list</span>[[<span class="text-yellow-300">2</span>]] &lt;- <span class="text-yellow-300">26</span>  <span class="text-slate-400"># 等价操作</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-5" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">5. 数据框</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 数据框的创建和操作</h4>
+                            <p class="text-slate-300 mb-4">特点：数据框是R语言中用于存储表格数据的主要数据结构，每列可以是不同类型。注意事项：数据框的每列必须具有相同的长度。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># 数据框创建</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 使用data.frame()函数创建数据框</span><br>
+                                    <span class="text-purple-300">students</span> &lt;- <span class="text-purple-300">data.frame</span>(<br>
+                                        <span class="text-blue-300">id</span> = <span class="text-yellow-300">1</span>:<span class="text-yellow-300">5</span>,<br>
+                                        <span class="text-blue-300">name</span> = <span class="text-purple-300">c</span>(<span class="text-green-300">"张三"</span>, <span class="text-green-300">"李四"</span>, <span class="text-green-300">"王五"</span>, <span class="text-green-300">"赵六"</span>, <span class="text-green-300">"钱七"</span>),<br>
+                                        <span class="text-blue-300">age</span> = <span class="text-purple-300">c</span>(<span class="text-yellow-300">25</span>, <span class="text-yellow-300">26</span>, <span class="text-yellow-300">24</span>, <span class="text-yellow-300">27</span>, <span class="text-yellow-300">23</span>),<br>
+                                        <span class="text-blue-300">score</span> = <span class="text-purple-300">c</span>(<span class="text-yellow-300">90</span>, <span class="text-yellow-300">85</span>, <span class="text-yellow-300">92</span>, <span class="text-yellow-300">88</span>, <span class="text-yellow-300">95</span>),<br>
+                                        <span class="text-blue-300">major</span> = <span class="text-purple-300">c</span>(<span class="text-green-300">"计算机"</span>, <span class="text-green-300">"数学"</span>, <span class="text-green-300">"计算机"</span>, <span class="text-green-300">"物理"</span>, <span class="text-green-300">"化学"</span>)<br>
+                                    )<br>
+                                    <br>
+                                    <span class="text-purple-300"># 查看数据框</span><br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">students</span>)<br>
+                                    <span class="text-purple-300">head</span>(<span class="text-purple-300">students</span>)  <span class="text-slate-400"># 查看前几行</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 数据框操作</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 访问列</span><br>
+                                    <span class="text-purple-300">students</span>$<span class="text-blue-300">name</span>  <span class="text-slate-400"># 通过名称访问列</span><br>
+                                    <span class="text-purple-300">students</span>[,<span class="text-yellow-300">2</span>]  <span class="text-slate-400"># 通过索引访问列</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 访问行</span><br>
+                                    <span class="text-purple-300">students</span>[<span class="text-yellow-300">1</span>, ]  <span class="text-slate-400"># 访问第一行</span><br>
+                                    <span class="text-purple-300">students</span>[<span class="text-yellow-300">1</span>:<span class="text-yellow-300">3</span>, ]  <span class="text-slate-400"># 访问前3行</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 筛选行</span><br>
+                                    <span class="text-purple-300">students</span>[<span class="text-purple-300">students</span>$<span class="text-blue-300">score</span> &gt; <span class="text-yellow-300">90</span>, ]  <span class="text-slate-400"># 筛选分数大于90的行</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-6" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">6. 控制流 - 条件语句</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 条件语句和分支控制</h4>
+                            <p class="text-slate-300 mb-4">特点：R语言支持if-else、ifelse、switch等条件语句。注意事项：条件表达式的结果必须是逻辑值。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># if-else语句</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">score</span> &lt;- <span class="text-yellow-300">85</span><br>
+                                    <br>
+                                    <span class="text-purple-300">if</span> (<span class="text-purple-300">score</span> &gt;= <span class="text-yellow-300">90</span>) {<br>
+                                        <span class="text-purple-300">print</span>(<span class="text-green-300">"优秀"</span>)<br>
+                                    } <span class="text-purple-300">else if</span> (<span class="text-purple-300">score</span> &gt;= <span class="text-yellow-300">80</span>) {<br>
+                                        <span class="text-purple-300">print</span>(<span class="text-green-300">"良好"</span>)<br>
+                                    } <span class="text-purple-300">else if</span> (<span class="text-purple-300">score</span> &gt;= <span class="text-yellow-300">60</span>) {<br>
+                                        <span class="text-purple-300">print</span>(<span class="text-green-300">"及格"</span>)<br>
+                                    } <span class="text-purple-300">else</span> {<br>
+                                        <span class="text-purple-300">print</span>(<span class="text-green-300">"不及格"</span>)<br>
+                                    }
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># ifelse函数和switch语句</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 使用ifelse函数进行向量条件操作</span><br>
+                                    <span class="text-purple-300">scores</span> &lt;- <span class="text-purple-300">c</span>(<span class="text-yellow-300">90</span>, <span class="text-yellow-300">85</span>, <span class="text-yellow-300">55</span>, <span class="text-yellow-300">75</span>)<br>
+                                    <span class="text-purple-300">results</span> &lt;- <span class="text-purple-300">ifelse</span>(<span class="text-purple-300">scores</span> &gt;= <span class="text-yellow-300">60</span>, <span class="text-green-300">"及格"</span>, <span class="text-green-300">"不及格"</span>)<br>
+                                    <span class="text-purple-300">results</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用switch语句</span><br>
+                                    <span class="text-purple-300">day</span> &lt;- <span class="text-green-300">"Monday"</span><br>
+                                    <span class="text-purple-300">switch</span>(<span class="text-purple-300">day</span>,<br>
+                                        <span class="text-green-300">"Monday"</span> = <span class="text-purple-300">print</span>(<span class="text-green-300">"星期一"</span>),<br>
+                                        <span class="text-green-300">"Tuesday"</span> = <span class="text-purple-300">print</span>(<span class="text-green-300">"星期二"</span>),<br>
+                                        <span class="text-green-300">"Wednesday"</span> = <span class="text-purple-300">print</span>(<span class="text-green-300">"星期三"</span>),<br>
+                                        <span class="text-purple-300">default</span> = <span class="text-purple-300">print</span>(<span class="text-green-300">"其他"</span>)<br>
+                                    )
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-7" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">7. 控制流 - 循环</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 循环结构</h4>
+                            <p class="text-slate-300 mb-4">特点：R语言支持for、while、repeat等循环结构。注意事项：在R中，向量化操作通常比循环更高效。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># for循环</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 遍历向量</span><br>
+                                    <span class="text-purple-300">numbers</span> &lt;- <span class="text-purple-300">1</span>:<span class="text-purple-300">5</span><br>
+                                    <span class="text-purple-300">for</span> (<span class="text-purple-300">i</span> <span class="text-purple-300">in</span> <span class="text-purple-300">numbers</span>) {<br>
+                                        <span class="text-purple-300">print</span>(<span class="text-green-300">paste</span>(<span class="text-green-300">"数字："</span>, <span class="text-purple-300">i</span>))<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-300"># 遍历列表</span><br>
+                                    <span class="text-purple-300">my_list</span> &lt;- <span class="text-purple-300">list</span>(<span class="text-blue-300">a</span> = <span class="text-yellow-300">1</span>, <span class="text-blue-300">b</span> = <span class="text-yellow-300">2</span>, <span class="text-blue-300">c</span> = <span class="text-yellow-300">3</span>)<br>
+                                    <span class="text-purple-300">for</span> (<span class="text-purple-300">name</span> <span class="text-purple-300">in</span> <span class="text-purple-300">names</span>(<span class="text-purple-300">my_list</span>)) {<br>
+                                        <span class="text-purple-300">print</span>(<span class="text-green-300">paste</span>(<span class="text-green-300">"元素"</span>, <span class="text-purple-300">name</span>, <span class="text-green-300">"的值是"</span>, <span class="text-purple-300">my_list</span>[[<span class="text-purple-300">name</span>]]))<br>
+                                    }
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># while和repeat循环</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># while循环</span><br>
+                                    <span class="text-purple-300">i</span> &lt;- <span class="text-yellow-300">1</span><br>
+                                    <span class="text-purple-300">while</span> (<span class="text-purple-300">i</span> &lt;= <span class="text-yellow-300">5</span>) {<br>
+                                        <span class="text-purple-300">print</span>(<span class="text-green-300">paste</span>(<span class="text-green-300">"i = "</span>, <span class="text-purple-300">i</span>))<br>
+                                        <span class="text-purple-300">i</span> &lt;- <span class="text-purple-300">i</span> + <span class="text-yellow-300">1</span><br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-300"># repeat循环（需要break退出）</span><br>
+                                    <span class="text-purple-300">i</span> &lt;- <span class="text-yellow-300">1</span><br>
+                                    <span class="text-purple-300">repeat</span> {<br>
+                                        <span class="text-purple-300">print</span>(<span class="text-green-300">paste</span>(<span class="text-green-300">"i = "</span>, <span class="text-purple-300">i</span>))<br>
+                                        <span class="text-purple-300">i</span> &lt;- <span class="text-purple-300">i</span> + <span class="text-yellow-300">1</span><br>
+                                        <span class="text-purple-300">if</span> (<span class="text-purple-300">i</span> &gt; <span class="text-yellow-300">5</span>) <span class="text-purple-300">break</span><br>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-8" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">8. 函数</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 函数的定义和使用</h4>
+                            <p class="text-slate-300 mb-4">特点：R语言支持自定义函数，函数可以有默认参数和可变参数。注意事项：函数中的变量默认是局部变量，使用&lt;&lt;-可以修改全局变量。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># 基本函数定义</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 定义一个简单的函数</span><br>
+                                    <span class="text-purple-300">add_numbers</span> &lt;- <span class="text-purple-300">function</span>(<span class="text-purple-300">a</span>, <span class="text-purple-300">b</span>) {<br>
+                                        <span class="text-purple-300">result</span> &lt;- <span class="text-purple-300">a</span> + <span class="text-purple-300">b</span><br>
+                                        <span class="text-purple-300">return</span>(<span class="text-purple-300">result</span>)<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用函数</span><br>
+                                    <span class="text-purple-300">sum_result</span> &lt;- <span class="text-purple-300">add_numbers</span>(<span class="text-yellow-300">5</span>, <span class="text-yellow-300">10</span>)<br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">sum_result</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 带有默认参数的函数</span><br>
+                                    <span class="text-purple-300">calculate_area</span> &lt;- <span class="text-purple-300">function</span>(<span class="text-purple-300">radius</span>, <span class="text-purple-300">pi</span> = <span class="text-yellow-300">3.14159</span>) {<br>
+                                        <span class="text-purple-300">area</span> &lt;- <span class="text-purple-300">pi</span> * <span class="text-purple-300">radius</span>^<span class="text-yellow-300">2</span><br>
+                                        <span class="text-purple-300">return</span>(<span class="text-purple-300">area</span>)<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用默认参数</span><br>
+                                    <span class="text-purple-300">area</span> &lt;- <span class="text-purple-300">calculate_area</span>(<span class="text-yellow-300">5</span>)<br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">area</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 覆盖默认参数</span><br>
+                                    <span class="text-purple-300">area</span> &lt;- <span class="text-purple-300">calculate_area</span>(<span class="text-yellow-300">5</span>, <span class="text-yellow-300">3.14</span>)<br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">area</span>)
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 可变参数和全局变量</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 使用...表示可变参数</span><br>
+                                    <span class="text-purple-300">sum_all</span> &lt;- <span class="text-purple-300">function</span>(...) {<br>
+                                        <span class="text-purple-300">numbers</span> &lt;- <span class="text-purple-300">list</span>(...)<br>
+                                        <span class="text-purple-300">total</span> &lt;- <span class="text-purple-300">sum</span>(<span class="text-purple-300">unlist</span>(<span class="text-purple-300">numbers</span>))<br>
+                                        <span class="text-purple-300">return</span>(<span class="text-purple-300">total</span>)<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-300">sum_result</span> &lt;- <span class="text-purple-300">sum_all</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>)<br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">sum_result</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用&lt;&lt;-修改全局变量</span><br>
+                                    <span class="text-purple-300">global_var</span> &lt;- <span class="text-yellow-300">10</span><br>
+                                    <br>
+                                    <span class="text-purple-300">modify_global</span> &lt;- <span class="text-purple-300">function</span>() {<br>
+                                        <span class="text-purple-300">global_var</span> &lt;&lt;- <span class="text-purple-300">global_var</span> + <span class="text-yellow-300">5</span><br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-300">modify_global</span>()<br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">global_var</span>)<br>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-9" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">9. 数据操作</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 数据筛选和转换</h4>
+                            <p class="text-slate-300 mb-4">特点：R语言提供了丰富的数据操作功能，包括筛选、排序、聚合、合并等。注意事项：使用基本R函数或dplyr包进行数据操作。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># 数据筛选和排序</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 创建示例数据框</span><br>
+                                    <span class="text-purple-300">students</span> &lt;- <span class="text-purple-300">data.frame</span>(<br>
+                                        <span class="text-blue-300">id</span> = <span class="text-yellow-300">1</span>:<span class="text-yellow-300">5</span>,<br>
+                                        <span class="text-blue-300">name</span> = <span class="text-purple-300">c</span>(<span class="text-green-300">"张三"</span>, <span class="text-green-300">"李四"</span>, <span class="text-green-300">"王五"</span>, <span class="text-green-300">"赵六"</span>, <span class="text-green-300">"钱七"</span>),<br>
+                                        <span class="text-blue-300">age</span> = <span class="text-purple-300">c</span>(<span class="text-yellow-300">25</span>, <span class="text-yellow-300">26</span>, <span class="text-yellow-300">24</span>, <span class="text-yellow-300">27</span>, <span class="text-yellow-300">23</span>),<br>
+                                        <span class="text-blue-300">score</span> = <span class="text-purple-300">c</span>(<span class="text-yellow-300">90</span>, <span class="text-yellow-300">85</span>, <span class="text-yellow-300">92</span>, <span class="text-yellow-300">88</span>, <span class="text-yellow-300">95</span>),<br>
+                                        <span class="text-blue-300">major</span> = <span class="text-purple-300">c</span>(<span class="text-green-300">"计算机"</span>, <span class="text-green-300">"数学"</span>, <span class="text-green-300">"计算机"</span>, <span class="text-green-300">"物理"</span>, <span class="text-green-300">"化学"</span>)<br>
+                                    )<br>
+                                    <br>
+                                    <span class="text-purple-300"># 筛选分数大于90的学生</span><br>
+                                    <span class="text-purple-300">top_students</span> &lt;- <span class="text-purple-300">students</span>[<span class="text-purple-300">students</span>$<span class="text-blue-300">score</span> &gt; <span class="text-yellow-300">90</span>, ]<br>
+                                    <br>
+                                    <span class="text-purple-300"># 筛选计算机专业的学生</span><br>
+                                    <span class="text-purple-300">cs_students</span> &lt;- <span class="text-purple-300">students</span>[<span class="text-purple-300">students</span>$<span class="text-blue-300">major</span> == <span class="text-green-300">"计算机"</span>, ]<br>
+                                    <br>
+                                    <span class="text-purple-300"># 按分数降序排序</span><br>
+                                    <span class="text-purple-300">students_sorted</span> &lt;- <span class="text-purple-300">students</span>[<span class="text-purple-300">order</span>(-<span class="text-purple-300">students</span>$<span class="text-blue-300">score</span>), ]
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 数据聚合和转换</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 按专业分组计算平均分数</span><br>
+                                    <span class="text-purple-300">major_avg</span> &lt;- <span class="text-purple-300">aggregate</span>(<span class="text-blue-300">score</span> ~ <span class="text-blue-300">major</span>, <span class="text-purple-300">data</span> = <span class="text-purple-300">students</span>, <span class="text-purple-300">FUN</span> = <span class="text-purple-300">mean</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 添加新列</span><br>
+                                    <span class="text-purple-300">students</span>$<span class="text-blue-300">grade</span> &lt;- <span class="text-purple-300">ifelse</span>(<span class="text-purple-300">students</span>$<span class="text-blue-300">score</span> &gt;= <span class="text-yellow-300">90</span>, <span class="text-green-300">"A"</span>, <span class="text-green-300">"B"</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 删除列</span><br>
+                                    <span class="text-purple-300">students</span>$<span class="text-blue-300">grade</span> &lt;- <span class="text-purple-300">NULL</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 数据框合并</span><br>
+                                    <span class="text-purple-300">info</span> &lt;- <span class="text-purple-300">data.frame</span>(<br>
+                                        <span class="text-blue-300">id</span> = <span class="text-yellow-300">1</span>:<span class="text-yellow-300">5</span>,<br>
+                                        <span class="text-blue-300">gender</span> = <span class="text-purple-300">c</span>(<span class="text-green-300">"男"</span>, <span class="text-green-300">"女"</span>, <span class="text-green-300">"男"</span>, <span class="text-green-300">"男"</span>, <span class="text-green-300">"女"</span>)<br>
+                                    )<br>
+                                    <span class="text-purple-300">merged_data</span> &lt;- <span class="text-purple-300">merge</span>(<span class="text-purple-300">students</span>, <span class="text-purple-300">info</span>, <span class="text-blue-300">by</span> = <span class="text-green-300">"id"</span>)
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-10" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">10. 绘图基础</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 基本图形绘制</h4>
+                            <p class="text-slate-300 mb-4">特点：R语言提供了强大的绘图功能，包括基本的散点图、直方图、箱线图等。注意事项：可以使用基本R绘图函数或ggplot2等包进行更高级的绘图。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># 基本图形绘制</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 创建示例数据</span><br>
+                                    <span class="text-purple-300">x</span> &lt;- <span class="text-purple-300">1</span>:<span class="text-purple-300">10</span><br>
+                                    <span class="text-purple-300">y</span> &lt;- <span class="text-purple-300">x</span>^<span class="text-yellow-300">2</span> + <span class="text-purple-300">rnorm</span>(<span class="text-yellow-300">10</span>, <span class="text-yellow-300">0</span>, <span class="text-yellow-300">5</span>)<br>
+                                    <span class="text-purple-300">data</span> &lt;- <span class="text-purple-300">data.frame</span>(<span class="text-blue-300">x</span> = <span class="text-purple-300">x</span>, <span class="text-blue-300">y</span> = <span class="text-purple-300">y</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 散点图</span><br>
+                                    <span class="text-purple-300">plot</span>(<span class="text-purple-300">x</span>, <span class="text-purple-300">y</span>, <span class="text-blue-300">main</span> = <span class="text-green-300">"散点图示例"</span>, <span class="text-blue-300">xlab</span> = <span class="text-green-300">"X轴"</span>, <span class="text-blue-300">ylab</span> = <span class="text-green-300">"Y轴"</span>, <span class="text-blue-300">col</span> = <span class="text-green-300">"blue"</span>, <span class="text-blue-300">pch</span> = <span class="text-yellow-300">16</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 直方图</span><br>
+                                    <span class="text-purple-300">hist</span>(<span class="text-purple-300">rnorm</span>(<span class="text-yellow-300">1000</span>), <span class="text-blue-300">main</span> = <span class="text-green-300">"正态分布直方图"</span>, <span class="text-blue-300">xlab</span> = <span class="text-green-300">"数值"</span>, <span class="text-blue-300">ylab</span> = <span class="text-green-300">"频率"</span>, <span class="text-blue-300">col</span> = <span class="text-green-300">"lightblue"</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 箱线图</span><br>
+                                    <span class="text-purple-300">boxplot</span>(<span class="text-purple-300">y</span> ~ <span class="text-purple-300">x</span>, <span class="text-purple-300">data</span> = <span class="text-purple-300">data.frame</span>(<span class="text-blue-300">x</span> = <span class="text-purple-300">rep</span>(<span class="text-purple-300">1</span>:<span class="text-purple-300">2</span>, <span class="text-yellow-300">5</span>), <span class="text-blue-300">y</span> = <span class="text-purple-300">y</span>), <span class="text-blue-300">main</span> = <span class="text-green-300">"箱线图示例"</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 条形图</span><br>
+                                    <span class="text-purple-300">barplot</span>(<span class="text-purple-300">table</span>(<span class="text-purple-300">c</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">3</span>)), <span class="text-blue-300">main</span> = <span class="text-green-300">"条形图示例"</span>, <span class="text-blue-300">xlab</span> = <span class="text-green-300">"类别"</span>, <span class="text-blue-300">ylab</span> = <span class="text-green-300">"计数"</span>, <span class="text-blue-300">col</span> = <span class="text-green-300">"lightgreen"</span>)
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 自定义图形</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 添加线条和点</span><br>
+                                    <span class="text-purple-300">plot</span>(<span class="text-purple-300">x</span>, <span class="text-purple-300">y</span>, <span class="text-blue-300">type</span> = <span class="text-green-300">"p"</span>, <span class="text-blue-300">col</span> = <span class="text-green-300">"red"</span>)<br>
+                                    <span class="text-purple-300">lines</span>(<span class="text-purple-300">x</span>, <span class="text-purple-300">x</span>^<span class="text-yellow-300">2</span>, <span class="text-blue-300">col</span> = <span class="text-green-300">"blue"</span>, <span class="text-blue-300">lwd</span> = <span class="text-yellow-300">2</span>)<br>
+                                    <span class="text-purple-300">points</span>(<span class="text-purple-300">x</span>, <span class="text-purple-300">x</span>^<span class="text-yellow-300">2</span>, <span class="text-blue-300">col</span> = <span class="text-green-300">"blue"</span>, <span class="text-blue-300">pch</span> = <span class="text-yellow-300">8</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 添加图例</span><br>
+                                    <span class="text-purple-300">legend</span>(<span class="text-green-300">"topleft"</span>, <span class="text-blue-300">legend</span> = <span class="text-purple-300">c</span>(<span class="text-green-300">"数据点"</span>, <span class="text-green-300">"拟合线"</span>), <span class="text-blue-300">col</span> = <span class="text-purple-300">c</span>(<span class="text-green-300">"red"</span>, <span class="text-green-300">"blue"</span>), <span class="text-blue-300">pch</span> = <span class="text-purple-300">c</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">8</span>), <span class="text-blue-300">lty</span> = <span class="text-purple-300">c</span>(<span class="text-yellow-300">NA</span>, <span class="text-yellow-300">1</span>))<br>
+                                    <br>
+                                    <span class="text-purple-300"># 多图布局</span><br>
+                                    <span class="text-purple-300">par</span>(<span class="text-blue-300">mfrow</span> = <span class="text-purple-300">c</span>(<span class="text-yellow-300">2</span>, <span class="text-yellow-300">2</span>))  <span class="text-slate-400"># 2行2列布局</span><br>
+                                    <span class="text-purple-300">plot</span>(<span class="text-purple-300">x</span>, <span class="text-purple-300">y</span>, <span class="text-blue-300">main</span> = <span class="text-green-300">"散点图"</span>)<br>
+                                    <span class="text-purple-300">hist</span>(<span class="text-purple-300">y</span>, <span class="text-blue-300">main</span> = <span class="text-green-300">"直方图"</span>)<br>
+                                    <span class="text-purple-300">boxplot</span>(<span class="text-purple-300">y</span>, <span class="text-blue-300">main</span> = <span class="text-green-300">"箱线图"</span>)<br>
+                                    <span class="text-purple-300">barplot</span>(<span class="text-purple-300">y</span>, <span class="text-blue-300">main</span> = <span class="text-green-300">"条形图"</span>)<br>
+                                    <span class="text-purple-300">par</span>(<span class="text-blue-300">mfrow</span> = <span class="text-purple-300">c</span>(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">1</span>))  <span class="text-slate-400"># 恢复单图布局</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-11" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">11. 高级绘图</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 使用ggplot2进行数据可视化</h4>
+                            <p class="text-slate-300 mb-4">特点：ggplot2是R语言中最流行的绘图包，基于图层系统，提供了强大的自定义能力。注意事项：需要先安装ggplot2包才能使用。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># ggplot2基础</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 安装和加载ggplot2包</span><br>
+                                    <span class="text-purple-300">install.packages</span>(<span class="text-green-300">"ggplot2"</span>)<br>
+                                    <span class="text-purple-300">library</span>(<span class="text-purple-300">ggplot2</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 创建示例数据</span><br>
+                                    <span class="text-purple-300">data</span> &lt;- <span class="text-purple-300">data.frame</span>(<br>
+                                        <span class="text-blue-300">x</span> = <span class="text-purple-300">1</span>:<span class="text-purple-300">10</span>,<br>
+                                        <span class="text-blue-300">y</span> = <span class="text-purple-300">x</span>^<span class="text-yellow-300">2</span> + <span class="text-purple-300">rnorm</span>(<span class="text-yellow-300">10</span>, <span class="text-yellow-300">0</span>, <span class="text-yellow-300">5</span>),<br>
+                                        <span class="text-blue-300">category</span> = <span class="text-purple-300">rep</span>(<span class="text-purple-300">c</span>(<span class="text-green-300">"A"</span>, <span class="text-green-300">"B"</span>), <span class="text-yellow-300">5</span>),<br>
+                                        <span class="text-blue-300">group</span> = <span class="text-purple-300">c</span>(<span class="text-purple-300">rep</span>(<span class="text-green-300">"Group1"</span>, <span class="text-yellow-300">3</span>), <span class="text-purple-300">rep</span>(<span class="text-green-300">"Group2"</span>, <span class="text-yellow-300">7</span>))<br>
+                                    )<br>
+                                    <br>
+                                    <span class="text-purple-300"># 基本散点图</span><br>
+                                    <span class="text-purple-300">ggplot</span>(<span class="text-purple-300">data</span> = <span class="text-purple-300">data</span>, <span class="text-purple-300">aes</span>(<span class="text-purple-300">x</span> = <span class="text-blue-300">x</span>, <span class="text-purple-300">y</span> = <span class="text-blue-300">y</span>)) +<br>
+                                        <span class="text-purple-300">geom_point</span>(<span class="text-purple-300">aes</span>(<span class="text-purple-300">color</span> = <span class="text-blue-300">category</span>), <span class="text-blue-300">size</span> = <span class="text-yellow-300">3</span>) +<br>
+                                        <span class="text-purple-300">labs</span>(<span class="text-purple-300">title</span> = <span class="text-green-300">"散点图示例"</span>, <span class="text-purple-300">x</span> = <span class="text-green-300">"X轴"</span>, <span class="text-purple-300">y</span> = <span class="text-green-300">"Y轴"</span>) +<br>
+                                        <span class="text-purple-300">theme_minimal</span>()<br>
+                                    <br>
+                                    <span class="text-purple-300"># 带拟合线的散点图</span><br>
+                                    <span class="text-purple-300">ggplot</span>(<span class="text-purple-300">data</span> = <span class="text-purple-300">data</span>, <span class="text-purple-300">aes</span>(<span class="text-purple-300">x</span> = <span class="text-blue-300">x</span>, <span class="text-purple-300">y</span> = <span class="text-blue-300">y</span>)) +<br>
+                                        <span class="text-purple-300">geom_point</span>() +<br>
+                                        <span class="text-purple-300">geom_smooth</span>(<span class="text-purple-300">method</span> = <span class="text-green-300">"lm"</span>, <span class="text-blue-300">se</span> = <span class="text-purple-300">TRUE</span>) +<br>
+                                        <span class="text-purple-300">theme_bw</span>()
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 高级图形和自定义</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 条形图</span><br>
+                                    <span class="text-purple-300">ggplot</span>(<span class="text-purple-300">data</span> = <span class="text-purple-300">data</span>, <span class="text-purple-300">aes</span>(<span class="text-purple-300">x</span> = <span class="text-blue-300">category</span>, <span class="text-purple-300">y</span> = <span class="text-blue-300">y</span>)) +<br>
+                                        <span class="text-purple-300">geom_bar</span>(<span class="text-purple-300">stat</span> = <span class="text-green-300">"identity"</span>, <span class="text-purple-300">aes</span>(<span class="text-purple-300">fill</span> = <span class="text-blue-300">category</span>)) +<br>
+                                        <span class="text-purple-300">labs</span>(<span class="text-purple-300">title</span> = <span class="text-green-300">"条形图示例"</span>) +<br>
+                                        <span class="text-purple-300">theme_void</span>() +<br>
+                                        <span class="text-purple-300">guides</span>(<span class="text-purple-300">fill</span> = <span class="text-purple-300">"none"</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 分面图</span><br>
+                                    <span class="text-purple-300">ggplot</span>(<span class="text-purple-300">data</span> = <span class="text-purple-300">data</span>, <span class="text-purple-300">aes</span>(<span class="text-purple-300">x</span> = <span class="text-blue-300">x</span>, <span class="text-purple-300">y</span> = <span class="text-blue-300">y</span>)) +<br>
+                                        <span class="text-purple-300">geom_point</span>() +<br>
+                                        <span class="text-purple-300">facet_wrap</span>(~ <span class="text-blue-300">group</span>) +<br>
+                                        <span class="text-purple-300">labs</span>(<span class="text-purple-300">title</span> = <span class="text-green-300">"分面图示例"</span>) +<br>
+                                        <span class="text-purple-300">theme_dark</span>()<br>
+                                    <br>
+                                    <span class="text-purple-300"># 自定义主题</span><br>
+                                    <span class="text-purple-300">ggplot</span>(<span class="text-purple-300">data</span> = <span class="text-purple-300">data</span>, <span class="text-purple-300">aes</span>(<span class="text-purple-300">x</span> = <span class="text-blue-300">x</span>, <span class="text-purple-300">y</span> = <span class="text-blue-300">y</span>)) +<br>
+                                        <span class="text-purple-300">geom_line</span>(<span class="text-purple-300">aes</span>(<span class="text-purple-300">color</span> = <span class="text-blue-300">category</span>), <span class="text-blue-300">size</span> = <span class="text-yellow-300">2</span>) +<br>
+                                        <span class="text-purple-300">labs</span>(<span class="text-purple-300">title</span> = <span class="text-green-300">"自定义主题示例"</span>) +<br>
+                                        <span class="text-purple-300">theme</span>(<br>
+                                            <span class="text-purple-300">plot.title</span> = <span class="text-purple-300">element_text</span>(<span class="text-blue-300">size</span> = <span class="text-yellow-300">16</span>, <span class="text-blue-300">face</span> = <span class="text-green-300">"bold"</span>),<br>
+                                            <span class="text-purple-300">axis.text</span> = <span class="text-purple-300">element_text</span>(<span class="text-blue-300">size</span> = <span class="text-yellow-300">12</span>),<br>
+                                            <span class="text-purple-300">axis.title</span> = <span class="text-purple-300">element_text</span>(<span class="text-blue-300">size</span> = <span class="text-yellow-300">14</span>),<br>
+                                            <span class="text-purple-300">legend.position</span> = <span class="text-green-300">"top"</span><br>
+                                        )
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-12" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">12. 统计分析</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 基本统计分析方法</h4>
+                            <p class="text-slate-300 mb-4">特点：R语言是统计分析的强大工具，提供了丰富的统计函数和包。注意事项：不同的统计方法有不同的假设条件，使用前需要了解其适用范围。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># 描述性统计</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 创建示例数据</span><br>
+                                    <span class="text-purple-300">data</span> &lt;- <span class="text-purple-300">data.frame</span>(<br>
+                                        <span class="text-blue-300">group</span> = <span class="text-purple-300">rep</span>(<span class="text-purple-300">c</span>(<span class="text-green-300">"A"</span>, <span class="text-green-300">"B"</span>), <span class="text-yellow-300">10</span>),<br>
+                                        <span class="text-blue-300">value</span> = <span class="text-purple-300">c</span>(<span class="text-purple-300">rnorm</span>(<span class="text-yellow-300">10</span>, <span class="text-yellow-300">50</span>, <span class="text-yellow-300">5</span>), <span class="text-purple-300">rnorm</span>(<span class="text-yellow-300">10</span>, <span class="text-yellow-300">55</span>, <span class="text-yellow-300">5</span>))<br>
+                                    )<br>
+                                    <br>
+                                    <span class="text-purple-300"># 基本统计量</span><br>
+                                    <span class="text-purple-300">mean</span>(<span class="text-purple-300">data</span>$<span class="text-blue-300">value</span>)          <span class="text-slate-400"># 均值</span><br>
+                                    <span class="text-purple-300">median</span>(<span class="text-purple-300">data</span>$<span class="text-blue-300">value</span>)        <span class="text-slate-400"># 中位数</span><br>
+                                    <span class="text-purple-300">sd</span>(<span class="text-purple-300">data</span>$<span class="text-blue-300">value</span>)            <span class="text-slate-400"># 标准差</span><br>
+                                    <span class="text-purple-300">var</span>(<span class="text-purple-300">data</span>$<span class="text-blue-300">value</span>)           <span class="text-slate-400"># 方差</span><br>
+                                    <span class="text-purple-300">min</span>(<span class="text-purple-300">data</span>$<span class="text-blue-300">value</span>)            <span class="text-slate-400"># 最小值</span><br>
+                                    <span class="text-purple-300">max</span>(<span class="text-purple-300">data</span>$<span class="text-blue-300">value</span>)            <span class="text-slate-400"># 最大值</span><br>
+                                    <span class="text-purple-300">range</span>(<span class="text-purple-300">data</span>$<span class="text-blue-300">value</span>)         <span class="text-slate-400"># 范围</span><br>
+                                    <span class="text-purple-300">quantile</span>(<span class="text-purple-300">data</span>$<span class="text-blue-300">value</span>, <span class="text-purple-300">c</span>(<span class="text-yellow-300">0.25</span>, <span class="text-yellow-300">0.5</span>, <span class="text-yellow-300">0.75</span>))  <span class="text-slate-400"># 四分位数</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 综合统计描述</span><br>
+                                    <span class="text-purple-300">summary</span>(<span class="text-purple-300">data</span>$<span class="text-blue-300">value</span>)            <span class="text-slate-400"># 基本统计摘要</span><br>
+                                    <span class="text-purple-300">summary</span>(<span class="text-purple-300">data</span>)                     <span class="text-slate-400"># 数据框的统计摘要</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 相关性和回归分析</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 创建回归分析数据</span><br>
+                                    <span class="text-purple-300">x</span> &lt;- <span class="text-purple-300">1</span>:<span class="text-purple-300">20</span><br>
+                                    <span class="text-purple-300">y</span> &lt;- <span class="text-yellow-300">2</span> * <span class="text-purple-300">x</span> + <span class="text-yellow-300">3</span> + <span class="text-purple-300">rnorm</span>(<span class="text-yellow-300">20</span>, <span class="text-yellow-300">0</span>, <span class="text-yellow-300">5</span>)<br>
+                                    <span class="text-purple-300">reg_data</span> &lt;- <span class="text-purple-300">data.frame</span>(<span class="text-blue-300">x</span> = <span class="text-purple-300">x</span>, <span class="text-blue-300">y</span> = <span class="text-purple-300">y</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 相关性分析</span><br>
+                                    <span class="text-purple-300">cor</span>(<span class="text-purple-300">x</span>, <span class="text-purple-300">y</span>)                  <span class="text-slate-400"># 皮尔逊相关系数</span><br>
+                                    <span class="text-purple-300">cor</span>(<span class="text-purple-300">x</span>, <span class="text-purple-300">y</span>, <span class="text-blue-300">method</span> = <span class="text-green-300">"spearman"</span>)  <span class="text-slate-400"># 斯皮尔曼相关系数</span><br>
+                                    <span class="text-purple-300">cov</span>(<span class="text-purple-300">x</span>, <span class="text-purple-300">y</span>)                  <span class="text-slate-400"># 协方差</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 线性回归分析</span><br>
+                                    <span class="text-purple-300">model</span> &lt;- <span class="text-purple-300">lm</span>(<span class="text-blue-300">y</span> ~ <span class="text-blue-300">x</span>, <span class="text-purple-300">data</span> = <span class="text-purple-300">reg_data</span>)<br>
+                                    <span class="text-purple-300">summary</span>(<span class="text-purple-300">model</span>)                <span class="text-slate-400"># 回归模型摘要</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 获取回归系数</span><br>
+                                    <span class="text-purple-300">coefficients</span>(<span class="text-purple-300">model</span>)           <span class="text-slate-400"># 回归系数</span><br>
+                                    <span class="text-purple-300">fitted.values</span>(<span class="text-purple-300">model</span>)         <span class="text-slate-400"># 拟合值</span><br>
+                                    <span class="text-purple-300">residuals</span>(<span class="text-purple-300">model</span>)           <span class="text-slate-400"># 残差</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 假设检验</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># t检验</span><br>
+                                    <span class="text-purple-300"># 单样本t检验</span><br>
+                                    <span class="text-purple-300">t.test</span>(<span class="text-purple-300">data</span>$<span class="text-blue-300">value</span>, <span class="text-blue-300">mu</span> = <span class="text-yellow-300">50</span>)  <span class="text-slate-400"># 检验均值是否为50</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 两样本t检验</span><br>
+                                    <span class="text-purple-300">t.test</span>(<span class="text-purple-300">value</span> ~ <span class="text-purple-300">group</span>, <span class="text-purple-300">data</span> = <span class="text-purple-300">data</span>, <span class="text-blue-300">var.equal</span> = <span class="text-purple-300">TRUE</span>)  <span class="text-slate-400"># 两独立样本t检验</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 方差分析</span><br>
+                                    <span class="text-purple-300">anova_model</span> &lt;- <span class="text-purple-300">aov</span>(<span class="text-blue-300">value</span> ~ <span class="text-blue-300">group</span>, <span class="text-purple-300">data</span> = <span class="text-purple-300">data</span>)<br>
+                                    <span class="text-purple-300">summary</span>(<span class="text-purple-300">anova_model</span>)            <span class="text-slate-400"># ANOVA结果</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 卡方检验</span><br>
+                                    <span class="text-purple-300"># 创建列联表数据</span><br>
+                                    <span class="text-purple-300">contingency_table</span> &lt;- <span class="text-purple-300">matrix</span>(<span class="text-purple-300">c</span>(<span class="text-yellow-300">20</span>, <span class="text-yellow-300">30</span>, <span class="text-yellow-300">15</span>, <span class="text-yellow-300">35</span>), <span class="text-blue-300">nrow</span> = <span class="text-yellow-300">2</span>, <span class="text-blue-300">ncol</span> = <span class="text-yellow-300">2</span>)<br>
+                                    <span class="text-purple-300">chisq.test</span>(<span class="text-purple-300">contingency_table</span>)         <span class="text-slate-400"># 卡方检验</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-13" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">13. 数据导入导出</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 数据文件的读写操作</h4>
+                            <p class="text-slate-300 mb-4">特点：R语言支持多种数据格式的导入和导出，包括CSV、Excel、文本文件和R专用格式。注意事项：导入不同格式的文件可能需要安装相应的包。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># CSV文件操作</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 创建示例数据</span><br>
+                                    <span class="text-purple-300">data</span> &lt;- <span class="text-purple-300">data.frame</span>(<br>
+                                        <span class="text-blue-300">id</span> = <span class="text-purple-300">1</span>:<span class="text-purple-300">5</span>,<br>
+                                        <span class="text-blue-300">name</span> = <span class="text-purple-300">c</span>(<span class="text-green-300">"张三"</span>, <span class="text-green-300">"李四"</span>, <span class="text-green-300">"王五"</span>, <span class="text-green-300">"赵六"</span>, <span class="text-green-300">"钱七"</span>),<br>
+                                        <span class="text-blue-300">age</span> = <span class="text-purple-300">c</span>(<span class="text-yellow-300">25</span>, <span class="text-yellow-300">26</span>, <span class="text-yellow-300">24</span>, <span class="text-yellow-300">27</span>, <span class="text-yellow-300">23</span>),<br>
+                                        <span class="text-blue-300">score</span> = <span class="text-purple-300">c</span>(<span class="text-yellow-300">90</span>, <span class="text-yellow-300">85</span>, <span class="text-yellow-300">92</span>, <span class="text-yellow-300">88</span>, <span class="text-yellow-300">95</span>)<br>
+                                    )<br>
+                                    <br>
+                                    <span class="text-purple-300"># 写入CSV文件</span><br>
+                                    <span class="text-purple-300">write.csv</span>(<span class="text-purple-300">data</span>, <span class="text-green-300">"students.csv"</span>, <span class="text-blue-300">row.names</span> = <span class="text-purple-300">FALSE</span>, <span class="text-blue-300">fileEncoding</span> = <span class="text-green-300">"UTF-8"</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 读取CSV文件</span><br>
+                                    <span class="text-purple-300">read_data</span> &lt;- <span class="text-purple-300">read.csv</span>(<span class="text-green-300">"students.csv"</span>, <span class="text-blue-300">fileEncoding</span> = <span class="text-green-300">"UTF-8"</span>)<br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">read_data</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 更灵活的read.csv2函数（用于分号分隔的文件）</span><br>
+                                    <span class="text-purple-300">read_data2</span> &lt;- <span class="text-purple-300">read.csv2</span>(<span class="text-green-300">"students_semicolon.csv"</span>)  <span class="text-slate-400"># 分号分隔，逗号小数</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># Excel文件操作</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 安装必要的包</span><br>
+                                    <span class="text-purple-300">install.packages</span>(<span class="text-purple-300">c</span>(<span class="text-green-300">"readxl"</span>, <span class="text-green-300">"writexl"</span>))<br>
+                                    <span class="text-purple-300">library</span>(<span class="text-purple-300">readxl</span>)<br>
+                                    <span class="text-purple-300">library</span>(<span class="text-purple-300">writexl</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 写入Excel文件</span><br>
+                                    <span class="text-purple-300">write_xlsx</span>(<span class="text-purple-300">data</span>, <span class="text-green-300">"students.xlsx"</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 写入多个工作表</span><br>
+                                    <span class="text-purple-300">sheets</span> &lt;- <span class="text-purple-300">list</span>(<span class="text-blue-300">sheet1</span> = <span class="text-purple-300">data</span>, <span class="text-blue-300">sheet2</span> = <span class="text-purple-300">data</span>)<br>
+                                    <span class="text-purple-300">write_xlsx</span>(<span class="text-purple-300">sheets</span>, <span class="text-green-300">"multiple_sheets.xlsx"</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 读取Excel文件</span><br>
+                                    <span class="text-purple-300">read_excel_data</span> &lt;- <span class="text-purple-300">read_xlsx</span>(<span class="text-green-300">"students.xlsx"</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 读取特定工作表</span><br>
+                                    <span class="text-purple-300">read_excel_data2</span> &lt;- <span class="text-purple-300">read_xlsx</span>(<span class="text-green-300">"multiple_sheets.xlsx"</span>, <span class="text-blue-300">sheet</span> = <span class="text-green-300">"sheet2"</span>)
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 文本文件和R数据格式</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 写入文本文件</span><br>
+                                    <span class="text-purple-300">write.table</span>(<span class="text-purple-300">data</span>, <span class="text-green-300">"students.txt"</span>, <span class="text-blue-300">sep</span> = <span class="text-green-300">"\t"</span>, <span class="text-blue-300">row.names</span> = <span class="text-purple-300">FALSE</span>, <span class="text-blue-300">fileEncoding</span> = <span class="text-green-300">"UTF-8"</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 读取文本文件</span><br>
+                                    <span class="text-purple-300">read_table_data</span> &lt;- <span class="text-purple-300">read.table</span>(<span class="text-green-300">"students.txt"</span>, <span class="text-blue-300">header</span> = <span class="text-purple-300">TRUE</span>, <span class="text-blue-300">sep</span> = <span class="text-green-300">"\t"</span>, <span class="text-blue-300">fileEncoding</span> = <span class="text-green-300">"UTF-8"</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 读取纯文本文件</span><br>
+                                    <span class="text-purple-300">text_lines</span> &lt;- <span class="text-purple-300">readLines</span>(<span class="text-green-300">"example.txt"</span>)<br>
+                                    <span class="text-purple-300">writeLines</span>(<span class="text-purple-300">text_lines</span>, <span class="text-green-300">"output.txt"</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># R数据格式（.RData和.rds）</span><br>
+                                    <span class="text-purple-300"># 保存单个对象（推荐使用）</span><br>
+                                    <span class="text-purple-300">saveRDS</span>(<span class="text-purple-300">data</span>, <span class="text-green-300">"data.rds"</span>)<br>
+                                    <span class="text-purple-300">read_data_rds</span> &lt;- <span class="text-purple-300">readRDS</span>(<span class="text-green-300">"data.rds"</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 保存多个对象</span><br>
+                                    <span class="text-purple-300">save</span>(<span class="text-purple-300">data</span>, <span class="text-purple-300">read_data</span>, <span class="text-blue-300">file</span> = <span class="text-green-300">"multiple_objects.RData"</span>)<br>
+                                    <span class="text-purple-300">load</span>(<span class="text-green-300">"multiple_objects.RData"</span>)  <span class="text-slate-400"># 加载所有保存的对象</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-14" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">14. 字符串操作</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 字符串处理和操作</h4>
+                            <p class="text-slate-300 mb-4">特点：R语言提供了丰富的字符串处理函数，可以进行字符串的创建、连接、分割、替换等操作。注意事项：字符串操作可能需要注意编码问题，特别是处理中文文本时。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># 字符串基础操作</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 创建字符串</span><br>
+                                    <span class="text-purple-300">str1</span> &lt;- <span class="text-green-300">"Hello"</span><br>
+                                    <span class="text-purple-300">str2</span> &lt;- <span class="text-green-300">"World"</span><br>
+                                    <span class="text-purple-300">str3</span> &lt;- <span class="text-green-300">"R语言"</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 字符串连接</span><br>
+                                    <span class="text-purple-300">paste</span>(<span class="text-purple-300">str1</span>, <span class="text-purple-300">str2</span>)  <span class="text-slate-400"># "Hello World"</span><br>
+                                    <span class="text-purple-300">paste</span>(<span class="text-purple-300">str1</span>, <span class="text-purple-300">str2</span>, <span class="text-blue-300">sep</span> = <span class="text-green-300">"-"</span>)  <span class="text-slate-400"># "Hello-World"</span><br>
+                                    <span class="text-purple-300">paste0</span>(<span class="text-purple-300">str1</span>, <span class="text-purple-300">str2</span>)  <span class="text-slate-400"># "HelloWorld"（无分隔符）</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 字符串长度</span><br>
+                                    <span class="text-purple-300">nchar</span>(<span class="text-purple-300">str3</span>)  <span class="text-slate-400"># 3（注意：中文可能占用多个字节，但nchar返回字符数）</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 字符串索引（R使用1-based索引）</span><br>
+                                    <span class="text-purple-300">substr</span>(<span class="text-purple-300">str1</span>, <span class="text-yellow-300">1</span>, <span class="text-yellow-300">3</span>)  <span class="text-slate-400"># "Hel"</span><br>
+                                    <span class="text-purple-300">substring</span>(<span class="text-purple-300">str1</span>, <span class="text-yellow-300">2</span>)  <span class="text-slate-400"># "ello"（从第2个字符开始）</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 字符串分割和替换</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 字符串分割</span><br>
+                                    <span class="text-purple-300">sentence</span> &lt;- <span class="text-green-300">"R语言是一门强大的统计分析语言"</span><br>
+                                    <span class="text-purple-300">words</span> &lt;- <span class="text-purple-300">strsplit</span>(<span class="text-purple-300">sentence</span>, <span class="text-green-300">"是"</span>)  <span class="text-slate-400"># 按"是"分割</span><br>
+                                    <span class="text-purple-300">unlist</span>(<span class="text-purple-300">words</span>)  <span class="text-slate-400"># 转换为向量</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 字符串替换</span><br>
+                                    <span class="text-purple-300">sub</span>(<span class="text-green-300">"语言"</span>, <span class="text-green-300">"编程语言"</span>, <span class="text-purple-300">sentence</span>)  <span class="text-slate-400"># 替换第一个匹配项</span><br>
+                                    <span class="text-purple-300">gsub</span>(<span class="text-green-300">"语言"</span>, <span class="text-green-300">"编程语言"</span>, <span class="text-purple-300">sentence</span>)  <span class="text-slate-400"># 替换所有匹配项</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 大小写转换</span><br>
+                                    <span class="text-purple-300">tolower</span>(<span class="text-purple-300">str1</span>)  <span class="text-slate-400"># "hello"</span><br>
+                                    <span class="text-purple-300">toupper</span>(<span class="text-purple-300">str1</span>)  <span class="text-slate-400"># "HELLO"</span><br>
+                                    <span class="text-purple-300">tools::toTitleCase</span>(<span class="text-purple-300">tolower</span>(<span class="text-green-300">"hello world"</span>))  <span class="text-slate-400"># "Hello World"</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 字符串查找和格式化</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 字符串查找</span><br>
+                                    <span class="text-purple-300">grep</span>(<span class="text-green-300">"语言"</span>, <span class="text-purple-300">sentence</span>)  <span class="text-slate-400"># 返回匹配的位置</span><br>
+                                    <span class="text-purple-300">grepl</span>(<span class="text-green-300">"统计"</span>, <span class="text-purple-300">sentence</span>)  <span class="text-slate-400"># 返回逻辑值：TRUE/FALSE</span><br>
+                                    <span class="text-purple-300">which</span>(<span class="text-purple-300">grepl</span>(<span class="text-green-300">"语言"</span>, <span class="text-purple-300">c</span>(<span class="text-purple-300">sentence</span>, <span class="text-green-300">"Python"</span>, <span class="text-green-300">"Java"</span>)))  <span class="text-slate-400"># 返回向量中匹配的索引</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 字符串格式化</span><br>
+                                    <span class="text-purple-300">sprintf</span>(<span class="text-green-300">"%s的长度是%d"</span>, <span class="text-purple-300">str1</span>, <span class="text-purple-300">nchar</span>(<span class="text-purple-300">str1</span>))  <span class="text-slate-400"># "Hello的长度是5"</span><br>
+                                    <span class="text-purple-300">sprintf</span>(<span class="text-green-300">"圆周率约等于%.2f"</span>, <span class="text-purple-300">pi</span>)  <span class="text-slate-400"># "圆周率约等于3.14"</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 字符串修剪</span><br>
+                                    <span class="text-purple-300">trimws</span>(<span class="text-green-300">"  Hello World  "</span>)  <span class="text-slate-400"># "Hello World"</span><br>
+                                    <span class="text-purple-300">trimws</span>(<span class="text-green-300">"  Hello World  "</span>, <span class="text-blue-300">which</span> = <span class="text-green-300">"left"</span>)  <span class="text-slate-400"># "Hello World  "（只修剪左边）</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-15" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">15. 日期和时间</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 日期和时间处理</h4>
+                            <p class="text-slate-300 mb-4">特点：R语言提供了多种处理日期和时间的函数和包，包括基本的Date类和更强大的POSIXct/POSIXlt类。注意事项：处理日期和时间时需要注意时区和格式问题。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># 日期时间对象的创建</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 创建日期对象</span><br>
+                                    <span class="text-purple-300">today</span> &lt;- <span class="text-purple-300">Sys.Date</span>()  <span class="text-slate-400"># 获取当前日期</span><br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">today</span>)<br>
+                                    <span class="text-purple-300">class</span>(<span class="text-purple-300">today</span>)  <span class="text-slate-400"># "Date"</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 从字符串创建日期</span><br>
+                                    <span class="text-purple-300">date_str</span> &lt;- <span class="text-green-300">"2023-10-01"</span><br>
+                                    <span class="text-purple-300">date1</span> &lt;- <span class="text-purple-300">as.Date</span>(<span class="text-purple-300">date_str</span>)<br>
+                                    <span class="text-purple-300">date2</span> &lt;- <span class="text-purple-300">as.Date</span>(<span class="text-green-300">"2023/10/01"</span>, <span class="text-blue-300">format</span> = <span class="text-green-300">"%Y/%m/%d"</span>)<br>
+                                    <span class="text-purple-300">date3</span> &lt;- <span class="text-purple-300">as.Date</span>(<span class="text-green-300">"10/01/2023"</span>, <span class="text-blue-300">format</span> = <span class="text-green-300">"%m/%d/%Y"</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 创建日期时间对象</span><br>
+                                    <span class="text-purple-300">now</span> &lt;- <span class="text-purple-300">Sys.time</span>()  <span class="text-slate-400"># 获取当前日期时间</span><br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">now</span>)<br>
+                                    <span class="text-purple-300">class</span>(<span class="text-purple-300">now</span>)  <span class="text-slate-400"># "POSIXct" "POSIXt"</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 从字符串创建日期时间</span><br>
+                                    <span class="text-purple-300">datetime_str</span> &lt;- <span class="text-green-300">"2023-10-01 14:30:45"</span><br>
+                                    <span class="text-purple-300">datetime1</span> &lt;- <span class="text-purple-300">as.POSIXct</span>(<span class="text-purple-300">datetime_str</span>)<br>
+                                    <span class="text-purple-300">datetime2</span> &lt;- <span class="text-purple-300">as.POSIXlt</span>(<span class="text-purple-300">datetime_str</span>)  <span class="text-slate-400"># 提供更多的访问器方法</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 日期时间运算</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 日期加法和减法</span><br>
+                                    <span class="text-purple-300">tomorrow</span> &lt;- <span class="text-purple-300">today</span> + <span class="text-yellow-300">1</span>  <span class="text-slate-400"># 明天</span><br>
+                                    <span class="text-purple-300">yesterday</span> &lt;- <span class="text-purple-300">today</span> - <span class="text-yellow-300">1</span>  <span class="text-slate-400"># 昨天</span><br>
+                                    <span class="text-purple-300">next_week</span> &lt;- <span class="text-purple-300">today</span> + <span class="text-yellow-300">7</span>  <span class="text-slate-400"># 下周</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 日期差</span><br>
+                                    <span class="text-purple-300">date_diff</span> &lt;- <span class="text-purple-300">date1</span> - <span class="text-purple-300">as.Date</span>(<span class="text-green-300">"2023-01-01"</span>)<br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">date_diff</span>)  <span class="text-slate-400"># 显示天数差</span><br>
+                                    <span class="text-purple-300">as.numeric</span>(<span class="text-purple-300">date_diff</span>)  <span class="text-slate-400"># 转换为数值天数</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 日期时间运算</span><br>
+                                    <span class="text-purple-300">next_hour</span> &lt;- <span class="text-purple-300">now</span> + <span class="text-yellow-300">3600</span>  <span class="text-slate-400"># POSIXct以秒为单位</span><br>
+                                    <span class="text-purple-300">datetime_diff</span> &lt;- <span class="text-purple-300">datetime1</span> - <span class="text-purple-300">as.POSIXct</span>(<span class="text-green-300">"2023-01-01 00:00:00"</span>)<br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">datetime_diff</span>)  <span class="text-slate-400"># 显示时间差</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 日期时间格式化和提取</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 格式化日期</span><br>
+                                    <span class="text-purple-300">format</span>(<span class="text-purple-300">today</span>, <span class="text-blue-300">format</span> = <span class="text-green-300">"%Y年%m月%d日"</span>)  <span class="text-slate-400"># "2023年10月01日"</span><br>
+                                    <span class="text-purple-300">format</span>(<span class="text-purple-300">now</span>, <span class="text-blue-300">format</span> = <span class="text-green-300">"%Y-%m-%d %H:%M:%S"</span>)  <span class="text-slate-400"># "2023-10-01 14:30:45"</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 提取日期时间组件</span><br>
+                                    <span class="text-purple-300"># 使用POSIXlt对象</span><br>
+                                    <span class="text-purple-300">datetime_lt</span> &lt;- <span class="text-purple-300">as.POSIXlt</span>(<span class="text-purple-300">now</span>)<br>
+                                    <span class="text-purple-300">datetime_lt</span>$<span class="text-blue-300">year</span> + <span class="text-yellow-300">1900</span>  <span class="text-slate-400"># 年份（从1900开始计算）</span><br>
+                                    <span class="text-purple-300">datetime_lt</span>$<span class="text-blue-300">mon</span> + <span class="text-yellow-300">1</span>     <span class="text-slate-400"># 月份（0-11）</span><br>
+                                    <span class="text-purple-300">datetime_lt</span>$<span class="text-blue-300">mday</span>         <span class="text-slate-400"># 日期</span><br>
+                                    <span class="text-purple-300">datetime_lt</span>$<span class="text-blue-300">hour</span>         <span class="text-slate-400"># 小时</span><br>
+                                    <span class="text-purple-300">datetime_lt</span>$<span class="text-blue-300">min</span>          <span class="text-slate-400"># 分钟</span><br>
+                                    <span class="text-purple-300">datetime_lt</span>$<span class="text-blue-300">sec</span>          <span class="text-slate-400"># 秒</span><br>
+                                    <span class="text-purple-300">datetime_lt</span>$<span class="text-blue-300">wday</span>         <span class="text-slate-400"># 星期几（0-6，周日为0）</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用专门的提取函数</span><br>
+                                    <span class="text-purple-300">years</span> &lt;- <span class="text-purple-300">format</span>(<span class="text-purple-300">now</span>, <span class="text-blue-300">format</span> = <span class="text-green-300">"%Y"</span>)<br>
+                                    <span class="text-purple-300">months</span> &lt;- <span class="text-purple-300">format</span>(<span class="text-purple-300">now</span>, <span class="text-blue-300">format</span> = <span class="text-green-300">"%m"</span>)<br>
+                                    <span class="text-purple-300">days</span> &lt;- <span class="text-purple-300">format</span>(<span class="text-purple-300">now</span>, <span class="text-blue-300">format</span> = <span class="text-green-300">"%d"</span>)
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># lubridate包（更便捷的日期时间处理）</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 安装和加载lubridate包</span><br>
+                                    <span class="text-purple-300">install.packages</span>(<span class="text-green-300">"lubridate"</span>)<br>
+                                    <span class="text-purple-300">library</span>(<span class="text-purple-300">lubridate</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用lubridate创建日期时间</span><br>
+                                    <span class="text-purple-300">date_lub</span> &lt;- <span class="text-purple-300">ymd</span>(<span class="text-green-300">"20231001"</span>)  <span class="text-slate-400"># 年-月-日</span><br>
+                                    <span class="text-purple-300">datetime_lub</span> &lt;- <span class="text-purple-300">ymd_hms</span>(<span class="text-green-300">"20231001143045"</span>)  <span class="text-slate-400"># 年-月-日-时-分-秒</span><br>
+                                    <span class="text-purple-300">mdy_date</span> &lt;- <span class="text-purple-300">mdy</span>(<span class="text-green-300">"10/01/2023"</span>)  <span class="text-slate-400"># 月-日-年</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 提取组件</span><br>
+                                    <span class="text-purple-300">year</span>(<span class="text-purple-300">datetime_lub</span>)<br>
+                                    <span class="text-purple-300">month</span>(<span class="text-purple-300">datetime_lub</span>)<br>
+                                    <span class="text-purple-300">day</span>(<span class="text-purple-300">datetime_lub</span>)<br>
+                                    <span class="text-purple-300">hour</span>(<span class="text-purple-300">datetime_lub</span>)<br>
+                                    <span class="text-purple-300">minute</span>(<span class="text-purple-300">datetime_lub</span>)<br>
+                                    <span class="text-purple-300">second</span>(<span class="text-purple-300">datetime_lub</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 日期时间运算</span><br>
+                                    <span class="text-purple-300">next_month</span> &lt;- <span class="text-purple-300">date_lub</span> + <span class="text-purple-300">months</span>(<span class="text-yellow-300">1</span>)<br>
+                                    <span class="text-purple-300">last_year</span> &lt;- <span class="text-purple-300">date_lub</span> - <span class="text-purple-300">years</span>(<span class="text-yellow-300">1</span>)<br>
+                                    <span class="text-purple-300">is_leap_year</span>(<span class="text-purple-300">ymd</span>(<span class="text-green-300">"20240101"</span>))  <span class="text-slate-400"># 检查是否为闰年</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-16" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">16. 正则表达式</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 正则表达式操作</h4>
+                            <p class="text-slate-300 mb-4">特点：R语言支持强大的正则表达式功能，可以用于字符串的模式匹配、替换和提取。注意事项：正则表达式中的特殊字符需要转义，R中使用两个反斜杠（\\）进行转义。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># 正则表达式基础</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 基本模式匹配</span><br>
+                                    <span class="text-purple-300"># 创建示例文本</span><br>
+                                    <span class="text-purple-300">texts</span> &lt;- <span class="text-purple-300">c</span>(<span class="text-green-300">"R语言123"</span>, <span class="text-green-300">"Python456"</span>, <span class="text-green-300">"Java789"</span>, <span class="text-green-300">"C++101"</span>, <span class="text-green-300">"JavaScript"</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 查找包含数字的字符串</span><br>
+                                    <span class="text-purple-300">grep</span>(<span class="text-green-300">"[0-9]"</span>, <span class="text-purple-300">texts</span>)                    <span class="text-slate-400"># 返回匹配的索引</span><br>
+                                    <span class="text-purple-300">grepl</span>(<span class="text-green-300">"[0-9]"</span>, <span class="text-purple-300">texts</span>)                   <span class="text-slate-400"># 返回逻辑值</span><br>
+                                    <span class="text-purple-300">texts</span>[<span class="text-purple-300">grepl</span>(<span class="text-green-300">"[0-9]"</span>, <span class="text-purple-300">texts</span>)]      <span class="text-slate-400"># 返回匹配的字符串</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 查找以特定字符开头的字符串</span><br>
+                                    <span class="text-purple-300">grep</span>(<span class="text-green-300">"^P"</span>, <span class="text-purple-300">texts</span>, <span class="text-blue-300">value</span> = <span class="text-purple-300">TRUE</span>) <span class="text-slate-400"># 以"P"开头的字符串</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 查找以特定字符结尾的字符串</span><br>
+                                    <span class="text-purple-300">grep</span>(<span class="text-green-300">"t$"</span>, <span class="text-purple-300">texts</span>, <span class="text-blue-300">value</span> = <span class="text-purple-300">TRUE</span>) <span class="text-slate-400"># 以"t"结尾的字符串</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 正则表达式替换</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 替换第一个匹配项</span><br>
+                                    <span class="text-purple-300">sub</span>(<span class="text-green-300">"[0-9]"</span>, <span class="text-green-300">"X"</span>, <span class="text-purple-300">texts</span>)      <span class="text-slate-400"># 替换第一个数字为"X"</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 替换所有匹配项</span><br>
+                                    <span class="text-purple-300">gsub</span>(<span class="text-green-300">"[0-9]"</span>, <span class="text-green-300">"X"</span>, <span class="text-purple-300">texts</span>)     <span class="text-slate-400"># 替换所有数字为"X"</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 替换多个字符类型</span><br>
+                                    <span class="text-purple-300">mixed_text</span> &lt;- <span class="text-green-300">"Hello123World456!@#"</span><br>
+                                    <span class="text-purple-300">gsub</span>(<span class="text-green-300">"[^A-Za-z]"</span>, <span class="text-green-300">""</span>, <span class="text-purple-300">mixed_text</span>)  <span class="text-slate-400"># 移除所有非字母字符</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 正则表达式提取</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 使用regmatches提取匹配的内容</span><br>
+                                    <span class="text-purple-300">email_text</span> &lt;- <span class="text-purple-300">c</span>(<span class="text-green-300">"张三: zhangsan@example.com"</span>, <span class="text-green-300">"李四: lisi@test.org"</span>, <span class="text-green-300">"王五: wangwu@company.net"</span>)<br>
+                                    <span class="text-purple-300">pattern</span> &lt;- <span class="text-green-300">"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"</span><br>
+                                    <span class="text-purple-300">matches</span> &lt;- <span class="text-purple-300">regexpr</span>(<span class="text-purple-300">pattern</span>, <span class="text-purple-300">email_text</span>)<br>
+                                    <span class="text-purple-300">regmatches</span>(<span class="text-purple-300">email_text</span>, <span class="text-purple-300">matches</span>)  <span class="text-slate-400"># 提取电子邮件地址</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># stringr包（更友好的正则表达式操作）</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 安装和加载stringr包</span><br>
+                                    <span class="text-purple-300">install.packages</span>(<span class="text-green-300">"stringr"</span>)<br>
+                                    <span class="text-purple-300">library</span>(<span class="text-purple-300">stringr</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用stringr进行模式匹配</span><br>
+                                    <span class="text-purple-300">str_detect</span>(<span class="text-purple-300">texts</span>, <span class="text-green-300">"[0-9]"</span>)       <span class="text-slate-400"># 类似grepl</span><br>
+                                    <span class="text-purple-300">str_subset</span>(<span class="text-purple-300">texts</span>, <span class="text-green-300">"[0-9]"</span>)       <span class="text-slate-400"># 筛选匹配的字符串</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用stringr进行替换</span><br>
+                                    <span class="text-purple-300">str_replace</span>(<span class="text-purple-300">texts</span>, <span class="text-green-300">"[0-9]"</span>, <span class="text-green-300">"X"</span>)   <span class="text-slate-400"># 替换第一个匹配项</span><br>
+                                    <span class="text-purple-300">str_replace_all</span>(<span class="text-purple-300">texts</span>, <span class="text-green-300">"[0-9]"</span>, <span class="text-green-300">"X"</span>) <span class="text-slate-400"># 替换所有匹配项</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用stringr进行提取</span><br>
+                                    <span class="text-purple-300">str_extract</span>(<span class="text-purple-300">email_text</span>, <span class="text-purple-300">pattern</span>)  <span class="text-slate-400"># 提取第一个匹配项</span><br>
+                                    <span class="text-purple-300">str_extract_all</span>(<span class="text-purple-300">email_text</span>, <span class="text-purple-300">pattern</span>) <span class="text-slate-400"># 提取所有匹配项</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用stringr进行分割</span><br>
+                                    <span class="text-purple-300">str_split</span>(<span class="text-green-300">"a,b,c"</span>, <span class="text-green-300">","</span>)              <span class="text-slate-400"># 按逗号分割</span><br>
+                                    <span class="text-purple-300">str_split_fixed</span>(<span class="text-green-300">"a,b,c"</span>, <span class="text-green-300">","</span>, <span class="text-yellow-300">2</span>)  <span class="text-slate-400"># 分割为固定数量的部分</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-17" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">17. 异常处理</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 异常处理和调试</h4>
+                            <p class="text-slate-300 mb-4">特点：R语言提供了基本的异常处理机制，可以捕获和处理程序运行中的错误和警告。注意事项：良好的异常处理可以提高程序的健壮性和用户体验。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># 基本的错误处理</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 简单的错误示例</span><br>
+                                    <span class="text-purple-300"># result &lt;- 10 / 0  # 会产生错误：除以零</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用tryCatch捕获错误</span><br>
+                                    <span class="text-purple-300">result</span> &lt;- <span class="text-purple-300">tryCatch</span>({<br>
+                                        <span class="text-purple-300">10</span> / <span class="text-purple-300">0</span><br>
+                                    }, <span class="text-blue-300">error</span> = <span class="text-purple-300">function</span>(e) {<br>
+                                        <span class="text-purple-300">print</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"错误信息："</span>, <span class="text-purple-300">e</span>$<span class="text-blue-300">message</span>))<br>
+                                        <span class="text-purple-300">return</span>(<span class="text-purple-300">NA</span>)<br>
+                                    })<br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">result</span>)  <span class="text-slate-400"># NA</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 同时捕获错误和警告</span><br>
+                                    <span class="text-purple-300">result2</span> &lt;- <span class="text-purple-300">tryCatch</span>({<br>
+                                        <span class="text-purple-300">warning</span>(<span class="text-green-300">"这是一个警告"</span>)<br>
+                                        <span class="text-purple-300">10</span> / <span class="text-yellow-300">2</span><br>
+                                    }, <span class="text-blue-300">error</span> = <span class="text-purple-300">function</span>(e) {<br>
+                                        <span class="text-purple-300">print</span>(<span class="text-green-300">"发生错误"</span>)<br>
+                                        <span class="text-purple-300">return</span>(<span class="text-purple-300">NA</span>)<br>
+                                    }, <span class="text-blue-300">warning</span> = <span class="text-purple-300">function</span>(w) {<br>
+                                        <span class="text-purple-300">print</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"警告信息："</span>, <span class="text-purple-300">w</span>$<span class="text-blue-300">message</span>))<br>
+                                        <span class="text-purple-300">invokeRestart</span>(<span class="text-green-300">"muffleWarning"</span>)  <span class="text-slate-400"># 抑制警告</span><br>
+                                    })<br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">result2</span>)  <span class="text-slate-400"># 5</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># try函数的使用</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 使用try函数处理错误（更简单的方式）</span><br>
+                                    <span class="text-purple-300">result3</span> &lt;- <span class="text-purple-300">try</span>({<br>
+                                        <span class="text-purple-300">10</span> / <span class="text-yellow-300">0</span><br>
+                                    }, <span class="text-blue-300">silent</span> = <span class="text-purple-300">TRUE</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 检查结果是否为错误对象</span><br>
+                                    <span class="text-purple-300">if</span> (<span class="text-purple-300">inherits</span>(<span class="text-purple-300">result3</span>, <span class="text-green-300">"try-error"</span>)) {<br>
+                                        <span class="text-purple-300">print</span>(<span class="text-green-300">"操作失败"</span>)<br>
+                                    } <span class="text-purple-300">else</span> {<br>
+                                        <span class="text-purple-300">print</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"结果："</span>, <span class="text-purple-300">result3</span>))<br>
+                                    }
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 调试技术</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 使用print进行简单调试</span><br>
+                                    <span class="text-purple-300">debug_function</span> &lt;- <span class="text-purple-300">function</span>(<span class="text-blue-300">x</span>, <span class="text-blue-300">y</span>) {<br>
+                                        <span class="text-purple-300">print</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"x = "</span>, <span class="text-purple-300">x</span>))<br>
+                                        <span class="text-purple-300">print</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"y = "</span>, <span class="text-purple-300">y</span>))<br>
+                                        <span class="text-purple-300">result</span> &lt;- <span class="text-purple-300">x</span> + <span class="text-purple-300">y</span><br>
+                                        <span class="text-purple-300">print</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"result = "</span>, <span class="text-purple-300">result</span>))<br>
+                                        <span class="text-purple-300">return</span>(<span class="text-purple-300">result</span>)<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-300"># debug_function(5, 10)</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用browser进行交互式调试</span><br>
+                                    <span class="text-purple-300">debug_function2</span> &lt;- <span class="text-purple-300">function</span>(<span class="text-blue-300">x</span>, <span class="text-blue-300">y</span>) {<br>
+                                        <span class="text-purple-300">result</span> &lt;- <span class="text-purple-300">x</span> * <span class="text-purple-300">y</span><br>
+                                        <span class="text-purple-300">browser</span>()  <span class="text-slate-400"># 在这里进入调试模式</span><br>
+                                        <span class="text-purple-300">result</span> &lt;- <span class="text-purple-300">result</span> + <span class="text-yellow-300">1</span><br>
+                                        <span class="text-purple-300">return</span>(<span class="text-purple-300">result</span>)<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-300"># debug_function2(5, 10)  # 会进入交互式调试</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 自定义错误和警告</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 自定义函数中抛出错误</span><br>
+                                    <span class="text-purple-300">divide_numbers</span> &lt;- <span class="text-purple-300">function</span>(<span class="text-blue-300">a</span>, <span class="text-blue-300">b</span>) {<br>
+                                        <span class="text-purple-300">if</span> (<span class="text-purple-300">b</span> == <span class="text-yellow-300">0</span>) {<br>
+                                            <span class="text-purple-300">stop</span>(<span class="text-green-300">"除数不能为零！"</span>)<br>
+                                        }<br>
+                                        <span class="text-purple-300">return</span>(<span class="text-purple-300">a</span> / <span class="text-purple-300">b</span>)<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-300"># 调用带有自定义错误的函数</span><br>
+                                    <span class="text-purple-300">result4</span> &lt;- <span class="text-purple-300">tryCatch</span>({<br>
+                                        <span class="text-purple-300">divide_numbers</span>(<span class="text-yellow-300">10</span>, <span class="text-yellow-300">0</span>)<br>
+                                    }, <span class="text-blue-300">error</span> = <span class="text-purple-300">function</span>(e) {<br>
+                                        <span class="text-purple-300">print</span>(<span class="text-purple-300">e</span>$<span class="text-blue-300">message</span>)<br>
+                                        <span class="text-purple-300">return</span>(<span class="text-purple-300">NA</span>)<br>
+                                    })<br>
+                                    <br>
+                                    <span class="text-purple-300"># 自定义警告</span><br>
+                                    <span class="text-purple-300">process_data</span> &lt;- <span class="text-purple-300">function</span>(<span class="text-blue-300">data</span>) {<br>
+                                        <span class="text-purple-300">if</span> (<span class="text-purple-300">length</span>(<span class="text-purple-300">data</span>) &lt; <span class="text-yellow-300">5</span>) {<br>
+                                            <span class="text-purple-300">warning</span>(<span class="text-green-300">"数据点数量较少，结果可能不准确"</span>)<br>
+                                        }<br>
+                                        <span class="text-purple-300">return</span>(<span class="text-purple-300">mean</span>(<span class="text-purple-300">data</span>))<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-300"># result5 &lt;- process_data(c(1, 2, 3))  # 会产生警告</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-18" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">18. 包的使用</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 包的管理和使用</h4>
+                            <p class="text-slate-300 mb-4">特点：R语言的包系统是其强大功能的核心，提供了丰富的第三方功能扩展。注意事项：使用包前需要先安装和加载，建议使用CRAN或Bioconductor等可靠的包源。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># 包的安装和加载</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 从CRAN安装包</span><br>
+                                    <span class="text-purple-300">install.packages</span>(<span class="text-green-300">"ggplot2"</span>)<br>
+                                    <span class="text-purple-300">install.packages</span>(<span class="text-purple-300">c</span>(<span class="text-green-300">"dplyr"</span>, <span class="text-green-300">"tidyr"</span>, <span class="text-green-300">"readxl"</span>))  <span class="text-slate-400"># 同时安装多个包</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 从GitHub安装开发版本的包</span><br>
+                                    <span class="text-purple-300"># install.packages("devtools")</span><br>
+                                    <span class="text-purple-300"># devtools::install_github("tidyverse/ggplot2")</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 加载包</span><br>
+                                    <span class="text-purple-300">library</span>(<span class="text-purple-300">ggplot2</span>)<br>
+                                    <span class="text-purple-300">library</span>(<span class="text-purple-300">dplyr</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 不加载包直接使用函数</span><br>
+                                    <span class="text-purple-300">dplyr::filter</span>(<span class="text-purple-300">mtcars</span>, <span class="text-purple-300">mpg</span> &gt; <span class="text-yellow-300">20</span>)
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 包的管理</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 查看已安装的包</span><br>
+                                    <span class="text-purple-300">installed.packages</span>()<br>
+                                    <span class="text-purple-300">library</span>(<span class="text-purple-300">utils</span>)<br>
+                                    <span class="text-purple-300">installed.packages</span>()$<span class="text-blue-300">Package</span>  <span class="text-slate-400"># 仅查看包名</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 查看已加载的包</span><br>
+                                    <span class="text-purple-300">sessionInfo</span>()$<span class="text-blue-300">otherPkgs</span><br>
+                                    <span class="text-purple-300">search</span>()  <span class="text-slate-400"># 查看搜索路径</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 更新包</span><br>
+                                    <span class="text-purple-300">update.packages</span>()  <span class="text-slate-400"># 更新所有已安装的包</span><br>
+                                    <span class="text-purple-300">update.packages</span>(<span class="text-green-300">"ggplot2"</span>)  <span class="text-slate-400"># 更新单个包</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 移除包</span><br>
+                                    <span class="text-purple-300"># remove.packages("ggplot2")</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 使用包函数和帮助文档</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 查看包的帮助文档</span><br>
+                                    <span class="text-purple-300">help</span>(<span class="text-purple-300">package</span> = <span class="text-green-300">"ggplot2"</span>)<br>
+                                    <span class="text-purple-300">?ggplot2</span>  <span class="text-slate-400"># 简写形式</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 查看特定函数的帮助</span><br>
+                                    <span class="text-purple-300">help</span>(<span class="text-purple-300">ggplot</span>)<br>
+                                    <span class="text-purple-300">?ggplot</span><br>
+                                    <span class="text-purple-300">args</span>(<span class="text-purple-300">ggplot</span>)  <span class="text-slate-400"># 仅查看函数参数</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 查看包中的示例</span><br>
+                                    <span class="text-purple-300">example</span>(<span class="text-purple-300">ggplot</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 查看包的版本信息</span><br>
+                                    <span class="text-purple-300">packageVersion</span>(<span class="text-green-300">"ggplot2"</span>)
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 创建简单的包</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 创建包的基本结构（使用devtools）</span><br>
+                                    <span class="text-purple-300"># devtools::create("myfirstpackage")</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 包的目录结构</span><br>
+                                    <span class="text-purple-300"># myfirstpackage/</span><br>
+                                    <span class="text-purple-300"># ├── DESCRIPTION</span><br>
+                                    <span class="text-purple-300"># ├── NAMESPACE</span><br>
+                                    <span class="text-purple-300"># └── R/</span><br>
+                                    <span class="text-purple-300">#     └── myfunctions.R</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 安装自己创建的包</span><br>
+                                    <span class="text-purple-300"># devtools::install("myfirstpackage")</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 常用的R包示例</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 数据处理和可视化</span><br>
+                                    <span class="text-purple-300">library</span>(<span class="text-purple-300">tidyverse</span>)  <span class="text-slate-400"># 包含dplyr, tidyr, ggplot2等</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 数据处理示例</span><br>
+                                    <span class="text-purple-300">processed_data</span> &lt;- <span class="text-purple-300">mtcars</span> %&gt;%<br>
+                                        <span class="text-purple-300">mutate</span>(<span class="text-blue-300">car_name</span> = <span class="text-purple-300">rownames</span>(<span class="text-purple-300">mtcars</span>)) %&gt;%<br>
+                                        <span class="text-purple-300">filter</span>(<span class="text-purple-300">mpg</span> &gt; <span class="text-yellow-300">20</span>) %&gt;%<br>
+                                        <span class="text-purple-300">select</span>(<span class="text-purple-300">car_name</span>, <span class="text-purple-300">mpg</span>, <span class="text-purple-300">hp</span>, <span class="text-purple-300">wt</span>) %&gt;%<br>
+                                        <span class="text-purple-300">arrange</span>(<span class="text-purple-300">desc</span>(<span class="text-purple-300">mpg</span>))<br>
+                                    <br>
+                                    <span class="text-purple-300"># 可视化示例</span><br>
+                                    <span class="text-purple-300">ggplot</span>(<span class="text-purple-300">processed_data</span>, <span class="text-purple-300">aes</span>(<span class="text-purple-300">x</span> = <span class="text-purple-300">wt</span>, <span class="text-purple-300">y</span> = <span class="text-purple-300">mpg</span>, <span class="text-purple-300">color</span> = <span class="text-purple-300">hp</span>)) +<br>
+                                        <span class="text-purple-300">geom_point</span>(<span class="text-blue-300">size</span> = <span class="text-yellow-300">3</span>) +<br>
+                                        <span class="text-purple-300">geom_smooth</span>(<span class="text-blue-300">method</span> = <span class="text-green-300">"lm"</span>) +<br>
+                                        <span class="text-purple-300">labs</span>(<br>
+                                            <span class="text-blue-300">title</span> = <span class="text-green-300">"汽车重量与燃油效率的关系"</span>,<br>
+                                            <span class="text-blue-300">x</span> = <span class="text-green-300">"重量(千磅)"</span>,<br>
+                                            <span class="text-blue-300">y</span> = <span class="text-green-300">"燃油效率(英里/加仑)"</span><br>
+                                        )
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-19" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">19. 面向对象编程</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 面向对象编程系统</h4>
+                            <p class="text-slate-300 mb-4">特点：R语言提供了多种面向对象编程系统，包括S3、S4和R6。注意事项：不同的OO系统有不同的语法和适用场景，选择合适的系统取决于具体需求。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># S3类系统（最常用的OO系统）</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 创建S3类的对象</span><br>
+                                    <span class="text-purple-300"># 使用list创建对象，然后指定类名</span><br>
+                                    <span class="text-purple-300">student</span> &lt;- <span class="text-purple-300">list</span>(<br>
+                                        <span class="text-blue-300">name</span> = <span class="text-green-300">"张三"</span>,<br>
+                                        <span class="text-blue-300">age</span> = <span class="text-yellow-300">20</span>,<br>
+                                        <span class="text-blue-300">major</span> = <span class="text-green-300">"统计学"</span>,<br>
+                                        <span class="text-blue-300">gpa</span> = <span class="text-yellow-300">3.8</span><br>
+                                    )<br>
+                                    <span class="text-purple-300">class</span>(<span class="text-purple-300">student</span>) &lt;- <span class="text-green-300">"Student"</span><br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">student</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 创建构造函数</span><br>
+                                    <span class="text-purple-300">Student</span> &lt;- <span class="text-purple-300">function</span>(<span class="text-blue-300">name</span>, <span class="text-blue-300">age</span>, <span class="text-blue-300">major</span>, <span class="text-blue-300">gpa</span>) {<br>
+                                        <span class="text-purple-300">obj</span> &lt;- <span class="text-purple-300">list</span>(<br>
+                                            <span class="text-blue-300">name</span> = <span class="text-purple-300">name</span>,<br>
+                                            <span class="text-blue-300">age</span> = <span class="text-purple-300">age</span>,<br>
+                                            <span class="text-blue-300">major</span> = <span class="text-purple-300">major</span>,<br>
+                                            <span class="text-blue-300">gpa</span> = <span class="text-purple-300">gpa</span><br>
+                                        )<br>
+                                        <span class="text-purple-300">class</span>(<span class="text-purple-300">obj</span>) &lt;- <span class="text-green-300">"Student"</span><br>
+                                        <span class="text-purple-300">return</span>(<span class="text-purple-300">obj</span>)<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用构造函数创建对象</span><br>
+                                    <span class="text-purple-300">student2</span> &lt;- <span class="text-purple-300">Student</span>(<span class="text-green-300">"李四"</span>, <span class="text-yellow-300">21</span>, <span class="text-green-300">"计算机科学"</span>, <span class="text-yellow-300">3.9</span>)<br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">student2</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 创建泛型函数和方法</span><br>
+                                    <span class="text-purple-300"># 定义泛型函数</span><br>
+                                    <span class="text-purple-300">print.Student</span> &lt;- <span class="text-purple-300">function</span>(<span class="text-blue-300">x</span>, ...) {<br>
+                                        <span class="text-purple-300">cat</span>(<span class="text-green-300">"学生信息：\n"</span>)<br>
+                                        <span class="text-purple-300">cat</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"姓名："</span>, <span class="text-purple-300">x</span>$<span class="text-blue-300">name</span>, <span class="text-green-300">"\n"</span>))<br>
+                                        <span class="text-purple-300">cat</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"年龄："</span>, <span class="text-purple-300">x</span>$<span class="text-blue-300">age</span>, <span class="text-green-300">"\n"</span>))<br>
+                                        <span class="text-purple-300">cat</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"专业："</span>, <span class="text-purple-300">x</span>$<span class="text-blue-300">major</span>, <span class="text-green-300">"\n"</span>))<br>
+                                        <span class="text-purple-300">cat</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"GPA："</span>, <span class="text-purple-300">x</span>$<span class="text-blue-300">gpa</span>, <span class="text-green-300">"\n"</span>))<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-300"># 测试自定义的print方法</span><br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">student2</span>)
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># S3方法的继承</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 创建一个继承自Student的GraduateStudent类</span><br>
+                                    <span class="text-purple-300">GraduateStudent</span> &lt;- <span class="text-purple-300">function</span>(<span class="text-blue-300">name</span>, <span class="text-blue-300">age</span>, <span class="text-blue-300">major</span>, <span class="text-blue-300">gpa</span>, <span class="text-blue-300">thesis_topic</span>) {<br>
+                                        <span class="text-purple-300">obj</span> &lt;- <span class="text-purple-300">Student</span>(<span class="text-purple-300">name</span>, <span class="text-purple-300">age</span>, <span class="text-purple-300">major</span>, <span class="text-purple-300">gpa</span>)<br>
+                                        <span class="text-purple-300">obj</span>$<span class="text-blue-300">thesis_topic</span> &lt;- <span class="text-purple-300">thesis_topic</span><br>
+                                        <span class="text-purple-300">class</span>(<span class="text-purple-300">obj</span>) &lt;- <span class="text-purple-300">c</span>(<span class="text-green-300">"GraduateStudent"</span>, <span class="text-green-300">"Student"</span>)<br>
+                                        <span class="text-purple-300">return</span>(<span class="text-purple-300">obj</span>)<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-300"># 为GraduateStudent创建专门的print方法</span><br>
+                                    <span class="text-purple-300">print.GraduateStudent</span> &lt;- <span class="text-purple-300">function</span>(<span class="text-blue-300">x</span>, ...) {<br>
+                                        <span class="text-purple-300">NextMethod</span>()  <span class="text-slate-400"># 调用父类的print方法</span><br>
+                                        <span class="text-purple-300">cat</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"论文题目："</span>, <span class="text-purple-300">x</span>$<span class="text-blue-300">thesis_topic</span>, <span class="text-green-300">"\n"</span>))<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-300"># 创建研究生对象</span><br>
+                                    <span class="text-purple-300">grad_student</span> &lt;- <span class="text-purple-300">GraduateStudent</span>(<br>
+                                        <span class="text-green-300">"王五"</span>, <span class="text-yellow-300">25</span>, <span class="text-green-300">"生物统计学"</span>, <span class="text-yellow-300">3.95</span>,<br>
+                                        <span class="text-green-300">"机器学习在医学影像分析中的应用"</span><br>
+                                    )<br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">grad_student</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 检查类的继承关系</span><br>
+                                    <span class="text-purple-300">inherits</span>(<span class="text-purple-300">grad_student</span>, <span class="text-green-300">"Student"</span>)         <span class="text-slate-400"># TRUE</span><br>
+                                    <span class="text-purple-300">inherits</span>(<span class="text-purple-300">grad_student</span>, <span class="text-green-300">"GraduateStudent"</span>)  <span class="text-slate-400"># TRUE</span><br>
+                                    <span class="text-purple-300">is</span>(<span class="text-purple-300">grad_student</span>, <span class="text-green-300">"Student"</span>)                  <span class="text-slate-400"># TRUE</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># S4类系统（更严格的OO系统）</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 定义S4类</span><br>
+                                    <span class="text-purple-300">setClass</span>(<br>
+                                        <span class="text-green-300">"Person"</span>,<br>
+                                        <span class="text-blue-300">slots</span> = <span class="text-purple-300">list</span>(<br>
+                                            <span class="text-blue-300">name</span> = <span class="text-green-300">"character"</span>,<br>
+                                            <span class="text-blue-300">age</span> = <span class="text-green-300">"numeric"</span>,<br>
+                                            <span class="text-blue-300">gender</span> = <span class="text-green-300">"character"</span><br>
+                                        )<br>
+                                    )<br>
+                                    <br>
+                                    <span class="text-purple-300"># 创建S4类的对象</span><br>
+                                    <span class="text-purple-300">person</span> &lt;- <span class="text-purple-300">new</span>(<span class="text-green-300">"Person"</span>, <span class="text-blue-300">name</span> = <span class="text-green-300">"李四"</span>, <span class="text-blue-300">age</span> = <span class="text-yellow-300">25</span>, <span class="text-blue-300">gender</span> = <span class="text-green-300">"男"</span>)<br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">person</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 访问和修改S4对象的槽</span><br>
+                                    <span class="text-purple-300">slot</span>(<span class="text-purple-300">person</span>, <span class="text-green-300">"name"</span>)  <span class="text-slate-400"># 获取name槽的值</span><br>
+                                    <span class="text-purple-300">slot</span>(<span class="text-purple-300">person</span>, <span class="text-green-300">"age"</span>) &lt;- <span class="text-yellow-300">26</span>  <span class="text-slate-400"># 修改age槽的值</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 定义S4方法</span><br>
+                                    <span class="text-purple-300">setMethod</span>(<br>
+                                        <span class="text-green-300">"show"</span>,<br>
+                                        <span class="text-green-300">"Person"</span>,<br>
+                                        <span class="text-purple-300">function</span>(<span class="text-blue-300">object</span>) {<br>
+                                            <span class="text-purple-300">cat</span>(<span class="text-green-300">"个人信息：\n"</span>)<br>
+                                            <span class="text-purple-300">cat</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"姓名："</span>, <span class="text-purple-300">slot</span>(<span class="text-purple-300">object</span>, <span class="text-green-300">"name"</span>), <span class="text-green-300">"\n"</span>))<br>
+                                            <span class="text-purple-300">cat</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"年龄："</span>, <span class="text-purple-300">slot</span>(<span class="text-purple-300">object</span>, <span class="text-green-300">"age"</span>), <span class="text-green-300">"\n"</span>))<br>
+                                            <span class="text-purple-300">cat</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"性别："</span>, <span class="text-purple-300">slot</span>(<span class="text-purple-300">object</span>, <span class="text-green-300">"gender"</span>), <span class="text-green-300">"\n"</span>))<br>
+                                        }<br>
+                                    )<br>
+                                    <br>
+                                    <span class="text-purple-300"># 测试show方法</span><br>
+                                    <span class="text-purple-300">person</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># R6类系统（引用类型的OO系统）</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 安装和加载R6包</span><br>
+                                    <span class="text-purple-300"># install.packages("R6")</span><br>
+                                    <span class="text-purple-300">library</span>(<span class="text-purple-300">R6</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 定义R6类</span><br>
+                                    <span class="text-purple-300">BankAccount</span> &lt;- <span class="text-purple-300">R6Class</span>(<br>
+                                        <span class="text-blue-300">classname</span> = <span class="text-green-300">"BankAccount"</span>,<br>
+                                        <br>
+                                        <span class="text-purple-300"># 属性</span><br>
+                                        <span class="text-blue-300">public</span> = <span class="text-purple-300">list</span>(<br>
+                                            <span class="text-blue-300">account_number</span> = <span class="text-purple-300">NULL</span>,<br>
+                                            <span class="text-blue-300">balance</span> = <span class="text-purple-300">NULL</span>,<br>
+                                            <br>
+                                            <span class="text-purple-300"># 初始化方法</span><br>
+                                            <span class="text-blue-300">initialize</span> = <span class="text-purple-300">function</span>(<span class="text-blue-300">account_number</span>, <span class="text-blue-300">initial_balance</span> = <span class="text-yellow-300">0</span>) {<br>
+                                                <span class="text-purple-300">self</span>$<span class="text-blue-300">account_number</span> &lt;- <span class="text-purple-300">account_number</span><br>
+                                                <span class="text-purple-300">self</span>$<span class="text-blue-300">balance</span> &lt;- <span class="text-purple-300">initial_balance</span><br>
+                                            },<br>
+                                            <br>
+                                            <span class="text-purple-300"># 存款方法</span><br>
+                                            <span class="text-blue-300">deposit</span> = <span class="text-purple-300">function</span>(<span class="text-blue-300">amount</span>) {<br>
+                                                <span class="text-purple-300">if</span> (<span class="text-purple-300">amount</span> &gt; <span class="text-yellow-300">0</span>) {<br>
+                                                    <span class="text-purple-300">self</span>$<span class="text-blue-300">balance</span> &lt;- <span class="text-purple-300">self</span>$<span class="text-blue-300">balance</span> + <span class="text-purple-300">amount</span><br>
+                                                    <span class="text-purple-300">cat</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"存款成功！当前余额："</span>, <span class="text-purple-300">self</span>$<span class="text-blue-300">balance</span>, <span class="text-green-300">"元\n"</span>))<br>
+                                                } <span class="text-purple-300">else</span> {<br>
+                                                    <span class="text-purple-300">cat</span>(<span class="text-green-300">"存款金额必须大于0！\n"</span>)<br>
+                                                }<br>
+                                            },<br>
+                                            <br>
+                                            <span class="text-purple-300"># 取款方法</span><br>
+                                            <span class="text-blue-300">withdraw</span> = <span class="text-purple-300">function</span>(<span class="text-blue-300">amount</span>) {<br>
+                                                <span class="text-purple-300">if</span> (<span class="text-purple-300">amount</span> &gt; <span class="text-yellow-300">0</span>) {<br>
+                                                    <span class="text-purple-300">if</span> (<span class="text-purple-300">amount</span> &lt;= <span class="text-purple-300">self</span>$<span class="text-blue-300">balance</span>) {<br>
+                                                        <span class="text-purple-300">self</span>$<span class="text-blue-300">balance</span> &lt;- <span class="text-purple-300">self</span>$<span class="text-blue-300">balance</span> - <span class="text-purple-300">amount</span><br>
+                                                        <span class="text-purple-300">cat</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"取款成功！当前余额："</span>, <span class="text-purple-300">self</span>$<span class="text-blue-300">balance</span>, <span class="text-green-300">"元\n"</span>))<br>
+                                                    } <span class="text-purple-300">else</span> {<br>
+                                                        <span class="text-purple-300">cat</span>(<span class="text-green-300">"余额不足！\n"</span>)<br>
+                                                    }<br>
+                                                } <span class="text-purple-300">else</span> {<br>
+                                                    <span class="text-purple-300">cat</span>(<span class="text-green-300">"取款金额必须大于0！\n"</span>)<br>
+                                                }<br>
+                                            },<br>
+                                            <br>
+                                            <span class="text-purple-300"># 查询余额方法</span><br>
+                                            <span class="text-blue-300">check_balance</span> = <span class="text-purple-300">function</span>() {<br>
+                                                <span class="text-purple-300">cat</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"账号："</span>, <span class="text-purple-300">self</span>$<span class="text-blue-300">account_number</span>, <span class="text-green-300">"\n"</span>))<br>
+                                                <span class="text-purple-300">cat</span>(<span class="text-purple-300">paste</span>(<span class="text-green-300">"当前余额："</span>, <span class="text-purple-300">self</span>$<span class="text-blue-300">balance</span>, <span class="text-green-300">"元\n"</span>))<br>
+                                            }<br>
+                                        }<br>
+                                    )<br>
+                                    <br>
+                                    <span class="text-purple-300"># 创建R6对象</span><br>
+                                    <span class="text-purple-300">account</span> &lt;- <span class="text-purple-300">BankAccount</span>$<span class="text-purple-300">new</span>(<span class="text-green-300">"123456789"</span>, <span class="text-yellow-300">1000</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 调用对象的方法</span><br>
+                                    <span class="text-purple-300">account</span>$<span class="text-purple-300">check_balance</span>()<br>
+                                    <span class="text-purple-300">account</span>$<span class="text-purple-300">deposit</span>(<span class="text-yellow-300">500</span>)     <span class="text-slate-400"># 存款500元</span><br>
+                                    <span class="text-purple-300">account</span>$<span class="text-purple-300">withdraw</span>(<span class="text-yellow-300">200</span>)    <span class="text-slate-400"># 取款200元</span><br>
+                                    <span class="text-purple-300">account</span>$<span class="text-purple-300">check_balance</span>()<br>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-20" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">20. 并行计算</span></h2>
+                        <div class="language-content" data-lang="r">
+                            <h4 class="text-lg font-medium mb-4">R语言 - 并行计算和高性能计算</h4>
+                            <p class="text-slate-300 mb-4">特点：R语言提供了多种并行计算的包和函数，可以利用多核CPU和分布式系统提高计算效率。注意事项：并行计算需要根据任务特点选择合适的方法，并且需要考虑通信开销。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2"># 基础并行计算（parallel包）</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300"># 加载parallel包</span><br>
+                                    <span class="text-purple-300">library</span>(<span class="text-purple-300">parallel</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 查看可用的CPU核心数</span><br>
+                                    <span class="text-purple-300">detectCores</span>()  <span class="text-slate-400"># 返回可用的CPU核心数</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 创建并行集群</span><br>
+                                    <span class="text-purple-300">cl</span> &lt;- <span class="text-purple-300">makeCluster</span>(<span class="text-yellow-300">2</span>)  <span class="text-slate-400"># 创建2个核心的集群</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用parLapply进行并行计算</span><br>
+                                    <span class="text-purple-300"># 串行版本</span><br>
+                                    <span class="text-purple-300">system.time</span>({<br>
+                                        <span class="text-purple-300">result_serial</span> &lt;- <span class="text-purple-300">lapply</span>(<span class="text-purple-300">1</span>:<span class="text-yellow-300">10</span>, <span class="text-purple-300">function</span>(<span class="text-blue-300">x</span>) {<br>
+                                            <span class="text-purple-300">Sys.sleep</span>(<span class="text-yellow-300">0.1</span>)  <span class="text-slate-400"># 模拟耗时操作</span><br>
+                                            <span class="text-purple-300">return</span>(<span class="text-purple-300">x</span>^<span class="text-yellow-300">2</span>)<br>
+                                        })<br>
+                                    })<br>
+                                    <br>
+                                    <span class="text-purple-300"># 并行版本</span><br>
+                                    <span class="text-purple-300">system.time</span>({<br>
+                                        <span class="text-purple-300">result_parallel</span> &lt;- <span class="text-purple-300">parLapply</span>(<span class="text-purple-300">cl</span>, <span class="text-purple-300">1</span>:<span class="text-yellow-300">10</span>, <span class="text-purple-300">function</span>(<span class="text-blue-300">x</span>) {<br>
+                                            <span class="text-purple-300">Sys.sleep</span>(<span class="text-yellow-300">0.1</span>)<br>
+                                            <span class="text-purple-300">return</span>(<span class="text-purple-300">x</span>^<span class="text-yellow-300">2</span>)<br>
+                                        })<br>
+                                    })<br>
+                                    <br>
+                                    <span class="text-purple-300"># 关闭集群</span><br>
+                                    <span class="text-purple-300">stopCluster</span>(<span class="text-purple-300">cl</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 检查结果是否相同</span><br>
+                                    <span class="text-purple-300">identical</span>(<span class="text-purple-300">result_serial</span>, <span class="text-purple-300">result_parallel</span>)  <span class="text-slate-400"># TRUE</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># foreach包（更灵活的并行循环）</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 安装和加载必要的包</span><br>
+                                    <span class="text-purple-300"># install.packages(c("foreach", "doParallel"))</span><br>
+                                    <span class="text-purple-300">library</span>(<span class="text-purple-300">foreach</span>)<br>
+                                    <span class="text-purple-300">library</span>(<span class="text-purple-300">doParallel</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 注册并行后端</span><br>
+                                    <span class="text-purple-300">cl</span> &lt;- <span class="text-purple-300">makeCluster</span>(<span class="text-yellow-300">2</span>)<br>
+                                    <span class="text-purple-300">registerDoParallel</span>(<span class="text-purple-300">cl</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用foreach进行并行循环</span><br>
+                                    <span class="text-purple-300">system.time</span>({<br>
+                                        <span class="text-purple-300">result_foreach</span> &lt;- <span class="text-purple-300">foreach</span>(<span class="text-blue-300">i</span> = <span class="text-purple-300">1</span>:<span class="text-yellow-300">10</span>, <span class="text-blue-300">.combine</span> = <span class="text-green-300">"c"</span>) %dopar% {<br>
+                                            <span class="text-purple-300">Sys.sleep</span>(<span class="text-yellow-300">0.1</span>)<br>
+                                            <span class="text-purple-300">i</span>^<span class="text-yellow-300">2</span><br>
+                                        }<br>
+                                    })<br>
+                                    <br>
+                                    <span class="text-purple-300"># 串行版本进行对比</span><br>
+                                    <span class="text-purple-300">system.time</span>({<br>
+                                        <span class="text-purple-300">result_serial</span> &lt;- <span class="text-purple-300">c</span>()<br>
+                                        <span class="text-purple-300">for</span> (<span class="text-blue-300">i</span> <span class="text-purple-300">in</span> <span class="text-purple-300">1</span>:<span class="text-yellow-300">10</span>) {<br>
+                                            <span class="text-purple-300">Sys.sleep</span>(<span class="text-yellow-300">0.1</span>)<br>
+                                            <span class="text-purple-300">result_serial</span> &lt;- <span class="text-purple-300">c</span>(<span class="text-purple-300">result_serial</span>, <span class="text-purple-300">i</span>^<span class="text-yellow-300">2</span>)<br>
+                                        }<br>
+                                    })<br>
+                                    <br>
+                                    <span class="text-purple-300"># 关闭集群</span><br>
+                                    <span class="text-purple-300">stopCluster</span>(<span class="text-purple-300">cl</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 查看结果</span><br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">result_foreach</span>)<br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">result_serial</span>)
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># future包（更现代的并行计算框架）</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 安装和加载future包</span><br>
+                                    <span class="text-purple-300"># install.packages("future")</span><br>
+                                    <span class="text-purple-300">library</span>(<span class="text-purple-300">future</span>)<br>
+                                    <span class="text-purple-300">library</span>(<span class="text-purple-300">future.apply</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 设置并行策略</span><br>
+                                    <span class="text-purple-300">plan</span>(<span class="text-purple-300">multisession</span>, <span class="text-blue-300">workers</span> = <span class="text-yellow-300">2</span>)  <span class="text-slate-400"># 使用多核CPU</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 使用future.apply进行并行计算</span><br>
+                                    <span class="text-purple-300">system.time</span>({<br>
+                                        <span class="text-purple-300">result_future</span> &lt;- <span class="text-purple-300">future_lapply</span>(<span class="text-purple-300">1</span>:<span class="text-yellow-300">10</span>, <span class="text-purple-300">function</span>(<span class="text-blue-300">x</span>) {<br>
+                                            <span class="text-purple-300">Sys.sleep</span>(<span class="text-yellow-300">0.1</span>)<br>
+                                            <span class="text-purple-300">x</span>^<span class="text-yellow-300">2</span><br>
+                                        })<br>
+                                    })<br>
+                                    <br>
+                                    <span class="text-purple-300"># 直接使用future语法</span><br>
+                                    <span class="text-purple-300">f1</span> &lt;- <span class="text-purple-300">future</span>({<br>
+                                        <span class="text-purple-300">Sys.sleep</span>(<span class="text-yellow-300">0.2</span>)<br>
+                                        <span class="text-green-300">"任务1完成"</span><br>
+                                    })<br>
+                                    <br>
+                                    <span class="text-purple-300">f2</span> &lt;- <span class="text-purple-300">future</span>({<br>
+                                        <span class="text-purple-300">Sys.sleep</span>(<span class="text-yellow-300">0.3</span>)<br>
+                                        <span class="text-green-300">"任务2完成"</span><br>
+                                    })<br>
+                                    <br>
+                                    <span class="text-purple-300"># 获取结果</span><br>
+                                    <span class="text-purple-300">result1</span> &lt;- <span class="text-purple-300">value</span>(<span class="text-purple-300">f1</span>)<br>
+                                    <span class="text-purple-300">result2</span> &lt;- <span class="text-purple-300">value</span>(<span class="text-purple-300">f2</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">result1</span>)<br>
+                                    <span class="text-purple-300">print</span>(<span class="text-purple-300">result2</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 重置并行策略为串行</span><br>
+                                    <span class="text-purple-300">plan</span>(<span class="text-purple-300">sequential</span>)<br>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 并行数据处理示例</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 模拟大型数据集</span><br>
+                                    <span class="text-purple-300">set.seed</span>(<span class="text-yellow-300">123</span>)<br>
+                                    <span class="text-purple-300">large_data</span> &lt;- <span class="text-purple-300">matrix</span>(<span class="text-purple-300">rnorm</span>(<span class="text-yellow-300">1000000</span>), <span class="text-blue-300">nrow</span> = <span class="text-yellow-300">1000</span>, <span class="text-blue-300">ncol</span> = <span class="text-yellow-300">1000</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 并行计算每行的均值</span><br>
+                                    <span class="text-purple-300">library</span>(<span class="text-purple-300">parallel</span>)<br>
+                                    <span class="text-purple-300">cl</span> &lt;- <span class="text-purple-300">makeCluster</span>(<span class="text-yellow-300">2</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300">system.time</span>({<br>
+                                        <span class="text-purple-300">row_means_serial</span> &lt;- <span class="text-purple-300">apply</span>(<span class="text-purple-300">large_data</span>, <span class="text-yellow-300">1</span>, <span class="text-purple-300">mean</span>)<br>
+                                    })<br>
+                                    <br>
+                                    <span class="text-purple-300">system.time</span>({<br>
+                                        <span class="text-purple-300">row_means_parallel</span> &lt;- <span class="text-purple-300">parApply</span>(<span class="text-purple-300">cl</span>, <span class="text-purple-300">large_data</span>, <span class="text-yellow-300">1</span>, <span class="text-purple-300">mean</span>)<br>
+                                    })<br>
+                                    <br>
+                                    <span class="text-purple-300">stopCluster</span>(<span class="text-purple-300">cl</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 验证结果</span><br>
+                                    <span class="text-purple-300">all.equal</span>(<span class="text-purple-300">row_means_serial</span>, <span class="text-purple-300">row_means_parallel</span>)<br>
+                                    <br>
+                                    <span class="text-purple-300"># 清理内存</span><br>
+                                    <span class="text-purple-300">rm</span>(<span class="text-purple-300">large_data</span>, <span class="text-purple-300">row_means_serial</span>, <span class="text-purple-300">row_means_parallel</span>)<br>
+                                    <span class="text-purple-300">gc</span>()<br>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2"># 并行计算的最佳实践</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300"># 1. 评估任务是否适合并行计算</span><br>
+                                    <span class="text-purple-300"># 计算密集型任务比IO密集型任务更适合并行</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 2. 选择合适的并行方法</span><br>
+                                    <span class="text-purple-300"># - 简单循环：foreach或future.apply</span><br>
+                                    <span class="text-purple-300"># - 复杂任务：future包</span><br>
+                                    <span class="text-purple-300"># - 大型数据集：data.table的并行功能</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 3. 注意内存使用</span><br>
+                                    <span class="text-purple-300"># 每个工作进程都会复制必要的数据</span><br>
+                                    <span class="text-purple-300"># 可以使用共享内存或内存映射文件减少开销</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 4. 测量性能并优化</span><br>
+                                    <span class="text-purple-300"># 使用system.time或microbenchmark包测量</span><br>
+                                    <span class="text-purple-300"># 调整workers数量以获得最佳性能</span><br>
+                                    <br>
+                                    <span class="text-purple-300"># 5. 错误处理</span><br>
+                                    <span class="text-purple-300"># 并行计算中的错误可能更难调试</span><br>
+                                    <span class="text-purple-300"># 确保每个工作进程都能访问必要的包和数据</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
