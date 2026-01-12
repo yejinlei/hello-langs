@@ -3,144 +3,969 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Csharp 教程 - Hello 编程语言</title>
-    <script>
-        // 尝试加载 Tailwind CSS，如果失败则使用备用方案
-        window.tailwindCdnLoaded = false;
-        function loadTailwindCSS() {
-            const script = document.createElement('script');
-            script.src = 'https://cdn.tailwindcss.com';
-            script.onload = function() {
-                window.tailwindCdnLoaded = true;
-                // Tailwind 配置
-                tailwind.config = {
-                    theme: {
-                        extend: {
-                            colors: {
-                                primary: '#10b981',
-                                secondary: '#8b5cf6',
-                                dark: '#1e293b',
-                                light: '#f8fafc'
-                            }
-                        }
-                    }
-                }
-            };
-            script.onerror = function() {
-                console.warn('Failed to load Tailwind CSS from CDN, applying fallback styles');
-                applyFallbackStyles();
-            };
-            document.head.appendChild(script);
-        }
-        
-        function applyFallbackStyles() {
-            // 应用基本的 Tailwind 类对应的样式
-            const fallbackStyles = document.createElement('style');
-            fallbackStyles.textContent = `
-                /* 基本布局类 */
-                .container { width: 100%; margin-right: auto; margin-left: auto; padding-right: 1rem; padding-left: 1rem; }
-                .grid { display: grid; }
-                .flex { display: flex; }
-                .hidden { display: none; }
-                
-                /* 网格列类 */
-                .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-                @media (min-width: 1024px) {
-                    .lg\\\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-                }
-                
-                /* 间距类 */
-                .p-8 { padding: 2rem; }
-                .p-4 { padding: 1rem; }
-                .mb-16 { margin-bottom: 4rem; }
-                .mb-8 { margin-bottom: 2rem; }
-                .mb-4 { margin-bottom: 1rem; }
-                .mb-2 { margin-bottom: 0.5rem; }
-                .mt-4 { margin-top: 1rem; }
-                .mr-2 { margin-right: 0.5rem; }
-                .ml-2 { margin-left: 0.5rem; }
-                
-                /* 字体类 */
-                .text-3xl { font-size: 1.875rem; }
-                .text-lg { font-size: 1.125rem; }
-                .text-sm { font-size: 0.875rem; }
-                .font-bold { font-weight: 700; }
-                .font-medium { font-weight: 500; }
-                
-                /* 文本类 */
-                .text-center { text-align: center; }
-                .text-purple-400 { color: #a78bfa; }
-                .text-slate-300 { color: #cbd5e1; }
-                .text-slate-400 { color: #94a3b8; }
-                
-                /* 背景类 */
-                .bg-slate-900 { background-color: #0f172a; }
-                .bg-slate-800 { background-color: #1e293b; }
-                
-                /* 边框类 */
-                .rounded-xl { border-radius: 0.75rem; }
-                .rounded-lg { border-radius: 0.5rem; }
-                .rounded { border-radius: 0.25rem; }
-                
-                /* 其他类 */
-                .gap-8 { gap: 2rem; }
-                .items-center { align-items: center; }
-                .justify-between { justify-content: space-between; }
-                .w-full { width: 100%; }
-            `;
-            document.head.appendChild(fallbackStyles);
-        }
-        
-        // 加载 Tailwind CSS
-        loadTailwindCSS();
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>C# 教程</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    
     <style>
-        * {
-            font-family: 'Noto Sans SC', sans-serif;
-        }
         .code-font {
-            font-family: 'JetBrains Mono', monospace;
+            font-family: 'Fira Code', monospace;
         }
+        
         .gradient-text {
-            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .syntax-card {
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(148, 163, 184, 0.1);
+        
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        .language-tab {
-            transition: all 0.3s ease;
+        
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
         }
-        .language-tab.active {
-            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
-            color: white;
+        
+        ::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 4px;
         }
-        .code-block {
-            background: rgba(2, 6, 23, 0.9);
-            border-left: 4px solid #3B82F6;
-        }
-        .highlight {
-            background: rgba(59, 130, 246, 0.2);
-            padding: 2px 4px;
-            border-radius: 3px;
-        }
-        .language-content.hidden {
-            display: none;
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen">
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="text-center py-20">
-            <h3 class="text-xl font-medium text-slate-300 mb-4">Csharp 教程内容正在开发中</h3>
-            <p class="text-slate-500">敬请期待完整的 Csharp 语法教程内容</p>
+<body class="bg-slate-900 text-white min-h-screen">
+    <header class="sticky top-0 z-50 bg-slate-800 border-b border-slate-700">
+        <div class="container mx-auto px-4 py-4">
+            <h1 class="text-3xl font-bold">
+                <span class="gradient-text">C# 编程语言教程</span>
+            </h1>
+            <p class="text-slate-400 mt-1">学习 C# 的核心概念和高级特性</p>
+        </div>
+    </header>
+    
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <aside class="sticky top-24 lg:w-1/4">
+                <div class="bg-slate-800 rounded-xl p-4 border border-slate-700">
+                    <h2 class="text-xl font-bold mb-4 gradient-text">章节列表</h2>
+                    <nav class="space-y-1">
+                        <a href="#section-1" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">1. 变量声明</a>
+                        <a href="#section-2" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">2. 数据类型</a>
+                        <a href="#section-3" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">3. 字符串操作</a>
+                        <a href="#section-4" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">4. 数组</a>
+                        <a href="#section-5" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">5. 集合</a>
+                        <a href="#section-6" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">6. 控制流 - 条件语句</a>
+                        <a href="#section-7" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">7. 控制流 - 循环</a>
+                        <a href="#section-8" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">8. 函数</a>
+                        <a href="#section-9" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">9. 面向对象编程</a>
+                        <a href="#section-10" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">10. 继承和多态</a>
+                        <a href="#section-11" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">11. 接口</a>
+                        <a href="#section-12" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">12. 泛型</a>
+                        <a href="#section-13" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">13. 异常处理</a>
+                        <a href="#section-14" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">14. LINQ</a>
+                        <a href="#section-15" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">15. 委托和事件</a>
+                        <a href="#section-16" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">16. Lambda表达式</a>
+                        <a href="#section-17" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">17. 异步编程</a>
+                        <a href="#section-18" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">18. 扩展方法</a>
+                        <a href="#section-19" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">19. 特性</a>
+                        <a href="#section-20" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">20. 运算符重载</a>
+                    </nav>
+                </div>
+            </aside>
+            
+            <div class="lg:w-3/4">
+                <div class="bg-slate-800 rounded-xl p-8 border border-slate-700">
+                    <section id="section-1" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">1. 变量声明</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 变量声明和初始化</h4>
+                            <p class="text-slate-300 mb-4">特点：强类型语言，变量必须先声明后使用，支持多种声明方式。注意事项：变量名使用驼峰命名法，不能使用关键字。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// 变量声明和初始化</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">age</span> = <span class="text-yellow-300">25</span>; <span class="text-slate-500">// 整数类型</span><br>
+                                    <span class="text-purple-300">string</span> <span class="text-blue-300">name</span> = <span class="text-green-300">"张三"</span>; <span class="text-slate-500">// 字符串类型</span><br>
+                                    <span class="text-purple-300">double</span> <span class="text-blue-300">salary</span> = <span class="text-yellow-300">5000.50</span>; <span class="text-slate-500">// 双精度浮点数</span><br>
+                                    <span class="text-purple-300">bool</span> <span class="text-blue-300">isActive</span> = <span class="text-purple-300">true</span>; <span class="text-slate-500">// 布尔类型</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// 隐式类型声明</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">var</span> <span class="text-blue-300">message</span> = <span class="text-green-300">"Hello, C#"</span>; <span class="text-slate-500">// 编译器推断为string类型</span><br>
+                                    <span class="text-purple-300">var</span> <span class="text-blue-300">count</span> = <span class="text-yellow-300">100</span>; <span class="text-slate-500">// 编译器推断为int类型</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-2" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">2. 数据类型</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 内置数据类型</h4>
+                            <p class="text-slate-300 mb-4">特点：包括值类型（如整数、浮点数、布尔值）和引用类型（如字符串、对象）。注意事项：值类型存储在栈上，引用类型存储在堆上。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// 数值类型</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">byte</span> <span class="text-blue-300">b</span> = <span class="text-yellow-300">255</span>; <span class="text-slate-500">// 无符号8位整数</span><br>
+                                    <span class="text-purple-300">short</span> <span class="text-blue-300">s</span> = <span class="text-yellow-300">32767</span>; <span class="text-slate-500">// 有符号16位整数</span><br>
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">i</span> = <span class="text-yellow-300">2147483647</span>; <span class="text-slate-500">// 有符号32位整数</span><br>
+                                    <span class="text-purple-300">long</span> <span class="text-blue-300">l</span> = <span class="text-yellow-300">9223372036854775807L</span>; <span class="text-slate-500">// 有符号64位整数</span><br>
+                                    <br>
+                                    <span class="text-purple-300">float</span> <span class="text-blue-300">f</span> = <span class="text-yellow-300">3.14F</span>; <span class="text-slate-500">// 32位浮点数</span><br>
+                                    <span class="text-purple-300">double</span> <span class="text-blue-300">d</span> = <span class="text-yellow-300">3.141592653589793</span>; <span class="text-slate-500">// 64位浮点数</span><br>
+                                    <span class="text-purple-300">decimal</span> <span class="text-blue-300">m</span> = <span class="text-yellow-300">3.14159265358979323846M</span>; <span class="text-slate-500">// 高精度十进制数</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// 其他类型</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">bool</span> <span class="text-blue-300">isValid</span> = <span class="text-purple-300">true</span>; <span class="text-slate-500">// 布尔类型</span><br>
+                                    <span class="text-purple-300">char</span> <span class="text-blue-300">c</span> = <span class="text-green-300">'A'</span>; <span class="text-slate-500">// 字符类型</span><br>
+                                    <span class="text-purple-300">string</span> <span class="text-blue-300">str</span> = <span class="text-green-300">"Hello"</span>; <span class="text-slate-500">// 字符串类型</span><br>
+                                    <span class="text-purple-300">object</span> <span class="text-blue-300">obj</span> = <span class="text-green-300">"Any Type"</span>; <span class="text-slate-500">// 对象类型（所有类型的基类）</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-3" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">3. 字符串操作</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 字符串处理和操作</h4>
+                            <p class="text-slate-300 mb-4">特点：不可变字符串，提供丰富的字符串处理方法，支持字符串插值和拼接。注意事项：字符串拼接使用+或StringBuilder，复杂操作推荐使用StringBuilder以提高性能。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// 字符串声明和初始化</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">string</span> <span class="text-blue-300">str1</span> = <span class="text-green-300">"Hello"</span>;<br>
+                                    <span class="text-purple-300">string</span> <span class="text-blue-300">str2</span> = <span class="text-green-300">"World"</span>;<br>
+                                    <span class="text-purple-300">string</span> <span class="text-blue-300">str3</span> = <span class="text-blue-300">str1</span> + <span class="text-green-300">" "</span> + <span class="text-blue-300">str2</span>; <span class="text-slate-500">// 字符串拼接</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// 字符串插值</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">string</span> <span class="text-blue-300">name</span> = <span class="text-green-300">"张三"</span>;<br>
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">age</span> = <span class="text-yellow-300">25</span>;<br>
+                                    <span class="text-purple-300">string</span> <span class="text-blue-300">message</span> = <span class="text-green-300">$"我的名字是{name}，今年{age}岁。"</span>; <span class="text-slate-500">// 字符串插值</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// 常用字符串方法</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">string</span> <span class="text-blue-300">text</span> = <span class="text-green-300">"Hello, World!"</span>;<br>
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">length</span> = <span class="text-blue-300">text</span>.<span class="text-blue-300">Length</span>; <span class="text-slate-500">// 获取字符串长度</span><br>
+                                    <span class="text-purple-300">string</span> <span class="text-blue-300">lower</span> = <span class="text-blue-300">text</span>.<span class="text-blue-300">ToLower</span>(); <span class="text-slate-500">// 转换为小写</span><br>
+                                    <span class="text-purple-300">string</span> <span class="text-blue-300">upper</span> = <span class="text-blue-300">text</span>.<span class="text-blue-300">ToUpper</span>(); <span class="text-slate-500">// 转换为大写</span><br>
+                                    <span class="text-purple-300">bool</span> <span class="text-blue-300">contains</span> = <span class="text-blue-300">text</span>.<span class="text-blue-300">Contains</span>(<span class="text-green-300">"World"</span>); <span class="text-slate-500">// 检查是否包含子字符串</span><br>
+                                    <span class="text-purple-300">string</span> <span class="text-blue-300">substring</span> = <span class="text-blue-300">text</span>.<span class="text-blue-300">Substring</span>(<span class="text-yellow-300">0</span>, <span class="text-yellow-300">5</span>); <span class="text-slate-500">// 获取子字符串</span><br>
+                                    <span class="text-purple-300">string</span> <span class="text-blue-300">trimmed</span> = <span class="text-green-300">"  Hello  "</span>.<span class="text-blue-300">Trim</span>(); <span class="text-slate-500">// 去除首尾空格</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-4" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">4. 数组</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 数组声明和使用</h4>
+                            <p class="text-slate-300 mb-4">特点：固定长度的同类型元素集合，支持一维、多维和交错数组。注意事项：数组索引从0开始，长度一旦确定不能改变。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// 一维数组</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">// 声明并初始化数组</span><br>
+                                    <span class="text-purple-300">int</span>[] <span class="text-blue-300">numbers1</span> = { <span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span> };<br>
+                                    <br>
+                                    <span class="text-purple-300">// 声明指定长度的数组</span><br>
+                                    <span class="text-purple-300">int</span>[] <span class="text-blue-300">numbers2</span> = <span class="text-purple-300">new</span> <span class="text-purple-300">int</span>[<span class="text-yellow-300">5</span>];<br>
+                                    <span class="text-blue-300">numbers2</span>[<span class="text-yellow-300">0</span>] = <span class="text-yellow-300">1</span>;<br>
+                                    <span class="text-blue-300">numbers2</span>[<span class="text-yellow-300">1</span>] = <span class="text-yellow-300">2</span>;<br>
+                                    <br>
+                                    <span class="text-purple-300">// 访问数组元素</span><br>
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">first</span> = <span class="text-blue-300">numbers1</span>[<span class="text-yellow-300">0</span>]; <span class="text-slate-500">// 获取第一个元素</span><br>
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">last</span> = <span class="text-blue-300">numbers1</span>[<span class="text-blue-300">numbers1</span>.<span class="text-blue-300">Length</span> - <span class="text-yellow-300">1</span>]; <span class="text-slate-500">// 获取最后一个元素</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// 多维数组</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">// 二维数组（矩阵）</span><br>
+                                    <span class="text-purple-300">int</span>[,] <span class="text-blue-300">matrix</span> = <span class="text-purple-300">new</span> <span class="text-purple-300">int</span>[<span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>];<br>
+                                    <span class="text-blue-300">matrix</span>[<span class="text-yellow-300">0</span>, <span class="text-yellow-300">0</span>] = <span class="text-yellow-300">1</span>;<br>
+                                    <span class="text-blue-300">matrix</span>[<span class="text-yellow-300">0</span>, <span class="text-yellow-300">1</span>] = <span class="text-yellow-300">2</span>;<br>
+                                    <span class="text-blue-300">matrix</span>[<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>] = <span class="text-yellow-300">6</span>;
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-5" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">5. 集合</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 常用集合类型</h4>
+                            <p class="text-slate-300 mb-4">特点：动态长度的元素集合，提供丰富的操作方法，位于System.Collections.Generic命名空间。注意事项：集合是泛型的，需要指定元素类型。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// List集合</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">using</span> <span class="text-blue-300">System</span>.<span class="text-blue-300">Collections</span>.<span class="text-blue-300">Generic</span>;<br>
+                                    <br>
+                                    <span class="text-purple-300">// 创建List集合</span><br>
+                                    <span class="text-purple-300">List</span>&lt;<span class="text-purple-300">string</span>&gt; <span class="text-blue-300">fruits</span> = <span class="text-purple-300">new</span> <span class="text-purple-300">List</span>&lt;<span class="text-purple-300">string</span>&gt;();<br>
+                                    <br>
+                                    <span class="text-purple-300">// 添加元素</span><br>
+                                    <span class="text-blue-300">fruits</span>.<span class="text-blue-300">Add</span>(<span class="text-green-300">"苹果"</span>);<br>
+                                    <span class="text-blue-300">fruits</span>.<span class="text-blue-300">Add</span>(<span class="text-green-300">"香蕉"</span>);<br>
+                                    <span class="text-blue-300">fruits</span>.<span class="text-blue-300">Add</span>(<span class="text-green-300">"橙子"</span>);<br>
+                                    <br>
+                                    <span class="text-purple-300">// 插入元素</span><br>
+                                    <span class="text-blue-300">fruits</span>.<span class="text-blue-300">Insert</span>(<span class="text-yellow-300">1</span>, <span class="text-green-300">"葡萄"</span>);<br>
+                                    <br>
+                                    <span class="text-purple-300">// 删除元素</span><br>
+                                    <span class="text-blue-300">fruits</span>.<span class="text-blue-300">Remove</span>(<span class="text-green-300">"香蕉"</span>);<br>
+                                    <span class="text-blue-300">fruits</span>.<span class="text-blue-300">RemoveAt</span>(<span class="text-yellow-300">2</span>);<br>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// Dictionary集合</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">// 创建Dictionary集合（键值对）</span><br>
+                                    <span class="text-purple-300">Dictionary</span>&lt;<span class="text-purple-300">string</span>, <span class="text-purple-300">int</span>&gt; <span class="text-blue-300">scores</span> = <span class="text-purple-300">new</span> <span class="text-purple-300">Dictionary</span>&lt;<span class="text-purple-300">string</span>, <span class="text-purple-300">int</span>&gt;();<br>
+                                    <br>
+                                    <span class="text-purple-300">// 添加键值对</span><br>
+                                    <span class="text-blue-300">scores</span>.<span class="text-blue-300">Add</span>(<span class="text-green-300">"张三"</span>, <span class="text-yellow-300">90</span>);<br>
+                                    <span class="text-blue-300">scores</span>.<span class="text-blue-300">Add</span>(<span class="text-green-300">"李四"</span>, <span class="text-yellow-300">85</span>);<br>
+                                    <br>
+                                    <span class="text-purple-300">// 访问值</span><br>
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">zhangScore</span> = <span class="text-blue-300">scores</span>[<span class="text-green-300">"张三"</span>];<br>
+                                    <br>
+                                    <span class="text-purple-300">// 检查键是否存在</span><br>
+                                    <span class="text-purple-300">if</span> (<span class="text-blue-300">scores</span>.<span class="text-blue-300">ContainsKey</span>(<span class="text-green-300">"王五"</span>))<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">int</span> <span class="text-blue-300">wangScore</span> = <span class="text-blue-300">scores</span>[<span class="text-green-300">"王五"</span>];<br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-6" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">6. 控制流 - 条件语句</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 条件语句和分支控制</h4>
+                            <p class="text-slate-300 mb-4">特点：包括if-else、switch-case等条件语句，支持嵌套和多条件判断。注意事项：switch-case中每个case需要break，否则会贯穿执行。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// if-else语句</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">score</span> = <span class="text-yellow-300">85</span>;<br>
+                                    <br>
+                                    <span class="text-purple-300">if</span> (<span class="text-blue-300">score</span> >= <span class="text-yellow-300">90</span>)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">"优秀"</span>);<br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">else if</span> (<span class="text-blue-300">score</span> >= <span class="text-yellow-300">80</span>)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">"良好"</span>);<br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">else if</span> (<span class="text-blue-300">score</span> >= <span class="text-yellow-300">60</span>)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">"及格"</span>);<br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">else</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">"不及格"</span>);<br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// switch-case语句</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">dayOfWeek</span> = <span class="text-yellow-300">3</span>;<br>
+                                    <br>
+                                    <span class="text-purple-300">switch</span> (<span class="text-blue-300">dayOfWeek</span>)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">case</span> <span class="text-yellow-300">1</span>:<br>
+                                            <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">"星期一"</span>);<br>
+                                            <span class="text-purple-300">break</span>;<br>
+                                        <span class="text-purple-300">case</span> <span class="text-yellow-300">2</span>:<br>
+                                            <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">"星期二"</span>);<br>
+                                            <span class="text-purple-300">break</span>;<br>
+                                        <span class="text-purple-300">case</span> <span class="text-yellow-300">3</span>:<br>
+                                            <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">"星期三"</span>);<br>
+                                            <span class="text-purple-300">break</span>;<br>
+                                        <span class="text-purple-300">default</span>:<br>
+                                            <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">"其他"</span>);<br>
+                                            <span class="text-purple-300">break</span>;<br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-7" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">7. 控制流 - 循环</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 循环语句</h4>
+                            <p class="text-slate-300 mb-4">特点：包括for、while、do-while、foreach等循环结构，用于重复执行代码块。注意事项：避免无限循环，确保循环条件最终会为false。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// for循环</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">// 计算1到10的和</span><br>
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">sum</span> = <span class="text-yellow-300">0</span>;<br>
+                                    <br>
+                                    <span class="text-purple-300">for</span> (<span class="text-purple-300">int</span> <span class="text-blue-300">i</span> = <span class="text-yellow-300">1</span>; <span class="text-blue-300">i</span> &lt;= <span class="text-yellow-300">10</span>; <span class="text-blue-300">i</span>++)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-blue-300">sum</span> += <span class="text-blue-300">i</span>;<br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <br>
+                                    <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">$"和为：{sum}"</span>);
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// while循环</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">// 输出1到5的数字</span><br>
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">count</span> = <span class="text-yellow-300">1</span>;<br>
+                                    <br>
+                                    <span class="text-purple-300">while</span> (<span class="text-blue-300">count</span> &lt;= <span class="text-yellow-300">5</span>)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-blue-300">count</span>);<br>
+                                        <span class="text-blue-300">count</span>++;<br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// do-while循环</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">// 至少执行一次的循环</span><br>
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">number</span> = <span class="text-yellow-300">1</span>;<br>
+                                    <br>
+                                    <span class="text-purple-300">do</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-blue-300">number</span>);<br>
+                                        <span class="text-blue-300">number</span>++;<br>
+                                    <span class="text-purple-300">}</span> <span class="text-purple-300">while</span> (<span class="text-blue-300">number</span> &lt;= <span class="text-yellow-300">3</span>);
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// foreach循环</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">// 遍历数组或集合</span><br>
+                                    <span class="text-purple-300">string</span>[] <span class="text-blue-300">fruits</span> = { <span class="text-green-300">"苹果"</span>, <span class="text-green-300">"香蕉"</span>, <span class="text-green-300">"橙子"</span> };<br>
+                                    <br>
+                                    <span class="text-purple-300">foreach</span> (<span class="text-purple-300">string</span> <span class="text-blue-300">fruit</span> <span class="text-purple-300">in</span> <span class="text-blue-300">fruits</span>)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-blue-300">fruit</span>);<br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-8" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">8. 函数</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 函数定义和调用</h4>
+                            <p class="text-slate-300 mb-4">特点：支持参数传递、返回值、函数重载、默认参数、命名参数、可选参数。注意事项：函数名使用帕斯卡命名法，参数使用驼峰命名法。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// 简单函数定义和调用</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">void</span> <span class="text-blue-300">SayHello</span>()<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">"Hello, World!"</span>);<br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <br>
+                                    <span class="text-purple-300">// 调用函数</span><br>
+                                    <span class="text-blue-300">SayHello</span>();
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// 带参数和返回值的函数</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">Add</span>(<span class="text-purple-300">int</span> <span class="text-blue-300">a</span>, <span class="text-purple-300">int</span> <span class="text-blue-300">b</span>)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">return</span> <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>;<br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <br>
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">result</span> = <span class="text-blue-300">Add</span>(<span class="text-yellow-300">5</span>, <span class="text-yellow-300">3</span>); <span class="text-slate-500">// 8</span><br>
+                                    <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-blue-300">result</span>);
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// 函数重载</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">Multiply</span>(<span class="text-purple-300">int</span> <span class="text-blue-300">a</span>, <span class="text-purple-300">int</span> <span class="text-blue-300">b</span>)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">return</span> <span class="text-blue-300">a</span> * <span class="text-blue-300">b</span>;<br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <br>
+                                    <span class="text-purple-300">double</span> <span class="text-blue-300">Multiply</span>(<span class="text-purple-300">double</span> <span class="text-blue-300">a</span>, <span class="text-purple-300">double</span> <span class="text-blue-300">b</span>)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">return</span> <span class="text-blue-300">a</span> * <span class="text-blue-300">b</span>;<br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <br>
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">intResult</span> = <span class="text-blue-300">Multiply</span>(<span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>); <span class="text-slate-500">// 6</span><br>
+                                    <span class="text-purple-300">double</span> <span class="text-blue-300">doubleResult</span> = <span class="text-blue-300">Multiply</span>(<span class="text-yellow-300">2.5</span>, <span class="text-yellow-300">3.0</span>); <span class="text-slate-500">// 7.5</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// 默认参数和命名参数</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">void</span> <span class="text-blue-300">PrintInfo</span>(<span class="text-purple-300">string</span> <span class="text-blue-300">name</span>, <span class="text-purple-300">int</span> <span class="text-blue-300">age</span> = <span class="text-yellow-300">18</span>, <span class="text-purple-300">string</span> <span class="text-blue-300">city</span> = <span class="text-green-300">"北京"</span>)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">$"姓名：{name}，年龄：{age}，城市：{city}"</span>);<br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <br>
+                                    <span class="text-purple-300">// 正常调用</span><br>
+                                    <span class="text-blue-300">PrintInfo</span>(<span class="text-green-300">"张三"</span>, <span class="text-yellow-300">25</span>, <span class="text-green-300">"上海"</span>);<br>
+                                    <span class="text-purple-300">// 使用默认参数</span><br>
+                                    <span class="text-blue-300">PrintInfo</span>(<span class="text-green-300">"李四"</span>); <span class="text-slate-500">// 年龄默认18，城市默认北京</span><br>
+                                    <span class="text-purple-300">// 使用命名参数</span><br>
+                                    <span class="text-blue-300">PrintInfo</span>(<span class="text-blue-300">name</span>: <span class="text-green-300">"王五"</span>, <span class="text-blue-300">city</span>: <span class="text-green-300">"广州"</span>); <span class="text-slate-500">// 年龄默认18</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-9" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">9. 面向对象编程</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 类和对象</h4>
+                            <p class="text-slate-300 mb-4">特点：支持封装、继承和多态三大特性，类是对象的模板，对象是类的实例。注意事项：类名使用帕斯卡命名法，成员变量使用驼峰命名法。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// 类的定义</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">class</span> <span class="text-blue-300">Person</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">// 成员变量（字段）</span><br>
+                                        <span class="text-purple-300">private</span> <span class="text-purple-300">string</span> <span class="text-blue-300">name</span>;<br>
+                                        <span class="text-purple-300">private</span> <span class="text-purple-300">int</span> <span class="text-blue-300">age</span>;<br>
+                                        <br>
+                                        <span class="text-purple-300">// 属性</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">string</span> <span class="text-blue-300">Name</span><br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">get</span> { <span class="text-purple-300">return</span> <span class="text-blue-300">name</span>; }<br>
+                                            <span class="text-purple-300">set</span> { <span class="text-blue-300">name</span> = <span class="text-blue-300">value</span>; }<br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">int</span> <span class="text-blue-300">Age</span><br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">get</span> { <span class="text-purple-300">return</span> <span class="text-blue-300">age</span>; }<br>
+                                            <span class="text-purple-300">set</span> { <span class="text-purple-300">if</span> (<span class="text-blue-300">value</span> &gt;= <span class="text-yellow-300">0</span>) <span class="text-blue-300">age</span> = <span class="text-blue-300">value</span>; }<br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <br>
+                                        <span class="text-purple-300">// 构造函数</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-blue-300">Person</span>()<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-blue-300">name</span> = <span class="text-green-300">"未知"</span>;<br>
+                                            <span class="text-blue-300">age</span> = <span class="text-yellow-300">0</span>;<br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <br>
+                                        <span class="text-purple-300">public</span> <span class="text-blue-300">Person</span>(<span class="text-purple-300">string</span> <span class="text-blue-300">name</span>, <span class="text-purple-300">int</span> <span class="text-blue-300">age</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-blue-300">this</span>.<span class="text-blue-300">name</span> = <span class="text-blue-300">name</span>;<br>
+                                            <span class="text-blue-300">this</span>.<span class="text-blue-300">age</span> = <span class="text-blue-300">age</span>;<br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <br>
+                                        <span class="text-purple-300">// 方法</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">void</span> <span class="text-blue-300">SayHello</span>()<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">$"你好，我叫{name}，今年{age}岁。"</span>);<br>
+                                        <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// 对象的创建和使用</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">// 创建对象</span><br>
+                                    <span class="text-purple-300">Person</span> <span class="text-blue-300">person1</span> = <span class="text-purple-300">new</span> <span class="text-blue-300">Person</span>();<br>
+                                    <span class="text-purple-300">Person</span> <span class="text-blue-300">person2</span> = <span class="text-purple-300">new</span> <span class="text-blue-300">Person</span>(<span class="text-green-300">"张三"</span>, <span class="text-yellow-300">25</span>);<br>
+                                    <br>
+                                    <span class="text-purple-300">// 设置属性</span><br>
+                                    <span class="text-blue-300">person1</span>.<span class="text-blue-300">Name</span> = <span class="text-green-300">"李四"</span>;<br>
+                                    <span class="text-blue-300">person1</span>.<span class="text-blue-300">Age</span> = <span class="text-yellow-300">30</span>;<br>
+                                    <br>
+                                    <span class="text-purple-300">// 调用方法</span><br>
+                                    <span class="text-blue-300">person1</span>.<span class="text-blue-300">SayHello</span>();<br>
+                                    <span class="text-blue-300">person2</span>.<span class="text-blue-300">SayHello</span>();
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-10" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">10. 继承和多态</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 继承和多态的实现</h4>
+                            <p class="text-slate-300 mb-4">特点：支持单继承，一个类只能有一个父类，使用virtual和override关键字实现多态。注意事项：构造函数不能继承，父类成员需要使用protected或public访问修饰符才能被继承。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// 继承</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">// 父类</span><br>
+                                    <span class="text-purple-300">class</span> <span class="text-blue-300">Animal</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">string</span> <span class="text-blue-300">Name</span> { <span class="text-purple-300">get</span>; <span class="text-purple-300">set</span>; }<br>
+                                        <br>
+                                        <span class="text-purple-300">// 构造函数</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-blue-300">Animal</span>(<span class="text-purple-300">string</span> <span class="text-blue-300">name</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-blue-300">Name</span> = <span class="text-blue-300">name</span>;<br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <br>
+                                        <span class="text-purple-300">// 虚方法，可被重写</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">virtual</span> <span class="text-purple-300">void</span> <span class="text-blue-300">MakeSound</span>()<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">"动物发出声音"</span>);<br>
+                                        <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <br>
+                                    <span class="text-purple-300">// 子类</span><br>
+                                    <span class="text-purple-300">class</span> <span class="text-blue-300">Dog</span> : <span class="text-blue-300">Animal</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">string</span> <span class="text-blue-300">Breed</span> { <span class="text-purple-300">get</span>; <span class="text-purple-300">set</span>; }<br>
+                                        <br>
+                                        <span class="text-purple-300">// 调用父类构造函数</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-blue-300">Dog</span>(<span class="text-purple-300">string</span> <span class="text-blue-300">name</span>, <span class="text-purple-300">string</span> <span class="text-blue-300">breed</span>) : <span class="text-purple-300">base</span>(<span class="text-blue-300">name</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-blue-300">Breed</span> = <span class="text-blue-300">breed</span>;<br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <br>
+                                        <span class="text-purple-300">// 重写父类方法</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">override</span> <span class="text-purple-300">void</span> <span class="text-blue-300">MakeSound</span>()<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">$"{Name} (品种: {Breed}) 汪汪叫！"</span>);<br>
+                                        <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <br>
+                                    <span class="text-purple-300">// 子类</span><br>
+                                    <span class="text-purple-300">class</span> <span class="text-blue-300">Cat</span> : <span class="text-blue-300">Animal</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">Cat</span>(<span class="text-purple-300">string</span> <span class="text-blue-300">name</span>) : <span class="text-purple-300">base</span>(<span class="text-blue-300">name</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">override</span> <span class="text-purple-300">void</span> <span class="text-blue-300">MakeSound</span>()<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">$"{Name} 喵喵叫！"</span>);<br>
+                                        <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// 多态</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">// 创建对象</span><br>
+                                    <span class="text-blue-300">Animal</span> <span class="text-blue-300">animal1</span> = <span class="text-purple-300">new</span> <span class="text-blue-300">Dog</span>(<span class="text-green-300">"旺财"</span>, <span class="text-green-300">"拉布拉多"</span>);<br>
+                                    <span class="text-blue-300">Animal</span> <span class="text-blue-300">animal2</span> = <span class="text-purple-300">new</span> <span class="text-blue-300">Cat</span>(<span class="text-green-300">"咪咪"</span>);<br>
+                                    <br>
+                                    <span class="text-purple-300">// 多态调用，根据实际类型执行相应的方法</span><br>
+                                    <span class="text-blue-300">animal1</span>.<span class="text-blue-300">MakeSound</span>(); <span class="text-slate-500">// 输出：旺财 (品种: 拉布拉多) 汪汪叫！</span><br>
+                                    <span class="text-blue-300">animal2</span>.<span class="text-blue-300">MakeSound</span>(); <span class="text-slate-500">// 输出：咪咪 喵喵叫！</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-11" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">11. 接口</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 接口定义和实现</h4>
+                            <p class="text-slate-300 mb-4">特点：接口定义方法、属性、事件和索引器的契约，类可以实现多个接口，接口可以继承多个接口。注意事项：接口成员默认是公共的，不能包含字段和实现代码。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// 接口定义</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">interface</span> <span class="text-blue-300">IShape</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">double</span> <span class="text-blue-300">CalculateArea</span>();<br>
+                                        <span class="text-purple-300">double</span> <span class="text-blue-300">CalculatePerimeter</span>();<br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <br>
+                                    <span class="text-purple-300">interface</span> <span class="text-blue-300">IDrawable</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">void</span> <span class="text-blue-300">Draw</span>();<br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// 实现接口</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">// 实现一个接口</span><br>
+                                    <span class="text-purple-300">class</span> <span class="text-blue-300">Circle</span> : <span class="text-blue-300">IShape</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">double</span> <span class="text-blue-300">Radius</span> { <span class="text-purple-300">get</span>; <span class="text-purple-300">set</span>; }<br>
+                                        <br>
+                                        <span class="text-purple-300">public</span> <span class="text-blue-300">Circle</span>(<span class="text-purple-300">double</span> <span class="text-blue-300">radius</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-blue-300">Radius</span> = <span class="text-blue-300">radius</span>;<br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">double</span> <span class="text-blue-300">CalculateArea</span>()<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">return</span> <span class="text-purple-300">Math</span>.<span class="text-blue-300">PI</span> * <span class="text-blue-300">Radius</span> * <span class="text-blue-300">Radius</span>;<br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">double</span> <span class="text-blue-300">CalculatePerimeter</span>()<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">return</span> <span class="text-yellow-300">2</span> * <span class="text-purple-300">Math</span>.<span class="text-blue-300">PI</span> * <span class="text-blue-300">Radius</span>;<br>
+                                        <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <br>
+                                    <span class="text-purple-300">// 实现多个接口</span><br>
+                                    <span class="text-purple-300">class</span> <span class="text-blue-300">Rectangle</span> : <span class="text-blue-300">IShape</span>, <span class="text-blue-300">IDrawable</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">double</span> <span class="text-blue-300">Width</span> { <span class="text-purple-300">get</span>; <span class="text-purple-300">set</span>; }<br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">double</span> <span class="text-blue-300">Height</span> { <span class="text-purple-300">get</span>; <span class="text-purple-300">set</span>; }<br>
+                                        <br>
+                                        <span class="text-purple-300">public</span> <span class="text-blue-300">Rectangle</span>(<span class="text-purple-300">double</span> <span class="text-blue-300">width</span>, <span class="text-purple-300">double</span> <span class="text-blue-300">height</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-blue-300">Width</span> = <span class="text-blue-300">width</span>;<br>
+                                            <span class="text-blue-300">Height</span> = <span class="text-blue-300">height</span>;<br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">double</span> <span class="text-blue-300">CalculateArea</span>()<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">return</span> <span class="text-blue-300">Width</span> * <span class="text-blue-300">Height</span>;<br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">double</span> <span class="text-blue-300">CalculatePerimeter</span>()<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">return</span> <span class="text-yellow-300">2</span> * (<span class="text-blue-300">Width</span> + <span class="text-blue-300">Height</span>);<br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">void</span> <span class="text-blue-300">Draw</span>()<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">$"绘制一个宽为{Width}，高为{Height}的矩形。"</span>);<br>
+                                        <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-12" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">12. 泛型</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 泛型类型和方法</h4>
+                            <p class="text-slate-300 mb-4">特点：允许创建通用的类型和方法，支持多种数据类型，提高代码复用性和类型安全性。注意事项：泛型类型参数使用大写字母开头，通常用T表示。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// 泛型类</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">// 泛型容器类</span><br>
+                                    <span class="text-purple-300">class</span> <span class="text-blue-300">GenericList</span>&lt;<span class="text-purple-300">T</span>&gt;<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">private</span> <span class="text-purple-300">T</span>[] <span class="text-blue-300">items</span>;<br>
+                                        <span class="text-purple-300">private</span> <span class="text-purple-300">int</span> <span class="text-blue-300">count</span>;<br>
+                                        <br>
+                                        <span class="text-purple-300">public</span> <span class="text-blue-300">GenericList</span>(<span class="text-purple-300">int</span> <span class="text-blue-300">capacity</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-blue-300">items</span> = <span class="text-purple-300">new</span> <span class="text-purple-300">T</span>[<span class="text-blue-300">capacity</span>];<br>
+                                            <span class="text-blue-300">count</span> = <span class="text-yellow-300">0</span>;<br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">void</span> <span class="text-blue-300">Add</span>(<span class="text-purple-300">T</span> <span class="text-blue-300">item</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">if</span> (<span class="text-blue-300">count</span> &lt; <span class="text-blue-300">items</span>.<span class="text-blue-300">Length</span>)<br>
+                                            <span class="text-purple-300">{</span><br>
+                                                <span class="text-blue-300">items</span>[<span class="text-blue-300">count</span>++] = <span class="text-blue-300">item</span>;<br>
+                                            <span class="text-purple-300">}</span><br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">T</span> <span class="text-blue-300">GetItem</span>(<span class="text-purple-300">int</span> <span class="text-blue-300">index</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">if</span> (<span class="text-blue-300">index</span> &gt;= <span class="text-yellow-300">0</span> &amp;&amp; <span class="text-blue-300">index</span> &lt; <span class="text-blue-300">count</span>)<br>
+                                            <span class="text-purple-300">{</span><br>
+                                                <span class="text-purple-300">return</span> <span class="text-blue-300">items</span>[<span class="text-blue-300">index</span>];<br>
+                                            <span class="text-purple-300">}</span><br>
+                                            <span class="text-purple-300">throw</span> <span class="text-purple-300">new</span> <span class="text-blue-300">IndexOutOfRangeException</span>();<br>
+                                        <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// 泛型方法</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">class</span> <span class="text-blue-300">GenericMethodExample</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">// 泛型方法</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">static</span> <span class="text-purple-300">void</span> <span class="text-blue-300">Swap</span>&lt;<span class="text-purple-300">T</span>&gt;(<span class="text-purple-300">ref</span> <span class="text-purple-300">T</span> <span class="text-blue-300">a</span>, <span class="text-purple-300">ref</span> <span class="text-purple-300">T</span> <span class="text-blue-300">b</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">T</span> <span class="text-blue-300">temp</span> = <span class="text-blue-300">a</span>;<br>
+                                            <span class="text-blue-300">a</span> = <span class="text-blue-300">b</span>;<br>
+                                            <span class="text-blue-300">b</span> = <span class="text-blue-300">temp</span>;<br>
+                                        <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// 使用泛型</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">// 使用泛型类</span><br>
+                                    <span class="text-blue-300">GenericList</span>&lt;<span class="text-purple-300">int</span>&gt; <span class="text-blue-300">intList</span> = <span class="text-purple-300">new</span> <span class="text-blue-300">GenericList</span>&lt;<span class="text-purple-300">int</span>&gt;(<span class="text-yellow-300">10</span>);<br>
+                                    <span class="text-blue-300">intList</span>.<span class="text-blue-300">Add</span>(<span class="text-yellow-300">1</span>);<br>
+                                    <span class="text-blue-300">intList</span>.<span class="text-blue-300">Add</span>(<span class="text-yellow-300">2</span>);<br>
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">value</span> = <span class="text-blue-300">intList</span>.<span class="text-blue-300">GetItem</span>(<span class="text-yellow-300">0</span>); <span class="text-slate-500">// 1</span><br>
+                                    <br>
+                                    <span class="text-purple-300">// 使用泛型方法</span><br>
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">x</span> = <span class="text-yellow-300">5</span>;<br>
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">y</span> = <span class="text-yellow-300">10</span>;<br>
+                                    <span class="text-blue-300">GenericMethodExample</span>.<span class="text-blue-300">Swap</span>(<span class="text-purple-300">ref</span> <span class="text-blue-300">x</span>, <span class="text-purple-300">ref</span> <span class="text-blue-300">y</span>); <span class="text-slate-500">// x=10, y=5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-13" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">13. 异常处理</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 异常处理机制</h4>
+                            <p class="text-slate-300 mb-4">特点：使用try-catch-finally结构处理运行时错误，提供异常类型层次结构，支持自定义异常。注意事项：catch块应从具体异常到通用异常依次排列。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// try-catch结构</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">try</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">int</span>[] <span class="text-blue-300">numbers</span> = { <span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span> };<br>
+                                        <span class="text-purple-300">int</span> <span class="text-blue-300">value</span> = <span class="text-blue-300">numbers</span>[<span class="text-yellow-300">5</span>]; <span class="text-slate-500">// 索引越界异常</span><br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">catch</span> (<span class="text-blue-300">IndexOutOfRangeException</span> <span class="text-blue-300">ex</span>)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">$"索引越界：{ex.Message}"</span>);<br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">catch</span> (<span class="text-purple-300">Exception</span> <span class="text-blue-300">ex</span>)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">$"发生异常：{ex.Message}"</span>);<br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">finally</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">"无论是否发生异常，都会执行finally块"</span>);<br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// 抛出异常</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">public</span> <span class="text-purple-300">void</span> <span class="text-blue-300">Divide</span>(<span class="text-purple-300">int</span> <span class="text-blue-300">a</span>, <span class="text-purple-300">int</span> <span class="text-blue-300">b</span>)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">if</span> (<span class="text-blue-300">b</span> == <span class="text-yellow-300">0</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">throw</span> <span class="text-purple-300">new</span> <span class="text-blue-300">DivideByZeroException</span>(<span class="text-green-300">"除数不能为零"</span>);<br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">$"结果：{a / b}"</span>);<br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// 自定义异常</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">// 自定义异常类</span><br>
+                                    <span class="text-purple-300">class</span> <span class="text-blue-300">InvalidAgeException</span> : <span class="text-purple-300">Exception</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-blue-300">InvalidAgeException</span>() : <span class="text-purple-300">base</span>() { }<br>
+                                        <span class="text-purple-300">public</span> <span class="text-blue-300">InvalidAgeException</span>(<span class="text-purple-300">string</span> <span class="text-blue-300">message</span>) : <span class="text-purple-300">base</span>(<span class="text-blue-300">message</span>) { }<br>
+                                        <span class="text-purple-300">public</span> <span class="text-blue-300">InvalidAgeException</span>(<span class="text-purple-300">string</span> <span class="text-blue-300">message</span>, <span class="text-purple-300">Exception</span> <span class="text-blue-300">innerException</span>) : <span class="text-purple-300">base</span>(<span class="text-blue-300">message</span>, <span class="text-blue-300">innerException</span>) { }<br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <br>
+                                    <span class="text-purple-300">// 使用自定义异常</span><br>
+                                    <span class="text-purple-300">public</span> <span class="text-purple-300">void</span> <span class="text-blue-300">SetAge</span>(<span class="text-purple-300">int</span> <span class="text-blue-300">age</span>)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">if</span> (<span class="text-blue-300">age</span> &lt; <span class="text-yellow-300">0</span> || <span class="text-blue-300">age</span> &gt; <span class="text-yellow-300">120</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">throw</span> <span class="text-purple-300">new</span> <span class="text-blue-300">InvalidAgeException</span>(<span class="text-green-300">$"无效的年龄：{age}"</span>);<br>
+                                        <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section id="section-14" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">14. LINQ</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - LINQ查询语言集成</h4>
+                            <p class="text-slate-300 mb-4">特点：Language Integrated Query，将查询功能集成到C#语言中，支持查询语法和方法语法两种风格。注意事项：LINQ提供统一的查询方式，适用于各种数据源（集合、数据库、XML等）。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// LINQ查询语法</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">int</span>[] <span class="text-blue-300">numbers</span> = { <span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>, <span class="text-yellow-300">6</span>, <span class="text-yellow-300">7</span>, <span class="text-yellow-300">8</span>, <span class="text-yellow-300">9</span>, <span class="text-yellow-300">10</span> };<br>
+                                    <br>
+                                    <span class="text-purple-300">// 查询语法</span><br>
+                                    <span class="text-purple-300">var</span> <span class="text-blue-300">evenNumbers</span> = <span class="text-purple-300">from</span> <span class="text-blue-300">num</span> <span class="text-purple-300">in</span> <span class="text-blue-300">numbers</span><br>
+                                               <span class="text-purple-300">where</span> <span class="text-blue-300">num</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span><br>
+                                               <span class="text-purple-300">select</span> <span class="text-blue-300">num</span>;<br>
+                                    <br>
+                                    <span class="text-purple-300">foreach</span> (<span class="text-purple-300">int</span> <span class="text-blue-300">num</span> <span class="text-purple-300">in</span> <span class="text-blue-300">evenNumbers</span>)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-blue-300">num</span>);<br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                                <div class="text-slate-400 mt-4 mb-2">// LINQ方法语法</div>
+                                <div class="text-sm leading-6 mt-2">
+                                    <span class="text-purple-300">// 方法语法（Lambda表达式）</span><br>
+                                    <span class="text-purple-300">var</span> <span class="text-blue-300">oddNumbers</span> = <span class="text-blue-300">numbers</span>.<span class="text-blue-300">Where</span>(<span class="text-blue-300">num</span> => <span class="text-blue-300">num</span> % <span class="text-yellow-300">2</span> != <span class="text-yellow-300">0</span>).<span class="text-blue-300">ToList</span>();<br>
+                                    <br>
+                                    <span class="text-purple-300">// 链式调用</span><br>
+                                    <span class="text-purple-300">var</span> <span class="text-blue-300">result</span> = <span class="text-blue-300">numbers</span><br>
+                                                .<span class="text-blue-300">Where</span>(<span class="text-blue-300">num</span> => <span class="text-blue-300">num</span> > <span class="text-yellow-300">5</span>)<br>
+                                                .<span class="text-blue-300">OrderByDescending</span>(<span class="text-blue-300">num</span> => <span class="text-blue-300">num</span>)<br>
+                                                .<span class="text-blue-300">Select</span>(<span class="text-blue-300">num</span> => <span class="text-green-300">$"数字: {num}"</span>);<br>
+                                    <br>
+                                    <span class="text-purple-300">foreach</span> (<span class="text-purple-300">string</span> <span class="text-blue-300">item</span> <span class="text-purple-300">in</span> <span class="text-blue-300">result</span>)<br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-blue-300">item</span>);<br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="section-15" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">15. Delegates and Events</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 委托和事件</h4>
+                            <p class="text-slate-300 mb-4">特点：委托是类型安全的函数指针，事件是基于委托的发布-订阅模式实现。注意事项：委托可以指向多个方法（多播委托），事件只能通过发布者触发。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// 委托定义和使用</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">// 定义委托类型</span><br>
+                                    <span class="text-purple-300">delegate</span> <span class="text-purple-300">void</span> <span class="text-blue-300">CalculateHandler</span>(<span class="text-purple-300">int</span> <span class="text-blue-300">a</span>, <span class="text-purple-300">int</span> <span class="text-blue-300">b</span>);<br>
+                                    <br>
+                                    <span class="text-purple-300">class</span> <span class="text-blue-300">Calculator</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">static</span> <span class="text-purple-300">void</span> <span class="text-blue-300">Add</span>(<span class="text-purple-300">int</span> <span class="text-blue-300">a</span>, <span class="text-purple-300">int</span> <span class="text-blue-300">b</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">$"和：{a + b}"</span>);<br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">static</span> <span class="text-purple-300">void</span> <span class="text-blue-300">Subtract</span>(<span class="text-purple-300">int</span> <span class="text-blue-300">a</span>, <span class="text-purple-300">int</span> <span class="text-blue-300">b</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">$"差：{a - b}"</span>);<br>
+                                        <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <br>
+                                    <span class="text-purple-300">// 使用委托</span><br>
+                                    <span class="text-blue-300">CalculateHandler</span> <span class="text-blue-300">handler</span> = <span class="text-blue-300">Calculator</span>.<span class="text-blue-300">Add</span>;<br>
+                                    <span class="text-blue-300">handler</span> += <span class="text-blue-300">Calculator</span>.<span class="text-blue-300">Subtract</span>; <span class="text-slate-400">// 多播委托</span><br>
+                                    <br>
+                                    <span class="text-blue-300">handler</span>(<span class="text-yellow-300">10</span>, <span class="text-yellow-300">5</span>); <span class="text-slate-400">// 调用所有方法</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="section-16" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">16. Lambda Expressions</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - Lambda表达式</h4>
+                            <p class="text-slate-300 mb-4">特点：匿名函数的简洁语法，用于创建委托实例或表达式树。注意事项：Lambda表达式可以捕获外部变量，注意闭包问题。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// 基本Lambda表达式</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">// 无参数Lambda</span><br>
+                                    <span class="text-blue-300">Action</span> <span class="text-blue-300">sayHello</span> = () => <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">"Hello"</span>);<br>
+                                    <span class="text-blue-300">sayHello</span>();<br>
+                                    <br>
+                                    <span class="text-purple-300">// 单参数Lambda</span><br>
+                                    <span class="text-blue-300">Func</span>&lt;<span class="text-purple-300">int</span>, <span class="text-purple-300">int</span>&gt; <span class="text-blue-300">square</span> = <span class="text-blue-300">x</span> => <span class="text-blue-300">x</span> * <span class="text-blue-300">x</span>;<br>
+                                    <span class="text-purple-300">int</span> <span class="text-blue-300">result</span> = <span class="text-blue-300">square</span>(<span class="text-yellow-300">5</span>); <span class="text-slate-400">// 25</span><br>
+                                    <br>
+                                    <span class="text-purple-300">// 多参数Lambda</span><br>
+                                    <span class="text-blue-300">Func</span>&lt;<span class="text-purple-300">int</span>, <span class="text-purple-300">int</span>, <span class="text-purple-300">int</span>&gt; <span class="text-blue-300">add</span> = (<span class="text-blue-300">a</span>, <span class="text-blue-300">b</span>) => <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span>;<br>
+                                    <span class="text-blue-300">result</span> = <span class="text-blue-300">add</span>(<span class="text-yellow-300">10</span>, <span class="text-yellow-300">5</span>); <span class="text-slate-400">// 15</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="section-17" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">17. Asynchronous Programming</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 异步编程</h4>
+                            <p class="text-slate-300 mb-4">特点：使用async和await关键字简化异步操作，避免阻塞主线程。注意事项：async方法必须返回void、Task或Task&lt;T&gt;，await只能在async方法中使用。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// 基本异步方法</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">using</span> <span class="text-blue-300">System</span>.<span class="text-blue-300">Threading</span>.<span class="text-blue-300">Tasks</span>;<br>
+                                    <span class="text-purple-300">using</span> <span class="text-blue-300">System</span>.<span class="text-blue-300">Threading</span>;<br>
+                                    <br>
+                                    <span class="text-purple-300">class</span> <span class="text-blue-300">AsyncExample</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">// 异步方法</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">async</span> <span class="text-purple-300">Task</span>&lt;<span class="text-purple-300">string</span>&gt; <span class="text-blue-300">DownloadDataAsync</span>(<span class="text-purple-300">string</span> <span class="text-blue-300">url</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">$"开始下载：{url}"</span>);<br>
+                                            <br>
+                                            <span class="text-purple-300">// 模拟网络延迟</span><br>
+                                            <span class="text-purple-300">await</span> <span class="text-blue-300">Task</span>.<span class="text-blue-300">Delay</span>(<span class="text-yellow-300">2000</span>);<br>
+                                            <br>
+                                            <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">$"下载完成：{url}"</span>);<br>
+                                            <span class="text-purple-300">return</span> <span class="text-green-300">$"来自 {url} 的数据"</span>;<br>
+                                        <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="section-18" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">18. Extension Methods</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 扩展方法</h4>
+                            <p class="text-slate-300 mb-4">特点：允许向现有类型添加方法，无需修改原始类型的定义。注意事项：扩展方法必须在静态类中定义，第一个参数使用this关键字。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// 字符串扩展方法</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">// 静态类包含扩展方法</span><br>
+                                    <span class="text-purple-300">public</span> <span class="text-purple-300">static</span> <span class="text-purple-300">class</span> <span class="text-blue-300">StringExtensions</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">// 扩展方法：首字母大写</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">static</span> <span class="text-purple-300">string</span> <span class="text-blue-300">ToTitleCase</span>(<span class="text-purple-300">this</span> <span class="text-purple-300">string</span> <span class="text-blue-300">str</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">if</span> (<span class="text-purple-300">string</span>.<span class="text-blue-300">IsNullOrWhiteSpace</span>(<span class="text-blue-300">str</span>))<br>
+                                                <span class="text-purple-300">return</span> <span class="text-blue-300">str</span>;<br>
+                                            <br>
+                                            <span class="text-purple-300">char</span>[] <span class="text-blue-300">chars</span> = <span class="text-blue-300">str</span>.<span class="text-blue-300">ToCharArray</span>();<br>
+                                            <span class="text-blue-300">chars</span>[<span class="text-yellow-300">0</span>] = <span class="text-purple-300">char</span>.<span class="text-blue-300">ToUpper</span>(<span class="text-blue-300">chars</span>[<span class="text-yellow-300">0</span>]);<br>
+                                            <span class="text-purple-300">return</span> <span class="text-purple-300">new</span> <span class="text-purple-300">string</span>(<span class="text-blue-300">chars</span>);<br>
+                                        <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <br>
+                                    <span class="text-purple-300">// 使用扩展方法</span><br>
+                                    <span class="text-purple-300">string</span> <span class="text-blue-300">text</span> = <span class="text-green-300">"hello world"</span>;<br>
+                                    <span class="text-purple-300">string</span> <span class="text-blue-300">titleCase</span> = <span class="text-blue-300">text</span>.<span class="text-blue-300">ToTitleCase</span>(); <span class="text-slate-400">// "Hello world"</span><br>
+                                    <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-blue-300">titleCase</span>);<br>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="section-19" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">19. Attributes</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 属性</h4>
+                            <p class="text-slate-300 mb-4">特点：提供程序元素的元数据，用于描述类型、方法、属性等的特性。注意事项：可以使用预定义属性或自定义属性，通过反射读取属性信息。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// 预定义属性</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">using</span> <span class="text-blue-300">System</span>;<br>
+                                    <span class="text-purple-300">using</span> <span class="text-blue-300">System</span>.<span class="text-blue-300">Diagnostics</span>;<br>
+                                    <br>
+                                    <span class="text-purple-300">class</span> <span class="text-blue-300">MyClass</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">// Obsolete属性：标记方法已过时</span><br>
+                                        [<span class="text-blue-300">Obsolete</span>(<span class="text-green-300">"此方法已过时，请使用NewMethod代替"</span>, <span class="text-blue-300">true</span>)]<br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">void</span> <span class="text-blue-300">OldMethod</span>()<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">"这是旧方法"</span>);<br>
+                                        <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="section-20" class="mb-16">
+                        <h2 class="text-3xl font-bold mb-8 text-center"><span class="gradient-text">20. Operator Overloading</span></h2>
+                        <div class="language-content" data-lang="csharp">
+                            <h4 class="text-lg font-medium mb-4">C# - 运算符重载</h4>
+                            <p class="text-slate-300 mb-4">特点：允许为自定义类型重载标准运算符，使代码更加直观。注意事项：运算符重载必须是公共静态方法，一元运算符重载参数为当前类型，二元运算符重载参数为两个类型。</p>
+                            <div class="code-block rounded-lg p-4 code-font text-sm">
+                                <div class="text-slate-400 mb-2">// 向量类型的运算符重载</div>
+                                <div class="text-sm leading-6">
+                                    <span class="text-purple-300">class</span> <span class="text-blue-300">Vector2D</span><br>
+                                    <span class="text-purple-300">{</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">double</span> <span class="text-blue-300">X</span> { <span class="text-purple-300">get</span>; <span class="text-purple-300">set</span>; }<br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">double</span> <span class="text-blue-300">Y</span> { <span class="text-purple-300">get</span>; <span class="text-purple-300">set</span>; }<br>
+                                        <br>
+                                        <span class="text-purple-300">public</span> <span class="text-blue-300">Vector2D</span>(<span class="text-purple-300">double</span> <span class="text-blue-300">x</span>, <span class="text-purple-300">double</span> <span class="text-blue-300">y</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-blue-300">X</span> = <span class="text-blue-300">x</span>;<br>
+                                            <span class="text-blue-300">Y</span> = <span class="text-blue-300">y</span>;<br>
+                                        <span class="text-purple-300">}</span><br>
+                                        <br>
+                                        <span class="text-purple-300">// 重载加法运算符</span><br>
+                                        <span class="text-purple-300">public</span> <span class="text-purple-300">static</span> <span class="text-blue-300">Vector2D</span> <span class="text-purple-300">operator</span> + (<span class="text-blue-300">Vector2D</span> <span class="text-blue-300">a</span>, <span class="text-blue-300">Vector2D</span> <span class="text-blue-300">b</span>)<br>
+                                        <span class="text-purple-300">{</span><br>
+                                            <span class="text-purple-300">return</span> <span class="text-purple-300">new</span> <span class="text-blue-300">Vector2D</span>(<span class="text-blue-300">a</span>.<span class="text-blue-300">X</span> + <span class="text-blue-300">b</span>.<span class="text-blue-300">X</span>, <span class="text-blue-300">a</span>.<span class="text-blue-300">Y</span> + <span class="text-blue-300">b</span>.<span class="text-blue-300">Y</span>);<br>
+                                        <span class="text-purple-300">}</span><br>
+                                    <span class="text-purple-300">}</span><br>
+                                    <br>
+                                    <span class="text-purple-300">// 使用运算符重载</span><br>
+                                    <span class="text-blue-300">Vector2D</span> <span class="text-blue-300">v1</span> = <span class="text-purple-300">new</span> <span class="text-blue-300">Vector2D</span>(<span class="text-yellow-300">1</span>.<span class="text-yellow-300">0</span>, <span class="text-yellow-300">2</span>.<span class="text-yellow-300">0</span>);<br>
+                                    <span class="text-blue-300">Vector2D</span> <span class="text-blue-300">v2</span> = <span class="text-purple-300">new</span> <span class="text-blue-300">Vector2D</span>(<span class="text-yellow-300">3</span>.<span class="text-yellow-300">0</span>, <span class="text-yellow-300">4</span>.<span class="text-yellow-300">0</span>);<br>
+                                    <span class="text-blue-300">Vector2D</span> <span class="text-blue-300">v3</span> = <span class="text-blue-300">v1</span> + <span class="text-blue-300">v2</span>; <span class="text-slate-400">// 使用重载的加法运算符</span><br>
+                                    <br>
+                                    <span class="text-purple-300">Console</span>.<span class="text-blue-300">WriteLine</span>(<span class="text-green-300">$"结果：({v3.X}, {v3.Y})"</span>); <span class="text-slate-400">// 输出：结果：(4, 6)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
         </div>
     </main>
 </body>
