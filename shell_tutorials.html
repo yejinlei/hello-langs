@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shell/Bash教程 - Hello 编程语言</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .syntax-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .language-tab {
+            transition: all 0.3s ease;
+        }
+        .language-tab.active {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            color: white;
+        }
+        .code-block {
+            background: rgba(2, 6, 23, 0.9);
+            border-left: 4px solid #3B82F6;
+        }
+        .highlight {
+            background: rgba(59, 130, 246, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .language-content.hidden {
+            display: none;
+        }
+        
+        /* Shell/Bash语法高亮 */
+        .language-content .bash-keyword {
+            color: #F87171 !important;
+            font-weight: 500 !important;
+        }
+        .language-content .bash-string {
+            color: #A78BFA !important;
+        }
+        .language-content .bash-number {
+            color: #FBBF24 !important;
+        }
+        .language-content .bash-comment {
+            color: #6B7280 !important;
+        }
+        .language-content .bash-function {
+            color: #34D399 !important;
+        }
+        .language-content .bash-operator {
+            color: #EC4899 !important;
+        }
+        .language-content .bash-variable {
+            color: #60A5FA !important;
+        }
+        .language-content .bash-command {
+            color: #8B5CF6 !important;
+        }
+        .language-content .bash-builtin {
+            color: #F59E0B !important;
+        }
+        .language-content .bash-pipe {
+            color: #EC4899 !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- 左侧导航栏 -->
+            <aside class="lg:w-1/4">
+                <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 sticky top-24 border border-slate-700">
+                    <h3 class="text-lg font-bold mb-4 gradient-text">章节导航</h3>
+                    <nav class="space-y-2">
+                        <a href="#section-1" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">1. Shell基础</a>
+                        <a href="#section-2" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">2. 文件和目录操作</a>
+                        <a href="#section-3" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">3. 文本处理命令</a>
+                        <a href="#section-4" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">4. 变量和赋值</a>
+                        <a href="#section-5" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">5. 字符串操作</a>
+                        <a href="#section-6" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">6. 数组操作</a>
+                        <a href="#section-7" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">7. 条件语句</a>
+                        <a href="#section-8" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">8. 循环语句</a>
+                        <a href="#section-9" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">9. 函数</a>
+                        <a href="#section-10" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">10. 输入输出重定向</a>
+                        <a href="#section-11" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">11. 管道和过滤器</a>
+                        <a href="#section-12" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">12. 正则表达式</a>
+                        <a href="#section-13" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">13. 进程管理</a>
+                        <a href="#section-14" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">14. 脚本编写</a>
+                        <a href="#section-15" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">15. 环境变量</a>
+                        <a href="#section-16" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">16. 权限管理</a>
+                        <a href="#section-17" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">17. 网络命令</a>
+                        <a href="#section-18" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">18. 压缩和归档</a>
+                        <a href="#section-19" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">19. 高级主题</a>
+                    </nav>
+                </div>
+            </aside>
+            
+            <!-- 主要内容区域 -->
+            <div class="lg:w-3/4">
+                <!-- 第1章：Shell基础 -->
+                <section id="section-1" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">1. Shell基础</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">什么是Shell？</h3>
+                        <p class="mb-4">Shell是一种命令行解释器，它提供了用户与操作系统内核进行交互的界面。Bash (Bourne Again Shell) 是最常用的Shell之一。</p>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">基本命令</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content"><span class="bash-command">echo</span> <span class="bash-string">"Hello, World!"</span>  <span class="bash-comment"># 输出文本</span>
+<span class="bash-command">pwd</span>                    <span class="bash-comment"># 显示当前工作目录</span>
+<span class="bash-command">ls</span>                     <span class="bash-comment"># 列出目录内容</span>
+<span class="bash-command">cd</span> /path/to/directory   <span class="bash-comment"># 切换目录</span>
+<span class="bash-command">mkdir</span> new_directory     <span class="bash-comment"># 创建新目录</span>
+<span class="bash-command">rm</span> file.txt            <span class="bash-comment"># 删除文件</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">命令格式</h3>
+                        <p class="mb-4">Shell命令的基本格式：</p>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">command</span> <span class="bash-operator">[</span>options<span class="bash-operator">]</span> <span class="bash-operator">[</span>arguments<span class="bash-operator">]</span></code></pre>
+                        <p class="mt-4">示例：</p>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">ls</span> <span class="bash-operator">-l</span> <span class="bash-operator">-a</span>  <span class="bash-comment"># 长格式列出所有文件（包括隐藏文件）</span>
+<span class="bash-command">cp</span> <span class="bash-string">file1.txt</span> <span class="bash-string">file2.txt</span>  <span class="bash-comment"># 复制文件</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第2章：文件和目录操作 -->
+                <section id="section-2" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">2. 文件和目录操作</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">目录操作</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">cd</span> <span class="bash-string">~</span>              <span class="bash-comment"># 切换到用户主目录</span>
+<span class="bash-command">cd</span> <span class="bash-operator">-</span>               <span class="bash-comment"># 切换到上一个工作目录</span>
+<span class="bash-command">mkdir</span> <span class="bash-operator">-p</span> dir1/dir2  <span class="bash-comment"># 创建嵌套目录</span>
+<span class="bash-command">rmdir</span> empty_dir        <span class="bash-comment"># 删除空目录</span>
+<span class="bash-command">rm</span> <span class="bash-operator">-rf</span> dir_name    <span class="bash-comment"># 递归删除目录及其内容</span>
+<span class="bash-command">pwd</span>                    <span class="bash-comment"># 显示当前工作目录</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">文件操作</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">touch</span> new_file.txt     <span class="bash-comment"># 创建空文件</span>
+<span class="bash-command">cp</span> <span class="bash-string">file.txt</span> <span class="bash-string">dir/</span>   <span class="bash-comment"># 复制文件到目录</span>
+<span class="bash-command">mv</span> <span class="bash-string">old.txt</span> <span class="bash-string">new.txt</span> <span class="bash-comment"># 重命名文件</span>
+<span class="bash-command">mv</span> <span class="bash-string">file.txt</span> <span class="bash-string">dir/</span>   <span class="bash-comment"># 移动文件到目录</span>
+<span class="bash-command">rm</span> <span class="bash-operator">-f</span> file.txt    <span class="bash-comment"># 强制删除文件</span>
+<span class="bash-command">cat</span> file.txt          <span class="bash-comment"># 显示文件内容</span>
+<span class="bash-command">head</span> <span class="bash-string">file.txt</span>      <span class="bash-comment"># 显示文件前10行</span>
+<span class="bash-command">tail</span> <span class="bash-string">file.txt</span>      <span class="bash-comment"># 显示文件后10行</span>
+<span class="bash-command">tail</span> <span class="bash-operator">-f</span> <span class="bash-string">file.txt</span>  <span class="bash-comment"># 实时显示文件更新</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第3章：文本处理命令 -->
+                <section id="section-3" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">3. 文本处理命令</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">基本文本处理</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">cat</span> <span class="bash-string">file1.txt</span> <span class="bash-string">file2.txt</span> <span class="bash-operator">></span> <span class="bash-string">combined.txt</span>  <span class="bash-comment"># 合并文件</span>
+<span class="bash-command">sort</span> <span class="bash-string">file.txt</span>                    <span class="bash-comment"># 排序文件内容</span>
+<span class="bash-command">uniq</span> <span class="bash-string">file.txt</span>                    <span class="bash-comment"># 去除重复行</span>
+<span class="bash-command">wc</span> <span class="bash-operator">-l</span> <span class="bash-string">file.txt</span>                <span class="bash-comment"># 统计行数</span>
+<span class="bash-command">grep</span> <span class="bash-string">"pattern"</span> <span class="bash-string">file.txt</span>           <span class="bash-comment"># 查找匹配模式的行</span>
+<span class="bash-command">sed</span> <span class="bash-string">'s/old/new/g'</span> <span class="bash-string">file.txt</span>      <span class="bash-comment"># 替换文本</span>
+<span class="bash-command">awk</span> <span class="bash-string">'{print $1}'</span> <span class="bash-string">file.txt</span>        <span class="bash-comment"># 打印第一列</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">更复杂的文本处理</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">grep</span> <span class="bash-operator">-i</span> <span class="bash-operator">-r</span> <span class="bash-string">"error"</span> /var/log/  <span class="bash-comment"># 递归查找错误日志</span>
+<span class="bash-command">sed</span> <span class="bash-string">'s/^/# /'</span> <span class="bash-string">file.txt</span>               <span class="bash-comment"># 在每行前添加注释</span>
+<span class="bash-command">awk</span> <span class="bash-string">'{sum += $2} END {print sum}'</span> <span class="bash-string">file.txt</span>  <span class="bash-comment"># 计算第二列总和</span>
+<span class="bash-command">cut</span> <span class="bash-operator">-d</span><span class="bash-string">","</span> <span class="bash-operator">-f</span><span class="bash-number">2</span> <span class="bash-string">file.csv</span>         <span class="bash-comment"># 提取CSV文件的第二列</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第4章：变量和赋值 -->
+                <section id="section-4" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">4. 变量和赋值</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">变量定义和使用</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-variable">name</span><span class="bash-operator">=</span><span class="bash-string">"John"</span>        <span class="bash-comment"># 定义变量（注意等号前后不能有空格）</span>
+<span class="bash-command">echo</span> <span class="bash-operator">$</span><span class="bash-variable">name</span>         <span class="bash-comment"># 使用变量</span>
+<span class="bash-command">echo</span> <span class="bash-string">"My name is </span><span class="bash-operator">$</span><span class="bash-variable">name</span><span class="bash-string">"</span>  <span class="bash-comment"># 在字符串中使用变量</span>
+<span class="bash-command">echo</span> <span class="bash-string">"My name is </span><span class="bash-operator">${</span><span class="bash-variable">name</span><span class="bash-operator">}s</span><span class="bash-string">"</span> <span class="bash-comment"># 变量名扩展</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">命令替换</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-variable">files</span><span class="bash-operator">=</span><span class="bash-operator">`</span><span class="bash-command">ls</span><span class="bash-operator">`</span>         <span class="bash-comment"># 使用反引号进行命令替换</span>
+<span class="bash-variable">files</span><span class="bash-operator">=</span><span class="bash-operator">$(</span><span class="bash-command">ls</span><span class="bash-operator">)</span>        <span class="bash-comment"># 使用$()进行命令替换（推荐）</span>
+<span class="bash-command">echo</span> <span class="bash-operator">$</span><span class="bash-variable">files</span>
+
+<span class="bash-variable">date</span><span class="bash-operator">=</span><span class="bash-operator">$(</span><span class="bash-command">date</span> <span class="bash-operator">+%Y-%m-%d</span><span class="bash-operator">)</span>
+<span class="bash-command">echo</span> <span class="bash-string">"Today is </span><span class="bash-operator">$</span><span class="bash-variable">date</span><span class="bash-string">"</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第5章：字符串操作 -->
+                <section id="section-5" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">5. 字符串操作</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">字符串长度</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-variable">str</span><span class="bash-operator">=</span><span class="bash-string">"Hello World"</span>
+<span class="bash-command">echo</span> <span class="bash-operator">${#</span><span class="bash-variable">str</span><span class="bash-operator">}</span>  <span class="bash-comment"># 输出：11</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">字符串截取</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-variable">str</span><span class="bash-operator">=</span><span class="bash-string">"Hello World"</span>
+<span class="bash-command">echo</span> <span class="bash-operator">${</span><span class="bash-variable">str</span><span class="bash-operator">:6</span><span class="bash-operator">}</span>    <span class="bash-comment"># 从位置6开始截取：World</span>
+<span class="bash-command">echo</span> <span class="bash-operator">${</span><span class="bash-variable">str</span><span class="bash-operator">:0:5</span><span class="bash-operator">}</span>  <span class="bash-comment"># 从位置0开始截取5个字符：Hello</span>
+<span class="bash-command">echo</span> <span class="bash-operator">${</span><span class="bash-variable">str</span><span class="bash-operator">: -5</span><span class="bash-operator">}</span>   <span class="bash-comment"># 截取最后5个字符：World</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">字符串替换</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-variable">str</span><span class="bash-operator">=</span><span class="bash-string">"Hello World"</span>
+<span class="bash-command">echo</span> <span class="bash-operator">${</span><span class="bash-variable">str</span><span class="bash-operator">/World/PHP</span><span class="bash-operator">}</span>   <span class="bash-comment"># 替换第一个匹配：Hello PHP</span>
+<span class="bash-command">echo</span> <span class="bash-operator">${</span><span class="bash-variable">str</span><span class="bash-operator">//l/L</span><span class="bash-operator">}</span>      <span class="bash-comment"># 替换所有匹配：HeLLo WorLd</span>
+<span class="bash-command">echo</span> <span class="bash-operator">${</span><span class="bash-variable">str</span><span class="bash-operator">/#Hello/Hi</span><span class="bash-operator">}</span>   <span class="bash-comment"># 替换开头：Hi World</span>
+<span class="bash-command">echo</span> <span class="bash-operator">${</span><span class="bash-variable">str</span><span class="bash-operator">/%World/Shell</span><span class="bash-operator">}</span> <span class="bash-comment"># 替换结尾：Hello Shell</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第6章：数组操作 -->
+                <section id="section-6" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">6. 数组操作</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">数组定义和访问</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-variable">fruits</span><span class="bash-operator">=(</span><span class="bash-string">"apple"</span> <span class="bash-string">"banana"</span> <span class="bash-string">"orange"</span><span class="bash-operator">)</span>  <span class="bash-comment"># 定义数组</span>
+<span class="bash-command">echo</span> <span class="bash-operator">${</span><span class="bash-variable">fruits</span><span class="bash-operator">[0]</span><span class="bash-operator">}</span>         <span class="bash-comment"># 访问第一个元素：apple</span>
+<span class="bash-command">echo</span> <span class="bash-operator">${</span><span class="bash-variable">fruits</span><span class="bash-operator">[1]</span><span class="bash-operator">}</span>         <span class="bash-comment"># 访问第二个元素：banana</span>
+<span class="bash-command">echo</span> <span class="bash-operator">${</span><span class="bash-variable">fruits</span><span class="bash-operator">[@]</span><span class="bash-operator">}</span>         <span class="bash-comment"># 访问所有元素</span>
+<span class="bash-command">echo</span> <span class="bash-operator">${</span><span class="bash-variable">fruits</span><span class="bash-operator">[*]</span><span class="bash-operator">}</span>         <span class="bash-comment"># 访问所有元素</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">数组操作</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-variable">fruits</span><span class="bash-operator">=(</span><span class="bash-string">"apple"</span> <span class="bash-string">"banana"</span><span class="bash-operator">)</span>
+<span class="bash-variable">fruits</span><span class="bash-operator">+=(</span><span class="bash-string">"orange"</span><span class="bash-operator">)</span>           <span class="bash-comment"># 添加元素</span>
+<span class="bash-variable">fruits</span><span class="bash-operator">[2]</span><span class="bash-operator">=</span><span class="bash-string">"grape"</span>          <span class="bash-comment"># 修改元素</span>
+
+<span class="bash-command">echo</span> <span class="bash-operator">${#</span><span class="bash-variable">fruits</span><span class="bash-operator">[@]</span><span class="bash-operator">}</span>       <span class="bash-comment"># 数组长度</span>
+
+<span class="bash-keyword">for</span> <span class="bash-variable">fruit</span> <span class="bash-keyword">in</span> <span class="bash-operator">${</span><span class="bash-variable">fruits</span><span class="bash-operator">[@]</span><span class="bash-operator">}</span>; <span class="bash-keyword">do</span>
+    <span class="bash-command">echo</span> <span class="bash-operator">$</span><span class="bash-variable">fruit</span>
+<span class="bash-keyword">done</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">关联数组</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-keyword">declare</span> <span class="bash-operator">-A</span> <span class="bash-variable">person</span>  <span class="bash-comment"># 声明关联数组</span>
+<span class="bash-variable">person</span><span class="bash-operator">[</span><span class="bash-string">"name"</span><span class="bash-operator">]</span><span class="bash-operator">=</span><span class="bash-string">"John"</span>
+<span class="bash-variable">person</span><span class="bash-operator">[</span><span class="bash-string">"age"</span><span class="bash-operator">]</span><span class="bash-operator">=</span><span class="bash-number">30</span>
+<span class="bash-variable">person</span><span class="bash-operator">[</span><span class="bash-string">"city"</span><span class="bash-operator">]</span><span class="bash-operator">=</span><span class="bash-string">"New York"</span>
+
+<span class="bash-command">echo</span> <span class="bash-operator">${</span><span class="bash-variable">person</span><span class="bash-operator">[</span><span class="bash-string">"name"</span><span class="bash-operator">]</span><span class="bash-operator">}</span>  <span class="bash-comment"># 访问：John</span>
+
+<span class="bash-command">echo</span> <span class="bash-operator">${!</span><span class="bash-variable">person</span><span class="bash-operator">[@]</span><span class="bash-operator">}</span>      <span class="bash-comment"># 所有键</span>
+<span class="bash-command">echo</span> <span class="bash-operator">${</span><span class="bash-variable">person</span><span class="bash-operator">[@]</span><span class="bash-operator">}</span>       <span class="bash-comment"># 所有值</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第7章：条件语句 -->
+                <section id="section-7" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">7. 条件语句</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">if语句</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-keyword">if</span> <span class="bash-operator">[</span> <span class="bash-operator">$</span><span class="bash-variable">a</span> <span class="bash-operator">-gt</span> <span class="bash-number">10</span> <span class="bash-operator">]</span>; <span class="bash-keyword">then</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"a is greater than 10"</span>
+<span class="bash-keyword">elif</span> <span class="bash-operator">[</span> <span class="bash-operator">$</span><span class="bash-variable">a</span> <span class="bash-operator">-lt</span> <span class="bash-number">10</span> <span class="bash-operator">]</span>; <span class="bash-keyword">then</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"a is less than 10"</span>
+<span class="bash-keyword">else</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"a is equal to 10"</span>
+<span class="bash-keyword">fi</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">字符串条件</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-variable">name</span><span class="bash-operator">=</span><span class="bash-string">"John"</span>
+
+<span class="bash-keyword">if</span> <span class="bash-operator">[</span> <span class="bash-string">"</span><span class="bash-operator">$</span><span class="bash-variable">name</span><span class="bash-string">"</span> <span class="bash-operator">==</span> <span class="bash-string">"John"</span> <span class="bash-operator">]</span>; <span class="bash-keyword">then</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"Hello John!"</span>
+<span class="bash-keyword">fi</span>
+
+<span class="bash-keyword">if</span> <span class="bash-operator">[</span> <span class="bash-operator">-z</span> <span class="bash-string">"</span><span class="bash-operator">$</span><span class="bash-variable">empty</span><span class="bash-string">"</span> <span class="bash-operator">]</span>; <span class="bash-keyword">then</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"String is empty"</span>
+<span class="bash-keyword">fi</span>
+
+<span class="bash-keyword">if</span> <span class="bash-operator">[</span> <span class="bash-operator">-n</span> <span class="bash-string">"</span><span class="bash-operator">$</span><span class="bash-variable">name</span><span class="bash-string">"</span> <span class="bash-operator">]</span>; <span class="bash-keyword">then</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"String is not empty"</span>
+<span class="bash-keyword">fi</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">文件条件</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-keyword">if</span> <span class="bash-operator">[</span> <span class="bash-operator">-f</span> <span class="bash-string">"file.txt"</span> <span class="bash-operator">]</span>; <span class="bash-keyword">then</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"File exists"</span>
+<span class="bash-keyword">fi</span>
+
+<span class="bash-keyword">if</span> <span class="bash-operator">[</span> <span class="bash-operator">-d</span> <span class="bash-string">"directory"</span> <span class="bash-operator">]</span>; <span class="bash-keyword">then</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"Directory exists"</span>
+<span class="bash-keyword">fi</span>
+
+<span class="bash-keyword">if</span> <span class="bash-operator">[</span> <span class="bash-operator">-r</span> <span class="bash-string">"file.txt"</span> <span class="bash-operator">]</span>; <span class="bash-keyword">then</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"File is readable"</span>
+<span class="bash-keyword">fi</span>
+
+<span class="bash-keyword">if</span> <span class="bash-operator">[</span> <span class="bash-operator">-w</span> <span class="bash-string">"file.txt"</span> <span class="bash-operator">]</span>; <span class="bash-keyword">then</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"File is writable"</span>
+<span class="bash-keyword">fi</span>
+
+<span class="bash-keyword">if</span> <span class="bash-operator">[</span> <span class="bash-operator">-x</span> <span class="bash-string">"script.sh"</span> <span class="bash-operator">]</span>; <span class="bash-keyword">then</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"Script is executable"</span>
+<span class="bash-keyword">fi</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第8章：循环语句 -->
+                <section id="section-8" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">8. 循环语句</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">for循环</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-keyword">for</span> <span class="bash-variable">i</span> <span class="bash-keyword">in</span> <span class="bash-number">1</span> <span class="bash-number">2</span> <span class="bash-number">3</span> <span class="bash-number">4</span> <span class="bash-number">5</span>; <span class="bash-keyword">do</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"Number: </span><span class="bash-operator">$</span><span class="bash-variable">i</span><span class="bash-string">"</span>
+<span class="bash-keyword">done</span>
+
+<span class="bash-keyword">for</span> <span class="bash-variable">i</span> <span class="bash-keyword">in</span> <span class="bash-operator">{1..10}</span>; <span class="bash-keyword">do</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"Number: </span><span class="bash-operator">$</span><span class="bash-variable">i</span><span class="bash-string">"</span>
+<span class="bash-keyword">done</span>
+
+<span class="bash-keyword">for</span> <span class="bash-variable">file</span> <span class="bash-keyword">in</span> <span class="bash-string">*.txt</span>; <span class="bash-keyword">do</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"File: </span><span class="bash-operator">$</span><span class="bash-variable">file</span><span class="bash-string">"</span>
+<span class="bash-keyword">done</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">while循环</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-variable">i</span><span class="bash-operator">=</span><span class="bash-number">1</span>
+<span class="bash-keyword">while</span> <span class="bash-operator">[</span> <span class="bash-operator">$</span><span class="bash-variable">i</span> <span class="bash-operator">-le</span> <span class="bash-number">5</span> <span class="bash-operator">]</span>; <span class="bash-keyword">do</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"Number: </span><span class="bash-operator">$</span><span class="bash-variable">i</span><span class="bash-string">"</span>
+    <span class="bash-variable">i</span><span class="bash-operator">=$</span><span class="bash-operator">((</span><span class="bash-variable">i</span> <span class="bash-operator">+</span> <span class="bash-number">1</span><span class="bash-operator">))</span>
+<span class="bash-keyword">done</span>
+
+<span class="bash-command">cat</span> <span class="bash-string">file.txt</span> <span class="bash-keyword">|</span> <span class="bash-keyword">while</span> <span class="bash-keyword">read</span> <span class="bash-variable">line</span>; <span class="bash-keyword">do</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"Line: </span><span class="bash-operator">$</span><span class="bash-variable">line</span><span class="bash-string">"</span>
+<span class="bash-keyword">done</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">until循环</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-variable">i</span><span class="bash-operator">=</span><span class="bash-number">1</span>
+<span class="bash-keyword">until</span> <span class="bash-operator">[</span> <span class="bash-operator">$</span><span class="bash-variable">i</span> <span class="bash-operator">-gt</span> <span class="bash-number">5</span> <span class="bash-operator">]</span>; <span class="bash-keyword">do</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"Number: </span><span class="bash-operator">$</span><span class="bash-variable">i</span><span class="bash-string">"</span>
+    <span class="bash-variable">i</span><span class="bash-operator">=$</span><span class="bash-operator">((</span><span class="bash-variable">i</span> <span class="bash-operator">+</span> <span class="bash-number">1</span><span class="bash-operator">))</span>
+<span class="bash-keyword">done</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第9章：函数 -->
+                <section id="section-9" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">9. 函数</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">函数定义和调用</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-keyword">function</span> <span class="bash-function">greet</span> {
+    <span class="bash-variable">name</span><span class="bash-operator">=</span><span class="bash-operator">$</span><span class="bash-number">1</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"Hello, </span><span class="bash-operator">$</span><span class="bash-variable">name</span><span class="bash-string">!"</span>
+}
+
+<span class="bash-function">greet</span> <span class="bash-string">"John"</span>  <span class="bash-comment"># 调用函数</span>
+
+<span class="bash-function">add</span> <span class="bash-operator">()</span> {
+    <span class="bash-variable">sum</span><span class="bash-operator">=$</span><span class="bash-operator">((</span><span class="bash-operator">$</span><span class="bash-number">1</span> <span class="bash-operator">+</span> <span class="bash-operator">$</span><span class="bash-number">2</span><span class="bash-operator">))</span>
+    <span class="bash-command">echo</span> <span class="bash-operator">$</span><span class="bash-variable">sum</span>
+}
+
+<span class="bash-variable">result</span><span class="bash-operator">=</span><span class="bash-operator">$(</span><span class="bash-function">add</span> <span class="bash-number">5</span> <span class="bash-number">3</span><span class="bash-operator">)</span>
+<span class="bash-command">echo</span> <span class="bash-string">"Result: </span><span class="bash-operator">$</span><span class="bash-variable">result</span><span class="bash-string">"</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">返回值和作用域</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-function">multiply</span> <span class="bash-operator">()</span> {
+    <span class="bash-variable">product</span><span class="bash-operator">=$</span><span class="bash-operator">((</span><span class="bash-operator">$</span><span class="bash-number">1</span> <span class="bash-operator">*</span> <span class="bash-operator">$</span><span class="bash-number">2</span><span class="bash-operator">))</span>
+    <span class="bash-keyword">return</span> <span class="bash-operator">$</span><span class="bash-variable">product</span>
+}
+
+<span class="bash-function">multiply</span> <span class="bash-number">4</span> <span class="bash-number">5</span>
+<span class="bash-variable">result</span><span class="bash-operator">=</span><span class="bash-operator">$?</span>  <span class="bash-comment"># 获取返回值</span>
+<span class="bash-command">echo</span> <span class="bash-string">"Result: </span><span class="bash-operator">$</span><span class="bash-variable">result</span><span class="bash-string">"</span>
+
+<span class="bash-variable">global_var</span><span class="bash-operator">=</span><span class="bash-string">"global"</span>
+
+<span class="bash-function">local_example</span> <span class="bash-operator">()</span> {
+    <span class="bash-keyword">local</span> <span class="bash-variable">local_var</span><span class="bash-operator">=</span><span class="bash-string">"local"</span>
+    <span class="bash-variable">global_var</span><span class="bash-operator">=</span><span class="bash-string">"modified"</span>  <span class="bash-comment"># 修改全局变量</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"Local: </span><span class="bash-operator">$</span><span class="bash-variable">local_var</span><span class="bash-string">"</span>
+}
+
+<span class="bash-function">local_example</span>
+<span class="bash-command">echo</span> <span class="bash-string">"Global: </span><span class="bash-operator">$</span><span class="bash-variable">global_var</span><span class="bash-string">"</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第10章：输入输出重定向 -->
+                <section id="section-10" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">10. 输入输出重定向</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">标准输出重定向</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">echo</span> <span class="bash-string">"Hello"</span> <span class="bash-operator">></span> <span class="bash-string">file.txt</span>     <span class="bash-comment"># 覆盖文件</span>
+<span class="bash-command">echo</span> <span class="bash-string">"World"</span> <span class="bash-operator">>></span> <span class="bash-string">file.txt</span>    <span class="bash-comment"># 追加到文件</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">标准错误重定向</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">ls</span> <span class="bash-string">non_existent_file</span> <span class="bash-operator">2></span> <span class="bash-string">error.log</span>  <span class="bash-comment"># 错误重定向</span>
+<span class="bash-command">ls</span> <span class="bash-string">file.txt</span> <span class="bash-string">non_existent_file</span> <span class="bash-operator">&></span> <span class="bash-string">output.log</span> <span class="bash-comment"># 同时重定向输出和错误</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">输入重定向</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">sort</span> <span class="bash-operator"><</span> <span class="bash-string">file.txt</span>               <span class="bash-comment"># 从文件读取输入</span>
+
+<span class="bash-command">wc</span> <span class="bash-operator">-l</span> <span class="bash-operator"><</span> <span class="bash-string">file.txt</span>            <span class="bash-comment"># 统计文件行数</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第11章：管道和过滤器 -->
+                <section id="section-11" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">11. 管道和过滤器</h2>
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">管道操作</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">ls</span> <span class="bash-operator">-l</span> <span class="bash-keyword">|</span> <span class="bash-command">sort</span> <span class="bash-operator">-k</span><span class="bash-number">5</span> <span class="bash-operator">-nr</span>  <span class="bash-comment"># 按文件大小排序</span>
+<span class="bash-command">cat</span> <span class="bash-string">file.txt</span> <span class="bash-keyword">|</span> <span class="bash-command">grep</span> <span class="bash-string">"error"</span> <span class="bash-keyword">|</span> <span class="bash-command">wc</span> <span class="bash-operator">-l</span>  <span class="bash-comment"># 统计错误行数</span>
+<span class="bash-command">ps</span> <span class="bash-operator">aux</span> <span class="bash-keyword">|</span> <span class="bash-command">grep</span> <span class="bash-string">"chrome"</span>   <span class="bash-comment"># 查找Chrome进程</span>
+<span class="bash-command">df</span> <span class="bash-operator">-h</span> <span class="bash-keyword">|</span> <span class="bash-command">awk</span> <span class="bash-string">'{print $1, $5}'</span>  <span class="bash-comment"># 显示文件系统和使用百分比</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第12章：正则表达式 -->
+                <section id="section-12" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">12. 正则表达式</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">基本正则表达式</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">grep</span> <span class="bash-string">"^a"</span> <span class="bash-string">file.txt</span>          <span class="bash-comment"># 匹配以a开头的行</span>
+<span class="bash-command">grep</span> <span class="bash-string">"z$"</span> <span class="bash-string">file.txt</span>          <span class="bash-comment"># 匹配以z结尾的行</span>
+<span class="bash-command">grep</span> <span class="bash-string">"[0-9]"</span> <span class="bash-string">file.txt</span>        <span class="bash-comment"># 匹配包含数字的行</span>
+<span class="bash-command">grep</span> <span class="bash-string">"[a-zA-Z]"</span> <span class="bash-string">file.txt</span>     <span class="bash-comment"># 匹配包含字母的行</span>
+<span class="bash-command">grep</span> <span class="bash-string">"^[A-Z]"</span> <span class="bash-string">file.txt</span>       <span class="bash-comment"># 匹配以大写字母开头的行</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">扩展正则表达式</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">grep</span> <span class="bash-operator">-E</span> <span class="bash-string">"a{2,3}"</span> <span class="bash-string">file.txt</span>     <span class="bash-comment"># 匹配2-3个连续的a</span>
+<span class="bash-command">grep</span> <span class="bash-operator">-E</span> <span class="bash-string">"(cat|dog)"</span> <span class="bash-string">file.txt</span>    <span class="bash-comment"># 匹配cat或dog</span>
+<span class="bash-command">grep</span> <span class="bash-operator">-E</span> <span class="bash-string">"[0-9]{3}-[0-9]{3}-[0-9]{4}"</span> <span class="bash-string">file.txt</span>  <span class="bash-comment"># 匹配电话号码格式</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第13章：进程管理 -->
+                <section id="section-13" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">13. 进程管理</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">查看进程</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">ps</span>                     <span class="bash-comment"># 查看当前终端的进程</span>
+<span class="bash-command">ps</span> <span class="bash-operator">aux</span>                 <span class="bash-comment"># 查看所有进程</span>
+<span class="bash-command">top</span>                    <span class="bash-comment"># 实时查看进程</span>
+<span class="bash-command">htop</span>                   <span class="bash-comment"># 交互式进程查看器</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">控制进程</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">sleep</span> <span class="bash-number">10</span> <span class="bash-operator">&</span>                <span class="bash-comment"># 后台运行进程</span>
+<span class="bash-command">jobs</span>                     <span class="bash-comment"># 查看后台作业</span>
+<span class="bash-command">fg</span> <span class="bash-number">%1</span>                  <span class="bash-comment"># 将作业1切换到前台</span>
+<span class="bash-command">bg</span> <span class="bash-number">%1</span>                  <span class="bash-comment"># 将作业1切换到后台</span>
+
+<span class="bash-command">kill</span> <span class="bash-variable">PID</span>                  <span class="bash-comment"># 终止进程</span>
+<span class="bash-command">kill</span> <span class="bash-operator">-9</span> <span class="bash-variable">PID</span>               <span class="bash-comment"># 强制终止进程</span>
+<span class="bash-command">pkill</span> <span class="bash-string">"process_name"</span>        <span class="bash-comment"># 根据名称终止进程</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第14章：脚本编写 -->
+                <section id="section-14" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">14. 脚本编写</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">脚本结构</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-comment">#!/bin/bash</span>
+<span class="bash-comment"># 这是一个简单的Bash脚本</span>
+
+<span class="bash-command">echo</span> <span class="bash-string">"Hello, World!"</span>
+<span class="bash-command">echo</span> <span class="bash-string">"Current date: </span><span class="bash-operator">$(</span><span class="bash-command">date</span><span class="bash-operator">)</span><span class="bash-string">"</span>
+<span class="bash-command">echo</span> <span class="bash-string">"Current user: </span><span class="bash-operator">$(</span><span class="bash-command">whoami</span><span class="bash-operator">)</span><span class="bash-string">"</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">运行脚本</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">chmod</span> <span class="bash-operator">+x</span> script.sh     <span class="bash-comment"># 赋予执行权限</span>
+<span class="bash-command">./script.sh</span>                <span class="bash-comment"># 运行脚本</span>
+<span class="bash-command">bash</span> script.sh              <span class="bash-comment"># 直接使用bash运行</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">脚本参数</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-comment">#!/bin/bash</span>
+
+<span class="bash-command">echo</span> <span class="bash-string">"脚本名称: </span><span class="bash-operator">$0</span><span class="bash-string">"</span>
+<span class="bash-command">echo</span> <span class="bash-string">"第一个参数: </span><span class="bash-operator">$1</span><span class="bash-string">"</span>
+<span class="bash-command">echo</span> <span class="bash-string">"第二个参数: </span><span class="bash-operator">$2</span><span class="bash-string">"</span>
+<span class="bash-command">echo</span> <span class="bash-string">"参数个数: </span><span class="bash-operator">$#</span><span class="bash-string">"</span>
+<span class="bash-command">echo</span> <span class="bash-string">"所有参数: </span><span class="bash-operator">$@</span><span class="bash-string">"</span>
+
+<span class="bash-keyword">if</span> <span class="bash-operator">[</span> <span class="bash-operator">$#</span> <span class="bash-operator">-eq</span> <span class="bash-number">0</span> <span class="bash-operator">]</span>; <span class="bash-keyword">then</span>
+    <span class="bash-command">echo</span> <span class="bash-string">"请提供至少一个参数"</span>
+    <span class="bash-keyword">exit</span> <span class="bash-number">1</span>
+<span class="bash-keyword">fi</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第15章：环境变量 -->
+                <section id="section-15" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">15. 环境变量</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">查看环境变量</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">printenv</span>                      <span class="bash-comment"># 查看所有环境变量</span>
+<span class="bash-command">echo</span> <span class="bash-operator">$HOME</span>                 <span class="bash-comment"># 查看HOME变量</span>
+<span class="bash-command">echo</span> <span class="bash-operator">$PATH</span>                 <span class="bash-comment"># 查看PATH变量</span>
+<span class="bash-command">echo</span> <span class="bash-operator">$USER</span>                 <span class="bash-comment"># 查看USER变量</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">设置环境变量</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-variable">export</span> <span class="bash-variable">MY_VAR</span><span class="bash-operator">=</span><span class="bash-string">"value"</span>         <span class="bash-comment"># 设置全局环境变量</span>
+<span class="bash-variable">MY_VAR</span><span class="bash-operator">=</span><span class="bash-string">"value"</span>               <span class="bash-comment"># 设置局部变量</span>
+
+<span class="bash-command">echo</span> <span class="bash-operator">$MY_VAR</span>
+
+<span class="bash-comment"># 在脚本中设置环境变量</span>
+<span class="bash-comment">#!/bin/bash</span>
+export <span class="bash-variable">PATH</span><span class="bash-operator">=</span><span class="bash-operator">$PATH</span><span class="bash-string">:/usr/local/bin</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第16章：权限管理 -->
+                <section id="section-16" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">16. 权限管理</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">查看权限</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">ls</span> <span class="bash-operator">-l</span> file.txt           <span class="bash-comment"># 查看文件权限</span>
+<span class="bash-command">ls</span> <span class="bash-operator">-ld</span> directory/        <span class="bash-comment"># 查看目录权限</span></code></pre>
+                    </div>
+
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">修改权限</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">chmod</span> <span class="bash-number">+x</span> script.sh         <span class="bash-comment"># 赋予执行权限</span>
+<span class="bash-command">chmod</span> <span class="bash-number">-x</span> script.sh         <span class="bash-comment"># 移除执行权限</span>
+<span class="bash-command">chmod</span> <span class="bash-number">644</span> file.txt          <span class="bash-comment"># 设置权限为rw-r--r--</span>
+<span class="bash-command">chmod</span> <span class="bash-number">755</span> directory/       <span class="bash-comment"># 设置目录权限为rwxr-xr-x</span>
+
+<span class="bash-comment"># 使用符号表示法</span>
+<span class="bash-command">chmod</span> <span class="bash-variable">u+x</span> script.sh        <span class="bash-comment"># 给所有者添加执行权限</span>
+<span class="bash-command">chmod</span> <span class="bash-variable">g+w</span> file.txt         <span class="bash-comment"># 给组添加写权限</span>
+<span class="bash-command">chmod</span> <span class="bash-variable">o-r</span> file.txt         <span class="bash-comment"># 移除其他人的读权限</span></code></pre>
+                    </div>
+
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">修改所有者</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">chown</span> user:group file.txt      <span class="bash-comment"># 修改所有者和组</span>
+<span class="bash-command">chown</span> user file.txt            <span class="bash-comment"># 只修改所有者</span>
+<span class="bash-command">chgrp</span> group file.txt           <span class="bash-comment"># 只修改组</span>
+
+<span class="bash-command">chown</span> <span class="bash-operator">-R</span> user:group directory/ <span class="bash-comment"># 递归修改目录</span></code></pre>
+                    </div>
+                </section>
+
+                <!-- 第17章：网络命令 -->
+                <section id="section-17" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">17. 网络命令</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">基本网络命令</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">ping</span> google.com               <span class="bash-comment"># 测试网络连接</span>
+<span class="bash-command">ifconfig</span>                   <span class="bash-comment"># 查看网络接口信息</span>
+<span class="bash-command">ip</span> addr show                 <span class="bash-comment"># 查看IP地址信息</span>
+<span class="bash-command">netstat</span> <span class="bash-operator">-tuln</span>               <span class="bash-comment"># 查看监听端口</span>
+<span class="bash-command">ss</span> <span class="bash-operator">-tuln</span>                    <span class="bash-comment"># 查看监听端口（替代netstat）</span>
+<span class="bash-command">hostname</span>                   <span class="bash-comment"># 查看主机名</span></code></pre>
+                    </div>
+
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">文件传输</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">curl</span> <span class="bash-string">http://example.com</span>        <span class="bash-comment"># 下载网页内容</span>
+<span class="bash-command">curl</span> <span class="bash-operator">-o</span> file.txt <span class="bash-string">http://example.com/file</span>  <span class="bash-comment"># 下载文件</span>
+<span class="bash-command">wget</span> <span class="bash-string">http://example.com/file</span>     <span class="bash-comment"># 下载文件</span>
+
+<span class="bash-command">scp</span> file.txt user@remote:~     <span class="bash-comment"># 复制文件到远程服务器</span>
+<span class="bash-command">scp</span> user@remote:~file.txt .     <span class="bash-comment"># 从远程服务器复制文件</span></code></pre>
+                    </div>
+                </section>
+
+                <!-- 第18章：压缩和归档 -->
+                <section id="section-18" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">18. 压缩和归档</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">tar命令</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">tar</span> <span class="bash-operator">-cvf</span> archive.tar directory/  <span class="bash-comment"># 创建归档</span>
+<span class="bash-command">tar</span> <span class="bash-operator">-xvf</span> archive.tar          <span class="bash-comment"># 解压缩归档</span>
+<span class="bash-command">tar</span> <span class="bash-operator">-tvf</span> archive.tar          <span class="bash-comment"># 查看归档内容</span>
+
+<span class="bash-comment"># 压缩为gzip格式</span>
+<span class="bash-command">tar</span> <span class="bash-operator">-czvf</span> archive.tar.gz directory/
+<span class="bash-command">tar</span> <span class="bash-operator">-xzvf</span> archive.tar.gz
+
+<span class="bash-comment"># 压缩为bzip2格式</span>
+<span class="bash-command">tar</span> <span class="bash-operator">-cjvf</span> archive.tar.bz2 directory/
+<span class="bash-command">tar</span> <span class="bash-operator">-xjvf</span> archive.tar.bz2</code></pre>
+                    </div>
+
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">其他压缩命令</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">gzip</span> file.txt                <span class="bash-comment"># 压缩为.gz文件</span>
+<span class="bash-command">gunzip</span> file.txt.gz            <span class="bash-comment"># 解压缩.gz文件</span>
+
+<span class="bash-command">bzip2</span> file.txt               <span class="bash-comment"># 压缩为.bz2文件</span>
+<span class="bash-command">bunzip2</span> file.txt.bz2          <span class="bash-comment"># 解压缩.bz2文件</span>
+
+<span class="bash-command">zip</span> archive.zip file1.txt file2.txt  <span class="bash-comment"># 创建zip压缩文件</span>
+<span class="bash-command">unzip</span> archive.zip                 <span class="bash-comment"># 解压缩zip文件</span></code></pre>
+                    </div>
+                </section>
+
+                <!-- 第19章：高级主题 -->
+                <section id="section-19" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">19. 高级主题</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">命令别名</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">alias</span> ll<span class="bash-operator">=</span><span class="bash-string">'ls -la'</span>              <span class="bash-comment"># 创建别名</span>
+<span class="bash-command">alias</span> gs<span class="bash-operator">=</span><span class="bash-string">'git status'</span>         <span class="bash-comment"># Git状态别名</span>
+<span class="bash-command">unalias</span> ll                   <span class="bash-comment"># 移除别名</span>
+
+<span class="bash-comment"># 永久别名（添加到~/.bashrc或~/.bash_profile）</span>
+echo <span class="bash-string">'alias ll="ls -la"'</span> <span class="bash-operator">>></span> <span class="bash-operator">~</span>/.bashrc</code></pre>
+                    </div>
+
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">Here Documents</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-command">cat</span> <span class="bash-operator">>></span> file.txt <span class="bash-operator"><<</span><span class="bash-operator">-</span> EOF
+这是一个
+多行文本
+EOF</code></pre>
+                    </div>
+
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">正则表达式高级用法</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="bash-comment"># 使用sed进行复杂替换</span>
+<span class="bash-command">sed</span> <span class="bash-string">'1,5d'</span> file.txt            <span class="bash-comment"># 删除前5行</span>
+<span class="bash-command">sed</span> <span class="bash-string">'/pattern/d'</span> file.txt      <span class="bash-comment"># 删除包含pattern的行</span>
+<span class="bash-command">sed</span> <span class="bash-string">'s/^/    /'</span> file.txt        <span class="bash-comment"># 每行前添加4个空格</span>
+
+<span class="bash-comment"># 使用awk进行高级文本处理</span>
+<span class="bash-command">awk</span> <span class="bash-string">'NR % 2 == 0'</span> file.txt     <span class="bash-comment"># 打印偶数行</span>
+<span class="bash-command">awk</span> <span class="bash-string">'$1 > 100'</span> file.txt      <span class="bash-comment"># 打印第一列大于100的行</span>
+<span class="bash-command">awk</span> <span class="bash-string">'{sum += $2} END {print "Total: " sum}'</span> file.txt</code></pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
