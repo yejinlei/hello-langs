@@ -191,6 +191,7 @@
                         <span class="gradient-text">1. 类型注解 (Type Annotations)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">TypeScript 提供了丰富的类型注解功能，用于指定变量、函数参数和返回值的类型。注意事项：类型注解使用冒号(:)语法；TypeScript 会在编译时进行类型检查，帮助发现潜在错误；类型注解不影响运行时性能。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">// 基本类型注解</span></div>
                             <div class="code-line"><span class="text-blue-300">let</span> <span class="text-yellow-300">isDone</span>: <span class="text-purple-400">boolean</span> = <span class="text-slate-300">false</span>;</div>
@@ -212,6 +213,7 @@
                         <span class="gradient-text">2. 接口 (Interfaces)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">接口是 TypeScript 中用于定义对象类型的强大工具，它描述了对象的结构和行为。注意事项：接口使用 interface 关键字定义；接口可以包含可选属性、只读属性和方法签名；接口只在编译时起作用，不会出现在运行时代码中。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">LabeledValue</span> {
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-yellow-300">label</span>: <span class="text-purple-400">string</span>;
@@ -257,6 +259,7 @@
                         <span class="gradient-text">3. 类 (Classes)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">TypeScript 支持面向对象编程，提供了完整的类、继承、封装和多态支持。注意事项：类使用 class 关键字定义；可以包含构造函数、属性和方法；支持访问修饰符（public、private、protected）；可以实现接口和继承其他类。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">class</span> <span class="text-yellow-300">Greeter</span> {
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">greeting</span>: <span class="text-purple-400">string</span>;
@@ -436,6 +439,7 @@
                         <span class="gradient-text">4. 泛型 (Generics)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">泛型是 TypeScript 中用于创建可复用、类型安全的组件的强大工具。注意事项：泛型使用尖括号(&lt;&gt;)语法定义类型参数；可以在函数、类和接口中使用泛型；泛型提供编译时类型检查，同时保持运行时性能。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">identity</span>&lt;<span class="text-blue-300">T</span>&gt;(<span class="text-blue-300">arg</span>: <span class="text-blue-300">T</span>): <span class="text-blue-300">T</span> {
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-blue-300">arg</span>;
@@ -453,6 +457,7 @@
                         <span class="gradient-text">5. 枚举 (Enums)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">枚举是 TypeScript 中用于定义命名常量集合的功能，它提供了一种更友好的方式来表示一组相关的值。注意事项：枚举使用 enum 关键字定义；默认情况下，枚举成员从 0 开始自动编号；可以手动指定枚举成员的值（数字或字符串）；枚举在编译时会被转换为 JavaScript 对象。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">enum</span> <span class="text-yellow-300">Color</span> {
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-yellow-300">Red</span>,
@@ -486,6 +491,7 @@
                         <span class="gradient-text">6. 高级类型 (Advanced Types)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">TypeScript 提供了丰富的高级类型系统，用于解决复杂的类型问题。注意事项：交叉类型（&）将多个类型合并为一个；联合类型（|）表示一个值可以是多种类型之一；类型保护用于在运行时确定联合类型的具体类型；类型别名用于为复杂类型创建更简单的名称。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">// 交叉类型</span></div>
                             <div class="code-line"><span class="text-purple-400">interface</span> <span class="text-yellow-300">A</span> {
@@ -519,6 +525,7 @@
                         <span class="gradient-text">7. 类型守卫 (Type Guards)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">类型守卫是一种在运行时确定联合类型具体类型的技术，它允许 TypeScript 编译器在条件分支中推断更具体的类型。注意事项：使用 typeof 操作符检查基本类型；使用 instanceof 检查类实例；使用 in 操作符检查对象属性；使用类型断言守卫（is 关键字）创建自定义类型检查函数。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">// 类型断言守卫</span></div>
                             <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">isString</span>(<span class="text-blue-300">x</span>: <span class="text-purple-400">any</span>): <span class="text-blue-300">x</span> <span class="text-purple-400">is</span> <span class="text-purple-400">string</span> {
@@ -548,6 +555,7 @@
                         <span class="gradient-text">8. 模块 (Modules)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">模块是 TypeScript 中用于组织代码的机制，它允许将代码分割成多个文件，提高代码的可维护性和复用性。注意事项：使用 export 关键字导出接口、类、函数等；使用 import 关键字导入其他模块的导出内容；模块可以重命名导入和导出的内容；默认导出和命名导出可以同时使用。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">// module1.ts</span></div>
                             <div class="code-line"><span class="text-purple-400">export</span> <span class="text-purple-400">interface</span> <span class="text-yellow-300">User</span> {
@@ -572,6 +580,7 @@
                         <span class="gradient-text">9. 命名空间 (Namespaces)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">命名空间是 TypeScript 中用于组织代码的另一种方式，它允许将相关的代码组织在一起，避免命名冲突。注意事项：使用 namespace 关键字定义命名空间；需要使用 export 关键字导出命名空间中的内容才能在外部访问；命名空间可以嵌套；命名空间主要用于内部代码组织，现代 TypeScript 项目通常更推荐使用 ES 模块。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">namespace</span> <span class="text-yellow-300">MyApp</span> {
                             <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">export</span> <span class="text-purple-400">interface</span> <span class="text-yellow-300">User</span> {
@@ -599,6 +608,7 @@
                         <span class="gradient-text">10. 装饰器 (Decorators)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">装饰器是 TypeScript 中用于修改类、方法、属性或参数行为的高级特性。注意事项：装饰器使用 @ 语法应用；需要在 tsconfig.json 中启用 experimentalDecorators 选项；可以用于实现元编程、依赖注入、日志记录等功能；装饰器在编译时执行，而不是运行时。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">// 类装饰器</span></div>
                             <div class="code-line"><span class="text-purple-400">function</span> <span class="text-yellow-300">sealed</span>(<span class="text-blue-300">constructor</span>: <span class="text-purple-400">Function</span>) {
@@ -634,6 +644,7 @@
                         <span class="gradient-text">11. 声明文件 (Declaration Files)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">声明文件是 TypeScript 中用于描述 JavaScript 库或模块类型的特殊文件，扩展名为 .d.ts。注意事项：声明文件不包含实现代码，只包含类型定义；使用 declare 关键字声明类型；可以为第三方 JavaScript 库编写声明文件；npm 上的 @types/* 包提供了许多流行库的声明文件。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">// my-module.d.ts</span></div>
                             <div class="code-line"><span class="text-purple-400">declare</span> <span class="text-purple-400">module</span> <span class="text-green-300">"my-module"</span> {
@@ -652,6 +663,7 @@
                         <span class="gradient-text">12. 编译配置 (Compilation)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">tsconfig.json 是 TypeScript 项目的编译配置文件，用于控制 TypeScript 编译器的行为。注意事项：tsconfig.json 位于项目根目录；compilerOptions 部分包含主要配置选项；target 选项指定编译后的 JavaScript 版本；module 选项指定模块系统；outDir 选项指定输出目录；strict 选项启用严格类型检查。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">// tsconfig.json</span></div>
                             <div class="code-line">{</div>
@@ -674,6 +686,7 @@
                         <span class="gradient-text">13. 高级概念 (Advanced Concepts)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">TypeScript 提供了一系列高级类型特性，用于创建更复杂和灵活的类型定义。注意事项：条件类型允许根据条件选择类型；映射类型用于转换现有类型；模板字面量类型用于创建字符串字面量类型；高级类型可以组合使用，创建强大的类型系统。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">// 条件类型</span></div>
                             <div class="code-line"><span class="text-purple-400">type</span> <span class="text-yellow-300">IsString</span>&lt;<span class="text-blue-300">T</span>&gt; = <span class="text-blue-300">T</span> <span class="text-purple-400">extends</span> <span class="text-purple-400">string</span> ? <span class="text-purple-400">true</span> : <span class="text-purple-400">false</span>;</div>
@@ -725,6 +738,7 @@
                         <span class="gradient-text">15. Node.js 与 TypeScript</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">TypeScript 可以与 Node.js 完美结合，提供类型安全的服务器端开发体验。注意事项：需要安装 @types/node 获取 Node.js 类型定义；使用 tsconfig.json 配置编译选项；Express 等框架也有对应的类型定义包（如 @types/express）。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">import</span> <span class="text-yellow-300">express</span> <span class="text-purple-400">from</span> <span class="text-green-300">'express'</span>;</div>
                             <div class="code-line"><span class="text-purple-400">import</span> <span class="text-yellow-300">{</span> <span class="text-yellow-300">Request</span>, <span class="text-yellow-300">Response</span> <span class="text-yellow-300">}</span> <span class="text-purple-400">from</span> <span class="text-green-300">'express'</span>;</div>
@@ -759,6 +773,7 @@
                         <span class="gradient-text">16. 测试 (Testing)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">TypeScript 支持多种测试框架，如 Jest、Mocha 等，提供类型安全的测试编写体验。注意事项：使用 @types/jest 等类型定义包；类型系统可以帮助捕获测试中的潜在错误；可以为测试编写自定义类型守卫和断言函数。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">// calculator.ts</span></div>
                             <div class="code-line"><span class="text-purple-400">export</span> <span class="text-purple-400">function</span> <span class="text-yellow-300">add</span>(<span class="text-blue-300">a</span>: <span class="text-purple-400">number</span>, <span class="text-blue-300">b</span>: <span class="text-purple-400">number</span>): <span class="text-purple-400">number</span> {
@@ -791,6 +806,7 @@
                         <span class="gradient-text">17. 性能优化 (Performance)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">TypeScript 提供了多种性能优化技术，帮助构建高效的应用程序。注意事项：优先使用接口进行对象类型定义（接口支持合并，类型别名不支持）；避免不必要的类型断言；合理使用泛型和高级类型，避免过度复杂的类型计算影响编译性能。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">// 接口合并 vs 类型别名</span></div>
                             <div class="code-line"><span class="text-purple-400">// 优先使用接口进行对象类型定义</span></div>
@@ -817,6 +833,7 @@
                         <span class="gradient-text">18. 最佳实践 (Best Practices)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">TypeScript 开发的最佳实践有助于提高代码质量和可维护性。注意事项：使用明确的类型注解，避免过度依赖类型推断；尽量避免使用 any 类型；使用接口定义对象结构，提高代码可读性；合理使用泛型和高级类型，增强代码复用性。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">// 使用明确的类型注解</span></div>
                             <div class="code-line"><span class="text-purple-400">// 好的做法</span></div>
@@ -842,6 +859,7 @@
                         <span class="gradient-text">19. 常见错误 (Common Errors)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">TypeScript 开发中常见的错误类型和解决方案。注意事项：类型不匹配是最常见的错误，需要确保变量类型与使用方式一致；避免访问对象不存在的属性，可以使用可选链操作符 (?.) 或类型断言；注意区分接口和类型别名的使用场景。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">// 错误：类型不匹配</span></div>
                             <div class="code-line"><span class="text-purple-400">// let age: number = "25"; // 类型错误</span></div>
@@ -868,6 +886,7 @@
                         <span class="gradient-text">20. 工具生态 (Tooling)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">TypeScript 拥有丰富的工具生态系统，支持代码质量和开发效率提升。注意事项：使用 ESLint 配合 @typescript-eslint 插件进行代码检查；使用 Prettier 统一代码格式化；VS Code 提供了优秀的 TypeScript 集成支持；ts-node 可以直接运行 TypeScript 文件而无需编译。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">// ESLint 配置</span></div>
                             <div class="code-line">{</div>
@@ -899,6 +918,7 @@
                         <span class="gradient-text">21. 未来展望 (Future)</span>
                     </h2>
                     <div class="language-content" data-lang="typescript">
+                        <p class="text-slate-300 mb-4">TypeScript 不断发展和改进，未来将带来更多强大功能。注意事项：装饰器将成为正式标准，提供更强大的元编程能力；类型系统将进一步增强，提供更好的类型推断和更复杂的类型操作；与 JavaScript 生态系统的集成将更加紧密，支持更多现代 JavaScript 特性。</p>
                         <div class="code-block">
                             <div class="code-line"><span class="text-purple-400">// TypeScript 未来发展方向和新特性预览</span></div>
                             <div class="code-line"></div>
