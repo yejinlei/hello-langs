@@ -3,151 +3,1224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lisp 教程 - Hello 编程语言</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Lisp 语法教程</title>
     <style>
+        /* 通用样式 */
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap');
+        
         * {
-            font-family: 'Noto Sans SC', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .code-font {
-            font-family: 'JetBrains Mono', monospace;
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #111827 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+            min-height: 100vh;
         }
+        
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+        
+        /* 侧边导航栏 */
+        .sidebar {
+            width: 280px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(148, 163, 184, 0.1);
+            padding: 2rem 1rem;
+            overflow-y: auto;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+        }
+        
+        .sidebar h3 {
+            color: #8b5cf6;
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .nav-menu {
+            list-style: none;
+        }
+        
+        .nav-menu li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-menu a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #94a3b8;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(139, 92, 246, 0.1);
+            color: #c4b5fd;
+            transform: translateX(5px);
+        }
+        
+        /* 主内容区域 */
+        main {
+            flex: 1;
+            margin-left: 280px;
+            padding: 3rem;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        
+        .header p {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* 章节样式 */
+        section {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
         .gradient-text {
-            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
+            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
+        
+        /* 语法卡片 */
         .syntax-card {
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #8b5cf6;
+            transition: all 0.3s ease;
+        }
+        
+        .syntax-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(139, 92, 246, 0.2);
+        }
+        
+        .syntax-card h5 {
+            color: #c4b5fd;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        /* 代码块样式 */
+        .code-block {
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            overflow-x: auto;
             border: 1px solid rgba(148, 163, 184, 0.1);
         }
-        .code-block {
-            background: rgba(2, 6, 23, 0.9);
-            border-left: 4px solid #3B82F6;
+        
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
-        .highlight {
-            background: rgba(59, 130, 246, 0.2);
-            padding: 2px 4px;
-            border-radius: 3px;
+        
+        /* Lisp 语法高亮 */
+        .language-content .lisp-comment {
+            color: #64748b !important;
+            font-style: italic;
+        }
+        
+        .language-content .lisp-keyword {
+            color: #f87171 !important;
+            font-weight: 500;
+        }
+        
+        .language-content .lisp-function {
+            color: #34d399 !important;
+        }
+        
+        .language-content .lisp-variable {
+            color: #60a5fa !important;
+        }
+        
+        .language-content .lisp-string {
+            color: #a78bfa !important;
+        }
+        
+        .language-content .lisp-number {
+            color: #fbbf24 !important;
+        }
+        
+        .language-content .lisp-boolean {
+            color: #f59e0b !important;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 240px;
+            }
+            
+            main {
+                margin-left: 240px;
+                padding: 2rem;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            }
+            
+            main {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+        }
+        
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.5);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.7);
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen">
-    <main class="container mx-auto px-4 py-8 max-w-6xl">
-        <!-- 1. Lisp 简介 -->
-        <section id="section-1" class="mb-16">
-            <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">1. Lisp 简介</span>
-            </h2>
-            
-            <div class="language-content" data-lang="lisp">
-                <h4 class="text-lg font-medium mb-4 text-purple-400">Lisp - 列表处理语言</h4>
-                <p class="text-slate-300 mb-4">Lisp是一种功能强大的函数式编程语言，以其独特的括号语法和强大的宏系统而闻名。它广泛应用于人工智能、符号计算、教育等领域。</p>
+<body>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- 侧边导航栏 -->
+            <aside class="lg:w-1/4">
+                <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 sticky top-24 border border-slate-700">
+                    <h3 class="text-lg font-bold mb-4 gradient-text">章节导航</h3>
+                    <nav class="space-y-2">
+                        <a href="#section-1" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">1. Lisp 概述</a>
+                        <a href="#section-2" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">2. Lisp 基本语法</a>
+                        <a href="#section-3" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">3. 函数定义</a>
+                        <a href="#section-4" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">4. 列表操作</a>
+                        <a href="#section-5" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">5. 条件语句</a>
+                        <a href="#section-6" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">6. 循环结构</a>
+                        <a href="#section-7" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">7. 高级函数</a>
+                        <a href="#section-8" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">8. 宏系统</a>
+                        <a href="#section-9" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">9. 文件 I/O 操作</a>
+                        <a href="#section-10" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">10. 错误处理</a>
+                        <a href="#section-11" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">11. 面向对象编程 (CLOS)</a>
+                        <a href="#section-12" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">12. 实际应用示例</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- 主内容区域 -->
+            <div class="lg:w-3/4">
+            <div class="header">
+                <h1>Welcome to Lisp</h1>
+                <p>探索函数式编程的先驱语言，掌握 Lisp 的核心概念和高级特性</p>
+            </div>
+
+            <!-- 1. Lisp 概述 -->
+            <section id="section-1" class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-center">
+                    <span class="gradient-text">1. Lisp 概述</span>
+                </h2>
+                <p class="mb-6 text-lg">
+                    Lisp（LISt Processing）是一种函数式编程语言，由 John McCarthy 于 1958 年在麻省理工学院开发。它是最早的高级编程语言之一，对后来的编程语言如 Scheme、Common Lisp、Clojure 等产生了深远影响。
+                </p>
+                <p class="mb-6 text-lg">
+                    Lisp 的主要特点包括：
+                </p>
+                <ul class="list-disc list-inside space-y-2 mb-6 text-lg">
+                    <li>列表作为基本数据结构</li>
+                    <li>同像性（代码即数据）</li>
+                    <li>强大的宏系统</li>
+                    <li>动态类型</li>
+                    <li>递归和迭代的支持</li>
+                    <li>高阶函数</li>
+                </ul>
+            </section>
+
+            <!-- 2. Lisp 基本语法 -->
+            <section id="section-2" class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-center">
+                    <span class="gradient-text">2. Lisp 基本语法</span>
+                </h2>
                 
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">Lisp 语言特点</h5>
-                    <ul class="text-slate-300 list-disc pl-6 space-y-2">
-                        <li>独特的括号语法（前缀表示法）</li>
-                        <li>强大的宏系统</li>
-                        <li>函数式编程范式</li>
-                        <li>动态类型系统</li>
-                        <li>垃圾回收机制</li>
-                        <li>丰富的符号处理能力</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+                <div class="language-content" data-lang="lisp">
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">表达式和求值</h5>
+                        <p class="text-slate-300 mb-4">Lisp 是一种基于表达式的语言，几乎所有的代码都是表达式。表达式由括号包围，第一个元素是操作符，后面是操作数。Lisp 会自动对表达式求值并返回结果。注意事项：表达式必须正确嵌套，括号必须配对，否则会导致语法错误。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; Lisp 表达式由括号包围</span>
+<span class="lisp-comment">; (+ 1 2) 是一个表达式，+ 是运算符，1 和 2 是操作数</span>
+(<span class="lisp-function">+</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span>)  <span class="lisp-comment">; 结果为 3</span>
 
-        <!-- 2. Lisp 基础语法 -->
-        <section id="section-2" class="mb-16">
-            <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">2. Lisp 基础语法</span>
-            </h2>
-            
-            <div class="language-content" data-lang="lisp">
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">Hello World 示例</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; Hello World 程序
-(print "Hello, World!")
-
-; 也可以使用 format 函数
-(format t "Hello, Lisp!~%")
+<span class="lisp-comment">; 嵌套表达式</span>
+(<span class="lisp-function">+</span> (<span class="lisp-function">*</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span>) (<span class="lisp-function">/</span> <span class="lisp-number">10</span> <span class="lisp-number">2</span>))  <span class="lisp-comment">; 结果为 11</span>
 </code></pre>
-                </div>
+                    </div>
 
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">基本表达式</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 算术表达式（前缀表示法）
-(+ 1 2 3)     ; 6
-(- 10 5)      ; 5
-(* 2 3 4)     ; 24
-(/ 10 2)      ; 5
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">变量和赋值</h5>
+                        <p class="text-slate-300 mb-4">Lisp 使用动态类型系统，变量无需声明类型。变量赋值使用 setq 或 setf 函数，局部变量使用 let 形式创建。注意事项：变量命名区分大小写，使用 - 作为分隔符，* 包围的变量通常是全局变量。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 使用 setq 进行变量赋值</span>
+(<span class="lisp-keyword">setq</span> <span class="lisp-variable">x</span> <span class="lisp-number">5</span>)  <span class="lisp-comment">; x 的值为 5</span>
+(<span class="lisp-keyword">setq</span> <span class="lisp-variable">y</span> <span class="lisp-number">10</span>)  <span class="lisp-comment">; y 的值为 10</span>
 
-; 比较表达式
-(= 1 1)       ; T (真)
-(> 5 3)       ; T
-(< 2 4)       ; T
-(/= 1 2)      ; T
+<span class="lisp-comment">; 使用变量</span>
+(<span class="lisp-function">+</span> <span class="lisp-variable">x</span> <span class="lisp-variable">y</span>)  <span class="lisp-comment">; 结果为 15</span>
 
-; 逻辑表达式
-(and T T)     ; T
-(or T nil)    ; T
-(not T)       ; nil (假)
+<span class="lisp-comment">; 使用 let 创建局部变量</span>
+(<span class="lisp-keyword">let</span> ((<span class="lisp-variable">a</span> <span class="lisp-number">1</span>) (<span class="lisp-variable">b</span> <span class="lisp-number">2</span>))
+  (<span class="lisp-function">+</span> <span class="lisp-variable">a</span> <span class="lisp-variable">b</span>))  <span class="lisp-comment">; 结果为 3</span>
 </code></pre>
-                </div>
-            </div>
-        </section>
+                    </div>
 
-        <!-- 3. Lisp 变量和函数 -->
-        <section id="section-3" class="mb-16">
-            <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">3. Lisp 变量和函数</span>
-            </h2>
-            
-            <div class="language-content" data-lang="lisp">
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">变量定义</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 使用 setq 定义变量
-(setq x 10)
-(setq y 20)
-(print (+ x y))  ; 30
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">数据类型</h5>
+                        <p class="text-slate-300 mb-4">Lisp 支持多种数据类型，包括数字、字符串、布尔值、符号和列表等。注意事项：nil 既是假值也是空列表，t 表示真值；符号是 Lisp 中的标识符，可以作为变量名或函数名。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 数字</span>
+<span class="lisp-number">42</span>  <span class="lisp-comment">; 整数</span>
+<span class="lisp-number">3.14</span>  <span class="lisp-comment">; 浮点数</span>
+<span class="lisp-number">1/2</span>  <span class="lisp-comment">; 分数</span>
 
-; 使用 defvar 定义全局变量
-(defvar *name* "Lisp")
-(print *name*)
+<span class="lisp-comment">; 字符串</span>
+<span class="lisp-string">"Hello, Lisp!"</span>
 
-; 使用 let 定义局部变量
-(let ((a 5) (b 3))
-  (print (+ a b)))  ; 8
+<span class="lisp-comment">; 布尔值</span>
+<span class="lisp-boolean">t</span>  <span class="lisp-comment">; 真</span>
+<span class="lisp-boolean">nil</span>  <span class="lisp-comment">; 假，同时也是空列表</span>
+
+<span class="lisp-comment">; 符号（标识符）</span>
+<span class="lisp-variable">my-variable</span>
+<span class="lisp-variable">*special-variable*</span>
 </code></pre>
+                    </div>
                 </div>
+            </section>
 
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">函数定义</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 使用 defun 定义函数
-(defun add (a b)
-  "计算两个数的和"
-  (+ a b))
+            <!-- 3. 函数定义 -->
+            <section id="section-3" class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-center">
+                    <span class="gradient-text">3. 函数定义</span>
+                </h2>
+                
+                <div class="language-content" data-lang="lisp">
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">基本函数定义</h5>
+                        <p class="text-slate-300 mb-4">在 Lisp 中，使用 defun 宏定义函数。函数定义包括函数名、参数列表和函数体。注意事项：函数名必须是符号，参数列表用括号包围，函数体可以是多个表达式，最后一个表达式的值作为函数的返回值。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 使用 defun 定义函数</span>
+<span class="lisp-comment">; 函数名：add</span>
+<span class="lisp-comment">; 参数：x, y</span>
+<span class="lisp-comment">; 函数体：(+ x y)</span>
+(<span class="lisp-keyword">defun</span> <span class="lisp-function">add</span> (<span class="lisp-variable">x</span> <span class="lisp-variable">y</span>) 
+  <span class="lisp-string">"计算两个数的和"</span>  <span class="lisp-comment">; 文档字符串</span>
+  (<span class="lisp-function">+</span> <span class="lisp-variable">x</span> <span class="lisp-variable">y</span>))
 
-(print (add 5 3))  ; 8
-
-; 递归函数
-(defun factorial (n)
-  "计算阶乘"
-  (if (<= n 1)
-      1
-      (* n (factorial (- n 1)))))
-
-(print (factorial 5))  ; 120
+<span class="lisp-comment">; 调用函数</span>
+(<span class="lisp-function">add</span> <span class="lisp-number">3</span> <span class="lisp-number">4</span>)  <span class="lisp-comment">; 结果为 7</span>
 </code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">带默认参数的函数</h5>
+                        <p class="text-slate-300 mb-4">Lisp 允许使用 &optional 参数来定义可选参数，并为其提供默认值。注意事项：可选参数必须放在必选参数之后，默认值可以是任何表达式，在调用时可以省略可选参数。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 使用 &optional 定义可选参数</span>
+<span class="lisp-keyword">defun</span> <span class="lisp-function">greet</span> (<span class="lisp-variable">name</span> &optional (<span class="lisp-variable">message</span> <span class="lisp-string">"Hello"</span>)) 
+  (<span class="lisp-function">format</span> <span class="lisp-variable">nil</span> <span class="lisp-string">"~a, ~a!"</span> <span class="lisp-variable">message</span> <span class="lisp-variable">name</span>))
+
+<span class="lisp-comment">; 调用函数</span>
+(<span class="lisp-function">greet</span> <span class="lisp-string">"World"</span>)  <span class="lisp-comment">; "Hello, World!"</span>
+(<span class="lisp-function">greet</span> <span class="lisp-string">"Lisp"</span> <span class="lisp-string">"Welcome to"</span>)  <span class="lisp-comment">; "Welcome to, Lisp!"</span>
+</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">带可变参数的函数</h5>
+                        <p class="text-slate-300 mb-4">Lisp 支持使用 &rest 参数来定义可变参数函数，可变参数会将所有剩余的参数收集到一个列表中。注意事项：可变参数必须放在参数列表的最后，调用时可以传递任意数量的额外参数。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 使用 &rest 定义可变参数</span>
+(<span class="lisp-keyword">defun</span> <span class="lisp-function">sum</span> (&rest <span class="lisp-variable">numbers</span>) 
+  (<span class="lisp-function">apply</span> '<span class="lisp-function">+</span> <span class="lisp-variable">numbers</span>))
+
+<span class="lisp-comment">; 调用函数</span>
+(<span class="lisp-function">sum</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span>)  <span class="lisp-comment">; 6</span>
+(<span class="lisp-function">sum</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span> <span class="lisp-number">4</span> <span class="lisp-number">5</span>)  <span class="lisp-comment">; 15</span>
+</code></pre>
+                    </div>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
+
+            <!-- 4. Lisp 列表操作 -->
+            <section id="section-4" class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-center">
+                    <span class="gradient-text">4. Lisp 列表操作</span>
+                </h2>
+                
+                <div class="language-content" data-lang="lisp">
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">列表创建</h5>
+                        <p class="text-slate-300 mb-4">列表是 Lisp 中最基本的数据结构，用于存储和操作多个元素。可以使用 list 函数或单引号来创建列表。注意事项：单引号会阻止列表求值，而 list 函数会对参数进行求值。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 使用 list 函数创建列表</span>
+(<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span>)  <span class="lisp-comment">; (1 2 3)</span>
+
+<span class="lisp-comment">; 使用单引号创建列表（不求值）</span>
+'(<span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span>)  <span class="lisp-comment">; (1 2 3)</span>
+
+<span class="lisp-comment">; 创建嵌套列表</span>
+(<span class="lisp-function">list</span> <span class="lisp-number">1</span> (<span class="lisp-function">list</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span>) <span class="lisp-number">4</span>)  <span class="lisp-comment">; (1 (2 3) 4)</span>
+
+<span class="lisp-comment">; 创建空列表</span>
+()  <span class="lisp-comment">; 空列表</span>
+<span class="lisp-function">nil</span>  <span class="lisp-comment">; 空列表的另一种表示</span>
+(<span class="lisp-function">list</span>)  <span class="lisp-comment">; 空列表</span>
+</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">列表访问</h5>
+                        <p class="text-slate-300 mb-4">Lisp 提供了多种方式来访问列表中的元素。car 函数获取列表的第一个元素，cdr 函数获取除第一个元素外的剩余部分。可以组合使用 car 和 cdr 来访问任意位置的元素，也可以使用 nth 函数直接访问指定索引的元素。注意事项：nth 的索引从 0 开始。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-variable">*my-list*</span> = (<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span> <span class="lisp-number">4</span> <span class="lisp-number">5</span>)
+
+<span class="lisp-comment">; 获取列表的第一个元素</span>
+(<span class="lisp-function">car</span> <span class="lisp-variable">*my-list*</span>)  <span class="lisp-comment">; 1</span>
+
+<span class="lisp-comment">; 获取列表除第一个元素外的剩余部分</span>
+(<span class="lisp-function">cdr</span> <span class="lisp-variable">*my-list*</span>)  <span class="lisp-comment">; (2 3 4 5)</span>
+
+<span class="lisp-comment">; 组合使用 car 和 cdr</span>
+(<span class="lisp-function">car</span> (<span class="lisp-function">cdr</span> <span class="lisp-variable">*my-list*</span>))  <span class="lisp-comment">; 2</span>
+
+<span class="lisp-comment">; 使用 nth 获取指定索引的元素（索引从 0 开始）</span>
+(<span class="lisp-function">nth</span> <span class="lisp-number">0</span> <span class="lisp-variable">*my-list*</span>)  <span class="lisp-comment">; 1</span>
+(<span class="lisp-function">nth</span> <span class="lisp-number">2</span> <span class="lisp-variable">*my-list*</span>)  <span class="lisp-comment">; 3</span>
+</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">列表操作</h5>
+                        <p class="text-slate-300 mb-4">Lisp 提供了丰富的列表操作函数，包括连接列表、反转列表、排序列表、检查元素是否在列表中以及计算列表长度等。注意事项：append 函数会创建一个新列表，不会修改原列表；sort 函数会原地修改列表。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-variable">*list1*</span> = (<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span>)
+<span class="lisp-variable">*list2*</span> = (<span class="lisp-function">list</span> <span class="lisp-number">4</span> <span class="lisp-number">5</span> <span class="lisp-number">6</span>)
+
+<span class="lisp-comment">; 连接列表</span>
+(<span class="lisp-function">append</span> <span class="lisp-variable">*list1*</span> <span class="lisp-variable">*list2*</span>)  <span class="lisp-comment">; (1 2 3 4 5 6)</span>
+
+<span class="lisp-comment">; 反转列表</span>
+(<span class="lisp-function">reverse</span> <span class="lisp-variable">*list1*</span>)  <span class="lisp-comment">; (3 2 1)</span>
+
+<span class="lisp-comment">; 排序列表</span>
+(<span class="lisp-function">sort</span> (<span class="lisp-function">list</span> <span class="lisp-number">3</span> <span class="lisp-number">1</span> <span class="lisp-number">4</span> <span class="lisp-number">1</span> <span class="lisp-number">5</span> <span class="lisp-number">9</span>) '<span class="lisp-function"><</span>)  <span class="lisp-comment">; (1 1 3 4 5 9)</span>
+
+<span class="lisp-comment">; 检查元素是否在列表中</span>
+(<span class="lisp-function">member</span> <span class="lisp-number">2</span> <span class="lisp-variable">*list1*</span>)  <span class="lisp-comment">; (2 3)</span>
+
+<span class="lisp-comment">; 计算列表长度</span>
+(<span class="lisp-function">length</span> <span class="lisp-variable">*list1*</span>)  <span class="lisp-comment">; 3</span>
+</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">列表修改</h5>
+                        <p class="text-slate-300 mb-4">Lisp 提供了多种方式来修改列表，包括在列表前端添加元素、设置列表特定位置的元素以及在列表中插入元素等。注意事项：cons 函数会创建一个新列表，而 setf 函数会修改原列表。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-variable">*my-list*</span> = (<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span>)
+
+<span class="lisp-comment">; 在列表前端添加元素</span>
+(<span class="lisp-function">cons</span> <span class="lisp-number">0</span> <span class="lisp-variable">*my-list*</span>)  <span class="lisp-comment">; (0 1 2 3)</span>
+
+<span class="lisp-comment">; 设置列表的第一个元素</span>
+(<span class="lisp-function">setf</span> (<span class="lisp-function">car</span> <span class="lisp-variable">*my-list*</span>) <span class="lisp-number">10</span>)  <span class="lisp-comment">; *my-list* 现在是 (10 2 3)</span>
+
+<span class="lisp-comment">; 设置列表的指定元素</span>
+(<span class="lisp-function">setf</span> (<span class="lisp-function">nth</span> <span class="lisp-number">1</span> <span class="lisp-variable">*my-list*</span>) <span class="lisp-number">20</span>)  <span class="lisp-comment">; *my-list* 现在是 (10 20 3)</span>
+
+<span class="lisp-comment">; 在列表中插入元素</span>
+(<span class="lisp-function">insert</span> <span class="lisp-number">15</span> <span class="lisp-variable">*my-list*</span> <span class="lisp-number">1</span>)  <span class="lisp-comment">; *my-list* 现在是 (10 15 20 3)</span>
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Lisp 条件语句 -->
+            <section id="section-5" class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-center">
+                    <span class="gradient-text">5. Lisp 条件语句</span>
+                </h2>
+                
+                <div class="language-content" data-lang="lisp">
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">if 条件</h5>
+                        <p class="text-slate-300 mb-4">if 是 Lisp 中最基本的条件语句，用于根据条件执行不同的表达式。注意事项：if 语句接受三个参数：条件、条件为真时执行的表达式和条件为假时执行的表达式。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-keyword">defun</span> <span class="lisp-function">is-positive</span> (<span class="lisp-variable">x</span>) 
+  (<span class="lisp-keyword">if</span> (<span class="lisp-function">></span> <span class="lisp-variable">x</span> <span class="lisp-number">0</span>)
+      <span class="lisp-string">"正数"</span>
+      <span class="lisp-string">"非正数"</span>))
+
+<span class="lisp-comment">; 调用函数</span>
+(<span class="lisp-function">is-positive</span> <span class="lisp-number">5</span>)  <span class="lisp-comment">; "正数"</span>
+(<span class="lisp-function">is-positive</span> <span class="lisp-number">-3</span>)  <span class="lisp-comment">; "非正数"</span>
+</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">cond 条件</h5>
+                        <p class="text-slate-300 mb-4">cond 用于处理多个条件分支，每个分支由一个条件和一个或多个表达式组成。注意事项：cond 会依次检查每个条件，直到找到第一个为真的条件，然后执行对应的表达式。可以使用 t 作为最后一个条件来处理默认情况。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-keyword">defun</span> <span class="lisp-function">classify-number</span> (<span class="lisp-variable">x</span>) 
+  (<span class="lisp-keyword">cond</span>
+    ((<span class="lisp-function">></span> <span class="lisp-variable">x</span> <span class="lisp-number">0</span>) <span class="lisp-string">"正数"</span>)
+    ((<span class="lisp-function"><</span> <span class="lisp-variable">x</span> <span class="lisp-number">0</span>) <span class="lisp-string">"负数"</span>)
+    (<span class="lisp-boolean">t</span> <span class="lisp-string">"零"</span>)))
+
+<span class="lisp-comment">; 调用函数</span>
+(<span class="lisp-function">classify-number</span> <span class="lisp-number">5</span>)  <span class="lisp-comment">; "正数"</span>
+(<span class="lisp-function">classify-number</span> <span class="lisp-number">-3</span>)  <span class="lisp-comment">; "负数"</span>
+(<span class="lisp-function">classify-number</span> <span class="lisp-number">0</span>)  <span class="lisp-comment">; "零"</span>
+</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">case 条件</h5>
+                        <p class="text-slate-300 mb-4">case 用于根据表达式的值匹配不同的分支。注意事项：每个分支由一个值列表和对应的表达式组成，当表达式的值与任何一个值列表中的值匹配时，就执行对应的表达式。可以使用 otherwise 作为最后一个分支来处理默认情况。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-keyword">defun</span> <span class="lisp-function">get-day-name</span> (<span class="lisp-variable">day</span>) 
+  (<span class="lisp-keyword">case</span> <span class="lisp-variable">day</span>
+    ((<span class="lisp-number">1</span>) <span class="lisp-string">"星期一"</span>)
+    ((<span class="lisp-number">2</span>) <span class="lisp-string">"星期二"</span>)
+    ((<span class="lisp-number">3</span>) <span class="lisp-string">"星期三"</span>)
+    ((<span class="lisp-number">4</span>) <span class="lisp-string">"星期四"</span>)
+    ((<span class="lisp-number">5</span>) <span class="lisp-string">"星期五"</span>)
+    ((<span class="lisp-number">6</span> <span class="lisp-number">7</span>) <span class="lisp-string">"周末"</span>)
+    (<span class="lisp-keyword">otherwise</span> <span class="lisp-string">"无效的星期"</span>)))
+
+<span class="lisp-comment">; 调用函数</span>
+(<span class="lisp-function">get-day-name</span> <span class="lisp-number">1</span>)  <span class="lisp-comment">; "星期一"</span>
+(<span class="lisp-function">get-day-name</span> <span class="lisp-number">6</span>)  <span class="lisp-comment">; "周末"</span>
+(<span class="lisp-function">get-day-name</span> <span class="lisp-number">8</span>)  <span class="lisp-comment">; "无效的星期"</span>
+</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">when 和 unless</h5>
+                        <p class="text-slate-300 mb-4">when 和 unless 是简化的条件语句，用于只需要一个分支的情况。注意事项：when 当条件为真时执行多个表达式，unless 当条件为假时执行多个表达式，最后一个表达式的值作为返回值。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-keyword">defun</span> <span class="lisp-function">process-positive-number</span> (<span class="lisp-variable">x</span>) 
+  (<span class="lisp-keyword">when</span> (<span class="lisp-function">></span> <span class="lisp-variable">x</span> <span class="lisp-number">0</span>)
+    (<span class="lisp-function">print</span> <span class="lisp-string">"处理正数: "</span>)
+    (<span class="lisp-function">print</span> <span class="lisp-variable">x</span>)
+    (<span class="lisp-function">*</span> <span class="lisp-variable">x</span> <span class="lisp-number">2</span>)))
+
+<span class="lisp-keyword">defun</span> <span class="lisp-function">process-non-zero</span> (<span class="lisp-variable">x</span>) 
+  (<span class="lisp-keyword">unless</span> (<span class="lisp-function">zerop</span> <span class="lisp-variable">x</span>)
+    (<span class="lisp-function">print</span> <span class="lisp-string">"处理非零值: "</span>)
+    (<span class="lisp-function">print</span> <span class="lisp-variable">x</span>)
+    (<span class="lisp-function">/</span> <span class="lisp-number">100</span> <span class="lisp-variable">x</span>)))
+
+<span class="lisp-comment">; 调用函数</span>
+(<span class="lisp-function">process-positive-number</span> <span class="lisp-number">5</span>)  <span class="lisp-comment">; 输出 "处理正数: 5" 并返回 10</span>
+(<span class="lisp-function">process-non-zero</span> <span class="lisp-number">10</span>)  <span class="lisp-comment">; 输出 "处理非零值: 10" 并返回 10</span>
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Lisp 循环结构 -->
+            <section id="section-6" class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-center">
+                    <span class="gradient-text">6. Lisp 循环结构</span>
+                </h2>
+                
+                <div class="language-content" data-lang="lisp">
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">dotimes 循环</h5>
+                        <p class="text-slate-300 mb-4">dotimes 用于执行指定次数的循环，通常用于计数循环。注意事项：dotimes 接受一个变量名、循环次数和可选的返回值，循环变量从 0 开始递增到循环次数减 1。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; dotimes - 执行指定次数的循环</span>
+<span class="lisp-comment">; 打印数字 0 到 4</span>
+(<span class="lisp-keyword">dotimes</span> (<span class="lisp-variable">i</span> <span class="lisp-number">5</span>) 
+  (<span class="lisp-function">print</span> <span class="lisp-variable">i</span>))
+
+<span class="lisp-comment">; dotimes 带返回值</span>
+(<span class="lisp-keyword">dotimes</span> (<span class="lisp-variable">i</span> <span class="lisp-number">3</span> <span class="lisp-string">"完成"</span>) 
+  (<span class="lisp-function">print</span> <span class="lisp-variable">i</span>))  <span class="lisp-comment">; 打印 0, 1, 2 并返回 "完成"</span>
+</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">dolist 循环</h5>
+                        <p class="text-slate-300 mb-4">dolist 用于遍历列表中的每个元素。注意事项：dolist 接受一个变量名、要遍历的列表和可选的返回值，循环变量会依次绑定到列表中的每个元素。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-variable">*fruits*</span> = (<span class="lisp-function">list</span> <span class="lisp-string">"苹果"</span> <span class="lisp-string">"香蕉"</span> <span class="lisp-string">"橙子"</span> <span class="lisp-string">"葡萄"</span>)
+
+<span class="lisp-comment">; dolist - 遍历列表</span>
+<span class="lisp-keyword">dolist</span> (<span class="lisp-variable">fruit</span> <span class="lisp-variable">*fruits*</span>) 
+  (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"我喜欢吃 ~a.~%"</span> <span class="lisp-variable">fruit</span>))
+
+<span class="lisp-comment">; dolist 带返回值</span>
+<span class="lisp-keyword">dolist</span> (<span class="lisp-variable">fruit</span> <span class="lisp-variable">*fruits*</span> <span class="lisp-string">"完成"</span>) 
+  (<span class="lisp-function">print</span> <span class="lisp-variable">fruit</span>))  <span class="lisp-comment">; 打印所有水果并返回 "完成"</span>
+</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">loop 宏</h5>
+                        <p class="text-slate-300 mb-4">loop 是 Lisp 中最强大和灵活的循环结构，提供了丰富的循环控制和数据处理功能。注意事项：loop 宏支持多种子句，如计数器、列表遍历、条件过滤、收集结果、求和等，可以组合使用这些子句来实现复杂的循环逻辑。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; loop - 通用循环宏</span>
+<span class="lisp-comment">; 简单的计数器循环</span>
+(<span class="lisp-function">loop</span> 
+  (<span class="lisp-variable">count</span> from <span class="lisp-number">0</span> to <span class="lisp-number">4</span> 
+  (<span class="lisp-function">print</span> <span class="lisp-variable">count</span>))
+
+<span class="lisp-comment">; loop 用于列表操作</span>
+(<span class="lisp-variable">*result*</span> = (<span class="lisp-function">loop</span> 
+  (<span class="lisp-variable">x</span> in (<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span> <span class="lisp-number">4</span> <span class="lisp-number">5</span>) 
+  (<span class="lisp-variable">when</span> (<span class="lisp-function">evenp</span> <span class="lisp-variable">x</span>) 
+  (<span class="lisp-function">collect</span> (<span class="lisp-function">*</span> <span class="lisp-variable">x</span> <span class="lisp-number">2</span>))))  <span class="lisp-comment">; (4 8)</span>
+
+<span class="lisp-comment">; loop 用于求和</span>
+(<span class="lisp-variable">*sum*</span> = (<span class="lisp-function">loop</span> 
+  (<span class="lisp-variable">x</span> from <span class="lisp-number">1</span> to <span class="lisp-number">5</span> 
+  (<span class="lisp-function">sum</span> <span class="lisp-variable">x</span>)))  <span class="lisp-comment">; 15</span>
+</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">do 和 do* 循环</h5>
+                        <p class="text-slate-300 mb-4">do 和 do* 是通用的迭代循环结构，允许自定义变量初始化、迭代步骤和终止条件。注意事项：do 并行初始化变量，do* 按顺序初始化变量；终止条件为真时循环结束，返回结果表达式的值。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; do 循环 - 通用迭代结构</span>
+<span class="lisp-comment">; 计算 1 到 5 的和</span>
+(<span class="lisp-keyword">do</span> ((<span class="lisp-variable">i</span> <span class="lisp-number">1</span> (<span class="lisp-function">+</span> <span class="lisp-variable">i</span> <span class="lisp-number">1</span>)) 
+     (<span class="lisp-variable">sum</span> <span class="lisp-number">0</span> (<span class="lisp-function">+</span> <span class="lisp-variable">sum</span> <span class="lisp-variable">i</span>))) 
+    ((<span class="lisp-function">></span> <span class="lisp-variable">i</span> <span class="lisp-number">5</span>) <span class="lisp-variable">sum</span>)  <span class="lisp-comment">; 终止条件: i > 5，返回 sum</span>
+  (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"i = ~a, sum = ~a~%"</span> <span class="lisp-variable">i</span> <span class="lisp-variable">sum</span>))
+
+<span class="lisp-comment">; do* 循环 - 变量按顺序初始化</span>
+<span class="lisp-comment">; 计算斐波那契数列</span>
+(<span class="lisp-keyword">do*</span> ((<span class="lisp-variable">a</span> <span class="lisp-number">0</span> <span class="lisp-variable">b</span>)  <span class="lisp-comment">; a = 0, 然后 a = b</span>
+      (<span class="lisp-variable">b</span> <span class="lisp-number">1</span> (<span class="lisp-function">+</span> <span class="lisp-variable">a</span> <span class="lisp-variable">b</span>)) <span class="lisp-comment">; b = 1, 然后 b = a + b</span>
+      (<span class="lisp-variable">count</span> <span class="lisp-number">10</span> (<span class="lisp-function">-</span> <span class="lisp-variable">count</span> <span class="lisp-number">1</span>)))
+     ((<span class="lisp-function">zerop</span> <span class="lisp-variable">count</span>) <span class="lisp-variable">a</span>)  <span class="lisp-comment">; 当 count 为 0 时返回 a</span>
+  (<span class="lisp-function">print</span> <span class="lisp-variable">a</span>))
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. Lisp 高级函数 -->
+            <section id="section-7" class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-center">
+                    <span class="gradient-text">7. Lisp 高级函数</span>
+                </h2>
+                
+                <div class="language-content" data-lang="lisp">
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">Lambda 函数</h5>
+                        <p class="text-slate-300 mb-4">Lambda 函数是匿名函数，可以在不定义名称的情况下直接使用。注意事项：lambda 函数的语法是 (lambda (参数列表) (函数体))，可以作为参数传递给其他函数，也可以赋值给变量。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; Lambda 函数 - 匿名函数</span>
+<span class="lisp-variable">*square-func*</span> = (<span class="lisp-keyword">lambda</span> (<span class="lisp-variable">x</span>) (<span class="lisp-function">*</span> <span class="lisp-variable">x</span> <span class="lisp-variable">x</span>))
+
+<span class="lisp-comment">; 使用 lambda 函数</span>
+(<span class="lisp-variable">*square-func*</span> <span class="lisp-number">5</span>)  <span class="lisp-comment">; 25</span>
+
+<span class="lisp-comment">; 直接使用 lambda</span>
+((<span class="lisp-keyword">lambda</span> (<span class="lisp-variable">x</span> <span class="lisp-variable">y</span>) (<span class="lisp-function">+</span> <span class="lisp-variable">x</span> <span class="lisp-variable">y</span>)) <span class="lisp-number">3</span> <span class="lisp-number">4</span>)  <span class="lisp-comment">; 7</span>
+
+<span class="lisp-comment">; Lambda 作为参数</span>
+(<span class="lisp-function">mapcar</span> (<span class="lisp-keyword">lambda</span> (<span class="lisp-variable">x</span>) (<span class="lisp-function">*</span> <span class="lisp-variable">x</span> <span class="lisp-number">2</span>))
+        (<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span>))  <span class="lisp-comment">; (2 4 6)</span>
+</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">映射函数</h5>
+                        <p class="text-slate-300 mb-4">映射函数用于对列表中的每个元素应用相同的函数，并返回结果列表。注意事项：mapcar 是最常用的映射函数，它接受一个函数和一个或多个列表作为参数，将函数应用于每个列表的对应元素。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; mapcar - 对列表元素应用函数</span>
+<span class="lisp-comment">; 计算列表中每个元素的平方</span>
+(<span class="lisp-function">mapcar</span> '<span class="lisp-function">*</span> 
+        (<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span> <span class="lisp-number">4</span>) 
+        (<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span> <span class="lisp-number">4</span>))  <span class="lisp-comment">; (1 4 9 16)</span>
+
+<span class="lisp-comment">; mapcan - 拼接结果列表</span>
+(<span class="lisp-function">mapcan</span> (<span class="lisp-keyword">lambda</span> (<span class="lisp-variable">x</span>) 
+                (<span class="lisp-function">list</span> <span class="lisp-variable">x</span> (<span class="lisp-function">*</span> <span class="lisp-variable">x</span> <span class="lisp-number">2</span>)))
+        (<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span>))  <span class="lisp-comment">; (1 2 2 4 3 6)</span>
+
+<span class="lisp-comment">; mapc - 只执行函数，不收集结果</span>
+(<span class="lisp-function">mapc</span> '<span class="lisp-function">print</span> (<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span>))
+</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">Reduce 和 Filter</h5>
+                        <p class="text-slate-300 mb-4">reduce 函数用于将列表元素归约为单个值，filter 相关函数用于根据条件过滤列表元素。注意事项：reduce 接受一个二元函数、一个列表和可选的初始值；remove-if 过滤掉满足条件的元素，remove-if-not 保留满足条件的元素。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; reduce - 归约函数</span>
+<span class="lisp-comment">; 计算列表元素的和</span>
+(<span class="lisp-function">reduce</span> '<span class="lisp-function">+</span> (<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span> <span class="lisp-number">4</span> <span class="lisp-number">5</span>))  <span class="lisp-comment">; 15</span>
+
+<span class="lisp-comment">; 带初始值的 reduce</span>
+(<span class="lisp-function">reduce</span> '<span class="lisp-function">+</span> (<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span>) :<span class="lisp-keyword">initial-value</span> <span class="lisp-number">10</span>)  <span class="lisp-comment">; 16</span>
+
+<span class="lisp-comment">; remove-if - 过滤函数</span>
+<span class="lisp-comment">; 过滤掉偶数</span>
+(<span class="lisp-function">remove-if</span> '<span class="lisp-function">evenp</span> (<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span> <span class="lisp-number">4</span> <span class="lisp-number">5</span>))  <span class="lisp-comment">; (1 3 5)</span>
+
+<span class="lisp-comment">; remove-if-not - 保留满足条件的元素</span>
+<span class="lisp-comment">; 保留大于 2 的元素</span>
+(<span class="lisp-function">remove-if-not</span> (<span class="lisp-keyword">lambda</span> (<span class="lisp-variable">x</span>) (<span class="lisp-function">>></span> <span class="lisp-variable">x</span> <span class="lisp-number">2</span>))
+        (<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span> <span class="lisp-number">4</span> <span class="lisp-number">5</span>))  <span class="lisp-comment">; (3 4 5)</span>
+</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">Apply 和 Funcall</h5>
+                        <p class="text-slate-300 mb-4">funcall 和 apply 用于动态调用函数。注意事项：funcall 直接接收函数和参数；apply 将列表中的元素作为参数传递给函数，可以与额外参数结合使用。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; funcall - 调用函数</span>
+(<span class="lisp-function">funcall</span> '<span class="lisp-function">+</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span>)  <span class="lisp-comment">; 6</span>
+
+<span class="lisp-variable">*operation*</span> = '<span class="lisp-function">*</span>
+(<span class="lisp-function">funcall</span> <span class="lisp-variable">*operation*</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span> <span class="lisp-number">4</span>)  <span class="lisp-comment">; 24</span>
+
+<span class="lisp-comment">; apply - 将列表作为参数调用函数</span>
+(<span class="lisp-function">apply</span> '<span class="lisp-function">+</span> (<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span>))  <span class="lisp-comment">; 6</span>
+
+<span class="lisp-comment">; apply 带额外参数</span>
+(<span class="lisp-function">apply</span> '<span class="lisp-function">+</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> (<span class="lisp-function">list</span> <span class="lisp-number">3</span> <span class="lisp-number">4</span> <span class="lisp-number">5</span>))  <span class="lisp-comment">; 15</span>
+
+<span class="lisp-comment">; 使用 apply 连接字符串</span>
+(<span class="lisp-function">apply</span> '<span class="lisp-function">concatenate</span> <span class="lisp-variable">'string</span> 
+        (<span class="lisp-function">list</span> <span class="lisp-string">"Hello, "</span> <span class="lisp-string">"Lisp "</span> <span class="lisp-string">"World!"</span>))
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. Lisp 宏系统 -->
+            <section id="section-8" class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-center">
+                    <span class="gradient-text">8. Lisp 宏系统</span>
+                </h2>
+                
+                <div class="language-content" data-lang="lisp">
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">宏的基本概念</h5>
+                        <p class="text-slate-300 mb-4">宏是 Lisp 中强大的元编程工具，用于在编译时转换代码。与函数不同，宏接收表达式作为参数并返回新的表达式。注意事项：宏在编译时展开，而函数在运行时求值；宏可以修改代码结构，实现语言扩展。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 宏与函数的区别：</span>
+<span class="lisp-comment">; 函数：接收参数值，返回计算结果</span>
+<span class="lisp-comment">; 宏：接收表达式，返回新的表达式</span>
+
+<span class="lisp-comment">; 简单宏示例</span>
+(<span class="lisp-keyword">defmacro</span> <span class="lisp-macro">when-not</span> (<span class="lisp-variable">condition</span> <span class="lisp-variable">*</span><span class="lisp-variable">body</span>) 
+  <span class="lisp-string">"条件为假时执行body"</span>
+  (<span class="lisp-function">list</span> '<span class="lisp-keyword">if</span> 
+        (<span class="lisp-function">list</span> '<span class="lisp-keyword">not</span> <span class="lisp-variable">condition</span>) 
+        (<span class="lisp-function">cons</span> '<span class="lisp-keyword">progn</span> <span class="lisp-variable">body</span>)))
+
+<span class="lisp-comment">; 使用宏</span>
+(<span class="lisp-macro">when-not</span> (<span class="lisp-function">null</span> <span class="lisp-variable">x</span>)
+  (<span class="lisp-function">print</span> <span class="lisp-string">"x 不为空"</span>)
+  (<span class="lisp-function">print</span> <span class="lisp-variable">x</span>))
+</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">Quote 和 反引号</h5>
+                        <p class="text-slate-300 mb-4">quote 和反引号是宏定义中常用的工具，用于控制表达式的求值。注意事项：quote 完全阻止表达式求值；反引号允许选择性求值，使用逗号(,)进行单个表达式求值，使用逗号拼接符(,@)展开列表。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; quote - 防止表达式求值</span>
+(<span class="lisp-function">quote</span> (<span class="lisp-function">+</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span>))  <span class="lisp-comment">; 返回表达式本身 (+ 1 2)</span>
+'<span class="lisp-comment">; 单引号是 quote 的简写</span>
+'<span class="lisp-function">+</span>  <span class="lisp-comment">; 返回符号 +</span>
+'<span class="lisp-variable">x</span>   <span class="lisp-comment">; 返回符号 x</span>
+'<span class="lisp-function">(</span><span class="lisp-variable">x</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span>)  <span class="lisp-comment">; 返回列表 (x 1 2)</span>
+
+<span class="lisp-comment">; 反引号 ` - 选择性求值</span>
+<span class="lisp-comment">; 使用 , 进行求值</span>
+(<span class="lisp-variable">x</span> = <span class="lisp-number">5</span>)
+(<span class="lisp-function">format</span> <span class="lisp-variable">nil</span> <span class="lisp-string">"x = ~a"</span> <span class="lisp-variable">x</span>)  <span class="lisp-comment">; "x = 5"</span>
+
+<span class="lisp-comment">; 反引号示例</span>
+(<span class="lisp-variable">y</span> = <span class="lisp-number">10</span>)
+`(<span class="lisp-function">+</span> <span class="lisp-variable">x</span> ,<span class="lisp-variable">y</span>)  <span class="lisp-comment">; 返回 (+ x 10)</span>
+
+<span class="lisp-comment">; 反引号在宏中的应用</span>
+(<span class="lisp-keyword">defmacro</span> <span class="lisp-macro">when-not</span> (<span class="lisp-variable">condition</span> &<span class="lisp-variable">body</span>)
+  <span class="lisp-string">"条件为假时执行body"</span>
+  `(<span class="lisp-keyword">if</span> (<span class="lisp-keyword">not</span> ,<span class="lisp-variable">condition</span>)
+       (<span class="lisp-keyword">progn</span> ,@<span class="lisp-variable">body</span>)))
+
+<span class="lisp-comment">; 变量捕获问题</span>
+<span class="lisp-comment">; 错误的宏定义</span>
+(<span class="lisp-keyword">defmacro</span> <span class="lisp-macro">bad-inc</span> (<span class="lisp-variable">x</span>)
+  `(<span class="lisp-keyword">let</span> ((<span class="lisp-variable">tmp</span> ,<span class="lisp-variable">x</span>))
+     (<span class="lisp-keyword">incf</span> <span class="lisp-variable">tmp</span>)))
+
+<span class="lisp-comment">; 正确的宏定义 - 使用 gensym</span>
+(<span class="lisp-keyword">defmacro</span> <span class="lisp-macro">good-inc</span> (<span class="lisp-variable">x</span>)
+  (<span class="lisp-keyword">let</span> ((<span class="lisp-variable">tmp</span> (<span class="lisp-function">gensym</span>)))
+    `(<span class="lisp-keyword">let</span> ((,tmp ,<span class="lisp-variable">x</span>))
+       (<span class="lisp-keyword">incf</span> ,tmp))))</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">宏的高级特性</h5>
+                        <p class="text-slate-300 mb-4">Lisp 宏支持多种高级特性，包括可变参数、递归宏定义和宏展开查看等。注意事项：在宏中使用局部变量时要注意变量捕获问题，可以使用 gensym 生成唯一符号；可以使用 macroexpand-1 查看宏的展开结果。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 可变参数宏</span>
+(<span class="lisp-keyword">defmacro</span> <span class="lisp-macro">my-or</span> (&rest <span class="lisp-variable">conditions</span>)
+  (<span class="lisp-keyword">if</span> (<span class="lisp-function">null</span> <span class="lisp-variable">conditions</span>)
+      <span class="lisp-boolean">nil</span>
+      `(<span class="lisp-keyword">let</span> ((<span class="lisp-variable">result</span> ,(<span class="lisp-function">car</span> <span class="lisp-variable">conditions</span>)))
+         (<span class="lisp-keyword">if</span> <span class="lisp-variable">result</span>
+             <span class="lisp-variable">result</span>
+             (my-or ,@(<span class="lisp-function">cdr</span> <span class="lisp-variable">conditions</span>)))))
+
+<span class="lisp-comment">; 使用 my-or 宏</span>
+(my-or (<span class="lisp-function">null</span> <span class="lisp-variable">x</span>) (<span class="lisp-function">= x 0</span>) (<span class="lisp-function">> x 100</span>))
+
+<span class="lisp-comment">; 宏的展开</span>
+(<span class="lisp-function">macroexpand-1</span> '(<span class="lisp-keyword">when</span> (<span class="lisp-function">> x 5</span>)
+                           (<span class="lisp-function">print</span> <span class="lisp-string">"x > 5"</span>)))</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. Lisp 文件 I/O 操作 -->
+            <section id="section-9" class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-center">
+                    <span class="gradient-text">9. Lisp 文件 I/O 操作</span>
+                </h2>
+                
+                <div class="language-content" data-lang="lisp">
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">文件写入</h5>
+                        <p class="text-slate-300 mb-4">Lisp 提供了多种文件写入方式，常用的是 with-open-file 宏，它可以自动处理文件的打开和关闭。注意事项：with-open-file 宏确保无论是否发生错误，文件都会被正确关闭；可以通过关键字参数设置文件模式（如 output、append）和存在性处理（如 supersede、append）。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 写入文件</span>
+(<span class="lisp-keyword">with-open-file</span> (<span class="lisp-variable">outfile</span> "example.txt" :<span class="lisp-keyword">direction</span> :<span class="lisp-keyword">output</span> :<span class="lisp-keyword">if-exists</span> :<span class="lisp-keyword">supersede</span>)
+  (<span class="lisp-function">format</span> <span class="lisp-variable">outfile</span> <span class="lisp-string">"Hello, Lisp!~%"</span>)
+  (<span class="lisp-function">format</span> <span class="lisp-variable">outfile</span> <span class="lisp-string">"这是一个示例文件。~%"</span>)
+  (<span class="lisp-function">format</span> <span class="lisp-variable">outfile</span> <span class="lisp-string">"文件写入完成。~%"</span>))
+
+<span class="lisp-comment">; 追加到文件</span>
+(<span class="lisp-keyword">with-open-file</span> (<span class="lisp-variable">outfile</span> "example.txt" :<span class="lisp-keyword">direction</span> :<span class="lisp-keyword">output</span> :<span class="lisp-keyword">if-exists</span> :<span class="lisp-keyword">append</span>)
+  (<span class="lisp-function">format</span> <span class="lisp-variable">outfile</span> <span class="lisp-string">"这是追加的内容。~%"</span>))</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">文件读取</h5>
+                        <p class="text-slate-300 mb-4">Lisp 支持多种文件读取方式，包括按行读取、按字符读取和读取 Lisp 对象等。注意事项：使用 read-line 读取文本行时，需要指定文件结束标记；使用 read 可以直接读取 Lisp 表达式，但要注意安全性问题。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 读取整个文件</span>
+(<span class="lisp-keyword">with-open-file</span> (<span class="lisp-variable">infile</span> "example.txt" :<span class="lisp-keyword">direction</span> :<span class="lisp-keyword">input</span>)
+  (<span class="lisp-function">loop</span> for <span class="lisp-variable">line</span> = (<span class="lisp-function">read-line</span> <span class="lisp-variable">infile</span> nil <span class="lisp-boolean">nil</span>)
+        while <span class="lisp-variable">line</span>
+        do (<span class="lisp-function">print</span> <span class="lisp-variable">line</span>)))
+
+<span class="lisp-comment">; 读取单个字符</span>
+(<span class="lisp-keyword">with-open-file</span> (<span class="lisp-variable">infile</span> "example.txt" :<span class="lisp-keyword">direction</span> :<span class="lisp-keyword">input</span>)
+  (<span class="lisp-function">loop</span> for <span class="lisp-variable">char</span> = (<span class="lisp-function">read-char</span> <span class="lisp-variable">infile</span> nil <span class="lisp-boolean">nil</span>)
+        while <span class="lisp-variable">char</span>
+        do (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"~c"</span> <span class="lisp-variable">char</span>)))
+
+<span class="lisp-comment">; 读取 Lisp 对象</span>
+(<span class="lisp-keyword">with-open-file</span> (<span class="lisp-variable">infile</span> "data.lisp" :<span class="lisp-keyword">direction</span> :<span class="lisp-keyword">input</span>)
+  (<span class="lisp-variable">*data*</span> = (<span class="lisp-function">read</span> <span class="lisp-variable">infile</span> nil <span class="lisp-boolean">nil</span>)))
+
+<span class="lisp-comment">; 写入 Lisp 对象</span>
+(<span class="lisp-keyword">with-open-file</span> (<span class="lisp-variable">outfile</span> "data.lisp" :<span class="lisp-keyword">direction</span> :<span class="lisp-keyword">output</span> :<span class="lisp-keyword">if-exists</span> :<span class="lisp-keyword">supersede</span>)
+  (<span class="lisp-function">print</span> (<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span> <span class="lisp-number">4</span> <span class="lisp-number">5</span>) <span class="lisp-variable">outfile</span>))</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">文件操作</h5>
+                        <p class="text-slate-300 mb-4">Lisp 提供了丰富的文件系统操作函数，包括检查文件存在性、删除文件、重命名文件、获取文件属性和目录操作等。注意事项：使用 directory 函数可以获取符合模式的文件列表；ensure-directories-exist 可以确保目录结构存在。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 检查文件是否存在</span>
+(<span class="lisp-function">probe-file</span> "example.txt")  <span class="lisp-comment">; 如果存在返回文件路径，否则返回 nil</span>
+
+<span class="lisp-comment">; 删除文件</span>
+(<span class="lisp-function">delete-file</span> "example.txt")  <span class="lisp-comment">; 删除文件</span>
+
+<span class="lisp-comment">; 重命名文件</span>
+(<span class="lisp-function">rename-file</span> "old.txt" "new.txt")  <span class="lisp-comment">; 重命名文件</span>
+
+<span class="lisp-comment">; 获取文件属性</span>
+(<span class="lisp-function">file-length</span> "example.txt")  <span class="lisp-comment">; 获取文件长度（字节）</span>
+
+<span class="lisp-comment">; 目录操作</span>
+(<span class="lisp-function">directory</span> "*.txt")  <span class="lisp-comment">; 获取当前目录下的所有 .txt 文件</span>
+
+<span class="lisp-comment">; 创建目录</span>
+(<span class="lisp-function">ensure-directories-exist</span> "my-directory/"))</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 10. Lisp 错误处理 -->
+            <section id="section-10" class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-center">
+                    <span class="gradient-text">10. Lisp 错误处理</span>
+                </h2>
+                
+                <div class="language-content" data-lang="lisp">
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">条件系统</h5>
+                        <p class="text-slate-300 mb-4">Lisp 的条件系统是一种强大的错误处理机制，允许定义自定义错误类型、信号错误和处理错误。注意事项：条件系统不仅用于错误处理，还用于实现各种控制流程；可以使用 define-condition 定义自定义条件类型，使用 handler-case 处理条件。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 条件类型</span>
+(<span class="lisp-keyword">define-condition</span> <span class="lisp-condition">division-by-zero-error</span> (<span class="lisp-condition">error</span>)
+  ((<span class="lisp-variable">dividend</span> :<span class="lisp-keyword">initarg</span> :<span class="lisp-variable">dividend</span> :<span class="lisp-keyword">reader</span> <span class="lisp-variable">dividend</span>))
+  (:<span class="lisp-keyword">documentation</span> "除以零错误"))
+
+<span class="lisp-comment">; 信号条件</span>
+(<span class="lisp-keyword">defun</span> <span class="lisp-function">safe-divide</span> (<span class="lisp-variable">x</span> <span class="lisp-variable">y</span>)
+  (<span class="lisp-keyword">if</span> (<span class="lisp-function">zerop</span> <span class="lisp-variable">y</span>)
+      (<span class="lisp-function">error</span> 'division-by-zero-error :<span class="lisp-variable">dividend</span> <span class="lisp-variable">x</span>)
+      (<span class="lisp-function">/</span> <span class="lisp-variable">x</span> <span class="lisp-variable">y</span>)))
+
+<span class="lisp-comment">; 处理条件</span>
+(<span class="lisp-keyword">handler-case</span>
+    (<span class="lisp-function">safe-divide</span> <span class="lisp-number">10</span> <span class="lisp-number">0</span>)
+  (division-by-zero-error (<span class="lisp-variable">e</span>)
+    (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"错误：尝试用 ~a 除以零！~%"</span> (<span class="lisp-variable">dividend</span> <span class="lisp-variable">e</span>))
+    <span class="lisp-number">0</span>)
+  (<span class="lisp-condition">error</span> (<span class="lisp-variable">e</span>)
+    (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"发生未知错误：~a~%"</span> <span class="lisp-variable">e</span>)
+    <span class="lisp-boolean">nil</span>))</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">Handler Bind</h5>
+                        <p class="text-slate-300 mb-4">handler-bind 提供了更灵活的条件处理方式，允许直接绑定条件处理函数。注意事项：handler-bind 允许在处理函数中使用 continue、abort 等重启操作；restart-case 可以提供恢复点，允许程序从错误中恢复执行。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 使用 handler-bind 处理条件</span>
+(<span class="lisp-keyword">handler-bind</span> ((<span class="lisp-condition">division-by-zero-error</span> #'(<span class="lisp-keyword">lambda</span> (<span class="lisp-variable">e</span>)
+                                           (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"处理除以零错误：~a~%"</span> (<span class="lisp-variable">dividend</span> <span class="lisp-variable">e</span>))
+                                           (<span class="lisp-function">continue</span>)))
+                    (<span class="lisp-condition">error</span> #'(<span class="lisp-keyword">lambda</span> (<span class="lisp-variable">e</span>)
+                                      (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"处理其他错误：~a~%"</span> <span class="lisp-variable">e</span>)
+                                      (<span class="lisp-function">abort</span>))))
+  (<span class="lisp-function">safe-divide</span> <span class="lisp-number">10</span> <span class="lisp-number">0</span>))
+
+<span class="lisp-comment">; 使用 restart-case 提供恢复点</span>
+(<span class="lisp-keyword">restart-case</span>
+    (<span class="lisp-keyword">handler-bind</span> ((<span class="lisp-condition">division-by-zero-error</span> #'(<span class="lisp-keyword">lambda</span> (<span class="lisp-variable">e</span>)
+                                               (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"发生除以零错误。~%"</span>)
+                                               (<span class="lisp-function">invoke-restart</span> 'use-one))))
+      (<span class="lisp-function">safe-divide</span> <span class="lisp-number">10</span> <span class="lisp-number">0</span>))
+  (use-one () <span class="lisp-number">1</span>)
+  (use-default () <span class="lisp-number">0</span>)
+  (retry-with-value (<span class="lisp-variable">new-y</span>)
+    :<span class="lisp-keyword">interactive</span> #'(<span class="lisp-keyword">lambda</span> ()
+                              (<span class="lisp-function">list</span> (<span class="lisp-function">read</span>)))
+    (<span class="lisp-function">safe-divide</span> <span class="lisp-number">10</span> <span class="lisp-variable">new-y</span>)))</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">调试工具</h5>
+                        <p class="text-slate-300 mb-4">Lisp 提供了丰富的调试工具，帮助开发者定位和修复代码中的问题。注意事项：trace 可以跟踪函数的调用和返回值；break 可以在特定条件下进入调试器；inspect 可以检查对象的内部结构。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 调试函数</span>
+(<span class="lisp-keyword">defun</span> <span class="lisp-function">buggy-function</span> (<span class="lisp-variable">x</span> <span class="lisp-variable">y</span>)
+  (<span class="lisp-keyword">let</span> ((<span class="lisp-variable">z</span> (<span class="lisp-function">/</span> <span class="lisp-variable">x</span> <span class="lisp-variable">y</span>)))
+    (<span class="lisp-function">* z</span> <span class="lisp-number">2</span>)))
+
+<span class="lisp-comment">; 使用 trace 跟踪函数调用</span>
+(<span class="lisp-function">trace</span> <span class="lisp-function">buggy-function</span>)
+
+<span class="lisp-comment">; 使用 untrace 取消跟踪</span>
+(<span class="lisp-function">untrace</span> <span class="lisp-function">buggy-function</span>)
+
+<span class="lisp-comment">; 使用 break 进入调试器</span>
+(<span class="lisp-keyword">defun</span> <span class="lisp-function">debug-function</span> (<span class="lisp-variable">x</span>)
+  (<span class="lisp-comment">; 当 x 为负数时进入调试器</span>
+   (<span class="lisp-keyword">when</span> (<span class="lisp-function"><</span> <span class="lisp-variable">x</span> <span class="lisp-number">0</span>)
+     (<span class="lisp-function">break</span>))
+   (<span class="lisp-function">* x</span> <span class="lisp-number">2</span>))
+
+<span class="lisp-comment">; 使用 inspect 检查对象</span>
+(<span class="lisp-function">inspect</span> (<span class="lisp-function">list</span> <span class="lisp-number">1</span> <span class="lisp-number">2</span> <span class="lisp-number">3</span>))</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 11. Lisp 面向对象编程 (CLOS) -->
+            <section id="section-11" class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-center">
+                    <span class="gradient-text">11. Lisp 面向对象编程 (CLOS)</span>
+                </h2>
+                
+                <div class="language-content" data-lang="lisp">
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">类定义</h5>
+                        <p class="text-slate-300 mb-4">CLOS (Common Lisp Object System) 是 Lisp 的面向对象编程系统，支持类定义、继承、多态等特性。注意事项：defclass 用于定义类，槽(slot)是类的属性；可以通过 initarg 指定构造函数参数，通过 reader 和 writer 指定访问器方法。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 定义简单类</span>
+(<span class="lisp-keyword">defclass</span> <span class="lisp-class">person</span> ()
+  ((<span class="lisp-variable">name</span> :<span class="lisp-keyword">initarg</span> :<span class="lisp-variable">name</span> :<span class="lisp-keyword">reader</span> <span class="lisp-variable">person-name</span> :<span class="lisp-keyword">writer</span> <span class="lisp-variable">set-person-name</span>)
+   (<span class="lisp-variable">age</span> :<span class="lisp-keyword">initarg</span> :<span class="lisp-variable">age</span> :<span class="lisp-keyword">reader</span> <span class="lisp-variable">person-age</span> :<span class="lisp-keyword">writer</span> <span class="lisp-variable">set-person-age</span>)
+   (<span class="lisp-variable">gender</span> :<span class="lisp-keyword">initarg</span> :<span class="lisp-variable">gender</span> :<span class="lisp-keyword">reader</span> <span class="lisp-variable">person-gender</span> :<span class="lisp-keyword">initform</span> <span class="lisp-string">"未知"</span>))
+  (:<span class="lisp-keyword">documentation</span> "人类"))
+
+<span class="lisp-comment">; 创建对象实例</span>
+(<span class="lisp-variable">*person*</span> = (<span class="lisp-function">make-instance</span> 'person :<span class="lisp-variable">name</span> <span class="lisp-string">"张三"</span> :<span class="lisp-variable">age</span> <span class="lisp-number">25</span> :<span class="lisp-variable">gender</span> <span class="lisp-string">"男"</span>))
+
+<span class="lisp-comment">; 访问对象属性</span>
+(<span class="lisp-variable">person-name</span> <span class="lisp-variable">*person*</span>)  <span class="lisp-comment">; 获取姓名</span>
+(<span class="lisp-variable">person-age</span> <span class="lisp-variable">*person*</span>)   <span class="lisp-comment">; 获取年龄</span>
+
+<span class="lisp-comment">; 修改对象属性</span>
+(<span class="lisp-variable">set-person-age</span> <span class="lisp-number">26</span> <span class="lisp-variable">*person*</span>)  <span class="lisp-comment">; 设置年龄为 26</span></code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">方法定义</h5>
+                        <p class="text-slate-300 mb-4">CLOS 使用 defmethod 定义方法，支持基于参数类型的多态。注意事项：方法自动与类关联，根据参数类型选择合适的方法实现；可以使用 defgeneric 显式定义泛型函数，然后用 defmethod 实现特定类型的方法。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 定义方法</span>
+(<span class="lisp-keyword">defmethod</span> <span class="lisp-function">introduce</span> ((<span class="lisp-variable">person</span> person))
+  (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"大家好，我叫 ~a，今年 ~a 岁，性别 ~a。~%"</span>
+          (<span class="lisp-variable">person-name</span> <span class="lisp-variable">person</span>)
+          (<span class="lisp-variable">person-age</span> <span class="lisp-variable">person</span>)
+          (<span class="lisp-variable">person-gender</span> <span class="lisp-variable">person</span>)))
+
+<span class="lisp-comment">; 使用方法</span>
+(<span class="lisp-function">introduce</span> <span class="lisp-variable">*person*</span>)  <span class="lisp-comment">; 输出自我介绍</span>
+
+<span class="lisp-comment">; 定义泛型函数</span>
+(<span class="lisp-keyword">defgeneric</span> <span class="lisp-function">work</span> ((<span class="lisp-variable">person</span> person))
+  (:<span class="lisp-keyword">documentation</span> "工作"))
+
+<span class="lisp-comment">; 实现泛型函数</span>
+(<span class="lisp-keyword">defmethod</span> <span class="lisp-function">work</span> ((<span class="lisp-variable">person</span> person))
+  (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"~a 正在工作。~%"</span> (<span class="lisp-variable">person-name</span> <span class="lisp-variable">person</span>)))</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">继承</h5>
+                        <p class="text-slate-300 mb-4">CLOS 支持单继承和多继承，允许子类继承父类的属性和方法。注意事项：在 defclass 中指定父类列表即可实现继承；子类可以添加新的槽，也可以重写父类的方法；实例化子类时会自动初始化父类的槽。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 定义学生类，继承自 person</span>
+(<span class="lisp-keyword">defclass</span> <span class="lisp-class">student</span> (person)
+  ((<span class="lisp-variable">student-id</span> :<span class="lisp-keyword">initarg</span> :<span class="lisp-variable">student-id</span> :<span class="lisp-keyword">reader</span> <span class="lisp-variable">student-id</span>)
+   (<span class="lisp-variable">major</span> :<span class="lisp-keyword">initarg</span> :<span class="lisp-variable">major</span> :<span class="lisp-keyword">reader</span> <span class="lisp-variable">student-major</span>)
+   (<span class="lisp-variable">gpa</span> :<span class="lisp-keyword">initarg</span> :<span class="lisp-variable">gpa</span> :<span class="lisp-keyword">reader</span> <span class="lisp-variable">student-gpa</span> :<span class="lisp-keyword">writer</span> <span class="lisp-variable">set-student-gpa</span>))
+  (:<span class="lisp-keyword">documentation</span> "学生类"))
+
+<span class="lisp-comment">; 定义教师类，继承自 person</span>
+(<span class="lisp-keyword">defclass</span> <span class="lisp-class">teacher</span> (person)
+  ((<span class="lisp-variable">teacher-id</span> :<span class="lisp-keyword">initarg</span> :<span class="lisp-variable">teacher-id</span> :<span class="lisp-keyword">reader</span> <span class="lisp-variable">teacher-id</span>)
+   (<span class="lisp-variable">department</span> :<span class="lisp-keyword">initarg</span> :<span class="lisp-variable">department</span> :<span class="lisp-keyword">reader</span> <span class="lisp-variable">teacher-department</span>)
+   (<span class="lisp-variable">title</span> :<span class="lisp-keyword">initarg</span> :<span class="lisp-variable">title</span> :<span class="lisp-keyword">reader</span> <span class="lisp-variable">teacher-title</span>))
+  (:<span class="lisp-keyword">documentation</span> "教师类"))
+
+<span class="lisp-comment">; 创建学生和教师实例</span>
+(<span class="lisp-variable">*student*</span> = (<span class="lisp-function">make-instance</span> 'student :<span class="lisp-variable">name</span> <span class="lisp-string">"李四"</span> :<span class="lisp-variable">age</span> <span class="lisp-number">20</span> :<span class="lisp-variable">gender</span> <span class="lisp-string">"女"</span> :<span class="lisp-variable">student-id</span> <span class="lisp-number">20230001</span> :<span class="lisp-variable">major</span> <span class="lisp-string">"计算机科学"</span> :<span class="lisp-variable">gpa</span> <span class="lisp-number">3.8</span>))
+
+(<span class="lisp-variable">*teacher*</span> = (<span class="lisp-function">make-instance</span> 'teacher :<span class="lisp-variable">name</span> <span class="lisp-string">"王五"</span> :<span class="lisp-variable">age</span> <span class="lisp-number">35</span> :<span class="lisp-variable">gender</span> <span class="lisp-string">"男"</span> :<span class="lisp-variable">teacher-id</span> <span class="lisp-number">1001</span> :<span class="lisp-variable">department</span> <span class="lisp-string">"计算机系"</span> :<span class="lisp-variable">title</span> <span class="lisp-string">"副教授"</span>))
+
+<span class="lisp-comment">; 重写方法</span>
+(<span class="lisp-keyword">defmethod</span> <span class="lisp-function">work</span> ((<span class="lisp-variable">student</span> student))
+  (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"学生 ~a 正在学习 ~a 专业。~%"</span>
+          (<span class="lisp-variable">person-name</span> <span class="lisp-variable">student</span>)
+          (<span class="lisp-variable">student-major</span> <span class="lisp-variable">student</span>)))
+
+(<span class="lisp-keyword">defmethod</span> <span class="lisp-function">work</span> ((<span class="lisp-variable">teacher</span> teacher))
+  (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"~a 老师在 ~a 系担任 ~a，正在教学。~%"</span>
+          (<span class="lisp-variable">person-name</span> <span class="lisp-variable">teacher</span>)
+          (<span class="lisp-variable">teacher-department</span> <span class="lisp-variable">teacher</span>)
+          (<span class="lisp-variable">teacher-title</span> <span class="lisp-variable">teacher</span>)))</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">多重方法</h5>
+                        <p class="text-slate-300 mb-4">CLOS 的多重方法允许方法根据所有参数的类型进行调度，而不仅仅是第一个参数。注意事项：多重方法提供了强大的多态能力，可以实现复杂的类型驱动行为；通过 defgeneric 定义多参数的泛型函数，然后用 defmethod 为不同参数类型组合提供实现。</p>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-comment">; 定义多重方法</span>
+(<span class="lisp-keyword">defgeneric</span> <span class="lisp-function">interact</span> ((<span class="lisp-variable">person1</span> person) (<span class="lisp-variable">person2</span> person))
+  (:<span class="lisp-keyword">documentation</span> "两个人之间的交互"))
+
+<span class="lisp-comment">; 教师与学生的交互</span>
+(<span class="lisp-keyword">defmethod</span> <span class="lisp-function">interact</span> ((<span class="lisp-variable">teacher</span> teacher) (<span class="lisp-variable">student</span> student))
+  (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"~a 老师指导学生 ~a 的学习。~%"</span>
+          (<span class="lisp-variable">person-name</span> <span class="lisp-variable">teacher</span>)
+          (<span class="lisp-variable">person-name</span> <span class="lisp-variable">student</span>)))
+
+<span class="lisp-comment">; 学生与学生的交互</span>
+(<span class="lisp-keyword">defmethod</span> <span class="lisp-function">interact</span> ((<span class="lisp-variable">student1</span> student) (<span class="lisp-variable">student2</span> student))
+  (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"学生 ~a 和学生 ~a 一起学习。~%"</span>
+          (<span class="lisp-variable">person-name</span> <span class="lisp-variable">student1</span>)
+          (<span class="lisp-variable">person-name</span> <span class="lisp-variable">student2</span>)))
+
+<span class="lisp-comment">; 教师与教师的交互</span>
+(<span class="lisp-keyword">defmethod</span> <span class="lisp-function">interact</span> ((<span class="lisp-variable">teacher1</span> teacher) (<span class="lisp-variable">teacher2</span> teacher))
+  (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"~a 老师和 ~a 老师讨论教学工作。~%"</span>
+          (<span class="lisp-variable">person-name</span> <span class="lisp-variable">teacher1</span>)
+          (<span class="lisp-variable">person-name</span> <span class="lisp-variable">teacher2</span>)))
+
+<span class="lisp-comment">; 使用多重方法</span>
+(<span class="lisp-function">interact</span> <span class="lisp-variable">*teacher*</span> <span class="lisp-variable">*student*</span>)  <span class="lisp-comment">; 教师指导学生</span>
+(<span class="lisp-function">interact</span> <span class="lisp-variable">*student*</span> <span class="lisp-variable">*student*</span>)  <span class="lisp-comment">; 学生之间的交互</span>
+(<span class="lisp-function">interact</span> <span class="lisp-variable">*teacher*</span> <span class="lisp-variable">*teacher*</span>)  <span class="lisp-comment">; 教师之间的交互</span></code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 12. Lisp 实际应用示例 -->
+            <section id="section-12" class="mb-16">
+                <h2 class="text-3xl font-bold mb-8 text-center">
+                    <span class="gradient-text">12. Lisp 实际应用示例</span>
+                </h2>
+                
+                <div class="language-content" data-lang="lisp">
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">示例 1: 简单计算器</h5>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-keyword">defun</span> <span class="lisp-function">simple-calculator</span> ()
+  "简单计算器，支持加减乘除"
+  (<span class="lisp-keyword">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"欢迎使用简单计算器！~%"</span>)
+  (<span class="lisp-keyword">loop</span>
+    (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"请输入表达式（例如：+ 1 2），或输入 q 退出：~%"</span>)
+    (<span class="lisp-variable">input</span> = (<span class="lisp-function">read-line</span>))
+    (<span class="lisp-keyword">when</span> (<span class="lisp-function">string-equal</span> <span class="lisp-variable">input</span> <span class="lisp-string">"q"</span>)
+      (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"再见！~%"</span>)
+      (<span class="lisp-keyword">return</span>))
+    (<span class="lisp-keyword">handler-case</span>
+        (<span class="lisp-keyword">let</span> ((<span class="lisp-variable">expr</span> (<span class="lisp-function">read-from-string</span> <span class="lisp-variable">input</span>)))
+          (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"结果: ~a~%"</span> (<span class="lisp-function">eval</span> <span class="lisp-variable">expr</span>)))
+      ((<span class="lisp-condition">error</span> (<span class="lisp-variable">e</span>))
+        (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"错误: ~a~%"</span> <span class="lisp-variable">e</span>)))))
+
+<span class="lisp-comment">; 使用计算器</span>
+; (simple-calculator)</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">示例 2: 列表处理工具</h5>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-keyword">defun</span> <span class="lisp-function">list-utils</span> ()
+  "列表处理工具，支持多种列表操作"
+  (<span class="lisp-keyword">let</span> ((<span class="lisp-variable">current-list</span> (<span class="lisp-function">list</span>)))  <span class="lisp-comment">; 当前列表</span>
+    (<span class="lisp-keyword">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"欢迎使用列表处理工具！~%"</span>)
+    (<span class="lisp-keyword">loop</span>
+      (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"当前列表: ~a~%"</span> <span class="lisp-variable">current-list</span>)
+      (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"请选择操作：~%"</span>)
+      (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"1. 添加元素~%"</span>)
+      (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"2. 删除元素~%"</span>)
+      (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"3. 排序~%"</span>)
+      (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"4. 反转~%"</span>)
+      (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"5. 清空~%"</span>)
+      (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"6. 退出~%"</span>)
+      (<span class="lisp-variable">choice</span> = (<span class="lisp-function">read-line</span>))
+      (<span class="lisp-keyword">cond</span>
+        ((<span class="lisp-function">string-equal</span> <span class="lisp-variable">choice</span> <span class="lisp-string">"1"</span>)
+         (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"请输入要添加的元素: ~%"</span>)
+         (<span class="lisp-variable">element</span> = (<span class="lisp-function">read-from-string</span> (<span class="lisp-function">read-line</span>)))
+         (<span class="lisp-variable">current-list</span> = (<span class="lisp-function">append</span> <span class="lisp-variable">current-list</span> (<span class="lisp-function">list</span> <span class="lisp-variable">element</span>))))
+        ((<span class="lisp-function">string-equal</span> <span class="lisp-variable">choice</span> <span class="lisp-string">"2"</span>)
+         (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"请输入要删除的元素: ~%"</span>)
+         (<span class="lisp-variable">element</span> = (<span class="lisp-function">read-from-string</span> (<span class="lisp-function">read-line</span>)))
+         (<span class="lisp-variable">current-list</span> = (<span class="lisp-function">remove</span> <span class="lisp-variable">element</span> <span class="lisp-variable">current-list</span>))))
+        ((<span class="lisp-function">string-equal</span> <span class="lisp-variable">choice</span> <span class="lisp-string">"3"</span>)
+         (<span class="lisp-variable">current-list</span> = (<span class="lisp-function">sort</span> <span class="lisp-variable">current-list</span> '<)))
+        ((<span class="lisp-function">string-equal</span> <span class="lisp-variable">choice</span> <span class="lisp-string">"4"</span>)
+         (<span class="lisp-variable">current-list</span> = (<span class="lisp-function">reverse</span> <span class="lisp-variable">current-list</span>))))
+        ((<span class="lisp-function">string-equal</span> <span class="lisp-variable">choice</span> <span class="lisp-string">"5"</span>)
+         (<span class="lisp-variable">current-list</span> = (<span class="lisp-function">list</span>)))
+        ((<span class="lisp-function">string-equal</span> <span class="lisp-variable">choice</span> <span class="lisp-string">"6"</span>)
+         (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"再见！~%"</span>)
+         (<span class="lisp-keyword">return</span>))
+        (<span class="lisp-boolean">t</span>
+         (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"无效的选择，请重新输入。~%"</span>))))))
+
+<span class="lisp-comment">; 使用列表处理工具</span>
+; (list-utils)</code></pre>
+                    </div>
+
+                    <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                        <h5 class="text-lg font-medium mb-4 text-purple-300">示例 2: 文本处理工具</h5>
+                        <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="lisp-keyword">defun</span> <span class="lisp-function">text-stats</span> (<span class="lisp-variable">filename</span>)
+  "统计文本文件的行数、单词数和字符数"
+  (<span class="lisp-keyword">with-open-file</span> (<span class="lisp-variable">infile</span> <span class="lisp-variable">filename</span> :<span class="lisp-keyword">direction</span> :<span class="lisp-keyword">input</span>)
+    (<span class="lisp-keyword">let</span> ((<span class="lisp-variable">line-count</span> <span class="lisp-number">0</span>)
+          (<span class="lisp-variable">word-count</span> <span class="lisp-number">0</span>)
+          (<span class="lisp-variable">char-count</span> <span class="lisp-number">0</span>))
+      (<span class="lisp-keyword">loop</span> for <span class="lisp-variable">line</span> = (<span class="lisp-function">read-line</span> <span class="lisp-variable">infile</span> nil <span class="lisp-boolean">nil</span>)
+            while <span class="lisp-variable">line</span>
+            do
+            (<span class="lisp-variable">line-count</span> = (<span class="lisp-function">+ line-count</span> <span class="lisp-number">1</span>))
+            (<span class="lisp-variable">char-count</span> = (<span class="lisp-function">+ char-count</span> (<span class="lisp-function">length</span> <span class="lisp-variable">line</span>) <span class="lisp-number">1</span>))  <span class="lisp-comment">; +1 表示换行符</span>
+            (<span class="lisp-variable">word-count</span> = (<span class="lisp-function">+ word-count</span> (<span class="lisp-function">length</span> (<span class="lisp-function">split-string</span> <span class="lisp-variable">line</span>)))))
+      (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"文件: ~a~%"</span> <span class="lisp-variable">filename</span>)
+      (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"行数: ~a~%"</span> <span class="lisp-variable">line-count</span>)
+      (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"单词数: ~a~%"</span> <span class="lisp-variable">word-count</span>)
+      (<span class="lisp-function">format</span> <span class="lisp-variable">t</span> <span class="lisp-string">"字符数: ~a~%"</span> <span class="lisp-variable">char-count</span>)
+      (<span class="lisp-keyword">values</span> <span class="lisp-variable">line-count</span> <span class="lisp-variable">word-count</span> <span class="lisp-variable">char-count</span>))))
+
+<span class="lisp-keyword">defun</span> <span class="lisp-function">split-string</span> (<span class="lisp-variable">string</span>)
+  "将字符串分割成单词列表"
+  (<span class="lisp-function">with-input-from-string</span> (<span class="lisp-variable">s</span> <span class="lisp-variable">string</span>)
+    (<span class="lisp-function">loop</span> for <span class="lisp-variable">word</span> = (<span class="lisp-function">read</span> <span class="lisp-variable">s</span> nil <span class="lisp-boolean">nil</span>)
+          while <span class="lisp-variable">word</span>
+          collect <span class="lisp-variable">word</span>)))
+
+<span class="lisp-comment">; 使用文本统计工具</span>
+; (text-stats "example.txt")</code></pre>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
 </body>
 </html>
