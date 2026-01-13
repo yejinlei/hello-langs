@@ -39,6 +39,23 @@
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">
     <main class="container mx-auto px-4 py-8 max-w-6xl">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Sidebar Navigation -->
+            <aside class="lg:w-1/4">
+                <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 sticky top-24 border border-slate-700">
+                    <h3 class="text-lg font-bold mb-4 gradient-text">章节导航</h3>
+                    <nav class="space-y-2">
+                        <a href="#section-1" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">1. Scheme 简介</a>
+                        <a href="#section-2" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">2. Scheme 基本语法</a>
+                        <a href="#section-3" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">3. Scheme 变量与函数</a>
+                        <a href="#section-4" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">4. Scheme 条件与循环</a>
+                        <a href="#section-5" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">5. Scheme 数据结构</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="lg:w-3/4">
         <!-- 1. Scheme 简介 -->
         <section id="section-1" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
@@ -64,167 +81,173 @@
             </div>
         </section>
 
-        <!-- 2. Scheme 基础语法 -->
+        <!-- 2. Scheme 基本语法 -->
         <section id="section-2" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">2. Scheme 基础语法</span>
+                <span class="gradient-text">2. Scheme 基本语法</span>
             </h2>
             
             <div class="language-content" data-lang="scheme">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">简洁而强大的表达式系统</h4>
+                <p class="text-slate-300 mb-4">Scheme使用极简的语法，几乎所有的操作都通过表达式实现。基本语法包括表达式、注释和简单的数据类型。</p>
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-blue-300">Hello World 示例</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; Hello World 程序
-(display "Hello, World!")
-(newline)
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-slate-500">; Hello World 程序</span>
+(<span class="text-cyan-300">display</span> <span class="text-yellow-300">"Hello, World!"</span>)
+(<span class="text-cyan-300">newline</span>)
 
-; 也可以使用简单的表达式
-"Hello, Scheme!"
+<span class="text-slate-500">; 也可以使用简单的表达式</span>
+<span class="text-yellow-300">"Hello, Scheme!"</span>
 </code></pre>
                 </div>
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-blue-300">基本表达式</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 算术表达式（前缀表示法）
-(+ 1 2 3)     ; 6
-(- 10 5)      ; 5
-(* 2 3 4)     ; 24
-(/ 10 2)      ; 5
-(remainder 10 3) ; 1
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-slate-500">; 算术表达式（前缀表示法）</span>
+(<span class="text-purple-300">+</span> <span class="text-yellow-300">1</span> <span class="text-yellow-300">2</span> <span class="text-yellow-300">3</span>)     <span class="text-slate-500">; 6</span>
+(<span class="text-purple-300">-</span> <span class="text-yellow-300">10</span> <span class="text-yellow-300">5</span>)      <span class="text-slate-500">; 5</span>
+(<span class="text-purple-300">*</span> <span class="text-yellow-300">2</span> <span class="text-yellow-300">3</span> <span class="text-yellow-300">4</span>)     <span class="text-slate-500">; 24</span>
+(<span class="text-purple-300">/</span> <span class="text-yellow-300">10</span> <span class="text-yellow-300">2</span>)      <span class="text-slate-500">; 5</span>
+(<span class="text-cyan-300">remainder</span> <span class="text-yellow-300">10</span> <span class="text-yellow-300">3</span>) <span class="text-slate-500">; 1</span>
 
-; 比较表达式
-(= 1 1)       ; #t (真)
-(> 5 3)       ; #t
-(< 2 4)       ; #t
-(not (= 1 2)) ; #t
-(and #t #t)   ; #t
-(or #t #f)    ; #t
-(not #t)      ; #f (假)
+<span class="text-slate-500">; 比较表达式</span>
+(<span class="text-purple-300">=</span> <span class="text-yellow-300">1</span> <span class="text-yellow-300">1</span>)       <span class="text-slate-500">; #t (真)</span>
+(<span class="text-purple-300">></span> <span class="text-yellow-300">5</span> <span class="text-yellow-300">3</span>)       <span class="text-slate-500">; #t</span>
+(<span class="text-purple-300"><</span> <span class="text-yellow-300">2</span> <span class="text-yellow-300">4</span>)       <span class="text-slate-500">; #t</span>
+(<span class="text-cyan-300">not</span> (<span class="text-purple-300">=</span> <span class="text-yellow-300">1</span> <span class="text-yellow-300">2</span>)) <span class="text-slate-500">; #t</span>
+(<span class="text-cyan-300">and</span> <span class="text-blue-300">#t</span> <span class="text-blue-300">#t</span>)   <span class="text-slate-500">; #t</span>
+(<span class="text-cyan-300">or</span> <span class="text-blue-300">#t</span> <span class="text-blue-300">#f</span>)    <span class="text-slate-500">; #t</span>
+(<span class="text-cyan-300">not</span> <span class="text-blue-300">#t</span>)      <span class="text-slate-500">; #f (假)</span>
 </code></pre>
                 </div>
             </div>
         </section>
 
-        <!-- 3. Scheme 变量和函数 -->
+        <!-- 3. Scheme 变量与函数 -->
         <section id="section-3" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">3. Scheme 变量和函数</span>
+                <span class="gradient-text">3. Scheme 变量与函数</span>
             </h2>
             
             <div class="language-content" data-lang="scheme">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">函数式编程的核心元素</h4>
+                <p class="text-slate-300 mb-4">Scheme支持变量的定义和函数的创建，函数是Scheme中的一等公民，可以作为参数传递、作为返回值和存储在数据结构中。</p>
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-blue-300">变量定义</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 使用 define 定义变量
-(define x 10)
-(define y 20)
-(display (+ x y)) ; 30
-(newline)
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-slate-500">; 使用 define 定义变量</span>
+(<span class="text-blue-400">define</span> <span class="text-green-300">x</span> <span class="text-yellow-300">10</span>)
+(<span class="text-blue-400">define</span> <span class="text-green-300">y</span> <span class="text-yellow-300">20</span>)
+(<span class="text-cyan-300">display</span> (<span class="text-purple-300">+</span> <span class="text-green-300">x</span> <span class="text-green-300">y</span>)) <span class="text-slate-500">; 30</span>
+(<span class="text-cyan-300">newline</span>)
 
-; 使用 let 定义局部变量
-(let ((a 5) (b 3))
-  (display (+ a b)) ; 8
-  (newline))
+<span class="text-slate-500">; 使用 let 定义局部变量</span>
+(<span class="text-blue-400">let</span> ((<span class="text-green-300">a</span> <span class="text-yellow-300">5</span>) (<span class="text-green-300">b</span> <span class="text-yellow-300">3</span>))
+  (<span class="text-cyan-300">display</span> (<span class="text-purple-300">+</span> <span class="text-green-300">a</span> <span class="text-green-300">b</span>)) <span class="text-slate-500">; 8</span>
+  (<span class="text-cyan-300">newline</span>))
 
-; let* 允许变量之间相互引用
-(let* ((a 2)
-       (b (* a 3))) ; b = 6
-  (display b)
-  (newline))
+<span class="text-slate-500">; let* 允许变量之间相互引用</span>
+(<span class="text-blue-400">let*</span> ((<span class="text-green-300">a</span> <span class="text-yellow-300">2</span>)
+       (<span class="text-green-300">b</span> (<span class="text-purple-300">*</span> <span class="text-green-300">a</span> <span class="text-yellow-300">3</span>))) <span class="text-slate-500">; b = 6</span>
+  (<span class="text-cyan-300">display</span> <span class="text-green-300">b</span>)
+  (<span class="text-cyan-300">newline</span>))
 </code></pre>
                 </div>
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-blue-300">函数定义</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 使用 define 定义函数
-(define (add a b)
-  "计算两个数的和"
-  (+ a b))
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-slate-500">; 使用 define 定义函数</span>
+(<span class="text-blue-400">define</span> (<span class="text-green-300">add</span> <span class="text-green-300">a</span> <span class="text-green-300">b</span>)
+  <span class="text-yellow-300">"计算两个数的和"</span>
+  (<span class="text-purple-300">+</span> <span class="text-green-300">a</span> <span class="text-green-300">b</span>))
 
-(display (add 5 3)) ; 8
-(newline)
+(<span class="text-cyan-300">display</span> (<span class="text-green-300">add</span> <span class="text-yellow-300">5</span> <span class="text-yellow-300">3</span>)) <span class="text-slate-500">; 8</span>
+(<span class="text-cyan-300">newline</span>)
 
-; 尾递归函数（会被优化为循环）
-(define (factorial n)
-  "计算阶乘（尾递归版本）"
-  (define (fact-iter product counter max-count)
-    (if (> counter max-count)
-        product
-        (fact-iter (* product counter) (+ counter 1) max-count)))
-  (fact-iter 1 1 n))
+<span class="text-slate-500">; 尾递归函数（会被优化为循环）</span>
+(<span class="text-blue-400">define</span> (<span class="text-green-300">factorial</span> <span class="text-green-300">n</span>)
+  <span class="text-yellow-300">"计算阶乘（尾递归版本）"</span>
+  (<span class="text-blue-400">define</span> (<span class="text-green-300">fact-iter</span> <span class="text-green-300">product</span> <span class="text-green-300">counter</span> <span class="text-green-300">max-count</span>)
+    (<span class="text-blue-400">if</span> (<span class="text-purple-300">></span> <span class="text-green-300">counter</span> <span class="text-green-300">max-count</span>)
+        <span class="text-green-300">product</span>
+        (<span class="text-green-300">fact-iter</span> (<span class="text-purple-300">*</span> <span class="text-green-300">product</span> <span class="text-green-300">counter</span>) (<span class="text-purple-300">+</span> <span class="text-green-300">counter</span> <span class="text-yellow-300">1</span>) <span class="text-green-300">max-count</span>)))
+  (<span class="text-green-300">fact-iter</span> <span class="text-yellow-300">1</span> <span class="text-yellow-300">1</span> <span class="text-green-300">n</span>))
 
-(display (factorial 5)) ; 120
-(newline)
+(<span class="text-cyan-300">display</span> (<span class="text-green-300">factorial</span> <span class="text-yellow-300">5</span>)) <span class="text-slate-500">; 120</span>
+(<span class="text-cyan-300">newline</span>)
 
-; 高阶函数 - 返回函数的函数
-(define (make-adder x)
-  (lambda (y) (+ x y)))
+<span class="text-slate-500">; 高阶函数 - 返回函数的函数</span>
+(<span class="text-blue-400">define</span> (<span class="text-green-300">make-adder</span> <span class="text-green-300">x</span>)
+  (<span class="text-blue-400">lambda</span> (<span class="text-green-300">y</span>) (<span class="text-purple-300">+</span> <span class="text-green-300">x</span> <span class="text-green-300">y</span>)))
 
-(define add5 (make-adder 5))
-(display (add5 3)) ; 8
-(newline)
+(<span class="text-blue-400">define</span> <span class="text-green-300">add5</span> (<span class="text-green-300">make-adder</span> <span class="text-yellow-300">5</span>))
+(<span class="text-cyan-300">display</span> (<span class="text-green-300">add5</span> <span class="text-yellow-300">3</span>)) <span class="text-slate-500">; 8</span>
+(<span class="text-cyan-300">newline</span>)
 </code></pre>
                 </div>
             </div>
         </section>
 
-        <!-- 4. Scheme 控制流 -->
+        <!-- 4. Scheme 条件与循环 -->
         <section id="section-4" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">4. Scheme 控制流</span>
+                <span class="gradient-text">4. Scheme 条件与循环</span>
             </h2>
             
             <div class="language-content" data-lang="scheme">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">控制程序的执行流程</h4>
+                <p class="text-slate-300 mb-4">Scheme提供了条件表达式来控制程序的分支，以及通过递归来实现循环功能，这是函数式编程的典型特征。</p>
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-blue-300">条件表达式</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; if 条件表达式
-(define (abs x)
-  (if (< x 0)
-      (- x)
-      x))
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-slate-500">; if 条件表达式</span>
+(<span class="text-blue-400">define</span> (<span class="text-green-300">abs</span> <span class="text-green-300">x</span>)
+  (<span class="text-blue-400">if</span> (<span class="text-purple-300"><</span> <span class="text-green-300">x</span> <span class="text-yellow-300">0</span>)
+      (<span class="text-purple-300">-</span> <span class="text-green-300">x</span>)
+      <span class="text-green-300">x</span>))
 
-(display (abs -5)) ; 5
-(newline)
+(<span class="text-cyan-300">display</span> (<span class="text-green-300">abs</span> <span class="text-yellow-300">-5</span>)) <span class="text-slate-500">; 5</span>
+(<span class="text-cyan-300">newline</span>)
 
-; cond 多分支条件
-(define (grade score)
-  (cond ((>= score 90) "A")
-        ((>= score 80) "B")
-        ((>= score 70) "C")
-        ((>= score 60) "D")
-        (else "F")))
+<span class="text-slate-500">; cond 多分支条件</span>
+(<span class="text-blue-400">define</span> (<span class="text-green-300">grade</span> <span class="text-green-300">score</span>)
+  (<span class="text-blue-400">cond</span> ((<span class="text-purple-300">>=</span> <span class="text-green-300">score</span> <span class="text-yellow-300">90</span>) <span class="text-yellow-300">"A"</span>)
+        ((<span class="text-purple-300">>=</span> <span class="text-green-300">score</span> <span class="text-yellow-300">80</span>) <span class="text-yellow-300">"B"</span>)
+        ((<span class="text-purple-300">>=</span> <span class="text-green-300">score</span> <span class="text-yellow-300">70</span>) <span class="text-yellow-300">"C"</span>)
+        ((<span class="text-purple-300">>=</span> <span class="text-green-300">score</span> <span class="text-yellow-300">60</span>) <span class="text-yellow-300">"D"</span>)
+        ((<span class="text-blue-400">else</span>) <span class="text-yellow-300">"F"</span>)))
 
-(display (grade 85)) ; B
-(newline)
+(<span class="text-cyan-300">display</span> (<span class="text-green-300">grade</span> <span class="text-yellow-300">85</span>)) <span class="text-slate-500">; B</span>
+(<span class="text-cyan-300">newline</span>)
 </code></pre>
                 </div>
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-blue-300">循环结构</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 使用递归实现循环
-(define (countdown n)
-  (if (> n 0)
-      (begin
-        (display n)
-        (newline)
-        (countdown (- n 1)))
-      (display "Blast off!")
-      (newline)))
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-slate-500">; 使用递归实现循环</span>
+(<span class="text-blue-400">define</span> (<span class="text-green-300">countdown</span> <span class="text-green-300">n</span>)
+  (<span class="text-blue-400">if</span> (<span class="text-purple-300">></span> <span class="text-green-300">n</span> <span class="text-yellow-300">0</span>)
+      (<span class="text-blue-400">begin</span>
+        (<span class="text-cyan-300">display</span> <span class="text-green-300">n</span>)
+        (<span class="text-cyan-300">newline</span>)
+        (<span class="text-green-300">countdown</span> (<span class="text-purple-300">-</span> <span class="text-green-300">n</span> <span class="text-yellow-300">1</span>)))
+      (<span class="text-cyan-300">display</span> <span class="text-yellow-300">"Blast off!"</span>)
+      (<span class="text-cyan-300">newline</span>)))
 
-(countdown 3)
-; 输出:
-; 3
-; 2
-; 1
-; Blast off!
+(<span class="text-green-300">countdown</span> <span class="text-yellow-300">3</span>)
+<span class="text-slate-500">; 输出:</span>
+<span class="text-slate-500">; 3</span>
+<span class="text-slate-500">; 2</span>
+<span class="text-slate-500">; 1</span>
+<span class="text-slate-500">; Blast off!</span>
 
-; 使用 do 循环
-(do ((i 0 (+ i 1)))
-    ((>= i 3))
-  (display i)
-  (newline))
-; 输出:
-; 0
-; 1
-; 2
+<span class="text-slate-500">; 使用 do 循环</span>
+(<span class="text-blue-400">do</span> ((<span class="text-green-300">i</span> <span class="text-yellow-300">0</span> (<span class="text-purple-300">+</span> <span class="text-green-300">i</span> <span class="text-yellow-300">1</span>)))
+    ((<span class="text-purple-300">>=</span> <span class="text-green-300">i</span> <span class="text-yellow-300">3</span>))
+  (<span class="text-cyan-300">display</span> <span class="text-green-300">i</span>)
+  (<span class="text-cyan-300">newline</span>))
+<span class="text-slate-500">; 输出:</span>
+<span class="text-slate-500">; 0</span>
+<span class="text-slate-500">; 1</span>
+<span class="text-slate-500">; 2</span>
 </code></pre>
                 </div>
             </div>
@@ -237,53 +260,57 @@
             </h2>
             
             <div class="language-content" data-lang="scheme">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">灵活多样的数据表示方式</h4>
+                <p class="text-slate-300 mb-4">Scheme提供了多种数据结构来表示和组织数据，包括列表、字符串、符号和向量等，这些数据结构可以组合使用来构建复杂的数据模型。</p>
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-blue-300">列表操作</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 创建列表
-(define numbers (list 1 2 3 4 5))
-(define empty-list '())
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-slate-500">; 创建列表</span>
+(<span class="text-blue-400">define</span> <span class="text-green-300">numbers</span> (<span class="text-cyan-300">list</span> <span class="text-yellow-300">1</span> <span class="text-yellow-300">2</span> <span class="text-yellow-300">3</span> <span class="text-yellow-300">4</span> <span class="text-yellow-300">5</span>))
+(<span class="text-blue-400">define</span> <span class="text-green-300">empty-list</span> <span class="text-blue-300">'</span>())
 
-; 列表操作
-(display (car numbers))   ; 1 (第一个元素)
-(newline)
-(display (cdr numbers))   ; (2 3 4 5) (剩余元素)
-(newline)
-(display (cons 0 numbers)) ; (0 1 2 3 4 5) (添加到开头)
-(newline)
-(display (append numbers (list 6 7))) ; (1 2 3 4 5 6 7) (连接列表)
-(newline)
-(display (length numbers)) ; 5 (列表长度)
-(newline)
-(display (reverse numbers)) ; (5 4 3 2 1) (反转列表)
-(newline)
+<span class="text-slate-500">; 列表操作</span>
+(<span class="text-cyan-300">display</span> (<span class="text-cyan-300">car</span> <span class="text-green-300">numbers</span>))   <span class="text-slate-500">; 1 (第一个元素)</span>
+(<span class="text-cyan-300">newline</span>)
+(<span class="text-cyan-300">display</span> (<span class="text-cyan-300">cdr</span> <span class="text-green-300">numbers</span>))   <span class="text-slate-500">; (2 3 4 5) (剩余元素)</span>
+(<span class="text-cyan-300">newline</span>)
+(<span class="text-cyan-300">display</span> (<span class="text-cyan-300">cons</span> <span class="text-yellow-300">0</span> <span class="text-green-300">numbers</span>)) <span class="text-slate-500">; (0 1 2 3 4 5) (添加到开头)</span>
+(<span class="text-cyan-300">newline</span>)
+(<span class="text-cyan-300">display</span> (<span class="text-cyan-300">append</span> <span class="text-green-300">numbers</span> (<span class="text-cyan-300">list</span> <span class="text-yellow-300">6</span> <span class="text-yellow-300">7</span>))) <span class="text-slate-500">; (1 2 3 4 5 6 7) (连接列表)</span>
+(<span class="text-cyan-300">newline</span>)
+(<span class="text-cyan-300">display</span> (<span class="text-cyan-300">length</span> <span class="text-green-300">numbers</span>)) <span class="text-slate-500">; 5 (列表长度)</span>
+(<span class="text-cyan-300">newline</span>)
+(<span class="text-cyan-300">display</span> (<span class="text-cyan-300">reverse</span> <span class="text-green-300">numbers</span>)) <span class="text-slate-500">; (5 4 3 2 1) (反转列表)</span>
+(<span class="text-cyan-300">newline</span>)
 </code></pre>
                 </div>
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-blue-300">其他数据类型</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">; 字符串
-(define greeting "Hello, Scheme!")
-(display greeting)
-(newline)
-(display (string-length greeting)) ; 14
-(newline)
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-slate-500">; 字符串</span>
+(<span class="text-blue-400">define</span> <span class="text-green-300">greeting</span> <span class="text-yellow-300">"Hello, Scheme!"</span>)
+(<span class="text-cyan-300">display</span> <span class="text-green-300">greeting</span>)
+(<span class="text-cyan-300">newline</span>)
+(<span class="text-cyan-300">display</span> (<span class="text-cyan-300">string-length</span> <span class="text-green-300">greeting</span>)) <span class="text-slate-500">; 14</span>
+(<span class="text-cyan-300">newline</span>)
 
-; 符号
-(define symbol 'my-symbol)
-(display symbol)
-(newline)
+<span class="text-slate-500">; 符号</span>
+(<span class="text-blue-400">define</span> <span class="text-green-300">symbol</span> <span class="text-blue-300">'</span>my-symbol)
+(<span class="text-cyan-300">display</span> <span class="text-green-300">symbol</span>)
+(<span class="text-cyan-300">newline</span>)
 
-; 向量（固定大小的数组）
-(define vector1 #(1 2 3 4 5))
-(display (vector-ref vector1 2)) ; 3
-(newline)
-(vector-set! vector1 2 10)
-(display (vector-ref vector1 2)) ; 10
-(newline)
+<span class="text-slate-500">; 向量（固定大小的数组）</span>
+(<span class="text-blue-400">define</span> <span class="text-green-300">vector1</span> <span class="text-blue-300">#</span>(<span class="text-yellow-300">1</span> <span class="text-yellow-300">2</span> <span class="text-yellow-300">3</span> <span class="text-yellow-300">4</span> <span class="text-yellow-300">5</span>))
+(<span class="text-cyan-300">display</span> (<span class="text-cyan-300">vector-ref</span> <span class="text-green-300">vector1</span> <span class="text-yellow-300">2</span>)) <span class="text-slate-500">; 3</span>
+(<span class="text-cyan-300">newline</span>)
+(<span class="text-cyan-300">vector-set!</span> <span class="text-green-300">vector1</span> <span class="text-yellow-300">2</span> <span class="text-yellow-300">10</span>)
+(<span class="text-cyan-300">display</span> (<span class="text-cyan-300">vector-ref</span> <span class="text-green-300">vector1</span> <span class="text-yellow-300">2</span>)) <span class="text-slate-500">; 10</span>
+(<span class="text-cyan-300">newline</span>)
 </code></pre>
                 </div>
             </div>
         </section>
+            </div>
+        </div>
     </main>
 </body>
 </html>
