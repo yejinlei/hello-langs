@@ -62,7 +62,10 @@
                         <a href="#section-6" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">6. Julia 自定义类型</a>
                         <a href="#section-7" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">7. Julia 模块与包</a>
                         <a href="#section-8" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">8. Julia 元编程</a>
-                    </nav>
+                                            <a href="#section-9" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">9. Julia 多重派发</a>
+                        <a href="#section-10" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">10. Julia 并行与分布式计算</a>
+                        <a href="#section-11" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">11. Julia 错误处理与测试</a>
+</nav>
                 </div>
             </aside>
 
@@ -239,6 +242,90 @@
 <span class="text-slate-500"># 创建类型实例</span>
 <span class="text-green-300">rover</span> <span class="text-purple-300">=</span> <span class="text-blue-300">Dog</span>(<span class="text-yellow-300">"Rover"</span>, <span class="text-yellow-300">3</span>)</code></pre>
                         </div>
+
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">可变类型</h4>
+                        <p class="text-slate-300 mb-4">使用mutable struct可以创建可变类型，其字段值可以被修改。</p>
+                        
+                        <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                            <h5 class="text-lg font-medium mb-4 text-blue-300">mutable struct</h5>
+                            <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-cyan-300">mutable struct</span> <span class="text-blue-300">Person</span>
+    <span class="text-green-300">name</span><span class="text-purple-300">::</span><span class="text-blue-300">String</span>
+    <span class="text-green-300">age</span><span class="text-purple-300">::</span><span class="text-blue-300">Int</span>
+    <span class="text-green-300">occupation</span><span class="text-purple-300">::</span><span class="text-blue-300">String</span>
+<span class="text-cyan-300">end</span>
+
+<span class="text-slate-500"># 创建可变对象</span>
+<span class="text-green-300">alice</span> <span class="text-purple-300">=</span> <span class="text-blue-300">Person</span>(<span class="text-yellow-300">"Alice"</span>, <span class="text-yellow-300">30</span>, <span class="text-yellow-300">"Engineer"</span>)
+
+<span class="text-slate-500"># 修改字段值</span>
+<span class="text-green-300">alice</span>.<span class="text-green-300">age</span> <span class="text-purple-300">=</span> <span class="text-yellow-300">31</span>
+<span class="text-green-300">alice</span>.<span class="text-green-300">occupation</span> <span class="text-purple-300">=</span> <span class="text-yellow-300">"Senior Engineer"</span></code></pre>
+                        </div>
+
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">构造函数</h4>
+                        <p class="text-slate-300 mb-4">Julia自动为结构体生成默认构造函数，同时支持自定义构造函数。</p>
+                        
+                        <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                            <h5 class="text-lg font-medium mb-4 text-blue-300">自定义构造函数</h5>
+                            <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-cyan-300">struct</span> <span class="text-blue-300">Point</span>
+    <span class="text-green-300">x</span><span class="text-purple-300">::</span><span class="text-blue-300">Float64</span>
+    <span class="text-green-300">y</span><span class="text-purple-300">::</span><span class="text-blue-300">Float64</span>
+    
+    <span class="text-slate-500"># 自定义构造函数</span>
+    <span class="text-cyan-300">function</span> <span class="text-blue-300">Point</span>(<span class="text-green-300">x</span><span class="text-purple-300">::</span><span class="text-blue-300">Number</span>, <span class="text-green-300">y</span><span class="text-purple-300">::</span><span class="text-blue-300">Number</span>)
+        <span class="text-cyan-300">new</span>(<span class="text-cyan-300">Float64</span>(<span class="text-green-300">x</span>), <span class="text-cyan-300">Float64</span>(<span class="text-green-300">y</span>))
+    <span class="text-cyan-300">end</span>
+    
+    <span class="text-slate-500"># 默认点构造函数</span>
+    <span class="text-cyan-300">function</span> <span class="text-blue-300">Point</span>()
+        <span class="text-cyan-300">new</span>(<span class="text-yellow-300">0.0</span>, <span class="text-yellow-300">0.0</span>)
+    <span class="text-cyan-300">end</span>
+<span class="text-cyan-300">end</span>
+
+<span class="text-slate-500"># 使用不同的构造函数</span>
+<span class="text-green-300">p1</span> <span class="text-purple-300">=</span> <span class="text-blue-300">Point</span>(<span class="text-yellow-300">1.5</span>, <span class="text-yellow-300">2.5</span>)  <span class="text-slate-500"># 自定义构造函数</span>
+<span class="text-green-300">p2</span> <span class="text-purple-300">=</span> <span class="text-blue-300">Point</span>(<span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>)  <span class="text-slate-500"># 自动类型转换</span>
+<span class="text-green-300">p3</span> <span class="text-purple-300">=</span> <span class="text-blue-300">Point</span>()  <span class="text-slate-500"># 默认构造函数</span></code></pre>
+                        </div>
+
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">类型参数化</h4>
+                        <p class="text-slate-300 mb-4">Julia支持类型参数化，允许创建泛型类型。</p>
+                        
+                        <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                            <h5 class="text-lg font-medium mb-4 text-blue-300">泛型类型</h5>
+                            <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-cyan-300">struct</span> <span class="text-blue-300">Vector2D</span>{<span class="text-blue-300">T</span><span class="text-purple-300">:</span><span class="text-purple-300">:</span> <span class="text-blue-300">Number</span>}
+    <span class="text-green-300">x</span><span class="text-purple-300">::</span><span class="text-blue-300">T</span>
+    <span class="text-green-300">y</span><span class="text-purple-300">::</span><span class="text-blue-300">T</span>
+<span class="text-cyan-300">end</span>
+
+<span class="text-slate-500"># 使用不同类型的参数</span>
+<span class="text-green-300">v1</span> <span class="text-purple-300">=</span> <span class="text-blue-300">Vector2D</span>{<span class="text-blue-300">Int</span>}(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>)
+<span class="text-green-300">v2</span> <span class="text-purple-300">=</span> <span class="text-blue-300">Vector2D</span>{<span class="text-blue-300">Float64</span>}(<span class="text-yellow-300">1.5</span>, <span class="text-yellow-300">2.5</span>)
+<span class="text-green-300">v3</span> <span class="text-purple-300">=</span> <span class="text-blue-300">Vector2D</span>(<span class="text-yellow-300">3.0</span>, <span class="text-yellow-300">4.0</span>)  <span class="text-slate-500"># 类型推断</span></code></pre>
+                        </div>
+
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">运算符重载</h4>
+                        <p class="text-slate-300 mb-4">Julia允许为自定义类型重载运算符，实现自定义的运算行为。</p>
+                        
+                        <div class="bg-slate-800 rounded-xl p-6 syntax-card">
+                            <h5 class="text-lg font-medium mb-4 text-blue-300">重载算术运算符</h5>
+                            <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-slate-500"># 为Vector2D类型重载加法运算符</span>
+<span class="text-cyan-300">function</span> <span class="text-purple-300">+</span>(<span class="text-green-300">v1</span><span class="text-purple-300">::</span><span class="text-blue-300">Vector2D</span>{<span class="text-blue-300">T</span>}, <span class="text-green-300">v2</span><span class="text-purple-300">::</span><span class="text-blue-300">Vector2D</span>{<span class="text-blue-300">T</span>}) <span class="text-cyan-300">where</span> <span class="text-blue-300">T</span>
+    <span class="text-cyan-300">return</span> <span class="text-blue-300">Vector2D</span>{<span class="text-blue-300">T</span>}(<span class="text-green-300">v1</span>.<span class="text-green-300">x</span> <span class="text-purple-300">+</span> <span class="text-green-300">v2</span>.<span class="text-green-300">x</span>, <span class="text-green-300">v1</span>.<span class="text-green-300">y</span> <span class="text-purple-300">+</span> <span class="text-green-300">v2</span>.<span class="text-green-300">y</span>)
+<span class="text-cyan-300">end</span>
+
+<span class="text-slate-500"># 为Vector2D类型重载乘法运算符（标量乘法）</span>
+<span class="text-cyan-300">function</span> <span class="text-purple-300">*</span>(<span class="text-green-300">v</span><span class="text-purple-300">::</span><span class="text-blue-300">Vector2D</span>{<span class="text-blue-300">T</span>}, <span class="text-green-300">scalar</span><span class="text-purple-300">::</span><span class="text-blue-300">Number</span>) <span class="text-cyan-300">where</span> <span class="text-blue-300">T</span>
+    <span class="text-blue-300">S</span> <span class="text-purple-300">=</span> <span class="text-cyan-300">promote_type</span>(<span class="text-blue-300">T</span>, <span class="text-cyan-300">typeof</span>(<span class="text-green-300">scalar</span>))
+    <span class="text-cyan-300">return</span> <span class="text-blue-300">Vector2D</span>{<span class="text-blue-300">S</span>}(<span class="text-green-300">v</span>.<span class="text-green-300">x</span> <span class="text-purple-300">*</span> <span class="text-green-300">scalar</span>, <span class="text-green-300">v</span>.<span class="text-green-300">y</span> <span class="text-purple-300">*</span> <span class="text-green-300">scalar</span>)
+<span class="text-cyan-300">end</span>
+
+<span class="text-slate-500"># 使用重载的运算符</span>
+<span class="text-green-300">v1</span> <span class="text-purple-300">=</span> <span class="text-blue-300">Vector2D</span>(<span class="text-yellow-300">1.0</span>, <span class="text-yellow-300">2.0</span>)
+<span class="text-green-300">v2</span> <span class="text-purple-300">=</span> <span class="text-blue-300">Vector2D</span>(<span class="text-yellow-300">3.0</span>, <span class="text-yellow-300">4.0</span>)
+<span class="text-green-300">v3</span> <span class="text-purple-300">=</span> <span class="text-green-300">v1</span> <span class="text-purple-300">+</span> <span class="text-green-300">v2</span>  <span class="text-slate-500"># Vector2D{Float64}(4.0, 6.0)</span>
+<span class="text-green-300">v4</span> <span class="text-purple-300">=</span> <span class="text-green-300">v1</span> <span class="text-purple-300">*</span> <span class="text-yellow-300">2.5</span>  <span class="text-slate-500"># Vector2D{Float64}(2.5, 5.0)</span></code></pre>
+                        </div>
                     </div>
                 </section>
 
@@ -271,10 +358,123 @@
     <span class="text-cyan-300">end</span>
 <span class="text-cyan-300">end</span></code></pre>
                         </div>
+
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">导入机制</h4>
+                        <p class="text-slate-300 mb-4">Julia提供了多种导入模块和函数的方式，包括完全导入、部分导入和别名导入。</p>
+                        
+                        <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                            <h5 class="text-lg font-medium mb-4 text-blue-300">导入模块</h5>
+                            <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-slate-500"># 完全导入模块</span>
+<span class="text-cyan-300">using</span> <span class="text-blue-300">MyMath</span>
+
+<span class="text-slate-500"># 使用模块中的函数</span>
+<span class="text-green-300">area</span> <span class="text-purple-300">=</span> <span class="text-blue-400">calculate_area</span>(<span class="text-yellow-300">5.0</span>)
+
+<span class="text-slate-500"># 导入特定函数</span>
+<span class="text-cyan-300">using</span> <span class="text-blue-300">MyMath</span>.<span class="text-blue-400">calculate_area</span>
+
+<span class="text-slate-500"># 导入模块但不导出函数</span>
+<span class="text-cyan-300">import</span> <span class="text-blue-300">MyMath</span>
+<span class="text-green-300">area</span> <span class="text-purple-300">=</span> <span class="text-blue-300">MyMath</span>.<span class="text-blue-400">calculate_area</span>(<span class="text-yellow-300">5.0</span>)
+
+<span class="text-slate-500"># 使用别名</span>
+<span class="text-cyan-300">using</span> <span class="text-blue-300">MyMath</span> <span class="text-cyan-300">as</span> <span class="text-blue-300">MM</span>
+<span class="text-green-300">area</span> <span class="text-purple-300">=</span> <span class="text-blue-300">MM</span>.<span class="text-blue-400">calculate_area</span>(<span class="text-yellow-300">5.0</span>)</code></pre>
+                        </div>
+
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">子模块</h4>
+                        <p class="text-slate-300 mb-4">Julia支持嵌套模块，允许创建子模块来更好地组织代码。</p>
+                        
+                        <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                            <h5 class="text-lg font-medium mb-4 text-blue-300">创建子模块</h5>
+                            <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-cyan-300">module</span> <span class="text-blue-300">Geometry</span>
+    <span class="text-cyan-300">export</span> <span class="text-blue-400">Circle</span>, <span class="text-blue-400">Rectangle</span>
+    
+    <span class="text-cyan-300">struct</span> <span class="text-blue-300">Circle</span>
+        <span class="text-green-300">radius</span><span class="text-purple-300">::</span><span class="text-blue-300">Float64</span>
+    <span class="text-cyan-300">end</span>
+    
+    <span class="text-cyan-300">struct</span> <span class="text-blue-400">Rectangle</span>
+        <span class="text-green-300">width</span><span class="text-purple-300">::</span><span class="text-blue-300">Float64</span>
+        <span class="text-green-300">height</span><span class="text-purple-300">::</span><span class="text-blue-300">Float64</span>
+    <span class="text-cyan-300">end</span>
+    
+    <span class="text-cyan-300">module</span> <span class="text-blue-300">Calculations</span>
+        <span class="text-cyan-300">export</span> <span class="text-blue-400">area</span>, <span class="text-blue-400">perimeter</span>
+        
+        <span class="text-cyan-300">function</span> <span class="text-blue-400">area</span>(<span class="text-green-300">c</span><span class="text-purple-300">::</span><span class="text-blue-400">Circle</span>) 
+            <span class="text-cyan-300">return</span> <span class="text-yellow-300">π</span> <span class="text-purple-300">*</span> <span class="text-green-300">c</span>.<span class="text-green-300">radius</span> <span class="text-purple-300">^</span> <span class="text-yellow-300">2</span>
+        <span class="text-cyan-300">end</span>
+        
+        <span class="text-cyan-300">function</span> <span class="text-blue-400">area</span>(<span class="text-green-300">r</span><span class="text-purple-300">::</span><span class="text-blue-400">Rectangle</span>) 
+            <span class="text-cyan-300">return</span> <span class="text-green-300">r</span>.<span class="text-green-300">width</span> <span class="text-purple-300">*</span> <span class="text-green-300">r</span>.<span class="text-green-300">height</span>
+        <span class="text-cyan-300">end</span>
+        
+        <span class="text-cyan-300">function</span> <span class="text-blue-400">perimeter</span>(<span class="text-green-300">c</span><span class="text-purple-300">::</span><span class="text-blue-400">Circle</span>) 
+            <span class="text-cyan-300">return</span> <span class="text-yellow-300">2</span> <span class="text-purple-300">*</span> <span class="text-yellow-300">π</span> <span class="text-purple-300">*</span> <span class="text-green-300">c</span>.<span class="text-green-300">radius</span>
+        <span class="text-cyan-300">end</span>
+        
+        <span class="text-cyan-300">function</span> <span class="text-blue-400">perimeter</span>(<span class="text-green-300">r</span><span class="text-purple-300">::</span><span class="text-blue-400">Rectangle</span>) 
+            <span class="text-cyan-300">return</span> <span class="text-yellow-300">2</span> <span class="text-purple-300">*</span> (<span class="text-green-300">r</span>.<span class="text-green-300">width</span> <span class="text-purple-300">+</span> <span class="text-green-300">r</span>.<span class="text-green-300">height</span>)
+        <span class="text-cyan-300">end</span>
+    <span class="text-cyan-300">end</span>
+<span class="text-cyan-300">end</span></code></pre>
+                        </div>
+
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">包管理</h4>
+                        <p class="text-slate-300 mb-4">Julia使用Pkg包管理器来安装、更新和管理依赖包。</p>
+                        
+                        <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                            <h5 class="text-lg font-medium mb-4 text-blue-300">使用Pkg</h5>
+                            <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-slate-500"># 进入Pkg模式（在REPL中按]）</span>
+<span class="text-slate-500"># 安装包</span>
+<span class="text-cyan-300">pkg</span><span class="text-purple-300">></span> <span class="text-blue-400">add</span> <span class="text-blue-300">DataFrames</span>
+
+<span class="text-slate-500"># 更新包</span>
+<span class="text-cyan-300">pkg</span><span class="text-purple-300">></span> <span class="text-blue-400">update</span>
+
+<span class="text-slate-500"># 移除包</span>
+<span class="text-cyan-300">pkg</span><span class="text-purple-300">></span> <span class="text-blue-400">remove</span> <span class="text-blue-300">DataFrames</span>
+
+<span class="text-slate-500"># 查看已安装的包</span>
+<span class="text-cyan-300">pkg</span><span class="text-purple-300">></span> <span class="text-blue-400">status</span>
+
+<span class="text-slate-500"># 在代码中使用Pkg</span>
+<span class="text-cyan-300">using</span> <span class="text-blue-300">Pkg</span>
+<span class="text-blue-300">Pkg</span>.<span class="text-blue-400">add</span>([<span class="text-yellow-300">"DataFrames"</span>, <span class="text-yellow-300">"Plots"</span>])</code></pre>
+                        </div>
+
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">命名空间</h4>
+                        <p class="text-slate-300 mb-4">Julia使用命名空间来避免名称冲突，每个模块都有自己的命名空间。</p>
+                        
+                        <div class="bg-slate-800 rounded-xl p-6 syntax-card">
+                            <h5 class="text-lg font-medium mb-4 text-blue-300">命名空间示例</h5>
+                            <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-cyan-300">module</span> <span class="text-blue-300">ModuleA</span>
+    <span class="text-cyan-300">export</span> <span class="text-blue-400">foo</span>
+    
+    <span class="text-cyan-300">function</span> <span class="text-blue-400">foo</span>()
+        <span class="text-cyan-300">println</span>(<span class="text-yellow-300">"ModuleA.foo"</span>)
+    <span class="text-cyan-300">end</span>
+<span class="text-cyan-300">end</span>
+
+<span class="text-cyan-300">module</span> <span class="text-blue-300">ModuleB</span>
+    <span class="text-cyan-300">export</span> <span class="text-blue-400">foo</span>
+    
+    <span class="text-cyan-300">function</span> <span class="text-blue-400">foo</span>()
+        <span class="text-cyan-300">println</span>(<span class="text-yellow-300">"ModuleB.foo"</span>)
+    <span class="text-cyan-300">end</span>
+<span class="text-cyan-300">end</span>
+
+<span class="text-cyan-300">using</span> <span class="text-blue-300">ModuleA</span>, <span class="text-blue-300">ModuleB</span>
+
+<span class="text-slate-500"># 使用完全限定名避免冲突</span>
+<span class="text-blue-300">ModuleA</span>.<span class="text-blue-400">foo</span>()
+<span class="text-blue-300">ModuleB</span>.<span class="text-blue-400">foo</span>()</code></pre>
+                        </div>
                     </div>
                 </section>
 
-                <!-- 8. Julia 元编程 -->
+                                <!-- 8. Julia 元编程 -->
                 <section id="section-8" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
                         <span class="gradient-text">8. Julia 元编程</span>
@@ -297,8 +497,30 @@
 <span class="text-cyan-300">eval</span>(<span class="text-green-300">expr</span>)  <span class="text-slate-500"># 7</span></code></pre>
                         </div>
 
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">引用和插值</h4>
+                        <p class="text-slate-300 mb-4">Julia提供了三种引用方式来创建表达式：$引用、@引用和quote块。</p>
+                        
+                        <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                            <h5 class="text-lg font-medium mb-4 text-blue-300">引用类型</h5>
+                            <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-slate-500"># $引用：创建单个表达式</span>
+<span class="text-green-300">expr1</span> <span class="text-purple-300">=</span> <span class="text-purple-300">$</span>(<span class="text-green-300">x</span> <span class="text-purple-300">+</span> <span class="text-green-300">y</span>)
+
+<span class="text-slate-500"># @引用：创建复杂表达式</span>
+<span class="text-green-300">expr2</span> <span class="text-purple-300">=</span> <span class="text-purple-300">@</span><span class="text-cyan-300">expr</span> <span class="text-green-300">x</span> <span class="text-purple-300">+</span> <span class="text-green-300">y</span> <span class="text-purple-300">*</span> <span class="text-green-300">z</span>
+
+<span class="text-slate-500"># quote块：创建多行表达式</span>
+<span class="text-green-300">expr3</span> <span class="text-purple-300">=</span> <span class="text-purple-300">quote</span>
+    <span class="text-green-300">a</span> <span class="text-purple-300">=</span> <span class="text-yellow-300">10</span>
+    <span class="text-green-300">b</span> <span class="text-purple-300">=</span> <span class="text-yellow-300">20</span>
+    <span class="text-green-300">a</span> <span class="text-purple-300">+</span> <span class="text-green-300">b</span>
+<span class="text-purple-300">end</span></code></pre>
+                        </div>
+
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">宏定义</h4>
+                        <p class="text-slate-300 mb-4">宏允许在编译时转换代码，生成高效的定制代码。</p>
+                        
                         <div class="bg-slate-800 rounded-xl p-6 syntax-card">
-                            <h5 class="text-lg font-medium mb-4 text-blue-300">宏定义</h5>
+                            <h5 class="text-lg font-medium mb-4 text-blue-300">简单宏</h5>
                             <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-cyan-300">macro</span> <span class="text-blue-400">timeit</span>(<span class="text-green-300">expr</span>)
     <span class="text-cyan-300">return</span> <span class="text-purple-300">quote</span>
         <span class="text-green-300">start</span> <span class="text-purple-300">=</span> <span class="text-cyan-300">time</span>()
@@ -314,8 +536,194 @@
                         </div>
                     </div>
                 </section>
-            </div>
-        </div>
-    </main>
+
+                                <!-- 9. Julia 多重派发 -->
+                <section id="section-9" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">9. Julia 多重派发</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="julia">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">多重派发概述</h4>
+                        <p class="text-slate-300 mb-4">多重派发是Julia的核心特性，允许根据所有参数的类型选择不同的函数实现。</p>
+                        
+                        <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                            <h5 class="text-lg font-medium mb-4 text-blue-300">基本多重派发</h5>
+                            <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-slate-500"># 定义不同类型的函数</span>
+<span class="text-cyan-300">function</span> <span class="text-blue-400">operate</span>(<span class="text-green-300">x</span><span class="text-purple-300">::</span><span class="text-blue-300">Int</span>, <span class="text-green-300">y</span><span class="text-purple-300">::</span><span class="text-blue-300">Int</span>)
+    <span class="text-cyan-300">println</span>(<span class="text-yellow-300">"整数运算"</span>)
+    <span class="text-cyan-300">return</span> <span class="text-green-300">x</span> <span class="text-purple-300">+</span> <span class="text-green-300">y</span>
+<span class="text-cyan-300">end</span>
+
+<span class="text-cyan-300">function</span> <span class="text-blue-400">operate</span>(<span class="text-green-300">x</span><span class="text-purple-300">::</span><span class="text-blue-300">Float64</span>, <span class="text-green-300">y</span><span class="text-purple-300">::</span><span class="text-blue-300">Float64</span>)
+    <span class="text-cyan-300">println</span>(<span class="text-yellow-300">"浮点数运算"</span>)
+    <span class="text-cyan-300">return</span> <span class="text-green-300">x</span> <span class="text-purple-300">*</span> <span class="text-green-300">y</span>
+<span class="text-cyan-300">end</span>
+
+<span class="text-cyan-300">function</span> <span class="text-blue-400">operate</span>(<span class="text-green-300">x</span><span class="text-purple-300">::</span><span class="text-blue-300">String</span>, <span class="text-green-300">y</span><span class="text-purple-300">::</span><span class="text-blue-300">String</span>)
+    <span class="text-cyan-300">println</span>(<span class="text-yellow-300">"字符串运算"</span>)
+    <span class="text-cyan-300">return</span> <span class="text-green-300">x</span> <span class="text-purple-300">*</span> <span class="text-green-300">y</span>
+<span class="text-cyan-300">end</span>
+
+<span class="text-slate-500"># 调用不同类型的函数</span>
+<span class="text-green-300">result1</span> <span class="text-purple-300">=</span> <span class="text-blue-400">operate</span>(<span class="text-yellow-300">10</span>, <span class="text-yellow-300">20</span>)  <span class="text-slate-500"># 整数运算，结果30</span>
+<span class="text-green-300">result2</span> <span class="text-purple-300">=</span> <span class="text-blue-400">operate</span>(<span class="text-yellow-300">2.5</span>, <span class="text-yellow-300">4.0</span>)  <span class="text-slate-500"># 浮点数运算，结果10.0</span>
+<span class="text-green-300">result3</span> <span class="text-purple-300">=</span> <span class="text-blue-400">operate</span>(<span class="text-yellow-300">"Hello "</span>, <span class="text-yellow-300">"Julia"</span>)  <span class="text-slate-500"># 字符串运算，结果"Hello Julia"</span></code></pre>
+                        </div>
+                    </div>
+                </section>                <!-- 10. Julia 并行与分布式计算 -->
+                <section id="section-10" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">10. Julia 并行与分布式计算</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="julia">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">并行计算概述</h4>
+                        <p class="text-slate-300 mb-4">Julia提供了强大的并行计算支持，包括多线程、多进程和分布式计算。</p>
+                        
+                        <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                            <h5 class="text-lg font-medium mb-4 text-blue-300">多线程计算</h5>
+                            <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-slate-500"># 设置线程数</span>
+<span class="text-cyan-300">using</span> <span class="text-blue-300">Threads</span>
+
+<span class="text-cyan-300">println</span>(<span class="text-yellow-300">"可用线程数: "</span>, <span class="text-blue-300">Threads</span>.<span class="text-blue-400">nthreads</span>())
+
+<span class="text-slate-500"># 并行循环</span>
+<span class="text-green-300">result</span> <span class="text-purple-300">=</span> <span class="text-cyan-300">zeros</span>(<span class="text-blue-300">Float64</span>, <span class="text-yellow-300">10</span>)
+
+<span class="text-cyan-300">Threads</span>.<span class="text-cyan-300">@threads</span> <span class="text-cyan-300">for</span> <span class="text-green-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span><span class="text-purple-300">:</span><span class="text-yellow-300">10</span>
+    <span class="text-green-300">result</span>[<span class="text-green-300">i</span>] <span class="text-purple-300">=</span> <span class="text-green-300">i</span> <span class="text-purple-300">*</span> <span class="text-green-300">i</span>
+<span class="text-cyan-300">end</span>
+
+<span class="text-cyan-300">println</span>(<span class="text-green-300">result</span>)</code></pre>
+                        </div>
+
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">多进程计算</h4>
+                        <p class="text-slate-300 mb-4">Julia支持多进程并行计算，可以利用多核CPU和分布式系统。</p>
+                        
+                        <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                            <h5 class="text-lg font-medium mb-4 text-blue-300">多进程计算</h5>
+                            <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-slate-500"># 启动多进程</span>
+<span class="text-cyan-300">using</span> <span class="text-blue-300">Distributed</span>
+
+<span class="text-slate-500"># 启动4个工作进程</span>
+<span class="text-blue-300">addprocs</span>(<span class="text-yellow-300">4</span>)
+
+<span class="text-cyan-300">println</span>(<span class="text-yellow-300">"可用进程数: "</span>, <span class="text-blue-300">nprocs</span>())
+
+<span class="text-slate-500"># 并行map操作</span>
+<span class="text-green-300">results</span> <span class="text-purple-300">=</span> <span class="text-blue-400">pmap</span>(<span class="text-cyan-300">x</span> <span class="text-purple-300">-></span> <span class="text-green-300">x</span> <span class="text-purple-300">*</span> <span class="text-green-300">x</span>, <span class="text-yellow-300">1</span><span class="text-purple-300">:</span><span class="text-yellow-300">10</span>)
+
+<span class="text-cyan-300">println</span>(<span class="text-green-300">results</span>)
+
+<span class="text-slate-500"># 分布式变量</span>
+<span class="text-blue-400">@everywhere</span> <span class="text-green-300">shared_data</span> <span class="text-purple-300">=</span> <span class="text-yellow-300">100</span>
+
+<span class="text-cyan-300">@everywhere</span> <span class="text-cyan-300">function</span> <span class="text-blue-400">calculate</span>(<span class="text-green-300">x</span>)
+    <span class="text-cyan-300">return</span> <span class="text-green-300">x</span> <span class="text-purple-300">*</span> <span class="text-green-300">shared_data</span>
+<span class="text-cyan-300">end</span>
+
+<span class="text-green-300">calc_results</span> <span class="text-purple-300">=</span> <span class="text-blue-400">pmap</span>(<span class="text-blue-400">calculate</span>, <span class="text-yellow-300">1</span><span class="text-purple-300">:</span><span class="text-yellow-300">5</span>)
+<span class="text-cyan-300">println</span>(<span class="text-green-300">calc_results</span>)</code></pre>
+                        </div>
+
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">共享内存与原子操作</h4>
+                        <p class="text-slate-300 mb-4">Julia提供了原子操作来确保线程安全的共享内存访问。</p>
+                        
+                        <div class="bg-slate-800 rounded-xl p-6 syntax-card">
+                            <h5 class="text-lg font-medium mb-4 text-blue-300">原子操作</h5>
+                            <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-cyan-300">using</span> <span class="text-blue-300">Threads</span>
+
+<span class="text-slate-500"># 共享计数器</span>
+<span class="text-green-300">counter</span> <span class="text-purple-300">=</span> <span class="text-blue-400">Ref</span>(<span class="text-yellow-300">0</span>)
+
+<span class="text-slate-500"># 并行增加计数器</span>
+<span class="text-cyan-300">Threads</span>.<span class="text-cyan-300">@threads</span> <span class="text-cyan-300">for</span> <span class="text-green-300">i</span> <span class="text-purple-300">in</span> <span class="text-yellow-300">1</span><span class="text-purple-300">:</span><span class="text-yellow-300">10000</span>
+    <span class="text-blue-300">Threads</span>.<span class="text-blue-400">atomic_add!</span>(<span class="text-green-300">counter</span>, <span class="text-yellow-300">1</span>)
+<span class="text-cyan-300">end</span>
+
+<span class="text-cyan-300">println</span>(<span class="text-yellow-300">"最终计数器值: "</span>, <span class="text-green-300">counter</span>[])</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 11. Julia 错误处理与测试 -->
+                <section id="section-11" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">11. Julia 错误处理与测试</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="julia">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">错误处理</h4>
+                        <p class="text-slate-300 mb-4">Julia提供了异常处理机制来处理运行时错误。</p>
+                        
+                        <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                            <h5 class="text-lg font-medium mb-4 text-blue-300">异常处理</h5>
+                            <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-slate-500"># try-catch块</span>
+<span class="text-cyan-300">try</span>
+    <span class="text-green-300">result</span> <span class="text-purple-300">=</span> <span class="text-yellow-300">10</span> <span class="text-purple-300">/</span> <span class="text-yellow-300">0</span>
+    <span class="text-cyan-300">println</span>(<span class="text-green-300">result</span>)
+<span class="text-cyan-300">catch</span> <span class="text-green-300">e</span>
+    <span class="text-cyan-300">println</span>(<span class="text-yellow-300">"发生错误: "</span>, <span class="text-green-300">e</span>)
+    <span class="text-cyan-300">println</span>(<span class="text-yellow-300">"错误类型: "</span>, <span class="text-blue-300">typeof</span>(<span class="text-green-300">e</span>))
+<span class="text-cyan-300">finally</span>
+    <span class="text-cyan-300">println</span>(<span class="text-yellow-300">"无论是否发生错误都会执行"</span>)
+<span class="text-cyan-300">end</span>
+
+<span class="text-slate-500"># 自定义异常</span>
+<span class="text-cyan-300">struct</span> <span class="text-blue-300">MyError</span> <span class="text-cyan-300"><:</span> <span class="text-blue-300">Exception</span>
+    <span class="text-green-300">message</span><span class="text-purple-300">::</span><span class="text-blue-300">String</span>
+<span class="text-cyan-300">end</span>
+
+<span class="text-cyan-300">function</span> <span class="text-blue-400">check_positive</span>(<span class="text-green-300">x</span><span class="text-purple-300">::</span><span class="text-blue-300">Number</span>)
+    <span class="text-cyan-300">if</span> <span class="text-green-300">x</span> <span class="text-purple-300">≤</span> <span class="text-yellow-300">0</span>
+        <span class="text-cyan-300">throw</span>(<span class="text-blue-300">MyError</span>(<span class="text-yellow-300">"值必须为正数"</span>))
+    <span class="text-cyan-300">end</span>
+    <span class="text-cyan-300">return</span> <span class="text-green-300">x</span>
+<span class="text-cyan-300">end</span>
+
+<span class="text-cyan-300">try</span>
+    <span class="text-blue-400">check_positive</span>(<span class="text-yellow-300">-5</span>)
+<span class="text-cyan-300">catch</span> <span class="text-green-300">e</span>
+    <span class="text-cyan-300">println</span>(<span class="text-yellow-300">"捕获到自定义异常: "</span>, <span class="text-green-300">e</span>.<span class="text-green-300">message</span>)
+<span class="text-cyan-300">end</span></code></pre>
+                        </div>
+
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">测试框架</h4>
+                        <p class="text-slate-300 mb-4">Julia提供了内置的测试框架来编写和运行测试。</p>
+                        
+                        <div class="bg-slate-800 rounded-xl p-6 syntax-card">
+                            <h5 class="text-lg font-medium mb-4 text-blue-300">测试框架</h5>
+                            <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-cyan-300">using</span> <span class="text-blue-300">Test</span>
+
+<span class="text-slate-500"># 简单测试</span>
+<span class="text-cyan-300">@test</span> <span class="text-yellow-300">2</span> <span class="text-purple-300">+</span> <span class="text-yellow-300">2</span> <span class="text-purple-300">==</span> <span class="text-yellow-300">4</span>
+<span class="text-cyan-300">@test</span> <span class="text-yellow-300">3</span> <span class="text-purple-300">*</span> <span class="text-yellow-300">5</span> <span class="text-purple-300">≥</span> <span class="text-yellow-300">14</span>
+
+<span class="text-slate-500"># 测试函数</span>
+<span class="text-cyan-300">function</span> <span class="text-blue-400">factorial</span>(<span class="text-green-300">n</span><span class="text-purple-300">::</span><span class="text-blue-300">Int</span>)
+    <span class="text-cyan-300">if</span> <span class="text-green-300">n</span> <span class="text-purple-300">≤</span> <span class="text-yellow-300">1</span>
+        <span class="text-cyan-300">return</span> <span class="text-yellow-300">1</span>
+    <span class="text-cyan-300">else</span>
+        <span class="text-cyan-300">return</span> <span class="text-green-300">n</span> <span class="text-purple-300">*</span> <span class="text-blue-400">factorial</span>(<span class="text-green-300">n</span> <span class="text-purple-300">-</span> <span class="text-yellow-300">1</span>)
+    <span class="text-cyan-300">end</span>
+<span class="text-cyan-300">end</span>
+
+<span class="text-cyan-300">@test</span> <span class="text-blue-400">factorial</span>(<span class="text-yellow-300">0</span>) <span class="text-purple-300">==</span> <span class="text-yellow-300">1</span>
+<span class="text-cyan-300">@test</span> <span class="text-blue-400">factorial</span>(<span class="text-yellow-300">5</span>) <span class="text-purple-300">==</span> <span class="text-yellow-300">120</span>
+<span class="text-cyan-300">@test</span> <span class="text-blue-400">factorial</span>(<span class="text-yellow-300">10</span>) <span class="text-purple-300">==</span> <span class="text-yellow-300">3628800</span>
+
+<span class="text-slate-500"># 测试集</span>
+<span class="text-blue-400">@testset</span> <span class="text-yellow-300">"算术运算测试"</span> <span class="text-cyan-300">begin</span>
+    <span class="text-cyan-300">@test</span> <span class="text-yellow-300">1</span> <span class="text-purple-300">+</span> <span class="text-yellow-300">1</span> <span class="text-purple-300">==</span> <span class="text-yellow-300">2</span>
+    <span class="text-cyan-300">@test</span> <span class="text-yellow-300">5</span> <span class="text-purple-300">-</span> <span class="text-yellow-300">3</span> <span class="text-purple-300">==</span> <span class="text-yellow-300">2</span>
+    <span class="text-cyan-300">@test</span> <span class="text-yellow-300">2</span> <span class="text-purple-300">*</span> <span class="text-yellow-300">4</span> <span class="text-purple-300">==</span> <span class="text-yellow-300">8</span>
+    <span class="text-cyan-300">@test</span> <span class="text-yellow-300">10</span> <span class="text-purple-300">/</span> <span class="text-yellow-300">2</span> <span class="text-purple-300">==</span> <span class="text-yellow-300">5</span>
+<span class="text-cyan-300">end</span></code></pre>
+                        </div>
+                    </div>
+                </section></main>
 </body>
 </html>
+
+
