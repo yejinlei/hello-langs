@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perl 教程 - Hello 编程语言</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Perl教程 - Hello 编程语言</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -26,6 +25,13 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(148, 163, 184, 0.1);
         }
+        .language-tab {
+            transition: all 0.3s ease;
+        }
+        .language-tab.active {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            color: white;
+        }
         .code-block {
             background: rgba(2, 6, 23, 0.9);
             border-left: 4px solid #3B82F6;
@@ -35,138 +41,1319 @@
             padding: 2px 4px;
             border-radius: 3px;
         }
+        .language-content.hidden {
+            display: none;
+        }
+        
+        /* Perl语法高亮 */
+        .language-content .perl-keyword {
+            color: #F87171 !important;
+            font-weight: 500 !important;
+        }
+        .language-content .perl-string {
+            color: #A78BFA !important;
+        }
+        .language-content .perl-number {
+            color: #FBBF24 !important;
+        }
+        .language-content .perl-comment {
+            color: #6B7280 !important;
+        }
+        .language-content .perl-function {
+            color: #34D399 !important;
+        }
+        .language-content .perl-operator {
+            color: #EC4899 !important;
+        }
+        .language-content .perl-variable {
+            color: #60A5FA !important;
+        }
+        .language-content .perl-builtin {
+            color: #F59E0B !important;
+        }
+        .language-content .perl-regex {
+            color: #8B5CF6 !important;
+        }
+        .language-content .perl-pragma {
+            color: #10B981 !important;
+        }
+        .language-content .perl-module {
+            color: #34D399 !important;
+        }
+        .language-content .perl-class {
+            color: #FBBF24 !important;
+            font-weight: 500 !important;
+        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">
-    <main class="container mx-auto px-4 py-8 max-w-6xl">
-        <!-- 1. Perl 简介 -->
-        <section id="section-1" class="mb-16">
-            <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">1. Perl 简介</span>
-            </h2>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- 左侧导航栏 -->
+            <aside class="lg:w-1/4">
+                <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 sticky top-24 border border-slate-700">
+                    <h3 class="text-lg font-bold mb-4 gradient-text">章节导航</h3>
+                    <nav class="space-y-2">
+                        <a href="#section-1" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">1. Perl简介</a>
+                        <a href="#section-2" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">2. 基本语法</a>
+                        <a href="#section-3" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">3. 变量和数据类型</a>
+                        <a href="#section-4" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">4. 字符串操作</a>
+                        <a href="#section-5" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">5. 控制语句</a>
+                        <a href="#section-6" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">6. 循环结构</a>
+                        <a href="#section-7" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">7. 数组操作</a>
+                        <a href="#section-8" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">8. 哈希表</a>
+                        <a href="#section-9" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">9. 函数</a>
+                        <a href="#section-10" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">10. 文件操作</a>
+                        <a href="#section-11" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">11. 正则表达式</a>
+                        <a href="#section-12" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">12. 模块和包</a>
+                        <a href="#section-13" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">13. 面向对象编程</a>
+                        <a href="#section-14" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">14. 错误处理</a>
+                        <a href="#section-15" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">15. 进程和系统调用</a>
+                        <a href="#section-16" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">16. 网络编程</a>
+                        <a href="#section-17" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">17. 数据库操作</a>
+                        <a href="#section-18" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">18. 测试和调试</a>
+                        <a href="#section-19" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">19. 最佳实践</a>
+                    </nav>
+                </div>
+            </aside>
             
-            <div class="language-content" data-lang="perl">
-                <h4 class="text-lg font-medium mb-4 text-purple-400">Perl - 实用提取与报告语言</h4>
-                <p class="text-slate-300 mb-4">Perl是一种功能强大的脚本语言，擅长文本处理和系统管理任务。它具有灵活的语法和丰富的模块库，广泛应用于Web开发、系统管理、网络编程等领域。</p>
+            <!-- 主要内容区域 -->
+            <div class="lg:w-3/4">
+                <!-- 第1章：Perl简介 -->
+                <section id="section-1" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">1. Perl简介</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">什么是Perl？</h3>
+                        <p class="mb-4">Perl是一种高级、通用、解释型的编程语言，全称是Practical Extraction and Reporting Language（实用提取和报告语言）。它最初设计用于文本处理，但现在已发展成为一种功能强大的通用编程语言。</p>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">Perl的特点</h3>
+                        <ul class="list-disc list-inside mb-4 space-y-2">
+                            <li>强大的文本处理和正则表达式支持</li>
+                            <li>跨平台兼容性</li>
+                            <li>灵活的语法和丰富的内置功能</li>
+                            <li>广泛的模块库（CPAN）</li>
+                            <li>支持过程式、函数式和面向对象编程</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">第一个Perl程序</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-pragma">#!/usr/bin/perl</span>
+<span class="perl-keyword">use</span> <span class="perl-builtin">strict</span>;
+<span class="perl-keyword">use</span> <span class="perl-builtin">warnings</span>;
+
+<span class="perl-builtin">print</span> <span class="perl-string">"Hello, World!\n"</span>;</code></pre>
+                        <p class="mt-4">运行方式：</p>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">perl hello.pl
+<span class="bash-comment"># 或</span>
+<span class="bash-operator">chmod</span> +x hello.pl
+./hello.pl</code></pre>
+                    </div>
+                </section>
                 
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">Perl 语言特点</h5>
-                    <ul class="text-slate-300 list-disc pl-6 space-y-2">
-                        <li>强大的正则表达式支持</li>
-                        <li>灵活的语法和丰富的运算符</li>
-                        <li>丰富的CPAN模块库</li>
-                        <li>跨平台兼容性</li>
-                        <li>擅长文本处理和字符串操作</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+                <!-- 第2章：基本语法 -->
+                <section id="section-2" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">2. 基本语法</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">注释</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-comment"># 单行注释</span>
 
-        <!-- 2. Perl 基础语法 -->
-        <section id="section-2" class="mb-16">
-            <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">2. Perl 基础语法</span>
-            </h2>
-            
-            <div class="language-content" data-lang="perl">
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">Hello World 示例</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">#!/usr/bin/perl
-use strict;
-use warnings;
+<span class="perl-comment">=pod</span>
+多行注释
+可以在这里写很多行
+<span class="perl-comment">=cut</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">语句和分号</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-builtin">print</span> <span class="perl-string">"Hello"</span>; <span class="perl-comment"># 分号结束语句</span>
+<span class="perl-builtin">print</span> <span class="perl-string">"World!\n"</span>;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">空白和缩进</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">if</span> (<span class="perl-number">1</span> == <span class="perl-number">1</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-string">"相等\n"</span>; <span class="perl-comment"># 缩进提高可读性</span>
+}</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第3章：变量和数据类型 -->
+                <section id="section-3" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">3. 变量和数据类型</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">标量变量</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">$name</span> = <span class="perl-string">"Perl"</span>; <span class="perl-comment"># 字符串</span>
+<span class="perl-variable">$age</span> = <span class="perl-number">35</span>;      <span class="perl-comment"># 整数</span>
+<span class="perl-variable">$price</span> = <span class="perl-number">19.99</span>;   <span class="perl-comment"># 浮点数</span>
+<span class="perl-variable">$flag</span> = <span class="perl-keyword">1</span>;        <span class="perl-comment"># 布尔值（1为真，0为假）</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">数组变量</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">@numbers</span> = (<span class="perl-number">1</span>, <span class="perl-number">2</span>, <span class="perl-number">3</span>, <span class="perl-number">4</span>, <span class="perl-number">5</span>);
+<span class="perl-variable">@fruits</span> = (<span class="perl-string">"apple"</span>, <span class="perl-string">"banana"</span>, <span class="perl-string">"orange"</span>);
 
-print "Hello, World!\n";
-</code></pre>
-                </div>
-
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">变量</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">#!/usr/bin/perl
-use strict;
-use warnings;
-
-# 标量变量
-my $name = "Perl";
-my $age = 30;
-my $price = 19.99;
-
-print "Name: $name\n";
-print "Age: $age\n";
-print "Price: $price\n";
-
-# 数组
-my @fruits = ("apple", "banana", "orange");
-print "Fruits: @fruits\n";
-
-# 哈希
-my %person = (
-    "name" => "John",
-    "age" => 25,
-    "city" => "New York"
+<span class="perl-builtin">print</span> <span class="perl-variable">$numbers</span>[<span class="perl-number">0</span>]; <span class="perl-comment"># 访问第一个元素</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">哈希变量</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">%person</span> = (
+    <span class="perl-string">"name"</span> => <span class="perl-string">"John"</span>,
+    <span class="perl-string">"age"</span>  => <span class="perl-number">30</span>,
+    <span class="perl-string">"city"</span> => <span class="perl-string">"New York"</span>
 );
-print "Person: $person{name}, $person{age}, $person{city}\n";
-</code></pre>
-                </div>
-            </div>
-        </section>
 
-        <!-- 3. Perl 控制流 -->
-        <section id="section-3" class="mb-16">
-            <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">3. Perl 控制流</span>
-            </h2>
-            
-            <div class="language-content" data-lang="perl">
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">条件语句</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">#!/usr/bin/perl
-use strict;
-use warnings;
+<span class="perl-builtin">print</span> <span class="perl-variable">$person</span>{<span class="perl-string">"name"</span>}; <span class="perl-comment"># 访问哈希值</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第4章：字符串操作 -->
+                <section id="section-4" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">4. 字符串操作</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">字符串连接</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">$first</span> = <span class="perl-string">"Hello"</span>;
+<span class="perl-variable">$second</span> = <span class="perl-string">"World"</span>;
+<span class="perl-variable">$result</span> = <span class="perl-variable">$first</span> . <span class="perl-string">", "</span> . <span class="perl-variable">$second</span> . <span class="perl-string">"!\n"</span>;
+<span class="perl-builtin">print</span> <span class="perl-variable">$result</span>;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">字符串重复</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">$line</span> = <span class="perl-string">"-"</span> x <span class="perl-number">50</span>;
+<span class="perl-builtin">print</span> <span class="perl-variable">$line</span> . <span class="perl-string">"\n"</span>;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">字符串函数</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">$str</span> = <span class="perl-string">"Hello, Perl!"</span>;
 
-my $score = 85;
+<span class="perl-builtin">print</span> <span class="perl-builtin">length</span>(<span class="perl-variable">$str</span>);           <span class="perl-comment"># 字符串长度</span>
+<span class="perl-builtin">print</span> <span class="perl-builtin">uc</span>(<span class="perl-variable">$str</span>);               <span class="perl-comment"># 转换为大写</span>
+<span class="perl-builtin">print</span> <span class="perl-builtin">lc</span>(<span class="perl-variable">$str</span>);               <span class="perl-comment"># 转换为小写</span>
+<span class="perl-builtin">print</span> <span class="perl-builtin">substr</span>(<span class="perl-variable">$str</span>, <span class="perl-number">0</span>, <span class="perl-number">5</span>);  <span class="perl-comment"># 截取子串</span>
+<span class="perl-builtin">print</span> <span class="perl-builtin">index</span>(<span class="perl-variable">$str</span>, <span class="perl-string">"Perl"</span>);   <span class="perl-comment"># 查找子串位置</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第5章：控制语句 -->
+                <section id="section-5" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">5. 控制语句</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">if语句</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">$age</span> = <span class="perl-number">18</span>;
 
-if ($score >= 90) {
-    print "A\n";
-} elsif ($score >= 80) {
-    print "B\n";
-} elsif ($score >= 70) {
-    print "C\n";
-} else {
-    print "D\n";
+<span class="perl-keyword">if</span> (<span class="perl-variable">$age</span> >= <span class="perl-number">18</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-string">"成年人\n"</span>;
+}<span class="perl-keyword">elsif</span> (<span class="perl-variable">$age</span> >= <span class="perl-number">13</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-string">"青少年\n"</span>;
+}<span class="perl-keyword">else</span> {
+    <span class="perl-builtin">print</span> <span class="perl-string">"儿童\n"</span>;
+}</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">unless语句</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">$flag</span> = <span class="perl-keyword">0</span>;
+
+<span class="perl-keyword">unless</span> (<span class="perl-variable">$flag</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-string">"条件为假\n"</span>;
+}</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">switch语句</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">use</span> <span class="perl-builtin">feature</span> <span class="perl-string">'say'</span>;
+<span class="perl-keyword">use</span> <span class="perl-builtin">Switch</span>;
+
+<span class="perl-variable">$num</span> = <span class="perl-number">3</span>;
+
+<span class="perl-keyword">switch</span> (<span class="perl-variable">$num</span>) {
+    <span class="perl-keyword">case</span> <span class="perl-number">1</span> { <span class="perl-builtin">say</span> <span class="perl-string">"一"</span>; }
+    <span class="perl-keyword">case</span> <span class="perl-number">2</span> { <span class="perl-builtin">say</span> <span class="perl-string">"二"</span>; }
+    <span class="perl-keyword">case</span> <span class="perl-number">3</span> { <span class="perl-builtin">say</span> <span class="perl-string">"三"</span>; }
+    <span class="perl-keyword">default</span> { <span class="perl-builtin">say</span> <span class="perl-string">"其他"</span>; }
+}</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第6章：循环结构 -->
+                <section id="section-6" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">6. 循环结构</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">for循环</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">for</span> (<span class="perl-variable">$i</span> = <span class="perl-number">0</span>; <span class="perl-variable">$i</span> < <span class="perl-number">10</span>; <span class="perl-variable">$i</span>++) {
+    <span class="perl-builtin">print</span> <span class="perl-variable">$i</span> . <span class="perl-string">"\n"</span>;
 }
-</code></pre>
-                </div>
 
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">循环语句</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">#!/usr/bin/perl
-use strict;
-use warnings;
-
-# for 循环
-print "For 循环:\n";
-for (my $i = 1; $i <= 5; $i++) {
-    print "$i\n";
+<span class="perl-comment"># 遍历数组</span>
+<span class="perl-variable">@fruits</span> = (<span class="perl-string">"apple"</span>, <span class="perl-string">"banana"</span>, <span class="perl-string">"orange"</span>);
+<span class="perl-keyword">for</span> (<span class="perl-variable">$i</span> = <span class="perl-number">0</span>; <span class="perl-variable">$i</span> < <span class="perl-builtin">scalar</span> <span class="perl-variable">@fruits</span>; <span class="perl-variable">$i</span>++) {
+    <span class="perl-builtin">print</span> <span class="perl-variable">$fruits</span>[<span class="perl-variable">$i</span>] . <span class="perl-string">"\n"</span>;
+}</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">foreach循环</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-comment"># 遍历数组</span>
+<span class="perl-variable">@fruits</span> = (<span class="perl-string">"apple"</span>, <span class="perl-string">"banana"</span>, <span class="perl-string">"orange"</span>);
+<span class="perl-keyword">foreach</span> <span class="perl-variable">$fruit</span> (<span class="perl-variable">@fruits</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-variable">$fruit</span> . <span class="perl-string">"\n"</span>;
 }
 
-# while 循环
-print "\nWhile 循环:\n";
-my $j = 1;
-while ($j <= 5) {
-    print "$j\n";
-    $j++;
+<span class="perl-comment"># 遍历哈希</span>
+<span class="perl-variable">%person</span> = (<span class="perl-string">"name"</span> => <span class="perl-string">"John"</span>, <span class="perl-string">"age"</span> => <span class="perl-number">30</span>);
+<span class="perl-keyword">foreach</span> <span class="perl-variable">$key</span> (<span class="perl-builtin">keys</span> <span class="perl-variable">%person</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-variable">$key</span> . <span class="perl-string">": "</span> . <span class="perl-variable">$person</span>{<span class="perl-variable">$key</span>} . <span class="perl-string">"\n"</span>;
+}</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">while循环</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">$i</span> = <span class="perl-number">0</span>;
+<span class="perl-keyword">while</span> (<span class="perl-variable">$i</span> < <span class="perl-number">10</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-variable">$i</span> . <span class="perl-string">"\n"</span>;
+    <span class="perl-variable">$i</span>++;
 }
 
-# foreach 循环
-print "\nForeach 循环:\n";
-my @numbers = (1, 2, 3, 4, 5);
-foreach my $num (@numbers) {
-    print "$num\n";
+<span class="perl-comment"># 读取文件</span>
+<span class="perl-keyword">open</span> <span class="perl-variable">my</span> <span class="perl-variable">$fh</span>, <span class="perl-string">'&lt;'</span>, <span class="perl-string">'test.txt'</span> <span class="perl-keyword">or</span> <span class="perl-builtin">die</span> <span class="perl-string">"无法打开文件: $!"</span>;
+<span class="perl-keyword">while</span> (<span class="perl-keyword">my</span> <span class="perl-variable">$line</span> = <span class="perl-builtin">readline</span> <span class="perl-variable">$fh</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-variable">$line</span>;
 }
-</code></pre>
-                </div>
-            </div>
-        </section>
-    </main>
-</body>
-</html>
+<span class="perl-builtin">close</span> <span class="perl-variable">$fh</span>;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">until循环</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">$i</span> = <span class="perl-number">0</span>;
+<span class="perl-keyword">until</span> (<span class="perl-variable">$i</span> >= <span class="perl-number">10</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-variable">$i</span> . <span class="perl-string">"\n"</span>;
+    <span class="perl-variable">$i</span>++;
+}</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第7章：数组操作 -->
+                <section id="section-7" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">7. 数组操作</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">数组创建和访问</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">@numbers</span> = (<span class="perl-number">1</span>, <span class="perl-number">2</span>, <span class="perl-number">3</span>, <span class="perl-number">4</span>, <span class="perl-number">5</span>);
+<span class="perl-builtin">print</span> <span class="perl-variable">$numbers</span>[<span class="perl-number">0</span>]; <span class="perl-comment"># 第一个元素</span>
+<span class="perl-builtin">print</span> <span class="perl-variable">$numbers</span>[-<span class="perl-number">1</span>]; <span class="perl-comment"># 最后一个元素</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">数组函数</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">@numbers</span> = (<span class="perl-number">3</span>, <span class="perl-number">1</span>, <span class="perl-number">4</span>, <span class="perl-number">1</span>, <span class="perl-number">5</span>);
+
+<span class="perl-builtin">print</span> <span class="perl-builtin">scalar</span> <span class="perl-variable">@numbers</span>; <span class="perl-comment"># 数组长度</span>
+
+<span class="perl-keyword">my</span> <span class="perl-variable">@sorted</span> = <span class="perl-builtin">sort</span> <span class="perl-variable">@numbers</span>; <span class="perl-comment"># 排序</span>
+<span class="perl-keyword">my</span> <span class="perl-variable">@reversed</span> = <span class="perl-builtin">reverse</span> <span class="perl-variable">@numbers</span>; <span class="perl-comment"># 反转</span>
+
+<span class="perl-builtin">push</span> <span class="perl-variable">@numbers</span>, <span class="perl-number">9</span>; <span class="perl-comment"># 添加到末尾</span>
+<span class="perl-builtin">pop</span> <span class="perl-variable">@numbers</span>; <span class="perl-comment"># 从末尾移除</span>
+
+<span class="perl-builtin">unshift</span> <span class="perl-variable">@numbers</span>, <span class="perl-number">0</span>; <span class="perl-comment"># 添加到开头</span>
+<span class="perl-builtin">shift</span> <span class="perl-variable">@numbers</span>; <span class="perl-comment"># 从开头移除</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">数组切片</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">@numbers</span> = (<span class="perl-number">1</span>, <span class="perl-number">2</span>, <span class="perl-number">3</span>, <span class="perl-number">4</span>, <span class="perl-number">5</span>, <span class="perl-number">6</span>);
+
+<span class="perl-keyword">my</span> <span class="perl-variable">@slice1</span> = <span class="perl-variable">@numbers</span>[<span class="perl-number">0</span>..<span class="perl-number">2</span>]; <span class="perl-comment"># 前3个元素</span>
+<span class="perl-keyword">my</span> <span class="perl-variable">@slice2</span> = <span class="perl-variable">@numbers</span>[<span class="perl-number">3</span>..<span class="perl-number">5</span>]; <span class="perl-comment"># 后3个元素</span>
+<span class="perl-keyword">my</span> <span class="perl-variable">@slice3</span> = <span class="perl-variable">@numbers</span>[<span class="perl-number">0</span>, <span class="perl-number">2</span>, <span class="perl-number">4</span>]; <span class="perl-comment"># 索引0,2,4的元素</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第8章：哈希表 -->
+                <section id="section-8" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">8. 哈希表</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">哈希创建和访问</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">my</span> <span class="perl-variable">%person</span> = (
+    <span class="perl-string">'name'</span> => <span class="perl-string">'John'</span>,
+    <span class="perl-string">'age'</span>  => <span class="perl-number">30</span>,
+    <span class="perl-string">'city'</span> => <span class="perl-string">'New York'</span>
+);
+
+<span class="perl-builtin">print</span> <span class="perl-variable">$person</span>{<span class="perl-string">'name'</span>}; <span class="perl-comment"># 访问值</span>
+<span class="perl-variable">$person</span>{<span class="perl-string">'email'</span>} = <span class="perl-string">'john@example.com'</span>; <span class="perl-comment"># 添加新键值对</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">哈希操作</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">my</span> <span class="perl-variable">%person</span> = (
+    <span class="perl-string">'name'</span> => <span class="perl-string">'John'</span>,
+    <span class="perl-string">'age'</span>  => <span class="perl-number">30</span>,
+    <span class="perl-string">'city'</span> => <span class="perl-string">'New York'</span>
+);
+
+<span class="perl-comment"># 获取所有键</span>
+<span class="perl-keyword">my</span> <span class="perl-variable">@keys</span> = <span class="perl-builtin">keys</span> <span class="perl-variable">%person</span>;
+
+<span class="perl-comment"># 获取所有值</span>
+<span class="perl-keyword">my</span> <span class="perl-variable">@values</span> = <span class="perl-builtin">values</span> <span class="perl-variable">%person</span>;
+
+<span class="perl-comment"># 检查键是否存在</span>
+<span class="perl-keyword">if</span> (<span class="perl-builtin">exists</span> <span class="perl-variable">$person</span>{<span class="perl-string">'name'</span>}) {
+    <span class="perl-builtin">print</span> <span class="perl-string">"Name exists\n"</span>;
+}
+
+<span class="perl-comment"># 删除键值对</span>
+<span class="perl-builtin">delete</span> <span class="perl-variable">$person</span>{<span class="perl-string">'age'</span>};</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">遍历哈希</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">my</span> <span class="perl-variable">%person</span> = (
+    <span class="perl-string">'name'</span> => <span class="perl-string">'John'</span>,
+    <span class="perl-string">'age'</span>  => <span class="perl-number">30</span>,
+    <span class="perl-string">'city'</span> => <span class="perl-string">'New York'</span>
+);
+
+<span class="perl-comment"># 遍历键值对</span>
+<span class="perl-keyword">while</span> (<span class="perl-keyword">my</span> (<span class="perl-variable">$key</span>, <span class="perl-variable">$value</span>) = <span class="perl-builtin">each</span> <span class="perl-variable">%person</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-variable">$key</span> . <span class="perl-string">": "</span> . <span class="perl-variable">$value</span> . <span class="perl-string">"\n"</span>;
+}</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第9章：函数 -->
+                <section id="section-9" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">9. 函数</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">函数定义和调用</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">sub</span> <span class="perl-function">greet</span> {
+    <span class="perl-keyword">my</span> <span class="perl-variable">$name</span> = <span class="perl-builtin">shift</span>;
+    <span class="perl-builtin">print</span> <span class="perl-string">"Hello, "</span> . <span class="perl-variable">$name</span> . <span class="perl-string">"!\n"</span>;
+}
+
+<span class="perl-function">greet</span>(<span class="perl-string">"Perl"</span>); <span class="perl-comment"># 调用函数</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">函数参数和返回值</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">sub</span> <span class="perl-function">add</span> {
+    <span class="perl-keyword">my</span> (<span class="perl-variable">$a</span>, <span class="perl-variable">$b</span>) = <span class="perl-builtin">@_</span>;
+    <span class="perl-keyword">return</span> <span class="perl-variable">$a</span> + <span class="perl-variable">$b</span>;
+}
+
+<span class="perl-keyword">my</span> <span class="perl-variable">$sum</span> = <span class="perl-function">add</span>(<span class="perl-number">3</span>, <span class="perl-number">5</span>);
+<span class="perl-builtin">print</span> <span class="perl-variable">$sum</span>; <span class="perl-comment"># 输出8</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">匿名函数和闭包</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-comment"># 匿名函数</span>
+<span class="perl-keyword">my</span> <span class="perl-variable">$multiply</span> = <span class="perl-keyword">sub</span> {
+    <span class="perl-keyword">my</span> (<span class="perl-variable">$a</span>, <span class="perl-variable">$b</span>) = <span class="perl-builtin">@_</span>;
+    <span class="perl-keyword">return</span> <span class="perl-variable">$a</span> * <span class="perl-variable">$b</span>;
+};
+
+<span class="perl-builtin">print</span> <span class="perl-variable">$multiply</span>->(<span class="perl-number">4</span>, <span class="perl-number">5</span>); <span class="perl-comment"># 调用匿名函数</span>
+
+<span class="perl-comment"># 闭包</span>
+<span class="perl-keyword">sub</span> <span class="perl-function">make_counter</span> {
+    <span class="perl-keyword">my</span> <span class="perl-variable">$count</span> = <span class="perl-number">0</span>;
+    <span class="perl-keyword">return</span> <span class="perl-keyword">sub</span> {
+        <span class="perl-keyword">return</span> ++<span class="perl-variable">$count</span>;
+    };
+}
+
+<span class="perl-keyword">my</span> <span class="perl-variable">$counter</span> = <span class="perl-function">make_counter</span>();
+<span class="perl-builtin">print</span> <span class="perl-variable">$counter</span>->(); <span class="perl-comment"># 输出1</span>
+<span class="perl-builtin">print</span> <span class="perl-variable">$counter</span>->(); <span class="perl-comment"># 输出2</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第10章：文件操作 -->
+                <section id="section-10" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">10. 文件操作</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">文件读取</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-comment"># 读取整个文件</span>
+<span class="perl-keyword">open</span> <span class="perl-variable">my</span> <span class="perl-variable">$file</span>, <span class="perl-string">'&lt;'</span>, <span class="perl-string">'test.txt'</span> <span class="perl-keyword">or</span> <span class="perl-builtin">die</span> <span class="perl-string">"无法打开文件: $!"</span>;
+<span class="perl-keyword">my</span> <span class="perl-variable">@content</span> = <span class="perl-builtin">readline</span> <span class="perl-variable">$file</span>;
+<span class="perl-builtin">close</span> <span class="perl-variable">$file</span>;
+
+<span class="perl-keyword">foreach</span> <span class="perl-variable">$line</span> (<span class="perl-variable">@content</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-variable">$line</span>;
+}
+
+<span class="perl-comment"># 逐行读取</span>
+<span class="perl-keyword">open</span> <span class="perl-variable">my</span> <span class="perl-variable">$fh</span>, <span class="perl-string">'&lt;'</span>, <span class="perl-string">'test.txt'</span> <span class="perl-keyword">or</span> <span class="perl-builtin">die</span> <span class="perl-string">"无法打开文件: $!"</span>;
+<span class="perl-keyword">while</span> (<span class="perl-keyword">my</span> <span class="perl-variable">$line</span> = <span class="perl-builtin">readline</span> <span class="perl-variable">$fh</span>) {
+    <span class="perl-builtin">chomp</span> <span class="perl-variable">$line</span>;
+    <span class="perl-builtin">print</span> <span class="perl-variable">$line</span> . <span class="perl-string">"\n"</span>;
+}
+<span class="perl-builtin">close</span> <span class="perl-variable">$fh</span>;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">文件写入</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-comment"># 写入文件（覆盖）</span>
+<span class="perl-keyword">open</span> <span class="perl-variable">my</span> <span class="perl-variable">$file</span>, <span class="perl-string">'&gt;'</span>, <span class="perl-string">'output.txt'</span> <span class="perl-keyword">or</span> <span class="perl-builtin">die</span> <span class="perl-string">"无法打开文件: $!"</span>;
+<span class="perl-builtin">print</span> <span class="perl-variable">$file</span> <span class="perl-string">"Hello, Perl!\n"</span>;
+<span class="perl-builtin">close</span> <span class="perl-variable">$file</span>;
+
+<span class="perl-comment"># 追加到文件</span>
+<span class="perl-keyword">open</span> <span class="perl-variable">my</span> <span class="perl-variable">$fh</span>, <span class="perl-string">'&gt;&gt;'</span>, <span class="perl-string">'output.txt'</span> <span class="perl-keyword">or</span> <span class="perl-builtin">die</span> <span class="perl-string">"无法打开文件: $!"</span>;
+<span class="perl-builtin">print</span> <span class="perl-variable">$fh</span> <span class="perl-string">"追加的内容\n"</span>;
+<span class="perl-builtin">close</span> <span class="perl-variable">$fh</span>;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">文件测试操作符</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">$filename</span> = <span class="perl-string">'test.txt'</span>;
+
+<span class="perl-keyword">if</span> (-e <span class="perl-variable">$filename</span>) { <span class="perl-builtin">print</span> <span class="perl-string">"文件存在\n"</span>; }
+<span class="perl-keyword">if</span> (-f <span class="perl-variable">$filename</span>) { <span class="perl-builtin">print</span> <span class="perl-string">"是普通文件\n"</span>; }
+<span class="perl-keyword">if</span> (-d <span class="perl-variable">$filename</span>) { <span class="perl-builtin">print</span> <span class="perl-string">"是目录\n"</span>; }
+<span class="perl-keyword">if</span> (-r <span class="perl-variable">$filename</span>) { <span class="perl-builtin">print</span> <span class="perl-string">"可读\n"</span>; }
+<span class="perl-keyword">if</span> (-w <span class="perl-variable">$filename</span>) { <span class="perl-builtin">print</span> <span class="perl-string">"可写\n"</span>; }
+<span class="perl-keyword">if</span> (-x <span class="perl-variable">$filename</span>) { <span class="perl-builtin">print</span> <span class="perl-string">"可执行\n"</span>; }
+<span class="perl-keyword">if</span> (-s <span class="perl-variable">$filename</span>) { <span class="perl-builtin">print</span> <span class="perl-string">"文件大小: "</span> . (-s <span class="perl-variable">$filename</span>) . <span class="perl-string">"字节\n"</span>; }</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第11章：正则表达式 -->
+                <section id="section-11" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">11. 正则表达式</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">基本正则表达式</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">$text</span> = <span class="perl-string">"Hello, Perl!"</span>;
+
+<span class="perl-comment"># 匹配</span>
+<span class="perl-keyword">if</span> (<span class="perl-variable">$text</span> =~ <span class="perl-regex">/Perl/</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-string">"找到匹配\n"</span>;
+}
+
+<span class="perl-comment"># 替换</span>
+<span class="perl-variable">$text</span> =~ s/<span class="perl-regex">/Perl/</span>/<span class="perl-regex">Python/</span>/;
+<span class="perl-builtin">print</span> <span class="perl-variable">$text</span>; <span class="perl-comment"># 输出: Hello, Python!</span>
+
+<span class="perl-comment"># 全局替换</span>
+<span class="perl-variable">$text</span> = <span class="perl-string">"apple, banana, apple"</span>;
+<span class="perl-variable">$text</span> =~ s/<span class="perl-regex">/apple/</span>/<span class="perl-regex">orange/</span>/g;
+<span class="perl-builtin">print</span> <span class="perl-variable">$text</span>; <span class="perl-comment"># 输出: orange, banana, orange</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">正则表达式元字符</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">$text</span> = <span class="perl-string">"abc123def456"</span>;
+
+<span class="perl-comment"># 匹配数字</span>
+<span class="perl-keyword">if</span> (<span class="perl-variable">$text</span> =~ <span class="perl-regex">/\d+/</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-string">"包含数字\n"</span>;
+}
+
+<span class="perl-comment"># 匹配字母</span>
+<span class="perl-keyword">if</span> (<span class="perl-variable">$text</span> =~ <span class="perl-regex">/[a-z]+/i</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-string">"包含字母\n"</span>;
+}
+
+<span class="perl-comment"># 捕获组</span>
+<span class="perl-variable">$text</span> = <span class="perl-string">"Name: John, Age: 30"</span>;
+<span class="perl-keyword">if</span> (<span class="perl-variable">$text</span> =~ <span class="perl-regex">/Name: (\w+), Age: (\d+)/</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-string">"姓名: $1, 年龄: $2\n"</span>;
+}</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">高级正则表达式</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-variable">$email</span> = <span class="perl-string">"user@example.com"</span>;
+
+<span class="perl-comment"># 邮箱验证</span>
+<span class="perl-keyword">if</span> (<span class="perl-variable">$email</span> =~ <span class="perl-regex">/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-string">"有效的邮箱地址\n"</span>;
+}
+
+<span class="perl-comment"># 正向预查</span>
+<span class="perl-variable">$text</span> = <span class="perl-string">"apple pie, cherry pie"</span>;
+<span class="perl-keyword">while</span> (<span class="perl-variable">$text</span> =~ <span class="perl-regex">/(\w+) (?=pie)/g</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-variable">$1</span> . <span class="perl-string">"\n"</span>; <span class="perl-comment"># 输出: apple cherry</span>
+}</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第12章：模块和包 -->
+                <section id="section-12" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">12. 模块和包</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">使用模块</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">use</span> <span class="perl-module">strict</span>;
+<span class="perl-keyword">use</span> <span class="perl-module">warnings</span>;
+<span class="perl-keyword">use</span> <span class="perl-module">Time::Local</span>;
+<span class="perl-keyword">use</span> <span class="perl-module">File::Basename</span> qw(basename dirname);
+
+<span class="perl-comment"># 使用Time::Local模块</span>
+<span class="perl-keyword">my</span> <span class="perl-variable">$time</span> = <span class="perl-function">timelocal</span>(<span class="perl-number">0</span>, <span class="perl-number">0</span>, <span class="perl-number">12</span>, <span class="perl-number">1</span>, <span class="perl-number">0</span>, <span class="perl-number">2024</span>); <span class="perl-comment"># 2024-01-01 12:00:00</span>
+<span class="perl-builtin">print</span> <span class="perl-variable">$time</span> . <span class="perl-string">"\n"</span>;
+
+<span class="perl-comment"># 使用File::Basename模块</span>
+<span class="perl-variable">$filename</span> = <span class="perl-string">'/path/to/file.txt'</span>;
+<span class="perl-keyword">my</span> <span class="perl-variable">$base</span> = <span class="perl-function">basename</span>(<span class="perl-variable">$filename</span>); <span class="perl-comment"># file.txt</span>
+<span class="perl-keyword">my</span> <span class="perl-variable">$dir</span> = <span class="perl-function">dirname</span>(<span class="perl-variable">$filename</span>);  <span class="perl-comment"># /path/to</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">创建模块</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-comment"># MyModule.pm</span>
+<span class="perl-keyword">package</span> <span class="perl-module">MyModule</span>;
+
+<span class="perl-keyword">use</span> <span class="perl-module">strict</span>;
+<span class="perl-keyword">use</span> <span class="perl-module">warnings</span>;
+
+<span class="perl-keyword">our</span> <span class="perl-variable">$VERSION</span> = <span class="perl-string">'1.00'</span>;
+
+<span class="perl-keyword">sub</span> <span class="perl-function">hello</span> {
+    <span class="perl-keyword">my</span> <span class="perl-variable">$name</span> = <span class="perl-builtin">shift</span> || <span class="perl-string">"World"</span>;
+    <span class="perl-keyword">return</span> <span class="perl-string">"Hello, $name!"</span>;
+}
+
+<span class="perl-keyword">sub</span> <span class="perl-function">add</span> {
+    <span class="perl-keyword">my</span> (<span class="perl-variable">$a</span>, <span class="perl-variable">$b</span>) = <span class="perl-builtin">@_</span>;
+    <span class="perl-keyword">return</span> <span class="perl-variable">$a</span> + <span class="perl-variable">$b</span>;
+}
+
+<span class="perl-keyword">1</span>; <span class="perl-comment"># 必须返回真值</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">使用自定义模块</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">use</span> <span class="perl-module">strict</span>;
+<span class="perl-keyword">use</span> <span class="perl-module">warnings</span>;
+<span class="perl-keyword">use</span> <span class="perl-module">lib</span> <span class="perl-string">'/path/to/modules'</span>; <span class="perl-comment"># 添加模块路径</span>
+<span class="perl-keyword">use</span> <span class="perl-module">MyModule</span> qw(hello add);
+
+<span class="perl-builtin">print</span> <span class="perl-function">hello</span>(<span class="perl-string">"Perl"</span>) . <span class="perl-string">"\n"</span>; <span class="perl-comment"># Hello, Perl!</span>
+<span class="perl-builtin">print</span> <span class="perl-function">add</span>(<span class="perl-number">3</span>, <span class="perl-number">5</span>) . <span class="perl-string">"\n"</span>; <span class="perl-comment"># 8</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第13章：面向对象编程 -->
+                <section id="section-13" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">13. 面向对象编程</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">类定义和构造函数</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">package</span> <span class="perl-class">Person</span>;
+
+<span class="perl-keyword">use</span> <span class="perl-module">strict</span>;
+<span class="perl-keyword">use</span> <span class="perl-module">warnings</span>;
+
+<span class="perl-keyword">sub</span> <span class="perl-function">new</span> {
+    <span class="perl-keyword">my</span> (<span class="perl-variable">$class</span>, <span class="perl-variable">%args</span>) = <span class="perl-builtin">@_</span>;
+    <span class="perl-keyword">my</span> <span class="perl-variable">$self</span> = {
+        <span class="perl-string">name</span> => <span class="perl-variable">$args</span>{<span class="perl-string">name</span>} || <span class="perl-string">'Unknown'</span>,
+        <span class="perl-string">age</span>  => <span class="perl-variable">$args</span>{<span class="perl-string">age</span>}  || <span class="perl-number">0</span>,
+        <span class="perl-string">city</span> => <span class="perl-variable">$args</span>{<span class="perl-string">city</span>} || <span class="perl-string">'Unknown'</span>
+    };
+    <span class="perl-keyword">bless</span> <span class="perl-variable">$self</span>, <span class="perl-variable">$class</span>;
+    <span class="perl-keyword">return</span> <span class="perl-variable">$self</span>;
+}
+
+<span class="perl-keyword">my</span> <span class="perl-variable">$person</span> = <span class="perl-class">Person</span>-><span class="perl-function">new</span>(
+    <span class="perl-string">name</span> => <span class="perl-string">'John'</span>,
+    <span class="perl-string">age</span>  => <span class="perl-number">30</span>,
+    <span class="perl-string">city</span> => <span class="perl-string">'New York'</span>
+);</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">方法定义和访问器</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">package</span> <span class="perl-class">Person</span>;
+
+<span class="perl-keyword">use</span> <span class="perl-module">strict</span>;
+<span class="perl-keyword">use</span> <span class="perl-module">warnings</span>;
+
+<span class="perl-keyword">sub</span> <span class="perl-function">new</span> {
+    <span class="perl-keyword">my</span> (<span class="perl-variable">$class</span>, <span class="perl-variable">%args</span>) = <span class="perl-builtin">@_</span>;
+    <span class="perl-keyword">my</span> <span class="perl-variable">$self</span> = {
+        <span class="perl-string">name</span> => <span class="perl-variable">$args</span>{<span class="perl-string">name</span>},
+        <span class="perl-string">age</span>  => <span class="perl-variable">$args</span>{<span class="perl-string">age</span>}
+    };
+    <span class="perl-keyword">bless</span> <span class="perl-variable">$self</span>, <span class="perl-variable">$class</span>;
+}
+
+<span class="perl-keyword">sub</span> <span class="perl-function">get_name</span> {
+    <span class="perl-keyword">my</span> <span class="perl-variable">$self</span> = <span class="perl-builtin">shift</span>;
+    <span class="perl-keyword">return</span> <span class="perl-variable">$self</span>{<span class="perl-string">name</span>};
+}
+
+<span class="perl-keyword">sub</span> <span class="perl-function">set_name</span> {
+    <span class="perl-keyword">my</span> (<span class="perl-variable">$self</span>, <span class="perl-variable">$name</span>) = <span class="perl-builtin">@_</span>;
+    <span class="perl-variable">$self</span>{<span class="perl-string">name</span>} = <span class="perl-variable">$name</span>;
+}
+
+<span class="perl-keyword">my</span> <span class="perl-variable">$person</span> = <span class="perl-class">Person</span>-><span class="perl-function">new</span>(<span class="perl-string">name</span> => <span class="perl-string">'John'</span>, <span class="perl-string">age</span> => <span class="perl-number">30</span>);
+<span class="perl-builtin">print</span> <span class="perl-variable">$person</span>-><span class="perl-function">get_name</span>(); <span class="perl-comment"># 输出: John</span>
+<span class="perl-variable">$person</span>-><span class="perl-function">set_name</span>(<span class="perl-string">'Mike'</span>);
+<span class="perl-builtin">print</span> <span class="perl-variable">$person</span>-><span class="perl-function">get_name</span>(); <span class="perl-comment"># 输出: Mike</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">继承和多态</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">package</span> <span class="perl-class">Employee</span>;
+
+<span class="perl-keyword">use</span> <span class="perl-module">strict</span>;
+<span class="perl-keyword">use</span> <span class="perl-module">warnings</span>;
+<span class="perl-keyword">use</span> <span class="perl-module">base</span> <span class="perl-string">'Person'</span>;
+
+<span class="perl-keyword">sub</span> <span class="perl-function">new</span> {
+    <span class="perl-keyword">my</span> (<span class="perl-variable">$class</span>, <span class="perl-variable">%args</span>) = <span class="perl-builtin">@_</span>;
+    <span class="perl-keyword">my</span> <span class="perl-variable">$self</span> = <span class="perl-class">Person</span>-><span class="perl-function">new</span>(<span class="perl-builtin">%args</span>);
+    <span class="perl-variable">$self</span>{<span class="perl-string">employee_id</span>} = <span class="perl-variable">$args</span>{<span class="perl-string">employee_id</span>};
+    <span class="perl-variable">$self</span>{<span class="perl-string">salary</span>}     = <span class="perl-variable">$args</span>{<span class="perl-string">salary</span>};
+    <span class="perl-keyword">bless</span> <span class="perl-variable">$self</span>, <span class="perl-variable">$class</span>;
+}
+
+<span class="perl-keyword">sub</span> <span class="perl-function">get_employee_id</span> {
+    <span class="perl-keyword">my</span> <span class="perl-variable">$self</span> = <span class="perl-builtin">shift</span>;
+    <span class="perl-keyword">return</span> <span class="perl-variable">$self</span>{<span class="perl-string">employee_id</span>};
+}
+
+<span class="perl-keyword">sub</span> <span class="perl-function">get_name</span> {
+    <span class="perl-keyword">my</span> <span class="perl-variable">$self</span> = <span class="perl-builtin">shift</span>;
+    <span class="perl-keyword">return</span> <span class="perl-string">'Employee: '</span> . <span class="perl-variable">$self</span>{<span class="perl-string">name</span>};
+}
+
+<span class="perl-keyword">my</span> <span class="perl-variable">$employee</span> = <span class="perl-class">Employee</span>-><span class="perl-function">new</span>(
+    <span class="perl-string">name</span>        => <span class="perl-string">'John'</span>,
+    <span class="perl-string">age</span>         => <span class="perl-number">30</span>,
+    <span class="perl-string">employee_id</span> => <span class="perl-number">12345</span>,
+    <span class="perl-string">salary</span>      => <span class="perl-number">50000</span>
+);
+
+<span class="perl-builtin">print</span> <span class="perl-variable">$employee</span>-><span class="perl-function">get_name</span>(); <span class="perl-comment"># 输出: Employee: John</span>
+<span class="perl-builtin">print</span> <span class="perl-variable">$employee</span>-><span class="perl-function">get_employee_id</span>(); <span class="perl-comment"># 输出: 12345</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第14章：错误处理 -->
+                <section id="section-14" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">14. 错误处理</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">die和warn函数</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-comment"># 使用die函数抛出致命错误</span>
+<span class="perl-keyword">open</span> <span class="perl-variable">my</span> <span class="perl-variable">$fh</span>, <span class="perl-string">'&lt;'</span>, <span class="perl-string">'nonexistent.txt'</span> <span class="perl-keyword">or</span> <span class="perl-builtin">die</span> <span class="perl-string">"无法打开文件: $!"</span>;
+
+<span class="perl-comment"># 使用warn函数发出警告</span>
+<span class="perl-keyword">my</span> <span class="perl-variable">$age</span> = <span class="perl-number">-1</span>;
+<span class="perl-keyword">if</span> (<span class="perl-variable">$age</span> < <span class="perl-number">0</span>) {
+    <span class="perl-builtin">warn</span> <span class="perl-string">"年龄不能为负数: $age"</span>;
+}</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">eval块捕获错误</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">eval</span> {
+    <span class="perl-keyword">open</span> <span class="perl-variable">my</span> <span class="perl-variable">$fh</span>, <span class="perl-string">'&lt;'</span>, <span class="perl-string">'nonexistent.txt'</span> <span class="perl-keyword">or</span> <span class="perl-builtin">die</span> <span class="perl-string">"无法打开文件: $!"</span>;
+    <span class="perl-comment"># 其他可能出错的代码</span>
+};
+
+<span class="perl-keyword">if</span> (<span class="perl-variable">$@</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-string">"捕获到错误: $@"</span>;
+} <span class="perl-keyword">else</span> {
+    <span class="perl-builtin">print</span> <span class="perl-string">"没有错误发生"</span>;
+}</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">Try-Catch模块</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">use</span> <span class="perl-module">Try::Tiny</span>;
+
+<span class="perl-keyword">try</span> {
+    <span class="perl-keyword">open</span> <span class="perl-variable">my</span> <span class="perl-variable">$fh</span>, <span class="perl-string">'&lt;'</span>, <span class="perl-string">'nonexistent.txt'</span> <span class="perl-keyword">or</span> <span class="perl-builtin">die</span> <span class="perl-string">"无法打开文件: $!"</span>;
+    <span class="perl-comment"># 其他可能出错的代码</span>
+} <span class="perl-keyword">catch</span> {
+    <span class="perl-builtin">print</span> <span class="perl-string">"捕获到错误: $_"</span>;
+} <span class="perl-keyword">finally</span> {
+    <span class="perl-builtin">print</span> <span class="perl-string">"无论是否出错都会执行的代码"</span>;
+}</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第15章：进程和系统调用 -->
+                <section id="section-15" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">15. 进程和系统调用</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">system函数</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-comment"># 执行外部命令并等待其完成</span>
+<span class="perl-keyword">my</span> <span class="perl-variable">$exit_code</span> = <span class="perl-builtin">system</span>(<span class="perl-string">"ls -la"</span>);
+<span class="perl-builtin">print</span> <span class="perl-string">"退出码: $exit_code\n"</span>;
+
+<span class="perl-comment"># 检查命令是否成功执行</span>
+<span class="perl-keyword">if</span> (<span class="perl-builtin">system</span>(<span class="perl-string">"mkdir test_dir"</span>) == <span class="perl-number">0</span>) {
+    <span class="perl-builtin">print</span> <span class="perl-string">"目录创建成功\n"</span>;
+} <span class="perl-keyword">else</span> {
+    <span class="perl-builtin">warn</span> <span class="perl-string">"目录创建失败\n"</span>;
+}</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">exec函数</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-comment"># 替换当前进程为新命令</span>
+<span class="perl-comment"># 下面的print语句不会执行，因为当前进程已被替换</span>
+<span class="perl-builtin">exec</span>(<span class="perl-string">"ls -la"</span>);
+<span class="perl-builtin">print</span> <span class="perl-string">"这条语句不会执行\n"</span>;
+
+<span class="perl-comment"># 在列表上下文中使用exec</span>
+<span class="perl-builtin">exec</span>("ls", "-la", "/home");</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">反引号操作符</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-comment"># 执行命令并捕获输出</span>
+<span class="perl-keyword">my</span> <span class="perl-variable">$output</span> = `<span class="perl-builtin">ls</span> -la`;
+<span class="perl-builtin">print</span> <span class="perl-variable">$output</span>;
+
+<span class="perl-comment"># 使用qx操作符（等同于反引号）</span>
+<span class="perl-keyword">my</span> <span class="perl-variable">$date</span> = <span class="perl-keyword">qx</span>{date};
+<span class="perl-builtin">print</span> <span class="perl-string">"当前时间: $date"</span>;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">fork函数</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">use</span> <span class="perl-module">strict</span>;
+<span class="perl-keyword">use</span> <span class="perl-module">warnings</span>;
+
+<span class="perl-keyword">my</span> <span class="perl-variable">$pid</span> = <span class="perl-builtin">fork</span>();
+
+<span class="perl-keyword">die</span> <span class="perl-string">"无法创建进程: $!"</span> <span class="perl-keyword">unless</span> <span class="perl-keyword">defined</span> <span class="perl-variable">$pid</span>;
+
+<span class="perl-keyword">if</span> (<span class="perl-variable">$pid</span> == <span class="perl-number">0</span>) {
+    <span class="perl-comment"># 子进程</span>
+    <span class="perl-builtin">print</span> <span class="perl-string">"我是子进程，PID: $$\n"</span>;
+    <span class="perl-builtin">sleep</span>(<span class="perl-number">2</span>);
+    <span class="perl-builtin">print</span> <span class="perl-string">"子进程执行完毕\n"</span>;
+    <span class="perl-builtin">exit</span> <span class="perl-number">0</span>;
+} <span class="perl-keyword">else</span> {
+    <span class="perl-comment"># 父进程</span>
+    <span class="perl-builtin">print</span> <span class="perl-string">"我是父进程，子进程PID: $pid\n"</span>;
+    <span class="perl-builtin">waitpid</span>(<span class="perl-variable">$pid</span>, <span class="perl-number">0</span>);
+    <span class="perl-builtin">print</span> <span class="perl-string">"子进程已结束\n"</span>;
+}</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第16章：网络编程 -->
+                <section id="section-16" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">16. 网络编程</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">Socket编程基础</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">use</span> <span class="perl-module">IO::Socket::INET</span>;
+
+<span class="perl-comment"># 创建TCP服务器</span>
+<span class="perl-keyword">my</span> <span class="perl-variable">$server</span> = <span class="perl-class">IO::Socket::INET</span>-><span class="perl-function">new</span>(
+    <span class="perl-string">LocalPort</span> => <span class="perl-number">8080</span>,
+    <span class="perl-string">Proto</span> => <span class="perl-string">'tcp'</span>,
+    <span class="perl-string">Listen</span> => <span class="perl-number">5</span>,
+    <span class="perl-string">Reuse</span> => <span class="perl-number">1</span>
+) <span class="perl-keyword">or</span> <span class="perl-builtin">die</span> <span class="perl-string">"无法创建服务器: $!"</span>;
+
+<span class="perl-builtin">print</span> <span class="perl-string">"服务器监听在端口8080...\n"</span>;
+
+<span class="comment"># 接受客户端连接</span>
+<span class="keyword">while</span> (<span class="keyword">my</span> <span class="variable">$client</span> = <span class="variable">$server</span>-><span class="function">accept</span>()) {
+    <span class="variable">$client</span>-><span class="function">autoflush</span>(<span class="number">1</span>);
+    <span class="function">print</span> <span class="string">"客户端连接: "</span> . <span class="variable">$client</span>-><span class="function">peerhost</span>() . <span class="string">":"</span> . <span class="variable">$client</span>-><span class="function">peerport</span>() . <span class="string">"\n"</span>;
+    <span class="function">print</span> <span class="variable">$client</span> <span class="string">"Hello from Perl Server!\n"</span>;
+    <span class="function">close</span> <span class="variable">$client</span>;
+}
+
+<span class="function">close</span> <span class="variable">$server</span>;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">TCP客户端</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">use</span> <span class="perl-module">IO::Socket::INET</span>;
+
+<span class="perl-comment"># 创建TCP客户端</span>
+<span class="perl-keyword">my</span> <span class="perl-variable">$client</span> = <span class="perl-class">IO::Socket::INET</span>-><span class="perl-function">new</span>(
+    <span class="perl-string">PeerAddr</span> => <span class="perl-string">'localhost'</span>,
+    <span class="perl-string">PeerPort</span> => <span class="perl-number">8080</span>,
+    <span class="perl-string">Proto</span> => <span class="perl-string">'tcp'</span>
+) <span class="perl-keyword">or</span> <span class="perl-builtin">die</span> <span class="perl-string">"无法连接到服务器: $!"</span>;
+
+<span class="comment"># 发送数据</span>
+<span class="function">print</span> <span class="variable">$client</span> <span class="string">"Hello from Perl Client!\n"</span>;
+
+<span class="comment"># 接收响应</span>
+<span class="keyword">my</span> <span class="variable">$response</span> = <span class="function">readline</span> <span class="variable">$client</span>;
+<span class="function">print</span> <span class="string">"服务器响应: $response"</span>;
+
+<span class="function">close</span> <span class="variable">$client</span>;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">UDP通信</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">use</span> <span class="perl-module">IO::Socket::INET</span>;
+
+<span class="perl-comment"># UDP服务器</span>
+<span class="comment"># my $server = IO::Socket::INET->new(</span>
+<span class="comment">#     LocalPort => 8081,</span>
+<span class="comment">#     Proto => 'udp'</span>
+<span class="comment"># ) or die "无法创建UDP服务器: $!";</span>
+<span class="comment"># </span>
+<span class="comment"># while (1) {</span>
+<span class="comment">#     my $data;</span>
+<span class="comment">#     my $client_addr = $server->recv($data, 1024);</span>
+<span class="comment">#     my ($port, $ip) = sockaddr_in($client_addr);</span>
+<span class="comment">#     my $ip_address = inet_ntoa($ip);</span>
+<span class="comment">#     print "从 $ip_address:$port 接收: $data";</span>
+<span class="comment">#     $server->send("已收到: $data");</span>
+<span class="comment"># }</span>
+
+<span class="comment"># UDP客户端</span>
+<span class="keyword">my</span> <span class="variable">$client</span> = <span class="class">IO::Socket::INET</span>-><span class="function">new</span>(
+    <span class="string">PeerAddr</span> => <span class="string">'localhost'</span>,
+    <span class="string">PeerPort</span> => <span class="number">8081</span>,
+    <span class="string">Proto</span> => <span class="string">'udp'</span>
+) <span class="keyword">or</span> <span class="function">die</span> <span class="string">"无法创建UDP客户端: $!"</span>;
+
+<span class="function">print</span> <span class="variable">$client</span> <span class="string">"Hello UDP!\n"</span>;
+
+<span class="keyword">my</span> <span class="variable">$response</span>;
+<span class="variable">$client</span>-><span class="function">recv</span>(<span class="variable">$response</span>, <span class="number">1024</span>);
+<span class="function">print</span> <span class="string">"UDP服务器响应: $response"</span>;
+
+<span class="function">close</span> <span class="variable">$client</span>;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">HTTP请求</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-keyword">use</span> <span class="perl-module">LWP::UserAgent</span>;
+
+<span class="perl-comment"># 创建UserAgent对象</span>
+<span class="keyword">my</span> <span class="variable">$ua</span> = <span class="class">LWP::UserAgent</span>-><span class="function">new</span>();
+
+<span class="comment"># 发送GET请求</span>
+<span class="keyword">my</span> <span class="variable">$response</span> = <span class="variable">$ua</span>-><span class="function">get</span>(<span class="string">'https://www.example.com'</span>);
+
+<span class="keyword">if</span> (<span class="variable">$response</span>-><span class="function">is_success</span>()) {
+    <span class="function">print</span> <span class="variable">$response</span>-><span class="function">content</span>;
+} <span class="keyword">else</span> {
+    <span class="function">die</span> <span class="string">"HTTP请求失败: "</span> . <span class="variable">$response</span>-><span class="function">status_line</span>;
+}
+
+<span class="comment"># 发送POST请求</span>
+<span class="variable">$response</span> = <span class="variable">$ua</span>-><span class="function">post</span>(
+    <span class="string">'https://www.example.com/api'</span>,
+    [<span class="string">'name'</span> => <span class="string">'Perl'</span>, <span class="string">'version'</span> => <span class="string">'5.32'</span>]
+);
+
+<span class="keyword">print</span> <span class="string">"POST响应: "</span> . <span class="variable">$response</span>-><span class="function">content</span> . <span class="string">"\n"</span>;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第17章：数据库操作 -->
+                <section id="section-17" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">17. 数据库操作</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">DBD::mysql模块</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="perl-comment"># 安装DBD::mysql模块</span>
+<span class="comment"># cpan DBD::mysql</span>
+
+<span class="keyword">use</span> <span class="module">DBI</span>;
+
+<span class="comment"># 数据库连接信息</span>
+<span class="keyword">my</span> <span class="variable">$dsn</span> = <span class="string">'DBI:mysql:database=test_db;host=localhost;port=3306'</span>;
+<span class="keyword">my</span> <span class="variable">$username</span> = <span class="string">'root'</span>;
+<span class="keyword">my</span> <span class="variable">$password</span> = <span class="string">'password'</span>;
+
+<span class="comment"># 连接数据库</span>
+<span class="keyword">my</span> <span class="variable">$dbh</span> = <span class="function">DBI->connect</span>(<span class="variable">$dsn</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, {
+    <span class="string">RaiseError</span> => <span class="number">1</span>,
+    <span class="string">AutoCommit</span> => <span class="number">1</span>
+}) <span class="keyword">or</span> <span class="function">die</span> <span class="string">"无法连接到数据库: "</span> . <span class="function">DBI->errstr</span>;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">执行查询</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="keyword">use</span> <span class="module">DBI</span>;
+
+<span class="comment"># 连接数据库...</span>
+
+<span class="comment"># 执行SELECT查询</span>
+<span class="keyword">my</span> <span class="variable">$sql</span> = <span class="string">'SELECT id, name, age FROM users'</span>;
+<span class="keyword">my</span> <span class="variable">$sth</span> = <span class="variable">$dbh</span>-><span class="function">prepare</span>(<span class="variable">$sql</span>);
+<span class="variable">$sth</span>-><span class="function">execute</span>() <span class="keyword">or</span> <span class="function">die</span> <span class="string">"查询失败: "</span> . <span class="variable">$dbh</span>-><span class="function">errstr</span>;
+
+<span class="comment"># 获取查询结果</span>
+<span class="keyword">while</span> (<span class="keyword">my</span> <span class="variable">$row</span> = <span class="variable">$sth</span>-><span class="function">fetchrow_hashref</span>()) {
+    <span class="function">print</span> <span class="string">"ID: $row->{id}, 姓名: $row->{name}, 年龄: $row->{age}\n"</span>;
+}
+
+<span class="comment"># 或者使用fetchall_arrayref</span>
+<span class="variable">$sth</span>-><span class="function">execute</span>();
+<span class="keyword">my</span> <span class="variable">$all_rows</span> = <span class="variable">$sth</span>-><span class="function">fetchall_arrayref</span>();
+<span class="keyword">foreach</span> <span class="keyword">my</span> <span class="variable">$row</span> (@<span class="variable">$all_rows</span>) {
+    <span class="function">print</span> <span class="string">"ID: $row->[0], 姓名: $row->[1], 年龄: $row->[2]\n"</span>;
+}
+
+<span class="variable">$sth</span>-><span class="function">finish</span>();</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">插入、更新和删除</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="keyword">use</span> <span class="module">DBI</span>;
+
+<span class="comment"># 连接数据库...</span>
+
+<span class="comment"># 插入数据</span>
+<span class="keyword">my</span> <span class="variable">$insert_sql</span> = <span class="string">'INSERT INTO users (name, age, email) VALUES (?, ?, ?)'</span>;
+<span class="keyword">my</span> <span class="variable">$insert_sth</span> = <span class="variable">$dbh</span>-><span class="function">prepare</span>(<span class="variable">$insert_sql</span>);
+<span class="variable">$insert_sth</span>-><span class="function">execute</span>(<span class="string">'John'</span>, <span class="number">30</span>, <span class="string">'john@example.com'</span>);
+<span class="function">print</span> <span class="string">"插入的记录ID: "</span> . <span class="variable">$dbh</span>-><span class="function">last_insert_id</span>(<span class="string">''</span>, <span class="string">''</span>, <span class="string">''</span>, <span class="string">''</span>) . <span class="string">"\n"</span>;
+
+<span class="comment"># 更新数据</span>
+<span class="keyword">my</span> <span class="variable">$update_sql</span> = <span class="string">'UPDATE users SET age = ? WHERE name = ?'</span>;
+<span class="keyword">my</span> <span class="variable">$update_sth</span> = <span class="variable">$dbh</span>-><span class="function">prepare</span>(<span class="variable">$update_sql</span>);
+<span class="variable">$update_sth</span>-><span class="function">execute</span>(<span class="number">31</span>, <span class="string">'John'</span>);
+<span class="function">print</span> <span class="string">"更新的记录数: "</span> . <span class="variable">$update_sth</span>-><span class="function">rows</span>() . <span class="string">"\n"</span>;
+
+<span class="comment"># 删除数据</span>
+<span class="keyword">my</span> <span class="variable">$delete_sql</span> = <span class="string">'DELETE FROM users WHERE age > ?'</span>;
+<span class="keyword">my</span> <span class="variable">$delete_sth</span> = <span class="variable">$dbh</span>-><span class="function">prepare</span>(<span class="variable">$delete_sql</span>);
+<span class="variable">$delete_sth</span>-><span class="function">execute</span>(<span class="number">35</span>);
+<span class="function">print</span> <span class="string">"删除的记录数: "</span> . <span class="variable">$delete_sth</span>-><span class="function">rows</span>() . <span class="string">"\n"</span>;
+
+<span class="variable">$insert_sth</span>-><span class="function">finish</span>();
+<span class="variable">$update_sth</span>-><span class="function">finish</span>();
+<span class="variable">$delete_sth</span>-><span class="function">finish</span>();</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">事务处理</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="keyword">use</span> <span class="module">DBI</span>;
+
+<span class="comment"># 连接数据库，关闭自动提交</span>
+<span class="keyword">my</span> <span class="variable">$dbh</span> = <span class="function">DBI->connect</span>(<span class="variable">$dsn</span>, <span class="variable">$username</span>, <span class="variable">$password</span>, {
+    <span class="string">RaiseError</span> => <span class="number">1</span>,
+    <span class="string">AutoCommit</span> => <span class="number">0</span> <span class="comment"># 关闭自动提交</span>
+});
+
+<span class="keyword">eval</span> {
+    <span class="comment"># 开始事务</span>
+    <span class="comment"># 执行多个操作</span>
+    <span class="keyword">my</span> <span class="variable">$sql1</span> = <span class="string">'UPDATE accounts SET balance = balance - 100 WHERE id = 1'</span>;
+    <span class="keyword">my</span> <span class="variable">$sql2</span> = <span class="string">'UPDATE accounts SET balance = balance + 100 WHERE id = 2'</span>;
+    
+    <span class="variable">$dbh</span>-><span class="function">do</span>(<span class="variable">$sql1</span>);
+    <span class="variable">$dbh</span>-><span class="function">do</span>(<span class="variable">$sql2</span>);
+    
+    <span class="comment"># 提交事务</span>
+    <span class="variable">$dbh</span>-><span class="function">commit</span>();
+    <span class="function">print</span> <span class="string">"事务提交成功\n"</span>;
+};
+
+<span class="keyword">if</span> (<span class="variable">$@</span>) {
+    <span class="comment"># 回滚事务</span>
+    <span class="variable">$dbh</span>-><span class="function">rollback</span>() <span class="keyword">if</span> <span class="variable">$dbh</span>;
+    <span class="function">die</span> <span class="string">"事务失败: $@"</span>;
+}
+
+<span class="comment"># 断开数据库连接</span>
+<span class="variable">$dbh</span>-><span class="function">disconnect</span>();</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第18章：测试和调试 -->
+                <section id="section-18" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">18. 测试和调试</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">Test::Simple模块</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="comment"># 安装Test::Simple模块</span>
+<span class="comment"># cpan Test::Simple</span>
+
+<span class="keyword">use</span> <span class="module">Test::Simple</span> <span class="number">0.98</span>;
+
+<span class="comment"># 基本测试</span>
+<span class="function">ok</span>(<span class="number">1</span>, <span class="string">'这是一个通过的测试'</span>);
+<span class="function">ok</span>(<span class="number">0</span>, <span class="string">'这是一个失败的测试'</span>);
+
+<span class="comment"># 测试函数结果</span>
+<span class="function">sub</span> <span class="function">add</span> {
+    <span class="keyword">my</span> (<span class="variable">$a</span>, <span class="variable">$b</span>) = <span class="function">@_</span>;
+    <span class="keyword">return</span> <span class="variable">$a</span> + <span class="variable">$b</span>;
+}
+
+<span class="function">ok</span>(add(<span class="number">2</span>, <span class="number">3</span>) == <span class="number">5</span>, <span class="string">'2 + 3 应该等于 5'</span>);
+<span class="function">ok</span>(add(<span class="number">-1</span>, <span class="number">1</span>) == <span class="number">0</span>, <span class="string">'-1 + 1 应该等于 0'</span>);
+
+<span class="function">done_testing</span>(); <span class="comment"># 声明测试总数</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">Test::More模块</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="keyword">use</span> <span class="module">Test::More</span> <span class="number">0.98</span>;
+
+<span class="comment"># 设置测试总数</span>
+<span class="function">plan</span>(<span class="function">tests</span> => <span class="number">5</span>);
+
+<span class="comment"># 基本断言</span>
+<span class="function">ok</span>(<span class="number">1</span>, <span class="string">'基本测试'</span>);
+<span class="function">is</span>(<span class="string">'abc'</span>, <span class="string">'abc'</span>, <span class="string">'字符串相等'</span>);
+<span class="function">isnt</span>(<span class="string">'abc'</span>, <span class="string">'def'</span>, <span class="string">'字符串不相等'</span>);
+<span class="function">like</span>(<span class="string">'hello world'</span>, qr/<span class="regex">world</span>/, <span class="string">'包含world'</span>);
+<span class="function">unlike</span>(<span class="string">'hello world'</span>, qr/<span class="regex">perl</span>/, <span class="string">'不包含perl'</span>);
+
+<span class="comment"># 测试数组和哈希</span>
+<span class="keyword">my</span> <span class="variable">@array1</span> = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);
+<span class="keyword">my</span> <span class="variable">@array2</span> = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);
+<span class="function">is_deeply</span>(\@<span class="variable">array1</span>, \@<span class="variable">array2</span>, <span class="string">'数组相等'</span>);
+
+<span class="keyword">my</span> <span class="variable">%hash1</span> = (<span class="string">name</span> => <span class="string">'John'</span>, <span class="string">age</span> => <span class="number">30</span>);
+<span class="keyword">my</span> <span class="variable">%hash2</span> = (<span class="string">name</span> => <span class="string">'John'</span>, <span class="string">age</span> => <span class="number">30</span>);
+<span class="function">is_deeply</span>(\%<span class="variable">hash1</span>, \%<span class="variable">hash2</span>, <span class="string">'哈希相等'</span>);
+
+<span class="comment"># 测试异常</span>
+<span class="function">sub</span> <span class="function">die_function</span> {
+    <span class="function">die</span> <span class="string">'这是一个异常'</span>;
+}
+
+<span class="function">dies_ok</span>(sub { <span class="function">die_function</span>() }, <span class="string">'函数应该抛出异常'</span>);
+<span class="function">lives_ok</span>(sub { <span class="number">1</span> + <span class="number">1</span> }, <span class="string">'表达式应该正常执行'</span>);</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">调试技巧</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="comment"># 1. 使用print语句调试</span>
+<span class="keyword">sub</span> <span class="function">debug_example</span> {
+    <span class="keyword">my</span> (<span class="variable">$param</span>) = <span class="function">@_</span>;
+    <span class="function">print</span> <span class="string">"参数值: $param\n"</span>; <span class="comment"># 打印调试信息</span>
+    <span class="comment"># ... 其他代码 ...</span>
+}
+
+<span class="comment"># 2. 使用warn语句发出警告</span>
+<span class="keyword">if</span> (<span class="variable">$param</span> < <span class="number">0</span>) {
+    <span class="function">warn</span> <span class="string">"参数值为负数: $param"</span>;
+}
+
+<span class="comment"># 3. 使用Data::Dumper打印复杂数据结构</span>
+<span class="keyword">use</span> <span class="module">Data::Dumper</span>;
+
+<span class="keyword">my</span> <span class="variable">%complex_hash</span> = (
+    <span class="string">name</span> => <span class="string">'John'</span>,
+    <span class="string">age</span> => <span class="number">30</span>,
+    <span class="string">hobbies</span> => [<span class="string">'reading'</span>, <span class="string">'gaming'</span>, <span class="string">'coding'</span>],
+    <span class="string">address</span> => {
+        <span class="string">city</span> => <span class="string">'New York'</span>,
+        <span class="string">zip</span> => <span class="number">10001</span>
+    }
+);
+
+<span class="function">print</span> <span class="function">Dumper</span>(\%<span class="variable">complex_hash</span>);
+
+<span class="comment"># 4. 使用调试器</span>
+<span class="comment"># perl -d script.pl</span>
+<span class="comment"># 在调试器中可以使用命令:</span>
+<span class="comment"># h - 帮助</span>
+<span class="comment"># l - 列出代码</span>
+<span class="comment"># b line - 在指定行设置断点</span>
+<span class="comment"># c - 继续执行</span>
+<span class="comment"># p variable - 打印变量值</span>
+<span class="comment"># q - 退出调试器</span>
+
+<span class="comment"># 5. 使用strict和warnings</span>
+<span class="keyword">use</span> <span class="module">strict</span>;
+<span class="keyword">use</span> <span class="module">warnings</span> FATAL => <span class="string">'all'</span>; <span class="comment"># 将警告转为致命错误</span></code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">测试覆盖率</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="comment"># 安装Devel::Cover模块</span>
+<span class="comment"># cpan Devel::Cover</span>
+
+<span class="comment"># 运行测试并生成覆盖率报告</span>
+<span class="comment"># perl -MDevel::Cover=-coverage,statement,branch,condition,subroutine t/*.t</span>
+
+<span class="comment"># 查看HTML格式的覆盖率报告</span>
+<span class="comment"># cover</span>
+
+<span class="comment"># 示例测试文件结构</span>
+<span class="comment"># lib/MyModule.pm - 被测试的模块</span>
+<span class="comment"># t/MyModule.t - 测试文件</span>
+
+<span class="comment"># t/MyModule.t 示例内容</span>
+<span class="comment">#!/usr/bin/perl</span>
+<span class="comment">use strict;</span>
+<span class="comment">use warnings;</span>
+<span class="comment">use Test::More tests => 3;</span>
+<span class="comment">use MyModule;</span>
+
+<span class="comment">ok(MyModule::function1(), 'function1 应该返回真');</span>
+<span class="comment">is(MyModule::function2(2), 4, 'function2(2) 应该返回 4');</span>
+<span class="comment">is_deeply(MyModule::function3(), [1, 2, 3], 'function3 应该返回正确的数组');</span></code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第19章：最佳实践 -->
+                <section id="section-19" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text text-center">19. 最佳实践</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">代码风格指南</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="comment"># 1. 始终使用strict和warnings</span>
+<span class="keyword">use</span> <span class="module">strict</span>;
+<span class="keyword">use</span> <span class="module">warnings</span> FATAL => <span class="string">'all'</span>; <span class="comment"># 更严格的警告设置</span>
+
+<span class="comment"># 2. 一致的缩进和格式</span>
+<span class="keyword">sub</span> <span class="function">well_formatted</span> {
+    <span class="keyword">my</span> (<span class="variable">$param</span>) = <span class="function">@_</span>;
+    
+    <span class="keyword">if</span> (<span class="variable">$param</span> <span class="operator">>=</span> <span class="number">0</span>) {
+        <span class="comment"># 4个空格的缩进</span>
+        <span class="keyword">return</span> <span class="variable">$param</span> * <span class="number">2</span>;
+    } <span class="keyword">else</span> {
+        <span class="function">warn</span> <span class="string">"参数为负数: $param"</span>;
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+}
+
+<span class="comment"># 3. 有意义的命名</span>
+<span class="keyword">my</span> <span class="variable">$user_name</span>; <span class="comment"># 好的命名</span>
+<span class="comment"># my $un; # 不好的命名</span>
+
+<span class="keyword">sub</span> <span class="function">calculate_user_score</span> {} <span class="comment"># 清晰的函数名</span>
+
+<span class="comment"># 4. 使用常量</span>
+<span class="keyword">use</span> <span class="module">constant</span> {
+    <span class="constant">MAX_USERS</span> => <span class="number">1000</span>,
+    <span class="constant">DEFAULT_TIMEOUT</span> => <span class="number">30</span>
+};
+
+<span class="comment"># 5. 模块化设计</span>
+<span class="keyword">use</span> <span class="module">MyApp::User</span>;
+<span class="keyword">use</span> <span class="module">MyApp::Order</span>;
+<span class="keyword">use</span> <span class="module">MyApp::Utils</span>;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">性能优化</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="comment"># 1. 减少函数调用开销</span>
+<span class="keyword">sub</span> <span class="function">optimize_function_calls</span> {
+    <span class="keyword">my</span> <span class="variable">@array</span> = <span class="function">@_</span>;
+    
+    <span class="comment"># 不好的写法：在循环中重复调用函数</span>
+    <span class="comment">for (my $i = 0; $i < scalar @array; $i++) {</span>
+    <span class="comment">    # ...</span>
+    <span class="comment">}</span>
+    
+    <span class="comment"># 好的写法：预计算函数结果</span>
+    <span class="keyword">my</span> <span class="variable">$array_length</span> = <span class="function">scalar</span> <span class="variable">@array</span>;
+    <span class="keyword">for</span> (<span class="keyword">my</span> <span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> < <span class="variable">$array_length</span>; <span class="variable">$i</span>++) {
+        <span class="comment"># ...</span>
+    }
+}
+
+<span class="comment"># 2. 高效的字符串操作</span>
+<span class="keyword">sub</span> <span class="function">optimize_string_operations</span> {
+    <span class="keyword">my</span> <span class="variable">@strings</span> = <span class="function">@_</span>;
+    
+    <span class="comment"># 不好的写法：频繁的字符串连接</span>
+    <span class="comment">my $result = '';</span>
+    <span class="comment">for my $str (@strings) {</span>
+    <span class="comment">    $result .= $str;</span>
+    <span class="comment">}</span>
+    
+    <span class="comment"># 好的写法：使用join函数</span>
+    <span class="keyword">my</span> <span class="variable">$result</span> = <span class="function">join</span>(<span class="string">''</span>, <span class="variable">@strings</span>);
+    
+    <span class="keyword">return</span> <span class="variable">$result</span>;
+}
+
+<span class="comment"># 3. 合理使用内存</span>
+<span class="keyword">sub</span> <span class="function">optimize_memory_usage</span> {
+    <span class="keyword">open</span> <span class="variable">my</span> <span class="variable">$fh</span>, <span class="string">'&lt;'</span>, <span class="string">'large_file.txt'</span> <span class="keyword">or</span> <span class="function">die</span> <span class="string">"$!"</span>;
+    
+    <span class="comment"># 逐行处理，而不是一次性读取整个文件</span>
+    <span class="keyword">while</span> (<span class="keyword">my</span> <span class="variable">$line</span> = <span class="function">readline</span> <span class="variable">$fh</span>) {
+        <span class="comment"># 处理每一行</span>
+    }
+    
+    <span class="function">close</span> <span class="variable">$fh</span>;
+}
+
+<span class="comment"># 4. 使用更高效的数据结构</span>
+<span class="keyword">sub</span> <span class="function">use_efficient_data_structures</span> {
+    <span class="keyword">my</span> <span class="variable">@items</span> = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>);
+    
+    <span class="comment"># 使用哈希进行快速查找</span>
+    <span class="keyword">my</span> <span class="variable">%item_map</span> = <span class="function">map</span> { <span class="variable">$_</span> => <span class="number">1</span> } <span class="variable">@items</span>;
+    
+    <span class="keyword">if</span> (<span class="variable">$item_map</span>{<span class="number">3</span>}) {
+        <span class="comment"># 快速查找，时间复杂度O(1)</span>
+        <span class="function">print</span> <span class="string">"找到项目3\n"</span>;
+    }
+}</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">安全注意事项</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content"><span class="comment"># 1. 输入验证和净化</span>
+<span class="keyword">sub</span> <span class="function">validate_input</span> {
+    <span class="keyword">my</span> (<span class="variable">$user_input</span>) = <span class="function">@_</span>;
+    
+    <span class="comment"># 检查是否为数字</span>
+    <span class="keyword">if</span> (<span class="variable">$user_input</span> <span class="operator">!~</span> <span class="regex">/^\d+$/</span>) {
+        <span class="function">die</span> <span class="string">"输入必须是数字"</span>;
+    }
+    
+    <span class="keyword">return</span> <span class="variable">$user_input</span>;
+}
+
+<span class="comment"># 2. 避免SQL注入攻击</span>
+<span class="keyword">sub</span> <span class="function">safe_database_query</span> {
+    <span class="keyword">my</span> (<span class="variable">$dbh</span>, <span class="variable">$user_id</span>) = <span class="function">@_</span>;
+    
+    <span class="comment"># 不好的写法：直接拼接SQL</span>
+    <span class="comment">my $sql = "SELECT * FROM users WHERE id = $user_id";</span>
+    <span class="comment">my $sth = $dbh->prepare($sql);</span>
+    
+    <span class="comment"># 好的写法：使用参数化查询</span>
+    <span class="keyword">my</span> <span class="variable">$sql</span> = <span class="string">"SELECT * FROM users WHERE id = ?"</span>;
+    <span class="keyword">my</span> <span class="variable">$sth</span> = <span class="variable">$dbh</span>-><span class="function">prepare</span>(<span class="variable">$sql</span>);
+    <span class="variable">$sth</span>-><span class="function">execute</span>(<span class="variable">$user_id</span>);
+    
+    <span class="keyword">return</span> <span class="variable">$sth</span>-><span class="function">fetchrow_hashref</span>();
+}
+
+<span class="comment"># 3. 安全的文件操作</span>
+<span class="keyword">sub</span> <span class="function">safe_file_operation</span> {
+    <span class="keyword">my</span> (<span class="variable">$filename</span>) = <span class="function">@_</span>;
+    
+    <span class="comment"># 检查文件名是否包含路径遍历字符</span>
+    <span class="keyword">if</span> (<span class="variable">$filename</span> <span class="operator">=~</span> <span class="regex">/\.\./</span> <span class="operator">||</span> <span class="variable">$filename</span> <span class="operator">=~</span> <span class="regex">^/</span>) {
+        <span class="function">die</span> <span class="string">"非法的文件名"</span>;
+    }
+    
+    <span class="comment"># 安全地打开文件</span>
+    <span class="keyword">open</span> <span class="variable">my</span> <span class="variable">$fh</span>, <span class="string">'&lt;'</span>, <span class="variable">$filename</span> <span class="keyword">or</span> <span class="function">die</span> <span class="string">"$!"</span>;
+    
+    <span class="comment"># 处理文件...</span>
+    
+    <span class="function">close</span> <span class="variable">$fh</span>;
+}
+
+<span class="comment"># 4. 避免命令注入攻击</span>
+<span class="keyword">sub</span> <span class="function">safe_command_execution</span> {
+    <span class="keyword">my</span> (<span class="variable">$user_input</span>) = <span class="function">@_</span>;
+    
+    <span class="comment"># 不好的写法：直接执行用户输入</span>
+    <span class="comment">system("ls -la $user_input");</span>
+    
+    <span class="comment"># 好的写法：使用列表形式</span>
+    <span class="function">system</span>("ls", "-la", <span class="variable">$user_input</span>);
+    
+    <span class="comment"># 或者使用IPC::Open3进行更安全的执行</span>
+    <span class="keyword">use</span> <span class="module">IPC::Open3</span>;
+    <span class="keyword">use</span> <span class="module">Symbol</span> <span class="string
