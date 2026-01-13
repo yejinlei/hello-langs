@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP教程 - Hello 编程语言</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .syntax-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .language-tab {
+            transition: all 0.3s ease;
+        }
+        .language-tab.active {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            color: white;
+        }
+        .code-block {
+            background: rgba(2, 6, 23, 0.9);
+            border-left: 4px solid #3B82F6;
+        }
+        .highlight {
+            background: rgba(59, 130, 246, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .language-content.hidden {
+            display: none;
+        }
+        
+        /* PHP语法高亮 */
+        .language-content .php-keyword {
+            color: #F87171 !important;
+            font-weight: 500 !important;
+        }
+        .language-content .php-string {
+            color: #A78BFA !important;
+        }
+        .language-content .php-number {
+            color: #FBBF24 !important;
+        }
+        .language-content .php-comment {
+            color: #6B7280 !important;
+        }
+        .language-content .php-function {
+            color: #34D399 !important;
+        }
+        .language-content .php-operator {
+            color: #EC4899 !important;
+        }
+        .language-content .php-variable {
+            color: #60A5FA !important;
+        }
+        .language-content .php-class {
+            color: #8B5CF6 !important;
+        }
+        .language-content .php-constant {
+            color: #F59E0B !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 class="text-4xl font-bold text-center mb-8 gradient-text">PHP教程</h1>
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- 左侧导航栏 -->
+            <aside class="lg:w-1/4">
+                <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 sticky top-24 border border-slate-700">
+                    <h3 class="text-lg font-bold mb-4 gradient-text">章节导航</h3>
+                    <nav class="space-y-2">
+                        <a href="#section-1" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">1. PHP基础</a>
+                        <a href="#section-2" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">2. 变量和数据类型</a>
+                        <a href="#section-3" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">3. 运算符</a>
+                        <a href="#section-4" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">4. 条件语句</a>
+                        <a href="#section-5" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">5. 循环语句</a>
+                        <a href="#section-6" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">6. 函数</a>
+                        <a href="#section-7" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">7. 数组</a>
+                        <a href="#section-8" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">8. 字符串处理</a>
+                        <a href="#section-9" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">9. 文件操作</a>
+                        <a href="#section-10" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">10. 类和对象</a>
+                        <a href="#section-11" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">11. 继承和多态</a>
+                        <a href="#section-12" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">12. 命名空间</a>
+                        <a href="#section-13" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">13. 异常处理</a>
+                        <a href="#section-14" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">14. 表单处理</a>
+                        <a href="#section-15" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">15. 数据库操作</a>
+                        <a href="#section-16" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">16. 会话管理</a>
+                        <a href="#section-17" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">17. 错误处理</a>
+                        <a href="#section-18" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">18. 正则表达式</a>
+                        <a href="#section-19" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">19. Composer和依赖管理</a>
+                    </nav>
+                </div>
+            </aside>
+            
+            <!-- 主要内容区域 -->
+            <div class="lg:w-3/4">
+                <!-- 第1章：PHP基础 -->
+                <section id="section-1" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">1. PHP基础</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">什么是PHP？</h3>
+                        <p class="mb-4">PHP（Hypertext Preprocessor）是一种广泛使用的开源服务器端脚本语言，主要用于Web开发。</p>
+                        <p class="mb-4">PHP可以嵌入到HTML中，也可以作为独立的脚本运行。</p>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">第一个PHP程序</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+    &lt;h1&gt;我的第一个PHP页面&lt;/h1&gt;
+    &lt;?php
+        echo &quot;Hello World!&quot;;
+    ?&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                        <p>这个程序会在浏览器中显示：</p>
+                        <div class="bg-slate-800 rounded-lg p-4 mb-4">
+                            <h1>我的第一个PHP页面</h1>
+                            <p>Hello World!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">PHP标签</h3>
+                        <p class="mb-4">PHP代码必须包含在特殊的标签中，以便服务器识别并执行：</p>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">&lt;?php
+    // PHP代码
+?&gt;</code></pre>
+                        <p>对于短标签（需要在php.ini中启用short_open_tag）：</p>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?
+    // PHP代码
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第2章：变量和数据类型 -->
+                <section id="section-2" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">2. 变量和数据类型</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">变量</h3>
+                        <p class="mb-4">PHP变量以$符号开头，后面跟变量名：</p>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">&lt;?php
+    <span class="php-variable">$name</span> = <span class="php-string">"John"</span>;
+    <span class="php-variable">$age</span> = <span class="php-number">30</span>;
+    <span class="php-variable">$height</span> = <span class="php-number">1.85</span>;
+    <span class="php-variable">$isStudent</span> = <span class="php-keyword">false</span>;
+    
+    echo <span class="php-variable">$name</span>; <span class="php-comment">// 输出：John</span>
+?&gt;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">数据类型</h3>
+                        <p class="mb-4">PHP支持以下数据类型：</p>
+                        <ul class="list-disc pl-6 mb-4 space-y-2">
+                            <li><strong>字符串</strong>：<code class="code-font bg-slate-800 px-2 py-1 rounded">"Hello"</code> 或 <code class="code-font bg-slate-800 px-2 py-1 rounded">'World'</code></li>
+                            <li><strong>整数</strong>：<code class="code-font bg-slate-800 px-2 py-1 rounded">123</code> 或 <code class="code-font bg-slate-800 px-2 py-1 rounded">-456</code></li>
+                            <li><strong>浮点数</strong>：<code class="code-font bg-slate-800 px-2 py-1 rounded">1.23</code> 或 <code class="code-font bg-slate-800 px-2 py-1 rounded">-4.56</code></li>
+                            <li><strong>布尔值</strong>：<code class="code-font bg-slate-800 px-2 py-1 rounded">true</code> 或 <code class="code-font bg-slate-800 px-2 py-1 rounded">false</code></li>
+                            <li><strong>数组</strong>：<code class="code-font bg-slate-800 px-2 py-1 rounded">array(1, 2, 3)</code> 或 <code class="code-font bg-slate-800 px-2 py-1 rounded">[1, 2, 3]</code></li>
+                            <li><strong>对象</strong>：通过类实例化的对象</li>
+                            <li><strong>NULL</strong>：表示无值</li>
+                            <li><strong>资源</strong>：指向外部资源的引用</li>
+                        </ul>
+                    </div>
+                </section>
+                
+                <!-- 第3章：运算符 -->
+                <section id="section-3" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">3. 运算符</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">算术运算符</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">&lt;?php
+    <span class="php-variable">$a</span> = <span class="php-number">10</span>;
+    <span class="php-variable">$b</span> = <span class="php-number">3</span>;
+    
+    echo <span class="php-variable">$a</span> + <span class="php-variable">$b</span>; <span class="php-comment">// 13</span>
+    echo <span class="php-variable">$a</span> - <span class="php-variable">$b</span>; <span class="php-comment">// 7</span>
+    echo <span class="php-variable">$a</span> * <span class="php-variable">$b</span>; <span class="php-comment">// 30</span>
+    echo <span class="php-variable">$a</span> / <span class="php-variable">$b</span>; <span class="php-comment">// 3.333...</span>
+    echo <span class="php-variable">$a</span> % <span class="php-variable">$b</span>; <span class="php-comment">// 1</span>
+    echo <span class="php-variable">$a</span> ** <span class="php-variable">$b</span>; <span class="php-comment">// 1000</span>
+?&gt;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">赋值运算符</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">&lt;?php
+    <span class="php-variable">$a</span> = <span class="php-number">10</span>;
+    <span class="php-variable">$a</span> += <span class="php-number">5</span>; <span class="php-comment">// $a = $a + 5</span>
+    <span class="php-variable">$a</span> -= <span class="php-number">3</span>; <span class="php-comment">// $a = $a - 3</span>
+    <span class="php-variable">$a</span> *= <span class="php-number">2</span>; <span class="php-comment">// $a = $a * 2</span>
+    <span class="php-variable">$a</span> /= <span class="php-number">4</span>; <span class="php-comment">// $a = $a / 4</span>
+?&gt;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">比较运算符</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    <span class="php-variable">$a</span> = <span class="php-number">10</span>;
+    <span class="php-variable">$b</span> = <span class="php-number">5</span>;
+    
+    echo <span class="php-variable">$a</span> == <span class="php-variable">$b</span>; <span class="php-comment">// false</span>
+    echo <span class="php-variable">$a</span> === <span class="php-variable">$b</span>; <span class="php-comment">// false (全等比较)</span>
+    echo <span class="php-variable">$a</span> != <span class="php-variable">$b</span>; <span class="php-comment">// true</span>
+    echo <span class="php-variable">$a</span> !== <span class="php-variable">$b</span>; <span class="php-comment">// true</span>
+    echo <span class="php-variable">$a</span> &gt; <span class="php-variable">$b</span>; <span class="php-comment">// true</span>
+    echo <span class="php-variable">$a</span> &lt; <span class="php-variable">$b</span>; <span class="php-comment">// false</span>
+    echo <span class="php-variable">$a</span> &gt;= <span class="php-variable">$b</span>; <span class="php-comment">// true</span>
+    echo <span class="php-variable">$a</span> &lt;= <span class="php-variable">$b</span>; <span class="php-comment">// false</span>
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第4章：条件语句 -->
+                <section id="section-4" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">4. 条件语句</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">if语句</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">&lt;?php
+    <span class="php-variable">$age</span> = <span class="php-number">18</span>;
+    
+    <span class="php-keyword">if</span> (<span class="php-variable">$age</span> &gt;= <span class="php-number">18</span>) {
+        echo <span class="php-string">"你是成年人"</span>;
+    }
+?&gt;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">if...else语句</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">&lt;?php
+    <span class="php-variable">$age</span> = <span class="php-number">16</span>;
+    
+    <span class="php-keyword">if</span> (<span class="php-variable">$age</span> &gt;= <span class="php-number">18</span>) {
+        echo <span class="php-string">"你是成年人"</span>;
+    } <span class="php-keyword">else</span> {
+        echo <span class="php-string">"你是未成年人"</span>;
+    }
+?&gt;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">switch语句</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    <span class="php-variable">$day</span> = <span class="php-number">3</span>;
+    
+    <span class="php-keyword">switch</span> (<span class="php-variable">$day</span>) {
+        <span class="php-keyword">case</span> <span class="php-number">1</span>:
+            echo <span class="php-string">"星期一"</span>;
+            <span class="php-keyword">break</span>;
+        <span class="php-keyword">case</span> <span class="php-number">2</span>:
+            echo <span class="php-string">"星期二"</span>;
+            <span class="php-keyword">break</span>;
+        <span class="php-keyword">case</span> <span class="php-number">3</span>:
+            echo <span class="php-string">"星期三"</span>;
+            <span class="php-keyword">break</span>;
+        <span class="php-keyword">default</span>:
+            echo <span class="php-string">"未知"</span>;
+    }
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第5章：循环语句 -->
+                <section id="section-5" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">5. 循环语句</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">for循环</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">&lt;?php
+    <span class="php-keyword">for</span> (<span class="php-variable">$i</span> = <span class="php-number">0</span>; <span class="php-variable">$i</span> &lt; <span class="php-number">5</span>; <span class="php-variable">$i</span>++) {
+        echo <span class="php-variable">$i</span> . <span class="php-string">" &quot;</span>;
+    }
+    <span class="php-comment">// 输出：0 1 2 3 4</span>
+?&gt;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">while循环</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">&lt;?php
+    <span class="php-variable">$i</span> = <span class="php-number">0</span>;
+    <span class="php-keyword">while</span> (<span class="php-variable">$i</span> &lt; <span class="php-number">5</span>) {
+        echo <span class="php-variable">$i</span> . <span class="php-string">" &quot;</span>;
+        <span class="php-variable">$i</span>++;
+    }
+    <span class="php-comment">// 输出：0 1 2 3 4</span>
+?&gt;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">foreach循环</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    <span class="php-variable">$colors</span> = [<span class="php-string">"红色"</span>, <span class="php-string">"绿色"</span>, <span class="php-string">"蓝色"</span>];
+    
+    <span class="php-keyword">foreach</span> (<span class="php-variable">$colors</span> <span class="php-keyword">as</span> <span class="php-variable">$color</span>) {
+        echo <span class="php-variable">$color</span> . <span class="php-string">" &quot;</span>;
+    }
+    <span class="php-comment">// 输出：红色 绿色 蓝色</span>
+    
+    <span class="php-comment">// 带索引的foreach</span>
+    <span class="php-keyword">foreach</span> (<span class="php-variable">$colors</span> <span class="php-keyword">as</span> <span class="php-variable">$index</span> =&gt; <span class="php-variable">$color</span>) {
+        echo <span class="php-string">"索引 "</span> . <span class="php-variable">$index</span> . <span class="php-string">": "</span> . <span class="php-variable">$color</span> . <span class="php-string">"<br>"</span>;
+    }
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第6章：函数 -->
+                <section id="section-6" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">6. 函数</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">定义和调用函数</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">&lt;?php
+    <span class="php-keyword">function</span> <span class="php-function">greet</span>(<span class="php-variable">$name</span>) {
+        <span class="php-keyword">return</span> <span class="php-string">"Hello, "</span> . <span class="php-variable">$name</span> . <span class="php-string">"!"</span>;
+    }
+    
+    echo <span class="php-function">greet</span>(<span class="php-string">"John"</span>); <span class="php-comment">// Hello, John!</span>
+?&gt;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">默认参数</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    <span class="php-keyword">function</span> <span class="php-function">greet</span>(<span class="php-variable">$name</span> = <span class="php-string">"World"</span>) {
+        <span class="php-keyword">return</span> <span class="php-string">"Hello, "</span> . <span class="php-variable">$name</span> . <span class="php-string">"!"</span>;
+    }
+    
+    echo <span class="php-function">greet</span>(); <span class="php-comment">// Hello, World!</span>
+    echo <span class="php-function">greet</span>(<span class="php-string">"John"</span>); <span class="php-comment">// Hello, John!</span>
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第7章：数组 -->
+                <section id="section-7" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">7. 数组</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">索引数组</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">&lt;?php
+    <span class="php-variable">$fruits</span> = [<span class="php-string">"苹果"</span>, <span class="php-string">"香蕉"</span>, <span class="php-string">"橙子"</span>];
+    
+    echo <span class="php-variable">$fruits</span>[<span class="php-number">0</span>]; <span class="php-comment">// 苹果</span>
+    echo <span class="php-variable">$fruits</span>[<span class="php-number">1</span>]; <span class="php-comment">// 香蕉</span>
+    echo <span class="php-variable">$fruits</span>[<span class="php-number">2</span>]; <span class="php-comment">// 橙子</span>
+?&gt;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">关联数组</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">&lt;?php
+    <span class="php-variable">$person</span> = [
+        <span class="php-string">"name"</span> =&gt; <span class="php-string">"John"</span>,
+        <span class="php-string">"age"</span> =&gt; <span class="php-number">30</span>,
+        <span class="php-string">"city"</span> =&gt; <span class="php-string">"New York"</span>
+    ];
+    
+    echo <span class="php-variable">$person</span>[<span class="php-string">"name"</span>]; <span class="php-comment">// John</span>
+    echo <span class="php-variable">$person</span>[<span class="php-string">"age"</span>]; <span class="php-comment">// 30</span>
+?&gt;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">数组函数</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    <span class="php-variable">$fruits</span> = [<span class="php-string">"苹果"</span>, <span class="php-string">"香蕉"</span>, <span class="php-string">"橙子"</span>];
+    
+    echo <span class="php-function">count</span>(<span class="php-variable">$fruits</span>); <span class="php-comment">// 3</span>
+    
+    <span class="php-function">array_push</span>(<span class="php-variable">$fruits</span>, <span class="php-string">"葡萄"</span>); <span class="php-comment">// 添加元素</span>
+    
+    <span class="php-variable">$sliced</span> = <span class="php-function">array_slice</span>(<span class="php-variable">$fruits</span>, <span class="php-number">1</span>, <span class="php-number">2</span>); <span class="php-comment">// 截取数组</span>
+    
+    <span class="php-function">sort</span>(<span class="php-variable">$fruits</span>); <span class="php-comment">// 排序</span>
+    
+    <span class="php-function">print_r</span>(<span class="php-variable">$fruits</span>); <span class="php-comment">// 打印数组结构</span>
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第8章：字符串处理 -->
+                <section id="section-8" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">8. 字符串处理</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">字符串连接</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">&lt;?php
+    <span class="php-variable">$firstName</span> = <span class="php-string">"John"</span>;
+    <span class="php-variable">$lastName</span> = <span class="php-string">"Doe"</span>;
+    
+    <span class="php-variable">$fullName</span> = <span class="php-variable">$firstName</span> . <span class="php-string">" "</span> . <span class="php-variable">$lastName</span>;
+    echo <span class="php-variable">$fullName</span>; <span class="php-comment">// John Doe</span>
+?&gt;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">字符串函数</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    <span class="php-variable">$str</span> = <span class="php-string">"Hello World"</span>;
+    
+    echo <span class="php-function">strlen</span>(<span class="php-variable">$str</span>); <span class="php-comment">// 11</span>
+    echo <span class="php-function">strtolower</span>(<span class="php-variable">$str</span>); <span class="php-comment">// hello world</span>
+    echo <span class="php-function">strtoupper</span>(<span class="php-variable">$str</span>); <span class="php-comment">// HELLO WORLD</span>
+    echo <span class="php-function">substr</span>(<span class="php-variable">$str</span>, <span class="php-number">0</span>, <span class="php-number">5</span>); <span class="php-comment">// Hello</span>
+    echo <span class="php-function">str_replace</span>(<span class="php-string">"World"</span>, <span class="php-string">"PHP"</span>, <span class="php-variable">$str</span>); <span class="php-comment">// Hello PHP</span>
+    echo <span class="php-function">trim</span>(<span class="php-string">"   Hello   "</span>); <span class="php-comment">// Hello</span>
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第9章：文件操作 -->
+                <section id="section-9" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">9. 文件操作</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">读取文件</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">&lt;?php
+    <span class="php-comment">// 读取整个文件</span>
+    <span class="php-variable">$content</span> = <span class="php-function">file_get_contents</span>(<span class="php-string">"test.txt"</span>);
+    echo <span class="php-variable">$content</span>;
+    
+    <span class="php-comment">// 逐行读取文件</span>
+    <span class="php-variable">$lines</span> = <span class="php-function">file</span>(<span class="php-string">"test.txt"</span>);
+    <span class="php-keyword">foreach</span> (<span class="php-variable">$lines</span> <span class="php-keyword">as</span> <span class="php-variable">$line</span>) {
+        echo <span class="php-variable">$line</span>;
+    }
+?&gt;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">写入文件</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    <span class="php-comment">// 写入文件（覆盖）</span>
+    <span class="php-function">file_put_contents</span>(<span class="php-string">"test.txt"</span>, <span class="php-string">"Hello World"</span>);
+    
+    <span class="php-comment">// 追加到文件</span>
+    <span class="php-function">file_put_contents</span>(<span class="php-string">"test.txt"</span>, <span class="php-string">"\nMore content"</span>, <span class="php-constant">FILE_APPEND</span>);
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第10章：类和对象 -->
+                <section id="section-10" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">10. 类和对象</h2>
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">定义类和创建对象</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    <span class="php-keyword">class</span> <span class="php-class">Person</span> {
+        <span class="php-keyword">public</span> <span class="php-variable">$name</span>;
+        <span class="php-keyword">public</span> <span class="php-variable">$age</span>;
+        
+        <span class="php-keyword">public</span> <span class="php-keyword">function</span> <span class="php-function">__construct</span>(<span class="php-variable">$name</span>, <span class="php-variable">$age</span>) {
+            <span class="php-keyword">$this</span>-&gt;<span class="php-variable">name</span> = <span class="php-variable">$name</span>;
+            <span class="php-keyword">$this</span>-&gt;<span class="php-variable">age</span> = <span class="php-variable">$age</span>;
+        }
+        
+        <span class="php-keyword">public</span> <span class="php-keyword">function</span> <span class="php-function">greet</span>() {
+            <span class="php-keyword">return</span> <span class="php-string">"Hello, my name is "</span> . <span class="php-keyword">$this</span>-&gt;<span class="php-variable">name</span>;
+        }
+    }
+    
+    <span class="php-comment">// 创建对象</span>
+    <span class="php-variable">$person</span> = <span class="php-keyword">new</span> <span class="php-class">Person</span>(<span class="php-string">"John"</span>, <span class="php-number">30</span>);
+    
+    echo <span class="php-variable">$person</span>-&gt;<span class="php-variable">name</span>; <span class="php-comment">// John</span>
+    echo <span class="php-variable">$person</span>-&gt;<span class="php-function">greet</span>(); <span class="php-comment">// Hello, my name is John</span>
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第11章：继承和多态 -->
+                <section id="section-11" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">11. 继承和多态</h2>
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">继承</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    <span class="php-keyword">class</span> <span class="php-class">Animal</span> {
+        <span class="php-keyword">protected</span> <span class="php-variable">$name</span>;
+        
+        <span class="php-keyword">public</span> <span class="php-keyword">function</span> <span class="php-function">__construct</span>(<span class="php-variable">$name</span>) {
+            <span class="php-keyword">$this</span>-&gt;<span class="php-variable">name</span> = <span class="php-variable">$name</span>;
+        }
+        
+        <span class="php-keyword">public</span> <span class="php-keyword">function</span> <span class="php-function">makeSound</span>() {
+            <span class="php-keyword">return</span> <span class="php-string">"Some sound"</span>;
+        }
+    }
+    
+    <span class="php-keyword">class</span> <span class="php-class">Dog</span> <span class="php-keyword">extends</span> <span class="php-class">Animal</span> {
+        <span class="php-keyword">public</span> <span class="php-keyword">function</span> <span class="php-function">makeSound</span>() {
+            <span class="php-keyword">return</span> <span class="php-string">"Woof!"</span>;
+        }
+    }
+    
+    <span class="php-variable">$dog</span> = <span class="php-keyword">new</span> <span class="php-class">Dog</span>(<span class="php-string">"Buddy"</span>);
+    echo <span class="php-variable">$dog</span>-&gt;<span class="php-function">makeSound</span>(); <span class="php-comment">// Woof!</span>
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第12章：命名空间 -->
+                <section id="section-12" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">12. 命名空间</h2>
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">命名空间的使用</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    <span class="php-keyword">namespace</span> <span class="php-class">MyApp</span>;
+    
+    <span class="php-keyword">class</span> <span class="php-class">User</span> {
+        <span class="php-keyword">public</span> <span class="php-variable">$name</span>;
+        
+        <span class="php-keyword">public</span> <span class="php-keyword">function</span> <span class="php-function">__construct</span>(<span class="php-variable">$name</span>) {
+            <span class="php-keyword">$this</span>-&gt;<span class="php-variable">name</span> = <span class="php-variable">$name</span>;
+        }
+    }
+    
+    <span class="php-comment">// 在同一命名空间中使用</span>
+    <span class="php-variable">$user</span> = <span class="php-keyword">new</span> <span class="php-class">User</span>(<span class="php-string">"John"</span>);
+    
+    <span class="php-comment">// 在其他命名空间中使用</span>
+    <span class="php-variable">$user</span> = <span class="php-keyword">new</span> <span class="php-class">MyApp</span>\<span class="php-class">User</span>(<span class="php-string">"John"</span>);
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第13章：异常处理 -->
+                <section id="section-13" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">13. 异常处理</h2>
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">try...catch语句</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    <span class="php-keyword">try</span> {
+        <span class="php-variable">$file</span> = <span class="php-function">fopen</span>(<span class="php-string">"non_existent_file.txt"</span>, <span class="php-string">"r"</span>);
+        <span class="php-keyword">if</span> (<span class="php-variable">$file</span> === <span class="php-keyword">false</span>) {
+            <span class="php-keyword">throw</span> <span class="php-keyword">new</span> <span class="php-class">Exception</span>(<span class="php-string">"无法打开文件"</span>);
+        }
+        <span class="php-function">fclose</span>(<span class="php-variable">$file</span>);
+    } <span class="php-keyword">catch</span> (<span class="php-class">Exception</span> <span class="php-variable">$e</span>) {
+        echo <span class="php-string">"错误: "</span> . <span class="php-variable">$e</span>-&gt;<span class="php-function">getMessage</span>();
+    }
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第14章：表单处理 -->
+                <section id="section-14" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">14. 表单处理</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">HTML表单</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">&lt;form method="post" action="submit.php"&gt;
+    &lt;label for="name"&gt;姓名：&lt;/label&gt;
+    &lt;input type="text" id="name" name="name"&gt;
+    
+    &lt;label for="email"&gt;邮箱：&lt;/label&gt;
+    &lt;input type="email" id="email" name="email"&gt;
+    
+    &lt;input type="submit" value="提交"&gt;
+&lt;/form&gt;</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">PHP处理表单</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    <span class="php-keyword">if</span> (<span class="php-function">$_SERVER</span>[<span class="php-string">"REQUEST_METHOD"</span>] == <span class="php-string">"POST"</span>) {
+        <span class="php-comment">// 获取表单数据</span>
+        <span class="php-variable">$name</span> = <span class="php-function">htmlspecialchars</span>(<span class="php-function">$_POST</span>[<span class="php-string">"name"</span>]);
+        <span class="php-variable">$email</span> = <span class="php-function">htmlspecialchars</span>(<span class="php-function">$_POST</span>[<span class="php-string">"email"</span>]);
+        
+        <span class="php-comment">// 处理数据</span>
+        echo <span class="php-string">"姓名: "</span> . <span class="php-variable">$name</span> . <span class="php-string">"&lt;br&gt;"</span>;
+        echo <span class="php-string">"邮箱: "</span> . <span class="php-variable">$email</span>;
+    }
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第15章：数据库操作 -->
+                <section id="section-15" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">15. 数据库操作</h2>
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">使用PDO连接MySQL</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    <span class="php-variable">$host</span> = <span class="php-string">"localhost"</span>;
+    <span class="php-variable">$dbname</span> = <span class="php-string">"mydb"</span>;
+    <span class="php-variable">$username</span> = <span class="php-string">"root"</span>;
+    <span class="php-variable">$password</span> = <span class="php-string">"password"</span>;
+    
+    <span class="php-keyword">try</span> {
+        <span class="php-variable">$conn</span> = <span class="php-keyword">new</span> <span class="php-class">PDO</span>(<span class="php-string">"mysql:host=</span> . <span class="php-variable">$host</span> . <span class="php-string">;dbname=</span> . <span class="php-variable">$dbname</span>, <span class="php-variable">$username</span>, <span class="php-variable">$password</span>);
+        <span class="php-variable">$conn</span>-&gt;<span class="php-variable">setAttribute</span>(<span class="php-class">PDO</span>::<span class="php-constant">ATTR_ERRMODE</span>, <span class="php-class">PDO</span>::<span class="php-constant">ERRMODE_EXCEPTION</span>);
+        
+        <span class="php-comment">// 查询数据</span>
+        <span class="php-variable">$stmt</span> = <span class="php-variable">$conn</span>-&gt;<span class="php-function">prepare</span>(<span class="php-string">"SELECT * FROM users"</span>);
+        <span class="php-variable">$stmt</span>-&gt;<span class="php-function">execute</span>();
+        <span class="php-variable">$users</span> = <span class="php-variable">$stmt</span>-&gt;<span class="php-function">fetchAll</span>();
+        
+        <span class="php-keyword">foreach</span> (<span class="php-variable">$users</span> <span class="php-keyword">as</span> <span class="php-variable">$user</span>) {
+            echo <span class="php-variable">$user</span>[<span class="php-string">"name"</span>] . <span class="php-string">"&lt;br&gt;"</span>;
+        }
+    } <span class="php-keyword">catch</span> (<span class="php-class">PDOException</span> <span class="php-variable">$e</span>) {
+        echo <span class="php-string">"连接失败: "</span> . <span class="php-variable">$e</span>-&gt;<span class="php-function">getMessage</span>();
+    }
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第16章：会话管理 -->
+                <section id="section-16" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">16. 会话管理</h2>
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">使用Session</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    <span class="php-function">session_start</span>();
+    
+    <span class="php-comment">// 设置会话变量</span>
+    <span class="php-variable">$_SESSION</span>[<span class="php-string">"username"</span>] = <span class="php-string">"John"</span>;
+    <span class="php-variable">$_SESSION</span>[<span class="php-string">"user_id"</span>] = <span class="php-number">123</span>;
+    
+    <span class="php-comment">// 获取会话变量</span>
+    echo <span class="php-variable">$_SESSION</span>[<span class="php-string">"username"</span>]; <span class="php-comment">// John</span>
+    
+    <span class="php-comment">// 销毁会话</span>
+    <span class="php-function">session_destroy</span>();
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第17章：错误处理 -->
+                <section id="section-17" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">17. 错误处理</h2>
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">错误报告</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    <span class="php-comment">// 显示所有错误</span>
+    <span class="php-function">error_reporting</span>(<span class="php-constant">E_ALL</span>);
+    <span class="php-variable">ini_set</span>(<span class="php-string">"display_errors"</span>, <span class="php-string">"1"</span>);
+    
+    <span class="php-comment">// 隐藏错误</span>
+    <span class="php-variable">ini_set</span>(<span class="php-string">"display_errors"</span>, <span class="php-string">"0"</span>);
+    
+    <span class="php-comment">// 记录错误到日志</span>
+    <span class="php-variable">ini_set</span>(<span class="php-string">"log_errors"</span>, <span class="php-string">"1"</span>);
+    <span class="php-variable">ini_set</span>(<span class="php-string">"error_log"</span>, <span class="php-string">"error.log"</span>);
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第18章：正则表达式 -->
+                <section id="section-18" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">18. 正则表达式</h2>
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">正则表达式函数</h3>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    <span class="php-variable">$email</span> = <span class="php-string">"test@example.com"</span>;
+    
+    <span class="php-comment">// 验证邮箱格式</span>
+    <span class="php-keyword">if</span> (<span class="php-function">preg_match</span>(<span class="php-string">"/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/"</span>, <span class="php-variable">$email</span>)) {
+        echo <span class="php-string">"邮箱格式正确"</span>;
+    } <span class="php-keyword">else</span> {
+        echo <span class="php-string">"邮箱格式错误"</span>;
+    }
+    
+    <span class="php-comment">// 替换字符串</span>
+    <span class="php-variable">$str</span> = <span class="php-string">"Hello 123 World 456"</span>;
+    <span class="php-variable">$result</span> = <span class="php-function">preg_replace</span>(<span class="php-string">"/[0-9]+/"</span>, <span class="php-string">"#"</span>, <span class="php-variable">$str</span>);
+    echo <span class="php-variable">$result</span>; <span class="php-comment">// Hello # World #</span>
+?&gt;</code></pre>
+                    </div>
+                </section>
+                
+                <!-- 第19章：Composer和依赖管理 -->
+                <section id="section-19" class="mb-12">
+                    <h2 class="text-3xl font-bold mb-6 gradient-text">19. Composer和依赖管理</h2>
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">什么是Composer？</h3>
+                        <p class="mb-4">Composer是PHP的依赖管理工具，用于管理项目的外部依赖库。</p>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6 mb-6">
+                        <h3 class="text-xl font-semibold mb-4">安装Composer</h3>
+                        <p class="mb-4">在终端中运行以下命令：</p>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+
+<span class="php-comment">// 全局安装</span>
+mv composer.phar /usr/local/bin/composer</code></pre>
+                    </div>
+                    
+                    <div class="syntax-card rounded-xl p-6">
+                        <h3 class="text-xl font-semibold mb-4">使用Composer</h3>
+                        <p class="mb-4">创建composer.json文件：</p>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">{
+    "require": {
+        "monolog/monolog": "^2.0"
+    }
+}</code></pre>
+                        <p class="mb-4">安装依赖：</p>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto mb-4"><code class="language-content">composer install</code></pre>
+                        <p class="mb-4">在PHP中使用：</p>
+                        <pre class="code-block code-font rounded-lg p-4 overflow-x-auto"><code class="language-content">&lt;?php
+    require_once 'vendor/autoload.php';
+    
+    use Monolog\Logger;
+    use Monolog\Handler\StreamHandler;
+    
+    <span class="php-comment">// 创建日志记录器</span>
+    <span class="php-variable">$log</span> = <span class="php-keyword">new</span> <span class="php-class">Logger</span>(<span class="php-string">"name"</span>);
+    <span class="php-variable">$log</span>-&gt;<span class="php-function">pushHandler</span>(<span class="php-keyword">new</span> <span class="php-class">StreamHandler</span>(<span class="php-string">'app.log'</span>, <span class="php-class">Logger</span>::<span class="php-constant">WARNING</span>));
+    
+    <span class="php-comment">// 添加日志记录</span>
+    <span class="php-variable">$log</span>-&gt;<span class="php-function">warning</span>(<span class="php-string">'警告信息'</span>);
+    <span class="php-variable">$log</span>-&gt;<span class="php-function">error</span>(<span class="php-string">'错误信息'</span>);
+?&gt;</code></pre>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
