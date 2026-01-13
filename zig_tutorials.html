@@ -2244,62 +2244,62 @@
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">C指针和内存管理</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">const std = @import("std");
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-blue-400">const</span> <span class="text-green-300">std</span> = <span class="text-cyan-300">@import</span>(<span class="text-yellow-300">"std"</span>);
 
 // 导入C标准库
-const c = @cImport({
-    @cInclude("stdio.h");
-    @cInclude("stdlib.h");
-    @cInclude("string.h");
+<span class="text-blue-400">const</span> <span class="text-green-300">c</span> = <span class="text-cyan-300">@cImport</span>({
+    <span class="text-cyan-300">@cInclude</span>(<span class="text-yellow-300">"stdio.h"</span>);
+    <span class="text-cyan-300">@cInclude</span>(<span class="text-yellow-300">"stdlib.h"</span>);
+    <span class="text-cyan-300">@cInclude</span>(<span class="text-yellow-300">"string.h"</span>);
 });
 
-pub fn main() !void {
-    const stdout = std.io.getStdOut().writer();
+<span class="text-blue-400">pub</span> <span class="text-blue-400">fn</span> <span class="text-cyan-300">main</span>() <span class="text-purple-300">!</span><span class="text-blue-400">void</span> {
+    <span class="text-blue-400">const</span> <span class="text-green-300">stdout</span> = <span class="text-green-300">std</span>.<span class="text-green-300">io</span>.<span class="text-cyan-300">getStdOut</span>().<span class="text-cyan-300">writer</span>();
     
     // C指针操作
-    var number: c_int = 42;
-    const c_ptr: *c_int = &number;
+    <span class="text-blue-400">var</span> <span class="text-green-300">number</span>: <span class="text-yellow-300">c_int</span> = <span class="text-yellow-300">42</span>;
+    <span class="text-blue-400">const</span> <span class="text-green-300">c_ptr</span>: <span class="text-blue-400">*</span><span class="text-yellow-300">c_int</span> = &<span class="text-green-300">number</span>;
     
-    _ = c.printf("C pointer value: %d\n", c_ptr.*);
+    _ = <span class="text-green-300">c</span>.<span class="text-cyan-300">printf</span>(<span class="text-yellow-300">"C pointer value: %d\n"</span>, <span class="text-green-300">c_ptr</span>.*);
     
     // 修改指针指向的值
-    c_ptr.* = 100;
-    try stdout.print("After modification: {}\n", .{number});
+    <span class="text-green-300">c_ptr</span>.* = <span class="text-yellow-300">100</span>;
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"After modification: {}\n"</span>, .{<span class="text-green-300">number</span>});
     
     // 动态分配内存 (C风格)
-    const array_size = 10;
-    const c_array = c.malloc(@sizeOf(c_int) * array_size) orelse {
-        try stdout.print("Failed to allocate array\n", .{});
-        return error.OutOfMemory;
+    <span class="text-blue-400">const</span> <span class="text-green-300">array_size</span> = <span class="text-yellow-300">10</span>;
+    <span class="text-blue-400">const</span> <span class="text-green-300">c_array</span> = <span class="text-green-300">c</span>.<span class="text-cyan-300">malloc</span>(<span class="text-cyan-300">@sizeOf</span>(<span class="text-yellow-300">c_int</span>) * <span class="text-green-300">array_size</span>) <span class="text-blue-400">orelse</span> {
+        <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Failed to allocate array\n"</span>, .{});
+        <span class="text-blue-400">return</span> <span class="text-red-400">error</span>.<span class="text-red-400">OutOfMemory</span>;
     };
-    defer c.free(c_array);
+    <span class="text-blue-400">defer</span> <span class="text-green-300">c</span>.<span class="text-cyan-300">free</span>(<span class="text-green-300">c_array</span>);
     
     // 将C指针转换为Zig切片进行操作
-    const zig_array = @as([*c]c_int, c_array)[0..array_size];
+    <span class="text-blue-400">const</span> <span class="text-green-300">zig_array</span> = <span class="text-cyan-300">@as</span>([<span class="text-blue-400">*c</span>]<span class="text-yellow-300">c_int</span>, <span class="text-green-300">c_array</span>)[<span class="text-yellow-300">0</span>..<span class="text-green-300">array_size</span>];
     
     // 填充数组
-    for (0..array_size) |i| {
-        zig_array[i] = @intCast(c_int, i * 2);
+    <span class="text-blue-400">for</span> (<span class="text-yellow-300">0</span>..<span class="text-green-300">array_size</span>) |<span class="text-green-300">i</span>| {
+        <span class="text-green-300">zig_array</span>[<span class="text-green-300">i</span>] = <span class="text-cyan-300">@intCast</span>(<span class="text-yellow-300">c_int</span>, <span class="text-green-300">i</span> * <span class="text-yellow-300">2</span>);
     }
     
     // 打印数组元素
-    try stdout.print("C array elements: ", .{});
-    for (zig_array) |value| {
-        try stdout.print("{} ", .{value});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"C array elements: "</span>, .{});
+    <span class="text-blue-400">for</span> (<span class="text-green-300">zig_array</span>) |<span class="text-green-300">value</span>| {
+        <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"{} "</span>, .{<span class="text-green-300">value</span>});
     }
-    try stdout.print("\n", .{});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"\n"</span>, .{});
     
     // 使用C的memcpy函数
-    const src = [_]c_int{1, 2, 3, 4, 5};
-    var dest: [5]c_int = undefined;
+    <span class="text-blue-400">const</span> <span class="text-green-300">src</span> = [<span class="text-blue-400">_</span>]<span class="text-yellow-300">c_int</span>{<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>};
+    <span class="text-blue-400">var</span> <span class="text-green-300">dest</span>: [<span class="text-yellow-300">5</span>]<span class="text-yellow-300">c_int</span> = <span class="text-blue-400">undefined</span>;
     
-    _ = c.memcpy(@as([*c]u8, &dest), @as([*c]const u8, &src), @sizeOf(@TypeOf(src)));
+    _ = <span class="text-green-300">c</span>.<span class="text-cyan-300">memcpy</span>(<span class="text-cyan-300">@as</span>([<span class="text-blue-400">*c</span>]<span class="text-yellow-300">u8</span>, &<span class="text-green-300">dest</span>), <span class="text-cyan-300">@as</span>([<span class="text-blue-400">*c</span>]<span class="text-blue-400">const</span> <span class="text-yellow-300">u8</span>, &<span class="text-green-300">src</span>), <span class="text-cyan-300">@sizeOf</span>(<span class="text-cyan-300">@TypeOf</span>(<span class="text-green-300">src</span>)));
     
-    try stdout.print("After memcpy: ", .{});
-    for (dest) |value| {
-        try stdout.print("{} ", .{value});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"After memcpy: "</span>, .{});
+    <span class="text-blue-400">for</span> (<span class="text-green-300">dest</span>) |<span class="text-green-300">value</span>| {
+        <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"{} "</span>, .{<span class="text-green-300">value</span>});
     }
-    try stdout.print("\n", .{});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"\n"</span>, .{});
 }
 </code></pre>
                 </div>
@@ -2307,52 +2307,52 @@ pub fn main() !void {
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">从C调用Zig函数</h5>
                     <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// === zig_library.zig ===
-// const std = @import("std");
+// <span class="text-blue-400">const</span> <span class="text-green-300">std</span> = <span class="text-cyan-300">@import</span>(<span class="text-yellow-300">"std"</span>);
 // 
 // // 导出函数供C调用 (使用export关键字)
-// export fn zig_add(a: c_int, b: c_int) c_int {
-//     return a + b;
+// <span class="text-blue-400">export</span> <span class="text-blue-400">fn</span> <span class="text-cyan-300">zig_add</span>(<span class="text-green-300">a</span>: <span class="text-yellow-300">c_int</span>, <span class="text-green-300">b</span>: <span class="text-yellow-300">c_int</span>) <span class="text-yellow-300">c_int</span> {
+//     <span class="text-blue-400">return</span> <span class="text-green-300">a</span> + <span class="text-green-300">b</span>;
 // }
 // 
-// export fn zig_multiply(a: c_double, b: c_double) c_double {
-//     return a * b;
+// <span class="text-blue-400">export</span> <span class="text-blue-400">fn</span> <span class="text-cyan-300">zig_multiply</span>(<span class="text-green-300">a</span>: <span class="text-yellow-300">c_double</span>, <span class="text-green-300">b</span>: <span class="text-yellow-300">c_double</span>) <span class="text-yellow-300">c_double</span> {
+//     <span class="text-blue-400">return</span> <span class="text-green-300">a</span> * <span class="text-green-300">b</span>;
 // }
 // 
 // // 导出带字符串参数的函数
-// export fn zig_hello(name: [*c]const u8) void {
-//     const stdout = std.io.getStdOut().writer();
-//     _ = stdout.print("Hello from Zig, {s}!\n", .{name}) catch return;
+// <span class="text-blue-400">export</span> <span class="text-blue-400">fn</span> <span class="text-cyan-300">zig_hello</span>(<span class="text-green-300">name</span>: [<span class="text-blue-400">*c</span>]<span class="text-blue-400">const</span> <span class="text-yellow-300">u8</span>) <span class="text-blue-400">void</span> {
+//     <span class="text-blue-400">const</span> <span class="text-green-300">stdout</span> = <span class="text-green-300">std</span>.<span class="text-green-300">io</span>.<span class="text-cyan-300">getStdOut</span>().<span class="text-cyan-300">writer</span>();
+//     _ = <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Hello from Zig, {s}!\n"</span>, .{<span class="text-green-300">name</span>}) <span class="text-blue-400">catch</span> <span class="text-blue-400">return</span>;
 // }
 // 
 // // 导出处理数组的函数
-// export fn zig_sum_array(array: [*c]c_int, size: c_int) c_int {
-//     var sum: c_int = 0;
-//     for (0..@intCast(usize, size)) |i| {
-//         sum += array[i];
+// <span class="text-blue-400">export</span> <span class="text-blue-400">fn</span> <span class="text-cyan-300">zig_sum_array</span>(<span class="text-green-300">array</span>: [<span class="text-blue-400">*c</span>]<span class="text-yellow-300">c_int</span>, <span class="text-green-300">size</span>: <span class="text-yellow-300">c_int</span>) <span class="text-yellow-300">c_int</span> {
+//     <span class="text-blue-400">var</span> <span class="text-green-300">sum</span>: <span class="text-yellow-300">c_int</span> = <span class="text-yellow-300">0</span>;
+//     <span class="text-blue-400">for</span> (<span class="text-yellow-300">0</span>..<span class="text-cyan-300">@intCast</span>(<span class="text-yellow-300">usize</span>, <span class="text-green-300">size</span>)) |<span class="text-green-300">i</span>| {
+//         <span class="text-green-300">sum</span> += <span class="text-green-300">array</span>[<span class="text-green-300">i</span>];
 //     }
-//     return sum;
+//     <span class="text-blue-400">return</span> <span class="text-green-300">sum</span>;
 // }
 
 // === main.zig ===
-const std = @import("std");
+<span class="text-blue-400">const</span> <span class="text-green-300">std</span> = <span class="text-cyan-300">@import</span>(<span class="text-yellow-300">"std"</span>);
 
 // 导入C标准库
-const c = @cImport({
-    @cInclude("stdio.h");
+<span class="text-blue-400">const</span> <span class="text-green-300">c</span> = <span class="text-cyan-300">@cImport</span>({
+    <span class="text-cyan-300">@cInclude</span>(<span class="text-yellow-300">"stdio.h"</span>);
 });
 
 // 模拟C调用Zig函数的场景
-pub fn main() !void {
-    const stdout = std.io.getStdOut().writer();
+<span class="text-blue-400">pub</span> <span class="text-blue-400">fn</span> <span class="text-cyan-300">main</span>() <span class="text-purple-300">!</span><span class="text-blue-400">void</span> {
+    <span class="text-blue-400">const</span> <span class="text-green-300">stdout</span> = <span class="text-green-300">std</span>.<span class="text-green-300">io</span>.<span class="text-cyan-300">getStdOut</span>().<span class="text-cyan-300">writer</span>();
     
-    try stdout.print("=== Zig Functions Callable from C ===\n", .{});
-    try stdout.print("1. int zig_add(int a, int b);\n", .{});
-    try stdout.print("2. double zig_multiply(double a, double b);\n", .{});
-    try stdout.print("3. void zig_hello(const char* name);\n", .{});
-    try stdout.print("4. int zig_sum_array(int* array, int size);\n", .{});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"=== Zig Functions Callable from C ===\n"</span>, .{});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"1. int zig_add(int a, int b);\n"</span>, .{});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"2. double zig_multiply(double a, double b);\n"</span>, .{});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"3. void zig_hello(const char* name);\n"</span>, .{});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"4. int zig_sum_array(int* array, int size);\n"</span>, .{});
     
-    try stdout.print("\nTo build as library: zig build-lib -dynamic zig_library.zig\n", .{});
-    try stdout.print("Or statically: zig build-lib -static zig_library.zig\n", .{});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"\nTo build as library: zig build-lib -dynamic zig_library.zig\n"</span>, .{});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Or statically: zig build-lib -static zig_library.zig\n"</span>, .{});
 }
 </code></pre>
                 </div>
@@ -2360,124 +2360,124 @@ pub fn main() !void {
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">使用C库示例</h5>
                     <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 示例：使用SDL2库 (需要安装SDL2开发库)
-// const std = @import("std");
+// <span class="text-blue-400">const</span> <span class="text-green-300">std</span> = <span class="text-cyan-300">@import</span>(<span class="text-yellow-300">"std"</span>);
 // 
 // // 导入SDL2库
-// const sdl = @cImport({
-//     @cInclude("SDL2/SDL.h");
+// <span class="text-blue-400">const</span> <span class="text-green-300">sdl</span> = <span class="text-cyan-300">@cImport</span>({
+//     <span class="text-cyan-300">@cInclude</span>(<span class="text-yellow-300">"SDL2/SDL.h"</span>);
 // });
 // 
-// pub fn main() !void {
-//     const stdout = std.io.getStdOut().writer();
+// <span class="text-blue-400">pub</span> <span class="text-blue-400">fn</span> <span class="text-cyan-300">main</span>() <span class="text-purple-300">!</span><span class="text-blue-400">void</span> {
+//     <span class="text-blue-400">const</span> <span class="text-green-300">stdout</span> = <span class="text-green-300">std</span>.<span class="text-green-300">io</span>.<span class="text-cyan-300">getStdOut</span>().<span class="text-cyan-300">writer</span>();
 //     
 //     // 初始化SDL
-//     if (sdl.SDL_Init(sdl.SDL_INIT_VIDEO) != 0) {
-//         try stdout.print("SDL_Init failed: {s}\n", .{sdl.SDL_GetError()});
-//         return error.SDLInitFailed;
+//     <span class="text-blue-400">if</span> (<span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_Init</span>(<span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_INIT_VIDEO</span>) != <span class="text-yellow-300">0</span>) {
+//         <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"SDL_Init failed: {s}\n"</span>, .{<span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_GetError</span>()});
+//         <span class="text-blue-400">return</span> <span class="text-red-400">error</span>.<span class="text-red-400">SDLInitFailed</span>;
 //     }
-//     defer sdl.SDL_Quit();
+//     <span class="text-blue-400">defer</span> <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_Quit</span>();
 //     
 //     // 创建窗口
-//     const window = sdl.SDL_CreateWindow(
-//         "Zig SDL2 Window",
-//         sdl.SDL_WINDOWPOS_UNDEFINED,
-//         sdl.SDL_WINDOWPOS_UNDEFINED,
-//         800,
-//         600,
-//         sdl.SDL_WINDOW_SHOWN
-//     ) orelse {
-//         try stdout.print("SDL_CreateWindow failed: {s}\n", .{sdl.SDL_GetError()});
-//         return error.WindowCreationFailed;
+//     <span class="text-blue-400">const</span> <span class="text-green-300">window</span> = <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_CreateWindow</span>(
+//         <span class="text-yellow-300">"Zig SDL2 Window"</span>,
+//         <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_WINDOWPOS_UNDEFINED</span>,
+//         <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_WINDOWPOS_UNDEFINED</span>,
+//         <span class="text-yellow-300">800</span>,
+//         <span class="text-yellow-300">600</span>,
+//         <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_WINDOW_SHOWN</span>
+//     ) <span class="text-blue-400">orelse</span> {
+//         <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"SDL_CreateWindow failed: {s}\n"</span>, .{<span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_GetError</span>()});
+//         <span class="text-blue-400">return</span> <span class="text-red-400">error</span>.<span class="text-red-400">WindowCreationFailed</span>;
 //     };
-//     defer sdl.SDL_DestroyWindow(window);
+//     <span class="text-blue-400">defer</span> <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_DestroyWindow</span>(<span class="text-green-300">window</span>);
 //     
 //     // 创建渲染器
-//     const renderer = sdl.SDL_CreateRenderer(
-//         window,
-//         -1,
-//         sdl.SDL_RENDERER_ACCELERATED
-//     ) orelse {
-//         try stdout.print("SDL_CreateRenderer failed: {s}\n", .{sdl.SDL_GetError()});
-//         return error.RendererCreationFailed;
+//     <span class="text-blue-400">const</span> <span class="text-green-300">renderer</span> = <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_CreateRenderer</span>(
+//         <span class="text-green-300">window</span>,
+//         <span class="text-yellow-300">-1</span>,
+//         <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_RENDERER_ACCELERATED</span>
+//     ) <span class="text-blue-400">orelse</span> {
+//         <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"SDL_CreateRenderer failed: {s}\n"</span>, .{<span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_GetError</span>()});
+//         <span class="text-blue-400">return</span> <span class="text-red-400">error</span>.<span class="text-red-400">RendererCreationFailed</span>;
 //     };
-//     defer sdl.SDL_DestroyRenderer(renderer);
+//     <span class="text-blue-400">defer</span> <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_DestroyRenderer</span>(<span class="text-green-300">renderer</span>);
 //     
-//     try stdout.print("SDL2 window created successfully!\n", .{});
-//     try stdout.print("Press any key to exit...\n", .{});
+//     <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"SDL2 window created successfully!\n"</span>, .{});
+//     <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Press any key to exit...\n"</span>, .{});
 //     
 //     // 主循环
-//     var running = true;
-//     while (running) {
-//         var event: sdl.SDL_Event = undefined;
-//         while (sdl.SDL_PollEvent(&event) != 0) {
-//             if (event.type == sdl.SDL_QUIT) {
-//                 running = false;
-//             } else if (event.type == sdl.SDL_KEYDOWN) {
-//                 running = false;
+//     <span class="text-blue-400">var</span> <span class="text-green-300">running</span> = <span class="text-blue-400">true</span>;
+//     <span class="text-blue-400">while</span> (<span class="text-green-300">running</span>) {
+//         <span class="text-blue-400">var</span> <span class="text-green-300">event</span>: <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_Event</span> = <span class="text-blue-400">undefined</span>;
+//         <span class="text-blue-400">while</span> (<span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_PollEvent</span>(&<span class="text-green-300">event</span>) != <span class="text-yellow-300">0</span>) {
+//             <span class="text-blue-400">if</span> (<span class="text-green-300">event</span>.<span class="text-green-300">type</span> == <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_QUIT</span>) {
+//                 <span class="text-green-300">running</span> = <span class="text-blue-400">false</span>;
+//             } <span class="text-blue-400">else if</span> (<span class="text-green-300">event</span>.<span class="text-green-300">type</span> == <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_KEYDOWN</span>) {
+//                 <span class="text-green-300">running</span> = <span class="text-blue-400">false</span>;
 //             }
 //         }
 //         
 //         // 清除屏幕
-//         _ = sdl.SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-//         _ = sdl.SDL_RenderClear(renderer);
+//         _ = <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_SetRenderDrawColor</span>(<span class="text-green-300">renderer</span>, <span class="text-yellow-300">0</span>, <span class="text-yellow-300">0</span>, <span class="text-yellow-300">0</span>, <span class="text-yellow-300">255</span>);
+//         _ = <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_RenderClear</span>(<span class="text-green-300">renderer</span>);
 //         
 //         // 绘制矩形
-//         const rect = sdl.SDL_Rect{ .x = 300, .y = 200, .w = 200, .h = 200 };
-//         _ = sdl.SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-//         _ = sdl.SDL_RenderDrawRect(renderer, &rect);
+//         <span class="text-blue-400">const</span> <span class="text-green-300">rect</span> = <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_Rect</span>{ .<span class="text-green-300">x</span> = <span class="text-yellow-300">300</span>, .<span class="text-green-300">y</span> = <span class="text-yellow-300">200</span>, .<span class="text-green-300">w</span> = <span class="text-yellow-300">200</span>, .<span class="text-green-300">h</span> = <span class="text-yellow-300">200</span> };
+//         _ = <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_SetRenderDrawColor</span>(<span class="text-green-300">renderer</span>, <span class="text-yellow-300">255</span>, <span class="text-yellow-300">0</span>, <span class="text-yellow-300">0</span>, <span class="text-yellow-300">255</span>);
+//         _ = <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_RenderDrawRect</span>(<span class="text-green-300">renderer</span>, &<span class="text-green-300">rect</span>);
 //         
 //         // 渲染
-//         sdl.SDL_RenderPresent(renderer);
+//         <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_RenderPresent</span>(<span class="text-green-300">renderer</span>);
 //         
 //         // 延迟
-//         sdl.SDL_Delay(16);
+//         <span class="text-green-300">sdl</span>.<span class="text-purple-300">SDL_Delay</span>(<span class="text-yellow-300">16</span>);
 //     }
 // }
 
 // 示例：使用curl库下载文件
-// const std = @import("std");
+// <span class="text-blue-400">const</span> <span class="text-green-300">std</span> = <span class="text-cyan-300">@import</span>(<span class="text-yellow-300">"std"</span>);
 // 
-// const c = @cImport({
-//     @cInclude("curl/curl.h");
+// <span class="text-blue-400">const</span> <span class="text-green-300">c</span> = <span class="text-cyan-300">@cImport</span>({
+//     <span class="text-cyan-300">@cInclude</span>(<span class="text-yellow-300">"curl/curl.h"</span>);
 // });
 // 
-// pub fn main() !void {
-//     const stdout = std.io.getStdOut().writer();
+// <span class="text-blue-400">pub</span> <span class="text-blue-400">fn</span> <span class="text-cyan-300">main</span>() <span class="text-purple-300">!</span><span class="text-blue-400">void</span> {
+//     <span class="text-blue-400">const</span> <span class="text-green-300">stdout</span> = <span class="text-green-300">std</span>.<span class="text-green-300">io</span>.<span class="text-cyan-300">getStdOut</span>().<span class="text-cyan-300">writer</span>();
 //     
 //     // 初始化curl
-//     _ = c.curl_global_init(c.CURL_GLOBAL_ALL);
-//     defer c.curl_global_cleanup();
+//     _ = <span class="text-green-300">c</span>.<span class="text-purple-300">curl_global_init</span>(<span class="text-green-300">c</span>.<span class="text-purple-300">CURL_GLOBAL_ALL</span>);
+//     <span class="text-blue-400">defer</span> <span class="text-green-300">c</span>.<span class="text-purple-300">curl_global_cleanup</span>();
 //     
 //     // 创建curl句柄
-//     const curl = c.curl_easy_init() orelse {
-//         try stdout.print("Failed to initialize curl\n", .{});
-//         return error.CurlInitFailed;
+//     <span class="text-blue-400">const</span> <span class="text-green-300">curl</span> = <span class="text-green-300">c</span>.<span class="text-purple-300">curl_easy_init</span>() <span class="text-blue-400">orelse</span> {
+//         <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Failed to initialize curl\n"</span>, .{});
+//         <span class="text-blue-400">return</span> <span class="text-red-400">error</span>.<span class="text-red-400">CurlInitFailed</span>;
 //     };
-//     defer c.curl_easy_cleanup(curl);
+//     <span class="text-blue-400">defer</span> <span class="text-green-300">c</span>.<span class="text-purple-300">curl_easy_cleanup</span>(<span class="text-green-300">curl</span>);
 //     
 //     // 设置URL
-//     _ = c.curl_easy_setopt(curl, c.CURLOPT_URL, "https://example.com");
+//     _ = <span class="text-green-300">c</span>.<span class="text-purple-300">curl_easy_setopt</span>(<span class="text-green-300">curl</span>, <span class="text-green-300">c</span>.<span class="text-purple-300">CURLOPT_URL</span>, <span class="text-yellow-300">"https://example.com"</span>);
 //     
 //     // 执行请求
-//     const res = c.curl_easy_perform(curl);
-//     if (res != c.CURLE_OK) {
-//         try stdout.print("curl_easy_perform() failed: {s}\n", .{c.curl_easy_strerror(res)});
-//         return error.CurlRequestFailed;
+//     <span class="text-blue-400">const</span> <span class="text-green-300">res</span> = <span class="text-green-300">c</span>.<span class="text-purple-300">curl_easy_perform</span>(<span class="text-green-300">curl</span>);
+//     <span class="text-blue-400">if</span> (<span class="text-green-300">res</span> != <span class="text-green-300">c</span>.<span class="text-purple-300">CURLE_OK</span>) {
+//         <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"curl_easy_perform() failed: {s}\n"</span>, .{<span class="text-green-300">c</span>.<span class="text-purple-300">curl_easy_strerror</span>(<span class="text-green-300">res</span>)});
+//         <span class="text-blue-400">return</span> <span class="text-red-400">error</span>.<span class="text-red-400">CurlRequestFailed</span>;
 //     }
 //     
-//     try stdout.print("Request completed successfully\n", .{});
+//     <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Request completed successfully\n"</span>, .{});
 // }
 
-pub fn main() !void {
-    const stdout = std.io.getStdOut().writer();
+<span class="text-blue-400">pub</span> <span class="text-blue-400">fn</span> <span class="text-cyan-300">main</span>() <span class="text-purple-300">!</span><span class="text-blue-400">void</span> {
+    <span class="text-blue-400">const</span> <span class="text-green-300">stdout</span> = <span class="text-green-300">std</span>.<span class="text-green-300">io</span>.<span class="text-cyan-300">getStdOut</span>().<span class="text-cyan-300">writer</span>();
     
-    try stdout.print("=== Using C Libraries in Zig ===\n", .{});
-    try stdout.print("1. SDL2 for graphics and input\n", .{});
-    try stdout.print("2. libcurl for HTTP requests\n", .{});
-    try stdout.print("3. OpenGL for 3D graphics\n", .{});
-    try stdout.print("4. SQLite for database access\n", .{});
-    try stdout.print("\nBuild command example:\n", .{});
-    try stdout.print("zig build-exe main.zig -lc -lSDL2\n", .{});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"=== Using C Libraries in Zig ===\n"</span>, .{});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"1. SDL2 for graphics and input\n"</span>, .{});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"2. libcurl for HTTP requests\n"</span>, .{});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"3. OpenGL for 3D graphics\n"</span>, .{});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"4. SQLite for database access\n"</span>, .{});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"\nBuild command example:\n"</span>, .{});
+    <span class="text-purple-300">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"zig build-exe main.zig -lc -lSDL2\n"</span>, .{});
 }
 </code></pre>
                 </div>
@@ -2496,396 +2496,396 @@ pub fn main() !void {
                 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">异步编程</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">const std = @import("std");
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-blue-400">const</span> <span class="text-green-300">std</span> = <span class="text-cyan-300">@import</span>(<span class="text-yellow-300">"std"</span>);
 
-// Zig的异步函数使用async/await语法
-fn asyncOperation(delay_ms: u32) !void {
-    const stdout = std.io.getStdOut().writer();
-    try stdout.print("Starting async operation with delay {}ms\n", .{delay_ms});
+<span class="text-slate-500">// Zig的异步函数使用async/await语法</span>
+<span class="text-blue-400">fn</span> <span class="text-green-300">asyncOperation</span>(<span class="text-green-300">delay_ms</span>: <span class="text-purple-300">u32</span>) !<span class="text-purple-300">void</span> {
+    <span class="text-blue-400">const</span> <span class="text-green-300">stdout</span> = <span class="text-green-300">std</span>.<span class="text-green-300">io</span>.<span class="text-cyan-300">getStdOut</span>().<span class="text-green-300">writer</span>();
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Starting async operation with delay {}ms\n"</span>, .{<span class="text-green-300">delay_ms</span>});
     
-    // 使用标准库的async sleep函数
-    const timer = try std.time.Timer.start();
-    while (timer.read() < delay_ms * std.time.ns_per_ms) {
-        // 让出执行权
-        std.event.Loop.instance.?.runNext() catch |err| {
-            try stdout.print("Error in event loop: {}\n", .{err});
-            return err;
+    <span class="text-slate-500">// 使用标准库的async sleep函数</span>
+    <span class="text-blue-400">const</span> <span class="text-green-300">timer</span> = <span class="text-blue-400">try</span> <span class="text-green-300">std</span>.<span class="text-green-300">time</span>.<span class="text-cyan-300">Timer</span>.<span class="text-cyan-300">start</span>();
+    <span class="text-blue-400">while</span> (<span class="text-green-300">timer</span>.<span class="text-cyan-300">read</span>() < <span class="text-green-300">delay_ms</span> * <span class="text-green-300">std</span>.<span class="text-green-300">time</span>.<span class="text-green-300">ns_per_ms</span>) {
+        <span class="text-slate-500">// 让出执行权</span>
+        <span class="text-green-300">std</span>.<span class="text-green-300">event</span>.<span class="text-green-300">Loop</span>.<span class="text-green-300">instance</span>.?.<span class="text-cyan-300">runNext</span>() <span class="text-blue-400">catch</span> |<span class="text-green-300">err</span>| {
+            <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Error in event loop: {}\n"</span>, .{<span class="text-green-300">err</span>});
+            <span class="text-blue-400">return</span> <span class="text-green-300">err</span>;
         };
     }
     
-    try stdout.print("Completed async operation after {}ms\n", .{delay_ms});
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Completed async operation after {}ms\n"</span>, .{<span class="text-green-300">delay_ms</span>});
 }
 
-// 异步函数可以被其他异步函数调用
-async fn performMultipleAsyncOps() !void {
-    const stdout = std.io.getStdOut().writer();
+<span class="text-slate-500">// 异步函数可以被其他异步函数调用</span>
+<span class="text-blue-400">async fn</span> <span class="text-green-300">performMultipleAsyncOps</span>() !<span class="text-purple-300">void</span> {
+    <span class="text-blue-400">const</span> <span class="text-green-300">stdout</span> = <span class="text-green-300">std</span>.<span class="text-green-300">io</span>.<span class="text-cyan-300">getStdOut</span>().<span class="text-green-300">writer</span>();
     
-    // 并发执行多个异步操作
-    const handle1 = async asyncOperation(1000);
-    const handle2 = async asyncOperation(500);
-    const handle3 = async asyncOperation(1500);
+    <span class="text-slate-500">// 并发执行多个异步操作</span>
+    <span class="text-blue-400">const</span> <span class="text-green-300">handle1</span> = <span class="text-blue-400">async</span> <span class="text-green-300">asyncOperation</span>(<span class="text-yellow-300">1000</span>);
+    <span class="text-blue-400">const</span> <span class="text-green-300">handle2</span> = <span class="text-blue-400">async</span> <span class="text-green-300">asyncOperation</span>(<span class="text-yellow-300">500</span>);
+    <span class="text-blue-400">const</span> <span class="text-green-300">handle3</span> = <span class="text-blue-400">async</span> <span class="text-green-300">asyncOperation</span>(<span class="text-yellow-300">1500</span>);
     
-    try stdout.print("All async operations started\n", .{});
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"All async operations started\n"</span>, .{});
     
-    // 等待所有操作完成
-    await handle1;
-    await handle2;
-    await handle3;
+    <span class="text-slate-500">// 等待所有操作完成</span>
+    <span class="text-blue-400">await</span> <span class="text-green-300">handle1</span>;
+    <span class="text-blue-400">await</span> <span class="text-green-300">handle2</span>;
+    <span class="text-blue-400">await</span> <span class="text-green-300">handle3</span>;
     
-    try stdout.print("All async operations completed\n", .{});
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"All async operations completed\n"</span>, .{});
 }
 
-pub fn main() !void {
-    const stdout = std.io.getStdOut().writer();
+<span class="text-blue-400">pub fn</span> <span class="text-green-300">main</span>() !<span class="text-purple-300">void</span> {
+    <span class="text-blue-400">const</span> <span class="text-green-300">stdout</span> = <span class="text-green-300">std</span>.<span class="text-green-300">io</span>.<span class="text-cyan-300">getStdOut</span>().<span class="text-green-300">writer</span>();
     
-    try stdout.print("Zig async programming example\n", .{});
-    try stdout.print("Note: This example demonstrates async syntax but may need event loop setup\n", .{});
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Zig async programming example\n"</span>, .{});
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Note: This example demonstrates async syntax but may need event loop setup\n"</span>, .{});
     
-    // 在实际应用中，需要设置事件循环
-    // const loop = std.event.Loop.instance.?;
-    // try loop.run(async performMultipleAsyncOps, .{});
+    <span class="text-slate-500">// 在实际应用中，需要设置事件循环</span>
+    <span class="text-slate-500">// const loop = std.event.Loop.instance.?;</span>
+    <span class="text-slate-500">// try loop.run(async performMultipleAsyncOps, .{});</span>
 }
 </code></pre>
                 </div>
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">原子操作</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">const std = @import("std");
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-blue-400">const</span> <span class="text-green-300">std</span> = <span class="text-cyan-300">@import</span>(<span class="text-yellow-300">"std"</span>);
 
-// 原子整数类型
-var atomic_counter: std.atomic.Atomic(i32) = .{ .value = 0 };
+<span class="text-slate-500">// 原子整数类型</span>
+<span class="text-blue-400">var</span> <span class="text-green-300">atomic_counter</span>: <span class="text-green-300">std</span>.<span class="text-green-300">atomic</span>.<span class="text-purple-300">Atomic</span>(<span class="text-purple-300">i32</span>) = .{ .<span class="text-green-300">value</span> = <span class="text-yellow-300">0</span> };
 
-// 使用原子操作进行线程安全的递增
-fn incrementCounter() void {
-    for (0..1000) |_| {
-        // 原子递增
-        _ = atomic_counter.fetchAdd(1, .Acquire);
+<span class="text-slate-500">// 使用原子操作进行线程安全的递增</span>
+<span class="text-blue-400">fn</span> <span class="text-green-300">incrementCounter</span>() <span class="text-purple-300">void</span> {
+    <span class="text-blue-400">for</span> (<span class="text-yellow-300">0</span>..<span class="text-yellow-300">1000</span>) |_| {
+        <span class="text-slate-500">// 原子递增</span>
+        _ = <span class="text-green-300">atomic_counter</span>.<span class="text-cyan-300">fetchAdd</span>(<span class="text-yellow-300">1</span>, .<span class="text-purple-300">Acquire</span>);
     }
 }
 
-// 使用原子操作进行线程安全的比较并交换
-fn compareAndSwap() void {
-    var old_value = atomic_counter.load(.Acquire);
-    while (true) {
-        const new_value = old_value + 100;
-        const result = atomic_counter.compareAndSwap(old_value, new_value, .Release, .Acquire);
-        if (result == null) break;
-        old_value = result.?;
+<span class="text-slate-500">// 使用原子操作进行线程安全的比较并交换</span>
+<span class="text-blue-400">fn</span> <span class="text-green-300">compareAndSwap</span>() <span class="text-purple-300">void</span> {
+    <span class="text-blue-400">var</span> <span class="text-green-300">old_value</span> = <span class="text-green-300">atomic_counter</span>.<span class="text-cyan-300">load</span>(.<span class="text-purple-300">Acquire</span>);
+    <span class="text-blue-400">while</span> (<span class="text-yellow-300">true</span>) {
+        <span class="text-blue-400">const</span> <span class="text-green-300">new_value</span> = <span class="text-green-300">old_value</span> + <span class="text-yellow-300">100</span>;
+        <span class="text-blue-400">const</span> <span class="text-green-300">result</span> = <span class="text-green-300">atomic_counter</span>.<span class="text-cyan-300">compareAndSwap</span>(<span class="text-green-300">old_value</span>, <span class="text-green-300">new_value</span>, .<span class="text-purple-300">Release</span>, .<span class="text-purple-300">Acquire</span>);
+        <span class="text-blue-400">if</span> (<span class="text-green-300">result</span> == <span class="text-blue-400">null</span>) <span class="text-blue-400">break</span>;
+        <span class="text-green-300">old_value</span> = <span class="text-green-300">result</span>.?;
     }
 }
 
-// 使用原子操作实现简单的自旋锁
-type SpinLock = struct {
-    locked: std.atomic.Atomic(bool),
+<span class="text-slate-500">// 使用原子操作实现简单的自旋锁</span>
+<span class="text-blue-400">type</span> <span class="text-purple-300">SpinLock</span> = <span class="text-blue-400">struct</span> {
+    <span class="text-green-300">locked</span>: <span class="text-green-300">std</span>.<span class="text-green-300">atomic</span>.<span class="text-purple-300">Atomic</span>(<span class="text-blue-400">bool</span>),
     
-    pub fn init() SpinLock {
-        return SpinLock{ .locked = .{ .value = false } };
+    <span class="text-blue-400">pub fn</span> <span class="text-green-300">init</span>() <span class="text-purple-300">SpinLock</span> {
+        <span class="text-blue-400">return</span> <span class="text-purple-300">SpinLock</span>{ .<span class="text-green-300">locked</span> = .{ .<span class="text-green-300">value</span> = <span class="text-yellow-300">false</span> } };
     }
     
-    pub fn lock(self: *SpinLock) void {
-        while (self.locked.swap(true, .Acquire)) {
-            // 自旋等待
+    <span class="text-blue-400">pub fn</span> <span class="text-green-300">lock</span>(<span class="text-green-300">self</span>: *<span class="text-purple-300">SpinLock</span>) <span class="text-purple-300">void</span> {
+        <span class="text-blue-400">while</span> (<span class="text-green-300">self</span>.<span class="text-green-300">locked</span>.<span class="text-cyan-300">swap</span>(<span class="text-yellow-300">true</span>, .<span class="text-purple-300">Acquire</span>)) {
+            <span class="text-slate-500">// 自旋等待</span>
         }
     }
     
-    pub fn unlock(self: *SpinLock) void {
-        self.locked.store(false, .Release);
+    <span class="text-blue-400">pub fn</span> <span class="text-green-300">unlock</span>(<span class="text-green-300">self</span>: *<span class="text-purple-300">SpinLock</span>) <span class="text-purple-300">void</span> {
+        <span class="text-green-300">self</span>.<span class="text-green-300">locked</span>.<span class="text-cyan-300">store</span>(<span class="text-yellow-300">false</span>, .<span class="text-purple-300">Release</span>);
     }
 };
 
-// 测试自旋锁
-var lock: SpinLock = SpinLock.init();
-var shared_resource: i32 = 0;
+<span class="text-slate-500">// 测试自旋锁</span>
+<span class="text-blue-400">var</span> <span class="text-green-300">lock</span>: <span class="text-purple-300">SpinLock</span> = <span class="text-purple-300">SpinLock</span>.<span class="text-cyan-300">init</span>();
+<span class="text-blue-400">var</span> <span class="text-green-300">shared_resource</span>: <span class="text-purple-300">i32</span> = <span class="text-yellow-300">0</span>;
 
-fn updateSharedResource() void {
-    lock.lock();
-    defer lock.unlock();
+<span class="text-blue-400">fn</span> <span class="text-green-300">updateSharedResource</span>() <span class="text-purple-300">void</span> {
+    <span class="text-green-300">lock</span>.<span class="text-cyan-300">lock</span>();
+    <span class="text-blue-400">defer</span> <span class="text-green-300">lock</span>.<span class="text-cyan-300">unlock</span>();
     
-    // 安全地更新共享资源
-    shared_resource += 1;
+    <span class="text-slate-500">// 安全地更新共享资源</span>
+    <span class="text-green-300">shared_resource</span> += <span class="text-yellow-300">1</span>;
 }
 
-pub fn main() !void {
-    const stdout = std.io.getStdOut().writer();
+<span class="text-blue-400">pub fn</span> <span class="text-green-300">main</span>() !<span class="text-purple-300">void</span> {
+    <span class="text-blue-400">const</span> <span class="text-green-300">stdout</span> = <span class="text-green-300">std</span>.<span class="text-green-300">io</span>.<span class="text-cyan-300">getStdOut</span>().<span class="text-green-300">writer</span>();
     
-    try stdout.print("Atomic operations example\n", .{});
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Atomic operations example\n"</span>, .{});
     
-    // 测试原子计数器
-    incrementCounter();
-    const counter_value = atomic_counter.load(.Acquire);
-    try stdout.print("Atomic counter value: {}\n", .{counter_value});
+    <span class="text-slate-500">// 测试原子计数器</span>
+    <span class="text-green-300">incrementCounter</span>();
+    <span class="text-blue-400">const</span> <span class="text-green-300">counter_value</span> = <span class="text-green-300">atomic_counter</span>.<span class="text-cyan-300">load</span>(.<span class="text-purple-300">Acquire</span>);
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Atomic counter value: {}\n"</span>, .{<span class="text-green-300">counter_value</span>});
     
-    // 测试比较并交换
-    compareAndSwap();
-    const cas_value = atomic_counter.load(.Acquire);
-    try stdout.print("After compareAndSwap: {}\n", .{cas_value});
+    <span class="text-slate-500">// 测试比较并交换</span>
+    <span class="text-green-300">compareAndSwap</span>();
+    <span class="text-blue-400">const</span> <span class="text-green-300">cas_value</span> = <span class="text-green-300">atomic_counter</span>.<span class="text-cyan-300">load</span>(.<span class="text-purple-300">Acquire</span>);
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"After compareAndSwap: {}\n"</span>, .{<span class="text-green-300">cas_value</span>});
     
-    // 测试自旋锁
-    updateSharedResource();
-    try stdout.print("Shared resource value: {}\n", .{shared_resource});
+    <span class="text-slate-500">// 测试自旋锁</span>
+    <span class="text-green-300">updateSharedResource</span>();
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Shared resource value: {}\n"</span>, .{<span class="text-green-300">shared_resource</span>});
 }
 </code></pre>
                 </div>
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">内存对齐控制</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">const std = @import("std");
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-blue-400">const</span> <span class="text-green-300">std</span> = <span class="text-cyan-300">@import</span>(<span class="text-yellow-300">"std"</span>);
 
-// 默认对齐的结构体
-const DefaultAligned = struct {
-    a: u8,   // 1 byte
-    b: u32,  // 4 bytes
-    c: u16,  // 2 bytes
+<span class="text-slate-500">// 默认对齐的结构体</span>
+<span class="text-blue-400">const</span> <span class="text-purple-300">DefaultAligned</span> = <span class="text-blue-400">struct</span> {
+    <span class="text-green-300">a</span>: <span class="text-purple-300">u8</span>,   <span class="text-slate-500">// 1 byte</span>
+    <span class="text-green-300">b</span>: <span class="text-purple-300">u32</span>,  <span class="text-slate-500">// 4 bytes</span>
+    <span class="text-green-300">c</span>: <span class="text-purple-300">u16</span>,  <span class="text-slate-500">// 2 bytes</span>
 };
 
-// 显式对齐的结构体
-const ExplicitAligned = struct {
-    a: u8,    // 1 byte
-    // 手动填充以确保对齐
-    _padding: [3]u8 align(4),
-    b: u32,   // 4 bytes, aligned to 4 bytes
-    c: u16,   // 2 bytes
+<span class="text-slate-500">// 显式对齐的结构体</span>
+<span class="text-blue-400">const</span> <span class="text-purple-300">ExplicitAligned</span> = <span class="text-blue-400">struct</span> {
+    <span class="text-green-300">a</span>: <span class="text-purple-300">u8</span>,    <span class="text-slate-500">// 1 byte</span>
+    <span class="text-slate-500">// 手动填充以确保对齐</span>
+    <span class="text-green-300">_padding</span>: [<span class="text-yellow-300">3</span>]<span class="text-purple-300">u8</span> <span class="text-blue-400">align</span>(<span class="text-yellow-300">4</span>),
+    <span class="text-green-300">b</span>: <span class="text-purple-300">u32</span>,   <span class="text-slate-500">// 4 bytes, aligned to 4 bytes</span>
+    <span class="text-green-300">c</span>: <span class="text-purple-300">u16</span>,   <span class="text-slate-500">// 2 bytes</span>
 };
 
-// 使用align关键字的结构体
-const AlignStruct = packed struct {
-    a: u8,
-    b: u32 align(4),
-    c: u16,
+<span class="text-slate-500">// 使用align关键字的结构体</span>
+<span class="text-blue-400">const</span> <span class="text-purple-300">AlignStruct</span> = <span class="text-blue-400">packed struct</span> {
+    <span class="text-green-300">a</span>: <span class="text-purple-300">u8</span>,
+    <span class="text-green-300">b</span>: <span class="text-purple-300">u32</span> <span class="text-blue-400">align</span>(<span class="text-yellow-300">4</span>),
+    <span class="text-green-300">c</span>: <span class="text-purple-300">u16</span>,
 };
 
-// 对齐到特定边界的全局变量
-var aligned_buffer: [1024]u8 align(4096) = undefined;
+<span class="text-slate-500">// 对齐到特定边界的全局变量</span>
+<span class="text-blue-400">var</span> <span class="text-green-300">aligned_buffer</span>: [<span class="text-yellow-300">1024</span>]<span class="text-purple-300">u8</span> <span class="text-blue-400">align</span>(<span class="text-yellow-300">4096</span>) = <span class="text-blue-400">undefined</span>;
 
-// 内存对齐检查函数
-fn checkAlignment(comptime T: type) void {
-    std.debug.print("Type {} size: {} bytes\n", .{@typeName(T), @sizeOf(T)});
-    std.debug.print("Type {} alignment: {} bytes\n", .{@typeName(T), @alignOf(T)});
+<span class="text-slate-500">// 内存对齐检查函数</span>
+<span class="text-blue-400">fn</span> <span class="text-green-300">checkAlignment</span>(<span class="text-blue-400">comptime</span> <span class="text-purple-300">T</span>: <span class="text-purple-300">type</span>) <span class="text-purple-300">void</span> {
+    <span class="text-green-300">std</span>.<span class="text-green-300">debug</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Type {} size: {} bytes\n"</span>, .{<span class="text-cyan-300">@typeName</span>(<span class="text-purple-300">T</span>), <span class="text-cyan-300">@sizeOf</span>(<span class="text-purple-300">T</span>)});
+    <span class="text-green-300">std</span>.<span class="text-green-300">debug</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Type {} alignment: {} bytes\n"</span>, .{<span class="text-cyan-300">@typeName</span>(<span class="text-purple-300">T</span>), <span class="text-cyan-300">@alignOf</span>(<span class="text-purple-300">T</span>)});
 }
 
-// 对齐分配函数
-fn alignedAlloc(allocator: std.mem.Allocator, size: usize, alignment: usize) ![]u8 {
-    // 使用标准库的alignedAlloc函数
-    return allocator.alignedAlloc(u8, alignment, size);
+<span class="text-slate-500">// 对齐分配函数</span>
+<span class="text-blue-400">fn</span> <span class="text-green-300">alignedAlloc</span>(<span class="text-green-300">allocator</span>: <span class="text-green-300">std</span>.<span class="text-green-300">mem</span>.<span class="text-purple-300">Allocator</span>, <span class="text-green-300">size</span>: <span class="text-purple-300">usize</span>, <span class="text-green-300">alignment</span>: <span class="text-purple-300">usize</span>) ![]<span class="text-purple-300">u8</span> {
+    <span class="text-slate-500">// 使用标准库的alignedAlloc函数</span>
+    <span class="text-blue-400">return</span> <span class="text-green-300">allocator</span>.<span class="text-cyan-300">alignedAlloc</span>(<span class="text-purple-300">u8</span>, <span class="text-green-300">alignment</span>, <span class="text-green-300">size</span>);
 }
 
-pub fn main() !void {
-    const stdout = std.io.getStdOut().writer();
+<span class="text-blue-400">pub fn</span> <span class="text-green-300">main</span>() !<span class="text-purple-300">void</span> {
+    <span class="text-blue-400">const</span> <span class="text-green-300">stdout</span> = <span class="text-green-300">std</span>.<span class="text-green-300">io</span>.<span class="text-cyan-300">getStdOut</span>().<span class="text-green-300">writer</span>();
     
-    try stdout.print("Memory alignment example\n", .{});
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Memory alignment example\n"</span>, .{});
     
-    // 检查结构体对齐
-    checkAlignment(DefaultAligned);
-    checkAlignment(ExplicitAligned);
-    checkAlignment(AlignStruct);
+    <span class="text-slate-500">// 检查结构体对齐</span>
+    <span class="text-green-300">checkAlignment</span>(<span class="text-purple-300">DefaultAligned</span>);
+    <span class="text-green-300">checkAlignment</span>(<span class="text-purple-300">ExplicitAligned</span>);
+    <span class="text-green-300">checkAlignment</span>(<span class="text-purple-300">AlignStruct</span>);
     
-    // 检查全局变量对齐
-    const buffer_align = @alignOf(@TypeOf(aligned_buffer));
-    try stdout.print("Global buffer alignment: {} bytes\n", .{buffer_align});
+    <span class="text-slate-500">// 检查全局变量对齐</span>
+    <span class="text-blue-400">const</span> <span class="text-green-300">buffer_align</span> = <span class="text-cyan-300">@alignOf</span>(<span class="text-cyan-300">@TypeOf</span>(<span class="text-green-300">aligned_buffer</span>));
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Global buffer alignment: {} bytes\n"</span>, .{<span class="text-green-300">buffer_align</span>});
     
-    // 分配对齐内存
-    const aligned_mem = try alignedAlloc(std.heap.page_allocator, 1024, 64);
-    defer std.heap.page_allocator.free(aligned_mem);
+    <span class="text-slate-500">// 分配对齐内存</span>
+    <span class="text-blue-400">const</span> <span class="text-green-300">aligned_mem</span> = <span class="text-blue-400">try</span> <span class="text-green-300">alignedAlloc</span>(<span class="text-green-300">std</span>.<span class="text-green-300">heap</span>.<span class="text-green-300">page_allocator</span>, <span class="text-yellow-300">1024</span>, <span class="text-yellow-300">64</span>);
+    <span class="text-blue-400">defer</span> <span class="text-green-300">std</span>.<span class="text-green-300">heap</span>.<span class="text-green-300">page_allocator</span>.<span class="text-cyan-300">free</span>(<span class="text-green-300">aligned_mem</span>);
     
-    // 检查分配的内存对齐
-    const addr = @ptrToInt(aligned_mem.ptr);
-    const is_aligned = (addr & (64 - 1)) == 0;
-    try stdout.print("Allocated memory address: 0x{x}, aligned to 64 bytes: {}\n", .{addr, is_aligned});
+    <span class="text-slate-500">// 检查分配的内存对齐</span>
+    <span class="text-blue-400">const</span> <span class="text-green-300">addr</span> = <span class="text-cyan-300">@ptrToInt</span>(<span class="text-green-300">aligned_mem</span>.<span class="text-green-300">ptr</span>);
+    <span class="text-blue-400">const</span> <span class="text-green-300">is_aligned</span> = (<span class="text-green-300">addr</span> & (<span class="text-yellow-300">64</span> - <span class="text-yellow-300">1</span>)) == <span class="text-yellow-300">0</span>;
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Allocated memory address: 0x{x}, aligned to 64 bytes: {}\n"</span>, .{<span class="text-green-300">addr</span>, <span class="text-green-300">is_aligned</span>});
 }
 </code></pre>
                 </div>
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">自定义分配器</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">const std = @import("std");
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-blue-400">const</span> <span class="text-green-300">std</span> = <span class="text-cyan-300">@import</span>(<span class="text-yellow-300">"std"</span>);
 
-// 简单的线性分配器
-const LinearAllocator = struct {
-    buffer: []u8,
-    offset: usize,
+<span class="text-slate-500">// 简单的线性分配器</span>
+<span class="text-blue-400">const</span> <span class="text-purple-300">LinearAllocator</span> = <span class="text-blue-400">struct</span> {
+    <span class="text-green-300">buffer</span>: []<span class="text-purple-300">u8</span>,
+    <span class="text-green-300">offset</span>: <span class="text-purple-300">usize</span>,
     
-    pub fn init(buffer: []u8) LinearAllocator {
-        return LinearAllocator{ .buffer = buffer, .offset = 0 };
+    <span class="text-blue-400">pub fn</span> <span class="text-green-300">init</span>(<span class="text-green-300">buffer</span>: []<span class="text-purple-300">u8</span>) <span class="text-purple-300">LinearAllocator</span> {
+        <span class="text-blue-400">return</span> <span class="text-purple-300">LinearAllocator</span>{ .<span class="text-green-300">buffer</span> = <span class="text-green-300">buffer</span>, .<span class="text-green-300">offset</span> = <span class="text-yellow-300">0</span> };
     }
     
-    pub fn allocator(self: *LinearAllocator) std.mem.Allocator {
-        return .{
-            .ptr = self,
-            .vtable = &LinearAllocator.vtable,
+    <span class="text-blue-400">pub fn</span> <span class="text-green-300">allocator</span>(<span class="text-green-300">self</span>: *<span class="text-purple-300">LinearAllocator</span>) <span class="text-green-300">std</span>.<span class="text-green-300">mem</span>.<span class="text-purple-300">Allocator</span> {
+        <span class="text-blue-400">return</span> .{
+            .<span class="text-green-300">ptr</span> = <span class="text-green-300">self</span>,
+            .<span class="text-green-300">vtable</span> = &<span class="text-purple-300">LinearAllocator</span>.<span class="text-green-300">vtable</span>,
         };
     }
     
-    fn alloc(self: *LinearAllocator, len: usize, ptr_align: u8, len_align: u29, ret_addr: usize) ?[*]u8 {
-        _ = len_align;
-        _ = ret_addr;
+    <span class="text-blue-400">fn</span> <span class="text-green-300">alloc</span>(<span class="text-green-300">self</span>: *<span class="text-purple-300">LinearAllocator</span>, <span class="text-green-300">len</span>: <span class="text-purple-300">usize</span>, <span class="text-green-300">ptr_align</span>: <span class="text-purple-300">u8</span>, <span class="text-green-300">len_align</span>: <span class="text-purple-300">u29</span>, <span class="text-green-300">ret_addr</span>: <span class="text-purple-300">usize</span>) ?[*]<span class="text-purple-300">u8</span> {
+        _ = <span class="text-green-300">len_align</span>;
+        _ = <span class="text-green-300">ret_addr</span>;
         
-        // 计算对齐后的偏移量
-        const aligned_offset = std.mem.alignForward(self.offset, ptr_align);
-        if (aligned_offset + len > self.buffer.len) {
-            return null;
+        <span class="text-slate-500">// 计算对齐后的偏移量</span>
+        <span class="text-blue-400">const</span> <span class="text-green-300">aligned_offset</span> = <span class="text-green-300">std</span>.<span class="text-green-300">mem</span>.<span class="text-cyan-300">alignForward</span>(<span class="text-green-300">self</span>.<span class="text-green-300">offset</span>, <span class="text-green-300">ptr_align</span>);
+        <span class="text-blue-400">if</span> (<span class="text-green-300">aligned_offset</span> + <span class="text-green-300">len</span> > <span class="text-green-300">self</span>.<span class="text-green-300">buffer</span>.<span class="text-green-300">len</span>) {
+            <span class="text-blue-400">return</span> <span class="text-blue-400">null</span>;
         }
         
-        const ptr = @ptrCast([*]u8, &self.buffer[aligned_offset]);
-        self.offset = aligned_offset + len;
-        return ptr;
+        <span class="text-blue-400">const</span> <span class="text-green-300">ptr</span> = <span class="text-cyan-300">@ptrCast</span>([*]<span class="text-purple-300">u8</span>, &<span class="text-green-300">self</span>.<span class="text-green-300">buffer</span>[<span class="text-green-300">aligned_offset</span>]);
+        <span class="text-green-300">self</span>.<span class="text-green-300">offset</span> = <span class="text-green-300">aligned_offset</span> + <span class="text-green-300">len</span>;
+        <span class="text-blue-400">return</span> <span class="text-green-300">ptr</span>;
     }
     
-    fn resize(self: *LinearAllocator, buf: []u8, buf_align: u8, new_len: usize, len_align: u29, ret_addr: usize) bool {
-        _ = self;
-        _ = buf_align;
-        _ = len_align;
-        _ = ret_addr;
+    <span class="text-blue-400">fn</span> <span class="text-green-300">resize</span>(<span class="text-green-300">self</span>: *<span class="text-purple-300">LinearAllocator</span>, <span class="text-green-300">buf</span>: []<span class="text-purple-300">u8</span>, <span class="text-green-300">buf_align</span>: <span class="text-purple-300">u8</span>, <span class="text-green-300">new_len</span>: <span class="text-purple-300">usize</span>, <span class="text-green-300">len_align</span>: <span class="text-purple-300">u29</span>, <span class="text-green-300">ret_addr</span>: <span class="text-purple-300">usize</span>) <span class="text-blue-400">bool</span> {
+        _ = <span class="text-green-300">self</span>;
+        _ = <span class="text-green-300">buf_align</span>;
+        _ = <span class="text-green-300">len_align</span>;
+        _ = <span class="text-green-300">ret_addr</span>;
         
-        // 线性分配器不支持缩小，只支持在原地扩展
-        return new_len <= buf.len;
+        <span class="text-slate-500">// 线性分配器不支持缩小，只支持在原地扩展</span>
+        <span class="text-blue-400">return</span> <span class="text-green-300">new_len</span> <= <span class="text-green-300">buf</span>.<span class="text-green-300">len</span>;
     }
     
-    fn free(self: *LinearAllocator, buf: []u8, buf_align: u8, ret_addr: usize) void {
-        _ = self;
-        _ = buf;
-        _ = buf_align;
-        _ = ret_addr;
-        // 线性分配器不支持单独释放内存
+    <span class="text-blue-400">fn</span> <span class="text-green-300">free</span>(<span class="text-green-300">self</span>: *<span class="text-purple-300">LinearAllocator</span>, <span class="text-green-300">buf</span>: []<span class="text-purple-300">u8</span>, <span class="text-green-300">buf_align</span>: <span class="text-purple-300">u8</span>, <span class="text-green-300">ret_addr</span>: <span class="text-purple-300">usize</span>) <span class="text-purple-300">void</span> {
+        _ = <span class="text-green-300">self</span>;
+        _ = <span class="text-green-300">buf</span>;
+        _ = <span class="text-green-300">buf_align</span>;
+        _ = <span class="text-green-300">ret_addr</span>;
+        <span class="text-slate-500">// 线性分配器不支持单独释放内存</span>
     }
     
-    // 重置分配器，允许重用内存
-    pub fn reset(self: *LinearAllocator) void {
-        self.offset = 0;
+    <span class="text-slate-500">// 重置分配器，允许重用内存</span>
+    <span class="text-blue-400">pub fn</span> <span class="text-green-300">reset</span>(<span class="text-green-300">self</span>: *<span class="text-purple-300">LinearAllocator</span>) <span class="text-purple-300">void</span> {
+        <span class="text-green-300">self</span>.<span class="text-green-300">offset</span> = <span class="text-yellow-300">0</span>;
     }
     
-    pub const vtable: std.mem.Allocator.VTable = .{
-        .alloc = alloc,
-        .resize = resize,
-        .free = free,
+    <span class="text-blue-400">pub const</span> <span class="text-green-300">vtable</span>: <span class="text-green-300">std</span>.<span class="text-green-300">mem</span>.<span class="text-purple-300">Allocator</span>.<span class="text-purple-300">VTable</span> = .{
+        .<span class="text-green-300">alloc</span> = <span class="text-green-300">alloc</span>,
+        .<span class="text-green-300">resize</span> = <span class="text-green-300">resize</span>,
+        .<span class="text-green-300">free</span> = <span class="text-green-300">free</span>,
     };
 };
 
-pub fn main() !void {
-    const stdout = std.io.getStdOut().writer();
+<span class="text-blue-400">pub fn</span> <span class="text-green-300">main</span>() !<span class="text-purple-300">void</span> {
+    <span class="text-blue-400">const</span> <span class="text-green-300">stdout</span> = <span class="text-green-300">std</span>.<span class="text-green-300">io</span>.<span class="text-cyan-300">getStdOut</span>().<span class="text-green-300">writer</span>();
     
-    try stdout.print("Custom allocator example\n", .{});
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Custom allocator example\n"</span>, .{});
     
-    // 创建内存池
-    var memory_pool: [4096]u8 = undefined;
+    <span class="text-slate-500">// 创建内存池</span>
+    <span class="text-blue-400">var</span> <span class="text-green-300">memory_pool</span>: [<span class="text-yellow-300">4096</span>]<span class="text-purple-300">u8</span> = <span class="text-blue-400">undefined</span>;
     
-    // 初始化线性分配器
-    var linear_allocator = LinearAllocator.init(&memory_pool);
-    const allocator = linear_allocator.allocator();
+    <span class="text-slate-500">// 初始化线性分配器</span>
+    <span class="text-blue-400">var</span> <span class="text-green-300">linear_allocator</span> = <span class="text-purple-300">LinearAllocator</span>.<span class="text-cyan-300">init</span>(&<span class="text-green-300">memory_pool</span>);
+    <span class="text-blue-400">const</span> <span class="text-green-300">allocator</span> = <span class="text-green-300">linear_allocator</span>.<span class="text-cyan-300">allocator</span>();
     
-    // 使用自定义分配器
-    const buffer = try allocator.alloc(u8, 1024);
-    defer allocator.free(buffer);
+    <span class="text-slate-500">// 使用自定义分配器</span>
+    <span class="text-blue-400">const</span> <span class="text-green-300">buffer</span> = <span class="text-blue-400">try</span> <span class="text-green-300">allocator</span>.<span class="text-cyan-300">alloc</span>(<span class="text-purple-300">u8</span>, <span class="text-yellow-300">1024</span>);
+    <span class="text-blue-400">defer</span> <span class="text-green-300">allocator</span>.<span class="text-cyan-300">free</span>(<span class="text-green-300">buffer</span>);
     
-    // 填充并使用内存
-    std.mem.set(u8, buffer, 'A');
-    try stdout.print("Allocated buffer size: {} bytes, first 10 bytes: {s}\n", .{buffer.len, buffer[0..10]});
+    <span class="text-slate-500">// 填充并使用内存</span>
+    <span class="text-green-300">std</span>.<span class="text-green-300">mem</span>.<span class="text-cyan-300">set</span>(<span class="text-purple-300">u8</span>, <span class="text-green-300">buffer</span>, <span class="text-yellow-300">'A'</span>);
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Allocated buffer size: {} bytes, first 10 bytes: {s}\n"</span>, .{<span class="text-green-300">buffer</span>.<span class="text-green-300">len</span>, <span class="text-green-300">buffer</span>[<span class="text-yellow-300">0</span>..<span class="text-yellow-300">10</span>]});
     
-    // 分配更多内存
-    const string = try std.fmt.allocPrint(allocator, "Hello from custom allocator!", .{});
-    defer allocator.free(string);
+    <span class="text-slate-500">// 分配更多内存</span>
+    <span class="text-blue-400">const</span> <span class="text-green-300">string</span> = <span class="text-blue-400">try</span> <span class="text-green-300">std</span>.<span class="text-green-300">fmt</span>.<span class="text-cyan-300">allocPrint</span>(<span class="text-green-300">allocator</span>, <span class="text-yellow-300">"Hello from custom allocator!"</span>, .{});
+    <span class="text-blue-400">defer</span> <span class="text-green-300">allocator</span>.<span class="text-cyan-300">free</span>(<span class="text-green-300">string</span>);
     
-    try stdout.print("Allocated string: {s}\n", .{string});
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Allocated string: {s}\n"</span>, .{<span class="text-green-300">string</span>});
     
-    // 重置分配器
-    linear_allocator.reset();
-    try stdout.print("Allocator reset, memory can be reused\n", .{});
+    <span class="text-slate-500">// 重置分配器</span>
+    <span class="text-green-300">linear_allocator</span>.<span class="text-cyan-300">reset</span>();
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Allocator reset, memory can be reused\n"</span>, .{});
 }
 </code></pre>
                 </div>
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">编译时代码生成</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">const std = @import("std");
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300"><span class="text-blue-400">const</span> <span class="text-green-300">std</span> = <span class="text-cyan-300">@import</span>(<span class="text-yellow-300">"std"</span>);
 
-// 编译时生成函数
-fn generateMathFunction(comptime operation: []const u8) type {
-    return struct {
-        pub fn apply(a: f64, b: f64) f64 {
-            if (std.mem.eql(u8, operation, "add")) {
-                return a + b;
-            } else if (std.mem.eql(u8, operation, "subtract")) {
-                return a - b;
-            } else if (std.mem.eql(u8, operation, "multiply")) {
-                return a * b;
-            } else if (std.mem.eql(u8, operation, "divide")) {
-                return a / b;
-            } else {
-                @compileError("Unknown operation: " ++ operation);
+<span class="text-slate-500">// 编译时生成函数</span>
+<span class="text-blue-400">fn</span> <span class="text-green-300">generateMathFunction</span>(<span class="text-blue-400">comptime</span> <span class="text-green-300">operation</span>: []<span class="text-blue-400">const</span> <span class="text-purple-300">u8</span>) <span class="text-purple-300">type</span> {
+    <span class="text-blue-400">return</span> <span class="text-blue-400">struct</span> {
+        <span class="text-blue-400">pub fn</span> <span class="text-green-300">apply</span>(<span class="text-green-300">a</span>: <span class="text-purple-300">f64</span>, <span class="text-green-300">b</span>: <span class="text-purple-300">f64</span>) <span class="text-purple-300">f64</span> {
+            <span class="text-blue-400">if</span> (<span class="text-green-300">std</span>.<span class="text-green-300">mem</span>.<span class="text-cyan-300">eql</span>(<span class="text-purple-300">u8</span>, <span class="text-green-300">operation</span>, <span class="text-yellow-300">"add"</span>)) {
+                <span class="text-blue-400">return</span> <span class="text-green-300">a</span> + <span class="text-green-300">b</span>;
+            } <span class="text-blue-400">else if</span> (<span class="text-green-300">std</span>.<span class="text-green-300">mem</span>.<span class="text-cyan-300">eql</span>(<span class="text-purple-300">u8</span>, <span class="text-green-300">operation</span>, <span class="text-yellow-300">"subtract"</span>)) {
+                <span class="text-blue-400">return</span> <span class="text-green-300">a</span> - <span class="text-green-300">b</span>;
+            } <span class="text-blue-400">else if</span> (<span class="text-green-300">std</span>.<span class="text-green-300">mem</span>.<span class="text-cyan-300">eql</span>(<span class="text-purple-300">u8</span>, <span class="text-green-300">operation</span>, <span class="text-yellow-300">"multiply"</span>)) {
+                <span class="text-blue-400">return</span> <span class="text-green-300">a</span> * <span class="text-green-300">b</span>;
+            } <span class="text-blue-400">else if</span> (<span class="text-green-300">std</span>.<span class="text-green-300">mem</span>.<span class="text-cyan-300">eql</span>(<span class="text-purple-300">u8</span>, <span class="text-green-300">operation</span>, <span class="text-yellow-300">"divide"</span>)) {
+                <span class="text-blue-400">return</span> <span class="text-green-300">a</span> / <span class="text-green-300">b</span>;
+            } <span class="text-blue-400">else</span> {
+                <span class="text-cyan-300">@compileError</span>(<span class="text-yellow-300">"Unknown operation: "</span> ++ <span class="text-green-300">operation</span>);
             }
         }
     };
 }
 
-// 编译时生成结构体字段
-fn generateVector(comptime dimensions: u32) type {
-    comptime var fields: [dimensions]std.builtin.Type.StructField = undefined;
+<span class="text-slate-500">// 编译时生成结构体字段</span>
+<span class="text-blue-400">fn</span> <span class="text-green-300">generateVector</span>(<span class="text-blue-400">comptime</span> <span class="text-green-300">dimensions</span>: <span class="text-purple-300">u32</span>) <span class="text-purple-300">type</span> {
+    <span class="text-blue-400">comptime var</span> <span class="text-green-300">fields</span>: [<span class="text-green-300">dimensions</span>]<span class="text-green-300">std</span>.<span class="text-green-300">builtin</span>.<span class="text-green-300">Type</span>.<span class="text-purple-300">StructField</span> = <span class="text-blue-400">undefined</span>;
     
-    for (0..dimensions) |i| {
-        const name = "x" ++ formatInt(@intCast(u32, i));
-        fields[i] = .{
-            .name = name,
-            .type = f64,
-            .default_value = @ptrCast(*const anyopaque, &@as(f64, 0.0)),
-            .is_comptime = false,
-            .alignment = @alignOf(f64),
+    <span class="text-blue-400">for</span> (<span class="text-yellow-300">0</span>..<span class="text-green-300">dimensions</span>) |<span class="text-green-300">i</span>| {
+        <span class="text-blue-400">const</span> <span class="text-green-300">name</span> = <span class="text-yellow-300">"x"</span> ++ <span class="text-green-300">formatInt</span>(<span class="text-cyan-300">@intCast</span>(<span class="text-purple-300">u32</span>, <span class="text-green-300">i</span>));
+        <span class="text-green-300">fields</span>[<span class="text-green-300">i</span>] = .{
+            .<span class="text-green-300">name</span> = <span class="text-green-300">name</span>,
+            .<span class="text-green-300">type</span> = <span class="text-purple-300">f64</span>,
+            .<span class="text-green-300">default_value</span> = <span class="text-cyan-300">@ptrCast</span>(*<span class="text-blue-400">const</span> <span class="text-purple-300">anyopaque</span>, &<span class="text-cyan-300">@as</span>(<span class="text-purple-300">f64</span>, <span class="text-yellow-300">0.0</span>)),
+            .<span class="text-green-300">is_comptime</span> = <span class="text-yellow-300">false</span>,
+            .<span class="text-green-300">alignment</span> = <span class="text-cyan-300">@alignOf</span>(<span class="text-purple-300">f64</span>),
         };
     }
     
-    return @Type(.{
-        .Struct = .{
-            .layout = .Auto,
-            .fields = &fields,
-            .decls = &.{},
-            .is_tuple = false,
+    <span class="text-blue-400">return</span> <span class="text-cyan-300">@Type</span>(.{
+        .<span class="text-green-300">Struct</span> = .{
+            .<span class="text-green-300">layout</span> = .<span class="text-purple-300">Auto</span>,
+            .<span class="text-green-300">fields</span> = &<span class="text-green-300">fields</span>,
+            .<span class="text-green-300">decls</span> = &.{},
+            .<span class="text-green-300">is_tuple</span> = <span class="text-yellow-300">false</span>,
         },
     });
 }
 
-// 辅助函数：编译时将整数转换为字符串
-fn formatInt(comptime n: u32) []const u8 { comptime {
-    var buffer: [20]u8 = undefined;
-    const len = std.fmt.formatInt(n, 10, .lower, .{}, &buffer) catch unreachable;
-    return buffer[0..len];
+<span class="text-slate-500">// 辅助函数：编译时将整数转换为字符串</span>
+<span class="text-blue-400">fn</span> <span class="text-green-300">formatInt</span>(<span class="text-blue-400">comptime</span> <span class="text-green-300">n</span>: <span class="text-purple-300">u32</span>) []<span class="text-blue-400">const</span> <span class="text-purple-300">u8</span> { <span class="text-blue-400">comptime</span> {
+    <span class="text-blue-400">var</span> <span class="text-green-300">buffer</span>: [<span class="text-yellow-300">20</span>]<span class="text-purple-300">u8</span> = <span class="text-blue-400">undefined</span>;
+    <span class="text-blue-400">const</span> <span class="text-green-300">len</span> = <span class="text-green-300">std</span>.<span class="text-green-300">fmt</span>.<span class="text-cyan-300">formatInt</span>(<span class="text-green-300">n</span>, <span class="text-yellow-300">10</span>, .<span class="text-purple-300">lower</span>, .{}, &<span class="text-green-300">buffer</span>) <span class="text-blue-400">catch</span> <span class="text-blue-400">unreachable</span>;
+    <span class="text-blue-400">return</span> <span class="text-green-300">buffer</span>[<span class="text-yellow-300">0</span>..<span class="text-green-300">len</span>];
 } }
 
-// 编译时生成的测试
-comptime {
-    // 生成并测试加法函数
-    const AddFunction = generateMathFunction("add");
-    std.debug.assert(AddFunction.apply(1.0, 2.0) == 3.0);
+<span class="text-slate-500">// 编译时生成的测试</span>
+<span class="text-blue-400">comptime</span> {
+    <span class="text-slate-500">// 生成并测试加法函数</span>
+    <span class="text-blue-400">const</span> <span class="text-green-300">AddFunction</span> = <span class="text-green-300">generateMathFunction</span>(<span class="text-yellow-300">"add"</span>);
+    <span class="text-green-300">std</span>.<span class="text-green-300">debug</span>.<span class="text-cyan-300">assert</span>(<span class="text-green-300">AddFunction</span>.<span class="text-cyan-300">apply</span>(<span class="text-yellow-300">1.0</span>, <span class="text-yellow-300">2.0</span>) == <span class="text-yellow-300">3.0</span>);
     
-    // 生成并测试乘法函数
-    const MultiplyFunction = generateMathFunction("multiply");
-    std.debug.assert(MultiplyFunction.apply(2.0, 3.0) == 6.0);
+    <span class="text-slate-500">// 生成并测试乘法函数</span>
+    <span class="text-blue-400">const</span> <span class="text-green-300">MultiplyFunction</span> = <span class="text-green-300">generateMathFunction</span>(<span class="text-yellow-300">"multiply"</span>);
+    <span class="text-green-300">std</span>.<span class="text-green-300">debug</span>.<span class="text-cyan-300">assert</span>(<span class="text-green-300">MultiplyFunction</span>.<span class="text-cyan-300">apply</span>(<span class="text-yellow-300">2.0</span>, <span class="text-yellow-300">3.0</span>) == <span class="text-yellow-300">6.0</span>);
     
-    // 生成2D向量类型
-    const Vector2D = generateVector(2);
-    _ = Vector2D{ .x0 = 1.0, .x1 = 2.0 };
+    <span class="text-slate-500">// 生成2D向量类型</span>
+    <span class="text-blue-400">const</span> <span class="text-green-300">Vector2D</span> = <span class="text-green-300">generateVector</span>(<span class="text-yellow-300">2</span>);
+    _ = <span class="text-green-300">Vector2D</span>{ .<span class="text-green-300">x0</span> = <span class="text-yellow-300">1.0</span>, .<span class="text-green-300">x1</span> = <span class="text-yellow-300">2.0</span> };
     
-    // 生成3D向量类型
-    const Vector3D = generateVector(3);
-    _ = Vector3D{ .x0 = 1.0, .x1 = 2.0, .x2 = 3.0 };
+    <span class="text-slate-500">// 生成3D向量类型</span>
+    <span class="text-blue-400">const</span> <span class="text-green-300">Vector3D</span> = <span class="text-green-300">generateVector</span>(<span class="text-yellow-300">3</span>);
+    _ = <span class="text-green-300">Vector3D</span>{ .<span class="text-green-300">x0</span> = <span class="text-yellow-300">1.0</span>, .<span class="text-green-300">x1</span> = <span class="text-yellow-300">2.0</span>, .<span class="text-green-300">x2</span> = <span class="text-yellow-300">3.0</span> };
     
-    std.debug.print("Compiled time code generation tests passed!\n", .{});
+    <span class="text-green-300">std</span>.<span class="text-green-300">debug</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Compiled time code generation tests passed!\n"</span>, .{});
 }
 
-pub fn main() !void {
-    const stdout = std.io.getStdOut().writer();
+<span class="text-blue-400">pub fn</span> <span class="text-green-300">main</span>() !<span class="text-purple-300">void</span> {
+    <span class="text-blue-400">const</span> <span class="text-green-300">stdout</span> = <span class="text-green-300">std</span>.<span class="text-green-300">io</span>.<span class="text-cyan-300">getStdOut</span>().<span class="text-green-300">writer</span>();
     
-    try stdout.print("Compile-time code generation example\n", .{});
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Compile-time code generation example\n"</span>, .{});
     
-    // 使用编译时生成的函数
-    const SubtractFunction = generateMathFunction("subtract");
-    const result = SubtractFunction.apply(10.0, 3.0);
-    try stdout.print("Subtraction result: {d:.2}\n", .{result});
+    <span class="text-slate-500">// 使用编译时生成的函数</span>
+    <span class="text-blue-400">const</span> <span class="text-green-300">SubtractFunction</span> = <span class="text-green-300">generateMathFunction</span>(<span class="text-yellow-300">"subtract"</span>);
+    <span class="text-blue-400">const</span> <span class="text-green-300">result</span> = <span class="text-green-300">SubtractFunction</span>.<span class="text-cyan-300">apply</span>(<span class="text-yellow-300">10.0</span>, <span class="text-yellow-300">3.0</span>);
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"Subtraction result: {d:.2}\n"</span>, .{<span class="text-green-300">result</span>});
     
-    // 使用编译时生成的4D向量
-    const Vector4D = generateVector(4);
-    const vec4 = Vector4D{ .x0 = 1.0, .x1 = 2.0, .x2 = 3.0, .x3 = 4.0 };
-    try stdout.print("4D vector components: {d:.1}, {d:.1}, {d:.1}, {d:.1}\n", 
-        .{vec4.x0, vec4.x1, vec4.x2, vec4.x3});
+    <span class="text-slate-500">// 使用编译时生成的4D向量</span>
+    <span class="text-blue-400">const</span> <span class="text-green-300">Vector4D</span> = <span class="text-green-300">generateVector</span>(<span class="text-yellow-300">4</span>);
+    <span class="text-blue-400">const</span> <span class="text-green-300">vec4</span> = <span class="text-green-300">Vector4D</span>{ .<span class="text-green-300">x0</span> = <span class="text-yellow-300">1.0</span>, .<span class="text-green-300">x1</span> = <span class="text-yellow-300">2.0</span>, .<span class="text-green-300">x2</span> = <span class="text-yellow-300">3.0</span>, .<span class="text-green-300">x3</span> = <span class="text-yellow-300">4.0</span> };
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"4D vector components: {d:.1}, {d:.1}, {d:.1}, {d:.1}\n"</span>, 
+        .{<span class="text-green-300">vec4</span>.<span class="text-green-300">x0</span>, <span class="text-green-300">vec4</span>.<span class="text-green-300">x1</span>, <span class="text-green-300">vec4</span>.<span class="text-green-300">x2</span>, <span class="text-green-300">vec4</span>.<span class="text-green-300">x3</span>});
     
-    try stdout.print("All compile-time generated code works!\n", .{});
+    <span class="text-blue-400">try</span> <span class="text-green-300">stdout</span>.<span class="text-cyan-300">print</span>(<span class="text-yellow-300">"All compile-time generated code works!\n"</span>, .{});
 }
 </code></pre>
                 </div>
