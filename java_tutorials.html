@@ -1121,3 +1121,119 @@
                                 }<br>
                                 <br>
                                 <span class="text-purple-400">class</span> Rectangle
+
+                </div>
+            </div>
+        </section><!-- 26. Lambda函数 -->
+        <section id="section-26" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">26. Lambda函数</span>
+            </h2>
+            
+            <div class="language-content" data-lang="java">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 匿名函数，用于简单的函数定义</h4>
+                        <p class="text-slate-300 mb-4">特点：简洁的语法，支持单行定义，支持闭包，常用于函数式编程。注意事项：只能包含一个表达式，不能包含复杂逻辑，可读性较差。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 基本lambda函数</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">add</span> = <span class="text-purple-400">lambda</span> <span class="text-blue-300">a</span>, <span class="text-blue-300">b</span>: <span class="text-blue-300">a</span> + <span class="text-blue-300">b</span><br>
+                                <span class="text-green-300">print</span>(<span class="text-blue-300">add</span>(<span class="text-yellow-300">3</span>, <span class="text-yellow-300">5</span>)) <span class="text-slate-500"># 8</span><br>
+                                <br>
+                                <span class="text-blue-300">greeting</span> = <span class="text-purple-400">lambda</span> <span class="text-blue-300">name</span>: <span class="text-green-300">f"Hello, {name}!"</span><br>
+                                <span class="text-green-300">print</span>(<span class="text-blue-300">greeting</span>(<span class="text-green-300">"张三"</span>)) <span class="text-slate-500"># Hello, 张三!</span>
+                            </div>
+                            
+                            <div class="text-slate-400 mt-4 mb-2"># lambda函数与内置函数结合</div>
+                            <div class="text-sm leading-6 mt-2">
+                                <span class="text-blue-300">numbers</span> = [<span class="text-yellow-300">5</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">8</span>, <span class="text-yellow-300">1</span>, <span class="text-yellow-300">9</span>, <span class="text-yellow-300">3</span>]<br>
+                                <br>
+                                <span class="text-blue-300"># 排序</span><br>
+                                <span class="text-blue-300">sorted_numbers</span> = <span class="text-purple-400">sorted</span>(<span class="text-blue-300">numbers</span>, <span class="text-purple-400">key</span>=<span class="text-purple-400">lambda</span> <span class="text-blue-300">x</span>: <span class="text-blue-300">x</span>)<br>
+                                <span class="text-green-300">print</span>(<span class="text-blue-300">sorted_numbers</span>) <span class="text-slate-500"># [1, 2, 3, 5, 8, 9]</span><br>
+                                <br>
+                                <span class="text-blue-300"># 映射</span><br>
+                                <span class="text-blue-300">squares</span> = <span class="text-purple-400">list</span>(<span class="text-purple-400">map</span>(<span class="text-purple-400">lambda</span> <span class="text-blue-300">x</span>: <span class="text-blue-300">x</span>*<span class="text-blue-300">x</span>, <span class="text-blue-300">numbers</span>))<br>
+                                <span class="text-green-300">print</span>(<span class="text-blue-300">squares</span>) <span class="text-slate-500"># [25, 4, 64, 1, 81, 9]</span><br>
+                                <br>
+                                <span class="text-blue-300"># 过滤</span><br>
+                                <span class="text-blue-300">even_numbers</span> = <span class="text-purple-400">list</span>(<span class="text-purple-400">filter</span>(<span class="text-purple-400">lambda</span> <span class="text-blue-300">x</span>: <span class="text-blue-300">x</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span>, <span class="text-blue-300">numbers</span>))<br>
+                                <span class="text-green-300">print</span>(<span class="text-blue-300">even_numbers</span>) <span class="text-slate-500"># [2, 8]</span>
+                            </div>
+                        </div>
+                    </div>
+        </section>
+        
+        <!-- 27. 函数式编程 -->
+        <section id="section-27" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">27. 函数式编程</span>
+            </h2>
+            
+            <div class="language-content" data-lang="java">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 函数式编程的核心函数</h4>
+                <p class="text-slate-300 mb-4">特点：支持函数式编程，简洁高效，减少代码量，支持链式调用。注意事项：map和filter返回迭代器，需要转换为列表查看结果，reduce需要导入functools模块。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># map函数</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">numbers</span> = [<span class="text-yellow-300">1, 2, 3, 4, 5</span>]<br>
+                        <span class="text-blue-300"># 使用map将列表中的每个元素乘以2</span><br>
+                        <span class="text-blue-300">doubled</span> = <span class="text-purple-400">list</span>(<span class="text-purple-400">map</span>(<span class="text-purple-400">lambda</span> <span class="text-blue-300">x</span>: <span class="text-blue-300">x</span> * <span class="text-yellow-300">2</span>, <span class="text-blue-300">numbers</span>))<br>
+                        <span class="text-green-300">print</span>(<span class="text-blue-300">doubled</span>) <span class="text-slate-500"># [2, 4, 6, 8, 10]</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2"># filter函数</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">numbers</span> = [<span class="text-yellow-300">1, 2, 3, 4, 5, 6, 7, 8, 9, 10</span>]<br>
+                        <span class="text-blue-300"># 使用filter过滤出偶数</span><br>
+                        <span class="text-blue-300">even_numbers</span> = <span class="text-purple-400">list</span>(<span class="text-purple-400">filter</span>(<span class="text-purple-400">lambda</span> <span class="text-blue-300">x</span>: <span class="text-blue-300">x</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span>, <span class="text-blue-300">numbers</span>))<br>
+                        <span class="text-green-300">print</span>(<span class="text-blue-300">even_numbers</span>) <span class="text-slate-500"># [2, 4, 6, 8, 10]</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2"># reduce函数</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-purple-400">from</span> <span class="text-blue-300">functools</span> <span class="text-purple-400">import</span> <span class="text-blue-300">reduce</span><br>
+                        <span class="text-blue-300">numbers</span> = [<span class="text-yellow-300">1, 2, 3, 4, 5</span>]<br>
+                        <span class="text-blue-300"># 使用reduce计算列表中所有元素的和</span><br>
+                        <span class="text-blue-300">sum_result</span> = <span class="text-blue-300">reduce</span>(<span class="text-purple-400">lambda</span> <span class="text-blue-300">x</span>, <span class="text-blue-300">y</span>: <span class="text-blue-300">x</span> + <span class="text-blue-300">y</span>, <span class="text-blue-300">numbers</span>)<br>
+                        <span class="text-green-300">print</span>(<span class="text-blue-300">sum_result</span>) <span class="text-slate-500"># 15</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 28. 推导式综合应用 -->
+        <section id="section-28" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">28. 推导式综合应用</span>
+            </h2>
+            
+            <div class="language-content" data-lang="java">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 各种推导式的综合应用</h4>
+                        <p class="text-slate-300 mb-4">特点：简洁高效，可读性好，支持多种数据结构，支持嵌套推导。注意事项：避免过于复杂的嵌套，保持代码可读性，根据实际需求选择合适的推导式。</p>
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 列表推导式的综合应用</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300"># 生成1-10的平方列表</span><br>
+                                <span class="text-blue-300">squares</span> = [<span class="text-blue-300">x</span>*<span class="text-blue-300">x</span> <span class="text-purple-400">for</span> <span class="text-blue-300">x</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-yellow-300">1, 11</span>)]<br>
+                                <span class="text-green-300">print(squares)</span> <span class="text-slate-500"># [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</span><br>
+                                <br>
+                                <span class="text-blue-300"># 过滤出偶数的平方</span><br>
+                                <span class="text-blue-300">even_squares</span> = [<span class="text-blue-300">x</span>*<span class="text-blue-300">x</span> <span class="text-purple-400">for</span> <span class="text-blue-300">x</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-yellow-300">1, 11</span>) <span class="text-purple-400">if</span> <span class="text-blue-300">x</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span>]<br>
+                                <span class="text-green-300">print(even_squares)</span> <span class="text-slate-500"># [4, 16, 36, 64, 100]</span>
+                            </div>
+                            
+                            <div class="text-slate-400 mt-4 mb-2"># 字典推导式的综合应用</div>
+                            <div class="text-sm leading-6 mt-2">
+                                <span class="text-blue-300"># 生成数字到平方的映射</span><br>
+                                <span class="text-blue-300">square_dict</span> = {<span class="text-blue-300">x</span>: <span class="text-blue-300">x</span>*<span class="text-blue-300">x</span> <span class="text-purple-400">for</span> <span class="text-blue-300">x</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-yellow-300">1, 6</span>)}<br>
+                                <span class="text-green-300">print(square_dict)</span> <span class="text-slate-500"># {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}</span><br>
+                                <br>
+                                <span class="text-blue-300"># 过滤出值大于10的键值对</span><br>
+                                <span class="text-blue-300">filtered_dict</span> = {<span class="text-blue-300">k</span>: <span class="text-blue-300">v</span> <span class="text-purple-400">for</span> <span class="text-blue-300">k</span>, <span class="text-blue-300">v</span> <span class="text-purple-400">in</span> <span class="text-blue-300">square_dict</span>.<span class="text-blue-300">items</span>() <span class="text-purple-400">if</span> <span class="text-blue-300">v</span> > <span class="text-yellow-300">10</span>}<br>
+                                <span class="text-green-300">print(filtered_dict)</span> <span class="text-slate-500"># {4: 16, 5: 25}</span>
+                            </div>
+                        </div>
+                    </div>
+        </section>
+        
+        
