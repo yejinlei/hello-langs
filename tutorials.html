@@ -809,6 +809,30 @@
                 
                 if (mainContent) {
                     contentDiv.innerHTML = mainContent.innerHTML;
+                    
+                    // Remove unwanted containers but keep their content
+                    setTimeout(() => {
+                        // Find all divs with the specified classes
+                        const unwantedDivs = contentDiv.querySelectorAll('div.bg-slate-800, div.rounded-xl, div.p-8, div.border, div.border-slate-700');
+                        
+                        // Create a set to avoid processing the same div multiple times
+                        const divsToProcess = new Set(unwantedDivs);
+                        
+                        // Process each div
+                        divsToProcess.forEach(div => {
+                            // Check if div has the combination of classes from the screenshot
+                            if (div.classList.contains('bg-slate-800') && div.classList.contains('rounded-xl') && 
+                                div.classList.contains('p-8') && div.classList.contains('border') && 
+                                div.classList.contains('border-slate-700')) {
+                                // If it has all the classes, move its children up and remove it
+                                while (div.firstChild) {
+                                    div.parentNode.insertBefore(div.firstChild, div);
+                                }
+                                div.parentNode.removeChild(div);
+                            }
+                        });
+                    }, 0);
+                    
                     // 初始化语法高亮
                     setTimeout(() => {
                         // 检查是否是使用span标签语法高亮的语言
