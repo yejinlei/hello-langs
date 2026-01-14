@@ -4,7 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Erlang 教程 - Hello 编程语言</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // 尝试加载 Tailwind CSS，如果失败则使用备用方案
+        window.tailwindCdnLoaded = false;
+        function loadTailwindCSS() {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.tailwindcss.com';
+            script.onload = function() {
+                window.tailwindCdnLoaded = true;
+                // Tailwind 配置
+                tailwind.config = {
+                    theme: {
+                        extend: {
+                            colors: {
+                                primary: '#10b981',
+                                secondary: '#8b5cf6',
+                                dark: '#1e293b',
+                                light: '#f8fafc'
+                            }
+                        }
+                    }
+                }
+            };
+            script.onerror = function() {
+                console.warn('Failed to load Tailwind CSS from CDN, applying fallback styles');
+                applyFallbackStyles();
+            };
+            document.head.appendChild(script);
+        }
+        
+        function applyFallbackStyles() {
+            // 应用基本的 Tailwind 类对应的样式
+            const fallbackStyles = document.createElement('style');
+            fallbackStyles.textContent = `
+                /* 基本布局类 */
+                .container { width: 100%; margin-right: auto; margin-left: auto; padding-right: 1rem; padding-left: 1rem; }
+                .grid { display: grid; }
+                .flex { display: flex; }
+                .hidden { display: none; }
+                
+                /* 网格列类 */
+                .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+                @media (min-width: 1024px) {
+                    .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+                }
+                
+                /* 间距类 */
+                .p-8 { padding: 2rem; }
+                .p-4 { padding: 1rem; }
+                .mb-16 { margin-bottom: 4rem; }
+                .mb-8 { margin-bottom: 2rem; }
+                .mb-4 { margin-bottom: 1rem; }
+                .mb-2 { margin-bottom: 0.5rem; }
+                .mt-4 { margin-top: 1rem; }
+                .mr-2 { margin-right: 0.5rem; }
+                .ml-2 { margin-left: 0.5rem; }
+                
+                /* 字体类 */
+                .text-3xl { font-size: 1.875rem; }
+                .text-lg { font-size: 1.125rem; }
+                .text-sm { font-size: 0.875rem; }
+                .font-bold { font-weight: 700; }
+                .font-medium { font-weight: 500; }
+                
+                /* 文本类 */
+                .text-center { text-align: center; }
+                .text-purple-400 { color: #a78bfa; }
+                .text-slate-300 { color: #cbd5e1; }
+                .text-slate-400 { color: #94a3b8; }
+                
+                /* 背景类 */
+                .bg-slate-900 { background-color: #0f172a; }
+                .bg-slate-800 { background-color: #1e293b; }
+                
+                /* 边框类 */
+                .rounded-xl { border-radius: 0.75rem; }
+                .rounded-lg { border-radius: 0.5rem; }
+                .rounded { border-radius: 0.25rem; }
+                
+                /* 其他类 */
+                .gap-8 { gap: 2rem; }
+                .items-center { align-items: center; }
+                .justify-between { justify-content: space-between; }
+                .w-full { width: 100%; }
+            `;
+            document.head.appendChild(fallbackStyles);
+        }
+        
+        // 加载 Tailwind CSS
+        loadTailwindCSS();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -26,6 +115,13 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(148, 163, 184, 0.1);
         }
+        .language-tab {
+            transition: all 0.3s ease;
+        }
+        .language-tab.active {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            color: white;
+        }
         .code-block {
             background: rgba(2, 6, 23, 0.9);
             border-left: 4px solid #3B82F6;
@@ -35,32 +131,85 @@
             padding: 2px 4px;
             border-radius: 3px;
         }
+        .language-content.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">
-    <main class="container mx-auto px-4 py-8 max-w-6xl">
+    <div class="container mx-auto px-4 py-8 max-w-6xl flex flex-col md:flex-row gap-8">
+        <!-- Sidebar Navigation -->
+        <aside class="lg:w-1/4">
+            <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 sticky top-24 border border-slate-700">
+                <h3 class="text-lg font-bold mb-4 gradient-text">章节导航</h3>
+                <nav class="space-y-2">
+                    <a href="#section-1" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">1. Erlang 简介</a>
+                    <a href="#section-2" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">2. Erlang 基础语法</a>
+                    <a href="#section-3" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">3. Erlang 函数和模块</a>
+                    <a href="#section-4" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">4. Erlang 控制流</a>
+                    <a href="#section-5" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">5. Erlang 错误处理</a>
+                    <a href="#section-6" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">6. Erlang 并发编程</a>
+                    <a href="#section-7" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">7. Erlang 消息传递</a>
+                    <a href="#section-8" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">8. Erlang OTP框架</a>
+                    <a href="#section-9" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">9. Erlang 分布式编程</a>
+                    <a href="#section-10" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">10. Erlang 高级特性</a>
+                </nav>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="flex-1">
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Sidebar Navigation -->
+                <aside class="lg:w-1/4">
+                    <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 sticky top-24 border border-slate-700">
+                        <h3 class="text-lg font-bold mb-4 gradient-text">章节导航</h3>
+                        <nav class="space-y-2">
+                            <a href="#section-1" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">1. Erlang 简介</a>
+                            <a href="#section-2" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">2. Erlang 基础语法</a>
+                            <a href="#section-3" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">3. Erlang 函数和模块</a>
+                            <a href="#section-4" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">4. Erlang 控制流</a>
+                            <a href="#section-5" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">5. Erlang 错误处理</a>
+                            <a href="#section-6" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">6. Erlang 并发编程</a>
+                            <a href="#section-7" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">7. Erlang 消息传递</a>
+                            <a href="#section-8" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">8. Erlang OTP框架</a>
+                            <a href="#section-9" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">9. Erlang 分布式编程</a>
+                            <a href="#section-10" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">10. Erlang 高级特性</a>
+                        </nav>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="lg:w-3/4">
         <!-- 1. Erlang 简介 -->
         <section id="section-1" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">1. Erlang 简介</span>
             </h2>
             
-            <div class="language-content" data-lang="erlang">
-                <h4 class="text-lg font-medium mb-4 text-purple-400">Erlang - 专为高并发和容错设计的编程语言</h4>
-                <p class="text-slate-300 mb-4">Erlang是一种函数式编程语言，最初由爱立信公司开发，用于构建高可用性、低延迟的电信系统。它以其卓越的并发处理能力、分布式计算支持和内置的容错机制而闻名，广泛应用于需要高可靠性的系统开发。</p>
-                
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">Erlang 语言特点</h5>
-                    <ul class="text-slate-300 list-disc pl-6 space-y-2">
-                        <li>轻量级进程模型，支持数百万级并发</li>
-                        <li>内置分布式计算支持</li>
-                        <li>健壮的容错机制</li>
-                        <li>热代码升级能力</li>
-                        <li>函数式编程范式</li>
-                        <li>动态类型系统</li>
-                        <li>垃圾回收机制</li>
-                        <li>模式匹配和递归</li>
-                    </ul>
+            <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Erlang 概述</h4>
+                <p class="text-slate-300 mb-4">Erlang是一种通用的、并发的、函数式编程语言，由爱立信公司开发，专为构建高可用、低延迟的分布式系统而设计。</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <div>
+                        <h5 class="text-md font-medium mb-2 text-blue-400">历史背景</h5>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li>1986年由爱立信公司开发</li>
+                            <li>旨在解决电信系统的可靠性问题</li>
+                            <li>2007年发布开源版本</li>
+                            <li>广泛应用于电信、金融等领域</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-md font-medium mb-2 text-blue-400">核心特性</h5>
+                        <ul class="list-disc list-inside text-slate-300 space-y-2">
+                            <li>并发处理模型</li>
+                            <li>容错机制</li>
+                            <li>热代码升级</li>
+                            <li>分布式计算</li>
+                            <li>函数式编程</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
@@ -73,78 +222,46 @@
             
             <div class="language-content" data-lang="erlang">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">Hello World 示例</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">% Hello World 程序
--module(hello).
--export([start/0]).
-
-start() ->
-    io:fwrite("Hello, Erlang!~n").
-</code></pre>
-                </div>
-
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">基本数据类型</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">% 原子
-ok.
-error.
-'my atom'.
-
-% 整数
-42.
--100.
-16#FF. % 十六进制
-
-% 浮点数
-3.14.
--2.5e10.
-
-% 字符串
-"Hello, World!".
-
-% 列表
-[1, 2, 3, 4, 5].
-[1, "hello", atom].
-
-% 元组
-{point, 10, 20}.
-{person, "Alice", 30}.(% 二进制
-&lt;&lt;1, 2, 3&gt;&gt;.
-&lt;&lt;"abc"&gt;&gt;. % 二进制字符串
-</code></pre>
-                </div>
-
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">变量和操作符</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">% 变量（以大写字母开头）
-X = 10.
-Y = "hello".
-
-% 算术操作符
-1 + 2.
-5 - 3.
-4 * 2.
-10 / 3. % 浮点数除法
-10 div 3. % 整数除法
-10 rem 3. % 取余
-
-% 比较操作符
-1 == 1. % true
-1 /= 2. % true
-1 &lt; 2. % true
-1 =&lt; 1. % true
-1 &gt; 2. % false
-1 &gt;= 1. % true
-
-% 布尔操作符
-true and false. % false
-true or false. % true
-not true. % false
-
-% 短路操作符
-true andalso false. % false
-true orelse false. % true
-</code></pre>
+                    <div class="code-block rounded-lg p-4 code-font text-sm">
+                        <div class="text-slate-400 mb-2">% 原子类型</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-purple-300">ok</span><br>
+                            <span class="text-purple-300">error</span><br>
+                            <span class="text-purple-300">'Hello World'</span><br>
+                        </div>
+                        
+                        <div class="text-slate-400 mb-2 mt-4">% 数值类型</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-yellow-300">123</span> <span class="text-green-400">% 整数</span><br>
+                            <span class="text-yellow-300">123.45</span> <span class="text-green-400">% 浮点数</span><br>
+                        </div>
+                        
+                        <div class="text-slate-400 mb-2 mt-4">% 字符串</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-green-300">"Hello Erlang"</span><br>
+                            <span class="text-purple-300">'Hello Erlang'</span><br>
+                        </div>
+                        
+                        <div class="text-slate-400 mb-2 mt-4">% 列表</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-blue-300">[</span><span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span><span class="text-blue-300">]</span><br>
+                            <span class="text-blue-300">[</span><span class="text-green-300">"a"</span>, <span class="text-green-300">"b"</span>, <span class="text-green-300">"c"</span><span class="text-blue-300">]</span><br>
+                            <span class="text-blue-300">[</span><span class="text-yellow-300">1</span>, <span class="text-purple-300">ok</span>, <span class="text-green-300">"hello"</span><span class="text-blue-300">]</span><br>
+                        </div>
+                        
+                        <div class="text-slate-400 mb-2 mt-4">% 元组</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-blue-300">{</span><span class="text-yellow-300">1</span>, <span class="text-green-300">"hello"</span><span class="text-blue-300">}</span><br>
+                            <span class="text-blue-300">{</span><span class="text-purple-300">user</span>, <span class="text-green-300">"admin"</span>, <span class="text-yellow-300">12345</span><span class="text-blue-300">}</span><br>
+                        </div>
+                        
+                        <div class="text-slate-400 mb-2 mt-4">% 二进制</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-blue-300">&lt;&lt;</span><span class="text-green-300">"hello"</span><span class="text-blue-300">/utf8&gt;&gt;</span><br>
+                            <span class="text-blue-300">&lt;&lt;</span><span class="text-yellow-300">10</span>, <span class="text-yellow-300">20</span>, <span class="text-yellow-300">30</span><span class="text-blue-300">&gt;&gt;</span><br>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -157,54 +274,21 @@ true orelse false. % true
             
             <div class="language-content" data-lang="erlang">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">函数定义和调用</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">% 模块定义
--module(math_functions).
--export([add/2, multiply/2, factorial/1]).
-
-% 函数定义
-add(A, B) ->
-    A + B.
-
-multiply(A, B) ->
-    A * B.
-
-% 递归函数
-factorial(0) -> 1;
-factorial(N) when N > 0 ->
-    N * factorial(N-1).
-
-% 调用函数
-% math_functions:add(5, 3). % 8
-% math_functions:factorial(5). % 120
-</code></pre>
-                </div>
-
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">模式匹配</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">% 列表模式匹配
-head([H | _]) -> H;
-head([]) -> empty.
-
-tail([_ | T]) -> T;
-tail([]) -> empty.
-
-% 元组模式匹配
-area({circle, R}) ->
-    math:pi() * R * R;
-area({rectangle, W, H}) ->
-    W * H;
-area({triangle, B, H}) ->
-    0.5 * B * H;
-area(_) ->
-    {error, invalid_shape}.
-
-% 函数参数模式匹配
-greet({person, Name, _Age}) ->
-    io:fwrite("Hello, ~s!~n", [Name]);
-greet(_) ->
-    io:fwrite("Hello, stranger!~n").
-</code></pre>
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">函数定义</h5>
+                    <div class="code-block rounded-lg p-4 code-font text-sm">
+                        <div class="text-slate-400 mb-2">% 简单函数定义</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-purple-300">add</span><span class="text-blue-300">(</span>A, B<span class="text-blue-300">) </span><span class="text-blue-300">-></span><br>
+                            <span class="text-yellow-300">123</span> <span class="text-blue-300">+</span> <span class="text-yellow-300">456</span><span class="text-blue-300">.</span><br>
+                        </div>
+                        
+                        <div class="text-slate-400 mb-2 mt-4">% 模式匹配</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-purple-300">factorial</span><span class="text-blue-300">(</span><span class="text-yellow-300">0</span><span class="text-blue-300">) </span><span class="text-blue-300">-></span> <span class="text-yellow-300">1</span><span class="text-blue-300">;</span><br>
+                            <span class="text-purple-300">factorial</span><span class="text-blue-300">(</span>N<span class="text-blue-300">) </span><span class="text-blue-300">-></span><br>
+                            <span class="text-yellow-300">123</span> <span class="text-blue-300">*</span> <span class="text-purple-300">factorial</span><span class="text-blue-300">(</span>N <span class="text-blue-300">-</span> <span class="text-yellow-300">1</span><span class="text-blue-300">).</span><br>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -218,186 +302,226 @@ greet(_) ->
             <div class="language-content" data-lang="erlang">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">条件表达式</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">% if 表达式
-max(X, Y) ->
-    if
-        X > Y -> X;
-        true -> Y
-    end.
-
-% case 表达式
-classify_age(Age) ->
-    case Age of
-        N when N < 18 -> minor;
-        N when N < 65 -> adult;
-        _ -> senior
-    end.
-
-% 守卫表达式
-positive(X) when X > 0 -> true;
-positive(_) -> false.
-
-% 多重守卫
-divide(X, Y) when Y /= 0 -> {ok, X / Y};
-divide(_, 0) -> {error, division_by_zero}.
-</code></pre>
-                </div>
-
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">列表操作</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">% 列表推导式
-EvenNumbers = [X || X <- [1, 2, 3, 4, 5], X rem 2 == 0]. % [2, 4]
-
-% 带条件的列表推导式
-SquaresOfEven = [X*X || X <- [1, 2, 3, 4, 5], X rem 2 == 0]. % [4, 16]
-
-% 多重生成器
-Pairs = [{X, Y} || X <- [1, 2, 3], Y <- [a, b]]. % [{1,a}, {1,b}, {2,a}, {2,b}, {3,a}, {3,b}]
-
-% 内置列表函数
-lists:reverse([1, 2, 3]). % [3, 2, 1]
-lists:sort([3, 1, 2]). % [1, 2, 3]
-lists:sum([1, 2, 3]). % 6
-lists:map(fun(X) -> X*2 end, [1, 2, 3]). % [2, 4, 6]
-lists:filter(fun(X) -> X rem 2 == 0 end, [1, 2, 3, 4]). % [2, 4]
-</code></pre>
+                    <div class="code-block rounded-lg p-4 code-font text-sm">
+                        <div class="text-slate-400 mb-2">% if 表达式</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-purple-300">check_number</span><span class="text-blue-300">(</span>N<span class="text-blue-300">) </span><span class="text-blue-300">-></span><br>
+                            <span class="text-purple-300">if</span><br>
+                            &nbsp;&nbsp;N <span class="text-blue-300">></span> <span class="text-yellow-300">0</span> <span class="text-blue-300">-></span> <span class="text-green-300">"positive"</span>;<br>
+                            &nbsp;&nbsp;N <span class="text-blue-300">==</span> <span class="text-yellow-300">0</span> <span class="text-blue-300">-></span> <span class="text-green-300">"zero"</span>;<br>
+                            &nbsp;&nbsp;N <span class="text-blue-300"><</span> <span class="text-yellow-300">0</span> <span class="text-blue-300">-></span> <span class="text-green-300">"negative"</span><br>
+                            <span class="text-purple-300">end</span><span class="text-blue-300">.</span><br>
+                        </div>
+                        
+                        <div class="text-slate-400 mb-2 mt-4">% case 表达式</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-purple-300">handle_message</span><span class="text-blue-300">(</span>Msg<span class="text-blue-300">) </span><span class="text-blue-300">-></span><br>
+                            <span class="text-purple-300">case</span> Msg <span class="text-purple-300">of</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">{</span><span class="text-purple-300">hello</span>, Name<span class="text-purple-300">}</span> <span class="text-blue-300">-></span> <span class="text-green-300">"Hello "</span> <span class="text-blue-300">++</span> Name;<br>
+                            &nbsp;&nbsp;<span class="text-purple-300">{</span><span class="text-purple-300">goodbye</span>, _<span class="text-purple-300">}</span> <span class="text-blue-300">-></span> <span class="text-green-300">"Goodbye"</span>;<br>
+                            &nbsp;&nbsp;<span class="text-purple-300">_</span> <span class="text-blue-300">-></span> <span class="text-green-300">"Unknown message"</span><br>
+                            <span class="text-purple-300">end</span><span class="text-blue-300">.</span><br>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. Erlang 并发编程 -->
+        <!-- 5. Erlang 错误处理 -->
         <section id="section-5" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">5. Erlang 并发编程</span>
+                <span class="gradient-text">5. Erlang 错误处理</span>
             </h2>
             
             <div class="language-content" data-lang="erlang">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">进程创建和消息传递</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">% 进程创建
--module(process_example).
--export([start/0, worker/0]).
-
-start() ->
-    % 创建新进程
-    Pid = spawn(process_example, worker, []),
-    % 发送消息
-    Pid ! {hello, "world"},
-    Pid ! stop.
-
-worker() ->
-    receive
-        {hello, Msg} ->
-            io:fwrite("Received: ~s~n", [Msg]),
-            worker();
-        stop ->
-            io:fwrite("Stopping worker~n");
-        _ ->
-            io:fwrite("Unknown message~n"),
-            worker()
-    end.
-</code></pre>
-                </div>
-
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">进程链接和监控</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">% 进程链接
--module(link_example).
--export([start/0, worker/0]).
-
-start() ->
-    % 链接进程
-    spawn_link(link_example, worker, []),
-    io:fwrite("Main process continues~n").
-
-worker() ->
-    io:fwrite("Worker started~n"),
-    % 故意崩溃
-    1 / 0.
-
-% 进程监控
--module(monitor_example).
--export([start/0, worker/0]).
-
-start() ->
-    % 监控进程
-    Pid = spawn(monitor_example, worker, []),
-    Ref = monitor(process, Pid),
-    receive
-        {'DOWN', Ref, process, Pid, Reason} ->
-            io:fwrite("Worker died: ~p~n", [Reason])
-    end.
-
-worker() ->
-    io:fwrite("Worker started~n"),
-    % 故意崩溃
-    1 / 0.
-</code></pre>
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">错误处理机制</h5>
+                    <div class="code-block rounded-lg p-4 code-font text-sm">
+                        <div class="text-slate-400 mb-2">% try-catch 表达式</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-purple-300">safe_divide</span><span class="text-blue-300">(</span>A, B<span class="text-blue-300">) </span><span class="text-blue-300">-></span><br>
+                            <span class="text-purple-300">try</span><br>
+                            &nbsp;&nbsp;A <span class="text-blue-300">/</span> B<br>
+                            <span class="text-purple-300">catch</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">error</span>:<span class="text-purple-300">badarith</span> <span class="text-blue-300">-></span> <span class="text-green-300">"Division by zero"</span>;<br>
+                            &nbsp;&nbsp;<span class="text-purple-300">_</span>:<span class="text-purple-300">_</span> <span class="text-blue-300">-></span> <span class="text-green-300">"Unknown error"</span><br>
+                            <span class="text-purple-300">end</span><span class="text-blue-300">.</span><br>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 6. Erlang OTP 行为模式 -->
+        <!-- 6. Erlang 并发编程 -->
         <section id="section-6" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">6. Erlang OTP 行为模式</span>
+                <span class="gradient-text">6. Erlang 并发编程</span>
             </h2>
             
             <div class="language-content" data-lang="erlang">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-purple-300">GenServer 行为模式</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">% 简单的 GenServer 实现
--module(counter_server).
--behaviour(gen_server).
-
-% API 函数
-export([start_link/0, increment/1, decrement/1, get_value/1]).
-
-% GenServer 回调函数
-export([init/1, handle_call/3, handle_cast/2, handle_info/2, terminate/2, code_change/3]).
-
-% 状态
--record(state, {count = 0}).
-
-% API 实现
-start_link() ->
-    gen_server:start_link(?MODULE, [], []).
-
-increment(Pid) ->
-    gen_server:cast(Pid, increment).
-
-decrement(Pid) ->
-    gen_server:cast(Pid, decrement).
-
-get_value(Pid) ->
-    gen_server:call(Pid, get_value).
-
-% 回调函数实现
-init([]) ->
-    {ok, #state{}}.
-
-handle_call(get_value, _From, State) ->
-    {reply, State#state.count, State}.
-
-handle_cast(increment, State) ->
-    NewCount = State#state.count + 1,
-    {noreply, State#state{count = NewCount}};
-handle_cast(decrement, State) ->
-    NewCount = State#state.count - 1,
-    {noreply, State#state{count = NewCount}}.
-
-handle_info(_Info, State) ->
-    {noreply, State}.
-
-terminate(_Reason, _State) ->
-    ok.
-
-code_change(_OldVsn, State, _Extra) ->
-    {ok, State}.
-</code></pre>
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">进程创建</h5>
+                    <div class="code-block rounded-lg p-4 code-font text-sm">
+                        <div class="text-slate-400 mb-2">% 创建新进程</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-purple-300">spawn</span><span class="text-blue-300">(</span><span class="text-purple-300">fun</span><span class="text-blue-300">() </span><span class="text-blue-300">-></span> <span class="text-purple-300">io</span>:<span class="text-purple-300">format</span><span class="text-blue-300">(</span><span class="text-green-300">"Hello from process: ~p~n"</span>, <span class="text-blue-300">[</span><span class="text-purple-300">self</span><span class="text-blue-300">()</span><span class="text-blue-300">]) </span><span class="text-blue-300">end</span><span class="text-blue-300">).</span><br>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-    </main>
+
+        <!-- 7. Erlang 消息传递 -->
+        <section id="section-7" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">7. Erlang 消息传递</span>
+            </h2>
+            
+            <div class="language-content" data-lang="erlang">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">消息发送与接收</h5>
+                    <div class="code-block rounded-lg p-4 code-font text-sm">
+                        <div class="text-slate-400 mb-2">% 发送消息</div>
+                        <div class="text-sm leading-6">
+                            Pid <span class="text-blue-300">!</span> <span class="text-purple-300">{</span><span class="text-purple-300">hello</span>, <span class="text-purple-300">self</span><span class="text-blue-300">()</span><span class="text-purple-300">}</span><span class="text-blue-300">.</span><br>
+                        </div>
+                        
+                        <div class="text-slate-400 mb-2 mt-4">% 接收消息</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-purple-300">receive</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">{</span><span class="text-purple-300">hello</span>, From<span class="text-purple-300">}</span> <span class="text-blue-300">-></span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">io</span>:<span class="text-purple-300">format</span><span class="text-blue-300">(</span><span class="text-green-300">"Received hello from ~p~n"</span>, <span class="text-blue-300">[</span>From<span class="text-blue-300">]);</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">{</span><span class="text-purple-300">goodbye</span>, _<span class="text-purple-300">}</span> <span class="text-blue-300">-></span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">io</span>:<span class="text-purple-300">format</span><span class="text-blue-300">(</span><span class="text-green-300">"Received goodbye~n"</span>, <span class="text-blue-300">[]</span>);<br>
+                            &nbsp;&nbsp;<span class="text-purple-300">_</span> <span class="text-blue-300">-></span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">io</span>:<span class="text-purple-300">format</span><span class="text-blue-300">(</span><span class="text-green-300">"Received unknown message~n"</span>, <span class="text-blue-300">[]</span>)<br>
+                            <span class="text-purple-300">end</span><span class="text-blue-300">.</span><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Erlang OTP框架 -->
+        <section id="section-8" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">8. Erlang OTP框架</span>
+            </h2>
+            
+            <div class="language-content" data-lang="erlang">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">GenServer示例</h5>
+                    <div class="code-block rounded-lg p-4 code-font text-sm">
+                        <div class="text-slate-400 mb-2">% 定义GenServer模块</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-purple-300">-module</span><span class="text-blue-300">(</span><span class="text-purple-300">my_server</span><span class="text-blue-300">).</span><br>
+                            <span class="text-purple-300">-behaviour</span><span class="text-blue-300">(</span><span class="text-purple-300">gen_server</span><span class="text-blue-300">).</span><br>
+                            <span class="text-purple-300">-export</span><span class="text-blue-300">([</span><span class="text-purple-300">start_link</span><span class="text-blue-300">()</span>, <span class="text-purple-300">increment</span><span class="text-blue-300">()</span>, <span class="text-purple-300">get_count</span><span class="text-blue-300">()</span><span class="text-blue-300">]).</span><br>
+                            <span class="text-purple-300">-export</span><span class="text-blue-300">([</span><span class="text-purple-300">init</span><span class="text-blue-300">(</span><span class="text-blue-300">1</span><span class="text-blue-300">)</span>, <span class="text-purple-300">handle_call</span><span class="text-blue-300">(</span><span class="text-blue-300">3</span><span class="text-blue-300">)</span>, <span class="text-purple-300">handle_cast</span><span class="text-blue-300">(</span><span class="text-blue-300">2</span><span class="text-blue-300">)</span><span class="text-blue-300">]).</span><br>
+                            <br>
+                            <span class="text-purple-300">-record</span><span class="text-blue-300">(</span><span class="text-purple-300">state</span>, <span class="text-blue-300">{</span><span class="text-purple-300">count</span> <span class="text-blue-300">=</span> <span class="text-yellow-300">0</span><span class="text-blue-300">}).</span><br>
+                            <br>
+                            <span class="text-purple-300">start_link</span><span class="text-blue-300">(</span><span class="text-blue-300">) </span><span class="text-blue-300">-></span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">gen_server</span>:<span class="text-purple-300">start_link</span><span class="text-blue-300">(</span><span class="text-purple-300">{</span><span class="text-purple-300">local</span>, <span class="text-purple-300">?</span><span class="text-purple-300">MODULE</span><span class="text-purple-300">}</span>, <span class="text-purple-300">?</span><span class="text-purple-300">MODULE</span>, <span class="text-blue-300">[], []</span><span class="text-blue-300">).</span><br>
+                            <br>
+                            <span class="text-purple-300">increment</span><span class="text-blue-300">(</span><span class="text-blue-300">) </span><span class="text-blue-300">-></span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">gen_server</span>:<span class="text-purple-300">cast</span><span class="text-blue-300">(</span><span class="text-purple-300">?</span><span class="text-purple-300">MODULE</span>, <span class="text-purple-300">increment</span><span class="text-blue-300">).</span><br>
+                            <br>
+                            <span class="text-purple-300">get_count</span><span class="text-blue-300">(</span><span class="text-blue-300">) </span><span class="text-blue-300">-></span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">gen_server</span>:<span class="text-purple-300">call</span><span class="text-blue-300">(</span><span class="text-purple-300">?</span><span class="text-purple-300">MODULE</span>, <span class="text-purple-300">get_count</span><span class="text-blue-300">).</span><br>
+                            <br>
+                            <span class="text-purple-300">init</span><span class="text-blue-300">(</span><span class="text-blue-300">[]</span><span class="text-blue-300">) </span><span class="text-blue-300">-></span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">{</span><span class="text-purple-300">ok</span>, <span class="text-purple-300">#state{</span><span class="text-purple-300">}</span><span class="text-purple-300">}</span><span class="text-blue-300">.</span><br>
+                            <br>
+                            <span class="text-purple-300">handle_call</span><span class="text-blue-300">(</span><span class="text-purple-300">get_count</span>, <span class="text-purple-300">_</span><span class="text-purple-300">From</span>, State<span class="text-blue-300">) </span><span class="text-blue-300">-></span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">{</span><span class="text-purple-300">reply</span>, State<span class="text-blue-300">#</span><span class="text-purple-300">state</span><span class="text-blue-300">.</span><span class="text-purple-300">count</span>, State<span class="text-purple-300">}</span><span class="text-blue-300">.</span><br>
+                            <br>
+                            <span class="text-purple-300">handle_cast</span><span class="text-blue-300">(</span><span class="text-purple-300">increment</span>, State<span class="text-blue-300">) </span><span class="text-blue-300">-></span><br>
+                            &nbsp;&nbsp;NewCount <span class="text-blue-300">=</span> State<span class="text-blue-300">#</span><span class="text-purple-300">state</span><span class="text-blue-300">.</span><span class="text-purple-300">count</span> <span class="text-blue-300">+</span> <span class="text-yellow-300">1</span>,<br>
+                            &nbsp;&nbsp;<span class="text-purple-300">{</span><span class="text-purple-300">noreply</span>, State<span class="text-blue-300">#</span><span class="text-purple-300">state</span><span class="text-blue-300">{</span><span class="text-purple-300">count</span> <span class="text-blue-300">=</span> NewCount<span class="text-blue-300">}</span><span class="text-purple-300">}</span><span class="text-blue-300">.</span><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Erlang 分布式编程 -->
+        <section id="section-9" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">9. Erlang 分布式编程</span>
+            </h2>
+            
+            <div class="language-content" data-lang="erlang">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">节点间通信</h5>
+                    <div class="code-block rounded-lg p-4 code-font text-sm">
+                        <div class="text-slate-400 mb-2">% 分布式节点通信</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-purple-300">-module</span><span class="text-blue-300">(</span><span class="text-purple-300">distributed_example</span><span class="text-blue-300">).</span><br>
+                            <span class="text-purple-300">-export</span><span class="text-blue-300">([</span><span class="text-purple-300">start_node</span><span class="text-blue-300">(</span><span class="text-blue-300">1</span><span class="text-blue-300">)</span>, <span class="text-purple-300">send_message</span><span class="text-blue-300">(</span><span class="text-blue-300">2</span><span class="text-blue-300">)</span><span class="text-blue-300">]).</span><br>
+                            <br>
+                            <span class="text-purple-300">start_node</span><span class="text-blue-300">(</span>NodeName<span class="text-blue-300">) </span><span class="text-blue-300">-></span><br>
+                            &nbsp;&nbsp;Pid <span class="text-blue-300">=</span> <span class="text-purple-300">spawn</span><span class="text-blue-300">(</span><span class="text-purple-300">fun</span><span class="text-blue-300">() </span><span class="text-blue-300">-></span> <span class="text-purple-300">receive_loop</span><span class="text-blue-300">()</span> <span class="text-blue-300">end</span><span class="text-blue-300">),</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">register</span><span class="text-blue-300">(</span><span class="text-purple-300">receiver</span>, Pid<span class="text-blue-300">),</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">io</span>:<span class="text-purple-300">fwrite</span><span class="text-blue-300">(</span><span class="text-green-300">"Receiver registered on node: ~p~n"</span>, <span class="text-blue-300">[</span><span class="text-purple-300">node</span><span class="text-blue-300">()</span><span class="text-blue-300">])</span><span class="text-blue-300">.</span><br>
+                            <br>
+                            <span class="text-purple-300">send_message</span><span class="text-blue-300">(</span>TargetNode, Message<span class="text-blue-300">) </span><span class="text-blue-300">-></span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">{</span><span class="text-purple-300">receiver</span>, TargetNode<span class="text-purple-300">}</span> <span class="text-blue-300">!</span> Message,<br>
+                            &nbsp;&nbsp;<span class="text-purple-300">io</span>:<span class="text-purple-300">fwrite</span><span class="text-blue-300">(</span><span class="text-green-300">"Sent message to node: ~p~n"</span>, <span class="text-blue-300">[</span>TargetNode<span class="text-blue-300">])</span><span class="text-blue-300">.</span><br>
+                            <br>
+                            <span class="text-purple-300">receive_loop</span><span class="text-blue-300">(</span><span class="text-blue-300">) </span><span class="text-blue-300">-></span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">receive</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Message <span class="text-blue-300">-></span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">io</span>:<span class="text-purple-300">fwrite</span><span class="text-blue-300">(</span><span class="text-green-300">"Received message on node ~p: ~p~n"</span>, <span class="text-blue-300">[</span><span class="text-purple-300">node</span><span class="text-blue-300">()</span>, Message<span class="text-blue-300">]),</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">receive_loop</span><span class="text-blue-300">()</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">end</span><span class="text-blue-300">.</span><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. Erlang 高级特性 -->
+        <section id="section-10" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">10. Erlang 高级特性</span>
+            </h2>
+            
+            <div class="language-content" data-lang="erlang">
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">进程链接</h5>
+                    <div class="code-block rounded-lg p-4 code-font text-sm">
+                        <div class="text-slate-400 mb-2">% 进程链接示例</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-purple-300">link_example</span><span class="text-blue-300">(</span><span class="text-blue-300">) </span><span class="text-blue-300">-></span><br>
+                            &nbsp;&nbsp;Pid <span class="text-blue-300">=</span> <span class="text-purple-300">spawn_link</span><span class="text-blue-300">(</span><span class="text-purple-300">fun</span><span class="text-blue-300">() </span><span class="text-blue-300">-></span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">timer</span>:<span class="text-purple-300">sleep</span><span class="text-blue-300">(</span><span class="text-yellow-300">1000</span><span class="text-blue-300">),</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-300">exit</span><span class="text-blue-300">(</span><span class="text-purple-300">normal</span><span class="text-blue-300">)</span><br>
+                            &nbsp;&nbsp;<span class="text-blue-300">end</span><span class="text-blue-300">),</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">io</span>:<span class="text-purple-300">format</span><span class="text-blue-300">(</span><span class="text-green-300">"Linked to process ~p~n"</span>, <span class="text-blue-300">[</span>Pid<span class="text-blue-300">])</span><span class="text-blue-300">.</span><br>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-purple-300">ETS表</h5>
+                    <div class="code-block rounded-lg p-4 code-font text-sm">
+                        <div class="text-slate-400 mb-2">% ETS表操作</div>
+                        <div class="text-sm leading-6">
+                            <span class="text-purple-300">ets_example</span><span class="text-blue-300">(</span><span class="text-blue-300">) </span><span class="text-blue-300">-></span><br>
+                            &nbsp;&nbsp;TableId <span class="text-blue-300">=</span> <span class="text-purple-300">ets</span>:<span class="text-purple-300">new</span><span class="text-blue-300">(</span><span class="text-purple-300">user_table</span>, <span class="text-blue-300">[</span><span class="text-purple-300">named_table</span><span class="text-blue-300">]),</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">ets</span>:<span class="text-purple-300">insert</span><span class="text-blue-300">(</span>TableId, <span class="text-purple-300">{</span><span class="text-yellow-300">1</span>, <span class="text-green-300">"Alice"</span><span class="text-purple-300">}),</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">ets</span>:<span class="text-purple-300">insert</span><span class="text-blue-300">(</span>TableId, <span class="text-purple-300">{</span><span class="text-yellow-300">2</span>, <span class="text-green-300">"Bob"</span><span class="text-purple-300">}),</span><br>
+                            &nbsp;&nbsp;<span class="text-purple-300">ets</span>:<span class="text-purple-300">lookup</span><span class="text-blue-300">(</span>TableId, <span class="text-yellow-300">1</span><span class="text-blue-300">).</span><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
