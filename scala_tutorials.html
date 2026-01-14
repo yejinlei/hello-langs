@@ -103,6 +103,8 @@
         }
         .code-font {
             font-family: 'JetBrains Mono', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
         .gradient-text {
             background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
@@ -118,6 +120,8 @@
         .code-block {
             background: #000000;
             border-left: 4px solid #3B82F6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
         .highlight {
             background: rgba(59, 130, 246, 0.2);
@@ -672,17 +676,17 @@
                         <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2">// 类定义</div>
                             <div class="text-sm leading-6">
-                                <span class="text-purple-400">class</span> <span class="text-blue-300">Person</span>(<span class="text-blue-300">name</span>: <span class="text-purple-400">String</span>, <span class="text-blue-300">age</span>: <span class="text-purple-400">Int</span>) {
-                                    <span class="text-purple-400">def</span> <span class="text-blue-300">greet</span>(): <span class="text-purple-400">Unit</span> = {
-                                        println(s<span class="text-green-300">"你好，我叫$name，今年$age岁了。"</span>)
-                                    }
-                                }
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Person</span>(<span class="text-blue-300">name</span>: <span class="text-purple-400">String</span>, <span class="text-blue-300">age</span>: <span class="text-purple-400">Int</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">greet</span>(): <span class="text-purple-400">Unit</span> = {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(s<span class="text-green-300">"你好，我叫$name，今年$age岁了。"</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
                                 <br>
-                                <span class="text-blue-400">// 对象定义</span>
-                                <span class="text-purple-400">object</span> <span class="text-blue-300">Person</span> {
-                                    <span class="text-purple-400">def</span> <span class="text-blue-300">apply</span>(<span class="text-blue-300">name</span>: <span class="text-purple-400">String</span>, <span class="text-blue-300">age</span>: <span class="text-purple-400">Int</span>): <span class="text-blue-300">Person</span> = {
-                                        <span class="text-purple-400">new</span> <span class="text-blue-300">Person</span>(<span class="text-blue-300">name</span>, <span class="text-blue-300">age</span>)
-                                    }
+                                <span class="text-blue-400">// 对象定义</span><br>
+                                <span class="text-purple-400">object</span> <span class="text-blue-300">Person</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">apply</span>(<span class="text-blue-300">name</span>: <span class="text-purple-400">String</span>, <span class="text-blue-300">age</span>: <span class="text-purple-400">Int</span>): <span class="text-blue-300">Person</span> = {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">new</span> <span class="text-blue-300">Person</span>(<span class="text-blue-300">name</span>, <span class="text-blue-300">age</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                                 }
                             </div>
                         </div>
@@ -702,28 +706,28 @@
                         <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2">// 类的继承</div>
                             <div class="text-sm leading-6">
-                                <span class="text-purple-400">class</span> <span class="text-blue-300">Animal</span> {
-                                    <span class="text-purple-400">def</span> <span class="text-blue-300">makeSound</span>(): <span class="text-purple-400">Unit</span> = {
-                                        println(<span class="text-green-300">"动物发出声音"</span>)
-                                    }
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Animal</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">makeSound</span>(): <span class="text-purple-400">Unit</span> = {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="text-green-300">"动物发出声音"</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                                 }
                                 <br>
-                                <span class="text-purple-400">class</span> <span class="text-blue-300">Dog</span> <span class="text-purple-400">extends</span> <span class="text-blue-300">Animal</span> {
-                                    <span class="text-purple-400">override</span> <span class="text-purple-400">def</span> <span class="text-blue-300">makeSound</span>(): <span class="text-purple-400">Unit</span> = {
-                                        println(<span class="text-green-300">"汪汪汪"</span>)
-                                    }
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Dog</span> <span class="text-purple-400">extends</span> <span class="text-blue-300">Animal</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">override</span> <span class="text-purple-400">def</span> <span class="text-blue-300">makeSound</span>(): <span class="text-purple-400">Unit</span> = {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="text-green-300">"汪汪汪"</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                                 }
                                 <br>
-                                <span class="text-purple-400">class</span> <span class="text-blue-300">Cat</span> <span class="text-purple-400">extends</span> <span class="text-blue-300">Animal</span> {
-                                    <span class="text-purple-400">override</span> <span class="text-purple-400">def</span> <span class="text-blue-300">makeSound</span>(): <span class="text-purple-400">Unit</span> = {
-                                        println(<span class="text-green-300">"喵喵喵"</span>)
-                                    }
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Cat</span> <span class="text-purple-400">extends</span> <span class="text-blue-300">Animal</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">override</span> <span class="text-purple-400">def</span> <span class="text-blue-300">makeSound</span>(): <span class="text-purple-400">Unit</span> = {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="text-green-300">"喵喵喵"</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                                 }
                                 <br>
-                                <span class="text-blue-400">// 多态</span>
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">animals</span> = List(<span class="text-purple-400">new</span> <span class="text-blue-300">Dog</span>(), <span class="text-purple-400">new</span> <span class="text-blue-300">Cat</span>())
-                                <span class="text-purple-400">for</span> (<span class="text-blue-300">animal</span> <- <span class="text-blue-300">animals</span>) {
-                                    <span class="text-blue-300">animal</span>.makeSound()
+                                <span class="text-blue-400">// 多态</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">animals</span> = List(<span class="text-purple-400">new</span> <span class="text-blue-300">Dog</span>(), <span class="text-purple-400">new</span> <span class="text-blue-300">Cat</span>())<br>
+                                <span class="text-purple-400">for</span> (<span class="text-blue-300">animal</span> <- <span class="text-blue-300">animals</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">animal</span>.makeSound()<br>
                                 }
                             </div>
                         </div>
@@ -743,20 +747,20 @@
                         <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2">// 特质定义</div>
                             <div class="text-sm leading-6">
-                                <span class="text-purple-400">trait</span> <span class="text-blue-300">Printable</span> {
-                                    <span class="text-purple-400">def</span> <span class="text-blue-300">print</span>(): <span class="text-purple-400">Unit</span>
+                                <span class="text-purple-400">trait</span> <span class="text-blue-300">Printable</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">print</span>(): <span class="text-purple-400">Unit</span><br>
                                 }
                                 <br>
-                                <span class="text-purple-400">trait</span> <span class="text-blue-300">Drawable</span> {
-                                    <span class="text-purple-400">def</span> <span class="text-blue-300">draw</span>(): <span class="text-purple-400">Unit</span> = {
-                                        println(<span class="text-green-300">"绘制图形"</span>)
-                                    }
+                                <span class="text-purple-400">trait</span> <span class="text-blue-300">Drawable</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">draw</span>(): <span class="text-purple-400">Unit</span> = {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="text-green-300">"绘制图形"</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                                 }
                                 <br>
-                                <span class="text-purple-400">class</span> <span class="text-blue-300">Circle</span> <span class="text-purple-400">extends</span> <span class="text-blue-300">Printable</span> <span class="text-purple-400">with</span> <span class="text-blue-300">Drawable</span> {
-                                    <span class="text-purple-400">override</span> <span class="text-purple-400">def</span> <span class="text-blue-300">print</span>(): <span class="text-purple-400">Unit</span> = {
-                                        println(<span class="text-green-300">"打印圆形"</span>)
-                                    }
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Circle</span> <span class="text-purple-400">extends</span> <span class="text-blue-300">Printable</span> <span class="text-purple-400">with</span> <span class="text-blue-300">Drawable</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">override</span> <span class="text-purple-400">def</span> <span class="text-blue-300">print</span>(): <span class="text-purple-400">Unit</span> = {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(<span class="text-green-300">"打印圆形"</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
                                 }
                             </div>
                         </div>
@@ -776,20 +780,20 @@
                         <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2">// 基本模式匹配</div>
                             <div class="text-sm leading-6">
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">x</span> = <span class="text-yellow-300">2</span>
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">result</span> = <span class="text-blue-300">x</span> <span class="text-purple-400">match</span> {
-                                    <span class="text-purple-400">case</span> <span class="text-yellow-300">1</span> => <span class="text-green-300">"一"</span>
-                                    <span class="text-purple-400">case</span> <span class="text-yellow-300">2</span> => <span class="text-green-300">"二"</span>
-                                    <span class="text-purple-400">case</span> <span class="text-yellow-300">3</span> => <span class="text-green-300">"三"</span>
-                                    <span class="text-purple-400">case</span> _ => <span class="text-green-300">"其他"</span>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">x</span> = <span class="text-yellow-300">2</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">result</span> = <span class="text-blue-300">x</span> <span class="text-purple-400">match</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> <span class="text-yellow-300">1</span> => <span class="text-green-300">"一"</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> <span class="text-yellow-300">2</span> => <span class="text-green-300">"二"</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> <span class="text-yellow-300">3</span> => <span class="text-green-300">"三"</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> _ => <span class="text-green-300">"其他"</span><br>
                                 }
                                 <br>
-                                <span class="text-blue-400">// 类型匹配</span>
-                                <span class="text-purple-400">def</span> <span class="text-blue-300">matchType</span>(<span class="text-blue-300">x</span>: <span class="text-purple-400">Any</span>): <span class="text-purple-400">String</span> = <span class="text-blue-300">x</span> <span class="text-purple-400">match</span> {
-                                    <span class="text-purple-400">case</span> <span class="text-blue-300">i</span>: <span class="text-purple-400">Int</span> => <span class="text-green-300">"整数"</span>
-                                    <span class="text-purple-400">case</span> <span class="text-blue-300">d</span>: <span class="text-purple-400">Double</span> => <span class="text-green-300">"浮点数"</span>
-                                    <span class="text-purple-400">case</span> <span class="text-blue-300">s</span>: <span class="text-purple-400">String</span> => <span class="text-green-300">"字符串"</span>
-                                    <span class="text-purple-400">case</span> _ => <span class="text-green-300">"其他类型"</span>
+                                <span class="text-blue-400">// 类型匹配</span><br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">matchType</span>(<span class="text-blue-300">x</span>: <span class="text-purple-400">Any</span>): <span class="text-purple-400">String</span> = <span class="text-blue-300">x</span> <span class="text-purple-400">match</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> <span class="text-blue-300">i</span>: <span class="text-purple-400">Int</span> => <span class="text-green-300">"整数"</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> <span class="text-blue-300">d</span>: <span class="text-purple-400">Double</span> => <span class="text-green-300">"浮点数"</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> <span class="text-blue-300">s</span>: <span class="text-purple-400">String</span> => <span class="text-green-300">"字符串"</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> _ => <span class="text-green-300">"其他类型"</span><br>
                                 }
                             </div>
                         </div>
@@ -809,23 +813,23 @@
                         <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2">// 选项类型的使用</div>
                             <div class="text-sm leading-6">
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">map</span> = Map(<span class="text-green-300">"a"</span> -> <span class="text-yellow-300">1</span>, <span class="text-green-300">"b"</span> -> <span class="text-yellow-300">2</span>)
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">map</span> = Map(<span class="text-green-300">"a"</span> -> <span class="text-yellow-300">1</span>, <span class="text-green-300">"b"</span> -> <span class="text-yellow-300">2</span>)<br>
                                 <br>
-                                <span class="text-blue-300">// 获取存在的键</span>
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">value1</span> = <span class="text-blue-300">map</span>.get(<span class="text-green-300">"a"</span>) <span class="text-blue-400">// Some(1)</span>
+                                <span class="text-blue-400">// 获取存在的键</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">value1</span> = <span class="text-blue-300">map</span>.get(<span class="text-green-300">"a"</span>) <span class="text-blue-400">// Some(1)</span><br>
                                 <br>
-                                <span class="text-blue-400">// 获取不存在的键</span>
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">value2</span> = <span class="text-blue-300">map</span>.get(<span class="text-green-300">"c"</span>) <span class="text-blue-400">// None</span>
+                                <span class="text-blue-400">// 获取不存在的键</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">value2</span> = <span class="text-blue-300">map</span>.get(<span class="text-green-300">"c"</span>) <span class="text-blue-400">// None</span><br>
                                 <br>
-                                <span class="text-blue-400">// 使用模式匹配处理选项类型</span>
-                                <span class="text-blue-300">value1</span> <span class="text-purple-400">match</span> {
-                                    <span class="text-purple-400">case</span> <span class="text-purple-400">Some</span>(<span class="text-blue-300">v</span>) => println(s<span class="text-green-300">"值是: $v"</span>)
-                                    <span class="text-purple-400">case</span> <span class="text-purple-400">None</span> => println(<span class="text-green-300">"没有找到值"</span>)
+                                <span class="text-blue-400">// 使用模式匹配处理选项类型</span><br>
+                                <span class="text-blue-300">value1</span> <span class="text-purple-400">match</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> <span class="text-purple-400">Some</span>(<span class="text-blue-300">v</span>) => println(s<span class="text-green-300">"值是: $v"</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> <span class="text-purple-400">None</span> => println(<span class="text-green-300">"没有找到值"</span>)<br>
                                 }
                                 <br>
-                                <span class="text-blue-400">// 使用getOrElse获取值</span>
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">v1</span> = <span class="text-blue-300">value1</span>.getOrElse(<span class="text-yellow-300">0</span>) <span class="text-blue-400">// 1</span>
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">v2</span> = <span class="text-blue-300">value2</span>.getOrElse(<span class="text-yellow-300">0</span>) <span class="text-blue-400">// 0</span>
+                                <span class="text-blue-400">// 使用getOrElse获取值</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">v1</span> = <span class="text-blue-300">value1</span>.getOrElse(<span class="text-yellow-300">0</span>) <span class="text-blue-400">// 1</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">v2</span> = <span class="text-blue-300">value2</span>.getOrElse(<span class="text-yellow-300">0</span>) <span class="text-blue-400">// 0</span><br>
                             </div>
                         </div>
                     </div>
@@ -844,21 +848,21 @@
                         <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2">// 异常处理</div>
                             <div class="text-sm leading-6">
-                                <span class="text-purple-400">try</span> {
-                                    <span class="text-purple-400">val</span> <span class="text-blue-300">result</span> = <span class="text-yellow-300">10</span> / <span class="text-yellow-300">0</span>
-                                } <span class="text-purple-400">catch</span> {
-                                    <span class="text-purple-400">case</span> <span class="text-blue-300">e</span>: <span class="text-purple-400">ArithmeticException</span> => println(s<span class="text-green-300">"算术异常: ${e.getMessage}"</span>)
-                                    <span class="text-purple-400">case</span> <span class="text-blue-300">e</span>: <span class="text-purple-400">Exception</span> => println(s<span class="text-green-300">"其他异常: ${e.getMessage}"</span>)
-                                } <span class="text-purple-400">finally</span> {
-                                    println(<span class="text-green-300">"无论是否发生异常都会执行"</span>)
+                                <span class="text-purple-400">try</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">val</span> <span class="text-blue-300">result</span> = <span class="text-yellow-300">10</span> / <span class="text-yellow-300">0</span><br>
+                                } <span class="text-purple-400">catch</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> <span class="text-blue-300">e</span>: <span class="text-purple-400">ArithmeticException</span> => println(s<span class="text-green-300">"算术异常: ${e.getMessage}"</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> <span class="text-blue-300">e</span>: <span class="text-purple-400">Exception</span> => println(s<span class="text-green-300">"其他异常: ${e.getMessage}"</span>)<br>
+                                } <span class="text-purple-400">finally</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;println(<span class="text-green-300">"无论是否发生异常都会执行"</span>)<br>
                                 }
                                 <br>
-                                <span class="text-blue-400">// 抛出异常</span>
-                                <span class="text-purple-400">def</span> <span class="text-blue-300">divide</span>(<span class="text-blue-300">a</span>: <span class="text-purple-400">Int</span>, <span class="text-blue-300">b</span>: <span class="text-purple-400">Int</span>): <span class="text-purple-400">Int</span> = {
-                                    <span class="text-purple-400">if</span> (<span class="text-blue-300">b</span> == <span class="text-yellow-300">0</span>) {
-                                        <span class="text-purple-400">throw</span> <span class="text-purple-400">new</span> <span class="text-blue-300">ArithmeticException</span>(<span class="text-green-300">"除数不能为零"</span>)
-                                    }
-                                    <span class="text-blue-300">a</span> / <span class="text-blue-300">b</span>
+                                <span class="text-blue-400">// 抛出异常</span><br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">divide</span>(<span class="text-blue-300">a</span>: <span class="text-purple-400">Int</span>, <span class="text-blue-300">b</span>: <span class="text-purple-400">Int</span>): <span class="text-purple-400">Int</span> = {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (<span class="text-blue-300">b</span> == <span class="text-yellow-300">0</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">throw</span> <span class="text-purple-400">new</span> <span class="text-blue-300">ArithmeticException</span>(<span class="text-green-300">"除数不能为零"</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">a</span> / <span class="text-blue-300">b</span><br>
                                 }
                             </div>
                         </div>
@@ -878,20 +882,20 @@
                         <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2">// 隐式转换函数</div>
                             <div class="text-sm leading-6">
-                                <span class="text-purple-400">implicit</span> <span class="text-purple-400">def</span> <span class="text-blue-300">intToString</span>(<span class="text-blue-300">i</span>: <span class="text-purple-400">Int</span>): <span class="text-purple-400">String</span> = {
-                                    <span class="text-blue-300">i</span>.toString
+                                <span class="text-purple-400">implicit</span> <span class="text-purple-400">def</span> <span class="text-blue-300">intToString</span>(<span class="text-blue-300">i</span>: <span class="text-purple-400">Int</span>): <span class="text-purple-400">String</span> = {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">i</span>.toString<br>
                                 }
                                 <br>
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">s</span>: <span class="text-purple-400">String</span> = <span class="text-yellow-300">123</span> <span class="text-blue-400">// 自动转换为字符串</span>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">s</span>: <span class="text-purple-400">String</span> = <span class="text-yellow-300">123</span> <span class="text-blue-400">// 自动转换为字符串</span><br>
                                 <br>
-                                <span class="text-blue-400">// 隐式类</span>
-                                <span class="text-purple-400">implicit</span> <span class="text-purple-400">class</span> <span class="text-blue-300">RichInt</span>(<span class="text-blue-300">i</span>: <span class="text-purple-400">Int</span>) {
-                                    <span class="text-purple-400">def</span> <span class="text-blue-300">isEven</span>: <span class="text-purple-400">Boolean</span> = <span class="text-blue-300">i</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span>
-                                    <span class="text-purple-400">def</span> <span class="text-blue-300">isOdd</span>: <span class="text-purple-400">Boolean</span> = <span class="text-blue-300">i</span> % <span class="text-yellow-300">2</span> != <span class="text-yellow-300">0</span>
+                                <span class="text-blue-400">// 隐式类</span><br>
+                                <span class="text-purple-400">implicit</span> <span class="text-purple-400">class</span> <span class="text-blue-300">RichInt</span>(<span class="text-blue-300">i</span>: <span class="text-purple-400">Int</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">isEven</span>: <span class="text-purple-400">Boolean</span> = <span class="text-blue-300">i</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">isOdd</span>: <span class="text-purple-400">Boolean</span> = <span class="text-blue-300">i</span> % <span class="text-yellow-300">2</span> != <span class="text-yellow-300">0</span><br>
                                 }
                                 <br>
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">even</span> = <span class="text-yellow-300">4</span>.isEven <span class="text-blue-400">// true</span>
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">odd</span> = <span class="text-yellow-300">5</span>.isOdd <span class="text-blue-400">// true</span>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">even</span> = <span class="text-yellow-300">4</span>.isEven <span class="text-blue-400">// true</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">odd</span> = <span class="text-yellow-300">5</span>.isOdd <span class="text-blue-400">// true</span><br>
                             </div>
                         </div>
                     </div>
@@ -910,20 +914,20 @@
                         <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2">// 泛型类</div>
                             <div class="text-sm leading-6">
-                                <span class="text-purple-400">class</span> <span class="text-blue-300">Box</span>[<span class="text-purple-400">T</span>](<span class="text-blue-300">value</span>: <span class="text-purple-400">T</span>) {
-                                    <span class="text-purple-400">def</span> <span class="text-blue-300">getContent</span>(): <span class="text-purple-400">T</span> = <span class="text-blue-300">value</span>
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Box</span>[<span class="text-purple-400">T</span>](<span class="text-blue-300">value</span>: <span class="text-purple-400">T</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">getContent</span>(): <span class="text-purple-400">T</span> = <span class="text-blue-300">value</span><br>
                                 }
                                 <br>
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">intBox</span> = <span class="text-purple-400">new</span> <span class="text-blue-300">Box</span>[<span class="text-purple-400">Int</span>](<span class="text-yellow-300">10</span>)
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">strBox</span> = <span class="text-purple-400">new</span> <span class="text-blue-300">Box</span>[<span class="text-purple-400">String</span>](<span class="text-green-300">"Hello"</span>)
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">intBox</span> = <span class="text-purple-400">new</span> <span class="text-blue-300">Box</span>[<span class="text-purple-400">Int</span>](<span class="text-yellow-300">10</span>)<br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">strBox</span> = <span class="text-purple-400">new</span> <span class="text-blue-300">Box</span>[<span class="text-purple-400">String</span>](<span class="text-green-300">"Hello"</span>)<br>
                                 <br>
-                                <span class="text-blue-400">// 类型边界</span>
-                                <span class="text-purple-400">def</span> <span class="text-blue-300">printLength</span>[<span class="text-purple-400">T</span> <span class="text-purple-400">:</span> <span class="text-purple-400">Length</span>](<span class="text-blue-300">obj</span>: <span class="text-purple-400">T</span>)(<span class="text-purple-400">implicit</span> <span class="text-blue-300">len</span>: <span class="text-purple-400">Length</span>[<span class="text-purple-400">T</span>]): <span class="text-purple-400">Unit</span> = {
-                                    println(s<span class="text-green-300">"长度: ${len.length(obj)}"</span>)
+                                <span class="text-blue-400">// 类型边界</span><br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">printLength</span>[<span class="text-purple-400">T</span> <span class="text-purple-400">:</span> <span class="text-purple-400">Length</span>](<span class="text-blue-300">obj</span>: <span class="text-purple-400">T</span>)(<span class="text-purple-400">implicit</span> <span class="text-blue-300">len</span>: <span class="text-purple-400">Length</span>[<span class="text-purple-400">T</span>]): <span class="text-purple-400">Unit</span> = {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;println(s<span class="text-green-300">"长度: ${len.length(obj)}"</span>)<br>
                                 }
                                 <br>
-                                <span class="text-purple-400">trait</span> <span class="text-blue-300">Length</span>[<span class="text-purple-400">T</span>] {
-                                    <span class="text-purple-400">def</span> <span class="text-blue-300">length</span>(<span class="text-blue-300">obj</span>: <span class="text-purple-400">T</span>): <span class="text-purple-400">Int</span>
+                                <span class="text-purple-400">trait</span> <span class="text-blue-300">Length</span>[<span class="text-purple-400">T</span>] {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">length</span>(<span class="text-blue-300">obj</span>: <span class="text-purple-400">T</span>): <span class="text-purple-400">Int</span><br>
                                 }
                             </div>
                         </div>
@@ -943,29 +947,29 @@
                         <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2">// Future和Promise</div>
                             <div class="text-sm leading-6">
-                                <span class="text-purple-400">import</span> <span class="text-blue-300">scala.concurrent.</span>*
-                                <span class="text-purple-400">import</span> <span class="text-blue-300">scala.concurrent.ExecutionContext.Implicits.global</span>
-                                <span class="text-purple-400">import</span> <span class="text-blue-300">scala.util.{Success, Failure}</span>
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">scala.concurrent.</span>*<br>
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">scala.concurrent.ExecutionContext.Implicits.global</span><br>
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">scala.util.{Success, Failure}</span><br>
                                 <br>
-                                <span class="text-blue-400">// 创建Future</span>
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">future</span> = <span class="text-purple-400">Future</span> {
-                                    <span class="text-purple-400">Thread</span>.sleep(<span class="text-yellow-300">1000</span>)
-                                    <span class="text-green-300">"Future执行完成"</span>
+                                <span class="text-blue-400">// 创建Future</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">future</span> = <span class="text-purple-400">Future</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">Thread</span>.sleep(<span class="text-yellow-300">1000</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"Future执行完成"</span><br>
                                 }
                                 <br>
-                                <span class="text-blue-400">// 处理Future结果</span>
-                                <span class="text-blue-300">future</span>.onComplete {
-                                    <span class="text-purple-400">case</span> <span class="text-purple-400">Success</span>(<span class="text-blue-300">result</span>) => println(<span class="text-blue-300">result</span>)
-                                    <span class="text-purple-400">case</span> <span class="text-purple-400">Failure</span>(<span class="text-blue-300">e</span>) => println(s<span class="text-green-300">"失败: ${e.getMessage}"</span>)
+                                <span class="text-blue-400">// 处理Future结果</span><br>
+                                <span class="text-blue-300">future</span>.onComplete {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> <span class="text-purple-400">Success</span>(<span class="text-blue-300">result</span>) => println(<span class="text-blue-300">result</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> <span class="text-purple-400">Failure</span>(<span class="text-blue-300">e</span>) => println(s<span class="text-green-300">"失败: ${e.getMessage}"</span>)<br>
                                 }
                                 <br>
-                                <span class="text-blue-400">// 使用for推导式组合Future</span>
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">future1</span> = <span class="text-purple-400">Future</span>(<span class="text-yellow-300">1</span>)
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">future2</span> = <span class="text-purple-400">Future</span>(<span class="text-yellow-300">2</span>)
-                                <span class="text-purple-400">val</span> <span class="text-blue-300">combined</span> = <span class="text-purple-400">for</span> {
-                                    <span class="text-blue-300">f1</span> <- <span class="text-blue-300">future1</span>
-                                    <span class="text-blue-300">f2</span> <- <span class="text-blue-300">future2</span>
-                                } <span class="text-purple-400">yield</span> <span class="text-blue-300">f1</span> + <span class="text-blue-300">f2</span>
+                                <span class="text-blue-400">// 使用for推导式组合Future</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">future1</span> = <span class="text-purple-400">Future</span>(<span class="text-yellow-300">1</span>)<br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">future2</span> = <span class="text-purple-400">Future</span>(<span class="text-yellow-300">2</span>)<br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">combined</span> = <span class="text-purple-400">for</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">f1</span> <- <span class="text-blue-300">future1</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">f2</span> <- <span class="text-blue-300">future2</span><br>
+                                } <span class="text-purple-400">yield</span> <span class="text-blue-300">f1</span> + <span class="text-blue-300">f2</span><br>
                             </div>
                         </div>
                     </div>
