@@ -4,7 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scala 教程 - Hello 编程语言</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // 尝试加载 Tailwind CSS，如果失败则使用备用方案
+        window.tailwindCdnLoaded = false;
+        function loadTailwindCSS() {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.tailwindcss.com';
+            script.onload = function() {
+                window.tailwindCdnLoaded = true;
+                // Tailwind 配置
+                tailwind.config = {
+                    theme: {
+                        extend: {
+                            colors: {
+                                primary: '#10b981',
+                                secondary: '#8b5cf6',
+                                dark: '#1e293b',
+                                light: '#f8fafc'
+                            }
+                        }
+                    }
+                }
+            };
+            script.onerror = function() {
+                console.warn('Failed to load Tailwind CSS from CDN, applying fallback styles');
+                applyFallbackStyles();
+            };
+            document.head.appendChild(script);
+        }
+        
+        function applyFallbackStyles() {
+            // 应用基本的 Tailwind 类对应的样式
+            const fallbackStyles = document.createElement('style');
+            fallbackStyles.textContent = `
+                /* 基本布局类 */
+                .container { width: 100%; margin-right: auto; margin-left: auto; padding-right: 1rem; padding-left: 1rem; }
+                .grid { display: grid; }
+                .flex { display: flex; }
+                .hidden { display: none; }
+                
+                /* 网格列类 */
+                .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+                @media (min-width: 1024px) {
+                    .lg\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+                }
+                
+                /* 间距类 */
+                .p-8 { padding: 2rem; }
+                .p-4 { padding: 1rem; }
+                .mb-16 { margin-bottom: 4rem; }
+                .mb-8 { margin-bottom: 2rem; }
+                .mb-4 { margin-bottom: 1rem; }
+                .mb-2 { margin-bottom: 0.5rem; }
+                .mt-4 { margin-top: 1rem; }
+                .mr-2 { margin-right: 0.5rem; }
+                .ml-2 { margin-left: 0.5rem; }
+                
+                /* 字体类 */
+                .text-3xl { font-size: 1.875rem; }
+                .text-lg { font-size: 1.125rem; }
+                .text-sm { font-size: 0.875rem; }
+                .font-bold { font-weight: 700; }
+                .font-medium { font-weight: 500; }
+                
+                /* 文本类 */
+                .text-center { text-align: center; }
+                .text-purple-400 { color: #a78bfa; }
+                .text-slate-300 { color: #cbd5e1; }
+                .text-slate-400 { color: #94a3b8; }
+                
+                /* 背景类 */
+                .bg-slate-900 { background-color: #0f172a; }
+                .bg-slate-800 { background-color: #1e293b; }
+                
+                /* 边框类 */
+                .rounded-xl { border-radius: 0.75rem; }
+                .rounded-lg { border-radius: 0.5rem; }
+                .rounded { border-radius: 0.25rem; }
+                
+                /* 其他类 */
+                .gap-8 { gap: 2rem; }
+                .items-center { align-items: center; }
+                .justify-between { justify-content: space-between; }
+                .w-full { width: 100%; }
+            `;
+            document.head.appendChild(fallbackStyles);
+        }
+        
+        // 加载 Tailwind CSS
+        loadTailwindCSS();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -27,7 +116,7 @@
             border: 1px solid rgba(148, 163, 184, 0.1);
         }
         .code-block {
-            background: rgba(2, 6, 23, 0.9);
+            background: #000000;
             border-left: 4px solid #3B82F6;
         }
         .highlight {
@@ -35,326 +124,854 @@
             padding: 2px 4px;
             border-radius: 3px;
         }
+        .language-content.hidden {
+            display: none;
+        }
+        .language-tab {
+            transition: all 0.3s ease;
+        }
+        .language-tab.active {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            color: white;
+        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">
-    <main class="container mx-auto px-4 py-8 max-w-6xl">
-        <!-- 1. Scala 简介 -->
-        <section id="section-1" class="mb-16">
-            <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">1. Scala 简介</span>
-            </h2>
-            
-            <div class="language-content" data-lang="scala">
-                <h4 class="text-lg font-medium mb-4 text-red-400">Scala - 融合面向对象与函数式编程的现代语言</h4>
-                <p class="text-slate-300 mb-4">Scala是一门多范式编程语言，融合了面向对象编程和函数式编程的特性。它运行在Java虚拟机上，与Java高度互操作，同时提供了更简洁、更强大的语法和功能。</p>
-                
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card">
-                    <h5 class="text-lg font-medium mb-4 text-red-300">Scala 语言特点</h5>
-                    <ul class="text-slate-300 list-disc pl-6 space-y-2">
-                        <li>融合面向对象和函数式编程范式</li>
-                        <li>静态类型系统，支持类型推断</li>
-                        <li>简洁优雅的语法设计</li>
-                        <li>与Java高度互操作</li>
-                        <li>支持模式匹配</li>
-                        <li>强大的集合库</li>
-                        <li>隐式转换和参数</li>
-                        <li>高阶函数和闭包</li>
-                    </ul>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Sidebar Navigation -->
+            <aside class="lg:w-1/4">
+                <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 sticky top-24 border border-slate-700">
+                    <h3 class="text-lg font-bold mb-4 gradient-text">章节导航</h3>
+                    <nav class="space-y-2">
+                        <a href="#section-1" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">1. Scala 简介</a>
+                        <a href="#section-2" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">2. 变量和数据类型</a>
+                        <a href="#section-3" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">3. 字符串操作</a>
+                        <a href="#section-4" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">4. 控制流 - 条件语句</a>
+                        <a href="#section-5" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">5. 控制流 - 循环</a>
+                        <a href="#section-6" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">6. 函数定义</a>
+                        <a href="#section-7" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">7. 高阶函数</a>
+                        <a href="#section-8" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">8. 集合 - 数组</a>
+                        <a href="#section-9" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">9. 集合 - List</a>
+                        <a href="#section-10" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">10. 集合 - Set</a>
+                        <a href="#section-11" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">11. 集合 - Map</a>
+                        <a href="#section-12" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">12. 面向对象编程</a>
+                        <a href="#section-13" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">13. 继承和多态</a>
+                        <a href="#section-14" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">14. 特质 (Traits)</a>
+                        <a href="#section-15" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">15. 模式匹配</a>
+                        <a href="#section-16" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">16. 选项类型 (Option)</a>
+                        <a href="#section-17" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">17. 异常处理</a>
+                        <a href="#section-18" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">18. 隐式转换</a>
+                        <a href="#section-19" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">19. 类型系统</a>
+                        <a href="#section-20" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">20. 并发编程</a>
+                    </nav>
                 </div>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="lg:w-3/4">
+                <!-- 1. Scala 简介 -->
+                <section id="section-1" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">1. Scala 简介</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - 融合面向对象与函数式编程的现代语言</h4>
+                        <p class="text-slate-300 mb-4">Scala是一门多范式编程语言，融合了面向对象编程和函数式编程的特性。它运行在Java虚拟机上，与Java高度互操作，同时提供了更简洁、更强大的语法和功能。</p>
+                        
+                        <div class="syntax-card rounded-xl p-6">
+                            <h5 class="text-lg font-medium mb-4 text-purple-300">Scala 语言特点</h5>
+                            <ul class="text-slate-300 list-disc pl-6 space-y-2">
+                                <li>融合面向对象和函数式编程范式</li>
+                                <li>静态类型系统，支持类型推断</li>
+                                <li>简洁优雅的语法设计</li>
+                                <li>与Java高度互操作</li>
+                                <li>支持模式匹配</li>
+                                <li>强大的集合库</li>
+                                <li>隐式转换和参数</li>
+                                <li>高阶函数和闭包</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. 变量和数据类型 -->
+                <section id="section-2" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">2. 变量和数据类型</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - 变量声明和基本数据类型</h4>
+                        <p class="text-slate-300 mb-4">Scala支持可变变量(var)和不可变变量(val)，并提供了丰富的基本数据类型。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 变量声明</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">x</span>: <span class="text-purple-400">Int</span> = <span class="text-yellow-300">10</span>        <span class="text-blue-400">// 不可变变量</span><br>
+                                <span class="text-purple-400">var</span> <span class="text-blue-300">y</span>: <span class="text-purple-400">String</span> = <span class="text-green-300">"Hello"</span> <span class="text-blue-400">// 可变变量</span><br>
+                                <br>
+                                <span class="text-blue-400">// 类型推断</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">a</span> = <span class="text-yellow-300">20</span>              <span class="text-blue-400">// Int类型</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">b</span> = <span class="text-yellow-300">3.14</span>            <span class="text-blue-400">// Double类型</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">c</span> = <span class="text-green-300">"World"</span>         <span class="text-blue-400">// String类型</span>
+                            </div>
+                        </div>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2">// 基本数据类型</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 整数类型</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">numByte</span>: <span class="text-purple-400">Byte</span> = <span class="text-yellow-300">127</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">numShort</span>: <span class="text-purple-400">Short</span> = <span class="text-yellow-300">32767</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">numInt</span>: <span class="text-purple-400">Int</span> = <span class="text-yellow-300">2147483647</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">numLong</span>: <span class="text-purple-400">Long</span> = <span class="text-yellow-300">9223372036854775807L</span><br>
+                                <br>
+                                <span class="text-blue-400">// 浮点类型</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">numFloat</span>: <span class="text-purple-400">Float</span> = <span class="text-yellow-300">3.14f</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">numDouble</span>: <span class="text-purple-400">Double</span> = <span class="text-yellow-300">3.1415926535</span><br>
+                                <br>
+                                <span class="text-blue-400">// 字符和布尔类型</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">char</span>: <span class="text-purple-400">Char</span> = <span class="text-green-300">'A'</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">isTrue</span>: <span class="text-purple-400">Boolean</span> = <span class="text-purple-300">true</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">isFalse</span>: <span class="text-purple-400">Boolean</span> = <span class="text-purple-300">false</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. 字符串操作 -->
+                <section id="section-3" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">3. 字符串操作</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - 字符串操作和插值</h4>
+                        <p class="text-slate-300 mb-4">Scala提供了丰富的字符串操作方法和灵活的字符串插值功能。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 字符串插值</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">name</span> = <span class="text-green-300">"张三"</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">age</span> = <span class="text-yellow-300">25</span><br>
+                                <br>
+                                <span class="text-blue-300">// s插值器</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">greeting</span> = s<span class="text-green-300">"你好，$name！你今年$age岁了。"</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">result</span> = s<span class="text-green-300">"1 + 2 = ${1 + 2}"</span><br>
+                                <br>
+                                <span class="text-blue-400">// f插值器</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">pi</span> = <span class="text-yellow-300">3.1415926</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">formatted</span> = f<span class="text-green-300">"π ≈ $pi%.2f"</span>
+                            </div>
+                        </div>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2">// 字符串操作方法</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">text</span> = <span class="text-green-300">"Hello, Scala!"</span><br>
+                                <br>
+                                <span class="text-blue-300">// 常用方法</span><br>
+                                text.<span class="text-purple-400">length</span>              <span class="text-blue-400">// 获取长度</span><br>
+                                text.<span class="text-purple-400">toUpperCase</span>()     <span class="text-blue-400">// 转换为大写</span><br>
+                                text.<span class="text-purple-400">toLowerCase</span>()     <span class="text-blue-400">// 转换为小写</span><br>
+                                text.<span class="text-purple-400">startsWith</span>(<span class="text-green-300">"Hello"</span>) <span class="text-blue-400">// 是否以Hello开头</span><br>
+                                text.<span class="text-purple-400">endsWith</span>(<span class="text-green-300">"Scala!"</span>) <span class="text-blue-400">// 是否以Scala!结尾</span><br>
+                                text.<span class="text-purple-400">substring</span>(<span class="text-yellow-300">7</span>, <span class="text-yellow-300">12</span>) <span class="text-blue-400">// 截取子串</span><br>
+                                text.<span class="text-purple-400">split</span>(<span class="text-green-300">", "</span>)    <span class="text-blue-400">// 分割字符串</span><br>
+                                text.<span class="text-purple-400">trim</span>()              <span class="text-blue-400">// 去除前后空格</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. 控制流 - 条件语句 -->
+                <section id="section-4" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">4. 控制流 - 条件语句</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - if-else条件语句</h4>
+                        <p class="text-slate-300 mb-4">Scala的条件语句与Java类似，但也可以作为表达式使用。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// if-else条件语句</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">age</span> = <span class="text-yellow-300">18</span><br>
+                                <br>
+                                <span class="text-purple-400">if</span> (<span class="text-blue-300">age</span> < <span class="text-yellow-300">18</span>) {
+                                    println(<span class="text-green-300">"未成年"</span>)
+                                } <span class="text-purple-400">else</span> <span class="text-purple-400">if</span> (<span class="text-blue-300">age</span> == <span class="text-yellow-300">18</span>) {
+                                    println(<span class="text-green-300">"刚成年"</span>)
+                                } <span class="text-purple-400">else</span> {
+                                    println(<span class="text-green-300">"成年人"</span>)
+                                }
+                                <br>
+                                <span class="text-blue-400">// 作为表达式使用</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">status</span> = <span class="text-purple-400">if</span> (<span class="text-blue-300">age</span> >= <span class="text-yellow-300">18</span>) <span class="text-green-300">"成年人"</span> <span class="text-purple-400">else</span> <span class="text-green-300">"未成年"</span>
+                            </div>
+                        </div>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2">// match表达式（类似于switch）</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">day</span> = <span class="text-yellow-300">3</span><br>
+                                <br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">dayName</span> = <span class="text-blue-300">day</span> <span class="text-purple-400">match</span> {
+                                    <span class="text-purple-400">case</span> <span class="text-yellow-300">1</span> => <span class="text-green-300">"星期一"</span><br>
+                                    <span class="text-purple-400">case</span> <span class="text-yellow-300">2</span> => <span class="text-green-300">"星期二"</span><br>
+                                    <span class="text-purple-400">case</span> <span class="text-yellow-300">3</span> => <span class="text-green-300">"星期三"</span><br>
+                                    <span class="text-purple-400">case</span> <span class="text-yellow-300">4</span> => <span class="text-green-300">"星期四"</span><br>
+                                    <span class="text-purple-400">case</span> <span class="text-yellow-300">5</span> => <span class="text-green-300">"星期五"</span><br>
+                                    <span class="text-purple-400">case</span> <span class="text-yellow-300">6</span> => <span class="text-green-300">"星期六"</span><br>
+                                    <span class="text-purple-400">case</span> <span class="text-yellow-300">7</span> => <span class="text-green-300">"星期日"</span><br>
+                                    <span class="text-purple-400">case</span> _ => <span class="text-green-300">"无效的日期"</span><br>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. 控制流 - 循环 -->
+                <section id="section-5" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">5. 控制流 - 循环</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - 循环语句和迭代器</h4>
+                        <p class="text-slate-300 mb-4">Scala提供了多种循环方式，包括for循环、while循环和do-while循环。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// while循环</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">var</span> <span class="text-blue-300">i</span> = <span class="text-yellow-300">1</span><br>
+                                <span class="text-purple-400">while</span> (<span class="text-blue-300">i</span> <= <span class="text-yellow-300">5</span>) {
+                                    println(<span class="text-blue-300">i</span>)
+                                    <span class="text-blue-300">i</span> += <span class="text-yellow-300">1</span>
+                                }
+                                <br>
+                                <span class="text-blue-400">// do-while循环</span><br>
+                                <span class="text-purple-400">var</span> <span class="text-blue-300">j</span> = <span class="text-yellow-300">1</span><br>
+                                <span class="text-purple-400">do</span> {
+                                    println(<span class="text-blue-300">j</span>)
+                                    <span class="text-blue-300">j</span> += <span class="text-yellow-300">1</span>
+                                } <span class="text-purple-400">while</span> (<span class="text-blue-300">j</span> <= <span class="text-yellow-300">5</span>)
+                            </div>
+                        </div>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2">// for循环和for推导式</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 基本for循环</span><br>
+                                <span class="text-purple-400">for</span> (<span class="text-blue-300">k</span> <- <span class="text-yellow-300">1</span> to <span class="text-yellow-300">5</span>) {
+                                    println(<span class="text-blue-300">k</span>)
+                                }
+                                <br>
+                                <span class="text-blue-400">// 使用until（不包含结束值）</span><br>
+                                <span class="text-purple-400">for</span> (<span class="text-blue-300">k</span> <- <span class="text-yellow-300">1</span> until <span class="text-yellow-300">5</span>) {
+                                    println(<span class="text-blue-300">k</span>)
+                                }
+                                <br>
+                                <span class="text-blue-400">// for推导式</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">squares</span> = <span class="text-purple-400">for</span> (<span class="text-blue-300">k</span> <- <span class="text-yellow-300">1</span> to <span class="text-yellow-300">5</span>) <span class="text-purple-400">yield</span> <span class="text-blue-300">k</span> * <span class="text-blue-300">k</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. 函数定义 -->
+                <section id="section-6" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">6. 函数定义</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - 函数定义和调用</h4>
+                        <p class="text-slate-300 mb-4">Scala支持多种函数定义方式，包括普通函数、匿名函数和高阶函数。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 普通函数定义</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">add</span>(<span class="text-blue-300">x</span>: <span class="text-purple-400">Int</span>, <span class="text-blue-300">y</span>: <span class="text-purple-400">Int</span>): <span class="text-purple-400">Int</span> = {
+                                    <span class="text-blue-300">x</span> + <span class="text-blue-300">y</span>
+                                }
+                                <br>
+                                <span class="text-blue-400">// 无返回值的函数</span><br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">printMessage</span>(<span class="text-blue-300">message</span>: <span class="text-purple-400">String</span>): <span class="text-purple-400">Unit</span> = {
+                                    println(<span class="text-blue-300">message</span>)
+                                }
+                                <br>
+                                <span class="text-blue-400">// 单行函数</span><br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">multiply</span>(<span class="text-blue-300">x</span>: <span class="text-purple-400">Int</span>, <span class="text-blue-300">y</span>: <span class="text-purple-400">Int</span>): <span class="text-purple-400">Int</span> = <span class="text-blue-300">x</span> * <span class="text-blue-300">y</span>
+                            </div>
+                        </div>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2">// 函数调用和默认参数</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">add</span>(<span class="text-yellow-300">10</span>, <span class="text-yellow-300">20</span>) <span class="text-blue-400">// 调用函数</span><br>
+                                <br>
+                                <span class="text-blue-400">// 默认参数</span><br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">greet</span>(<span class="text-blue-300">name</span>: <span class="text-purple-400">String</span>, <span class="text-blue-300">message</span>: <span class="text-purple-400">String</span> = <span class="text-green-300">"你好"</span>): <span class="text-purple-400">String</span> = {
+                                    s<span class="text-green-300">"$message，$name！"</span>
+                                }
+                                <br>
+                                <span class="text-blue-300">greet</span>(<span class="text-green-300">"张三"</span>) <span class="text-blue-400">// 使用默认参数</span><br>
+                                <span class="text-blue-300">greet</span>(<span class="text-green-300">"张三"</span>, <span class="text-green-300">"早上好"</span>) <span class="text-blue-400">// 覆盖默认参数</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. 高阶函数 -->
+                <section id="section-7" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">7. 高阶函数</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - 高阶函数和Lambda表达式</h4>
+                        <p class="text-slate-300 mb-4">Scala支持高阶函数，可以将函数作为参数传递或作为返回值返回。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 高阶函数</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 将函数作为参数</span><br>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">applyOperation</span>(<span class="text-blue-300">x</span>: <span class="text-purple-400">Int</span>, <span class="text-blue-300">y</span>: <span class="text-purple-400">Int</span>, <span class="text-blue-300">operation</span>: (<span class="text-purple-400">Int</span>, <span class="text-purple-400">Int</span>) => <span class="text-purple-400">Int</span>): <span class="text-purple-400">Int</span> = {
+                                    <span class="text-blue-300">operation</span>(<span class="text-blue-300">x</span>, <span class="text-blue-300">y</span>)
+                                }
+                                <br>
+                                <span class="text-blue-400">// Lambda表达式</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">sum</span> = (<span class="text-blue-300">x</span>: <span class="text-purple-400">Int</span>, <span class="text-blue-300">y</span>: <span class="text-purple-400">Int</span>) => <span class="text-blue-300">x</span> + <span class="text-blue-300">y</span>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">product</span> = (<span class="text-blue-300">x</span>: <span class="text-purple-400">Int</span>, <span class="text-blue-300">y</span>: <span class="text-purple-400">Int</span>) => <span class="text-blue-300">x</span> * <span class="text-blue-300">y</span>
+                                <br>
+                                <span class="text-blue-400">// 调用高阶函数</span><br>
+                                <span class="text-blue-300">applyOperation</span>(<span class="text-yellow-300">10</span>, <span class="text-yellow-300">20</span>, <span class="text-blue-300">sum</span>)<br>
+                                <span class="text-blue-300">applyOperation</span>(<span class="text-yellow-300">10</span>, <span class="text-yellow-300">20</span>, <span class="text-blue-300">product</span>)<br>
+                                <span class="text-blue-300">applyOperation</span>(<span class="text-yellow-300">10</span>, <span class="text-yellow-300">20</span>, (<span class="text-blue-300">x</span>, <span class="text-blue-300">y</span>) => <span class="text-blue-300">x</span> - <span class="text-blue-300">y</span>)<br>
+                            </div>
+                        </div>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2">// 函数作为返回值</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">createMultiplier</span>(<span class="text-blue-300">factor</span>: <span class="text-purple-400">Int</span>): <span class="text-purple-400">Int</span> => <span class="text-purple-400">Int</span> = {
+                                    (<span class="text-blue-300">x</span>: <span class="text-purple-400">Int</span>) => <span class="text-blue-300">x</span> * <span class="text-blue-300">factor</span>
+                                }
+                                <br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">double</span> = <span class="text-blue-300">createMultiplier</span>(<span class="text-yellow-300">2</span>)<br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">triple</span> = <span class="text-blue-300">createMultiplier</span>(<span class="text-yellow-300">3</span>)<br>
+                                <br>
+                                <span class="text-blue-300">double</span>(<span class="text-yellow-300">10</span>) <span class="text-blue-400">// 输出: 20</span><br>
+                                <span class="text-blue-300">triple</span>(<span class="text-yellow-300">10</span>) <span class="text-blue-400">// 输出: 30</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. 集合 - 数组 -->
+                <section id="section-8" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">8. 集合 - 数组</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - 数组和数组操作</h4>
+                        <p class="text-slate-300 mb-4">Scala提供了丰富的数组操作方法，包括不可变数组和可变数组。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 数组声明和初始化</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-400">// 不可变数组</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">numbers</span> = Array(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>)<br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">strings</span> = Array(<span class="text-green-300">"a"</span>, <span class="text-green-300">"b"</span>, <span class="text-green-300">"c"</span>)<br>
+                                <br>
+                                <span class="text-blue-400">// 指定类型的数组</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">doubles</span>: Array[<span class="text-purple-400">Double</span>] = Array(<span class="text-yellow-300">1.0</span>, <span class="text-yellow-300">2.0</span>, <span class="text-yellow-300">3.0</span>)<br>
+                                <br>
+                                <span class="text-blue-400">// 空数组</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">empty</span>: Array[<span class="text-purple-400">Int</span>] = Array.empty<br>
+                                <br>
+                                <span class="text-blue-400">// 创建指定大小的数组</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">size5</span>: Array[<span class="text-purple-400">Int</span>] = Array.ofDim(<span class="text-yellow-300">5</span>)
+                            </div>
+                        </div>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2">// 数组操作</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">arr</span> = Array(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>)<br>
+                                <br>
+                                <span class="text-blue-400">// 访问元素</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">first</span> = <span class="text-blue-300">arr</span>(<span class="text-yellow-300">0</span>)<br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">last</span> = <span class="text-blue-300">arr</span>(<span class="text-blue-300">arr</span>.length - <span class="text-yellow-300">1</span>)<br>
+                                <br>
+                                <span class="text-blue-400">// 更新元素</span><br>
+                                <span class="text-blue-300">arr</span>(<span class="text-yellow-300">0</span>) = <span class="text-yellow-300">10</span><br>
+                                <br>
+                                <span class="text-blue-400">// 数组遍历</span><br>
+                                <span class="text-purple-400">for</span> (<span class="text-blue-300">element</span> <- <span class="text-blue-300">arr</span>) {
+                                    println(<span class="text-blue-300">element</span>)
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 9. 集合 - List -->
+                <section id="section-9" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">9. 集合 - List</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - List和List操作</h4>
+                        <p class="text-slate-300 mb-4">Scala的List是不可变的，提供了丰富的操作方法。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// List声明和初始化</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">numbers</span> = List(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>)<br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">emptyList</span> = List.empty[<span class="text-purple-400">Int</span>]<br>
+                                <br>
+                                <span class="text-blue-400">// 使用cons操作符创建List</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">list1</span> = <span class="text-yellow-300">1</span> :: <span class="text-yellow-300">2</span> :: <span class="text-yellow-300">3</span> :: Nil<br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">list2</span> = <span class="text-yellow-300">4</span> :: <span class="text-yellow-300">5</span> :: Nil<br>
+                                <br>
+                                <span class="text-blue-400">// 合并List</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">combined</span> = <span class="text-blue-300">list1</span> ++ <span class="text-blue-300">list2</span>
+                            </div>
+                        </div>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2">// List操作</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">list</span> = List(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>)<br>
+                                <br>
+                                <span class="text-blue-400">// 基本操作</span><br>
+                                <span class="text-blue-300">list</span>.head        <span class="text-blue-400">// 获取第一个元素: 1</span><br>
+                                <span class="text-blue-300">list</span>.tail        <span class="text-blue-400">// 获取除第一个元素外的所有元素: List(2, 3, 4, 5)</span><br>
+                                <span class="text-blue-300">list</span>.isEmpty     <span class="text-blue-400">// 检查是否为空: false</span><br>
+                                <span class="text-blue-300">list</span>.length      <span class="text-blue-400">// 获取长度: 5</span><br>
+                                <br>
+                                <span class="text-blue-400">// 变换操作</span><br>
+                                <span class="text-blue-300">list</span>.map(_ * <span class="text-yellow-300">2</span>)  <span class="text-blue-400">// 映射: List(2, 4, 6, 8, 10)</span><br>
+                                <span class="text-blue-300">list</span>.filter(_ % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span>) <span class="text-blue-400">// 过滤: List(2, 4)</span><br>
+                                <span class="text-blue-300">list</span>.flatMap(x => List(x, x + <span class="text-yellow-300">1</span>)) <span class="text-blue-400">// 扁平映射: List(1, 2, 2, 3, 3, 4, 4, 5, 5, 6)</span><br>
+                                <br>
+                                <span class="text-blue-400">// 折叠操作</span><br>
+                                <span class="text-blue-300">list</span>.foldLeft(<span class="text-yellow-300">0</span>)(_ + _)  <span class="text-blue-400">// 左折叠求和: 15</span><br>
+                                <span class="text-blue-300">list</span>.reduce(_ + _)  <span class="text-blue-400">// 归约求和: 15</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 10. 集合 - Set -->
+                <section id="section-10" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">10. 集合 - Set</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - Set和Set操作</h4>
+                        <p class="text-slate-300 mb-4">Scala的Set是不可变的，不允许重复元素。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// Set声明和初始化</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">numbers</span> = Set(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>)<br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">uniqueNumbers</span> = Set(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">3</span>) <span class="text-blue-400">// Set(1, 2, 3)</span><br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">emptySet</span> = Set.empty[<span class="text-purple-400">Int</span>]
+                            </div>
+                        </div>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2">// Set操作</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">set1</span> = Set(<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>)<br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">set2</span> = Set(<span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>, <span class="text-yellow-300">6</span>, <span class="text-yellow-300">7</span>)<br>
+                                <br>
+                                <span class="text-blue-400">// 基本操作</span><br>
+                                <span class="text-blue-300">set1</span>.contains(<span class="text-yellow-300">3</span>)  <span class="text-blue-400">// 检查元素是否存在: true</span><br>
+                                <span class="text-blue-300">set1</span>.isEmpty     <span class="text-blue-400">// 检查是否为空: false</span><br>
+                                <span class="text-blue-300">set1</span>.size        <span class="text-blue-400">// 获取大小: 5</span><br>
+                                <br>
+                                <span class="text-blue-400">// 集合操作</span><br>
+                                <span class="text-blue-300">set1</span> ++ <span class="text-blue-300">set2</span>      <span class="text-blue-400">// 并集: Set(1, 2, 3, 4, 5, 6, 7)</span><br>
+                                <span class="text-blue-300">set1</span> intersect <span class="text-blue-300">set2</span> <span class="text-blue-400">// 交集: Set(3, 4, 5)</span><br>
+                                <span class="text-blue-300">set1</span> diff <span class="text-blue-300">set2</span>      <span class="text-blue-400">// 差集: Set(1, 2)</span><br>
+                                <span class="text-blue-300">set1</span> subsetOf <span class="text-blue-300">set2</span> <span class="text-blue-400">// 子集检查: false</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 11. 集合 - Map -->
+                <section id="section-11" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">11. 集合 - Map</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - Map和Map操作</h4>
+                        <p class="text-slate-300 mb-4">Scala的Map是不可变的，存储键值对。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// Map声明和初始化</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">person</span> = Map(
+                                    <span class="text-green-300">"name"</span> -> <span class="text-green-300">"张三"</span>,
+                                    <span class="text-green-300">"age"</span> -> <span class="text-yellow-300">25</span>,
+                                    <span class="text-green-300">"city"</span> -> <span class="text-green-300">"北京"</span>
+                                )<br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">emptyMap</span> = Map.empty[<span class="text-purple-400">String</span>, <span class="text-purple-400">Any</span>]
+                            </div>
+                        </div>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2">// Map操作</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">map</span> = Map(
+                                    <span class="text-green-300">"a"</span> -> <span class="text-yellow-300">1</span>,
+                                    <span class="text-green-300">"b"</span> -> <span class="text-yellow-300">2</span>,
+                                    <span class="text-green-300">"c"</span> -> <span class="text-yellow-300">3</span>
+                                )<br>
+                                <br>
+                                <span class="text-blue-400">// 访问元素</span><br>
+                                <span class="text-blue-300">map</span>(<span class="text-green-300">"a"</span>)       <span class="text-blue-400">// 获取值: 1</span><br>
+                                <span class="text-blue-300">map</span>.get(<span class="text-green-300">"a"</span>)    <span class="text-blue-400">// 使用get方法: Some(1)</span><br>
+                                <span class="text-blue-300">map</span>.getOrElse(<span class="text-green-300">"d"</span>, <span class="text-yellow-300">0</span>) <span class="text-blue-400">// 获取不存在的键: 0</span><br>
+                                <br>
+                                <span class="text-blue-400">// Map遍历</span><br>
+                                <span class="text-purple-400">for</span> ((<span class="text-blue-300">key</span>, <span class="text-blue-300">value</span>) <- <span class="text-blue-300">map</span>) {
+                                    println(s<span class="text-green-300">"$key -> $value"</span>)
+                                }
+                                <br>
+                                <span class="text-blue-400">// 过滤和映射</span><br>
+                                <span class="text-blue-300">map</span>.filterKeys(<span class="text-blue-300">key</span> => <span class="text-blue-300">key</span> != <span class="text-green-300">"a"</span>) <span class="text-blue-400">// 过滤键</span><br>
+                                <span class="text-blue-300">map</span>.mapValues(<span class="text-blue-300">value</span> => <span class="text-blue-300">value</span> * <span class="text-yellow-300">2</span>) <span class="text-blue-400">// 映射值</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 12. 面向对象编程 -->
+                <section id="section-12" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">12. 面向对象编程</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - 类和对象</h4>
+                        <p class="text-slate-300 mb-4">Scala是一门面向对象的编程语言，支持类、对象和继承等特性。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 类定义</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Person</span>(<span class="text-blue-300">name</span>: <span class="text-purple-400">String</span>, <span class="text-blue-300">age</span>: <span class="text-purple-400">Int</span>) {
+                                    <span class="text-purple-400">def</span> <span class="text-blue-300">greet</span>(): <span class="text-purple-400">Unit</span> = {
+                                        println(s<span class="text-green-300">"你好，我叫$name，今年$age岁了。"</span>)
+                                    }
+                                }
+                                <br>
+                                <span class="text-blue-400">// 对象定义</span>
+                                <span class="text-purple-400">object</span> <span class="text-blue-300">Person</span> {
+                                    <span class="text-purple-400">def</span> <span class="text-blue-300">apply</span>(<span class="text-blue-300">name</span>: <span class="text-purple-400">String</span>, <span class="text-blue-300">age</span>: <span class="text-purple-400">Int</span>): <span class="text-blue-300">Person</span> = {
+                                        <span class="text-purple-400">new</span> <span class="text-blue-300">Person</span>(<span class="text-blue-300">name</span>, <span class="text-blue-300">age</span>)
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 13. 继承和多态 -->
+                <section id="section-13" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">13. 继承和多态</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - 类的继承和多态</h4>
+                        <p class="text-slate-300 mb-4">Scala支持类的继承和多态，允许创建子类并覆盖父类方法。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 类的继承</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Animal</span> {
+                                    <span class="text-purple-400">def</span> <span class="text-blue-300">makeSound</span>(): <span class="text-purple-400">Unit</span> = {
+                                        println(<span class="text-green-300">"动物发出声音"</span>)
+                                    }
+                                }
+                                <br>
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Dog</span> <span class="text-purple-400">extends</span> <span class="text-blue-300">Animal</span> {
+                                    <span class="text-purple-400">override</span> <span class="text-purple-400">def</span> <span class="text-blue-300">makeSound</span>(): <span class="text-purple-400">Unit</span> = {
+                                        println(<span class="text-green-300">"汪汪汪"</span>)
+                                    }
+                                }
+                                <br>
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Cat</span> <span class="text-purple-400">extends</span> <span class="text-blue-300">Animal</span> {
+                                    <span class="text-purple-400">override</span> <span class="text-purple-400">def</span> <span class="text-blue-300">makeSound</span>(): <span class="text-purple-400">Unit</span> = {
+                                        println(<span class="text-green-300">"喵喵喵"</span>)
+                                    }
+                                }
+                                <br>
+                                <span class="text-blue-400">// 多态</span>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">animals</span> = List(<span class="text-purple-400">new</span> <span class="text-blue-300">Dog</span>(), <span class="text-purple-400">new</span> <span class="text-blue-300">Cat</span>())
+                                <span class="text-purple-400">for</span> (<span class="text-blue-300">animal</span> <- <span class="text-blue-300">animals</span>) {
+                                    <span class="text-blue-300">animal</span>.makeSound()
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 14. 特质 (Traits) -->
+                <section id="section-14" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">14. 特质 (Traits)</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - 特质的定义和使用</h4>
+                        <p class="text-slate-300 mb-4">特质是Scala中的一种特性，类似于接口，可以被类混入（mixin）。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 特质定义</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">trait</span> <span class="text-blue-300">Printable</span> {
+                                    <span class="text-purple-400">def</span> <span class="text-blue-300">print</span>(): <span class="text-purple-400">Unit</span>
+                                }
+                                <br>
+                                <span class="text-purple-400">trait</span> <span class="text-blue-300">Drawable</span> {
+                                    <span class="text-purple-400">def</span> <span class="text-blue-300">draw</span>(): <span class="text-purple-400">Unit</span> = {
+                                        println(<span class="text-green-300">"绘制图形"</span>)
+                                    }
+                                }
+                                <br>
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Circle</span> <span class="text-purple-400">extends</span> <span class="text-blue-300">Printable</span> <span class="text-purple-400">with</span> <span class="text-blue-300">Drawable</span> {
+                                    <span class="text-purple-400">override</span> <span class="text-purple-400">def</span> <span class="text-blue-300">print</span>(): <span class="text-purple-400">Unit</span> = {
+                                        println(<span class="text-green-300">"打印圆形"</span>)
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 15. 模式匹配 -->
+                <section id="section-15" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">15. 模式匹配</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - 模式匹配的使用</h4>
+                        <p class="text-slate-300 mb-4">模式匹配是Scala中的一种强大功能，可以匹配不同类型的值并执行相应的操作。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 基本模式匹配</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">x</span> = <span class="text-yellow-300">2</span>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">result</span> = <span class="text-blue-300">x</span> <span class="text-purple-400">match</span> {
+                                    <span class="text-purple-400">case</span> <span class="text-yellow-300">1</span> => <span class="text-green-300">"一"</span>
+                                    <span class="text-purple-400">case</span> <span class="text-yellow-300">2</span> => <span class="text-green-300">"二"</span>
+                                    <span class="text-purple-400">case</span> <span class="text-yellow-300">3</span> => <span class="text-green-300">"三"</span>
+                                    <span class="text-purple-400">case</span> _ => <span class="text-green-300">"其他"</span>
+                                }
+                                <br>
+                                <span class="text-blue-400">// 类型匹配</span>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">matchType</span>(<span class="text-blue-300">x</span>: <span class="text-purple-400">Any</span>): <span class="text-purple-400">String</span> = <span class="text-blue-300">x</span> <span class="text-purple-400">match</span> {
+                                    <span class="text-purple-400">case</span> <span class="text-blue-300">i</span>: <span class="text-purple-400">Int</span> => <span class="text-green-300">"整数"</span>
+                                    <span class="text-purple-400">case</span> <span class="text-blue-300">d</span>: <span class="text-purple-400">Double</span> => <span class="text-green-300">"浮点数"</span>
+                                    <span class="text-purple-400">case</span> <span class="text-blue-300">s</span>: <span class="text-purple-400">String</span> => <span class="text-green-300">"字符串"</span>
+                                    <span class="text-purple-400">case</span> _ => <span class="text-green-300">"其他类型"</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 16. 选项类型 (Option) -->
+                <section id="section-16" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">16. 选项类型 (Option)</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - 选项类型的使用</h4>
+                        <p class="text-slate-300 mb-4">选项类型是Scala中用于处理可能缺失值的类型，它有两个子类：Some和None。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 选项类型的使用</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">map</span> = Map(<span class="text-green-300">"a"</span> -> <span class="text-yellow-300">1</span>, <span class="text-green-300">"b"</span> -> <span class="text-yellow-300">2</span>)
+                                <br>
+                                <span class="text-blue-300">// 获取存在的键</span>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">value1</span> = <span class="text-blue-300">map</span>.get(<span class="text-green-300">"a"</span>) <span class="text-blue-400">// Some(1)</span>
+                                <br>
+                                <span class="text-blue-400">// 获取不存在的键</span>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">value2</span> = <span class="text-blue-300">map</span>.get(<span class="text-green-300">"c"</span>) <span class="text-blue-400">// None</span>
+                                <br>
+                                <span class="text-blue-400">// 使用模式匹配处理选项类型</span>
+                                <span class="text-blue-300">value1</span> <span class="text-purple-400">match</span> {
+                                    <span class="text-purple-400">case</span> <span class="text-purple-400">Some</span>(<span class="text-blue-300">v</span>) => println(s<span class="text-green-300">"值是: $v"</span>)
+                                    <span class="text-purple-400">case</span> <span class="text-purple-400">None</span> => println(<span class="text-green-300">"没有找到值"</span>)
+                                }
+                                <br>
+                                <span class="text-blue-400">// 使用getOrElse获取值</span>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">v1</span> = <span class="text-blue-300">value1</span>.getOrElse(<span class="text-yellow-300">0</span>) <span class="text-blue-400">// 1</span>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">v2</span> = <span class="text-blue-300">value2</span>.getOrElse(<span class="text-yellow-300">0</span>) <span class="text-blue-400">// 0</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 17. 异常处理 -->
+                <section id="section-17" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">17. 异常处理</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - 异常处理的使用</h4>
+                        <p class="text-slate-300 mb-4">Scala提供了异常处理机制，可以捕获和处理程序运行时出现的异常。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 异常处理</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">try</span> {
+                                    <span class="text-purple-400">val</span> <span class="text-blue-300">result</span> = <span class="text-yellow-300">10</span> / <span class="text-yellow-300">0</span>
+                                } <span class="text-purple-400">catch</span> {
+                                    <span class="text-purple-400">case</span> <span class="text-blue-300">e</span>: <span class="text-purple-400">ArithmeticException</span> => println(s<span class="text-green-300">"算术异常: ${e.getMessage}"</span>)
+                                    <span class="text-purple-400">case</span> <span class="text-blue-300">e</span>: <span class="text-purple-400">Exception</span> => println(s<span class="text-green-300">"其他异常: ${e.getMessage}"</span>)
+                                } <span class="text-purple-400">finally</span> {
+                                    println(<span class="text-green-300">"无论是否发生异常都会执行"</span>)
+                                }
+                                <br>
+                                <span class="text-blue-400">// 抛出异常</span>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">divide</span>(<span class="text-blue-300">a</span>: <span class="text-purple-400">Int</span>, <span class="text-blue-300">b</span>: <span class="text-purple-400">Int</span>): <span class="text-purple-400">Int</span> = {
+                                    <span class="text-purple-400">if</span> (<span class="text-blue-300">b</span> == <span class="text-yellow-300">0</span>) {
+                                        <span class="text-purple-400">throw</span> <span class="text-purple-400">new</span> <span class="text-blue-300">ArithmeticException</span>(<span class="text-green-300">"除数不能为零"</span>)
+                                    }
+                                    <span class="text-blue-300">a</span> / <span class="text-blue-300">b</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 18. 隐式转换 -->
+                <section id="section-18" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">18. 隐式转换</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - 隐式转换的使用</h4>
+                        <p class="text-slate-300 mb-4">隐式转换是Scala中的一种强大功能，可以自动将一种类型转换为另一种类型。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 隐式转换函数</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">implicit</span> <span class="text-purple-400">def</span> <span class="text-blue-300">intToString</span>(<span class="text-blue-300">i</span>: <span class="text-purple-400">Int</span>): <span class="text-purple-400">String</span> = {
+                                    <span class="text-blue-300">i</span>.toString
+                                }
+                                <br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">s</span>: <span class="text-purple-400">String</span> = <span class="text-yellow-300">123</span> <span class="text-blue-400">// 自动转换为字符串</span>
+                                <br>
+                                <span class="text-blue-400">// 隐式类</span>
+                                <span class="text-purple-400">implicit</span> <span class="text-purple-400">class</span> <span class="text-blue-300">RichInt</span>(<span class="text-blue-300">i</span>: <span class="text-purple-400">Int</span>) {
+                                    <span class="text-purple-400">def</span> <span class="text-blue-300">isEven</span>: <span class="text-purple-400">Boolean</span> = <span class="text-blue-300">i</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span>
+                                    <span class="text-purple-400">def</span> <span class="text-blue-300">isOdd</span>: <span class="text-purple-400">Boolean</span> = <span class="text-blue-300">i</span> % <span class="text-yellow-300">2</span> != <span class="text-yellow-300">0</span>
+                                }
+                                <br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">even</span> = <span class="text-yellow-300">4</span>.isEven <span class="text-blue-400">// true</span>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">odd</span> = <span class="text-yellow-300">5</span>.isOdd <span class="text-blue-400">// true</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 19. 类型系统 -->
+                <section id="section-19" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">19. 类型系统</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - 高级类型系统</h4>
+                        <p class="text-slate-300 mb-4">Scala提供了强大的类型系统，包括泛型、类型参数、类型边界等特性。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// 泛型类</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">class</span> <span class="text-blue-300">Box</span>[<span class="text-purple-400">T</span>](<span class="text-blue-300">value</span>: <span class="text-purple-400">T</span>) {
+                                    <span class="text-purple-400">def</span> <span class="text-blue-300">getContent</span>(): <span class="text-purple-400">T</span> = <span class="text-blue-300">value</span>
+                                }
+                                <br>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">intBox</span> = <span class="text-purple-400">new</span> <span class="text-blue-300">Box</span>[<span class="text-purple-400">Int</span>](<span class="text-yellow-300">10</span>)
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">strBox</span> = <span class="text-purple-400">new</span> <span class="text-blue-300">Box</span>[<span class="text-purple-400">String</span>](<span class="text-green-300">"Hello"</span>)
+                                <br>
+                                <span class="text-blue-400">// 类型边界</span>
+                                <span class="text-purple-400">def</span> <span class="text-blue-300">printLength</span>[<span class="text-purple-400">T</span> <span class="text-purple-400">:</span> <span class="text-purple-400">Length</span>](<span class="text-blue-300">obj</span>: <span class="text-purple-400">T</span>)(<span class="text-purple-400">implicit</span> <span class="text-blue-300">len</span>: <span class="text-purple-400">Length</span>[<span class="text-purple-400">T</span>]): <span class="text-purple-400">Unit</span> = {
+                                    println(s<span class="text-green-300">"长度: ${len.length(obj)}"</span>)
+                                }
+                                <br>
+                                <span class="text-purple-400">trait</span> <span class="text-blue-300">Length</span>[<span class="text-purple-400">T</span>] {
+                                    <span class="text-purple-400">def</span> <span class="text-blue-300">length</span>(<span class="text-blue-300">obj</span>: <span class="text-purple-400">T</span>): <span class="text-purple-400">Int</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 20. 并发编程 -->
+                <section id="section-20" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">20. 并发编程</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="scala">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Scala - 并发编程模型</h4>
+                        <p class="text-slate-300 mb-4">Scala提供了多种并发编程模型，包括Actor模型和Future/Promise。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2">// Future和Promise</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">scala.concurrent.</span>*
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">scala.concurrent.ExecutionContext.Implicits.global</span>
+                                <span class="text-purple-400">import</span> <span class="text-blue-300">scala.util.{Success, Failure}</span>
+                                <br>
+                                <span class="text-blue-400">// 创建Future</span>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">future</span> = <span class="text-purple-400">Future</span> {
+                                    <span class="text-purple-400">Thread</span>.sleep(<span class="text-yellow-300">1000</span>)
+                                    <span class="text-green-300">"Future执行完成"</span>
+                                }
+                                <br>
+                                <span class="text-blue-400">// 处理Future结果</span>
+                                <span class="text-blue-300">future</span>.onComplete {
+                                    <span class="text-purple-400">case</span> <span class="text-purple-400">Success</span>(<span class="text-blue-300">result</span>) => println(<span class="text-blue-300">result</span>)
+                                    <span class="text-purple-400">case</span> <span class="text-purple-400">Failure</span>(<span class="text-blue-300">e</span>) => println(s<span class="text-green-300">"失败: ${e.getMessage}"</span>)
+                                }
+                                <br>
+                                <span class="text-blue-400">// 使用for推导式组合Future</span>
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">future1</span> = <span class="text-purple-400">Future</span>(<span class="text-yellow-300">1</span>)
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">future2</span> = <span class="text-purple-400">Future</span>(<span class="text-yellow-300">2</span>)
+                                <span class="text-purple-400">val</span> <span class="text-blue-300">combined</span> = <span class="text-purple-400">for</span> {
+                                    <span class="text-blue-300">f1</span> <- <span class="text-blue-300">future1</span>
+                                    <span class="text-blue-300">f2</span> <- <span class="text-blue-300">future2</span>
+                                } <span class="text-purple-400">yield</span> <span class="text-blue-300">f1</span> + <span class="text-blue-300">f2</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
-        </section>
-
-        <!-- 2. Scala 基础语法 -->
-        <section id="section-2" class="mb-16">
-            <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">2. Scala 基础语法</span>
-            </h2>
-            
-            <div class="language-content" data-lang="scala">
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-red-300">Hello World 示例</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// Hello World 程序
-object HelloWorld {
-  def main(args: Array[String]): Unit = {
-    println("Hello, Scala!")
-  }
-}
-
-// 简洁版
-@main def hello = println("Hello, Scala!")
-</code></pre>
-                </div>
-
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-red-300">基本数据类型和变量</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 变量定义
-val x: Int = 10        // 不可变变量
-var y: String = "Hello" // 可变变量
-
-// 类型推断
-val a = 20              // Int类型
-val b = 3.14            // Double类型
-val c = "World"         // String类型
-
-// 字符串操作
-val greeting = s"$y $c!" // 字符串插值: "Hello World!"
-val repeated = "Scala" * 3 // 重复字符串: "ScalaScalaScala"
-
-// 多行字符串
-val multiLine = """
-  This is a
-  multi-line
-  string
-"""
-</code></pre>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. Scala 函数和方法 -->
-        <section id="section-3" class="mb-16">
-            <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">3. Scala 函数和方法</span>
-            </h2>
-            
-            <div class="language-content" data-lang="scala">
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-red-300">函数定义</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 标准函数定义
-def add(a: Int, b: Int): Int = a + b
-
-// 多行函数
-def multiply(a: Int, b: Int): Int = {
-  val result = a * b
-  result
-}
-
-// 匿名函数
-val subtract = (a: Int, b: Int) => a - b
-
-// 高阶函数
-def applyFunction(f: (Int, Int) => Int, x: Int, y: Int): Int = f(x, y)
-
-val sum = applyFunction(add, 5, 3)     // 8
-val diff = applyFunction(subtract, 5, 3) // 2
-</code></pre>
-                </div>
-
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-red-300">柯里化函数</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 柯里化函数
-def curriedAdd(a: Int)(b: Int): Int = a + b
-
-val add5 = curriedAdd(5) _   // 偏应用函数
-val result = add5(3)         // 8
-
-// 隐式参数
-def greet(name: String)(implicit greeting: String): String = {
-  s"$greeting, $name!"
-}
-
-implicit val defaultGreeting = "Hello"
-greet("Scala") // "Hello, Scala!"
-</code></pre>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. Scala 控制流 -->
-        <section id="section-4" class="mb-16">
-            <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">4. Scala 控制流</span>
-            </h2>
-            
-            <div class="language-content" data-lang="scala">
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-red-300">条件表达式</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// if-else 表达式
-val x = 10
-val result = if (x > 5) "大于5" else "小于等于5"
-
-// 多条件表达式
-val y = 15
-val category = if (y < 10) "小" else if (y < 20) "中" else "大"
-
-// 模式匹配
-val day = "Monday"
-val message = day match {
-  case "Monday" => "周一，开始新的一周"
-  case "Friday" => "周五，周末快到了"
-  case _ => "普通的一天"
-}
-
-// 类型匹配
-def process(value: Any): String = value match {
-  case i: Int => s"整数: $i"
-  case d: Double => s"浮点数: $d"
-  case s: String => s"字符串: $s"
-  case _ => "其他类型"
-}
-</code></pre>
-                </div>
-
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-red-300">循环结构</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// for循环
-for (i <- 1 to 5) {
-  println(i)
-}
-
-// 带条件的for循环
-for (i <- 1 to 10 if i % 2 == 0) {
-  println(i)
-}
-
-// 多重for循环
-for {
-  i <- 1 to 3
-  j <- 1 to 2
-} println(s"i=$i, j=$j")
-
-// while循环
-var i = 1
-while (i <= 5) {
-  println(i)
-  i += 1
-}
-
-// do-while循环
-var j = 1
-do {
-  println(j)
-  j += 1
-} while (j <= 5)
-</code></pre>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. Scala 集合 -->
-        <section id="section-5" class="mb-16">
-            <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">5. Scala 集合</span>
-            </h2>
-            
-            <div class="language-content" data-lang="scala">
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-red-300">不可变集合</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 列表
-val numbers = List(1, 2, 3, 4, 5)
-val emptyList = Nil
-val anotherList = 0 :: numbers // 前缀操作: List(0, 1, 2, 3, 4, 5)
-
-// 集合
-val uniqueNumbers = Set(1, 2, 3, 2, 1) // Set(1, 2, 3)
-
-// 元组
-val tuple = (1, "Hello", 3.14) // Tuple3[Int, String, Double]
-val first = tuple._1 // 1
-val second = tuple._2 // "Hello"
-
-// 映射
-val map = Map("name" -> "Scala", "version" -> "3.0")
-val name = map("name") // "Scala"
-val optionalVersion = map.get("version") // Some("3.0")
-</code></pre>
-                </div>
-
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-red-300">集合操作</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 转换操作
-val doubled = numbers.map(_ * 2) // List(2, 4, 6, 8, 10)
-val evenNumbers = numbers.filter(_ % 2 == 0) // List(2, 4)
-val summed = numbers.reduce(_ + _) // 15
-val sortedDesc = numbers.sorted(Ordering[Int].reverse) // List(5, 4, 3, 2, 1)
-
-// 折叠操作
-val sumWithStart = numbers.fold(0)(_ + _) // 15
-val sumLeft = numbers.foldLeft(0)(_ + _) // 15
-val sumRight = numbers.foldRight(0)(_ + _) // 15
-
-// 扁平化
-val nested = List(List(1, 2), List(3, 4))
-val flattened = nested.flatten // List(1, 2, 3, 4)
-
-// 扁平映射
-val flatMapped = nested.flatMap(list => list.map(_ * 2)) // List(2, 4, 6, 8)
-</code></pre>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. Scala 面向对象编程 -->
-        <section id="section-6" class="mb-16">
-            <h2 class="text-3xl font-bold mb-8 text-center">
-                <span class="gradient-text">6. Scala 面向对象编程</span>
-            </h2>
-            
-            <div class="language-content" data-lang="scala">
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-red-300">类和对象</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 类定义
-class Person(var name: String, var age: Int) {
-  // 辅助构造函数
-  def this(name: String) = this(name, 0)
-  
-  // 方法
-  def greet(): String = s"Hello, my name is $name and I'm $age years old."
-}
-
-// 对象实例化
-val person1 = new Person("Alice", 30)
-val person2 = new Person("Bob")
-
-person1.age = 31 // 修改属性
-println(person1.greet()) // "Hello, my name is Alice and I'm 31 years old."
-
-// 单例对象
-object MyApp {
-  def main(args: Array[String]): Unit = {
-    println("Hello from singleton object!")
-  }
-}
-</code></pre>
-                </div>
-
-                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
-                    <h5 class="text-lg font-medium mb-4 text-red-300">继承和特质</h5>
-                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">// 特质（类似接口）
-trait Greeting {
-  def greet(): String
-}
-
-// 抽象类
-abstract class Animal {
-  def sound(): String
-}
-
-// 类继承抽象类并实现特质
-class Dog extends Animal with Greeting {
-  override def sound(): String = "Woof!"
-  override def greet(): String = "Hello, I'm a dog!"
-}
-
-val dog = new Dog()
-println(dog.sound()) // "Woof!"
-println(dog.greet()) // "Hello, I'm a dog!"
-
-// 密封类（只能在当前文件中被继承）
-sealed trait Shape
-case class Circle(radius: Double) extends Shape
-case class Rectangle(width: Double, height: Double) extends Shape
-
-// 模式匹配使用密封类
-def area(shape: Shape): Double = shape match {
-  case Circle(r) => Math.PI * r * r
-  case Rectangle(w, h) => w * h
-}
-</code></pre>
-                </div>
-            </div>
-        </section>
+        </div>
     </main>
 </body>
 </html>
