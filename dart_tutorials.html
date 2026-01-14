@@ -708,16 +708,16 @@
                                 );
                                 <br>
                                 <span class="text-blue-300">// 使用async/await与Stream</span><br>
-                                <span class="text-purple-400">void</span> main() async {
-                                    <span class="text-purple-400">var</span> stream = countStream(<span class="text-yellow-300">3</span>);
+                                <span class="text-purple-400">void</span> main() async {<br>
+                                    <span class="text-purple-400">var</span> stream = countStream(<span class="text-yellow-300">3</span>);<br>
                                     <br>
                                     <span class="text-blue-300">// 使用await for循环</span><br>
-                                    <span class="text-purple-400">await</span> <span class="text-purple-400">for</span> (<span class="text-purple-400">var</span> number <span class="text-purple-400">in</span> stream) {
-                                        <span class="text-green-300">print</span>(number);
-                                    }
+                                    <span class="text-purple-400">await</span> <span class="text-purple-400">for</span> (<span class="text-purple-400">var</span> number <span class="text-purple-400">in</span> stream) {<br>
+                                        <span class="text-green-300">print</span>(number);<br>
+                                    }<br>
                                     <br>
-                                    <span class="text-green-300">print</span>(<span class="text-green-300">'Stream processing finished'</span>);
-                                }
+                                    <span class="text-green-300">print</span>(<span class="text-green-300">'Stream processing finished'</span>);<br>
+                                }<br>
                             </div>
                         </div>
                     </div>
@@ -1085,9 +1085,9 @@
                                 nullableName ??= <span class="text-green-300">'Default Name'</span>; <span class="text-blue-300">// 如果nullableName为null，赋值为'Default Name'</span>
                                 <br>
                                 <span class="text-blue-300">// 类型提升</span><br>
-                                <span class="text-purple-400">if</span> (nullableName != <span class="text-purple-400">null</span>) {
-                                    <span class="text-purple-400">int</span> len = nullableName.length; <span class="text-blue-300">// Dart知道这里nullableName不为null</span>
-                                }
+                                <span class="text-purple-400">if</span> (nullableName != <span class="text-purple-400">null</span>) {<br>
+                                    <span class="text-purple-400">int</span> len = nullableName.length; <span class="text-blue-300">// Dart知道这里nullableName不为null</span><br>
+                                }<br>
                             </div>
                         </div>
                     </div>
