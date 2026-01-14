@@ -36,10 +36,15 @@
         }
         .language-tab {
             transition: all 0.3s ease;
+            background-color: #334155 !important;
+            color: #cbd5e1 !important;
+        }
+        .language-tab:hover {
+            background-color: #475569 !important;
         }
         .language-tab.active {
-            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
-            color: white;
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6) !important;
+            color: white !important;
         }
         .code-block {
             background: #000000;
@@ -262,6 +267,166 @@
             border: 1px solid rgba(148, 163, 184, 0.1);
         }
         
+        /* 主题变量定义 */
+        :root {
+            /* 默认主题 - 当前配置的主题 */
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --border-color: rgba(148, 163, 184, 0.1);
+            --code-bg: #000000;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --gradient-primary: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            --gradient-card: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+        }
+        
+        /* GitHub 亮色主题 */
+        body[data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f6f8fa;
+            --bg-tertiary: #e1e4e8;
+            --text-primary: #24292e;
+            --text-secondary: #586069;
+            --text-muted: #6a737d;
+            --border-color: #e1e4e8;
+            --code-bg: #f6f8fa;
+            --accent-primary: #0366d6;
+            --accent-secondary: #6f42c1;
+            --gradient-primary: linear-gradient(135deg, #0366d6, #6f42c1);
+            --gradient-card: linear-gradient(145deg, rgba(246, 248, 250, 0.8), rgba(255, 255, 255, 0.9));
+        }
+        
+        /* GitHub 暗色主题 */
+        body[data-theme="github-dark"] {
+            --bg-primary: #161b22;
+            --bg-secondary: #21262d;
+            --bg-tertiary: #30363d;
+            --text-primary: #f0f6fc;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --border-color: #30363d;
+            --code-bg: #21262d;
+            --accent-primary: #58a6ff;
+            --accent-secondary: #d2a8ff;
+            --gradient-primary: linear-gradient(135deg, #58a6ff, #d2a8ff);
+            --gradient-card: linear-gradient(145deg, rgba(33, 38, 45, 0.8), rgba(22, 27, 34, 0.9));
+        }
+        
+        /* Material Design 主题 */
+        body[data-theme="material"] {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --bg-tertiary: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --text-muted: #757575;
+            --border-color: #424242;
+            --code-bg: #1e1e1e;
+            --accent-primary: #2196f3;
+            --accent-secondary: #ff4081;
+            --gradient-primary: linear-gradient(135deg, #2196f3, #ff4081);
+            --gradient-card: linear-gradient(145deg, rgba(30, 30, 30, 0.8), rgba(18, 18, 18, 0.9));
+        }
+        
+        /* Nord 主题 */
+        body[data-theme="nord"] {
+            --bg-primary: #2e3440;
+            --bg-secondary: #3b4252;
+            --bg-tertiary: #434c5e;
+            --text-primary: #eceff4;
+            --text-secondary: #d8dee9;
+            --text-muted: #81a1c1;
+            --border-color: #4c566a;
+            --code-bg: #3b4252;
+            --accent-primary: #88c0d0;
+            --accent-secondary: #81a1c1;
+            --gradient-primary: linear-gradient(135deg, #88c0d0, #81a1c1);
+            --gradient-card: linear-gradient(145deg, rgba(59, 66, 82, 0.8), rgba(46, 52, 64, 0.9));
+        }
+        
+        /* 应用主题变量 */
+        body {
+            background-color: var(--bg-primary) !important;
+            color: var(--text-primary) !important;
+        }
+        
+        .syntax-card {
+            background: var(--gradient-card) !important;
+            border-color: var(--border-color) !important;
+        }
+        
+        .language-tab {
+            background-color: var(--bg-tertiary) !important;
+            color: var(--text-secondary) !important;
+        }
+        
+        .language-tab:hover {
+            background-color: var(--bg-secondary) !important;
+        }
+        
+        .language-tab.active {
+            background: var(--gradient-primary) !important;
+            color: white !important;
+        }
+        
+        .code-block,
+        pre.code-block,
+        pre code,
+        .hljs {
+            background: var(--code-bg) !important;
+        }
+        
+        nav {
+            background-color: rgba(15, 23, 42, 0.8) !important;
+            border-color: var(--border-color) !important;
+        }
+        
+        body[data-theme="light"] nav {
+            background-color: rgba(255, 255, 255, 0.8) !important;
+        }
+        
+        body[data-theme="github-dark"] nav {
+            background-color: rgba(22, 27, 34, 0.8) !important;
+        }
+        
+        body[data-theme="material"] nav {
+            background-color: rgba(18, 18, 18, 0.8) !important;
+        }
+        
+        body[data-theme="nord"] nav {
+            background-color: rgba(46, 52, 64, 0.8) !important;
+        }
+        
+        /* 主题切换按钮样式 */
+        #theme-toggle-btn, #mobile-theme-toggle {
+            color: var(--text-secondary) !important;
+        }
+        
+        #theme-toggle-btn:hover, #mobile-theme-toggle:hover {
+            color: var(--text-primary) !important;
+            background-color: var(--bg-secondary) !important;
+        }
+        
+        /* 主题下拉菜单样式 */
+        #theme-dropdown {
+            background-color: var(--bg-secondary) !important;
+            border: 1px solid var(--border-color) !important;
+        }
+        
+        .theme-option {
+            background-color: transparent;
+            color: var(--text-secondary) !important;
+        }
+        
+        .theme-option:hover {
+            background-color: var(--bg-tertiary) !important;
+            color: var(--text-primary) !important;
+        }
+        
         /* 积木分类标题 */
         .scratch-category-title {
             font-size: 1.5rem;
@@ -458,13 +623,36 @@
                 <div class="flex items-center space-x-4">
                     <div class="text-2xl font-bold gradient-text">Hello 编程语言</div>
                 </div>
-                <div class="hidden md:flex space-x-8">
+                <div class="hidden md:flex items-center space-x-8">
                     <a href="index.html" class="text-slate-300 hover:text-blue-400 transition-colors">首页</a>
                     <a href="tutorials.html" class="text-blue-400 font-medium">语法教程</a>
                     <!-- <a href="lab.html" class="text-slate-300 hover:text-blue-400 transition-colors">代码实验室</a> -->
                     <!-- <a href="resources.html" class="text-slate-300 hover:text-blue-400 transition-colors">资源中心</a> -->
+                    <!-- 主题切换 -->
+                    <div class="relative">
+                        <button id="theme-toggle-btn" class="p-2 rounded-full hover:bg-slate-800 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            </svg>
+                        </button>
+                        <div id="theme-dropdown" class="absolute right-0 mt-2 w-48 bg-slate-800 rounded-lg shadow-xl opacity-0 invisible transition-all duration-300 z-50">
+                            <button class="theme-option w-full px-4 py-2 text-left text-sm text-slate-300 hover:bg-slate-700 transition-colors" data-theme="default">默认主题</button>
+                            <button class="theme-option w-full px-4 py-2 text-left text-sm text-slate-300 hover:bg-slate-700 transition-colors" data-theme="light">GitHub Light</button>
+                            <button class="theme-option w-full px-4 py-2 text-left text-sm text-slate-300 hover:bg-slate-700 transition-colors" data-theme="github-dark">GitHub Dark</button>
+                            <button class="theme-option w-full px-4 py-2 text-left text-sm text-slate-300 hover:bg-slate-700 transition-colors" data-theme="material">Material Design</button>
+                            <button class="theme-option w-full px-4 py-2 text-left text-sm text-slate-300 hover:bg-slate-700 transition-colors" data-theme="nord">Nord</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="md:hidden">
+                <div class="md:hidden flex items-center space-x-4">
+                    <!-- 移动端主题切换 -->
+                    <div class="relative">
+                        <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-slate-800 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            </svg>
+                        </button>
+                    </div>
                     <button id="mobile-menu-btn" class="text-slate-300 hover:text-white">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -488,34 +676,34 @@
             <!-- Language Selector -->
             <div class="mb-8">
                 <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3 px-4">
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600 text-center" data-lang="scratch">Scratch</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg text-center" data-lang="scratch">Scratch</button>
                     <button class="language-tab active px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="python">Python</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="c">C</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="cpp">C++</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="java">Java</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="kotlin">Kotlin</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="go">Go</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="rust">Rust</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="javascript">JavaScript</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="typescript">TypeScript</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="csharp">C#</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="swift">Swift</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="dart">Dart</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="ruby">Ruby</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="php">PHP</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="htmlcss">HTML/CSS</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="sql">SQL</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="r">R</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="scala">Scala</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="julia">Julia</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="lua">Lua</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="shell">Shell/Bash</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="perl">Perl</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="lisp">Lisp</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="zig">Zig</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="scheme">Scheme</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="erlang">Erlang</button>
-                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium bg-slate-700 text-slate-300 shadow-lg hover:bg-slate-600" data-lang="haskell">Haskell</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="c">C</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="cpp">C++</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="java">Java</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="kotlin">Kotlin</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="go">Go</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="rust">Rust</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="javascript">JavaScript</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="typescript">TypeScript</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="csharp">C#</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="swift">Swift</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="dart">Dart</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="ruby">Ruby</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="php">PHP</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="htmlcss">HTML/CSS</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="sql">SQL</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="r">R</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="scala">Scala</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="julia">Julia</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="lua">Lua</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="shell">Shell/Bash</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="perl">Perl</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="lisp">Lisp</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="zig">Zig</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="scheme">Scheme</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="erlang">Erlang</button>
+                    <button class="language-tab px-4 py-2 rounded-full text-sm font-medium shadow-lg" data-lang="haskell">Haskell</button>
                 </div>
             </div>
         </div>
@@ -631,10 +819,8 @@
                 // Update active state
                 document.querySelectorAll('.language-tab').forEach(t => {
                     t.classList.remove('active');
-                    t.classList.add('bg-slate-700', 'text-slate-300');
                 });
                 
-                this.classList.remove('bg-slate-700', 'text-slate-300');
                 this.classList.add('active');
                 
                 // Load the selected language content
@@ -645,7 +831,67 @@
         // Load default language (Python) on page load
         document.addEventListener('DOMContentLoaded', function() {
             loadLanguageContent('python');
+            
+            // 初始化主题
+            initTheme();
         });
+        
+        // 主题切换功能
+        function initTheme() {
+            // 从localStorage获取保存的主题，如果没有则不设置data-theme属性，使用默认配色
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme && savedTheme !== 'default') {
+                document.body.setAttribute('data-theme', savedTheme);
+            } else {
+                // 使用默认主题，不设置data-theme属性
+                document.body.removeAttribute('data-theme');
+            }
+            
+            // 主题切换按钮和下拉菜单
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            const themeDropdown = document.getElementById('theme-dropdown');
+            const themeOptions = document.querySelectorAll('.theme-option');
+            const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+            
+            // 切换下拉菜单显示/隐藏
+            function toggleDropdown() {
+                const isVisible = themeDropdown.classList.contains('opacity-100');
+                if (isVisible) {
+                    themeDropdown.classList.remove('opacity-100', 'visible');
+                    themeDropdown.classList.add('opacity-0', 'invisible');
+                } else {
+                    themeDropdown.classList.remove('opacity-0', 'invisible');
+                    themeDropdown.classList.add('opacity-100', 'visible');
+                }
+            }
+            
+            // 点击主题切换按钮显示/隐藏下拉菜单
+            themeToggleBtn.addEventListener('click', toggleDropdown);
+            mobileThemeToggle.addEventListener('click', toggleDropdown);
+            
+            // 点击主题选项应用主题
+            themeOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const theme = this.getAttribute('data-theme');
+                    if (theme === 'default') {
+                        document.body.removeAttribute('data-theme');
+                        localStorage.setItem('theme', 'default');
+                    } else {
+                        document.body.setAttribute('data-theme', theme);
+                        localStorage.setItem('theme', theme);
+                    }
+                    toggleDropdown();
+                });
+            });
+            
+            // 点击页面其他地方关闭下拉菜单
+            document.addEventListener('click', function(e) {
+                if (!themeToggleBtn.contains(e.target) && !themeDropdown.contains(e.target) && !mobileThemeToggle.contains(e.target)) {
+                    themeDropdown.classList.remove('opacity-100', 'visible');
+                    themeDropdown.classList.add('opacity-0', 'invisible');
+                }
+            });
+        }
     </script>
     </body>
 </html>
