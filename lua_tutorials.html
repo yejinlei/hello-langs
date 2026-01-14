@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lua 教程 - Hello 编程语言</title>
+    <script>
+        // 尝试加载 Tailwind CSS，如果失败则使用备用方案
+        window.tailwindCdnLoaded = false;
+        function loadTailwindCSS() {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.tailwindcss.com';
+            script.onload = function() {
+                window.tailwindCdnLoaded = true;
+                // Tailwind 配置
+                tailwind.config = {
+                    theme: {
+                        extend: {
+                            colors: {
+                                primary: '#10b981',
+                                secondary: '#8b5cf6',
+                                dark: '#1e293b',
+                                light: '#f8fafc'
+                            }
+                        }
+                    }
+                }
+            };
+            script.onerror = function() {
+                console.warn('Failed to load Tailwind CSS from CDN, applying fallback styles');
+                applyFallbackStyles();
+            };
+            document.head.appendChild(script);
+        }
+        
+        function applyFallbackStyles() {
+            // 应用基本的 Tailwind 类对应的样式
+            const fallbackStyles = document.createElement('style');
+            fallbackStyles.textContent = `
+                /* 基本布局类 */
+                .container { width: 100%; margin-right: auto; margin-left: auto; padding-right: 1rem; padding-left: 1rem; }
+                .grid { display: grid; }
+                .flex { display: flex; }
+                .hidden { display: none; }
+                
+                /* 网格列类 */
+                .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+                @media (min-width: 1024px) {
+                    .lg\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+                }
+                
+                /* 间距类 */
+                .p-8 { padding: 2rem; }
+                .p-4 { padding: 1rem; }
+                .mb-16 { margin-bottom: 4rem; }
+                .mb-8 { margin-bottom: 2rem; }
+                .mb-4 { margin-bottom: 1rem; }
+                .mb-2 { margin-bottom: 0.5rem; }
+                .mt-4 { margin-top: 1rem; }
+                .mr-2 { margin-right: 0.5rem; }
+                .ml-2 { margin-left: 0.5rem; }
+                
+                /* 字体类 */
+                .text-3xl { font-size: 1.875rem; }
+                .text-lg { font-size: 1.125rem; }
+                .text-sm { font-size: 0.875rem; }
+                .font-bold { font-weight: 700; }
+                .font-medium { font-weight: 500; }
+                
+                /* 文本类 */
+                .text-center { text-align: center; }
+                .text-purple-400 { color: #a78bfa; }
+                .text-slate-300 { color: #cbd5e1; }
+                .text-slate-400 { color: #94a3b8; }
+                
+                /* 背景类 */
+                .bg-slate-900 { background-color: #0f172a; }
+                .bg-slate-800 { background-color: #1e293b; }
+                
+                /* 边框类 */
+                .rounded-xl { border-radius: 0.75rem; }
+                .rounded-lg { border-radius: 0.5rem; }
+                .rounded { border-radius: 0.25rem; }
+                
+                /* 其他类 */
+                .gap-8 { gap: 2rem; }
+                .items-center { align-items: center; }
+                .justify-between { justify-content: space-between; }
+                .w-full { width: 100%; }
+            `;
+            document.head.appendChild(fallbackStyles);
+        }
+        
+        // 加载 Tailwind CSS
+        loadTailwindCSS();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .syntax-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .language-tab {
+            transition: all 0.3s ease;
+        }
+        .language-tab.active {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            color: white;
+        }
+        .code-block {
+            background: #000000;
+            border-left: 4px solid #3B82F6;
+        }
+        .highlight {
+            background: rgba(59, 130, 246, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .language-content.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Sidebar Navigation -->
+            <aside class="lg:w-1/4">
+                <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 sticky top-24 border border-slate-700">
+                    <h3 class="text-lg font-bold mb-4 gradient-text">章节导航</h3>
+                    <nav class="space-y-2">
+                        <a href="#section-1" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">1. 变量声明</a>
+                        <a href="#section-2" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">2. 数据类型</a>
+                        <a href="#section-3" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">3. 字符串操作</a>
+                        <a href="#section-4" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">4. 表 (Tables)</a>
+                        <a href="#section-5" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">5. 函数</a>
+                        <a href="#section-6" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">6. 控制流 - 条件语句</a>
+                        <a href="#section-7" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">7. 控制流 - 循环</a>
+                        <a href="#section-8" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">8. 模块和导入</a>
+                        <a href="#section-9" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">9. 面向对象编程</a>
+                        <a href="#section-10" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">10. 错误处理</a>
+                        <a href="#section-11" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">11. 协程 (Coroutines)</a>
+                        <a href="#section-12" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">12. 元表和元方法</a>
+                        <a href="#section-13" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">13. 文件操作</a>
+                        <a href="#section-14" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">14. 标准库</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="lg:w-3/4">
+                <!-- 1. 变量声明 -->
+        <section id="section-1" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">1. 变量声明</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lua">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Lua - 动态类型语言，变量无需声明类型</h4>
+                <p class="text-slate-300 mb-4">特点：简洁易读，支持多种数据类型，动态类型绑定，变量默认全局。注意事项：使用local关键字声明局部变量，避免全局变量污染。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2">-- 全局变量声明</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">x</span> = <span class="text-yellow-300">10</span><br>
+                        <span class="text-blue-300">name</span> = <span class="text-green-300">"张三"</span><br>
+                        <span class="text-blue-300">age</span> = <span class="text-yellow-300">25</span><br>
+                        <span class="text-blue-300">height</span> = <span class="text-yellow-300">1.75</span><br>
+                        <span class="text-blue-300">is_student</span> = <span class="text-purple-300">true</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 局部变量声明</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-purple-300">local</span> <span class="text-blue-300">y</span> = <span class="text-yellow-300">20</span><br>
+                        <span class="text-purple-300">local</span> <span class="text-blue-300">pi</span> = <span class="text-yellow-300">3.14159</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 多重赋值</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">a</span>, <span class="text-blue-300">b</span>, <span class="text-blue-300">c</span> = <span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span><br>
+                        <span class="text-blue-300">x</span>, <span class="text-blue-300">y</span> = <span class="text-blue-300">y</span>, <span class="text-blue-300">x</span>  <span class="text-slate-500">-- 交换变量</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 2. 数据类型 -->
+        <section id="section-2" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">2. 数据类型</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lua">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Lua - 轻量级数据类型系统</h4>
+                <p class="text-slate-300 mb-4">特点：支持8种基本数据类型，表是核心数据结构，nil表示空值，boolean表示布尔值。注意事项：使用type()函数查看数据类型，nil和false是唯一的假值。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2">-- 基本数据类型</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-400">-- nil (空值)</span><br>
+                        <span class="text-blue-300">empty</span> = <span class="text-purple-300">nil</span><br>
+                        <br>
+                        <span class="text-blue-400">-- boolean (布尔值)</span><br>
+                        <span class="text-blue-300">is_true</span> = <span class="text-purple-300">true</span><br>
+                        <span class="text-blue-300">is_false</span> = <span class="text-purple-300">false</span><br>
+                        <br>
+                        <span class="text-blue-400">-- number (数值，Lua 5.3+ 支持整数和浮点数)</span><br>
+                        <span class="text-blue-300">num_int</span> = <span class="text-yellow-300">42</span><br>
+                        <span class="text-blue-300">num_float</span> = <span class="text-yellow-300">3.14159</span><br>
+                        <br>
+                        <span class="text-blue-400">-- string (字符串)</span><br>
+                        <span class="text-blue-300">str1</span> = <span class="text-green-300">"Hello, World!"</span><br>
+                        <span class="text-blue-300">str2</span> = <span class="text-green-300">'Single quotes also work'</span><br>
+                        <br>
+                        <span class="text-blue-400">-- function (函数)</span><br>
+                        <span class="text-blue-300">add</span> = <span class="text-purple-300">function</span>(a, b) <span class="text-purple-300">return</span> a + b <span class="text-purple-300">end</span><br>
+                        <br>
+                        <span class="text-blue-400">-- table (表，Lua的核心数据结构)</span><br>
+                        <span class="text-blue-300">tbl</span> = <span class="text-purple-300">{}</span><br>
+                        <br>
+                        <span class="text-blue-400">-- userdata (用户数据)</span><br>
+                        <span class="text-blue-400">-- thread (协程)</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 类型检查</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-slate-300">print(type(x))  </span><span class="text-slate-500">-- number</span><br>
+                        <span class="text-slate-300">print(type(name))  </span><span class="text-slate-500">-- string</span><br>
+                        <span class="text-slate-300">print(type(add))  </span><span class="text-slate-500">-- function</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 3. 字符串操作 -->
+        <section id="section-3" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">3. 字符串操作</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lua">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Lua - 支持丰富的字符串操作</h4>
+                <p class="text-slate-300 mb-4">特点：字符串是不可变对象，支持多种操作方法，内置丰富的字符串处理函数。注意事项：使用..操作符连接字符串，使用#操作符获取字符串长度。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2">-- 字符串连接</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">greeting</span> = <span class="text-green-300">"Hello"</span> .. <span class="text-green-300">" "</span> .. <span class="text-green-300">"World"</span><br>
+                        <span class="text-slate-300">print(greeting)  </span><span class="text-slate-500">-- Hello World</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 字符串长度</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">s</span> = <span class="text-green-300">"Hello, World!"</span><br>
+                        <span class="text-slate-300">print(#s)  </span><span class="text-slate-500">-- 13</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 字符串索引</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-slate-300">print(s:sub(1, 5))  </span><span class="text-slate-500">-- Hello</span><br>
+                        <span class="text-slate-300">print(s:sub(8))  </span><span class="text-slate-500">-- World!</span><br>
+                        <span class="text-slate-300">print(s:find("World"))  </span><span class="text-slate-500">-- 8 12</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 字符串格式化</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">name</span> = <span class="text-green-300">"张三"</span><br>
+                        <span class="text-blue-300">age</span> = <span class="text-yellow-300">25</span><br>
+                        <span class="text-blue-300">msg</span> = string.format(<span class="text-green-300">"姓名：%s，年龄：%d"</span>, name, age)<br>
+                        <span class="text-slate-300">print(msg)  </span><span class="text-slate-500">-- 姓名：张三，年龄：25</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 4. 表 (Tables) -->
+        <section id="section-4" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">4. 表 (Tables)</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lua">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Lua - 表是Lua的核心数据结构</h4>
+                <p class="text-slate-300 mb-4">特点：表是Lua中唯一的数据结构，可以用作数组、字典、对象等。注意事项：表的索引从1开始，支持任意类型的键。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2">-- 数组表</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">arr</span> = <span class="text-purple-300">{1, 2, 3, 4, 5}</span><br>
+                        <span class="text-slate-300">print(arr[1])  </span><span class="text-slate-500">-- 1 (索引从1开始)</span><br>
+                        <span class="text-slate-300">print(#arr)  </span><span class="text-slate-500">-- 5 (数组长度)</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 字典表</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">person</span> = <span class="text-purple-300">{</span><br>
+                        <span class="text-slate-300">    name = "张三",</span><br>
+                        <span class="text-slate-300">    age = 25,</span><br>
+                        <span class="text-slate-300">    is_student = true</span><br>
+                        <span class="text-purple-300">}</span><br>
+                        <span class="text-slate-300">print(person.name)  </span><span class="text-slate-500">-- 张三</span><br>
+                        <span class="text-slate-300">print(person["age"])  </span><span class="text-slate-500">-- 25</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 表操作</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-400">-- 添加元素</span><br>
+                        <span class="text-blue-300">arr</span>[6] = <span class="text-yellow-300">6</span><br>
+                        <span class="text-blue-300">person</span>.email = <span class="text-green-300">"zhangsan@example.com"</span><br>
+                        <br>
+                        <span class="text-blue-400">-- 删除元素</span><br>
+                        <span class="text-blue-300">person</span>.is_student = <span class="text-purple-300">nil</span><br>
+                        <br>
+                        <span class="text-blue-400">-- 遍历表</span><br>
+                        <span class="text-purple-300">for</span> i, v <span class="text-purple-300">in</span> ipairs(arr) <span class="text-purple-300">do</span><br>
+                        <span class="text-slate-300">    print(i, v)</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <br>
+                        <span class="text-purple-300">for</span> k, v <span class="text-purple-300">in</span> pairs(person) <span class="text-purple-300">do</span><br>
+                        <span class="text-slate-300">    print(k, v)</span><br>
+                        <span class="text-purple-300">end</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 5. 函数 -->
+        <section id="section-5" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">5. 函数</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lua">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Lua - 函数是第一类值</h4>
+                <p class="text-slate-300 mb-4">特点：函数可以作为参数传递，可以作为返回值，可以赋值给变量。注意事项：支持多重返回值，参数默认是值传递。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2">-- 基本函数定义</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-300">function</span> <span class="text-blue-300">add</span>(a, b)<br>
+                        <span class="text-slate-300">    return a + b</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <span class="text-slate-300">print(add(10, 20))  </span><span class="text-slate-500">-- 30</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 匿名函数</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">multiply</span> = <span class="text-purple-300">function</span>(a, b) <span class="text-purple-300">return</span> a * b <span class="text-purple-300">end</span><br>
+                        <span class="text-slate-300">print(multiply(5, 6))  </span><span class="text-slate-500">-- 30</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 多重返回值</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-purple-300">function</span> <span class="text-blue-300">get_coordinates</span>()<br>
+                        <span class="text-slate-300">    return 10, 20</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <span class="text-blue-300">x</span>, <span class="text-blue-300">y</span> = get_coordinates()<br>
+                        <span class="text-slate-300">print(x, y)  </span><span class="text-slate-500">-- 10 20</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 可变参数</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-purple-300">function</span> <span class="text-blue-300">sum</span>(...)   <br>
+                        <span class="text-slate-300">    local result = 0</span><br>
+                        <span class="text-slate-300">    for _, v in ipairs({...}) do</span><br>
+                        <span class="text-slate-300">        result = result + v</span><br>
+                        <span class="text-slate-300">    end</span><br>
+                        <span class="text-slate-300">    return result</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <span class="text-slate-300">print(sum(1, 2, 3, 4, 5))  </span><span class="text-slate-500">-- 15</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 6. 控制流 - 条件语句 -->
+        <section id="section-6" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">6. 控制流 - 条件语句</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lua">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Lua - 支持if-elseif-else条件结构</h4>
+                <p class="text-slate-300 mb-4">特点：条件表达式可以是任意类型，nil和false是假值，其他都是真值。注意事项：没有switch语句，可以使用表来模拟。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2">-- if语句</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">age</span> = <span class="text-yellow-300">18</span><br>
+                        <span class="text-purple-300">if</span> age >= <span class="text-yellow-300">18</span> <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">    print("成年人")</span><br>
+                        <span class="text-purple-300">end</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- if-else语句</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">x</span> = <span class="text-yellow-300">10</span><br>
+                        <span class="text-purple-300">if</span> x > <span class="text-yellow-300">0</span> <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">    print("正数")</span><br>
+                        <span class="text-purple-300">else</span><br>
+                        <span class="text-slate-300">    print("非正数")</span><br>
+                        <span class="text-purple-300">end</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- if-elseif-else语句</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">score</span> = <span class="text-yellow-300">85</span><br>
+                        <span class="text-purple-300">if</span> score >= <span class="text-yellow-300">90</span> <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">    print("优秀")</span><br>
+                        <span class="text-purple-300">elseif</span> score >= <span class="text-yellow-300">80</span> <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">    print("良好")</span><br>
+                        <span class="text-purple-300">elseif</span> score >= <span class="text-yellow-300">60</span> <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">    print("及格")</span><br>
+                        <span class="text-purple-300">else</span><br>
+                        <span class="text-slate-300">    print("不及格")</span><br>
+                        <span class="text-purple-300">end</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 使用表模拟switch语句</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">day</span> = <span class="text-green-300">"Monday"</span><br>
+                        <span class="text-blue-300">actions</span> = <span class="text-purple-300">{</span><br>
+                        <span class="text-slate-300">    Monday = function() print("周一工作") end,</span><br>
+                        <span class="text-slate-300">    Tuesday = function() print("周二工作") end,</span><br>
+                        <span class="text-slate-300">    default = function() print("其他日子") end</span><br>
+                        <span class="text-purple-300">}</span><br>
+                        <span class="text-blue-300">action</span> = actions[day] or actions.default<br>
+                        <span class="text-blue-300">action</span>()  <span class="text-slate-500">-- 周一工作</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 7. 控制流 - 循环 -->
+        <section id="section-7" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">7. 控制流 - 循环</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lua">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Lua - 支持多种循环结构</h4>
+                <p class="text-slate-300 mb-4">特点：支持for循环、while循环和repeat-until循环。注意事项：for循环默认步长为1，支持break和continue（通过goto实现）。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2">-- for循环</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-400">-- 数值for循环</span><br>
+                        <span class="text-purple-300">for</span> i = <span class="text-yellow-300">1</span>, <span class="text-yellow-300">10</span> <span class="text-purple-300">do</span><br>
+                        <span class="text-slate-300">    print(i)</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <br>
+                        <span class="text-blue-400">-- 步长for循环</span><br>
+                        <span class="text-purple-300">for</span> i = <span class="text-yellow-300">10</span>, <span class="text-yellow-300">1</span>, <span class="text-yellow-300">-2</span> <span class="text-purple-300">do</span><br>
+                        <span class="text-slate-300">    print(i)</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <br>
+                        <span class="text-blue-400">-- 泛型for循环</span><br>
+                        <span class="text-blue-300">arr</span> = <span class="text-purple-300">{"a", "b", "c", "d", "e"}</span><br>
+                        <span class="text-purple-300">for</span> i, v <span class="text-purple-300">in</span> ipairs(arr) <span class="text-purple-300">do</span><br>
+                        <span class="text-slate-300">    print(i, v)</span><br>
+                        <span class="text-purple-300">end</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- while循环</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">i</span> = <span class="text-yellow-300">1</span><br>
+                        <span class="text-purple-300">while</span> i <= <span class="text-yellow-300">5</span> <span class="text-purple-300">do</span><br>
+                        <span class="text-slate-300">    print(i)</span><br>
+                        <span class="text-slate-300">    i = i + 1</span><br>
+                        <span class="text-purple-300">end</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- repeat-until循环</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">i</span> = <span class="text-yellow-300">1</span><br>
+                        <span class="text-purple-300">repeat</span><br>
+                        <span class="text-slate-300">    print(i)</span><br>
+                        <span class="text-slate-300">    i = i + 1</span><br>
+                        <span class="text-purple-300">until</span> i > <span class="text-yellow-300">5</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- break和continue</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-purple-300">for</span> i = <span class="text-yellow-300">1</span>, <span class="text-yellow-300">10</span> <span class="text-purple-300">do</span><br>
+                        <span class="text-purple-300">    if</span> i == <span class="text-yellow-300">5</span> <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">        break  </span><span class="text-slate-500">-- 跳出循环</span><br>
+                        <span class="text-purple-300">    end</span><br>
+                        <span class="text-purple-300">    if</span> i % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span> <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">        goto continue  </span><span class="text-slate-500">-- 模拟continue</span><br>
+                        <span class="text-purple-300">    end</span><br>
+                        <span class="text-slate-300">    print(i)</span><br>
+                        <span class="text-purple-300">::continue::</span><br>
+                        <span class="text-purple-300">end</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 8. 模块和导入 -->
+        <section id="section-8" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">8. 模块和导入</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lua">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Lua - 支持模块系统</h4>
+                <p class="text-slate-300 mb-4">特点：使用require函数导入模块，模块通过return返回表。注意事项：模块文件需要以.lua为扩展名，放在package.path指定的路径中。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2">-- 模块文件 (mymodule.lua)</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-300">local</span> <span class="text-blue-300">M</span> = <span class="text-purple-300">{}</span><br>
+                        <br>
+                        <span class="text-purple-300">function</span> <span class="text-blue-300">M.add</span>(a, b)<br>
+                        <span class="text-slate-300">    return a + b</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <br>
+                        <span class="text-purple-300">function</span> <span class="text-blue-300">M.multiply</span>(a, b)<br>
+                        <span class="text-slate-300">    return a * b</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <br>
+                        <span class="text-purple-300">return</span> <span class="text-blue-300">M</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 导入和使用模块</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">mymodule</span> = require(<span class="text-green-300">"mymodule"</span>)<br>
+                        <span class="text-slate-300">print(mymodule.add(10, 20))  </span><span class="text-slate-500">-- 30</span><br>
+                        <span class="text-slate-300">print(mymodule.multiply(5, 6))  </span><span class="text-slate-500">-- 30</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 导入并重命名</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">mm</span> = require(<span class="text-green-300">"mymodule"</span>)<br>
+                        <span class="text-slate-300">print(mm.add(30, 40))  </span><span class="text-slate-500">-- 70</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 导入标准库模块</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">math</span> = require(<span class="text-green-300">"math"</span>)<br>
+                        <span class="text-slate-300">print(math.sqrt(16))  </span><span class="text-slate-500">-- 4</span><br>
+                        <span class="text-slate-300">print(math.random())  </span><span class="text-slate-500">-- 随机数</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 9. 面向对象编程 -->
+        <section id="section-9" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">9. 面向对象编程</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lua">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Lua - 通过表和元表实现面向对象</h4>
+                <p class="text-slate-300 mb-4">特点：使用表模拟类和对象，使用元表实现继承。注意事项：Lua没有内置的类系统，需要手动实现。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2">-- 创建类</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">Person</span> = <span class="text-purple-300">{}</span><br>
+                        <span class="text-blue-300">Person.__index</span> = <span class="text-blue-300">Person</span><br>
+                        <br>
+                        <span class="text-purple-300">function</span> <span class="text-blue-300">Person.new</span>(name, age)<br>
+                        <span class="text-slate-300">    local self = setmetatable({}, Person)</span><br>
+                        <span class="text-slate-300">    self.name = name</span><br>
+                        <span class="text-slate-300">    self.age = age</span><br>
+                        <span class="text-slate-300">    return self</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <br>
+                        <span class="text-purple-300">function</span> <span class="text-blue-300">Person:greet</span>()<br>
+                        <span class="text-slate-300">    print("你好，我是" .. self.name)</span><br>
+                        <span class="text-purple-300">end</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 创建对象</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">person1</span> = <span class="text-blue-300">Person</span>.new(<span class="text-green-300">"张三"</span>, <span class="text-yellow-300">25</span>)<br>
+                        <span class="text-blue-300">person1:greet()  </span><span class="text-slate-500">-- 你好，我是张三</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 继承</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">Student</span> = <span class="text-purple-300">{}</span><br>
+                        <span class="text-blue-300">Student.__index</span> = <span class="text-blue-300">Student</span><br>
+                        <span class="text-blue-300">setmetatable</span>(Student, <span class="text-blue-300">Person</span>)<br>
+                        <br>
+                        <span class="text-purple-300">function</span> <span class="text-blue-300">Student.new</span>(name, age, school)<br>
+                        <span class="text-slate-300">    local self = Person.new(name, age)</span><br>
+                        <span class="text-slate-300">    setmetatable(self, Student)</span><br>
+                        <span class="text-slate-300">    self.school = school</span><br>
+                        <span class="text-slate-300">    return self</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <br>
+                        <span class="text-purple-300">function</span> <span class="text-blue-300">Student:study</span>()<br>
+                        <span class="text-slate-300">    print(self.name .. "在" .. self.school .. "学习")</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <br>
+                        <span class="text-blue-300">student1</span> = <span class="text-blue-300">Student</span>.new(<span class="text-green-300">"李四"</span>, <span class="text-yellow-300">20</span>, <span class="text-green-300">"北京大学"</span>)<br>
+                        <span class="text-blue-300">student1:greet()  </span><span class="text-slate-500">-- 你好，我是李四</span><br>
+                        <span class="text-blue-300">student1:study()  </span><span class="text-slate-500">-- 李四在北京大学学习</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 10. 错误处理 -->
+        <section id="section-10" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">10. 错误处理</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lua">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Lua - 支持错误处理</h4>
+                <p class="text-slate-300 mb-4">特点：使用pcall和xpcall函数捕获错误，使用error函数抛出错误。注意事项：错误信息可以是任意类型。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2">-- 抛出错误</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-300">function</span> <span class="text-blue-300">divide</span>(a, b)<br>
+                        <span class="text-purple-300">    if</span> b == <span class="text-yellow-300">0</span> <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">        error("除数不能为0")</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <span class="text-slate-300">    return a / b</span><br>
+                        <span class="text-purple-300">end</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 捕获错误 (pcall)</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">success</span>, <span class="text-blue-300">result</span> = pcall(divide, <span class="text-yellow-300">10</span>, <span class="text-yellow-300">0</span>)<br>
+                        <span class="text-purple-300">if</span> success <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">    print("结果：" .. result)</span><br>
+                        <span class="text-purple-300">else</span><br>
+                        <span class="text-slate-300">    print("错误：" .. result)</span><br>
+                        <span class="text-purple-300">end</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 扩展错误处理 (xpcall)</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-purple-300">local</span> <span class="text-blue-300">error_handler</span> = <span class="text-purple-300">function</span>(err)<br>
+                        <span class="text-slate-300">    return "错误处理：" .. err</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <br>
+                        <span class="text-blue-300">success</span>, <span class="text-blue-300">result</span> = xpcall(divide, error_handler, <span class="text-yellow-300">10</span>, <span class="text-yellow-300">0</span>)<br>
+                        <span class="text-slate-300">print(result)  </span><span class="text-slate-500">-- 错误处理：除数不能为0</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 11. 协程 (Coroutines) -->
+        <section id="section-11" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">11. 协程 (Coroutines)</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lua">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Lua - 支持协程</h4>
+                <p class="text-slate-300 mb-4">特点：协程是一种轻量级线程，支持暂停和恢复执行。注意事项：Lua的协程是协作式的，需要手动调用yield暂停执行。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2">-- 创建和使用协程</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-300">local</span> <span class="text-blue-300">co</span> = coroutine.create(<span class="text-purple-300">function</span>()<br>
+                        <span class="text-slate-300">    for i = 1, 5 do</span><br>
+                        <span class="text-slate-300">        print("协程执行：" .. i)</span><br>
+                        <span class="text-slate-300">        coroutine.yield()</span><br>
+                        <span class="text-slate-300">    end</span><br>
+                        <span class="text-slate-300">    return "协程结束"</span><br>
+                        <span class="text-purple-300">end)</span><br>
+                        <br>
+                        <span class="text-slate-300">print(coroutine.status(co))  </span><span class="text-slate-500">-- suspended</span><br>
+                        <br>
+                        <span class="text-purple-300">while</span> coroutine.status(co) ~= "dead" <span class="text-purple-300">do</span><br>
+                        <span class="text-slate-300">    print("主线程执行")</span><br>
+                        <span class="text-slate-300">    local success, result = coroutine.resume(co)</span><br>
+                        <span class="text-purple-300">    if</span> result <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">        print(result)</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <span class="text-purple-300">end</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 协程通信</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-purple-300">local</span> <span class="text-blue-300">producer</span> = coroutine.create(<span class="text-purple-300">function</span>()<br>
+                        <span class="text-slate-300">    for i = 1, 5 do</span><br>
+                        <span class="text-slate-300">        print("生产：" .. i)</span><br>
+                        <span class="text-slate-300">        coroutine.yield(i)</span><br>
+                        <span class="text-slate-300">    end</span><br>
+                        <span class="text-purple-300">end)</span><br>
+                        <br>
+                        <span class="text-purple-300">local</span> <span class="text-blue-300">consumer</span> = coroutine.create(<span class="text-purple-300">function</span>()<br>
+                        <span class="text-slate-300">    while true do</span><br>
+                        <span class="text-slate-300">        local success, value = coroutine.resume(producer)</span><br>
+                        <span class="text-purple-300">        if</span> not success <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">            break</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <span class="text-slate-300">        print("消费：" .. value)</span><br>
+                        <span class="text-slate-300">    end</span><br>
+                        <span class="text-purple-300">end)</span><br>
+                        <br>
+                        coroutine.resume(consumer)
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 12. 元表和元方法 -->
+        <section id="section-12" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">12. 元表和元方法</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lua">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Lua - 元表用于修改表的行为</h4>
+                <p class="text-slate-300 mb-4">特点：元表允许定义表的操作符行为、索引和赋值等。注意事项：使用setmetatable设置元表，使用getmetatable获取元表。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2">-- 元表和__add元方法</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">t1</span> = <span class="text-purple-300">{1, 2, 3}</span><br>
+                        <span class="text-blue-300">t2</span> = <span class="text-purple-300">{4, 5, 6}</span><br>
+                        <br>
+                        <span class="text-blue-300">mt</span> = <span class="text-purple-300">{}</span><br>
+                        <span class="text-blue-300">mt.__add</span> = <span class="text-purple-300">function</span>(a, b)<br>
+                        <span class="text-slate-300">    local result = {}</span><br>
+                        <span class="text-slate-300">    for _, v in ipairs(a) do</span><br>
+                        <span class="text-slate-300">        table.insert(result, v)</span><br>
+                        <span class="text-slate-300">    end</span><br>
+                        <span class="text-slate-300">    for _, v in ipairs(b) do</span><br>
+                        <span class="text-slate-300">        table.insert(result, v)</span><br>
+                        <span class="text-slate-300">    end</span><br>
+                        <span class="text-slate-300">    return result</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <br>
+                        <span class="text-blue-300">setmetatable</span>(t1, <span class="text-blue-300">mt</span>)<br>
+                        <span class="text-blue-300">setmetatable</span>(t2, <span class="text-blue-300">mt</span>)<br>
+                        <br>
+                        <span class="text-blue-300">t3</span> = t1 + t2   <span class="text-slate-500">-- 调用__add元方法</span><br>
+                        <span class="text-purple-300">for</span> i, v <span class="text-purple-300">in</span> ipairs(t3) <span class="text-purple-300">do</span><br>
+                        <span class="text-slate-300">    print(i, v)</span><br>
+                        <span class="text-purple-300">end</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- __index元方法</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">mt</span> = <span class="text-purple-300">{}</span><br>
+                        <span class="text-blue-300">mt.__index</span> = <span class="text-purple-300">function</span>(table, key)<br>
+                        <span class="text-slate-300">    return "默认值"</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <br>
+                        <span class="text-blue-300">tbl</span> = <span class="text-purple-300">{x = 10, y = 20}</span><br>
+                        <span class="text-blue-300">setmetatable</span>(tbl, <span class="text-blue-300">mt</span>)<br>
+                        <br>
+                        <span class="text-slate-300">print(tbl.x)  </span><span class="text-slate-500">-- 10</span><br>
+                        <span class="text-slate-300">print(tbl.z)  </span><span class="text-slate-500">-- 默认值</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 13. 文件操作 -->
+        <section id="section-13" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">13. 文件操作</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lua">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Lua - 支持文件读写操作</h4>
+                <p class="text-slate-300 mb-4">特点：使用io库进行文件操作，支持多种打开模式。注意事项：使用完毕后需要关闭文件。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2">-- 写入文件</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">file</span> = io.open(<span class="text-green-300">"test.txt"</span>, <span class="text-green-300">"w"</span>)<br>
+                        <span class="text-purple-300">if</span> file <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">    file:write("Hello, Lua!\n")</span><br>
+                        <span class="text-slate-300">    file:write("这是一个测试文件\n")</span><br>
+                        <span class="text-slate-300">    file:close()</span><br>
+                        <span class="text-purple-300">end</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 读取文件</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">file</span> = io.open(<span class="text-green-300">"test.txt"</span>, <span class="text-green-300">"r"</span>)<br>
+                        <span class="text-purple-300">if</span> file <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">    <span class="text-purple-300">for</span> line in file:lines() <span class="text-purple-300">do</span></span><br>
+                        <span class="text-slate-300">        print(line)</span><br>
+                        <span class="text-slate-300">    <span class="text-purple-300">end</span></span><br>
+                        <span class="text-slate-300">    file:close()</span><br>
+                        <span class="text-purple-300">end</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 读取整个文件</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">file</span> = io.open(<span class="text-green-300">"test.txt"</span>, <span class="text-green-300">"r"</span>)<br>
+                        <span class="text-purple-300">if</span> file <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">    local content = file:read("*all")</span><br>
+                        <span class="text-slate-300">    print(content)</span><br>
+                        <span class="text-slate-300">    file:close()</span><br>
+                        <span class="text-purple-300">end</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 14. 标准库 -->
+        <section id="section-14" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">14. 标准库</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lua">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Lua - 丰富的标准库</h4>
+                <p class="text-slate-300 mb-4">特点：内置多个功能强大的标准库，包括字符串、表、数学、文件操作等。注意事项：使用require导入标准库模块。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2">-- 字符串库</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">s</span> = <span class="text-green-300">"Hello, World!"</span><br>
+                        <span class="text-slate-300">print(string.upper(s))  </span><span class="text-slate-500">-- HELLO, WORLD!</span><br>
+                        <span class="text-slate-300">print(string.lower(s))  </span><span class="text-slate-500">-- hello, world!</span><br>
+                        <span class="text-slate-300">print(string.sub(s, 8, 12))  </span><span class="text-slate-500">-- World</span><br>
+                        <span class="text-slate-300">print(string.gsub(s, "World", "Lua"))  </span><span class="text-slate-500">-- Hello, Lua!</span><br>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 表库</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-blue-300">tbl</span> = <span class="text-purple-300">{3, 1, 4, 1, 5, 9, 2, 6}</span><br>
+                        <span class="text-blue-300">table.sort</span>(tbl)<br>
+                        <span class="text-purple-300">for</span> i, v <span class="text-purple-300">in</span> ipairs(tbl) <span class="text-purple-300">do</span><br>
+                        <span class="text-slate-300">    print(v)</span><br>
+                        <span class="text-purple-300">end</span><br>
+                        <br>
+                        <span class="text-blue-300">table.insert</span>(tbl, 1, 0)   <span class="text-slate-500">-- 在位置1插入0</span><br>
+                        <span class="text-blue-300">table.remove</span>(tbl, 3)        <span class="text-slate-500">-- 删除位置3的元素</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2">-- 数学库</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-slate-300">print(math.pi)  </span><span class="text-slate-500">-- 3.1415926535898</span><br>
+                        <span class="text-slate-300">print(math.sqrt(16))  </span><span class="text-slate-500">-- 4</span><br>
+                        <span class="text-slate-300">print(math.abs(-10))  </span><span class="text-slate-500">-- 10</span><br>
+                        <span class="text-slate-300">print(math.random())  </span><span class="text-slate-500">-- 随机数</span><br>
+                        <span class="text-slate-300">print(math.max(1, 3, 2))  </span><span class="text-slate-500">-- 3</span><br>
+                        <span class="text-slate-300">print(math.min(1, 3, 2))  </span><span class="text-slate-500">-- 1</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 总结 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">Lua语法总结</span>
+            </h2>
+            
+            <div class="language-content" data-lang="lua">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Lua - 简洁高效的脚本语言</h4>
+                <p class="text-slate-300 mb-4">Lua是一种轻量级、高效的脚本语言，具有以下特点：</p>
+                <ul class="text-slate-300 list-disc pl-6 mb-4">
+                    <li>简洁易读的语法</li>
+                    <li>动态类型系统</li>
+                    <li>表作为核心数据结构</li>
+                    <li>函数作为第一类值</li>
+                    <li>支持协程</li>
+                    <li>丰富的标准库</li>
+                    <li>可扩展的元表机制</li>
+                    <li>与C语言的良好交互性</li>
+                </ul>
+                <p class="text-slate-300 mb-4">Lua广泛应用于游戏开发、嵌入式系统、脚本扩展等领域，是一种非常实用的编程语言。</p>
+            </div>
+        </section>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
