@@ -8,6 +8,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Highlight.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <!-- Highlight.js JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <!-- Highlight.js language support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/haskell.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
     <style>
         * {
             font-family: 'Noto Sans SC', sans-serif;
@@ -34,8 +41,18 @@
             color: white;
         }
         .code-block {
-            background: rgba(2, 6, 23, 0.9);
+            background: #000000;
             border-left: 4px solid #3B82F6;
+        }
+        /* 覆盖Highlight.js主题的背景颜色 */
+        pre.code-block {
+            background: #000000 !important;
+        }
+        pre code {
+            background: #000000 !important;
+        }
+        .hljs {
+            background: #000000 !important;
         }
         .code-font {
             font-family: 'JetBrains Mono', monospace;
@@ -567,6 +584,24 @@
                 
                 if (mainContent) {
                     contentDiv.innerHTML = mainContent.innerHTML;
+                    // 初始化语法高亮
+                    setTimeout(() => {
+                        // 为所有代码块添加正确的类名
+                        const codeBlocks = contentDiv.querySelectorAll('code');
+                        codeBlocks.forEach(codeBlock => {
+                            // 如果是Haskell代码块
+                            if (codeBlock.textContent.includes('type ') || codeBlock.textContent.includes('data ') || 
+                                codeBlock.textContent.includes('module ') || codeBlock.textContent.includes('import ')) {
+                                codeBlock.classList.add('hljs', 'haskell');
+                            } 
+                            // 如果是Python代码块
+                            else if (codeBlock.textContent.includes('def ') || codeBlock.textContent.includes('class ') || 
+                                     codeBlock.textContent.includes('import ') || codeBlock.textContent.includes('from ')) {
+                                codeBlock.classList.add('hljs', 'python');
+                            }
+                        });
+                        hljs.highlightAll();
+                    }, 0);
                 } else {
                     contentDiv.innerHTML = '<div class="text-center py-12 text-red-400">内容加载失败</div>';
                 }
