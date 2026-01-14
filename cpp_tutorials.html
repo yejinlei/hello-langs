@@ -347,11 +347,441 @@
                         <br>
                         <span class="text-blue-300">// std::vector</span><br>
                         <span class="text-purple-400">std::vector</span>&lt;<span class="text-purple-400">int</span>&gt; vec = {1, 2, 3, 4, 5};<br>
-                        <span class="text-blue-300">MyClass</span> obj1(<span class="text-purple-400">std::move</span>(vec)); <span class="text-blue-300">// 触发移动构造</span><br>
                         <br>
-                        <span class="text-purple-400">std::vector</span>&lt;<span class="text-purple-400">int</span>&gt; vec2 = {6, 7, 8, 9, 10};<br>
-                        <span class="text-blue-300">MyClass</span> obj2(vec2);<br>
-                        obj2 = <span class="text-blue-300">MyClass</span>(<span class="text-purple-400">std::move</span>(vec2)); <span class="text-blue-300">// 触发移动赋值</span><br>
+                        <span class="text-blue-300">// std::map - 关联容器</span><br>
+                        <span class="text-purple-400">std::map</span>&lt;<span class="text-purple-400">std::string</span>, <span class="text-purple-400">int</span>&gt; studentScores;<br>
+                        studentScores[<span class="text-green-300">"Alice"</span>] = <span class="text-yellow-300">95</span>;<br>
+                        studentScores[<span class="text-green-300">"Bob"</span>] = <span class="text-yellow-300">88</span>;<br>
+                        <br>
+                        <span class="text-blue-300">// std::set - 集合容器</span><br>
+                        <span class="text-purple-400">std::set</span>&lt;<span class="text-purple-400">int</span>&gt; uniqueNumbers = {<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>};<br>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 指针与引用 -->
+        <section id="section-6" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">6. 指针与引用</span>
+            </h2>
+            
+            <div class="language-content" data-lang="cpp">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 指针、引用和智能指针</h4>
+                <p class="text-slate-300 mb-4">特点：支持传统指针和引用，C++11引入了智能指针管理内存。注意事项：优先使用智能指针，避免内存泄漏和悬空指针问题。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 指针与引用</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">// 指针</span><br>
+                        <span class="text-purple-400">int</span> value = <span class="text-yellow-300">42</span>;<br>
+                        <span class="text-purple-400">int</span>* ptr = &amp;value; <span class="text-blue-300">// 指向value的指针</span><br>
+                        <span class="text-purple-400">int</span> dereferenced = *ptr; <span class="text-blue-300">// 解引用</span><br>
+                        <br>
+                        <span class="text-blue-300">// 引用</span><br>
+                        <span class="text-purple-400">int</span>&amp; ref = value; <span class="text-blue-300">// value的引用</span><br>
+                        ref = <span class="text-yellow-300">100</span>; <span class="text-blue-300">// value现在是100</span><br>
+                        <br>
+                        <span class="text-blue-300">// 智能指针 (C++11)</span><br>
+                        <span class="text-purple-400">std::unique_ptr</span>&lt;<span class="text-purple-400">int</span>&gt; uniquePtr = <span class="text-blue-300">std::make_unique</span>&lt;<span class="text-purple-400">int</span>&gt;(<span class="text-yellow-300">42</span>);<br>
+                        <span class="text-purple-400">std::shared_ptr</span>&lt;<span class="text-purple-400">int</span>&gt; sharedPtr1 = <span class="text-blue-300">std::make_shared</span>&lt;<span class="text-purple-400">int</span>&gt;(<span class="text-yellow-300">42</span>);<br>
+                        <span class="text-purple-400">std::shared_ptr</span>&lt;<span class="text-purple-400">int</span>&gt; sharedPtr2 = sharedPtr1; <span class="text-blue-300">// 引用计数增加</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 类与对象 -->
+        <section id="section-7" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">7. 类与对象</span>
+            </h2>
+            
+            <div class="language-content" data-lang="cpp">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 类定义、构造函数和析构函数</h4>
+                <p class="text-slate-300 mb-4">特点：支持封装、继承、多态等面向对象特性，C++11引入了默认函数、删除函数等。注意事项：合理使用构造函数和析构函数管理资源，遵循RAII原则。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 类与对象</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">// 类定义</span><br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Person</span> {<br>
+                        <span class="text-purple-400">private</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">std::string</span> name;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">int</span> age;<br>
+                        <br>
+                        <span class="text-purple-400">public</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">Person</span>(<span class="text-purple-400">const</span> <span class="text-purple-400">std::string</span>& n, <span class="text-purple-400">int</span> a) : name(n), age(a) {} <span class="text-blue-300">// 构造函数</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">~Person</span>() { <span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-green-300">"Person destroyed"</span> &lt;&lt; <span class="text-green-300">std::endl</span>; } <span class="text-blue-300">// 析构函数</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">const</span> <span class="text-purple-400">std::string</span>& <span class="text-blue-300">getName</span>() <span class="text-purple-400">const</span> { <span class="text-purple-400">return</span> name; }<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">int</span> <span class="text-blue-300">getAge</span>() <span class="text-purple-400">const</span> { <span class="text-purple-400">return</span> age; }<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> <span class="text-blue-300">setAge</span>(<span class="text-purple-400">int</span> newAge) { age = newAge; }<br>
+                        };<br>
+                        <br>
+                        <span class="text-blue-300">// 对象创建和使用</span><br>
+                        <span class="text-blue-300">Person</span> person(<span class="text-green-300">"Alice"</span>, <span class="text-yellow-300">30</span>);<br>
+                        <span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-green-300">"Name: "</span> &lt;&lt; person.<span class="text-blue-300">getName</span>() &lt;&lt; <span class="text-green-300">", Age: "</span> &lt;&lt; person.<span class="text-blue-300">getAge</span>() &lt;&lt; <span class="text-green-300">std::endl</span>;
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. 继承与多态 -->
+        <section id="section-8" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">8. 继承与多态</span>
+            </h2>
+            
+            <div class="language-content" data-lang="cpp">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 继承、虚函数和多态</h4>
+                <p class="text-slate-300 mb-4">特点：支持单继承和多继承，虚函数实现动态多态，C++11引入了override和final关键字。注意事项：使用override关键字确保函数重写，合理设计继承层次结构。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 继承与多态</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">// 基类</span><br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Animal</span> {
+                        <span class="text-purple-400">protected</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">std::string</span> name;
+                        <br>
+                        <span class="text-purple-400">public</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">Animal</span>(<span class="text-purple-400">const</span> <span class="text-purple-400">std::string</span>& n) : name(n) {}
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">virtual</span> <span class="text-blue-300">~Animal</span>() = <span class="text-purple-400">default</span>; <span class="text-blue-300">// 虚析构函数</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">virtual</span> <span class="text-purple-400">void</span> <span class="text-blue-300">speak</span>() <span class="text-purple-400">const</span> { <span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-green-300">"Animal speaks"</span> &lt;&lt; <span class="text-green-300">std::endl</span>; }
+                        };
+                        <br>
+                        <span class="text-blue-300">// 派生类</span><br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Dog</span> : <span class="text-purple-400">public</span> <span class="text-blue-300">Animal</span> {
+                        <span class="text-purple-400">public</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">Dog</span>(<span class="text-purple-400">const</span> <span class="text-purple-400">std::string</span>& n) : <span class="text-blue-300">Animal</span>(n) {}
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> <span class="text-blue-300">speak</span>() <span class="text-purple-400">const</span> <span class="text-purple-400">override</span> { <span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-green-300">"Woof!"</span> &lt;&lt; <span class="text-green-300">std::endl</span>; } <span class="text-blue-300">// C++11 override</span>
+                        };
+                        <br>
+                        <span class="text-blue-300">// 多态使用</span><br>
+                        <span class="text-blue-300">Animal</span>* animal = <span class="text-purple-400">new</span> <span class="text-blue-300">Dog</span>(<span class="text-green-300">"Buddy"</span>);
+                        animal-&gt;<span class="text-blue-300">speak</span>(); <span class="text-blue-300">// 输出 "Woof!"</span>
+                        <span class="text-purple-400">delete</span> animal;
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. 模板 -->
+        <section id="section-9" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">9. 模板</span>
+            </h2>
+            
+            <div class="language-content" data-lang="cpp">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 函数模板和类模板</h4>
+                <p class="text-slate-300 mb-4">特点：支持函数模板和类模板，实现泛型编程，C++11引入了可变参数模板。注意事项：模板在编译时生成代码，可能增加编译时间和可执行文件大小。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 模板</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">// 函数模板</span><br>
+                        <span class="text-purple-400">template</span>&lt;<span class="text-purple-400">typename</span> T&gt;
+                        T <span class="text-blue-300">max</span>(T a, T b) {
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> (a &gt; b) ? a : b;
+                        }
+                        <br>
+                        <span class="text-blue-300">// 使用函数模板</span><br>
+                        <span class="text-purple-400">int</span> intMax = <span class="text-blue-300">max</span>(<span class="text-yellow-300">10</span>, <span class="text-yellow-300">20</span>);
+                        <span class="text-purple-400">double</span> doubleMax = <span class="text-blue-300">max</span>(<span class="text-yellow-300">3.14</span>, <span class="text-yellow-300">2.71</span>);
+                        <br>
+                        <span class="text-blue-300">// 类模板</span><br>
+                        <span class="text-purple-400">template</span>&lt;<span class="text-purple-400">typename</span> T&gt;
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Container</span> {
+                        <span class="text-purple-400">private</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;T value;
+                        <br>
+                        <span class="text-purple-400">public</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">Container</span>(T v) : value(v) {}
+                        &nbsp;&nbsp;&nbsp;&nbsp;T <span class="text-blue-300">getValue</span>() <span class="text-purple-400">const</span> { <span class="text-purple-400">return</span> value; }
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> <span class="text-blue-300">setValue</span>(T v) { value = v; }
+                        };
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. 异常处理 -->
+        <section id="section-10" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">10. 异常处理</span>
+            </h2>
+            
+            <div class="language-content" data-lang="cpp">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 异常处理机制</h4>
+                <p class="text-slate-300 mb-4">特点：支持try-catch-finally模式，可以抛出任意类型的异常，C++11增强了异常安全性。注意事项：异常处理会影响性能，不应作为常规流程控制使用。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 异常处理</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">try</span> {
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">std::vector</span>&lt;<span class="text-purple-400">int</span>&gt; vec(<span class="text-yellow-300">5</span>);
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">std::cout</span> &lt;&lt; vec.<span class="text-blue-300">at</span>(<span class="text-yellow-300">10</span>) &lt;&lt; <span class="text-green-300">std::endl</span>; <span class="text-blue-300">// 抛出 std::out_of_range</span>
+                        } <span class="text-purple-400">catch</span> (<span class="text-purple-400">const</span> <span class="text-blue-300">std::out_of_range</span>& e) {
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-green-300">"Out of range error: "</span> &lt;&lt; e.<span class="text-blue-300">what</span>() &lt;&lt; <span class="text-green-300">std::endl</span>;
+                        } <span class="text-purple-400">catch</span> (...) {
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-green-300">"Unknown exception"</span> &lt;&lt; <span class="text-green-300">std::endl</span>;
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. 面向对象编程 -->
+        <section id="section-11" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">11. 面向对象编程</span>
+            </h2>
+            
+            <div class="language-content" data-lang="cpp">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 面向对象编程特性</h4>
+                <p class="text-slate-300 mb-4">特点：封装、继承、多态三大特性，支持抽象类和接口设计。注意事项：合理使用访问控制符，遵循面向对象设计原则。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 面向对象编程</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">// 抽象类</span><br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Shape</span> {
+                        <span class="text-purple-400">public</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">virtual</span> <span class="text-purple-400">double</span> <span class="text-blue-300">area</span>() <span class="text-purple-400">const</span> = <span class="text-yellow-300">0</span>; <span class="text-blue-300">// 纯虚函数</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">virtual</span> <span class="text-purple-400">void</span> <span class="text-blue-300">draw</span>() <span class="text-purple-400">const</span> = <span class="text-yellow-300">0</span>; <span class="text-blue-300">// 纯虚函数</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">virtual</span> <span class="text-blue-300">~Shape</span>() = <span class="text-purple-400">default</span>;
+                        };
+                        <br>
+                        <span class="text-blue-300">// 具体实现类</span><br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Circle</span> : <span class="text-purple-400">public</span> <span class="text-blue-300">Shape</span> {
+                        <span class="text-purple-400">private</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">double</span> radius;
+                        <br>
+                        <span class="text-purple-400">public</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">Circle</span>(<span class="text-purple-400">double</span> r) : radius(r) {}
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">double</span> <span class="text-blue-300">area</span>() <span class="text-purple-400">const</span> <span class="text-purple-400">override</span> { <span class="text-purple-400">return</span> <span class="text-yellow-300">3.14159</span> * radius * radius; }
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> <span class="text-blue-300">draw</span>() <span class="text-purple-400">const</span> <span class="text-purple-400">override</span> { <span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-green-300">"Drawing a circle"</span> &lt;&lt; <span class="text-green-300">std::endl</span>; }
+                        };
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. 继承和多态 -->
+        <section id="section-12" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">12. 继承和多态</span>
+            </h2>
+            
+            <div class="language-content" data-lang="cpp">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 复杂继承关系和多态实现</h4>
+                <p class="text-slate-300 mb-4">特点：支持多重继承、虚继承、虚函数等高级特性，C++11引入了override和final关键字。注意事项：设计继承关系时要考虑菱形继承问题，合理使用虚继承。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 继承和多态</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">// 虚继承示例</span><br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Vehicle</span> {
+                        <span class="text-purple-400">protected</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">std::string</span> brand;
+                        <br>
+                        <span class="text-purple-400">public</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">Vehicle</span>(<span class="text-purple-400">const</span> <span class="text-purple-400">std::string</span>& b) : brand(b) {}
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">virtual</span> <span class="text-purple-400">void</span> <span class="text-blue-300">start</span>() = <span class="text-yellow-300">0</span>;
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">virtual</span> <span class="text-blue-300">~Vehicle</span>() = <span class="text-purple-400">default</span>;
+                        };
+                        <br>
+                        <span class="text-blue-300">// 虚继承</span><br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Car</span> : <span class="text-purple-400">virtual</span> <span class="text-purple-400">public</span> <span class="text-blue-300">Vehicle</span> {
+                        <span class="text-purple-400">public</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">Car</span>(<span class="text-purple-400">const</span> <span class="text-purple-400">std::string</span>& b) : <span class="text-blue-300">Vehicle</span>(b) {}
+                        };
+                        <br>
+                        <span class="text-blue-300">// 多重继承</span><br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">ElectricCar</span> : <span class="text-purple-400">public</span> <span class="text-blue-300">Car</span> {
+                        <span class="text-purple-400">private</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">double</span> batteryLevel;
+                        <br>
+                        <span class="text-purple-400">public</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">ElectricCar</span>(<span class="text-purple-400">const</span> <span class="text-purple-400">std::string</span>& b, <span class="text-purple-400">double</span> level) : <span class="text-blue-300">Car</span>(b), batteryLevel(level) {}
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">void</span> <span class="text-blue-300">start</span>() <span class="text-purple-400">override</span> {
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-green-300">"Electric car starting silently"</span> &lt;&lt; <span class="text-green-300">std::endl</span>;
+                        &nbsp;&nbsp;&nbsp;&nbsp;}
+                        };
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13. 异常处理 -->
+        <section id="section-13" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">13. 异常处理</span>
+            </h2>
+            
+            <div class="language-content" data-lang="cpp">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 高级异常处理和异常安全</h4>
+                <p class="text-slate-300 mb-4">特点：支持异常规范、noexcept说明符、异常安全保证等特性，C++11增强了异常安全性。注意事项：异常安全分为基本保证、强保证和不抛异常保证三个级别。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 高级异常处理</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">// 自定义异常类</span><br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">CustomException</span> : <span class="text-purple-400">public</span> <span class="text-blue-300">std::exception</span> {
+                        <span class="text-purple-400">private</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">std::string</span> message;
+                        <br>
+                        <span class="text-purple-400">public</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">CustomException</span>(<span class="text-purple-400">const</span> <span class="text-purple-400">std::string</span>& msg) : message(msg) {}
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">const</span> <span class="text-purple-400">char</span>* <span class="text-blue-300">what</span>() <span class="text-purple-400">const</span> <span class="text-purple-400">noexcept</span> <span class="text-purple-400">override</span> {
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> message.<span class="text-blue-300">c_str</span>();
+                        &nbsp;&nbsp;&nbsp;&nbsp;}
+                        };
+                        <br>
+                        <span class="text-blue-300">// 使用noexcept (C++11)</span><br>
+                        <span class="text-purple-400">void</span> <span class="text-blue-300">functionThatDoesNotThrow</span>() <span class="text-purple-400">noexcept</span> {
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-green-300">"This function does not throw exceptions"</span> &lt;&lt; <span class="text-green-300">std::endl</span>;
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14. 智能指针 -->
+        <section id="section-14" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">14. 智能指针</span>
+            </h2>
+            
+            <div class="language-content" data-lang="cpp">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 智能指针管理内存</h4>
+                <p class="text-slate-300 mb-4">特点：C++11引入了unique_ptr、shared_ptr、weak_ptr等智能指针，实现自动内存管理。注意事项：优先使用RAII原则和智能指针，避免手动内存管理。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 智能指针</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">// unique_ptr - 独占所有权</span><br>
+                        <span class="text-purple-400">auto</span> uniquePtr = <span class="text-blue-300">std::make_unique</span>&lt;<span class="text-purple-400">int</span>&gt;(<span class="text-yellow-300">42</span>);
+                        <span class="text-purple-400">int</span> value = *uniquePtr; <span class="text-blue-300">// 访问值</span>
+                        <br>
+                        <span class="text-blue-300">// shared_ptr - 共享所有权</span><br>
+                        <span class="text-purple-400">auto</span> sharedPtr1 = <span class="text-blue-300">std::make_shared</span>&lt;<span class="text-purple-400">int</span>&gt;(<span class="text-yellow-300">42</span>);
+                        <span class="text-purple-400">auto</span> sharedPtr2 = sharedPtr1; <span class="text-blue-300">// 引用计数增加</span>
+                        <span class="text-purple-400">int</span> count = sharedPtr1.<span class="text-blue-300">use_count</span>(); <span class="text-blue-300">// 获取引用计数</span>
+                        <br>
+                        <span class="text-blue-300">// weak_ptr - 避免循环引用</span><br>
+                        <span class="text-purple-400">std::weak_ptr</span>&lt;<span class="text-purple-400">int</span>&gt; weakPtr = sharedPtr1;
+                        <span class="text-purple-400">if</span> (<span class="text-purple-400">auto</span> lockedPtr = weakPtr.<span class="text-blue-300">lock</span>()) { <span class="text-blue-300">// 检查对象是否仍然存在</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-green-300">"Value: "</span> &lt;&lt; *lockedPtr &lt;&lt; <span class="text-green-300">std::endl</span>;
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 15. 文件操作 -->
+        <section id="section-15" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">15. 文件操作</span>
+            </h2>
+            
+            <div class="language-content" data-lang="cpp">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 文件输入输出操作</h4>
+                <p class="text-slate-300 mb-4">特点：支持文本文件和二进制文件操作，提供ifstream、ofstream、fstream等流类。注意事项：操作完成后要检查文件状态并关闭文件。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 文件操作</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">// 写入文件</span><br>
+                        <span class="text-purple-400">std::ofstream</span> outFile(<span class="text-green-300">"example.txt"</span>);
+                        <span class="text-purple-400">if</span> (outFile.<span class="text-blue-300">is_open</span>()) {
+                        &nbsp;&nbsp;&nbsp;&nbsp;outFile &lt;&lt; <span class="text-green-300">"Hello, C++ File!"</span> &lt;&lt; <span class="text-green-300">std::endl</span>;
+                        &nbsp;&nbsp;&nbsp;&nbsp;outFile &lt;&lt; <span class="text-yellow-300">42</span> &lt;&lt; <span class="text-green-300">" "</span> &lt;&lt; <span class="text-yellow-300">3.14</span> &lt;&lt; <span class="text-green-300">std::endl</span>;
+                        &nbsp;&nbsp;&nbsp;&nbsp;outFile.<span class="text-blue-300">close</span>();
+                        }
+                        <br>
+                        <span class="text-blue-300">// 读取文件</span><br>
+                        <span class="text-purple-400">std::ifstream</span> inFile(<span class="text-green-300">"example.txt"</span>);
+                        <span class="text-purple-400">if</span> (inFile.<span class="text-blue-300">is_open</span>()) {
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">std::string</span> line;
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">while</span> (<span class="text-purple-400">std::getline</span>(inFile, line)) {
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">std::cout</span> &lt;&lt; line &lt;&lt; <span class="text-green-300">std::endl</span>;
+                        &nbsp;&nbsp;&nbsp;&nbsp;}
+                        &nbsp;&nbsp;&nbsp;&nbsp;inFile.<span class="text-blue-300">close</span>();
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 16. Lambda表达式 -->
+        <section id="section-16" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">16. Lambda表达式</span>
+            </h2>
+            
+            <div class="language-content" data-lang="cpp">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - Lambda表达式和函数式编程</h4>
+                <p class="text-slate-300 mb-4">特点：C++11引入了Lambda表达式，支持闭包、捕获列表等特性。注意事项：注意捕获方式(值捕获、引用捕获)对Lambda生命周期的影响。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># Lambda表达式</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">// 基本Lambda表达式</span><br>
+                        <span class="text-purple-400">auto</span> add = [](<span class="text-purple-400">int</span> a, <span class="text-purple-400">int</span> b) { <span class="text-purple-400">return</span> a + b; };
+                        <span class="text-purple-400">int</span> result = <span class="text-blue-300">add</span>(<span class="text-yellow-300">5</span>, <span class="text-yellow-300">3</span>); <span class="text-blue-300">// 结果为 8</span>
+                        <br>
+                        <span class="text-blue-300">// 值捕获</span><br>
+                        <span class="text-purple-400">int</span> multiplier = <span class="text-yellow-300">10</span>;
+                        <span class="text-purple-400">auto</span> multiplyByTen = [multiplier](<span class="text-purple-400">int</span> x) { <span class="text-purple-400">return</span> x * multiplier; };
+                        <br>
+                        <span class="text-blue-300">// 引用捕获</span><br>
+                        <span class="text-purple-400">auto</span> multiplyByRef = [&amp;multiplier](<span class="text-purple-400">int</span> x) { <span class="text-purple-400">return</span> x * multiplier; };
+                        <br>
+                        <span class="text-blue-300">// 使用Lambda配合STL算法</span><br>
+                        <span class="text-purple-400">std::vector</span>&lt;<span class="text-purple-400">int</span>&gt; numbers = {<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>};
+                        <span class="text-purple-400">std::sort</span>(numbers.<span class="text-blue-300">begin</span>(), numbers.<span class="text-blue-300">end</span>(), [](<span class="text-purple-400">int</span> a, <span class="text-purple-400">int</span> b) { <span class="text-purple-400">return</span> a &gt; b; }); <span class="text-blue-300">// 降序排序</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 17. 移动语义 -->
+        <section id="section-17" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">17. 移动语义</span>
+            </h2>
+            
+            <div class="language-content" data-lang="cpp">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">C++ - 移动语义和右值引用</h4>
+                <p class="text-slate-300 mb-4">特点：C++11引入了移动语义，通过右值引用提高性能，避免不必要的拷贝。注意事项：合理使用std::move，理解左值和右值的区别。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 移动语义</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">// 移动构造函数示例</span><br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">MyClass</span> {
+                        <span class="text-purple-400">private</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">std::vector</span>&lt;<span class="text-purple-400">int</span>&gt; data;
+                        <br>
+                        <span class="text-purple-400">public</span>:
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">MyClass</span>(<span class="text-purple-400">std::vector</span>&lt;<span class="text-purple-400">int</span>&gt; vec) : data(<span class="text-purple-400">std::move</span>(vec)) {} <span class="text-blue-300">// 移动构造</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">MyClass</span>(<span class="text-blue-300">MyClass</span>&& other) <span class="text-purple-400">noexcept</span> : data(<span class="text-purple-400">std::move</span>(other.data)) {} <span class="text-blue-300">// 移动构造函数</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-blue-300">MyClass</span>& <span class="text-blue-300">operator</span>= (<span class="text-blue-300">MyClass</span>&& other) <span class="text-purple-400">noexcept</span> { <span class="text-green-300">// 移动赋值</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">if</span> (<span class="text-purple-400">this</span> != &amp;other) {
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data = <span class="text-purple-400">std::move</span>(other.data);
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> *<span class="text-purple-400">this</span>;
+                        &nbsp;&nbsp;&nbsp;&nbsp;}
+                        };
+                        <br>
+                        <span class="text-blue-300">// 使用移动语义</span><br>
+                        <span class="text-purple-400">std::vector</span>&lt;<span class="text-purple-400">int</span>&gt; vec = {1, 2, 3, 4, 5};
+                        <span class="text-blue-300">MyClass</span> obj1(<span class="text-purple-400">std::move</span>(vec)); <span class="text-blue-300">// 触发移动构造</span>
+                        <br>
+                        <span class="text-purple-400">std::vector</span>&lt;<span class="text-purple-400">int</span>&gt; vec2 = {6, 7, 8, 9, 10};
+                        <span class="text-blue-300">MyClass</span> obj2(vec2);
+                        obj2 = <span class="text-blue-300">MyClass</span>(<span class="text-purple-400">std::move</span>(vec2)); <span class="text-blue-300">// 触发移动赋值</span>
                     </div>
                 </div>
             </div>
