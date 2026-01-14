@@ -145,46 +145,48 @@
 
         <div class="flex flex-col lg:flex-row gap-8">
             <!-- 侧边导航 -->
-            <nav class="lg:w-1/4 bg-slate-800 rounded-xl p-6 h-fit">
-                <h3 class="text-lg font-bold text-purple-400 mb-4">章节导航</h3>
-                <div class="space-y-2">
-                    <a href="#section-1" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">1. Java - 变量声明与初始化</a>
-                    <a href="#section-2" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">2. Java - 基本数据类型</a>
-                    <a href="#section-3" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">3. Java - 控制流语句</a>
-                    <a href="#section-4" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">4. Java - 函数定义与使用</a>
-                    <a href="#section-5" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">5. Java - 数组和集合</a>
-                    <a href="#section-6" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">6. Java - 映射(Map)</a>
-                    <a href="#section-7" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">7. Java - 类和对象</a>
-                    <a href="#section-8" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">8. Java - 接口</a>
-                    <a href="#section-9" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">9. Java - 继承与多态</a>
-                    <a href="#section-10" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">10. Java - 异常处理</a>
-                    <a href="#section-11" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">11. Java - 包管理</a>
-                    <a href="#section-12" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">12. Java - 泛型</a>
-                    <a href="#section-13" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">13. Java - 注解</a>
-                    <a href="#section-14" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">14. Java - 反射</a>
-                    <a href="#section-15" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">15. Java - Lambda表达式</a>
-                    <a href="#section-16" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">16. Java - 流(Stream)API</a>
-                    <a href="#section-17" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">17. Java - 线程</a>
-                    <a href="#section-18" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">18. Java - 并发编程</a>
-                    <a href="#section-19" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">19. Java - 同步机制</a>
-                    <a href="#section-20" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">20. Java - 内存管理</a>
-                    <a href="#section-21" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">21. Java - 垃圾回收</a>
-                    <a href="#section-22" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">22. Java - I/O流</a>
-                    <a href="#section-23" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">23. Java - NIO</a>
-                    <a href="#section-24" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">24. Java - 网络编程</a>
-                    <a href="#section-25" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">25. Java - 设计模式</a>
+            <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 sticky top-24 border border-slate-700">
+                    <h3 class="text-lg font-bold mb-4 gradient-text">章节导航</h3>
+                    <nav class="h-fit space-y-2">
+                    
+                    <a href="#section-1" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">1. 变量声明与初始化</a>
+                    <a href="#section-2" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">2. 基本数据类型</a>
+                    <a href="#section-3" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">3. 控制流语句</a>
+                    <a href="#section-4" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">4. 函数定义与使用</a>
+                    <a href="#section-5" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">5. 数组和集合</a>
+                    <a href="#section-6" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">6. 映射(Map)</a>
+                    <a href="#section-7" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">7. 类和对象</a>
+                    <a href="#section-8" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">8. 接口</a>
+                    <a href="#section-9" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">9. 继承与多态</a>
+                    <a href="#section-10" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">10. 异常处理</a>
+                    <a href="#section-11" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">11. 包管理</a>
+                    <a href="#section-12" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">12. 泛型</a>
+                    <a href="#section-13" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">13. 注解</a>
+                    <a href="#section-14" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">14. 反射</a>
+                    <a href="#section-15" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">15. Lambda表达式</a>
+                    <a href="#section-16" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">16. 流(Stream)API</a>
+                    <a href="#section-17" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">17. 线程</a>
+                    <a href="#section-18" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">18. 并发编程</a>
+                    <a href="#section-19" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">19. 同步机制</a>
+                    <a href="#section-20" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">20. 内存管理</a>
+                    <a href="#section-21" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">21. 垃圾回收</a>
+                    <a href="#section-22" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">22. I/O流</a>
+                    <a href="#section-23" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">23. NIO</a>
+                    <a href="#section-24" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">24. 网络编程</a>
+                    <a href="#section-25" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">25. 设计模式</a>
                     <a href="#section-26" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">26. 集合框架</a>
                     <a href="#section-27" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">27. 测试</a>
                     <a href="#section-28" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">28. Java 17+新特性</a>
+                
+                    </nav>
                 </div>
-            </nav>
 
             <!-- 主内容区 -->
             <div class="lg:w-3/4 space-y-12">
                 <!-- 1. 变量声明与初始化 -->
                 <section id="section-1" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">1. Java - 变量声明与初始化</span>
+                    <span class="gradient-text">1. 变量声明与初始化</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 变量声明、初始化和类型推导</h4>                    <p class="text-slate-300 mb-4">特点：Java是静态类型语言，变量必须先声明后使用，支持多种数据类型。注意事项：变量名区分大小写，必须遵循标识符命名规则，变量作用域有限制。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 变量声明与初始化</div>
@@ -212,7 +214,7 @@
                 <!-- 2. 基本数据类型 -->
                 <section id="section-2" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">2. Java - 基本数据类型</span>
+                    <span class="gradient-text">2. 基本数据类型</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 基本数据类型</h4>                    <p class="text-slate-300 mb-4">特点：Java有8种基本数据类型，包括数值型、字符型和布尔型。注意事项：不同类型占用内存大小不同，数值类型之间转换需要注意精度问题，char类型使用Unicode编码。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 基本数据类型</div>
@@ -239,7 +241,7 @@
                 <!-- 3. 控制流语句 -->
                 <section id="section-3" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">3. Java - 控制流语句</span>
+                    <span class="gradient-text">3. 控制流语句</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 控制流语句</h4>                    <p class="text-slate-300 mb-4">特点：Java的控制流语句包括条件语句、循环语句和跳转语句。注意事项：if语句的条件必须是boolean类型，switch语句支持String类型，循环语句可以嵌套使用。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 控制流语句</div>
@@ -276,7 +278,7 @@
                 <!-- 4. 函数定义与使用 -->
                 <section id="section-4" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">4. Java - 函数定义与使用</span>
+                    <span class="gradient-text">4. 函数定义与使用</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 函数定义与使用</h4>                    <p class="text-slate-300 mb-4">特点：Java中的函数称为方法，必须定义在类中，支持方法重载。注意事项：方法有访问修饰符、返回类型、参数列表等要素，静态方法可以直接通过类名调用。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 函数定义与使用</div>
@@ -310,7 +312,7 @@
                 <!-- 5. 数组和集合 -->
                 <section id="section-5" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">5. Java - 数组和集合</span>
+                    <span class="gradient-text">5. 数组和集合</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 数组和集合</h4>                    <p class="text-slate-300 mb-4">特点：数组是固定大小的数据结构，集合是动态大小的数据结构。注意事项：数组长度一旦确定不能改变，集合提供了丰富的操作方法，List、Set、Map是主要的集合接口。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 数组和集合</div>
@@ -338,7 +340,7 @@
                 <!-- 6. 映射(Map) -->
                 <section id="section-6" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">6. Java - 映射(Map)</span>
+                    <span class="gradient-text">6. 映射(Map)</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 映射(Map)</h4>                    <p class="text-slate-300 mb-4">特点：Map接口存储键值对，键不允许重复。注意事项：HashMap提供快速访问，TreeMap保持键的排序，LinkedHashMap保持插入顺序，ConcurrentHashMap线程安全。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 映射(Map)</div>
@@ -366,7 +368,7 @@
                 <!-- 7. 类和对象 -->
                 <section id="section-7" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">7. Java - 类和对象</span>
+                    <span class="gradient-text">7. 类和对象</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 类和对象</h4>                    <p class="text-slate-300 mb-4">特点：Java是面向对象语言，类是对象的模板，对象是类的实例。注意事项：类包含属性和方法，支持封装、继承、多态三大特性，构造器用于初始化对象。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 类和对象</div>
@@ -402,7 +404,7 @@
                 <!-- 8. 接口 -->
                 <section id="section-8" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">8. Java - 接口</span>
+                    <span class="gradient-text">8. 接口</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 接口</h4>                    <p class="text-slate-300 mb-4">特点：接口定义行为规范，类可以实现多个接口。注意事项：接口中的方法默认是public abstract，Java 8后接口可以有默认实现方法，接口不能被实例化。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 接口</div>
@@ -440,7 +442,7 @@
                 <!-- 9. 继承与多态 -->
                 <section id="section-9" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">9. Java - 继承与多态</span>
+                    <span class="gradient-text">9. 继承与多态</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 继承与多态</h4>                    <p class="text-slate-300 mb-4">特点：继承允许子类获得父类的属性和方法，多态允许同一接口的不同实现。注意事项：Java只支持单继承，但支持接口的多重实现，使用super关键字调用父类成员。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 继承与多态</div>
@@ -483,7 +485,7 @@
                 <!-- 10. 异常处理 -->
                 <section id="section-10" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">10. Java - 异常处理</span>
+                    <span class="gradient-text">10. 异常处理</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 异常处理</h4>                    <p class="text-slate-300 mb-4">特点：Java提供try-catch-finally机制处理异常，分为检查异常和运行时异常。注意事项：必须处理检查异常，可以捕获多个异常类型，finally块总是执行（除非JVM退出）。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 异常处理</div>
@@ -519,7 +521,7 @@
                 <!-- 11. 包管理 -->
                 <section id="section-11" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">11. Java - 包管理</span>
+                    <span class="gradient-text">11. 包管理</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 包管理</h4>                    <p class="text-slate-300 mb-4">特点：包用于组织类，避免命名冲突，提供访问控制。注意事项：包名通常使用公司域名反向命名，import语句导入其他包的类，public类只能在一个文件中定义。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 包管理</div>
@@ -556,7 +558,7 @@
                 <!-- 12. 泛型 -->
                 <section id="section-12" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">12. Java - 泛型</span>
+                    <span class="gradient-text">12. 泛型</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 泛型</h4>                    <p class="text-slate-300 mb-4">特点：泛型提供编译时类型安全检查，避免类型转换错误。注意事项：泛型类型在运行时会被擦除，泛型方法和泛型类提供类型参数，通配符用于不确定类型。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 泛型</div>
@@ -594,7 +596,7 @@
                 <!-- 13. 注解 -->
                 <section id="section-13" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">13. Java - 注解</span>
+                    <span class="gradient-text">13. 注解</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 注解</h4>                    <p class="text-slate-300 mb-4">特点：注解提供元数据信息，不影响程序逻辑，可以被编译器或运行时处理。注意事项：内置注解如@Override、@Deprecated、@SuppressWarnings，可以自定义注解，注解有保留策略。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 注解</div>
@@ -629,7 +631,7 @@
                 <!-- 14. 反射 -->
                 <section id="section-14" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">14. Java - 反射</span>
+                    <span class="gradient-text">14. 反射</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 反射</h4>                    <p class="text-slate-300 mb-4">特点：反射允许程序在运行时检查类、接口、字段和方法的信息。注意事项：反射性能较低，破坏封装性，主要用于框架开发，可以动态创建对象和调用方法。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 反射</div>
@@ -657,7 +659,7 @@
                 <!-- 15. Lambda表达式 -->
                 <section id="section-15" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">15. Java - Lambda表达式</span>
+                    <span class="gradient-text">15. Lambda表达式</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - Lambda表达式</h4>                    <p class="text-slate-300 mb-4">特点：Lambda表达式提供简洁的匿名函数语法，主要用于函数式编程。注意事项：只能用于函数式接口（只有一个抽象方法的接口），可以简化事件处理和集合操作。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># Lambda表达式</div>
@@ -691,7 +693,7 @@
                 <!-- 16. 流(Stream)API -->
                 <section id="section-16" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">16. Java - 流(Stream)API</span>
+                    <span class="gradient-text">16. 流(Stream)API</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 流(Stream)API</h4>                    <p class="text-slate-300 mb-4">特点：Stream API提供函数式编程能力，用于处理集合数据。注意事项：Stream是惰性求值的，中间操作不会立即执行，终端操作才会触发计算，不修改原始数据源。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 流(Stream)API</div>
@@ -723,7 +725,7 @@
                 <!-- 17. 线程 -->
                 <section id="section-17" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">17. Java - 线程</span>
+                    <span class="gradient-text">17. 线程</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 线程</h4>                    <p class="text-slate-300 mb-4">特点：线程是程序执行的最小单位，Java提供Thread类和Runnable接口创建线程。注意事项：线程安全是并发编程的重要考虑因素，需要同步机制来避免竞态条件，线程生命周期包括新建、就绪、运行、阻塞、死亡状态。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 线程</div>
@@ -761,7 +763,7 @@
                 <!-- 18. 并发编程 -->
                 <section id="section-18" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">18. Java - 并发编程</span>
+                    <span class="gradient-text">18. 并发编程</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 并发编程</h4>                    <p class="text-slate-300 mb-4">特点：并发编程允许多个任务同时执行，提高程序效率。注意事项：需要处理线程安全问题，使用同步机制避免数据竞争，Java提供丰富的并发工具类如ExecutorService、CountDownLatch等。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 并发编程</div>
@@ -802,7 +804,7 @@
                 <!-- 19. 同步机制 -->
                 <section id="section-19" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">19. Java - 同步机制</span>
+                    <span class="gradient-text">19. 同步机制</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 同步机制</h4>                    <p class="text-slate-300 mb-4">特点：同步机制确保多线程环境下数据的一致性和正确性。注意事项：synchronized关键字提供互斥锁，ReentrantLock提供更灵活的锁机制，volatile保证可见性但不保证原子性。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 同步机制</div>
@@ -853,7 +855,7 @@
                 <!-- 20. 内存管理 -->
                 <section id="section-20" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">20. Java - 内存管理</span>
+                    <span class="gradient-text">20. 内存管理</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 内存管理</h4>                    <p class="text-slate-300 mb-4">特点：Java自动管理内存，通过垃圾回收器回收不再使用的对象。注意事项：堆内存存储对象实例，栈内存存储局部变量和方法调用，方法区存储类信息和静态变量，了解内存结构有助于优化性能。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 内存管理</div>
@@ -888,7 +890,7 @@
                 <!-- 21. 垃圾回收 -->
                 <section id="section-21" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">21. Java - 垃圾回收</span>
+                    <span class="gradient-text">21. 垃圾回收</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 垃圾回收</h4>                    <p class="text-slate-300 mb-4">特点：Java虚拟机自动回收不再使用的对象释放内存空间。注意事项：不同GC算法适用于不同场景，新生代和老年代采用不同的回收策略，可以通过JVM参数调整GC行为，避免内存泄漏。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 垃圾回收</div>
@@ -928,7 +930,7 @@
                 <!-- 22. I/O流 -->
                 <section id="section-22" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">22. Java - I/O流</span>
+                    <span class="gradient-text">22. I/O流</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - I/O流</h4>                    <p class="text-slate-300 mb-4">特点：Java I/O提供字节流和字符流处理输入输出操作。注意事项：字节流处理二进制数据，字符流处理文本数据，使用try-with-resources确保资源正确关闭，缓冲流提高I/O性能。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># I/O流</div>
@@ -974,7 +976,7 @@
                 <!-- 23. NIO -->
                 <section id="section-23" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">23. Java - NIO</span>
+                    <span class="gradient-text">23. NIO</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - NIO</h4>                    <p class="text-slate-300 mb-4">特点：NIO(New I/O)提供非阻塞I/O操作，基于通道和缓冲区模型。注意事项：NIO适合高并发场景，Channel表示I/O操作的连接，Buffer存储数据，Selector实现单线程管理多个连接。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># NIO</div>
@@ -1027,7 +1029,7 @@
                 <!-- 24. 网络编程 -->
                 <section id="section-24" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">24. Java - 网络编程</span>
+                    <span class="gradient-text">24. 网络编程</span>
                 </h2>
                     <div class="language-content" data-lang="java">                    <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 网络编程</h4>                    <p class="text-slate-300 mb-4">特点：Java提供Socket API实现网络通信，支持TCP/IP和UDP协议。注意事项：ServerSocket监听客户端连接，Socket建立网络连接，需要正确处理异常和资源管理，注意网络安全问题。</p>                    <div class="code-block rounded-lg p-4 code-font text-sm">
                             <div class="text-slate-400 mb-2"># 网络编程</div>
@@ -1076,7 +1078,7 @@
                 <!-- 25. 设计模式 -->
                 <section id="section-25" class="mb-16">
                     <h2 class="text-3xl font-bold mb-8 text-center">
-                    <span class="gradient-text">25. Java - 设计模式</span>
+                    <span class="gradient-text">25. 设计模式</span>
                 </h2>
                     <div class="language-content" data-lang="java">
                                         <h4 class="text-lg font-medium mb-4 text-purple-400">Java - 设计模式</h4>                    <p class="text-slate-300 mb-4">特点：设计模式是解决常见软件设计问题的经验总结，提高代码可维护性和可扩展性。注意事项：常用模式包括单例、工厂、观察者、装饰器等，选择合适的设计模式需要根据具体场景，过度使用可能导致复杂性增加。</p>
