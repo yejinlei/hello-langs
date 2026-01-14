@@ -10,7 +10,7 @@
         function loadTailwindCSS() {
             const script = document.createElement('script');
             script.src = 'https://cdn.tailwindcss.com';
-            script.onload = function() {
+            script.onload = function () {
                 window.tailwindCdnLoaded = true;
                 // Tailwind 配置
                 tailwind.config = {
@@ -26,7 +26,7 @@
                     }
                 }
             };
-            script.onerror = function() {
+            script.onerror = function () {
                 console.warn('Failed to load Tailwind CSS from CDN, applying fallback styles');
                 applyFallbackStyles();
             };
@@ -103,6 +103,9 @@
         }
         .code-font {
             font-family: 'JetBrains Mono', monospace;
+            font-variant-ligatures: none;
+            letter-spacing: 0;
+            word-spacing: 0;
         }
         .gradient-text {
             background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
@@ -125,6 +128,7 @@
         .code-block {
             background: #000000;
             border-left: 4px solid #3B82F6;
+            white-space: pre-wrap;
         }
         .highlight {
             background: rgba(59, 130, 246, 0.2);
@@ -343,9 +347,9 @@
                     <div class="text-slate-400 mt-4 mb-2">-- 字典表</div>
                     <div class="text-sm leading-6 mt-2">
                         <span class="text-blue-300">person</span> = <span class="text-purple-300">{</span><br>
-                        <span class="text-slate-300">    name = "张三",</span><br>
-                        <span class="text-slate-300">    age = 25,</span><br>
-                        <span class="text-slate-300">    is_student = true</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;name = "张三",</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;age = 25,</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;is_student = true</span><br>
                         <span class="text-purple-300">}</span><br>
                         <span class="text-slate-300">print(person.name)  </span><span class="text-slate-500">-- 张三</span><br>
                         <span class="text-slate-300">print(person["age"])  </span><span class="text-slate-500">-- 25</span>
@@ -362,11 +366,11 @@
                         <br>
                         <span class="text-blue-400">-- 遍历表</span><br>
                         <span class="text-purple-300">for</span> i, v <span class="text-purple-300">in</span> ipairs(arr) <span class="text-purple-300">do</span><br>
-                        <span class="text-slate-300">    print(i, v)</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print(i, v)</span><br>
                         <span class="text-purple-300">end</span><br>
                         <br>
                         <span class="text-purple-300">for</span> k, v <span class="text-purple-300">in</span> pairs(person) <span class="text-purple-300">do</span><br>
-                        <span class="text-slate-300">    print(k, v)</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print(k, v)</span><br>
                         <span class="text-purple-300">end</span>
                     </div>
                 </div>
@@ -386,7 +390,7 @@
                     <div class="text-slate-400 mb-2">-- 基本函数定义</div>
                     <div class="text-sm leading-6">
                         <span class="text-purple-300">function</span> <span class="text-blue-300">add</span>(a, b)<br>
-                        <span class="text-slate-300">    return a + b</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;return a + b</span><br>
                         <span class="text-purple-300">end</span><br>
                         <span class="text-slate-300">print(add(10, 20))  </span><span class="text-slate-500">-- 30</span>
                     </div>
@@ -400,7 +404,7 @@
                     <div class="text-slate-400 mt-4 mb-2">-- 多重返回值</div>
                     <div class="text-sm leading-6 mt-2">
                         <span class="text-purple-300">function</span> <span class="text-blue-300">get_coordinates</span>()<br>
-                        <span class="text-slate-300">    return 10, 20</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;return 10, 20</span><br>
                         <span class="text-purple-300">end</span><br>
                         <span class="text-blue-300">x</span>, <span class="text-blue-300">y</span> = get_coordinates()<br>
                         <span class="text-slate-300">print(x, y)  </span><span class="text-slate-500">-- 10 20</span>
@@ -408,12 +412,12 @@
                     
                     <div class="text-slate-400 mt-4 mb-2">-- 可变参数</div>
                     <div class="text-sm leading-6 mt-2">
-                        <span class="text-purple-300">function</span> <span class="text-blue-300">sum</span>(...)   <br>
-                        <span class="text-slate-300">    local result = 0</span><br>
-                        <span class="text-slate-300">    for _, v in ipairs({...}) do</span><br>
-                        <span class="text-slate-300">        result = result + v</span><br>
-                        <span class="text-slate-300">    end</span><br>
-                        <span class="text-slate-300">    return result</span><br>
+                        <span class="text-purple-300">function</span> <span class="text-blue-300">sum</span>(...) <br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;local result = 0</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;for _, v in ipairs({...}) do</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = result + v</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;end</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;return result</span><br>
                         <span class="text-purple-300">end</span><br>
                         <span class="text-slate-300">print(sum(1, 2, 3, 4, 5))  </span><span class="text-slate-500">-- 15</span>
                     </div>
@@ -435,7 +439,7 @@
                     <div class="text-sm leading-6">
                         <span class="text-blue-300">age</span> = <span class="text-yellow-300">18</span><br>
                         <span class="text-purple-300">if</span> age >= <span class="text-yellow-300">18</span> <span class="text-purple-300">then</span><br>
-                        <span class="text-slate-300">    print("成年人")</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print("成年人")</span><br>
                         <span class="text-purple-300">end</span>
                     </div>
                     
@@ -443,9 +447,9 @@
                     <div class="text-sm leading-6 mt-2">
                         <span class="text-blue-300">x</span> = <span class="text-yellow-300">10</span><br>
                         <span class="text-purple-300">if</span> x > <span class="text-yellow-300">0</span> <span class="text-purple-300">then</span><br>
-                        <span class="text-slate-300">    print("正数")</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print("正数")</span><br>
                         <span class="text-purple-300">else</span><br>
-                        <span class="text-slate-300">    print("非正数")</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print("非正数")</span><br>
                         <span class="text-purple-300">end</span>
                     </div>
                     
@@ -453,13 +457,13 @@
                     <div class="text-sm leading-6 mt-2">
                         <span class="text-blue-300">score</span> = <span class="text-yellow-300">85</span><br>
                         <span class="text-purple-300">if</span> score >= <span class="text-yellow-300">90</span> <span class="text-purple-300">then</span><br>
-                        <span class="text-slate-300">    print("优秀")</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print("优秀")</span><br>
                         <span class="text-purple-300">elseif</span> score >= <span class="text-yellow-300">80</span> <span class="text-purple-300">then</span><br>
-                        <span class="text-slate-300">    print("良好")</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print("良好")</span><br>
                         <span class="text-purple-300">elseif</span> score >= <span class="text-yellow-300">60</span> <span class="text-purple-300">then</span><br>
-                        <span class="text-slate-300">    print("及格")</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print("及格")</span><br>
                         <span class="text-purple-300">else</span><br>
-                        <span class="text-slate-300">    print("不及格")</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print("不及格")</span><br>
                         <span class="text-purple-300">end</span>
                     </div>
                     
@@ -467,9 +471,9 @@
                     <div class="text-sm leading-6 mt-2">
                         <span class="text-blue-300">day</span> = <span class="text-green-300">"Monday"</span><br>
                         <span class="text-blue-300">actions</span> = <span class="text-purple-300">{</span><br>
-                        <span class="text-slate-300">    Monday = function() print("周一工作") end,</span><br>
-                        <span class="text-slate-300">    Tuesday = function() print("周二工作") end,</span><br>
-                        <span class="text-slate-300">    default = function() print("其他日子") end</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;Monday = function () print("周一工作") end,</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;Tuesday = function () print("周二工作") end,</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;default = function () print("其他日子") end</span><br>
                         <span class="text-purple-300">}</span><br>
                         <span class="text-blue-300">action</span> = actions[day] or actions.default<br>
                         <span class="text-blue-300">action</span>()  <span class="text-slate-500">-- 周一工作</span>
@@ -492,18 +496,18 @@
                     <div class="text-sm leading-6">
                         <span class="text-blue-400">-- 数值for循环</span><br>
                         <span class="text-purple-300">for</span> i = <span class="text-yellow-300">1</span>, <span class="text-yellow-300">10</span> <span class="text-purple-300">do</span><br>
-                        <span class="text-slate-300">    print(i)</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print(i)</span><br>
                         <span class="text-purple-300">end</span><br>
                         <br>
                         <span class="text-blue-400">-- 步长for循环</span><br>
                         <span class="text-purple-300">for</span> i = <span class="text-yellow-300">10</span>, <span class="text-yellow-300">1</span>, <span class="text-yellow-300">-2</span> <span class="text-purple-300">do</span><br>
-                        <span class="text-slate-300">    print(i)</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print(i)</span><br>
                         <span class="text-purple-300">end</span><br>
                         <br>
                         <span class="text-blue-400">-- 泛型for循环</span><br>
                         <span class="text-blue-300">arr</span> = <span class="text-purple-300">{"a", "b", "c", "d", "e"}</span><br>
                         <span class="text-purple-300">for</span> i, v <span class="text-purple-300">in</span> ipairs(arr) <span class="text-purple-300">do</span><br>
-                        <span class="text-slate-300">    print(i, v)</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print(i, v)</span><br>
                         <span class="text-purple-300">end</span>
                     </div>
                     
@@ -511,8 +515,8 @@
                     <div class="text-sm leading-6 mt-2">
                         <span class="text-blue-300">i</span> = <span class="text-yellow-300">1</span><br>
                         <span class="text-purple-300">while</span> i <= <span class="text-yellow-300">5</span> <span class="text-purple-300">do</span><br>
-                        <span class="text-slate-300">    print(i)</span><br>
-                        <span class="text-slate-300">    i = i + 1</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print(i)</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;i = i + 1</span><br>
                         <span class="text-purple-300">end</span>
                     </div>
                     
@@ -520,22 +524,22 @@
                     <div class="text-sm leading-6 mt-2">
                         <span class="text-blue-300">i</span> = <span class="text-yellow-300">1</span><br>
                         <span class="text-purple-300">repeat</span><br>
-                        <span class="text-slate-300">    print(i)</span><br>
-                        <span class="text-slate-300">    i = i + 1</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print(i)</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;i = i + 1</span><br>
                         <span class="text-purple-300">until</span> i > <span class="text-yellow-300">5</span>
                     </div>
                     
                     <div class="text-slate-400 mt-4 mb-2">-- break和continue</div>
                     <div class="text-sm leading-6 mt-2">
                         <span class="text-purple-300">for</span> i = <span class="text-yellow-300">1</span>, <span class="text-yellow-300">10</span> <span class="text-purple-300">do</span><br>
-                        <span class="text-purple-300">    if</span> i == <span class="text-yellow-300">5</span> <span class="text-purple-300">then</span><br>
-                        <span class="text-slate-300">        break  </span><span class="text-slate-500">-- 跳出循环</span><br>
-                        <span class="text-purple-300">    end</span><br>
-                        <span class="text-purple-300">    if</span> i % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span> <span class="text-purple-300">then</span><br>
-                        <span class="text-slate-300">        goto continue  </span><span class="text-slate-500">-- 模拟continue</span><br>
-                        <span class="text-purple-300">    end</span><br>
-                        <span class="text-slate-300">    print(i)</span><br>
-                        <span class="text-purple-300">::continue::</span><br>
+                        <span class="text-purple-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> i == <span class="text-yellow-300">5</span> <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break  </span><span class="text-slate-500">-- 跳出循环</span><br>
+                        <span class="text-purple-300">&nbsp;&nbsp;&nbsp;&nbsp;end</span><br>
+                        <span class="text-purple-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> i % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span> <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;goto continue  </span><span class="text-slate-500">-- 模拟continue</span><br>
+                        <span class="text-purple-300">&nbsp;&nbsp;&nbsp;&nbsp;end</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print(i)</span><br>
+                        <span class="text-purple-300">&nbsp;&nbsp;&nbsp;&nbsp;::continue::</span><br>
                         <span class="text-purple-300">end</span>
                     </div>
                 </div>
@@ -557,11 +561,11 @@
                         <span class="text-purple-300">local</span> <span class="text-blue-300">M</span> = <span class="text-purple-300">{}</span><br>
                         <br>
                         <span class="text-purple-300">function</span> <span class="text-blue-300">M.add</span>(a, b)<br>
-                        <span class="text-slate-300">    return a + b</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;return a + b</span><br>
                         <span class="text-purple-300">end</span><br>
                         <br>
                         <span class="text-purple-300">function</span> <span class="text-blue-300">M.multiply</span>(a, b)<br>
-                        <span class="text-slate-300">    return a * b</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;return a * b</span><br>
                         <span class="text-purple-300">end</span><br>
                         <br>
                         <span class="text-purple-300">return</span> <span class="text-blue-300">M</span>
@@ -606,14 +610,14 @@
                         <span class="text-blue-300">Person.__index</span> = <span class="text-blue-300">Person</span><br>
                         <br>
                         <span class="text-purple-300">function</span> <span class="text-blue-300">Person.new</span>(name, age)<br>
-                        <span class="text-slate-300">    local self = setmetatable({}, Person)</span><br>
-                        <span class="text-slate-300">    self.name = name</span><br>
-                        <span class="text-slate-300">    self.age = age</span><br>
-                        <span class="text-slate-300">    return self</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;local self = setmetatable({}, Person)</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;self.name = name</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;self.age = age</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;return self</span><br>
                         <span class="text-purple-300">end</span><br>
                         <br>
                         <span class="text-purple-300">function</span> <span class="text-blue-300">Person:greet</span>()<br>
-                        <span class="text-slate-300">    print("你好，我是" .. self.name)</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print("你好，我是" .. self.name)</span><br>
                         <span class="text-purple-300">end</span>
                     </div>
                     
@@ -630,14 +634,14 @@
                         <span class="text-blue-300">setmetatable</span>(Student, <span class="text-blue-300">Person</span>)<br>
                         <br>
                         <span class="text-purple-300">function</span> <span class="text-blue-300">Student.new</span>(name, age, school)<br>
-                        <span class="text-slate-300">    local self = Person.new(name, age)</span><br>
-                        <span class="text-slate-300">    setmetatable(self, Student)</span><br>
-                        <span class="text-slate-300">    self.school = school</span><br>
-                        <span class="text-slate-300">    return self</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;local self = Person.new(name, age)</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;setmetatable(self, Student)</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;self.school = school</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;return self</span><br>
                         <span class="text-purple-300">end</span><br>
                         <br>
                         <span class="text-purple-300">function</span> <span class="text-blue-300">Student:study</span>()<br>
-                        <span class="text-slate-300">    print(self.name .. "在" .. self.school .. "学习")</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print(self.name .. "在" .. self.school .. "学习")</span><br>
                         <span class="text-purple-300">end</span><br>
                         <br>
                         <span class="text-blue-300">student1</span> = <span class="text-blue-300">Student</span>.new(<span class="text-green-300">"李四"</span>, <span class="text-yellow-300">20</span>, <span class="text-green-300">"北京大学"</span>)<br>
@@ -661,10 +665,10 @@
                     <div class="text-slate-400 mb-2">-- 抛出错误</div>
                     <div class="text-sm leading-6">
                         <span class="text-purple-300">function</span> <span class="text-blue-300">divide</span>(a, b)<br>
-                        <span class="text-purple-300">    if</span> b == <span class="text-yellow-300">0</span> <span class="text-purple-300">then</span><br>
-                        <span class="text-slate-300">        error("除数不能为0")</span><br>
-                        <span class="text-purple-300">end</span><br>
-                        <span class="text-slate-300">    return a / b</span><br>
+                        <span class="text-purple-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> b == <span class="text-yellow-300">0</span> <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;error("除数不能为0")</span><br>
+                        <span class="text-purple-300">&nbsp;&nbsp;&nbsp;&nbsp;end</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;return a / b</span><br>
                         <span class="text-purple-300">end</span>
                     </div>
                     
@@ -672,16 +676,16 @@
                     <div class="text-sm leading-6 mt-2">
                         <span class="text-blue-300">success</span>, <span class="text-blue-300">result</span> = pcall(divide, <span class="text-yellow-300">10</span>, <span class="text-yellow-300">0</span>)<br>
                         <span class="text-purple-300">if</span> success <span class="text-purple-300">then</span><br>
-                        <span class="text-slate-300">    print("结果：" .. result)</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print("结果：" .. result)</span><br>
                         <span class="text-purple-300">else</span><br>
-                        <span class="text-slate-300">    print("错误：" .. result)</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print("错误：" .. result)</span><br>
                         <span class="text-purple-300">end</span>
                     </div>
                     
                     <div class="text-slate-400 mt-4 mb-2">-- 扩展错误处理 (xpcall)</div>
                     <div class="text-sm leading-6 mt-2">
                         <span class="text-purple-300">local</span> <span class="text-blue-300">error_handler</span> = <span class="text-purple-300">function</span>(err)<br>
-                        <span class="text-slate-300">    return "错误处理：" .. err</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;return "错误处理：" .. err</span><br>
                         <span class="text-purple-300">end</span><br>
                         <br>
                         <span class="text-blue-300">success</span>, <span class="text-blue-300">result</span> = xpcall(divide, error_handler, <span class="text-yellow-300">10</span>, <span class="text-yellow-300">0</span>)<br>
@@ -704,21 +708,21 @@
                     <div class="text-slate-400 mb-2">-- 创建和使用协程</div>
                     <div class="text-sm leading-6">
                         <span class="text-purple-300">local</span> <span class="text-blue-300">co</span> = coroutine.create(<span class="text-purple-300">function</span>()<br>
-                        <span class="text-slate-300">    for i = 1, 5 do</span><br>
-                        <span class="text-slate-300">        print("协程执行：" .. i)</span><br>
-                        <span class="text-slate-300">        coroutine.yield()</span><br>
-                        <span class="text-slate-300">    end</span><br>
-                        <span class="text-slate-300">    return "协程结束"</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;for i = 1, 5 do</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("协程执行：" .. i)</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;coroutine.yield()</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;end</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;return "协程结束"</span><br>
                         <span class="text-purple-300">end)</span><br>
                         <br>
                         <span class="text-slate-300">print(coroutine.status(co))  </span><span class="text-slate-500">-- suspended</span><br>
                         <br>
                         <span class="text-purple-300">while</span> coroutine.status(co) ~= "dead" <span class="text-purple-300">do</span><br>
-                        <span class="text-slate-300">    print("主线程执行")</span><br>
-                        <span class="text-slate-300">    local success, result = coroutine.resume(co)</span><br>
-                        <span class="text-purple-300">    if</span> result <span class="text-purple-300">then</span><br>
-                        <span class="text-slate-300">        print(result)</span><br>
-                        <span class="text-purple-300">end</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;print("主线程执行")</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;local success, result = coroutine.resume(co)</span><br>
+                        <span class="text-purple-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> result <span class="text-purple-300">then</span><br>
+                        <span class="text-slate-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(result)</span><br>
+                        <span class="text-purple-300">&nbsp;&nbsp;&nbsp;&nbsp;end</span><br>
                         <span class="text-purple-300">end</span>
                     </div>
                     
@@ -937,7 +941,7 @@
                         <span class="text-blue-300">mt</span> = <span class="text-purple-300">{}</span><br>
                         <span class="text-blue-300">mt.__call</span> = <span class="text-purple-300">function</span>(table, ...)<br>
                         <span class="text-slate-300">    local result = 0</span><br>
-                        <span class="text-slate-300">    for _, v in ipairs({...}) do</span><br>
+                        <span class="text-slate-300">    for _, v in ipairs({ ... }) do</span><br>
                         <span class="text-slate-300">        result = result + v</span><br>
                         <span class="text-slate-300">    end</span><br>
                         <span class="text-slate-300">    return result</span><br>
@@ -1103,14 +1107,14 @@
                     
                     <div class="text-slate-400 mt-4 mb-2">-- 跟踪函数调用</div>
                     <div class="text-sm leading-6 mt-2">
-                        <span class="text-blue-300">debug.sethook</span>(<span class="text-purple-300">function</span>(event, line)   <br>
+                        <span class="text-blue-300">debug.sethook</span>(<span class="text-purple-300">function</span> (event, line)   <br>
                         <span class="text-slate-300">    local info = debug.getinfo(2)</span><br>
                         <span class="text-slate-300">    if info and info.name then</span><br>
                         <span class="text-slate-300">        print(event .. " at line " .. line .. " in " .. info.name)</span><br>
                         <span class="text-slate-300">    end</span><br>
                         <span class="text-purple-300">end</span>, <span class="text-green-300">"cl"</span>)   <span class="text-slate-500">-- c:调用, l:行, r:返回</span><br>
                         <br>
-                        <span class="text-purple-300">function</span> <span class="text-blue-300">add</span>(a, b)<br>
+                        <span class="text-purple-300">function</span> <span class="text-blue-300">add</span> (a, b)<br>
                         <span class="text-slate-300">    local result = a + b</span><br>
                         <span class="text-slate-300">    return result</span><br>
                         <span class="text-purple-300">end</span><br>

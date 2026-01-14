@@ -15,6 +15,7 @@
     <!-- Highlight.js language support -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/haskell.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/lua.min.js"></script>
     <style>
         * {
             font-family: 'Noto Sans SC', sans-serif;
@@ -561,6 +562,9 @@
             haskell: 'haskell_tutorials.html'
         };
         
+        // Map of languages that use span-based highlighting instead of code tags
+        const spanBasedLanguages = ['lua'];
+        
         // Function to load content dynamically
         async function loadLanguageContent(lang) {
             try {
@@ -586,6 +590,12 @@
                     contentDiv.innerHTML = mainContent.innerHTML;
                     // 初始化语法高亮
                     setTimeout(() => {
+                        // 检查是否是使用span标签语法高亮的语言
+                        if (spanBasedLanguages.includes(lang)) {
+                            // 如果是，保持原有span标签高亮不变，不应用Highlight.js
+                            return;
+                        }
+                        
                         // 为所有代码块添加正确的类名
                         const codeBlocks = contentDiv.querySelectorAll('code');
                         codeBlocks.forEach(codeBlock => {
