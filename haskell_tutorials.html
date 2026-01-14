@@ -38,9 +38,27 @@
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">
-    <main class="container mx-auto px-4 py-8 max-w-6xl">
-        <!-- 1. Haskell 简介 -->
-        <section id="section-1" class="mb-16">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Sidebar Navigation -->
+            <aside class="lg:w-1/4">
+                <div class="bg-slate-800/50 backdrop-blur-md rounded-xl p-6 sticky top-24 border border-slate-700">
+                    <h3 class="text-lg font-bold mb-4 gradient-text">章节导航</h3>
+                    <nav class="space-y-2">
+                        <a href="#section-1" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">1. Haskell 简介</a>
+                        <a href="#section-2" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">2. Haskell 基础语法</a>
+                        <a href="#section-3" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">3. Haskell 列表操作</a>
+                        <a href="#section-4" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">4. Haskell 函数式编程特性</a>
+                        <a href="#section-5" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">5. Haskell 类型系统</a>
+                        <a href="#section-6" class="block py-2 px-3 text-slate-300 hover:bg-slate-700 hover:text-white rounded-lg transition-colors">6. Haskell IO 和副作用</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="lg:w-3/4">
+                <!-- 1. Haskell 简介 -->
+                <section id="section-1" class="mb-16">
             <h2 class="text-3xl font-bold mb-8 text-center">
                 <span class="gradient-text">1. Haskell 简介</span>
             </h2>
@@ -74,6 +92,7 @@
             <div class="language-content" data-lang="haskell">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-green-300">Hello World 示例</h5>
+                    <p class="text-slate-300 mb-4">这是Haskell的经典Hello World程序，展示了Haskell的基本结构。main函数是程序的入口点，IO ()类型表示这是一个产生副作用的操作。</p>
                     <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- Hello World 程序
 main :: IO ()
 main = putStrLn "Hello, Haskell!"
@@ -82,6 +101,7 @@ main = putStrLn "Hello, Haskell!"
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-green-300">基本数据类型和表达式</h5>
+                    <p class="text-slate-300 mb-4">Haskell支持多种基本数据类型，包括数值类型、布尔值、字符、字符串、列表和元组。这些数据类型构成了Haskell编程的基础。</p>
                     <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 整数
 42
 -100
@@ -134,6 +154,7 @@ not True       -- 逻辑非
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-green-300">函数定义</h5>
+                    <p class="text-slate-300 mb-4">Haskell中的函数定义遵循声明式风格，支持多种定义方式，包括简单函数、递归函数、条件函数、模式匹配函数和守卫表达式等。</p>
                     <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 简单函数定义
 add :: Int -> Int -> Int
 add x y = x + y
@@ -175,6 +196,7 @@ grade score
             <div class="language-content" data-lang="haskell">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-green-300">列表构造</h5>
+                    <p class="text-slate-300 mb-4">Haskell中的列表是一种强大的数据结构，支持多种构造方式，包括空列表、列表构造符、列表范围和无限列表（利用惰性求值特性）。</p>
                     <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 空列表
 emptyList = []
 
@@ -194,6 +216,7 @@ firstTenEvens = take 10 allEvens  -- [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-green-300">列表推导式</h5>
+                    <p class="text-slate-300 mb-4">列表推导式是Haskell中创建和转换列表的强大工具，允许从一个或多个列表中生成新列表，并可以包含条件过滤。</p>
                     <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 基本列表推导式
 evenNumbers = [x | x <- [1..10], even x]  -- [2, 4, 6, 8, 10]
 
@@ -210,6 +233,7 @@ uppercaseStrings = [map toUpper s | s <- ["hello", "world"]]  -- ["HELLO", "WORL
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-green-300">内置列表函数</h5>
+                    <p class="text-slate-300 mb-4">Haskell提供了丰富的内置列表函数，用于列表的各种操作，如长度计算、排序、映射、过滤和折叠等，这些函数是函数式编程的核心工具。</p>
                     <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 列表长度
 length [1, 2, 3, 4, 5]  -- 5
 
@@ -259,6 +283,7 @@ foldr (+) 0 [1, 2, 3, 4]  -- 10
             <div class="language-content" data-lang="haskell">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-green-300">高阶函数</h5>
+                    <p class="text-slate-300 mb-4">高阶函数是函数式编程的核心特性，允许函数作为参数传递给其他函数，或者作为结果返回。这使得代码更加模块化和灵活。</p>
                     <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 接收函数作为参数的函数
 applyTwice :: (a -> a) -> a -> a
 applyTwice f x = f (f x)
@@ -291,6 +316,7 @@ add10 5  -- 15
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-green-300">匿名函数</h5>
+                    <p class="text-slate-300 mb-4">匿名函数（Lambda表达式）是没有名称的函数，常用于临时或一次性使用的场景，特别适合作为高阶函数的参数。</p>
                     <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 使用匿名函数的 map
 map (\x -> x * 2) [1, 2, 3]  -- [2, 4, 6]
 
@@ -304,6 +330,7 @@ foldr (\x acc -> x : acc) [] [1, 2, 3]  -- [1, 2, 3]
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-green-300">递归与尾递归</h5>
+                    <p class="text-slate-300 mb-4">递归是Haskell中实现循环和迭代的主要方式。尾递归是一种特殊的递归形式，其中递归调用是函数的最后一个操作，允许编译器进行优化，避免栈溢出。</p>
                     <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 普通递归
 sumList :: [Int] -> Int
 sumList [] = 0
@@ -337,6 +364,7 @@ quickSort (x:xs) =
             <div class="language-content" data-lang="haskell">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-green-300">类型声明和类型推断</h5>
+                    <p class="text-slate-300 mb-4">Haskell具有强大的静态类型系统，支持显式类型声明和类型推断。类型系统确保了程序的类型安全，减少了运行时错误。</p>
                     <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 显式类型声明
 x :: Int
 x = 42
@@ -362,6 +390,7 @@ length' (_:xs) = 1 + length' xs
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-green-300">代数数据类型</h5>
+                    <p class="text-slate-300 mb-4">代数数据类型是Haskell中定义自定义类型的强大方式，支持枚举类型、参数化类型、记录类型和递归类型等多种形式，是函数式编程中数据建模的核心工具。</p>
                     <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 简单的代数数据类型
 data Bool = True | False
 
@@ -407,6 +436,7 @@ preorder (Node left x right) = [x] ++ preorder left ++ preorder right
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-green-300">类型类</h5>
+                    <p class="text-slate-300 mb-4">类型类是Haskell中实现多态性的核心机制，类似于其他语言中的接口。它定义了一组操作，任何实现了这些操作的类型都可以成为该类型类的实例。</p>
                     <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 类型类定义
 typeclass Eq a where
     (==) :: a -> a -> Bool
@@ -451,6 +481,7 @@ doubleAndShow x = show (x * 2)
             <div class="language-content" data-lang="haskell">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-green-300">基本 IO 操作</h5>
+                    <p class="text-slate-300 mb-4">IO操作是Haskell中处理副作用的方式，包括输入输出、文件操作等。IO操作被组织成Monad链，确保了副作用的可控性。</p>
                     <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 输出
 main :: IO ()
 main = do
@@ -485,6 +516,7 @@ printSum = do
 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-green-300">Monad 简介</h5>
+                    <p class="text-slate-300 mb-4">Monad是Haskell中用于处理副作用、顺序计算和上下文传递的核心抽象。它提供了一种结构化的方式来组合计算，同时保持代码的清晰和类型安全。</p>
                     <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- Maybe Monad 示例
 safeDivide :: Double -> Double -> Maybe Double
 safeDivide _ 0 = Nothing
@@ -516,8 +548,200 @@ main = do
     putStrLn $ "Sum: " ++ show result
 </code></pre>
                 </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">模块系统</h5>
+                    <p class="text-slate-300 mb-4">Haskell的模块系统用于组织和复用代码，通过module和import语句可以创建和使用模块。</p>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 模块定义（MyModule.hs）
+module MyModule (add, multiply) where  -- 导出函数
+
+add :: Int -> Int -> Int
+add x y = x + y
+
+multiply :: Int -> Int -> Int
+multiply x y = x * y
+
+-- 内部函数（不导出）
+subtract :: Int -> Int -> Int
+subtract x y = x - y
+
+-- 模块导入
+-- import MyModule  -- 导入所有导出函数
+-- import MyModule (add)  -- 只导入add函数
+-- import MyModule hiding (multiply)  -- 导入除multiply外的所有函数
+-- import qualified MyModule as MM  -- 导入并使用别名
+-- import qualified MyModule as MM (add)  -- 带别名的选择性导入
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">类型别名</h5>
+                    <p class="text-slate-300 mb-4">类型别名使用type关键字定义，用于为现有类型创建更具描述性的名称，提高代码可读性。</p>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 基本类型别名
+type Name = String
+type Age = Int
+type Email = String
+
+-- 带参数的类型别名
+type Pair a = (a, a)
+type Triplet a b c = (a, b, c)
+
+type PersonInfo = (Name, Age, Email)
+
+-- 使用类型别名
+greet :: Name -> String
+greet name = "Hello, " ++ name ++ "!"
+
+createPerson :: Name -> Age -> Email -> PersonInfo
+createPerson name age email = (name, age, email)
+
+-- 类型别名与记录类型
+data Person = Person {
+    personName :: Name,
+    personAge :: Age,
+    personEmail :: Email
+}
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">Either Monad</h5>
+                    <p class="text-slate-300 mb-4">Either Monad类似于Maybe，但可以携带错误信息，常用于错误处理，其中Left表示错误，Right表示成功。</p>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- Either类型定义
+data Either a b = Left a | Right b
+
+-- 使用Either进行错误处理
+safeDivide :: Double -> Double -> Either String Double
+safeDivide _ 0 = Left "Division by zero"
+safeDivide x y = Right (x / y)
+
+-- 使用Either Monad链式操作
+result :: Either String Double
+result = do
+    x <- safeDivide 10 2
+    y <- safeDivide 20 4
+    z <- safeDivide x 0  -- 这里会产生错误
+    Right (x * y * z)
+
+-- 使用绑定操作符 (>>=)
+result' :: Either String Double
+result' = safeDivide 10 2 >>= \
+          \x -> safeDivide 20 4 >>= \
+          \y -> safeDivide x y >>= \
+          \z -> Right (x * y * z)
+
+-- 处理Either结果
+processResult :: Either String Double -> String
+processResult (Left errorMsg) = "Error: " ++ errorMsg
+processResult (Right value) = "Result: " ++ show value
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">List Monad</h5>
+                    <p class="text-slate-300 mb-4">List Monad用于非确定性计算，允许一个值映射到多个可能的结果。</p>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 使用List Monad进行非确定性计算
+possibleResults :: [(Int, Int, Int)]
+possibleResults = do
+    x <- [1, 2, 3]
+    y <- [4, 5]
+    z <- [6]
+    if x + y + z > 10 then return (x, y, z) else []
+
+-- 等价于
+possibleResults' :: [(Int, Int, Int)]
+possibleResults' = 
+    [1, 2, 3] >>= \
+    \x -> [4, 5] >>= \
+    \y -> [6] >>= \
+    \z -> if x + y + z > 10 then [(x, y, z)] else []
+
+-- 列表推导式与List Monad等价
+possibleResults'' :: [(Int, Int, Int)]
+possibleResults'' = [(x, y, z) | x <- [1, 2, 3], y <- [4, 5], z <- [6], x + y + z > 10]
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">Let和Where表达式</h5>
+                    <p class="text-slate-300 mb-4">Let和Where表达式用于在本地范围内定义变量和函数，提高代码可读性和复用性。</p>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- Let表达式（在表达式内部定义）
+circleArea :: Double -> Double
+circleArea radius = 
+    let pi = 3.14159
+        area = pi * radius * radius
+    in area
+
+-- Where表达式（在函数定义末尾定义）
+rectangleArea :: Double -> Double -> Double
+rectangleArea width height = width * height
+    where
+        perimeter = 2 * (width + height)
+        diagonal = sqrt (width * width + height * height)
+
+-- 在条件表达式中使用Let
+grade :: Int -> String
+grade score = 
+    let 
+        excellent = 90
+        good = 80
+        average = 70
+        passing = 60
+    in
+        if score >= excellent then "A"
+        else if score >= good then "B"
+        else if score >= average then "C"
+        else if score >= passing then "D"
+        else "F"
+
+-- 在do notation中使用Let
+main :: IO ()
+main = do
+    putStrLn "Enter two numbers:"
+    num1Str <- getLine
+    num2Str <- getLine
+    let 
+        num1 = read num1Str :: Int
+        num2 = read num2Str :: Int
+        sum = num1 + num2
+    putStrLn $ "Sum: " ++ show sum
+</code></pre>
+                </div>
+
+                <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
+                    <h5 class="text-lg font-medium mb-4 text-green-300">异常处理</h5>
+                    <p class="text-slate-300 mb-4">Haskell支持传统的异常处理机制，通过Control.Exception模块提供。</p>
+                    <pre class="code-block p-4 rounded-lg overflow-x-auto"><code class="code-font text-slate-300">-- 导入异常处理模块
+-- import Control.Exception
+
+-- 抛出异常
+throwExample :: Int -> Int
+throwExample x = 
+    if x == 0 then error "Division by zero" 
+    else 10 `div` x
+
+-- 捕获异常
+catchExample :: Int -> String
+catchExample x = 
+    catch
+        (show (throwExample x))
+        (\e -> "Caught exception: " ++ show (e :: SomeException))
+
+-- 资源管理（bracket）
+-- bracketExample :: IO ()
+-- bracketExample = 
+--     bracket
+--         (openFile "test.txt" ReadMode)  -- 获取资源
+--         hClose                           -- 释放资源
+--         (\handle -> do                   -- 使用资源
+--             content <- hGetContents handle
+--             putStrLn content)
+</code></pre>
+                </div>
             </div>
         </section>
+            </div>
+        </div>
     </main>
 </body>
 </html>
