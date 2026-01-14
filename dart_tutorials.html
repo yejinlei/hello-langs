@@ -26,13 +26,6 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(148, 163, 184, 0.1);
         }
-        .language-tab {
-            transition: all 0.3s ease;
-        }
-        .language-tab.active {
-            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
-            color: white;
-        }
         .code-block {
             background: rgba(2, 6, 23, 0.9);
             border-left: 4px solid #3B82F6;
@@ -42,16 +35,1064 @@
             padding: 2px 4px;
             border-radius: 3px;
         }
-        .language-content.hidden {
-            display: none;
-        }
     </style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="text-center py-20">
-            <h3 class="text-xl font-medium text-slate-300 mb-4">Dart 教程内容正在开发中</h3>
-            <p class="text-slate-500">敬请期待完整的 Dart 语法教程内容</p>
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- 左侧导航栏 -->
+            <nav class="lg:w-1/4 bg-slate-800 rounded-xl p-6 h-fit">
+                    <h3 class="text-lg font-bold text-purple-400 mb-4">章节导航</h3>
+                    <div class="space-y-2">
+                        <a href="#section-1" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">1. 变量声明与数据类型</a>
+                        <a href="#section-2" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">2. 运算符与表达式</a>
+                        <a href="#section-3" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">3. 控制流语句</a>
+                        <a href="#section-4" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">4. 函数</a>
+                        <a href="#section-5" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">5. 类与对象</a>
+                        <a href="#section-6" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">6. 接口与抽象类</a>
+                        <a href="#section-7" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">7. 泛型</a>
+                        <a href="#section-8" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">8. 集合类型</a>
+                        <a href="#section-9" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">9. 异步编程</a>
+                        <a href="#section-10" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">10. Stream编程</a>
+                        <a href="#section-11" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">11. 异常处理</a>
+                        <a href="#section-12" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">12. 库与导入</a>
+                        <a href="#section-13" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">13. 元数据</a>
+                        <a href="#section-14" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">14. 扩展方法</a>
+                        <a href="#section-15" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">15. Mixins</a>
+                        <a href="#section-16" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">16. 级联运算符</a>
+                        <a href="#section-17" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">17. 空安全</a>
+                    </div>
+            </nav>
+            <div class="lg:w-3/4">
+                <!-- 1. 变量声明与数据类型 -->
+                <section id="section-1" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">1. 变量声明与数据类型</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - 变量声明与初始化</h4>
+                        <p class="text-slate-300 mb-4">特点：Dart支持var、final、const关键字声明变量，类型推导功能强大。注意事项：final变量只能赋值一次，const变量在编译时确定值。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 变量声明</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 使用var声明变量（类型推导）</span><br>
+                                var name = <span class="text-green-300">'Dart'</span>;<br>
+                                var age = <span class="text-yellow-300">25</span>;<br>
+                                var isActive = <span class="text-green-300">true</span>;<br>
+                                <br>
+                                <span class="text-blue-300">// 显式声明类型</span><br>
+                                String message = <span class="text-green-300">'Hello'</span>;<br>
+                                int count = <span class="text-yellow-300">10</span>;<br>
+                                double price = <span class="text-yellow-300">19.99</span>;<br>
+                                <br>
+                                <span class="text-blue-300">// final变量（只能赋值一次）</span><br>
+                                final String constantName = <span class="text-green-300">'Fixed Value'</span>;<br>
+                                <br>
+                                <span class="text-blue-300">// const变量（编译时常量）</span><br>
+                                const int maxSize = <span class="text-yellow-300">100</span>;<br>
+                            </div>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-4 text-purple-400 mt-8">Dart - 基本数据类型</h4>
+                        <p class="text-slate-300 mb-4">Dart支持多种基本数据类型，包括数值类型、字符串、布尔值、列表、集合、映射等。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 基本数据类型</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 数值类型</span><br>
+                                int x = <span class="text-yellow-300">42</span>;<br>
+                                double pi = <span class="text-yellow-300">3.14159</span>;<br>
+                                <br>
+                                <span class="text-blue-300">// 字符串</span><br>
+                                String singleQuote = <span class="text-green-300">'Single quotes'</span>;<br>
+                                String doubleQuote = <span class="text-green-300">"Double quotes"</span>;<br>
+                                String multiLine = <span class="text-green-300">'''Multi<br>line<br>string'''</span>;<br>
+                                <br>
+                                <span class="text-blue-300">// 布尔值</span><br>
+                                bool isTrue = <span class="text-green-300">true</span>;<br>
+                                bool isFalse = <span class="text-green-300">false</span>;<br>
+                                <br>
+                                <span class="text-blue-300">// 列表</span><br>
+                                List&lt;String&gt; fruits = [<span class="text-green-300">'apple'</span>, <span class="text-green-300">'banana'</span>, <span class="text-green-300">'orange'</span>];<br>
+                                <br>
+                                <span class="text-blue-300">// 映射</span><br>
+                                Map&lt;String, int&gt; ages = {<span class="text-green-300">'Alice'</span>: <span class="text-yellow-300">25</span>, <span class="text-green-300">'Bob'</span>: <span class="text-yellow-300">30</span>};<br>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. 运算符与表达式 -->
+                <section id="section-2" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">2. 运算符与表达式</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - 算术运算符</h4>
+                        <p class="text-slate-300 mb-4">Dart支持基本的算术运算符，包括加减乘除、取余、自增自减等。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 算术运算符</div>
+                            <div class="text-sm leading-6">
+                                var a = <span class="text-yellow-300">10</span>;<br>
+                                var b = <span class="text-yellow-300">3</span>;<br>
+                                <br>
+                                print(a + b); <span class="text-blue-300">// 13</span><br>
+                                print(a - b); <span class="text-blue-300">// 7</span><br>
+                                print(a * b); <span class="text-blue-300">// 30</span><br>
+                                print(a / b); <span class="text-blue-300">// 3.333...</span><br>
+                                print(a ~/ b); <span class="text-blue-300">// 3 (整数除法)</span><br>
+                                print(a % b); <span class="text-blue-300">// 1 (取余)</span><br>
+                                <br>
+                                <span class="text-blue-300">// 自增自减</span><br>
+                                var c = <span class="text-yellow-300">5</span>;<br>
+                                print(c++); <span class="text-blue-300">// 5 (后增)</span><br>
+                                print(++c); <span class="text-blue-300">// 7 (前增)</span><br>
+                                print(c--); <span class="text-blue-300">// 7 (后减)</span><br>
+                                print(--c); <span class="text-blue-300">// 5 (前减)</span><br>
+                            </div>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-4 text-purple-400 mt-8">Dart - 关系运算符与逻辑运算符</h4>
+                        <p class="text-slate-300 mb-4">Dart提供了丰富的关系运算符和逻辑运算符，用于条件判断和逻辑组合。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 关系运算符与逻辑运算符</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 关系运算符</span><br>
+                                var x = <span class="text-yellow-300">5</span>;<br>
+                                var y = <span class="text-yellow-300">10</span>;<br>
+                                <br>
+                                print(x &lt; y); <span class="text-blue-300">// true</span><br>
+                                print(x &gt; y); <span class="text-blue-300">// false</span><br>
+                                print(x &lt;= y); <span class="text-blue-300">// true</span><br>
+                                print(x &gt;= y); <span class="text-blue-300">// false</span><br>
+                                print(x == y); <span class="text-blue-300">// false</span><br>
+                                print(x != y); <span class="text-blue-300">// true</span><br>
+                                <br>
+                                <span class="text-blue-300">// 逻辑运算符</span><br>
+                                var isTrue = <span class="text-green-300">true</span>;<br>
+                                var isFalse = <span class="text-green-300">false</span>;<br>
+                                <br>
+                                print(isTrue && isFalse); <span class="text-blue-300">// false (逻辑与)</span><br>
+                                print(isTrue || isFalse); <span class="text-blue-300">// true (逻辑或)</span><br>
+                                print(!isTrue); <span class="text-blue-300">// false (逻辑非)</span><br>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. 控制流语句 -->
+                <section id="section-3" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">3. 控制流语句</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - if-else语句</h4>
+                        <p class="text-slate-300 mb-4">Dart的if-else语句与其他编程语言类似，支持条件判断和分支执行。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># if-else语句</div>
+                            <div class="text-sm leading-6">
+                                var score = <span class="text-yellow-300">85</span>;<br>
+                                <br>
+                                <span class="text-purple-400">if</span> (score >= <span class="text-yellow-300">90</span>) {<br>
+                                    <span class="text-green-300">print</span>(<span class="text-green-300">'优秀'</span>);<br>
+                                } <span class="text-purple-400">else if</span> (score >= <span class="text-yellow-300">80</span>) {<br>
+                                    <span class="text-green-300">print</span>(<span class="text-green-300">'良好'</span>);<br>
+                                } <span class="text-purple-400">else if</span> (score >= <span class="text-yellow-300">60</span>) {<br>
+                                    <span class="text-green-300">print</span>(<span class="text-green-300">'及格'</span>);<br>
+                                } <span class="text-purple-400">else</span> {<br>
+                                    <span class="text-green-300">print</span>(<span class="text-green-300">'不及格'</span>);<br>
+                                }<br>
+                            </div>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-4 text-purple-400 mt-8">Dart - switch语句</h4>
+                        <p class="text-slate-300 mb-4">Dart的switch语句支持字符串、数字等类型，每个case必须以break、return或throw结束。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># switch语句</div>
+                            <div class="text-sm leading-6">
+                                var day = <span class="text-green-300">'Monday'</span>;<br>
+                                <br>
+                                <span class="text-purple-400">switch</span> (day) {
+                                    <span class="text-purple-400">case</span> <span class="text-green-300">'Monday'</span>:
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'周一'</span>);
+                                        <span class="text-purple-400">break</span>;
+                                    <span class="text-purple-400">case</span> <span class="text-green-300">'Tuesday'</span>:
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'周二'</span>);
+                                        <span class="text-purple-400">break</span>;
+                                    <span class="text-purple-400">case</span> <span class="text-green-300">'Wednesday'</span>:
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'周三'</span>);
+                                        <span class="text-purple-400">break</span>;
+                                    <span class="text-purple-400">default</span>:
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'其他'</span>);
+                                }
+                            </div>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-4 text-purple-400 mt-8">Dart - 循环语句</h4>
+                        <p class="text-slate-300 mb-4">Dart支持for、while、do-while循环，以及for-in循环遍历集合。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 循环语句</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// for循环</span><br>
+                                <span class="text-purple-400">for</span> (<span class="text-purple-400">var</span> i = <span class="text-yellow-300">0</span>; i < <span class="text-yellow-300">5</span>; i++) {
+                                    <span class="text-green-300">print</span>(i);
+                                }
+                                <br>
+                                <span class="text-blue-300">// while循环</span><br>
+                                <span class="text-purple-400">var</span> j = <span class="text-yellow-300">0</span>;
+                                <span class="text-purple-400">while</span> (j < <span class="text-yellow-300">5</span>) {
+                                    <span class="text-green-300">print</span>(j);
+                                    j++;
+                                }
+                                <br>
+                                <span class="text-blue-300">// do-while循环</span><br>
+                                <span class="text-purple-400">var</span> k = <span class="text-yellow-300">0</span>;
+                                <span class="text-purple-400">do</span> {
+                                    <span class="text-green-300">print</span>(k);
+                                    k++;
+                                } <span class="text-purple-400">while</span> (k < <span class="text-yellow-300">5</span>);
+                                <br>
+                                <span class="text-blue-300">// for-in循环</span><br>
+                                <span class="text-purple-400">var</span> list = [<span class="text-green-300">'a'</span>, <span class="text-green-300">'b'</span>, <span class="text-green-300">'c'</span>];
+                                <span class="text-purple-400">for</span> (<span class="text-purple-400">var</span> item <span class="text-purple-400">in</span> list) {
+                                    <span class="text-green-300">print</span>(item);
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. 函数 -->
+                <section id="section-4" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">4. 函数</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - 函数定义与调用</h4>
+                        <p class="text-slate-300 mb-4">Dart支持函数定义、参数传递、返回值等功能，函数也是对象。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 函数定义与调用</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 基本函数定义</span><br>
+                                <span class="text-purple-400">int</span> add(<span class="text-purple-400">int</span> a, <span class="text-purple-400">int</span> b) {
+                                    <span class="text-purple-400">return</span> a + b;
+                                }
+                                <br>
+                                <span class="text-blue-300">// 函数调用</span><br>
+                                <span class="text-purple-400">var</span> result = add(<span class="text-yellow-300">3</span>, <span class="text-yellow-300">5</span>);
+                                <span class="text-green-300">print</span>(result); <span class="text-blue-300">// 8</span>
+                                <br>
+                                <span class="text-blue-300">// 箭头函数 (单行函数的简写)</span><br>
+                                <span class="text-purple-400">int</span> multiply(<span class="text-purple-400">int</span> a, <span class="text-purple-400">int</span> b) => a * b;
+                                <br>
+                                <span class="text-blue-300">// 可选参数</span><br>
+                                <span class="text-purple-400">void</span> greet(<span class="text-purple-400">String</span> name, [<span class="text-purple-400">String</span> message]) {
+                                    <span class="text-purple-400">var</span> msg = message ?? <span class="text-green-300">'Hello'</span>;
+                                    <span class="text-green-300">print</span>(<span class="text-green-300">'$msg, $name!'</span>);
+                                }
+                                <br>
+                                <span class="text-blue-300">// 命名参数</span><br>
+                                <span class="text-purple-400">void</span> configure(<span class="text-purple-400">{</span><span class="text-purple-400">required</span> <span class="text-purple-400">String</span> host, <span class="text-purple-400">int</span> port = <span class="text-yellow-300">8080</span><span class="text-purple-400">}</span>) {
+                                    <span class="text-green-300">print</span>(<span class="text-green-300">'Host: $host, Port: $port'</span>);
+                                }
+                                <br>
+                                <span class="text-blue-300">// 调用命名参数函数</span><br>
+                                configure(host: <span class="text-green-300">'localhost'</span>, port: <span class="text-yellow-300">9090</span>);
+                            </div>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-4 text-purple-400 mt-8">Dart - 匿名函数</h4>
+                        <p class="text-slate-300 mb-4">Dart支持匿名函数（Lambda表达式），可以作为参数传递或赋值给变量。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 匿名函数</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 定义匿名函数</span><br>
+                                <span class="text-purple-400">var</span> numbers = [<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>];
+                                <br>
+                                <span class="text-blue-300">// 使用匿名函数作为forEach的参数</span><br>
+                                numbers.forEach((number) {
+                                    <span class="text-green-300">print</span>(number);
+                                });
+                                <br>
+                                <span class="text-blue-300">// 使用箭头函数简写</span><br>
+                                numbers.forEach((number) => <span class="text-green-300">print</span>(number));
+                                <br>
+                                <span class="text-blue-300">// 赋值给变量</span><br>
+                                <span class="text-purple-400">var</span> square = (n) => n * n;
+                                <span class="text-green-300">print</span>(square(<span class="text-yellow-300">5</span>)); <span class="text-blue-300">// 25</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. 类与对象 -->
+                <section id="section-5" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">5. 类与对象</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - 类定义与对象创建</h4>
+                        <p class="text-slate-300 mb-4">Dart是面向对象的语言，支持类定义、构造函数、继承等特性。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 类定义与对象创建</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 类定义</span><br>
+                                <span class="text-purple-400">class</span> Person {<br>
+                                    <span class="text-purple-400">String</span>? name;<br>
+                                    <span class="text-purple-400">int</span>? age;<br>
+                                    <br>
+                                    <span class="text-blue-300">// 构造函数</span><br>
+                                    Person(<span class="text-purple-400">this</span>.name, <span class="text-purple-400">this</span>.age);<br>
+                                    <br>
+                                    <span class="text-blue-300">// 方法</span><br>
+                                    <span class="text-purple-400">void</span> introduce() {<br>
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'Hi, I\'m $name, $age years old.'</span>);<br>
+                                    }<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-300">// 创建对象</span><br>
+                                <span class="text-purple-400">var</span> person = Person(<span class="text-green-300">'Alice'</span>, <span class="text-yellow-300">25</span>);
+                                <br>
+                                <span class="text-blue-300">// 调用方法</span><br>
+                                person.introduce(); <span class="text-blue-300">// Hi, I'm Alice, 25 years old.</span>
+                                <br>
+                                <span class="text-blue-300">// 设置属性</span><br>
+                                person.age = <span class="text-yellow-300">26</span>;
+                                <span class="text-green-300">print</span>(person.age); <span class="text-blue-300">// 26</span>
+                            </div>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-4 text-purple-400 mt-8">Dart - 构造函数</h4>
+                        <p class="text-slate-300 mb-4">Dart支持多种构造函数形式，包括命名构造函数、重定向构造函数等。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 构造函数</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">class</span> Point {<br>
+                                    <span class="text-purple-400">double</span> x = <span class="text-yellow-300">0.0</span>;<br>
+                                    <span class="text-purple-400">double</span> y = <span class="text-yellow-300">0.0</span>;<br>
+                                    <br>
+                                    <span class="text-blue-300">// 默认构造函数</span><br>
+                                    Point(<span class="text-purple-400">this</span>.x, <span class="text-purple-400">this</span>.y);<br>
+                                    <br>
+                                    <span class="text-blue-300">// 命名构造函数</span><br>
+                                    Point.origin() {<br>
+                                        x = <span class="text-yellow-300">0.0</span>;<br>
+                                        y = <span class="text-yellow-300">0.0</span>;<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-blue-300">// 重定向构造函数</span><br>
+                                    Point.fromJson(Map&lt;<span class="text-purple-400">String</span>, <span class="text-purple-400">dynamic</span>&gt; json) : <span class="text-purple-400">this</span>(json[<span class="text-green-300">'x'</span>], json[<span class="text-green-300">'y'</span>]);<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-300">// 使用不同构造函数</span><br>
+                                <span class="text-purple-400">var</span> p1 = Point(<span class="text-yellow-300">1.0</span>, <span class="text-yellow-300">2.0</span>);
+                                <span class="text-purple-400">var</span> p2 = Point.origin();
+                                <span class="text-purple-400">var</span> p3 = Point.fromJson({<span class="text-green-300">'x'</span>: <span class="text-yellow-300">3.0</span>, <span class="text-green-300">'y'</span>: <span class="text-yellow-300">4.0</span>});
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. 接口与抽象类 -->
+                <section id="section-6" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">6. 接口与抽象类</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - 抽象类</h4>
+                        <p class="text-slate-300 mb-4">Dart的抽象类使用abstract关键字定义，可以包含抽象方法和具体方法。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 抽象类</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">abstract</span> <span class="text-purple-400">class</span> Shape {<br>
+                                    <span class="text-blue-300">// 抽象方法</span><br>
+                                    <span class="text-purple-400">double</span> calculateArea();<br>
+                                    <br>
+                                    <span class="text-blue-300">// 具体方法</span><br>
+                                    <span class="text-purple-400">void</span> draw() {<br>
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'Drawing shape'</span>);<br>
+                                    }<br>
+                                }<br>
+                                <br>
+                                <span class="text-purple-400">class</span> Circle <span class="text-purple-400">extends</span> Shape {<br>
+                                    <span class="text-purple-400">double</span> radius;<br>
+                                    <br>
+                                    Circle(<span class="text-purple-400">this</span>.radius);<br>
+                                    <br>
+                                    <span class="text-purple-400">@override</span><br>
+                                    <span class="text-purple-400">double</span> calculateArea() {<br>
+                                        <span class="text-purple-400">return</span> <span class="text-yellow-300">3.14159</span> * radius * radius;<br>
+                                    }<br>
+                                }<br>
+                                <br>
+                                <span class="text-purple-400">var</span> circle = Circle(<span class="text-yellow-300">5.0</span>);
+                                <span class="text-green-300">print</span>(circle.calculateArea()); <span class="text-blue-300">// 78.53975</span>
+                                circle.draw(); <span class="text-blue-300">// Drawing shape</span>
+                            </div>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-4 text-purple-400 mt-8">Dart - 接口</h4>
+                        <p class="text-slate-300 mb-4">Dart中任何类都可以作为接口，使用implements关键字实现接口。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 接口</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-purple-400">class</span> Drawable {<br>
+                                    <span class="text-purple-400">void</span> draw() {<br>
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'Drawing'</span>);<br>
+                                    }<br>
+                                }<br>
+                                <br>
+                                <span class="text-purple-400">class</span> Movable {<br>
+                                    <span class="text-purple-400">void</span> move() {<br>
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'Moving'</span>);<br>
+                                    }<br>
+                                }<br>
+                                <br>
+                                <span class="text-purple-400">class</span> Car <span class="text-purple-400">implements</span> Drawable, Movable {<br>
+                                    <span class="text-purple-400">@override</span><br>
+                                    <span class="text-purple-400">void</span> draw() {<br>
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'Drawing car'</span>);<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-400">@override</span><br>
+                                    <span class="text-purple-400">void</span> move() {<br>
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'Car moving'</span>);<br>
+                                    }<br>
+                                }<br>
+                                <br>
+                                <span class="text-purple-400">var</span> car = Car();
+                                car.draw(); <span class="text-blue-300">// Drawing car</span>
+                                car.move(); <span class="text-blue-300">// Car moving</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. 泛型 -->
+                <section id="section-7" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">7. 泛型</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - 泛型类与方法</h4>
+                        <p class="text-slate-300 mb-4">Dart支持泛型，可以创建通用的类、方法和函数。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 泛型类与方法</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 泛型类</span><br>
+                                <span class="text-purple-400">class</span> Box&lt;T&gt; {<br>
+                                    T? value;<br>
+                                    <br>
+                                    Box(<span class="text-purple-400">this</span>.value);<br>
+                                    <br>
+                                    <span class="text-purple-400">void</span> setValue(T newValue) {<br>
+                                        value = newValue;<br>
+                                    }<br>
+                                    <br>
+                                    T? getValue() {<br>
+                                        <span class="text-purple-400">return</span> value;<br>
+                                    }<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-300">// 使用泛型类</span><br>
+                                <span class="text-purple-400">var</span> stringBox = Box&lt;<span class="text-purple-400">String</span>&gt;(<span class="text-green-300">'Hello'</span>);
+                                <span class="text-purple-400">var</span> intBox = Box&lt;<span class="text-purple-400">int</span>&gt;(<span class="text-yellow-300">42</span>);
+                                <br>
+                                <span class="text-green-300">print</span>(stringBox.getValue()); <span class="text-blue-300">// Hello</span>
+                                <span class="text-green-300">print</span>(intBox.getValue()); <span class="text-blue-300">// 42</span>
+                                <br>
+                                <span class="text-blue-300">// 泛型方法</span><br>
+                                <span class="text-purple-400">T</span> findFirst&lt;T&gt;(List&lt;T&gt; items) {
+                                    <span class="text-purple-400">if</span> (items.isEmpty) {
+                                        <span class="text-purple-400">return</span> <span class="text-purple-400">null</span> as T;
+                                    }
+                                    <span class="text-purple-400">return</span> items[<span class="text-yellow-300">0</span>];
+                                }
+                                <br>
+                                <span class="text-purple-400">var</span> numbers = [<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>];
+                                <span class="text-purple-400">var</span> firstNumber = findFirst(numbers);
+                                <span class="text-green-300">print</span>(firstNumber); <span class="text-blue-300">// 1</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. 集合类型 -->
+                <section id="section-8" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">8. 集合类型</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - List集合</h4>
+                        <p class="text-slate-300 mb-4">List是有序的对象集合，支持索引访问和修改。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># List集合</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 创建List</span><br>
+                                <span class="text-purple-400">var</span> fruits = [<span class="text-green-300">'apple'</span>, <span class="text-green-300">'banana'</span>, <span class="text-green-300">'orange'</span>];
+                                <span class="text-purple-400">var</span> numbers = <span class="text-purple-400">List</span>&lt;<span class="text-purple-400">int</span>&gt;.filled(<span class="text-yellow-300">3</span>, <span class="text-yellow-300">0</span>);
+                                <br>
+                                <span class="text-blue-300">// 访问元素</span><br>
+                                <span class="text-green-300">print</span>(fruits[<span class="text-yellow-300">0</span>]); <span class="text-blue-300">// apple</span>
+                                <br>
+                                <span class="text-blue-300">// 修改元素</span><br>
+                                fruits[<span class="text-yellow-300">1</span>] = <span class="text-green-300">'grape'</span>;
+                                <br>
+                                <span class="text-blue-300">// 添加元素</span><br>
+                                fruits.add(<span class="text-green-300">'mango'</span>);
+                                fruits.insert(<span class="text-yellow-300">1</span>, <span class="text-green-300">'pear'</span>);
+                                <br>
+                                <span class="text-blue-300">// 删除元素</span><br>
+                                fruits.removeAt(<span class="text-yellow-300">0</span>);
+                                fruits.remove(<span class="text-green-300">'orange'</span>);
+                                <br>
+                                <span class="text-blue-300">// 遍历List</span><br>
+                                <span class="text-purple-400">for</span> (<span class="text-purple-400">var</span> fruit <span class="text-purple-400">in</span> fruits) {
+                                    <span class="text-green-300">print</span>(fruit);
+                                }
+                            </div>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-4 text-purple-400 mt-8">Dart - Set集合</h4>
+                        <p class="text-slate-300 mb-4">Set是无序的唯一对象集合，不允许重复元素。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># Set集合</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 创建Set</span><br>
+                                <span class="text-purple-400">var</span> uniqueNumbers = {<span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>, <span class="text-yellow-300">3</span>}; <span class="text-blue-300">// 自动去重</span>
+                                <span class="text-purple-400">var</span> emptySet = <span class="text-purple-400">Set</span>&lt;<span class="text-purple-400">String</span>&gt;();
+                                <br>
+                                <span class="text-blue-300">// 添加元素</span><br>
+                                uniqueNumbers.add(<span class="text-yellow-300">4</span>);
+                                uniqueNumbers.addAll({<span class="text-yellow-300">5</span>, <span class="text-yellow-300">6</span>});
+                                <br>
+                                <span class="text-blue-300">// 删除元素</span><br>
+                                uniqueNumbers.remove(<span class="text-yellow-300">3</span>);
+                                <br>
+                                <span class="text-blue-300">// 检查元素是否存在</span><br>
+                                <span class="text-green-300">print</span>(uniqueNumbers.contains(<span class="text-yellow-300">2</span>)); <span class="text-blue-300">// true</span>
+                                <br>
+                                <span class="text-blue-300">// 遍历Set</span><br>
+                                <span class="text-purple-400">for</span> (<span class="text-purple-400">var</span> number <span class="text-purple-400">in</span> uniqueNumbers) {
+                                    <span class="text-green-300">print</span>(number);
+                                }
+                            </div>
+                        </div>
+                        
+                        <h4 class="text-lg font-medium mb-4 text-purple-400 mt-8">Dart - Map集合</h4>
+                        <p class="text-slate-300 mb-4">Map是键值对的集合，键是唯一的。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># Map集合</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 创建Map</span><br>
+                                <span class="text-purple-400">var</span> person = {
+                                    <span class="text-green-300">'name'</span>: <span class="text-green-300">'Alice'</span>,
+                                    <span class="text-green-300">'age'</span>: <span class="text-yellow-300">25</span>,
+                                    <span class="text-green-300">'city'</span>: <span class="text-green-300">'Beijing'</span>
+                                };
+                                <span class="text-purple-400">var</span> emptyMap = <span class="text-purple-400">Map</span>&lt;<span class="text-purple-400">String</span>, <span class="text-purple-400">dynamic</span>&gt;();
+                                <br>
+                                <span class="text-blue-300">// 访问值</span><br>
+                                <span class="text-green-300">print</span>(person[<span class="text-green-300">'name'</span>]); <span class="text-blue-300">// Alice</span>
+                                <br>
+                                <span class="text-blue-300">// 修改值</span><br>
+                                person[<span class="text-green-300">'age'</span>] = <span class="text-yellow-300">26</span>;
+                                <br>
+                                <span class="text-blue-300">// 添加键值对</span><br>
+                                person[<span class="text-green-300">'job'</span>] = <span class="text-green-300">'Engineer'</span>;
+                                <br>
+                                <span class="text-blue-300">// 删除键值对</span><br>
+                                person.remove(<span class="text-green-300">'city'</span>);
+                                <br>
+                                <span class="text-blue-300">// 遍历Map</span><br>
+                                person.forEach((key, value) {
+                                    <span class="text-green-300">print</span>(<span class="text-green-300">'$key: $value'</span>);
+                                });
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 9. 异步编程 -->
+                <section id="section-9" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">9. 异步编程</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - Future与异步操作</h4>
+                        <p class="text-slate-300 mb-4">Dart使用Future表示异步操作的结果，支持async/await语法。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># Future与异步操作</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 返回Future的异步函数</span><br>
+                                Future&lt;<span class="text-purple-400">String</span>&gt; fetchData() {
+                                    <span class="text-purple-400">return</span> Future.delayed(Duration(seconds: <span class="text-yellow-300">2</span>), () {
+                                        <span class="text-purple-400">return</span> <span class="text-green-300">'Data fetched successfully'</span>;
+                                    });
+                                }
+                                <br>
+                                <span class="text-blue-300">// 使用then()处理Future结果</span><br>
+                                fetchData().then((data) {
+                                    <span class="text-green-300">print</span>(data);
+                                }).catchError((error) {
+                                    <span class="text-green-300">print</span>(<span class="text-green-300">'Error: $error'</span>);
+                                }).whenComplete(() {
+                                    <span class="text-green-300">print</span>(<span class="text-green-300">'Operation completed'</span>);
+                                });
+                                <br>
+                                <span class="text-blue-300">// 使用async/await语法</span><br>
+                                <span class="text-purple-400">void</span> main() async {
+                                    <span class="text-purple-400">try</span> {
+                                        <span class="text-purple-400">var</span> data = await fetchData();
+                                        <span class="text-green-300">print</span>(data);
+                                    } <span class="text-purple-400">catch</span> (error) {
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'Error: $error'</span>);
+                                    } <span class="text-purple-400">finally</span> {
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'Operation completed'</span>);
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 10. Stream编程 -->
+                <section id="section-10" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">10. Stream编程</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - Stream与事件流</h4>
+                        <p class="text-slate-300 mb-4">Stream表示一系列异步事件，支持监听和转换操作。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># Stream与事件流</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 创建Stream</span><br>
+                                Stream&lt;<span class="text-purple-400">int</span>&gt; countStream(<span class="text-purple-400">int</span> max) {
+                                    <span class="text-purple-400">return</span> Stream.periodic(Duration(seconds: <span class="text-yellow-300">1</span>), (i) => i + <span class="text-yellow-300">1</span>).take(max);
+                                }
+                                <br>
+                                <span class="text-blue-300">// 使用listen()监听Stream</span><br>
+                                countStream(<span class="text-yellow-300">5</span>).listen(
+                                    (data) => <span class="text-green-300">print</span>(data),
+                                    onError: (error) => <span class="text-green-300">print</span>(<span class="text-green-300">'Error: $error'</span>),
+                                    onDone: () => <span class="text-green-300">print</span>(<span class="text-green-300">'Stream completed'</span>)
+                                );
+                                <br>
+                                <span class="text-blue-300">// 使用async/await与Stream</span><br>
+                                <span class="text-purple-400">void</span> main() async {
+                                    <span class="text-purple-400">var</span> stream = countStream(<span class="text-yellow-300">3</span>);
+                                    <br>
+                                    <span class="text-blue-300">// 使用await for循环</span><br>
+                                    <span class="text-purple-400">await</span> <span class="text-purple-400">for</span> (<span class="text-purple-400">var</span> number <span class="text-purple-400">in</span> stream) {
+                                        <span class="text-green-300">print</span>(number);
+                                    }
+                                    <br>
+                                    <span class="text-green-300">print</span>(<span class="text-green-300">'Stream processing finished'</span>);
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 11. 异常处理 -->
+                <section id="section-11" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">11. 异常处理</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - 异常捕获与处理</h4>
+                        <p class="text-slate-300 mb-4">Dart支持try-catch-finally异常处理机制，可以自定义异常类型。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 异常捕获与处理</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 捕获异常</span><br>
+                                <span class="text-purple-400">try</span> {
+                                    <span class="text-purple-400">var</span> result = <span class="text-yellow-300">10</span> ~/ <span class="text-yellow-300">0</span>; <span class="text-blue-300">// 除以零异常</span>
+                                    <span class="text-green-300">print</span>(result);
+                                } <span class="text-purple-400">on</span> IntegerDivisionByZeroException {
+                                    <span class="text-green-300">print</span>(<span class="text-green-300">'Cannot divide by zero'</span>);
+                                } <span class="text-purple-400">on</span> Exception <span class="text-purple-400">catch</span> (e) {
+                                    <span class="text-green-300">print</span>(<span class="text-green-300">'Other exception: $e'</span>);
+                                } <span class="text-purple-400">finally</span> {
+                                    <span class="text-green-300">print</span>(<span class="text-green-300">'Finally block executed'</span>);
+                                }
+                                <br>
+                                <span class="text-blue-300">// 自定义异常</span><br>
+                                <span class="text-purple-400">class</span> InvalidInputException <span class="text-purple-400">extends</span> Exception {<br>
+                                    <span class="text-purple-400">final</span> <span class="text-purple-400">String</span> message;<br>
+                                    <br>
+                                    InvalidInputException(<span class="text-purple-400">this</span>.message);<br>
+                                    <br>
+                                    <span class="text-purple-400">@override</span><br>
+                                    <span class="text-purple-400">String</span> toString() {<br>
+                                        <span class="text-purple-400">return</span> <span class="text-green-300">'InvalidInputException: $message'</span>;<br>
+                                    }<br>
+                                }<br>
+                                <br>
+                                <span class="text-purple-400">void</span> validateInput(<span class="text-purple-400">String</span> input) {<br>
+                                    <span class="text-purple-400">if</span> (input.isEmpty) {<br>
+                                        <span class="text-purple-400">throw</span> InvalidInputException(<span class="text-green-300">'Input cannot be empty'</span>);<br>
+                                    }<br>
+                                }<br>
+                                <br>
+                                <span class="text-purple-400">try</span> {<br>
+                                    validateInput(<span class="text-green-300">''</span>);<br>
+                                } <span class="text-purple-400">catch</span> (e) {<br>
+                                    <span class="text-green-300">print</span>(e);<br>
+                                }<br>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 12. 库与导入 -->
+                <section id="section-12" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">12. 库与导入</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - 库与导入</h4>
+                        <p class="text-slate-300 mb-4">Dart使用库来组织代码，支持导入和导出功能。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 库与导入</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 导入核心库</span><br>
+                                <span class="text-purple-400">import</span> <span class="text-green-300">'dart:core'</span>;<br>
+                                <span class="text-purple-400">import</span> <span class="text-green-300">'dart:io'</span>;<br>
+                                <span class="text-purple-400">import</span> <span class="text-green-300">'dart:math'</span>;<br>
+                                <br>
+                                <span class="text-blue-300">// 导入第三方库（需要在pubspec.yaml中配置）</span><br>
+                                <span class="text-purple-400">import</span> <span class="text-green-300">'package:http/http.dart'</span> <span class="text-purple-400">as</span> http;<br>
+                                <br>
+                                <span class="text-blue-300">// 导入自定义库</span><br>
+                                <span class="text-purple-400">import</span> <span class="text-green-300">'./my_lib.dart'</span>;<br>
+                                <br>
+                                <span class="text-blue-300">// 有选择地导入</span><br>
+                                <span class="text-purple-400">import</span> <span class="text-green-300">'dart:convert'</span> <span class="text-purple-400">show</span> jsonEncode, jsonDecode;<br>
+                                <br>
+                                <span class="text-blue-300">// 隐藏导入</span><br>
+                                <span class="text-purple-400">import</span> <span class="text-green-300">'dart:math'</span> <span class="text-purple-400">hide</span> pow;<br>
+                                <br>
+                                <span class="text-blue-300">// 延迟导入（懒加载）</span><br>
+                                <span class="text-purple-400">import</span> <span class="text-green-300">'dart:html'</span> <span class="text-purple-400">deferred</span> <span class="text-purple-400">as</span> html;<br>
+                                <br>
+                                <span class="text-blue-300">// 使用延迟导入的库</span><br>
+                                Future&lt;<span class="text-purple-400">void</span>&gt; useHtml() async {
+                                    <span class="text-purple-400">await</span> html.loadLibrary();
+                                    <span class="text-purple-400">// 现在可以使用html库的功能了</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 13. 元数据 -->
+                <section id="section-13" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">13. 元数据</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - 元数据注解</h4>
+                        <p class="text-slate-300 mb-4">Dart支持元数据注解，可以为代码添加额外的信息。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 元数据注解</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 使用内置元数据注解</span><br>
+                                <span class="text-purple-400">@override</span><br>
+                                <span class="text-purple-400">void</span> toString() {
+                                    <span class="text-purple-400">return</span> <span class="text-green-300">'Custom String'</span>;
+                                }
+                                <br>
+                                <span class="text-purple-400">@deprecated</span><br>
+                                <span class="text-purple-400">void</span> oldMethod() {
+                                    <span class="text-green-300">print</span>(<span class="text-green-300">'This method is deprecated'</span>);
+                                }
+                                <br>
+                                <span class="text-purple-400">@required</span><br>
+                                <span class="text-purple-400">final</span> <span class="text-purple-400">String</span> name;
+                                <br>
+                                <span class="text-blue-300">// 自定义元数据注解</span><br>
+                                <span class="text-purple-400">class</span> MyAnnotation {
+                                    <span class="text-purple-400">final</span> <span class="text-purple-400">String</span> message;
+                                    <br>
+                                    <span class="text-purple-400">const</span> MyAnnotation(<span class="text-purple-400">this</span>.message);
+                                }
+                                <br>
+                                <span class="text-purple-400">@MyAnnotation</span>(<span class="text-green-300">'This is a custom annotation'</span>)<br>
+                                <span class="text-purple-400">class</span> MyClass {<br>
+                                    <span class="text-purple-400">@MyAnnotation</span>(<span class="text-green-300">'This is a field annotation'</span>)<br>
+                                    <span class="text-purple-400">final</span> <span class="text-purple-400">String</span> field;<br>
+                                    <br>
+                                    <span class="text-purple-400">@MyAnnotation</span>(<span class="text-green-300">'This is a constructor annotation'</span>)<br>
+                                    MyClass(<span class="text-purple-400">this</span>.field);<br>
+                                }<br>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 14. 扩展方法 -->
+                <section id="section-14" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">14. 扩展方法</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - 扩展方法</h4>
+                        <p class="text-slate-300 mb-4">扩展方法允许为现有类型添加新方法，而无需修改类型本身。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 扩展方法</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 为String类型添加扩展方法</span><br>
+                                <span class="text-purple-400">extension</span> StringExtension <span class="text-purple-400">on</span> <span class="text-purple-400">String</span> {
+                                    <span class="text-purple-400">bool</span> isPalindrome() {
+                                        <span class="text-purple-400">var</span> reversed = <span class="text-purple-400">this</span>.split(<span class="text-green-300">''</span>).reversed.join(<span class="text-green-300">''</span>);
+                                        <span class="text-purple-400">return</span> <span class="text-purple-400">this</span> == reversed;
+                                    }
+                                    <br>
+                                    <span class="text-purple-400">String</span> toTitleCase() {
+                                        <span class="text-purple-400">if</span> (<span class="text-purple-400">this</span>.isEmpty) <span class="text-purple-400">return</span> <span class="text-green-300">''</span>;
+                                        <br>
+                                        <span class="text-purple-400">return</span> <span class="text-purple-400">this</span>[<span class="text-yellow-300">0</span>].toUpperCase() + <span class="text-purple-400">this</span>.substring(<span class="text-yellow-300">1</span>).toLowerCase();
+                                    }
+                                }
+                                <br>
+                                <span class="text-blue-300">// 使用扩展方法</span><br>
+                                <span class="text-purple-400">var</span> word = <span class="text-green-300">'racecar'</span>;
+                                <span class="text-green-300">print</span>(word.isPalindrome()); <span class="text-blue-300">// true</span>
+                                <br>
+                                <span class="text-purple-400">var</span> sentence = <span class="text-green-300">'hello world'</span>;
+                                <span class="text-green-300">print</span>(sentence.toTitleCase()); <span class="text-blue-300">// Hello world</span>
+                                <br>
+                                <span class="text-blue-300">// 为int类型添加扩展方法</span><br>
+                                <span class="text-purple-400">extension</span> IntExtension <span class="text-purple-400">on</span> <span class="text-purple-400">int</span> {
+                                    <span class="text-purple-400">bool</span> isEven() {
+                                        <span class="text-purple-400">return</span> <span class="text-purple-400">this</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span>;
+                                    }
+                                    <br>
+                                    <span class="text-purple-400">bool</span> isOdd() {
+                                        <span class="text-purple-400">return</span> <span class="text-purple-400">this</span> % <span class="text-yellow-300">2</span> != <span class="text-yellow-300">0</span>;
+                                    }
+                                }
+                                <br>
+                                <span class="text-purple-400">var</span> number = <span class="text-yellow-300">10</span>;
+                                <span class="text-green-300">print</span>(number.isEven()); <span class="text-blue-300">// true</span>
+                                <span class="text-green-300">print</span>(number.isOdd()); <span class="text-blue-300">// false</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 15. Mixins -->
+                <section id="section-15" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">15. Mixins</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - Mixins</h4>
+                        <p class="text-slate-300 mb-4">Mixins允许重用类的代码，而无需继承。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># Mixins</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 定义Mixin</span><br>
+                                <span class="text-purple-400">mixin</span> Flyable {<br>
+                                    <span class="text-purple-400">void</span> fly() {<br>
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'Flying'</span>);<br>
+                                    }<br>
+                                }<br>
+                                <br>
+                                <span class="text-purple-400">mixin</span> Swimmable {<br>
+                                    <span class="text-purple-400">void</span> swim() {<br>
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'Swimming'</span>);<br>
+                                    }<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-300">// 使用Mixin</span><br>
+                                <span class="text-purple-400">class</span> Animal {<br>
+                                    <span class="text-purple-400">void</span> eat() {<br>
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'Eating'</span>);<br>
+                                    }<br>
+                                }<br>
+                                <br>
+                                <span class="text-purple-400">class</span> Duck <span class="text-purple-400">extends</span> Animal <span class="text-purple-400">with</span> Flyable, Swimmable {<br>
+                                    <span class="text-purple-400">void</span> quack() {<br>
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'Quacking'</span>);<br>
+                                    }<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-300">// 使用带有Mixin的类</span><br>
+                                <span class="text-purple-400">var</span> duck = Duck();
+                                duck.eat(); <span class="text-blue-300">// Eating</span>
+                                duck.fly(); <span class="text-blue-300">// Flying</span>
+                                duck.swim(); <span class="text-blue-300">// Swimming</span>
+                                duck.quack(); <span class="text-blue-300">// Quacking</span>
+                                <br>
+                                <span class="text-blue-300">// 限制Mixin的使用</span><br>
+                                <span class="text-purple-400">mixin</span> Walkable <span class="text-purple-400">on</span> Animal {<br>
+                                    <span class="text-purple-400">void</span> walk() {<br>
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'Walking'</span>);<br>
+                                    }<br>
+                                }<br>
+                                <br>
+                                <span class="text-purple-400">class</span> Dog <span class="text-purple-400">extends</span> Animal <span class="text-purple-400">with</span> Walkable {<br>
+                                    <span class="text-purple-400">void</span> bark() {<br>
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'Barking'</span>);<br>
+                                    }<br>
+                                }<br>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 16. 级联运算符 -->
+                <section id="section-16" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">16. 级联运算符</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - 级联运算符</h4>
+                        <p class="text-slate-300 mb-4">级联运算符允许对同一个对象执行一系列操作。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 级联运算符</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 定义一个类</span><br>
+                                <span class="text-purple-400">class</span> Person {<br>
+                                    <span class="text-purple-400">String</span>? name;<br>
+                                    <span class="text-purple-400">int</span>? age;<br>
+                                    <span class="text-purple-400">String</span>? email;<br>
+                                    <br>
+                                    <span class="text-purple-400">void</span> setName(<span class="text-purple-400">String</span> name) {<br>
+                                        <span class="text-purple-400">this</span>.name = name;<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-400">void</span> setAge(<span class="text-purple-400">int</span> age) {<br>
+                                        <span class="text-purple-400">this</span>.age = age;<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-400">void</span> setEmail(<span class="text-purple-400">String</span> email) {<br>
+                                        <span class="text-purple-400">this</span>.email = email;<br>
+                                    }<br>
+                                    <br>
+                                    <span class="text-purple-400">void</span> printInfo() {<br>
+                                        <span class="text-green-300">print</span>(<span class="text-green-300">'Name: $name, Age: $age, Email: $email'</span>);<br>
+                                    }<br>
+                                }<br>
+                                <br>
+                                <span class="text-blue-300">// 不使用级联运算符</span><br>
+                                <span class="text-purple-400">var</span> person1 = Person();
+                                person1.setName(<span class="text-green-300">'Alice'</span>);
+                                person1.setAge(<span class="text-yellow-300">25</span>);
+                                person1.setEmail(<span class="text-green-300">'alice@example.com'</span>);
+                                person1.printInfo();
+                                <br>
+                                <span class="text-blue-300">// 使用级联运算符</span><br>
+                                <span class="text-purple-400">var</span> person2 = Person()
+                                    ..setName(<span class="text-green-300">'Bob'</span>)
+                                    ..setAge(<span class="text-yellow-300">30</span>)
+                                    ..setEmail(<span class="text-green-300">'bob@example.com'</span>)
+                                    ..printInfo();
+                                <br>
+                                <span class="text-blue-300">// 级联运算符与构造函数</span><br>
+                                <span class="text-purple-400">var</span> person3 = Person()
+                                    ..name = <span class="text-green-300">'Charlie'</span>
+                                    ..age = <span class="text-yellow-300">35</span>
+                                    ..email = <span class="text-green-300">'charlie@example.com'</span>
+                                    ..printInfo();
+                                <br>
+                                <span class="text-blue-300">// 级联运算符与集合</span><br>
+                                <span class="text-purple-400">var</span> list = &lt;<span class="text-purple-400">int</span>&gt;[]
+                                    ..add(<span class="text-yellow-300">1</span>)
+                                    ..add(<span class="text-yellow-300">2</span>)
+                                    ..addAll([<span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>])
+                                    ..sort();
+                                <br>
+                                <span class="text-green-300">print</span>(list); <span class="text-blue-300">// [1, 2, 3, 4, 5]</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 17. 空安全 -->
+                <section id="section-17" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">17. 空安全</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="dart">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Dart - 空安全</h4>
+                        <p class="text-slate-300 mb-4">空安全帮助防止空指针异常，是Dart 2.12+的重要特性。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 空安全</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 非空类型（默认）</span><br>
+                                <span class="text-purple-400">String</span> name = <span class="text-green-300">'Alice'</span>; <span class="text-blue-300">// 不能为null</span>
+                                <br>
+                                <span class="text-blue-300">// 可空类型</span><br>
+                                <span class="text-purple-400">String</span>? nullableName; <span class="text-blue-300">// 可以为null</span>
+                                nullableName = <span class="text-purple-400">null</span>; <span class="text-blue-300">// 合法</span>
+                                <br>
+                                <span class="text-blue-300">// 空断言运算符</span><br>
+                                <span class="text-purple-400">String</span> nonNullableName = nullableName!; <span class="text-blue-300">// 断言nullableName不为null</span>
+                                <br>
+                                <span class="text-blue-300">// 条件成员访问</span><br>
+                                <span class="text-purple-400">int</span>? length = nullableName?.length; <span class="text-blue-300">// 如果nullableName为null，length也为null</span>
+                                <br>
+                                <span class="text-blue-300">// 空合并运算符</span><br>
+                                <span class="text-purple-400">String</span> displayName = nullableName ?? <span class="text-green-300">'Anonymous'</span>; <span class="text-blue-300">// 如果nullableName为null，使用'Anonymous'</span>
+                                <br>
+                                <span class="text-blue-300">// 空合并赋值</span><br>
+                                nullableName ??= <span class="text-green-300">'Default Name'</span>; <span class="text-blue-300">// 如果nullableName为null，赋值为'Default Name'</span>
+                                <br>
+                                <span class="text-blue-300">// 类型提升</span><br>
+                                <span class="text-purple-400">if</span> (nullableName != <span class="text-purple-400">null</span>) {
+                                    <span class="text-purple-400">int</span> len = nullableName.length; <span class="text-blue-300">// Dart知道这里nullableName不为null</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
     </main>
 </body>
