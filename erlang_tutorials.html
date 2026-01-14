@@ -223,6 +223,7 @@
             <div class="language-content" data-lang="erlang">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">基本数据类型</h5>
+                    <p class="text-slate-300 mb-4">Erlang支持多种基本数据类型，包括原子、数值、字符串、列表、元组和二进制等。这些数据类型构成了Erlang编程的基础。</p>
                     <div class="code-block rounded-lg p-4 code-font text-sm">
                         <div class="text-slate-400 mb-2">% 原子类型</div>
                         <div class="text-sm leading-6">
@@ -275,6 +276,7 @@
             <div class="language-content" data-lang="erlang">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">函数定义</h5>
+                    <p class="text-slate-300 mb-4">Erlang中的函数是核心概念，支持模式匹配、函数重载和匿名函数等特性。函数可以定义在模块中，也可以作为匿名函数使用。</p>
                     <div class="code-block rounded-lg p-4 code-font text-sm">
                         <div class="text-slate-400 mb-2">% 简单函数定义</div>
                         <div class="text-sm leading-6">
@@ -302,6 +304,7 @@
             <div class="language-content" data-lang="erlang">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">条件表达式</h5>
+                    <p class="text-slate-300 mb-4">Erlang提供了多种控制流结构，包括if表达式和case表达式，用于实现条件判断和分支逻辑。这些结构支持模式匹配和卫语句。</p>
                     <div class="code-block rounded-lg p-4 code-font text-sm">
                         <div class="text-slate-400 mb-2">% if 表达式</div>
                         <div class="text-sm leading-6">
@@ -336,6 +339,7 @@
             <div class="language-content" data-lang="erlang">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">错误处理机制</h5>
+                    <p class="text-slate-300 mb-4">Erlang的错误处理机制基于"让它崩溃"的哲学，提供了try-catch表达式和进程监控等方式来处理异常情况，确保系统的稳定性。</p>
                     <div class="code-block rounded-lg p-4 code-font text-sm">
                         <div class="text-slate-400 mb-2">% try-catch 表达式</div>
                         <div class="text-sm leading-6">
@@ -361,6 +365,7 @@
             <div class="language-content" data-lang="erlang">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">进程创建</h5>
+                    <p class="text-slate-300 mb-4">Erlang的并发模型基于轻量级进程，这些进程之间通过消息传递进行通信。使用spawn函数可以创建新的进程，实现高度并发的系统。</p>
                     <div class="code-block rounded-lg p-4 code-font text-sm">
                         <div class="text-slate-400 mb-2">% 创建新进程</div>
                         <div class="text-sm leading-6">
@@ -380,6 +385,7 @@
             <div class="language-content" data-lang="erlang">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">消息发送与接收</h5>
+                    <p class="text-slate-300 mb-4">Erlang进程之间通过异步消息传递进行通信。使用!运算符发送消息，使用receive表达式接收消息，实现进程间的安全通信。</p>
                     <div class="code-block rounded-lg p-4 code-font text-sm">
                         <div class="text-slate-400 mb-2">% 发送消息</div>
                         <div class="text-sm leading-6">
@@ -411,6 +417,7 @@
             <div class="language-content" data-lang="erlang">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">GenServer示例</h5>
+                    <p class="text-slate-300 mb-4">OTP（Open Telecom Platform）是Erlang的应用开发框架，提供了一系列行为模式，如GenServer、Supervisor等。GenServer用于实现服务器进程，提供了标准的请求-响应和异步消息处理机制。</p>
                     <div class="code-block rounded-lg p-4 code-font text-sm">
                         <div class="text-slate-400 mb-2">% 定义GenServer模块</div>
                         <div class="text-sm leading-6">
@@ -454,6 +461,7 @@
             <div class="language-content" data-lang="erlang">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">节点间通信</h5>
+                    <p class="text-slate-300 mb-4">Erlang天生支持分布式编程，可以在多个节点上运行进程并实现节点间通信。使用节点名和Pid可以在不同节点上发送和接收消息，构建分布式系统。</p>
                     <div class="code-block rounded-lg p-4 code-font text-sm">
                         <div class="text-slate-400 mb-2">% 分布式节点通信</div>
                         <div class="text-sm leading-6">
@@ -490,6 +498,7 @@
             <div class="language-content" data-lang="erlang">
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">进程链接</h5>
+                    <p class="text-slate-300 mb-4">进程链接是Erlang中的重要特性，用于实现进程间的依赖关系。当一个链接的进程崩溃时，会向另一个进程发送退出信号，用于构建容错系统。</p>
                     <div class="code-block rounded-lg p-4 code-font text-sm">
                         <div class="text-slate-400 mb-2">% 进程链接示例</div>
                         <div class="text-sm leading-6">
@@ -505,6 +514,7 @@
                 
                 <div class="bg-slate-800 rounded-xl p-6 syntax-card mb-6">
                     <h5 class="text-lg font-medium mb-4 text-purple-300">ETS表</h5>
+                    <p class="text-slate-300 mb-4">ETS（Erlang Term Storage）是Erlang中的内存数据库，用于高效存储和检索Erlang数据结构。ETS表支持各种操作，如插入、查找、更新和删除，是构建高性能应用的重要工具。</p>
                     <div class="code-block rounded-lg p-4 code-font text-sm">
                         <div class="text-slate-400 mb-2">% ETS表操作</div>
                         <div class="text-sm leading-6">
