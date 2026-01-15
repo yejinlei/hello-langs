@@ -3,56 +3,612 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swift 教程 - Hello 编程语言</title>
+    <title>Swift 语言教程</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            font-family: 'Noto Sans SC', sans-serif;
-        }
-        .code-font {
-            font-family: 'JetBrains Mono', monospace;
-        }
         .gradient-text {
             background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            color: transparent;
         }
+        
+        .code-font {
+            font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+        }
+        
         .syntax-card {
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(148, 163, 184, 0.1);
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.3);
         }
-        .language-tab {
-            transition: all 0.3s ease;
+        
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         }
-        .language-tab.active {
-            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
-            color: white;
-        }
+        
         .code-block {
             background: rgba(2, 6, 23, 0.9);
             border-left: 4px solid #3B82F6;
         }
-        .highlight {
-            background: rgba(59, 130, 246, 0.2);
-            padding: 2px 4px;
-            border-radius: 3px;
-        }
-        .language-content.hidden {
-            display: none;
-        }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen">
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="text-center py-20">
-            <h3 class="text-xl font-medium text-slate-300 mb-4">Swift 教程内容正在开发中</h3>
-            <p class="text-slate-500">敬请期待完整的 Swift 语法教程内容</p>
-        </div>
-    </main>
-</body>
-</html>
+<body class="min-h-screen">
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- 侧边导航 -->
+            <nav class="lg:w-1/4 bg-slate-800 rounded-xl p-6 h-fit">
+                <h3 class="text-lg font-bold text-purple-400 mb-4">章节导航</h3>
+                <div class="space-y-2">
+                        <a href="#section-1" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">1. 变量声明与初始化</a>
+                        <a href="#section-2" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">2. 基本数据类型</a>
+                        <a href="#section-3" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">3. 控制流语句</a>
+                        <a href="#section-4" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">4. 函数定义与使用</a>
+                        <a href="#section-5" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">5. 字符串与集合类型</a>
+                        <a href="#section-6" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">6. 结构体和类</a>
+                        <a href="#section-7" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">7. 枚举</a>
+                        <a href="#section-8" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">8. 可选类型</a>
+                        <a href="#section-9" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">9. 闭包</a>
+                        <a href="#section-10" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">10. 协议和扩展</a>
+                        <a href="#section-11" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">11. 泛型</a>
+                        <a href="#section-12" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">12. 错误处理</a>
+                        <a href="#section-13" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">13. 类型转换与类型检查</a>
+                        <a href="#section-14" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">14. 内存管理</a>
+                        <a href="#section-15" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">15. 访问控制</a>
+                        <a href="#section-16" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">16. 高级运算符</a>
+                        <a href="#section-17" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">17. 嵌套类型</a>
+                        <a href="#section-18" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">18. 自定义运算符</a>
+                        <a href="#section-19" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">19. 扩展与协议组合</a>
+                        <a href="#section-20" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">20. 泛型约束</a>
+                </div>
+            </nav>
+            <div class="lg:w-3/4">
+                <!-- 1. 变量声明与初始化 -->
+                <section id="section-1" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">1. 变量声明与初始化</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="swift">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Swift - 变量声明与初始化</h4>
+                        <p class="text-slate-300 mb-4">特点：支持多种声明方式，包括变量(var)、常量(let)、类型标注和类型推导。注意事项：常量一旦赋值不可修改，Swift是类型安全语言，变量声明后类型不可更改。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 变量声明与初始化</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 变量声明</span><br>
+                                <span class="text-purple-400">var</span> age <span class="text-purple-400">Int</span><br>
+                                <span class="text-purple-400">var</span> name <span class="text-purple-400">String</span><br>
+                                <span class="text-purple-400">var</span> isActive <span class="text-purple-400">Bool</span><br>
+                                
+                                <span class="text-blue-300">// 声明并初始化</span><br>
+                                <span class="text-purple-400">var</span> age = <span class="text-yellow-300">25</span><br>
+                                <span class="text-purple-400">var</span> name = <span class="text-green-300">"张三"</span><br>
+                                <span class="text-purple-400">var</span> price <span class="text-purple-400">Double</span> = <span class="text-yellow-300">19.99</span><br>
+                                
+                                <span class="text-blue-300">// 常量声明</span><br>
+                                <span class="text-purple-400">let</span> pi = <span class="text-yellow-300">3.14159</span><br>
+                                <span class="text-purple-400">let</span> maxUsers = <span class="text-yellow-300">100</span><br>
+                                
+                                <span class="text-blue-300">// 类型推导</span><br>
+                                <span class="text-purple-400">var</span> count = <span class="text-yellow-300">10</span> <span class="text-blue-300">// 自动推导为Int类型</span><br>
+                                <span class="text-purple-400">var</span> message = <span class="text-green-300">"Hello"</span> <span class="text-blue-300">// 自动推导为String类型</span><br>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. 基本数据类型 -->
+                <section id="section-2" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">2. 基本数据类型</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="swift">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Swift - 基本数据类型</h4>
+                        <p class="text-slate-300 mb-4">特点：包含丰富的内置类型，包括数值类型、布尔型、字符串型等。注意事项：不同类型的数值不能直接运算，需要显式转换，字符串是值类型。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 基本数据类型</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 布尔型</span><br>
+                                <span class="text-purple-400">var</span> isActive <span class="text-purple-400">Bool</span> = <span class="text-green-300">true</span><br>
+                                <span class="text-purple-400">var</span> isAvailable = <span class="text-green-300">false</span><br>
+                                
+                                <span class="text-blue-300">// 整型</span><br>
+                                <span class="text-purple-400">var</span> integer <span class="text-purple-400">Int</span> = <span class="text-yellow-300">42</span><br>
+                                <span class="text-purple-400">var</span> int8 <span class="text-purple-400">Int8</span> = <span class="text-yellow-300">127</span><br>
+                                <span class="text-purple-400">var</span> uint <span class="text-purple-400">UInt</span> = <span class="text-yellow-300">100</span><br>
+                                
+                                <span class="text-blue-300">// 浮点型</span><br>
+                                <span class="text-purple-400">var</span> double <span class="text-purple-400">Double</span> = <span class="text-yellow-300">3.14159</span><br>
+                                <span class="text-purple-400">var</span> float <span class="text-purple-400">Float</span> = <span class="text-yellow-300">2.718</span><br>
+                                
+                                <span class="text-blue-300">// 字符串</span><br>
+                                <span class="text-purple-400">var</span> str <span class="text-purple-400">String</span> = <span class="text-green-300">"Hello Swift"</span><br>
+                                <span class="text-purple-400">var</span> emptyString = <span class="text-green-300">""</span><br>
+                                <span class="text-purple-400">var</span> multiLine = <span class="text-green-300">"""多行
+                                字符串"""</span><br>
+                                
+                                <span class="text-blue-300">// 字符</span><br>
+                                <span class="text-purple-400">var</span> char <span class="text-purple-400">Character</span> = <span class="text-green-300">"A"</span><br>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. 控制流语句 -->
+                <section id="section-3" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">3. 控制流语句</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="swift">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Swift - 控制流语句</h4>
+                        <p class="text-slate-300 mb-4">特点：包含条件语句、循环语句、控制转移语句等。注意事项：条件语句不需要括号，循环语句支持for-in、while、repeat-while等多种形式。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 控制流语句</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// if-else 语句</span><br>
+                                <span class="text-purple-400">var</span> score = <span class="text-yellow-300">85</span><br>
+                                <span class="text-purple-400">if</span> score >= <span class="text-yellow-300">90</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(<span class="text-green-300">"优秀"</span>)<br>
+                                } <span class="text-purple-400">else if</span> score >= <span class="text-yellow-300">80</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(<span class="text-green-300">"良好"</span>)<br>
+                                } <span class="text-purple-400">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(<span class="text-green-300">"及格"</span>)<br>
+                                }<br>
+                                
+                                <span class="text-blue-300">// switch 语句</span><br>
+                                <span class="text-purple-400">var</span> day = <span class="text-yellow-300">3</span><br>
+                                <span class="text-purple-400">switch</span> day {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> <span class="text-yellow-300">1</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(<span class="text-green-300">"星期一"</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> <span class="text-yellow-300">2</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(<span class="text-green-300">"星期二"</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">default</span>:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(<span class="text-green-300">"其他天"</span>)<br>
+                                }<br>
+                                
+                                <span class="text-blue-300">// for-in 循环</span><br>
+                                <span class="text-purple-400">for</span> i <span class="text-purple-400">in</span> <span class="text-yellow-300">1</span>...<span class="text-yellow-300">5</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(i)<br>
+                                }<br>
+                                
+                                <span class="text-purple-400">let</span> numbers = [<span class="text-yellow-300">1, 2, 3, 4, 5</span>]<br>
+                                <span class="text-purple-400">for</span> number <span class="text-purple-400">in</span> numbers {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(number)<br>
+                                }<br>
+                                
+                                <span class="text-blue-300">// while 循环</span><br>
+                                <span class="text-purple-400">var</span> count = <span class="text-yellow-300">0</span><br>
+                                <span class="text-purple-400">while</span> count < <span class="text-yellow-300">5</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(count)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;count += <span class="text-yellow-300">1</span><br>
+                                }<br>
+                                
+                                <span class="text-blue-300">// repeat-while 循环</span><br>
+                                <span class="text-purple-400">var</span> index = <span class="text-yellow-300">0</span><br>
+                                <span class="text-purple-400">repeat</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(index)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;index += <span class="text-yellow-300">1</span><br>
+                                } <span class="text-purple-400">while</span> index < <span class="text-yellow-300">5</span><br>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. 函数定义与使用 -->
+                <section id="section-4" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">4. 函数定义与使用</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="swift">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Swift - 函数定义与使用</h4>
+                        <p class="text-slate-300 mb-4">特点：支持函数参数、返回值、默认参数、可变参数、in-out参数等。注意事项：函数参数默认是常量，in-out参数允许在函数内部修改外部变量。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 函数定义与使用</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 基本函数</span><br>
+                                <span class="text-purple-400">func</span> <span class="text-purple-400">greet</span>(<span class="text-green-300">name:</span> <span class="text-purple-400">String</span>) -&gt; <span class="text-purple-400">String</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-green-300">"Hello, \(name)!"</span><br>
+                                }<br>
+                                
+                                <span class="text-blue-300">// 调用函数</span><br>
+                                <span class="text-purple-400">let</span> message = <span class="text-purple-400">greet</span>(<span class="text-green-300">name:</span> <span class="text-green-300">"张三"</span>)<br>
+                                
+                                <span class="text-blue-300">// 无返回值函数</span><br>
+                                <span class="text-purple-400">func</span> <span class="text-purple-400">printGreeting</span>(<span class="text-green-300">name:</span> <span class="text-purple-400">String</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(<span class="text-green-300">"Hello, \(name)!"</span>)<br>
+                                }<br>
+                                
+                                <span class="text-blue-300">// 默认参数</span><br>
+                                <span class="text-purple-400">func</span> <span class="text-purple-400">greet</span>(<span class="text-green-300">name:</span> <span class="text-purple-400">String</span>, <span class="text-green-300">greeting:</span> <span class="text-purple-400">String</span> = <span class="text-green-300">"Hello"</span>) -&gt; <span class="text-purple-400">String</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-green-300">"\(greeting), \(name)!"</span><br>
+                                }<br>
+                                
+                                <span class="text-blue-300">// 可变参数</span><br>
+                                <span class="text-purple-400">func</span> <span class="text-purple-400">sum</span>(<span class="text-green-300">numbers:</span> <span class="text-purple-400">Int</span>...) -&gt; <span class="text-purple-400">Int</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">var</span> total = <span class="text-yellow-300">0</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">for</span> number <span class="text-purple-400">in</span> numbers {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total += number<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> total<br>
+                                }<br>
+                                
+                                <span class="text-blue-300">// in-out 参数</span><br>
+                                <span class="text-purple-400">func</span> <span class="text-purple-400">swap</span>(<span class="text-green-300">_</span> a: <span class="text-purple-400">inout</span> <span class="text-purple-400">Int</span>, <span class="text-green-300">_</span> b: <span class="text-purple-400">inout</span> <span class="text-purple-400">Int</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">let</span> temp = a<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;a = b<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;b = temp<br>
+                                }<br>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. 字符串与集合类型 -->
+                <section id="section-5" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">5. 字符串与集合类型</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="swift">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Swift - 字符串与集合类型</h4>
+                        <p class="text-slate-300 mb-4">特点：字符串支持丰富的操作，集合类型包括数组、集合和字典。注意事项：数组是有序集合，集合是无序唯一元素集合，字典是键值对集合。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 字符串与集合类型</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 字符串操作</span><br>
+                                <span class="text-purple-400">var</span> str = <span class="text-green-300">"Hello Swift"</span><br>
+                                
+                                <span class="text-purple-400">print</span>(str.count) <span class="text-blue-300">// 字符串长度</span><br>
+                                <span class="text-purple-400">print</span>(str.hasPrefix(<span class="text-green-300">"Hello"</span>)) <span class="text-blue-300">// 前缀检查</span><br>
+                                <span class="text-purple-400">print</span>(str.hasSuffix(<span class="text-green-300">"Swift"</span>)) <span class="text-blue-300">// 后缀检查</span><br>
+                                
+                                <span class="text-purple-400">var</span> combined = str + <span class="text-green-300">"!"</span> <span class="text-blue-300">// 字符串拼接</span><br>
+                                
+                                <span class="text-blue-300">// 数组</span><br>
+                                <span class="text-purple-400">var</span> numbers = [<span class="text-yellow-300">1, 2, 3, 4, 5</span>]<br>
+                                <span class="text-purple-400">var</span> strings: [<span class="text-purple-400">String</span>] = []<br>
+                                
+                                numbers.append(<span class="text-yellow-300">6</span>) <span class="text-blue-300">// 添加元素</span><br>
+                                numbers.remove(at: <span class="text-yellow-300">0</span>) <span class="text-blue-300">// 移除元素</span><br>
+                                <span class="text-purple-400">print</span>(numbers.first) <span class="text-blue-300">// 第一个元素</span><br>
+                                <span class="text-purple-400">print</span>(numbers.last) <span class="text-blue-300">// 最后一个元素</span><br>
+                                
+                                <span class="text-blue-300">// 集合</span><br>
+                                <span class="text-purple-400">var</span> set: <span class="text-purple-400">Set</span>&lt;<span class="text-purple-400">Int</span>&gt; = [<span class="text-yellow-300">1, 2, 3, 4, 5</span>]<br>
+                                set.insert(<span class="text-yellow-300">6</span>) <span class="text-blue-300">// 添加元素</span><br>
+                                set.remove(<span class="text-yellow-300">1</span>) <span class="text-blue-300">// 移除元素</span><br>
+                                <span class="text-purple-400">print</span>(set.contains(<span class="text-yellow-300">2</span>)) <span class="text-blue-300">// 检查元素</span><br>
+                                
+                                <span class="text-blue-300">// 字典</span><br>
+                                <span class="text-purple-400">var</span> dict: [<span class="text-purple-400">String</span>: <span class="text-purple-400">Int</span>] = [<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"张三"</span>: <span class="text-yellow-300">25</span>,<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"李四"</span>: <span class="text-yellow-300">30</span><br>
+                                ]<br>
+                                
+                                dict[<span class="text-green-300">"王五"</span>] = <span class="text-yellow-300">35</span> <span class="text-blue-300">// 添加键值对</span><br>
+                                dict.removeValue(forKey: <span class="text-green-300">"张三"</span>) <span class="text-blue-300">// 移除键值对</span><br>
+                                <span class="text-purple-400">print</span>(dict[<span class="text-green-300">"李四"</span>]) <span class="text-blue-300">// 获取值</span><br>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. 结构体和类 -->
+                <section id="section-6" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">6. 结构体和类</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="swift">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Swift - 结构体和类</h4>
+                        <p class="text-slate-300 mb-4">特点：结构体是值类型，类是引用类型。注意事项：结构体默认有成员初始化器，类需要显式定义初始化器，引用类型使用引用计数进行内存管理。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 结构体和类</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 结构体定义</span><br>
+                                <span class="text-purple-400">struct</span> <span class="text-purple-400">Person</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">var</span> name: <span class="text-purple-400">String</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">var</span> age: <span class="text-purple-400">Int</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">let</span> id: <span class="text-purple-400">String</span><br>
+                                }<br>
+                                
+                                <span class="text-blue-300">// 使用结构体</span><br>
+                                <span class="text-purple-400">var</span> person1 = <span class="text-purple-400">Person</span>(<span class="text-green-300">name:</span> <span class="text-green-300">"张三"</span>, <span class="text-green-300">age:</span> <span class="text-yellow-300">25</span>, <span class="text-green-300">id:</span> <span class="text-green-300">"123456"</span>)<br>
+                                
+                                <span class="text-blue-300">// 结构体是值类型</span><br>
+                                <span class="text-purple-400">var</span> person2 = person1<br>
+                                person2.name = <span class="text-green-300">"李四"</span> <span class="text-blue-300">// 修改person2不会影响person1</span><br>
+                                
+                                <span class="text-blue-300">// 类定义</span><br>
+                                <span class="text-purple-400">class</span> <span class="text-purple-400">Student</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">var</span> name: <span class="text-purple-400">String</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">var</span> grade: <span class="text-purple-400">Int</span><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">init</span>(<span class="text-green-300">name:</span> <span class="text-purple-400">String</span>, <span class="text-green-300">grade:</span> <span class="text-purple-400">Int</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">self</span>.name = name<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">self</span>.grade = grade<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">func</span> <span class="text-purple-400">study</span>() {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(<span class="text-green-300">"\(name) is studying."</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
+                                
+                                <span class="text-blue-300">// 使用类</span><br>
+                                <span class="text-purple-400">let</span> student1 = <span class="text-purple-400">Student</span>(<span class="text-green-300">name:</span> <span class="text-green-300">"王五"</span>, <span class="text-green-300">grade:</span> <span class="text-yellow-300">100</span>)<br>
+                                student1.study()<br>
+                                
+                                <span class="text-blue-300">// 类是引用类型</span><br>
+                                <span class="text-purple-400">let</span> student2 = student1<br>
+                                student2.name = <span class="text-green-300">"赵六"</span> <span class="text-blue-300">// 修改student2会影响student1</span><br>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. 枚举 -->
+                <section id="section-7" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">7. 枚举</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="swift">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Swift - 枚举</h4>
+                        <p class="text-slate-300 mb-4">特点：支持关联值、原始值、递归枚举等。注意事项：枚举可以有方法和属性，可以遵守协议，关联值可以携带额外信息。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 枚举</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 基本枚举</span><br>
+                                <span class="text-purple-400">enum</span> <span class="text-purple-400">Direction</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> north<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> south<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> east<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> west<br>
+                                }<br>
+                                
+                                <span class="text-blue-300">// 使用枚举</span><br>
+                                <span class="text-purple-400">var</span> direction = <span class="text-purple-400">Direction</span>.north<br>
+                                direction = .south<br>
+                                
+                                <span class="text-blue-300">// 关联值枚举</span><br>
+                                <span class="text-purple-400">enum</span> <span class="text-purple-400">Result</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> success(<span class="text-purple-400">Int</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> failure(<span class="text-purple-400">Error</span>)<br>
+                                }<br>
+                                
+                                <span class="text-purple-400">let</span> result: <span class="text-purple-400">Result</span> = .success(<span class="text-yellow-300">42</span>)<br>
+                                
+                                <span class="text-blue-300">// 原始值枚举</span><br>
+                                <span class="text-purple-400">enum</span> <span class="text-purple-400">Planet:</span> <span class="text-purple-400">Int</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> mercury = <span class="text-yellow-300">1</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> venus<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> earth<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> mars<br>
+                                }<br>
+                                
+                                <span class="text-purple-400">let</span> earth = <span class="text-purple-400">Planet</span>.earth.rawValue <span class="text-blue-300">// 3</span><br>
+                                
+                                <span class="text-blue-300">// 枚举方法</span><br>
+                                <span class="text-purple-400">enum</span> <span class="text-purple-400">Weather</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> sunny, rainy, cloudy<br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">func</span> <span class="text-purple-400">description</span>() -&gt; <span class="text-purple-400">String</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">switch</span> <span class="text-purple-400">self</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> .sunny:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-green-300">"晴天"</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> .rainy:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-green-300">"雨天"</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">case</span> .cloudy:<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-green-300">"多云"</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. 可选类型 -->
+                <section id="section-8" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">8. 可选类型</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="swift">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Swift - 可选类型</h4>
+                        <p class="text-slate-300 mb-4">特点：可选类型表示可能有值也可能没有值的类型。注意事项：可选类型需要解包才能使用，使用!强制解包可能导致运行时错误，推荐使用可选绑定或空合运算符。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 可选类型</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 可选类型声明</span><br>
+                                <span class="text-purple-400">var</span> optionalString: <span class="text-purple-400">String</span>?<br>
+                                <span class="text-purple-400">var</span> optionalInt: <span class="text-purple-400">Int</span>? = <span class="text-yellow-300">42</span><br>
+                                
+                                <span class="text-blue-300">// nil 值</span><br>
+                                optionalString = <span class="text-purple-400">nil</span><br>
+                                
+                                <span class="text-blue-300">// 可选绑定</span><br>
+                                <span class="text-purple-400">if let</span> str = optionalString {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(str)<br>
+                                } <span class="text-purple-400">else</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(<span class="text-green-300">"字符串为空"</span>)<br>
+                                }<br>
+                                
+                                <span class="text-blue-300">// 强制解包</span><br>
+                                <span class="text-purple-400">let</span> value = optionalInt! <span class="text-blue-300">// 只有确定有值时才能使用</span><br>
+                                
+                                <span class="text-blue-300">// 空合运算符</span><br>
+                                <span class="text-purple-400">let</span> result = optionalString ?? <span class="text-green-300">"默认值"</span><br>
+                                
+                                <span class="text-blue-300">// 可选链</span><br>
+                                <span class="text-purple-400">struct</span> <span class="text-purple-400">Person</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">var</span> name: <span class="text-purple-400">String</span>?<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">var</span> age: <span class="text-purple-400">Int</span>?<br>
+                                }<br>
+                                
+                                <span class="text-purple-400">var</span> person: <span class="text-purple-400">Person</span>? = <span class="text-purple-400">Person</span>()<br>
+                                <span class="text-purple-400">let</span> personName = person?.name ?? <span class="text-green-300">"匿名"</span><br>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 9. 闭包 -->
+                <section id="section-9" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">9. 闭包</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="swift">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Swift - 闭包</h4>
+                        <p class="text-slate-300 mb-4">特点：Swift中的闭包是自包含的功能代码块，可以在代码中传递和使用。注意事项：闭包会自动捕获其所在上下文中的变量和常量，避免强引用循环。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 闭包的基本语法</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 完整语法的闭包</span><br>
+                                <span class="text-purple-400">let</span> add = { (<span class="text-green-300">a:</span> <span class="text-purple-400">Int</span>, <span class="text-green-300">b:</span> <span class="text-purple-400">Int</span>) -&gt; <span class="text-purple-400">Int</span> <span class="text-purple-400">in</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> a + b<br>
+                                }<br>
+                                
+                                <span class="text-blue-300">// 调用闭包</span><br>
+                                <span class="text-purple-400">let</span> sum = add(<span class="text-yellow-300">5</span>, <span class="text-yellow-300">3</span>) <span class="text-blue-300">// 8</span><br>
+                                
+                                <span class="text-blue-300">// 类型推断的闭包</span><br>
+                                <span class="text-purple-400">let</span> multiply: (<span class="text-purple-400">Int</span>, <span class="text-purple-400">Int</span>) -&gt; <span class="text-purple-400">Int</span> = { a, b <span class="text-purple-400">in</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> a * b<br>
+                                }<br>
+                                <span class="text-blue-300">// 隐式返回的闭包</span><br>
+                                <span class="text-purple-400">let</span> subtract: (<span class="text-purple-400">Int</span>, <span class="text-purple-400">Int</span>) -&gt; <span class="text-purple-400">Int</span> = { a, b <span class="text-purple-400">in</span> a - b }<br>
+                                
+                                <span class="text-blue-300">// 缩写参数名的闭包</span><br>
+                                <span class="text-purple-400">let</span> divide: (<span class="text-purple-400">Int</span>, <span class="text-purple-400">Int</span>) -&gt; <span class="text-purple-400">Int</span> = { $0 / $1 }<br>
+                            </div>
+                        </div>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2"># 尾随闭包</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 接受闭包参数的函数</span><br>
+                                <span class="text-purple-400">func</span> <span class="text-purple-400">performOperation</span>(<span class="text-green-300">a:</span> <span class="text-purple-400">Int</span>, <span class="text-green-300">b:</span> <span class="text-purple-400">Int</span>, <span class="text-green-300">operation:</span> (<span class="text-purple-400">Int</span>, <span class="text-purple-400">Int</span>) -&gt; <span class="text-purple-400">Int</span>) -&gt; <span class="text-purple-400">Int</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> operation(a, b)<br>
+                                }<br>
+                                <span class="text-blue-300">// 正常调用</span><br>
+                                <span class="text-purple-400">let</span> result1 = <span class="text-purple-400">performOperation</span>(<span class="text-green-300">a:</span> <span class="text-yellow-300">10</span>, <span class="text-green-300">b:</span> <span class="text-yellow-300">5</span>, <span class="text-green-300">operation:</span> { $0 - $1 })<br>
+                                <span class="text-blue-300">// 尾随闭包语法</span><br>
+                                <span class="text-purple-400">let</span> result2 = <span class="text-purple-400">performOperation</span>(<span class="text-green-300">a:</span> <span class="text-yellow-300">10</span>, <span class="text-green-300">b:</span> <span class="text-yellow-300">5</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> $0 * $1<br>
+                                }<br>
+                                <span class="text-blue-300">// forEach方法使用尾随闭包</span><br>
+                                <span class="text-purple-400">let</span> numbers = [<span class="text-yellow-300">1, 2, 3, 4, 5</span>]<br>
+                                numbers.forEach { number <span class="text-purple-400">in</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(number)<br>
+                                }<br>
+                            </div>
+                        </div>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm mt-4">
+                            <div class="text-slate-400 mb-2"># 闭包捕获值</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 闭包捕获外部变量</span><br>
+                                <span class="text-purple-400">var</span> counter = <span class="text-yellow-300">0</span><br>
+                                
+                                <span class="text-purple-400">let</span> increment = { <span class="text-purple-400">in</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;counter += <span class="text-yellow-300">1</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(counter)<br>
+                                }<br>
+                                
+                                increment() <span class="text-blue-300">// 1</span><br>
+                                increment() <span class="text-blue-300">// 2</span><br>
+                                increment() <span class="text-blue-300">// 3</span><br>
+                                
+                                <span class="text-blue-300">// 逃逸闭包</span><br>
+                                <span class="text-purple-400">var</span> completionHandlers: [<span class="text-purple-400">() -&gt; Void</span>] = []<br>
+                                
+                                <span class="text-purple-400">func</span> <span class="text-purple-400">someFunctionWithEscapingClosure</span>(<span class="text-green-300">completionHandler:</span> <span class="text-purple-400">@escaping</span> <span class="text-purple-400">() -&gt; Void</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;completionHandlers.append(completionHandler)<br>
+                                }<br>
+                                
+                                <span class="text-purple-400">func</span> <span class="text-purple-400">someFunctionWithNonescapingClosure</span>(<span class="text-green-300">closure:</span> <span class="text-purple-400">() -&gt; Void</span>) {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;closure()<br>
+                                }<br>
+                                
+                                <span class="text-purple-400">someFunctionWithEscapingClosure</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(<span class="text-green-300">"逃逸闭包被调用"</span>)<br>
+                                }<br>
+                                
+                                completionHandlers.forEach { $0() } <span class="text-blue-300">// 调用所有保存的闭包</span><br>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 10. 协议和扩展 -->
+                <section id="section-10" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">10. 协议和扩展</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="swift">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Swift - 协议和扩展</h4>
+                        <p class="text-slate-300 mb-4">特点：协议定义接口，扩展为现有类型添加功能。注意事项：协议可以被结构体、类、枚举遵守，扩展不能添加存储属性，只能添加计算属性和方法。</p>
+                        
+                        <div class="code-block rounded-lg p-4 code-font text-sm">
+                            <div class="text-slate-400 mb-2"># 协议和扩展</div>
+                            <div class="text-sm leading-6">
+                                <span class="text-blue-300">// 协议定义</span><br>
+                                <span class="text-purple-400">protocol</span> <span class="text-purple-400">Drawable</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">var</span> color: <span class="text-purple-400">String</span> { <span class="text-purple-400">get</span> <span class="text-purple-400">set</span> }<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">func</span> <span class="text-purple-400">draw</span>()<br>
+                                }<br>
+                                
+                                <span class="text-blue-300">// 结构体遵守协议</span><br>
+                                <span class="text-purple-400">struct</span> <span class="text-purple-400">Circle</span>: <span class="text-purple-400">Drawable</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">var</span> color: <span class="text-purple-400">String</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">var</span> radius: <span class="text-purple-400">Double</span><br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">func</span> <span class="text-purple-400">draw</span>() {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">print</span>(<span class="text-green-300">"绘制一个\(color)色的圆，半径为\(radius)"</span>)<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
+                                
+                                <span class="text-blue-300">// 扩展</span><br>
+                                <span class="text-purple-400">extension</span> <span class="text-purple-400">Int</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">func</span> <span class="text-purple-400">isEven</span>() -&gt; <span class="text-purple-400">Bool</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-purple-400">self</span> % <span class="text-yellow-300">2</span> == <span class="text-yellow-300">0</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">var</span> squared: <span class="text-purple-400">Int</span> {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">return</span> <span class="text-purple-400">self</span> * <span class="text-purple-400">self</span><br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                                }<br>
+                                
+                                <span class="text-blue-300">// 使用扩展</span><br>
+                                <span class="text-purple-400">let</span> number = <span class="text-yellow-300">5</span><br>
+                                <span class="text-purple-400">print</span>(number.isEven()) <span class="text-blue-300">// false</span><br>
+                                <span class="text-purple-400">print</span>(number.squared) <span class="text-blue-300">// 25</span><br>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 11. 泛型 -->
+                <section id="section-11" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-8 text-center">
+                        <span class="gradient-text">11. 泛型</span>
+                    </h2>
+                    
+                    <div class="language-content" data-lang="swift">
+                        <h4 class="text-lg font-medium mb-4 text-purple-400">Swift - 泛型</h4>
+                        <p class="text-slate
