@@ -131,6 +131,8 @@
         .code-block {
             background: rgba(2, 6, 23, 0.9);
             border-left: 4px solid #3B82F6;
+            white-space: pre-wrap;
+            word-break: break-all;
         }
         
         .highlight {
@@ -141,6 +143,11 @@
         
         .language-content.hidden {
             display: none;
+        }
+        
+        .text-sm.leading-6 {
+            white-space: pre-wrap;
+            word-break: break-all;
         }
         
         body {
@@ -215,7 +222,7 @@
                         <span class="text-blue-300">// 类型推导</span><br>
                         <span class="text-purple-400">auto</span> num = <span class="text-yellow-300">42</span>; <span class="text-blue-300">// 推导为 int</span><br>
                         <span class="text-purple-400">auto</span> pi = <span class="text-yellow-300">3.14159</span>; <span class="text-blue-300">// 推导为 double</span><br>
-                        <span class="text-purple-400">auto</span> flag = <span class="text-green-300">false</span>; <span class="text-blue-300">// 推导为 bool</span>
+                        <span class="text-purple-400">auto</span> flag = <span class="text-green-300">false</span>; <span class="text-blue-300">// 推导为 bool</span><br>
                     </div>
                 </div>
             </div>
@@ -247,7 +254,7 @@
                         <span class="text-purple-400">long</span> <span class="text-purple-400">double</span> ld = <span class="text-yellow-300">3.141592653589793L</span>; <span class="text-blue-300">// 通常 10 或 16 字节</span><br>
                         <br>
                         <span class="text-blue-300">// 类型大小</span><br>
-                        <span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-green-300">"sizeof(int): "</span> &lt;&lt; <span class="text-purple-400">sizeof</span>(<span class="text-purple-400">int</span>) &lt;&lt; <span class="text-green-300">std::endl</span>;
+                        <span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-green-300">"sizeof(int): "</span> &lt;&lt; <span class="text-purple-400">sizeof</span>(<span class="text-purple-400">int</span>) &lt;&lt; <span class="text-green-300">std::endl</span>;<br>
                     </div>
                 </div>
             </div>
@@ -280,7 +287,7 @@
                         <span class="text-purple-400">for</span> (<span class="text-purple-400">const</span> <span class="text-purple-400">auto</span>& element : numbers) {<br>
                         &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">std::cout</span> &lt;&lt; element &lt;&lt; <span class="text-green-300">" "</span>;<br>
                         }<br>
-                        <span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-green-300">std::endl</span>;
+                        <span class="text-green-300">std::cout</span> &lt;&lt; <span class="text-green-300">std::endl</span>;<br>
                     </div>
                 </div>
             </div>
