@@ -3,56 +3,1055 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruby 教程 - Hello 编程语言</title>
+    <title>Ruby 语言教程</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            font-family: 'Noto Sans SC', sans-serif;
-        }
-        .code-font {
-            font-family: 'JetBrains Mono', monospace;
-        }
         .gradient-text {
-            background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F87171 100%);
+            background: linear-gradient(135deg, #E11D48 0%, #7C3AED 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            color: transparent;
         }
+        
+        .code-font {
+            font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+        }
+        
         .syntax-card {
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(148, 163, 184, 0.1);
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.3);
         }
-        .language-tab {
-            transition: all 0.3s ease;
+        
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         }
-        .language-tab.active {
-            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
-            color: white;
-        }
+        
         .code-block {
             background: rgba(2, 6, 23, 0.9);
-            border-left: 4px solid #3B82F6;
-        }
-        .highlight {
-            background: rgba(59, 130, 246, 0.2);
-            padding: 2px 4px;
-            border-radius: 3px;
-        }
-        .language-content.hidden {
-            display: none;
+            border-left: 4px solid #E11D48;
         }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen">
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="text-center py-20">
-            <h3 class="text-xl font-medium text-slate-300 mb-4">Ruby 教程内容正在开发中</h3>
-            <p class="text-slate-500">敬请期待完整的 Ruby 语法教程内容</p>
-        </div>
-    </main>
+<body class="min-h-screen">
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- 侧边导航 -->
+            <nav class="lg:w-1/4 bg-slate-800 rounded-xl p-6 h-fit">
+                <h3 class="text-lg font-bold text-purple-400 mb-4">章节导航</h3>
+                <div class="space-y-2">
+                        <a href="#section-1" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">1. Ruby简介</a>
+                        <a href="#section-2" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">2. 变量声明与初始化</a>
+                        <a href="#section-3" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">3. 基本数据类型</a>
+                        <a href="#section-4" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">4. 控制流语句</a>
+                        <a href="#section-5" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">5. 函数定义与使用</a>
+                        <a href="#section-6" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">6. 数组与哈希</a>
+                        <a href="#section-7" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">7. 字符串操作</a>
+                        <a href="#section-8" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">8. 类与对象</a>
+                        <a href="#section-9" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">9. 继承与模块</a>
+                        <a href="#section-10" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">10. 异常处理</a>
+                        <a href="#section-11" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">11. 文件操作</a>
+                        <a href="#section-12" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">12. 正则表达式</a>
+                        <a href="#section-13" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">13. 块、Proc和Lambda</a>
+                        <a href="#section-14" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">14. 符号与散列</a>
+                        <a href="#section-15" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">15. 范围(Range)</a>
+                        <a href="#section-16" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">16. 迭代器</a>
+                        <a href="#section-17" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">17. 元编程基础</a>
+                        <a href="#section-18" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">18. 并发编程</a>
+                        <a href="#section-19" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">19. 宝石(Gem)管理</a>
+                        <a href="#section-20" class="block py-2 px-3 rounded-lg text-slate-300 hover:bg-purple-900 hover:text-purple-300 transition-colors duration-200">20. Ruby 3.x 新特性</a>
+                    </div>
+            </nav>
+            <div class="lg:w-3/4">
+                <!-- 1. Ruby简介 -->
+        <section id="section-1" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">1. Ruby简介</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 语言概述</h4>
+                <p class="text-slate-300 mb-4">特点：Ruby是一种动态、面向对象的脚本语言，以简洁、优雅的语法著称。注意事项：Ruby强调"开发者友好"的设计理念，注重代码的可读性和表达能力。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># Ruby 简介示例</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># Ruby 的 hello world</span><br>
+                        <span class="text-purple-400">puts</span> <span class="text-green-300">"Hello, Ruby!"</span><br>
+                        <br>
+                        <span class="text-blue-300"># Ruby 的设计哲学</span><br>
+                        <span class="text-purple-400"># 1. 开发者的幸福感很重要</span><br>
+                        <span class="text-purple-400"># 2. 代码应该是优雅的、易读的</span><br>
+                        <span class="text-purple-400"># 3. 最小惊讶原则</span><br>
+                        <br>
+                        <span class="text-blue-300"># Ruby 的主要特点</span><br>
+                        <span class="text-purple-400"># - 纯面向对象</span><br>
+                        <span class="text-purple-400"># - 动态类型</span><br>
+                        <span class="text-purple-400"># - 垃圾回收</span><br>
+                        <span class="text-purple-400"># - 强大的元编程能力</span><br>
+                        <span class="text-purple-400"># - 丰富的标准库</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+                <!-- 2. 变量声明与初始化 -->
+        <section id="section-2" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">2. 变量声明与初始化</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 变量声明、初始化和作用域</h4>
+                <p class="text-slate-300 mb-4">特点：动态类型语言，支持多种变量类型（局部变量、实例变量、类变量、全局变量），无需显式类型声明。注意事项：变量名以不同前缀区分作用域，局部变量仅在定义的块或方法内可见。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 变量声明与初始化</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># 局部变量</span><br>
+                        name = <span class="text-green-300">"Alice"</span><br>
+                        age = <span class="text-yellow-300">25</span><br>
+                        is_active = <span class="text-purple-400">true</span><br>
+                        <br>
+                        <span class="text-blue-300"># 实例变量 (类内部使用)</span><br>
+                        <span class="text-purple-400">@instance_var</span> = <span class="text-green-300">"实例变量"</span><br>
+                        <br>
+                        <span class="text-blue-300"># 类变量</span><br>
+                        <span class="text-purple-400">@@class_var</span> = <span class="text-green-300">"类变量"</span><br>
+                        <br>
+                        <span class="text-blue-300"># 全局变量</span><br>
+                        <span class="text-purple-400">$global_var</span> = <span class="text-green-300">"全局变量"</span><br>
+                        <br>
+                        <span class="text-blue-300"># 常量</span><br>
+                        <span class="text-yellow-300">MAX_SIZE</span> = <span class="text-yellow-300">100</span><br>
+                        <br>
+                        <span class="text-blue-300"># 多重赋值</span><br>
+                        x, y, z = <span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span><br>
+                        a, *b = <span class="text-yellow-300">1</span>, <span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span> <span class="text-blue-300"># a=1, b=[2,3]</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 基本数据类型 -->
+        <section id="section-3" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">3. 基本数据类型</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 基本数据类型和操作</h4>
+                <p class="text-slate-300 mb-4">特点：支持丰富的数据类型，包括数值、字符串、布尔值、符号等，所有类型都是对象。注意事项：Ruby是动态类型语言，变量类型可以在运行时改变，nil表示空值。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 基本数据类型</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># 数值类型</span><br>
+                        integer = <span class="text-yellow-300">42</span><br>
+                        float = <span class="text-yellow-300">3.14159</span><br>
+                        rational = <span class="text-yellow-300">2</span> / <span class="text-yellow-300">3</span>.to_r<br>
+                        complex = <span class="text-yellow-300">1</span> + <span class="text-yellow-300">2</span>i<br>
+                        <br>
+                        <span class="text-blue-300"># 字符串</span><br>
+                        str1 = <span class="text-green-300">"Hello, Ruby!"</span><br>
+                        str2 = '<span class="text-green-300">单引号字符串</span>'<br>
+                        str3 = <span class="text-green-300">"插值字符串: #{'Ruby'} #{2023}"</span><br>
+                        <br>
+                        <span class="text-blue-300"># 布尔值</span><br>
+                        <span class="text-purple-400">true</span><br>
+                        <span class="text-purple-400">false</span><br>
+                        <br>
+                        <span class="text-blue-300"># nil (空值)</span><br>
+                        empty_var = <span class="text-purple-400">nil</span><br>
+                        <br>
+                        <span class="text-blue-300"># 符号 (不可变标识符)</span><br>
+                        symbol = <span class="text-yellow-300">:symbol_name</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 控制流语句 -->
+        <section id="section-4" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">4. 控制流语句</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 条件语句、循环和流程控制</h4>
+                <p class="text-slate-300 mb-4">特点：支持传统控制流语句，同时提供Ruby特有的简洁语法（如unless、until、case表达式）。注意事项：Ruby的条件判断使用"真值"概念，只有false和nil被视为假，其他所有值都为真。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 控制流语句</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># if-elsif-else 语句</span><br>
+                        <span class="text-purple-400">if</span> age &gt;= <span class="text-yellow-300">18</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"成年人"</span><br>
+                        <span class="text-purple-400">elsif</span> age &gt;= <span class="text-yellow-300">13</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"青少年"</span><br>
+                        <span class="text-purple-400">else</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"儿童"</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-blue-300"># unless 语句 (if not 的反向)</span><br>
+                        <span class="text-purple-400">unless</span> name.<span class="text-blue-300">empty?</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"欢迎, #{name}!"</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-blue-300"># case 语句</span><br>
+                        <span class="text-purple-400">case</span> day<br>
+                        <span class="text-purple-400">when</span> <span class="text-yellow-300">:monday</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"周一"</span><br>
+                        <span class="text-purple-400">when</span> <span class="text-yellow-300">:tuesday</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"周二"</span><br>
+                        <span class="text-purple-400">else</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"其他"</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-blue-300"># 循环</span><br>
+                        <span class="text-yellow-300">5</span>.<span class="text-blue-300">times</span> <span class="text-purple-400">do</span> |i|<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"次数: #{i}"</span><br>
+                        <span class="text-purple-400">end</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 函数定义与使用 -->
+        <section id="section-5" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">5. 函数定义与使用</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 方法定义、参数和返回值</h4>
+                <p class="text-slate-300 mb-4">特点：使用def关键字定义方法，支持多种参数形式（位置参数、默认参数、关键字参数、可变参数），隐式返回最后一个表达式的值。注意事项：方法名可以以问号（布尔检查）或感叹号（危险操作）结尾。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 方法定义与使用</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># 基本方法定义</span><br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">greet</span>(name)<br>
+                        &nbsp;&nbsp;<span class="text-green-300">"Hello, #{name}!"</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-blue-300"># 调用方法</span><br>
+                        <span class="text-purple-400">puts</span> <span class="text-blue-300">greet</span>(<span class="text-green-300">"Alice"</span>)<br>
+                        <br>
+                        <span class="text-blue-300"># 默认参数</span><br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">welcome</span>(name, message = <span class="text-green-300">"欢迎"</span>)<br>
+                        &nbsp;&nbsp;<span class="text-green-300">"#{message}, #{name}!"</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-blue-300"># 关键字参数</span><br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">create_user</span>(name:, email:, age: <span class="text-yellow-300">18</span>)<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">{</span> name: name, email: email, age: age <span class="text-purple-400">}</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-blue-300"># 可变参数</span><br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">sum</span>(*numbers)<br>
+                        &nbsp;&nbsp;numbers.<span class="text-blue-300">sum</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-blue-300"># 带块的方法</span><br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">with_log</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"开始"</span><br>
+                        &nbsp;&nbsp;result = <span class="text-purple-400">yield</span> <span class="text-blue-300">if</span> <span class="text-purple-400">block_given?</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"结束"</span><br>
+                        &nbsp;&nbsp;result<br>
+                        <span class="text-purple-400">end</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 数组与哈希 -->
+        <section id="section-6" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">6. 数组与哈希</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 数组和哈希数据结构</h4>
+                <p class="text-slate-300 mb-4">特点：提供灵活的数组和哈希实现，支持丰富的操作方法。注意事项：数组可以包含不同类型的元素，哈希在Ruby 1.9+支持符号键的简洁语法，两者都是可变的。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 数组与哈希</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># 数组创建</span><br>
+                        arr1 = <span class="text-purple-400">[</span><span class="text-green-300">"apple"</span>, <span class="text-green-300">"banana"</span>, <span class="text-green-300">"cherry"</span><span class="text-purple-400">]</span><br>
+                        arr2 = <span class="text-purple-400">Array</span>.<span class="text-blue-300">new</span>(<span class="text-yellow-300">3</span>, <span class="text-yellow-300">0</span>) <span class="text-blue-300"># [0, 0, 0]</span><br>
+                        arr3 = <span class="text-yellow-300">1</span>..<span class="text-yellow-300">5</span>.<span class="text-blue-300">to_a</span> <span class="text-blue-300"># [1, 2, 3, 4, 5]</span><br>
+                        <br>
+                        <span class="text-blue-300"># 数组操作</span><br>
+                        arr1.<span class="text-blue-300">push</span>(<span class="text-green-300">"date"</span>) <span class="text-blue-300"># 添加元素</span><br>
+                        arr1.<span class="text-blue-300">pop</span> <span class="text-blue-300"># 删除最后一个元素</span><br>
+                        arr1[<span class="text-yellow-300">0</span>] <span class="text-blue-300"># 访问第一个元素</span><br>
+                        arr1.<span class="text-blue-300">first</span><br>
+                        arr1.<span class="text-blue-300">last</span><br>
+                        <br>
+                        <span class="text-blue-300"># 哈希创建</span><br>
+                        hash1 = <span class="text-purple-400">{</span> name: <span class="text-green-300">"Alice"</span>, age: <span class="text-yellow-300">25</span> <span class="text-purple-400">}</span><br>
+                        hash2 = <span class="text-purple-400">Hash</span>.<span class="text-blue-300">new</span>(0) <span class="text-blue-300"># 默认值为0</span><br>
+                        hash3 = <span class="text-purple-400">{</span> <span class="text-green-300">"name"</span> =&gt; <span class="text-green-300">"Bob"</span>, <span class="text-green-300">"email"</span> =&gt; <span class="text-green-300">"bob@example.com"</span> <span class="text-purple-400">}</span><br>
+                        <br>
+                        <span class="text-blue-300"># 哈希操作</span><br>
+                        hash1[:name]<br>
+                        hash1[:city] = <span class="text-green-300">"北京"</span><br>
+                        hash1.<span class="text-blue-300">delete</span>(:age)<br>
+                        hash1.<span class="text-blue-300">keys</span> <span class="text-blue-300"># [:name, :city]</span><br>
+                        hash1.<span class="text-blue-300">values</span> <span class="text-blue-300"># ["Alice", "北京"]</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 字符串操作 -->
+        <section id="section-7" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">7. 字符串操作</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 字符串处理和操作方法</h4>
+                <p class="text-slate-300 mb-4">特点：提供丰富的字符串处理方法，支持字符串插值、连接、分割、替换等操作。注意事项：字符串是可变的，可以直接修改，单引号和双引号字符串有不同的行为（双引号支持插值和转义序列）。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 字符串操作</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># 字符串创建</span><br>
+                        str1 = <span class="text-green-300">"Hello, Ruby!"</span><br>
+                        str2 = '<span class="text-green-300">单引号字符串</span>'<br>
+                        <br>
+                        <span class="text-blue-300"># 字符串连接</span><br>
+                        str3 = str1 + <span class="text-green-300">" Welcome!"</span><br>
+                        str4 = <span class="text-green-300">"Hello"</span> &lt;&lt; <span class="text-green-300">", "</span> &lt;&lt; <span class="text-green-300">"Ruby"</span><br>
+                        <br>
+                        <span class="text-blue-300"># 字符串插值</span><br>
+                        name = <span class="text-green-300">"Alice"</span><br>
+                        str5 = <span class="text-green-300">"Hello, #{name}! You are #{2023 - 1998} years old."</span><br>
+                        <br>
+                        <span class="text-blue-300"># 字符串方法</span><br>
+                        str1.<span class="text-blue-300">length</span> <span class="text-blue-300"># 字符串长度</span><br>
+                        str1.<span class="text-blue-300">upcase</span> <span class="text-blue-300"># 转换为大写</span><br>
+                        str1.<span class="text-blue-300">downcase</span> <span class="text-blue-300"># 转换为小写</span><br>
+                        str1.<span class="text-blue-300">strip</span> <span class="text-blue-300"># 去除前后空格</span><br>
+                        <br>
+                        <span class="text-blue-300"># 字符串分割与替换</span><br>
+                        <span class="text-green-300">"a,b,c,d"</span>.<span class="text-blue-300">split</span>(<span class="text-green-300">","</span>) <span class="text-blue-300"># ["a", "b", "c", "d"]</span><br>
+                        <span class="text-green-300">"Hello, Ruby"</span>.<span class="text-blue-300">gsub</span>(<span class="text-green-300">"Ruby"</span>, <span class="text-green-300">"World"</span>) <span class="text-blue-300"># "Hello, World"</span><br>
+                        <br>
+                        <span class="text-blue-300"># 多行字符串</span><br>
+                        multiline = <span class="text-purple-400"><<-EOS</span><br>
+                        这是一个<br>
+                        多行字符串<br>
+                        EOS<br>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. 类与对象 -->
+        <section id="section-8" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">8. 类与对象</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 类定义、对象创建和封装</h4>
+                <p class="text-slate-300 mb-4">特点：纯面向对象语言，所有事物都是对象，支持封装、继承和多态。注意事项：使用class关键字定义类，实例变量以@开头，方法默认是public的，可以使用private/protected关键字改变可见性。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 类与对象</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># 类定义</span><br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Person</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">attr_accessor</span> :name, :age <span class="text-blue-300"># 自动生成 getter 和 setter</span><br>
+                        <br>
+                        &nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">initialize</span>(name, age)
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">@name</span> = name
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">@age</span> = age
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span>
+                        <br>
+                        &nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">greet</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"Hello, my name is #{@name} and I'm #{@age} years old."</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span>
+                        <br>
+                        &nbsp;&nbsp;<span class="text-purple-400">private</span>
+                        <br>
+                        &nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">private_method</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"This is a private method"</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span>
+                        <span class="text-purple-400">end</span>
+                        <br>
+                        <span class="text-blue-300"># 创建对象</span><br>
+                        person = <span class="text-blue-300">Person</span>.<span class="text-blue-300">new</span>(<span class="text-green-300">"Alice"</span>, <span class="text-yellow-300">25</span>)<br>
+                        <br>
+                        <span class="text-blue-300"># 访问对象属性和方法</span><br>
+                        person.name <span class="text-blue-300"># "Alice"</span><br>
+                        person.age = <span class="text-yellow-300">26</span><br>
+                        <span class="text-purple-400">puts</span> person.<span class="text-blue-300">greet</span><br>
+                        <br>
+                        <span class="text-blue-300"># 类方法</span><br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">MathUtil</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-purple-400">self</span>.<span class="text-blue-300">square</span>(x)
+                        &nbsp;&nbsp;&nbsp;&nbsp;x * x
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span>
+                        <span class="text-purple-400">end</span>
+                        <br>
+                        <span class="text-purple-400">puts</span> <span class="text-blue-300">MathUtil</span>.<span class="text-blue-300">square</span>(<span class="text-yellow-300">5</span>) <span class="text-blue-300"># 25</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. 继承与模块 -->
+        <section id="section-9" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">9. 继承与模块</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 继承、模块和混入(Mixin)</h4>
+                <p class="text-slate-300 mb-4">特点：支持单继承，通过模块实现多重继承功能（混入），使用super关键字调用父类方法。注意事项：Ruby不支持多继承，但可以通过包含多个模块来实现类似功能，模块不能被实例化。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 继承与模块</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># 继承</span><br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Employee</span> &lt; <span class="text-blue-300">Person</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">attr_accessor</span> :salary
+                        <br>
+                        &nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">initialize</span>(name, age, salary)
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">super</span>(name, age)
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">@salary</span> = salary
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span>
+                        <br>
+                        &nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">greet</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-green-300">"#{super} My salary is #{@salary}."</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span>
+                        <span class="text-purple-400">end</span>
+                        <br>
+                        <span class="text-blue-300"># 模块定义</span>
+                        <span class="text-purple-400">module</span> <span class="text-blue-300">Serializable</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">to_json</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">require</span> <span class="text-green-300">'json'</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">{</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name: <span class="text-purple-400">@name</span>,
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;age: <span class="text-purple-400">@age</span>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">}</span>.<span class="text-blue-300">to_json</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span>
+                        <span class="text-purple-400">end</span>
+                        <br>
+                        <span class="text-blue-300"># 包含模块 (混入)</span>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Person</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">include</span> <span class="text-blue-300">Serializable</span>
+                        <span class="text-purple-400">end</span>
+                        <br>
+                        <span class="text-blue-300"># 使用混入的方法</span>
+                        person = <span class="text-blue-300">Person</span>.<span class="text-blue-300">new</span>(<span class="text-green-300">"Alice"</span>, <span class="text-yellow-300">25</span>)
+                        <span class="text-purple-400">puts</span> person.<span class="text-blue-300">to_json</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 10. 异常处理 -->
+        <section id="section-10" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">10. 异常处理</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 异常处理和错误管理</h4>
+                <p class="text-slate-300 mb-4">特点：使用begin/rescue/ensure/end结构处理异常，支持自定义异常类。注意事项：异常处理应该用于处理意外情况，而不是控制流，ensure块中的代码无论是否发生异常都会执行。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 异常处理</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># 基本异常处理</span><br>
+                        <span class="text-purple-400">begin</span>
+                        &nbsp;&nbsp;file = <span class="text-purple-400">File</span>.<span class="text-blue-300">open</span>(<span class="text-green-300">"non_existent_file.txt"</span>)
+                        &nbsp;&nbsp;content = file.<span class="text-blue-300">read</span>
+                        <span class="text-purple-400">rescue</span> <span class="text-purple-400">Errno</span>::<span class="text-blue-300">ENOENT</span> =&gt; e
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"文件不存在: #{e.message}"</span>
+                        <span class="text-purple-400">rescue</span> <span class="text-purple-400">Exception</span> =&gt; e
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"发生错误: #{e.message}"</span>
+                        <span class="text-purple-400">ensure</span>
+                        &nbsp;&nbsp;file.<span class="text-blue-300">close</span> <span class="text-purple-400">if</span> file
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"操作完成"</span>
+                        <span class="text-purple-400">end</span>
+                        <br>
+                        <span class="text-blue-300"># 自定义异常</span>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">MyCustomError</span> &lt; <span class="text-purple-400">StandardError</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">attr_reader</span> :details
+                        <br>
+                        &nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">initialize</span>(message, details)
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">super</span>(message)
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">@details</span> = details
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span>
+                        <span class="text-purple-400">end</span>
+                        <br>
+                        <span class="text-blue-300"># 抛出和捕获自定义异常</span>
+                        <span class="text-purple-400">begin</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">raise</span> <span class="text-blue-300">MyCustomError</span>.<span class="text-blue-300">new</span>(<span class="text-green-300">"自定义错误"</span>, { code: <span class="text-yellow-300">500</span> })
+                        <span class="text-purple-400">rescue</span> <span class="text-blue-300">MyCustomError</span> =&gt; e
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"错误信息: #{e.message}"</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"错误详情: #{e.details}"</span>
+                        <span class="text-purple-400">end</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 11. 文件操作 -->
+        <section id="section-11" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">11. 文件操作</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 文件读写和目录操作</h4>
+                <p class="text-slate-300 mb-4">特点：提供丰富的文件和目录操作方法，支持块式语法自动管理资源。注意事项：使用File和Dir类进行文件和目录操作，块式语法可以自动关闭文件，避免资源泄漏。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 文件操作</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># 文件读取 (块式语法)</span>
+                        <span class="text-purple-400">File</span>.<span class="text-blue-300">open</span>(<span class="text-green-300">"file.txt"</span>, <span class="text-green-300">"r"</span>) <span class="text-purple-400">do</span> |file|
+                        &nbsp;&nbsp;content = file.<span class="text-blue-300">read</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> content
+                        <span class="text-purple-400">end</span>
+                        <br>
+                        <span class="text-blue-300"># 逐行读取</span>
+                        <span class="text-purple-400">File</span>.<span class="text-blue-300">foreach</span>(<span class="text-green-300">"file.txt"</span>) <span class="text-purple-400">do</span> |line|
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> line.<span class="text-blue-300">chomp</span>
+                        <span class="text-purple-400">end</span>
+                        <br>
+                        <span class="text-blue-300"># 文件写入</span>
+                        <span class="text-purple-400">File</span>.<span class="text-blue-300">open</span>(<span class="text-green-300">"output.txt"</span>, <span class="text-green-300">"w"</span>) <span class="text-purple-400">do</span> |file|
+                        &nbsp;&nbsp;file.<span class="text-blue-300">write</span>(<span class="text-green-300">"Hello, Ruby!\n"</span>)
+                        &nbsp;&nbsp;file.<span class="text-blue-300">write</span>(<span class="text-green-300">"Welcome to file operations.\n"</span>)
+                        <span class="text-purple-400">end</span>
+                        <br>
+                        <span class="text-blue-300"># 文件追加</span>
+                        <span class="text-purple-400">File</span>.<span class="text-blue-300">open</span>(<span class="text-green-300">"output.txt"</span>, <span class="text-green-300">"a"</span>) <span class="text-purple-400">do</span> |file|
+                        &nbsp;&nbsp;file.<span class="text-blue-300">write</span>(<span class="text-green-300">"This is an appended line.\n"</span>)
+                        <span class="text-purple-400">end</span>
+                        <br>
+                        <span class="text-blue-300"># 目录操作</span>
+                        <span class="text-purple-400">Dir</span>.<span class="text-blue-300">mkdir</span>(<span class="text-green-300">"new_dir"</span>) <span class="text-blue-300">unless</span> <span class="text-purple-400">Dir</span>.<span class="text-blue-300">exist?</span>(<span class="text-green-300">"new_dir"</span>)
+                        <span class="text-purple-400">Dir</span>.<span class="text-blue-300">entries</span>(<span class="text-green-300">"."</span>) <span class="text-blue-300"># 获取当前目录文件列表</span>
+                        <span class="text-purple-400">Dir</span>.<span class="text-blue-300">glob</span>(<span class="text-green-300">"*.txt"</span>) <span class="text-blue-300"># 获取所有txt文件</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. 正则表达式 -->
+        <section id="section-12" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">12. 正则表达式</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 正则表达式语法和使用</h4>
+                <p class="text-slate-300 mb-4">特点：内置强大的正则表达式支持，使用/.../语法定义正则，支持丰富的模式匹配和替换操作。注意事项：正则表达式在Ruby中是对象，可以使用=~运算符进行匹配，$1, $2等变量保存匹配组。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 正则表达式</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># 正则表达式创建</span>
+                        regex1 = <span class="text-purple-400">/hello/i</span> <span class="text-blue-300"># 不区分大小写</span>
+                        regex2 = <span class="text-purple-400">Regexp</span>.<span class="text-blue-300">new</span>(<span class="text-green-300">"world"</span>, <span class="text-purple-400">Regexp</span>::<span class="text-blue-300">IGNORECASE</span>)
+                        <br>
+                        <span class="text-blue-300"># 模式匹配</span>
+                        text = <span class="text-green-300">"Hello, World! Hello, Ruby!"</span>
+                        <span class="text-purple-400">puts</span> text =~ <span class="text-purple-400">/hello/i</span> <span class="text-blue-300"># 0 (匹配位置)</span>
+                        <span class="text-purple-400">puts</span> <span class="text-purple-400">$&</span> <span class="text-blue-300"># "Hello" (匹配的文本)</span>
+                        <br>
+                        <span class="text-blue-300"># 捕获组</span>
+                        text = <span class="text-green-300">"My email is alice@example.com"</span>
+                        <span class="text-purple-400">if</span> text =~ <span class="text-purple-400">/([a-zA-Z0-9._%+-]+)@([a-zA-Z0-9.-]+)\.([a-zA-Z]{2,})/</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"用户名: #{$1}"</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"域名: #{$2}"</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"后缀: #{$3}"</span>
+                        <span class="text-purple-400">end</span>
+                        <br>
+                        <span class="text-blue-300"># 字符串替换</span>
+                        text = <span class="text-green-300">"Hello, World!"</span>
+                        new_text = text.<span class="text-blue-300">gsub</span>(<span class="text-purple-400">/World/</span>, <span class="text-green-300">"Ruby"</span>)
+                        <span class="text-purple-400">puts</span> new_text <span class="text-blue-300"># "Hello, Ruby!"</span>
+                        <br>
+                        <span class="text-blue-300"># 块替换</span>
+                        text = <span class="text-green-300">"1, 2, 3, 4, 5"</span>
+                        new_text = text.<span class="text-blue-300">gsub</span>(<span class="text-purple-400">/\d+/</span>) <span class="text-purple-400">do</span> |match|
+                        &nbsp;&nbsp;(match.<span class="text-blue-300">to_i</span> * <span class="text-yellow-300">2</span>).<span class="text-blue-300">to_s</span>
+                        <span class="text-purple-400">end</span>
+                        <span class="text-purple-400">puts</span> new_text <span class="text-blue-300"># "2, 4, 6, 8, 10"</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 13. 块、Proc和Lambda -->
+        <section id="section-13" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">13. 块、Proc和Lambda</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 块、Proc和Lambda的使用</h4>
+                <p class="text-slate-300 mb-4">特点：支持块（代码块）、Proc（可调用对象）和Lambda（匿名函数），提供灵活的函数式编程能力。注意事项：块是临时的代码片段，Proc和Lambda是可重用的代码对象，Lambda对参数数量更严格。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 块、Proc和Lambda</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># 块的使用</span>
+                        <span class="text-yellow-300">5</span>.<span class="text-blue-300">times</span> <span class="text-purple-400">do</span> |i|
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"第 #{i+1} 次"</span>
+                        <span class="text-purple-400">end</span>
+                        <br>
+                        <span class="text-blue-300"># 使用yield的方法</span>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">with_log</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"开始"</span>
+                        &nbsp;&nbsp;result = <span class="text-purple-400">yield</span> <span class="text-blue-300">if</span> <span class="text-purple-400">block_given?</span>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"结束"</span>
+                        &nbsp;&nbsp;result
+                        <span class="text-purple-400">end</span>
+                        <br>
+                        <span class="text-purple-400">puts</span> <span class="text-blue-300">with_log</span> <span class="text-purple-400">do</span>
+                        &nbsp;&nbsp;<span class="text-green-300">"执行块"</span>
+                        <span class="text-purple-400">end</span>
+                        <br>
+                        <span class="text-blue-300"># Proc</span>
+                        proc1 = <span class="text-purple-400">Proc</span>.<span class="text-blue-300">new</span> { |x, y| x + y }
+                        <span class="text-purple-400">puts</span> proc1.<span class="text-blue-300">call</span>(<span class="text-yellow-300">2</span>, <span class="text-yellow-300">3</span>) <span class="text-blue-300"># 5</span>
+                        <span class="text-purple-400">puts</span> proc1.<span class="text-blue-300">[]</span>(<span class="text-yellow-300">4</span>, <span class="text-yellow-300">5</span>) <span class="text-blue-300"># 9</span>
+                        <br>
+                        <span class="text-blue-300"># Lambda</span>
+                        lambda1 = <span class="text-purple-400">-></span>(x, y) { x + y }
+                        <span class="text-purple-400">puts</span> lambda1.<span class="text-blue-300">call</span>(<span class="text-yellow-300">3</span>, <span class="text-yellow-300">4</span>) <span class="text-blue-300"># 7</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 14. 符号与散列 -->
+        <section id="section-14" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">14. 符号与散列</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 符号和散列的使用</h4>
+                <p class="text-slate-300 mb-4">特点：符号是不可变的标识符，比字符串更高效，常用于散列键和方法名。注意事项：符号在内存中只存在一份，使用:符号名语法创建，Ruby 1.9+支持哈希的简洁语法。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 符号与散列</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># 符号创建</span>
+                        sym1 = <span class="text-yellow-300">:name</span>
+                        sym2 = <span class="text-green-300">"age"</span>.<span class="text-blue-300">to_sym</span>
+                        sym3 = <span class="text-green-300">"email"</span>.<span class="text-blue-300">intern</span>
+                        <br>
+                        <span class="text-blue-300"># 符号属性</span>
+                        <span class="text-purple-400">puts</span> <span class="text-yellow-300">:name</span>.<span class="text-blue-300">to_s</span> <span class="text-blue-300"># "name"</span>
+                        <span class="text-purple-400">puts</span> <span class="text-yellow-300">:name</span>.<span class="text-blue-300">object_id</span>
+                        <span class="text-purple-400">puts</span> <span class="text-green-300">"name"</span>.<span class="text-blue-300">to_sym</span>.<span class="text-blue-300">object_id</span> <span class="text-blue-300"># 相同的object_id</span>
+                        <br>
+                        <span class="text-blue-300"># 符号作为哈希键</span>
+                        user = <span class="text-purple-400">{</span> :name =&gt; <span class="text-green-300">"Alice"</span>, :age =&gt; <span class="text-yellow-300">25</span> <span class="text-purple-400">}</span>
+                        <br>
+                        <span class="text-blue-300"># Ruby 1.9+ 简洁语法</span>
+                        user = <span class="text-purple-400">{</span> name: <span class="text-green-300">"Alice"</span>, age: <span class="text-yellow-300">25</span> <span class="text-purple-400">}</span>
+                        <br>
+                        <span class="text-blue-300"># 哈希操作</span>
+                        <span class="text-purple-400">puts</span> user.<span class="text-blue-300">[:name]</span> <span class="text-blue-300"># "Alice"</span>
+                        <span class="text-purple-400">puts</span> user.<span class="text-blue-300">[:age]</span> <span class="text-blue-300"># 25</span>
+                        <br>
+                        <span class="text-blue-300"># 哈希方法</span>
+                        <span class="text-purple-400">puts</span> user.<span class="text-blue-300">keys</span> <span class="text-blue-300"># [:name, :age]</span>
+                        <span class="text-purple-400">puts</span> user.<span class="text-blue-300">values</span> <span class="text-blue-300"># ["Alice", 25]</span>
+                        <span class="text-purple-400">puts</span> user.<span class="text-blue-300">empty?</span> <span class="text-blue-300"># false</span>
+                        <br>
+                        <span class="text-blue-300"># 合并哈希</span>
+                        user_info = user.<span class="text-blue-300">merge</span>(<span class="text-purple-400">{</span> email: <span class="text-green-300">"alice@example.com"</span> <span class="text-purple-400">}</span>)
+                        <span class="text-purple-400">puts</span> user_info
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 15. 范围(Range) -->
+        <section id="section-15" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">15. 范围(Range)</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 范围的定义和使用</h4>
+                <p class="text-slate-300 mb-4">特点：范围是表示值序列的对象，使用..（包含端点）或...（不包含右端点）创建。注意事项：范围常用于迭代、条件判断和序列生成。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 范围的定义与使用</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># 数字范围</span><br>
+                        (1..5).each do |num|<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> num<br>
+                        <span class="text-purple-400">end</span> <span class="text-blue-300"># 输出 1, 2, 3, 4, 5</span><br>
+                        <br>
+                        <span class="text-blue-300"># 不包含右端点</span><br>
+                        (1...5).each do |num|<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> num<br>
+                        <span class="text-purple-400">end</span> <span class="text-blue-300"># 输出 1, 2, 3, 4</span><br>
+                        <br>
+                        <span class="text-blue-300"># 字符范围</span><br>
+                        (<span class="text-green-300">'a'</span>..<span class="text-green-300">'e'</span>).each do |char|<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> char<br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-blue-300"># 范围作为条件</span><br>
+                        score = 85<br>
+                        <span class="text-purple-400">case</span> score<br>
+                        <span class="text-purple-400">when</span> 90..100<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"优秀"</span><br>
+                        <span class="text-purple-400">when</span> 80..89<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"良好"</span><br>
+                        <span class="text-purple-400">when</span> 70..79<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"中等"</span><br>
+                        <span class="text-purple-400">else</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"不及格"</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-blue-300"># 范围转换为数组</span><br>
+                        numbers = (1..10).to_a<br>
+                        <span class="text-purple-400">puts</span> numbers <span class="text-blue-300"># [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span><br>
+                        <br>
+                        <span class="text-blue-300"># 范围方法</span><br>
+                        <span class="text-purple-400">puts</span> (1..5).include?(3) <span class="text-blue-300"># true</span><br>
+                        <span class="text-purple-400">puts</span> (1..5).first <span class="text-blue-300"># 1</span><br>
+                        <span class="text-purple-400">puts</span> (1..5).last <span class="text-blue-300"># 5</span><br>
+                        <span class="text-purple-400">puts</span> (1..5).size <span class="text-blue-300"># 5</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 16. 迭代器 -->
+        <section id="section-16" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">16. 迭代器</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 迭代器的使用</h4>
+                <p class="text-slate-300 mb-4">特点：迭代器是Ruby的核心特性之一，用于遍历集合对象。注意事项：Ruby提供了丰富的内置迭代器，也可以自定义迭代器。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 迭代器的使用</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># each 迭代器</span><br>
+                        [1, 2, 3, 4, 5].each do |num|<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> num<br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-blue-300"># each_with_index</span><br>
+                        ["a", "b", "c"].each_with_index do |char, index|<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"索引 #{index}: #{char}"</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-blue-300"># map 迭代器（转换集合）</span><br>
+                        numbers = [1, 2, 3, 4, 5]<br>
+                        squared = numbers.map do |num|<br>
+                        &nbsp;&nbsp;num * num<br>
+                        <span class="text-purple-400">end</span><br>
+                        <span class="text-purple-400">puts</span> squared <span class="text-blue-300"># [1, 4, 9, 16, 25]</span><br>
+                        <br>
+                        <span class="text-blue-300"># select 迭代器（过滤集合）</span><br>
+                        even_numbers = numbers.select do |num|<br>
+                        &nbsp;&nbsp;num.even?<br>
+                        <span class="text-purple-400">end</span><br>
+                        <span class="text-purple-400">puts</span> even_numbers <span class="text-blue-300"># [2, 4]</span><br>
+                        <br>
+                        <span class="text-blue-300"># reject 迭代器（排除元素）</span><br>
+                        odd_numbers = numbers.reject do |num|<br>
+                        &nbsp;&nbsp;num.even?<br>
+                        <span class="text-purple-400">end</span><br>
+                        <span class="text-purple-400">puts</span> odd_numbers <span class="text-blue-300"># [1, 3, 5]</span><br>
+                        <br>
+                        <span class="text-blue-300"># reduce 迭代器（折叠集合）</span><br>
+                        sum = numbers.reduce(0) do |acc, num|<br>
+                        &nbsp;&nbsp;acc + num<br>
+                        <span class="text-purple-400">end</span><br>
+                        <span class="text-purple-400">puts</span> sum <span class="text-blue-300"># 15</span><br>
+                        <br>
+                        <span class="text-blue-300"># 简洁写法（&: 符号）</span><br>
+                        even_numbers = numbers.select(&:even?)<br>
+                        <br>
+                        <span class="text-blue-300"># 自定义迭代器</span><br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">custom_each</span>(array)<br>
+                        &nbsp;&nbsp;index = 0<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">while</span> index < array.size<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">yield</span> array[index]<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;index += 1<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        custom_each([1, 2, 3]) do |num|<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> num<br>
+                        <span class="text-purple-400">end</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 17. 元编程基础 -->
+        <section id="section-17" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">17. 元编程基础</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 元编程的基本概念</h4>
+                <p class="text-slate-300 mb-4">特点：元编程是Ruby的强大特性，允许程序在运行时操作自身结构。注意事项：元编程可以使代码更灵活，但也可能降低可读性和可维护性。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 元编程基础</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># 动态方法调用</span><br>
+                        obj = <span class="text-purple-400">"Hello"</span><br>
+                        <span class="text-purple-400">puts</span> obj.send(:upcase) <span class="text-blue-300"># "HELLO"</span><br>
+                        <span class="text-purple-400">puts</span> obj.send(:length) <span class="text-blue-300"># 5</span><br>
+                        <br>
+                        <span class="text-blue-300"># 动态定义方法</span><br>
+                        <span class="text-purple-400">class</span> <span class="text-yellow-300">Person</span><br>
+                        &nbsp;&nbsp;<span class="text-blue-300">%w(name age email)</span>.each do |attr|<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">define_method</span>(<span class="text-purple-400">"</span>#{attr}<span class="text-purple-400">="</span>) do |value|<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;instance_variable_set(<span class="text-purple-400">"</span>@#{attr}<span class="text-purple-400">"</span>, value)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">end</span><br>
+                        <br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">define_method</span>(attr) do<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;instance_variable_get(<span class="text-purple-400">"</span>@#{attr}<span class="text-purple-400">"</span>)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">end</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        person = <span class="text-yellow-300">Person</span>.<span class="text-blue-300">new</span><br>
+                        person.name = <span class="text-green-300">"Alice"</span><br>
+                        <span class="text-purple-400">puts</span> person.name <span class="text-blue-300"># "Alice"</span><br>
+                        <br>
+                        <span class="text-blue-300"># 打开类（Monkey Patching）</span><br>
+                        <span class="text-purple-400">class</span> <span class="text-yellow-300">String</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">reverse_and_upcase</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">self</span>.reverse.upcase<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-purple-400">puts</span> <span class="text-green-300">"hello"</span>.<span class="text-blue-300">reverse_and_upcase</span> <span class="text-blue-300"># "OLLEH"</span><br>
+                        <br>
+                        <span class="text-blue-300"># 使用 instance_eval</span><br>
+                        person = <span class="text-yellow-300">Person</span>.<span class="text-blue-300">new</span><br>
+                        person.instance_eval <span class="text-purple-400">do</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">self</span>.name = <span class="text-green-300">"Bob"</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">@age</span> = <span class="text-yellow-300">30</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-purple-400">puts</span> person.name <span class="text-blue-300"># "Bob"</span><br>
+                        <br>
+                        <span class="text-blue-300"># 使用 class_eval</span><br>
+                        <span class="text-yellow-300">Person</span>.class_eval <span class="text-purple-400">do</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">greet</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"你好，我是 #{$self.name}"</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        person.greet <span class="text-blue-300"># "你好，我是 Bob"</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 18. 并发编程 -->
+        <section id="section-18" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">18. 并发编程</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 并发编程的实现</h4>
+                <p class="text-slate-300 mb-4">特点：Ruby支持多种并发编程模型，包括线程、纤程和并行处理。注意事项：并发编程需要注意线程安全和资源竞争问题。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 并发编程</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># 线程的创建与使用</span><br>
+                        thread1 = <span class="text-purple-400">Thread</span>.<span class="text-blue-300">new</span> <span class="text-purple-400">do</span><br>
+                        &nbsp;&nbsp;<span class="text-yellow-300">5</span>.times do |i|<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"线程1: #{i}"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;sleep 0.1<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        thread2 = <span class="text-purple-400">Thread</span>.<span class="text-blue-300">new</span> <span class="text-purple-400">do</span><br>
+                        &nbsp;&nbsp;<span class="text-yellow-300">5</span>.times do |i|<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"线程2: #{i}"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;sleep 0.1<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        thread1.join<br>
+                        thread2.join<br>
+                        <br>
+                        <span class="text-blue-300"># 线程安全</span><br>
+                        <span class="text-purple-400">class</span> <span class="text-yellow-300">Counter</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">initialize</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">@count</span> = 0<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">@mutex</span> = <span class="text-purple-400">Mutex</span>.<span class="text-blue-300">new</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span><br>
+                        <br>
+                        &nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">increment</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">@mutex</span>.<span class="text-blue-300">synchronize</span> <span class="text-purple-400">do</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">@count</span> += 1<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">end</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span><br>
+                        <br>
+                        &nbsp;&nbsp;<span class="text-purple-400">def</span> <span class="text-blue-300">count</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">@count</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-blue-300"># 纤程（Fibers）</span><br>
+                        <span class="text-purple-400">fiber1</span> = <span class="text-purple-400">Fiber</span>.<span class="text-blue-300">new</span> <span class="text-purple-400">do</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"纤程开始"</span><br>
+                        &nbsp;&nbsp;value = <span class="text-purple-400">Fiber</span>.<span class="text-blue-300">yield</span> <span class="text-green-300">"返回值1"</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"纤程继续: #{value}"</span><br>
+                        &nbsp;&nbsp;<span class="text-green-300">"返回值2"</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-purple-400">puts</span> fiber1.resume <span class="text-blue-300"># "纤程开始", "返回值1"</span><br>
+                        <span class="text-purple-400">puts</span> fiber1.resume <span class="text-green-300">"传入值"</span> <span class="text-blue-300"># "纤程继续: 传入值", "返回值2"</span><br>
+                        <br>
+                        <span class="text-blue-300"># Ruby 3.0+ 并发特性</span><br>
+                        <span class="text-purple-400"># 使用 Ractor（Ruby 3.0+）</span><br>
+                        <span class="text-purple-400">if</span> <span class="text-purple-400">RUBY_VERSION</span> &gt;= <span class="text-green-300">"3.0.0"</span><br>
+                        &nbsp;&nbsp;ractor = <span class="text-purple-400">Ractor</span>.<span class="text-blue-300">new</span> do<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-purple-400">receive</span> + <span class="text-yellow-300">10</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">end</span><br>
+                        <br>
+                        &nbsp;&nbsp;ractor.<span class="text-blue-300">send</span>(<span class="text-yellow-300">5</span>)<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> ractor.<span class="text-blue-300">take</span> <span class="text-blue-300"># 15</span><br>
+                        <span class="text-purple-400">end</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 19. 宝石(Gem)管理 -->
+        <section id="section-19" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">19. 宝石(Gem)管理</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 宝石的安装和使用</h4>
+                <p class="text-slate-300 mb-4">特点：Gem是Ruby的包管理系统，用于安装和管理第三方库。注意事项：使用Bundler可以更好地管理项目依赖。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 宝石管理</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># 安装宝石</span><br>
+                        <span class="text-blue-300"># gem install rails</span><br>
+                        <span class="text-blue-300"># gem install nokogiri --version 1.13.0</span><br>
+                        <br>
+                        <span class="text-blue-300"># 列出已安装的宝石</span><br>
+                        <span class="text-blue-300"># gem list</span><br>
+                        <br>
+                        <span class="text-blue-300"># 查看宝石信息</span><br>
+                        <span class="text-blue-300"># gem info rails</span><br>
+                        <br>
+                        <span class="text-blue-300"># 卸载宝石</span><br>
+                        <span class="text-blue-300"># gem uninstall nokogiri</span><br>
+                        <br>
+                        <span class="text-blue-300"># 使用Bundler管理依赖</span><br>
+                        <span class="text-blue-300"># bundle install</span><br>
+                        <span class="text-blue-300"># bundle update</span><br>
+                        <span class="text-blue-300"># bundle exec ruby script.rb</span><br>
+                        <br>
+                        <span class="text-blue-300"># 在代码中使用宝石</span><br>
+                        <span class="text-purple-400">require</span> <span class="text-green-300">'nokogiri'</span><br>
+                        <br>
+                        <span class="text-purple-400"># 创建简单的HTML解析</span><br>
+                        html = <span class="text-green-300">'<html><body><h1>标题</h1></body></html>'</span><br>
+                        doc = <span class="text-yellow-300">Nokogiri</span>.<span class="text-blue-300">HTML</span>(html)<br>
+                        <span class="text-purple-400">puts</span> doc.at(<span class="text-green-300">'h1'</span>).content <span class="text-blue-300"># "标题"</span><br>
+                        <br>
+                        <span class="text-blue-300"># Gemfile示例</span><br>
+                        <span class="text-blue-300"># source 'https://rubygems.org'</span><br>
+                        <span class="text-blue-300"># ruby '3.0.0'</span><br>
+                        <span class="text-blue-300">#</span><br>
+                        <span class="text-blue-300"># gem 'rails', '~&gt; 7.0.0'</span><br>
+                        <span class="text-blue-300"># gem 'nokogiri'</span><br>
+                        <span class="text-blue-300"># gem 'puma', '~&gt; 5.0'</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 20. Ruby 3.x 新特性 -->
+        <section id="section-20" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">20. Ruby 3.x 新特性</span>
+            </h2>
+            
+            <div class="language-content" data-lang="ruby">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Ruby - 3.x版本的主要更新</h4>
+                <p class="text-slate-300 mb-4">特点：Ruby 3.x引入了许多重要特性，包括并行处理、类型提示和语法改进。注意事项：这些新特性提高了Ruby的性能和表达能力。</p>
+                
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># Ruby 3.x 新特性</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300"># Ruby 3.0+ 类型提示</span><br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">add</span>(a, b)<span class="text-purple-400">:</span> <span class="text-purple-400">Integer</span><br>
+                        &nbsp;&nbsp;a + b<br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-blue-300"># 可选参数语法</span><br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">greet</span>(name, message: <span class="text-green-300">"你好"</span>)<br>
+                        &nbsp;&nbsp;<span class="text-green-300">"#{message}, #{name}!"</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-purple-400">puts</span> greet(<span class="text-green-300">"Alice"</span>) <span class="text-blue-300"># "你好, Alice!"</span><br>
+                        <span class="text-purple-400">puts</span> greet(<span class="text-green-300">"Bob"</span>, message: <span class="text-green-300">"欢迎"</span>) <span class="text-blue-300"># "欢迎, Bob!"</span><br>
+                        <br>
+                        <span class="text-blue-300"># Ruby 3.0+ 模式匹配</span><br>
+                        <span class="text-purple-400">case</span> [1, 2]<br>
+                        <span class="text-purple-400">in</span> [a, b]<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"a: #{a}, b: #{b}"</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-blue-300"># 哈希模式匹配</span><br>
+                        <span class="text-purple-400">case</span> <span class="text-purple-400">{</span> name: <span class="text-green-300">"Alice"</span>, age: <span class="text-yellow-300">25</span> <span class="text-purple-400">}</span><br>
+                        <span class="text-purple-400">in</span> <span class="text-purple-400">{</span> name: n, age: a <span class="text-purple-400">}</span><br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"姓名: #{n}, 年龄: #{a}"</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-blue-300"># Ruby 3.1+ 单行模式匹配</span><br>
+                        <span class="text-purple-400">if</span> [1, 2, 3] <span class="text-purple-400">in</span> [a, *, b]<br>
+                        &nbsp;&nbsp;<span class="text-purple-400">puts</span> <span class="text-green-300">"a: #{a}, b: #{b}"</span><br>
+                        <span class="text-purple-400">end</span><br>
+                        <br>
+                        <span class="text-blue-300"># Ruby 3.2+ 改进的错误信息</span><br>
+                        <span class="text-purple-400"># 更清晰的错误提示和上下文信息</span><br>
+                        <br>
+                        <span class="text-blue-300"># 性能提升</span><br>
+                        <span class="text-purple-400"># Ruby 3.x 实现了 "Ruby 3x3" 性能目标</span><br>
+                        <span class="text-purple-400"># 比 Ruby 2.0 快 3 倍</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
 </body>
 </html>
