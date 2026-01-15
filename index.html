@@ -235,7 +235,7 @@
         
         .stats-number {
             font-family: 'Oranienbaum', serif;
-            font-size: 3rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--accent-color);
         }
@@ -342,13 +342,22 @@
         
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="mb-8">
-                <h1 class="hero-title text-5xl md:text-7xl font-bold mb-6 opacity-0" id="main-title">
+                <!-- 维特根斯坦名言 -->
+                <div class="mb-20 opacity-0" id="wittgenstein">
+                    <div class="flex items-end justify-center gap-4">
+                        <h3 class="text-4xl md:text-6xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-pink-500">“语言的界限，即是世界的界限”</h3>
+                        <p class="text-xl md:text-2xl bg-clip-text text-transparent bg-gradient-to-r from-slate-100 to-gray-300 italic mb-[-4px]">- 维根斯坦</p>
+                    </div>
+                </div>
+                
+                <h1 class="hero-title text-3xl md:text-5xl font-bold mb-6 mt-32 opacity-0" id="main-title">
                     Hello 编程语言
                 </h1>
-                <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto opacity-0" id="subtitle">
+                <p class="text-xl md:text-2xl text-gray-300 mb-4 max-w-3xl mx-auto opacity-0" id="subtitle">
                     一站式多语言编程学习平台<br/>
                     掌握20+种主流编程语言的完整语法体系
                 </p>
+                
                 <div class="flex flex-col sm:flex-row gap-4 justify-center opacity-0" id="hero-buttons">
                     <a href="tutorials.html" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105">
                         开始学习
@@ -357,18 +366,14 @@
             </div>
             
             <!-- 统计数据 -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 opacity-0" id="stats">
+            <div class="flex justify-center items-center gap-8 mt-16 opacity-0" id="stats">
                 <div class="text-center">
-                    <div class="stats-number" data-count="22">0</div>
+                    <div class="stats-number" data-count="20">0+</div>
                     <p class="text-gray-400">编程语言</p>
                 </div>
                 <div class="text-center">
-                    <div class="stats-number" data-count="200">0</div>
+                    <div class="stats-number" data-count="200">0+</div>
                     <p class="text-gray-400">语法示例</p>
-                </div>
-                <div class="text-center">
-                    <div class="stats-number" data-count="100">0</div>
-                    <p class="text-gray-400">练习项目</p>
                 </div>
             </div>
         </div>

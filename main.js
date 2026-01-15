@@ -13,6 +13,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // 初始化页面动画
 function initAnimations() {
+    // 维特根斯坦部分动画（现在位于主标题上方，需要先显示）
+    anime({
+        targets: '#wittgenstein',
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 800,
+        easing: 'easeOutExpo',
+        delay: 300
+    });
+    
     // 主标题动画
     anime({
         targets: '#main-title',
@@ -20,7 +30,7 @@ function initAnimations() {
         translateY: [50, 0],
         duration: 1000,
         easing: 'easeOutExpo',
-        delay: 500
+        delay: 700
     });
     
     // 副标题动画
@@ -30,7 +40,7 @@ function initAnimations() {
         translateY: [30, 0],
         duration: 800,
         easing: 'easeOutExpo',
-        delay: 800
+        delay: 1100
     });
     
     // 按钮动画
@@ -40,7 +50,7 @@ function initAnimations() {
         translateY: [20, 0],
         duration: 600,
         easing: 'easeOutExpo',
-        delay: 1200
+        delay: 1500
     });
     
     // 统计数据动画
@@ -140,13 +150,19 @@ function initStatsCounter() {
             if (entry.isIntersecting) {
                 const target = entry.target;
                 const finalValue = parseInt(target.dataset.count);
+                const hasPlusSign = target.innerHTML.includes('+');
                 
                 anime({
                     targets: target,
                     innerHTML: [0, finalValue],
                     duration: 2000,
                     easing: 'easeOutExpo',
-                    round: 1
+                    round: 1,
+                    complete: function() {
+                        if (hasPlusSign) {
+                            target.innerHTML += '+';
+                        }
+                    }
                 });
                 
                 observer.unobserve(target);
