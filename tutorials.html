@@ -60,6 +60,26 @@
         .hljs {
             background: #000000 !important;
         }
+        
+        /* 针对基于span标签的代码块的样式 - 只应用于特定类 */
+        .span-based-code .text-sm.leading-6 {
+            white-space: pre-wrap !important;
+            word-break: break-all !important;
+            display: block;
+            overflow-x: auto;
+        }
+        
+        /* 确保基于span标签的代码行正确分隔 */
+        .span-based-code .text-sm.leading-6 br {
+            display: block !important;
+            content: "\00a0" !important;
+            height: 0.8em !important;
+        }
+        
+        /* 确保代码行内的span元素正确显示 */
+        .span-based-code .text-sm.leading-6 span {
+            display: inline !important;
+        }
         .code-font {
             font-family: 'JetBrains Mono', monospace;
         }
@@ -784,7 +804,7 @@
         };
         
         // Map of languages that use span-based highlighting instead of code tags
-        const spanBasedLanguages = ['lua'];
+        const spanBasedLanguages = ['lua', 'cpp', 'swift', 'go'];
         
         // Function to load content dynamically
         async function loadLanguageContent(lang) {
@@ -838,6 +858,105 @@
                         // 检查是否是使用span标签语法高亮的语言
                         if (spanBasedLanguages.includes(lang)) {
                             // 如果是，保持原有span标签高亮不变，不应用Highlight.js
+                            // 为基于span标签的代码块添加特定类
+                            const spanCodeBlocks = contentDiv.querySelectorAll('.code-block');
+                            spanCodeBlocks.forEach(block => {
+                                block.classList.add('span-based-code');
+                                
+                                // 处理代码块：左对齐，删除多余空行，移除#开头的标题
+                                // 找到并移除包含#标题的div元素
+                                const titleDiv = block.querySelector('.text-slate-400.mb-2');
+                                if (titleDiv && titleDiv.textContent.trim().startsWith('#')) {
+                                    titleDiv.remove();
+                                }
+                                
+                                const codeLinesDiv = block.querySelector('.text-sm.leading-6');
+                                if (codeLinesDiv) {
+                                    // 获取代码内容
+                                    let codeContent = codeLinesDiv.innerHTML;
+                                    
+                                    // 保留&nbsp;用于代码内部的缩进，只处理HTML结构中的空格
+                                    // codeContent = codeContent.replace(/&nbsp;/g, ' ');
+                                    
+                                    // 确保<br>标签能正确换行
+                                    codeContent = codeContent.replace(/<br>/g, '<br>');
+                                    
+                                    // 按<br>标签分割内容，处理每行
+                                    const lines = codeContent.split('<br>');
+                                    
+                                    // 处理每行
+                                    const processedLines = lines.map(line => {
+                                        // 移除HTML结构中添加的所有多余空格，保留代码本身的缩进（&nbsp;）
+                                        let processedLine = line.replace(/^\s*/, '');
+                                        
+                                        // 检查是否包含访问修饰符
+                                        const isAccessModifier = processedLine.includes('protected:') || 
+                                                              processedLine.includes('public:') || 
+                                                              processedLine.includes('private:');
+                                        
+                                        // 如果是访问修饰符，确保没有前导空格
+                                        if (isAccessModifier) {
+                                            // 移除所有前导空格（包括&nbsp;）
+                                            processedLine = processedLine.replace(/^(?:&nbsp;|\s)*/g, '');
+                                        } else {
+                                            // 如果不是访问修饰符，移除HTML结构中的多余空格，但保留代码本身的缩进
+                                            // 使用正则表达式匹配前导空格或&nbsp;
+                                            const leadingSpaces = processedLine.match(/^(?:&nbsp;|\s)*/)[0];
+                                            
+                                            // 计算应该保留的缩进（&nbsp;的数量）
+                                            // 假设HTML结构中添加了固定数量的空格
+                                            // 这里我们简单地移除所有前导空格，保留&nbsp;
+                                            const preservedIndent = leadingSpaces.replace(/\s/g, '');
+                                            
+                                            // 移除所有前导空格和&nbsp;，然后添加回保留的缩进
+                                            processedLine = preservedIndent + processedLine.replace(/^(?:&nbsp;|\s)*/, '');
+                                        }
+                                        
+                                        return processedLine;
+                                    });
+                                    
+                                    // 处理行间距和格式：优化代码块的美观度
+                                    const filteredLines = [];
+                                    let previousLine = '';
+                                    
+                                    for (const line of processedLines) {
+                                        const trimmedLine = line.trim();
+                                        
+                                        // 如果当前行不是空行
+                                        if (trimmedLine !== '') {
+                                            // 如果前一行是空行，或者当前行是注释行，添加到结果中
+                                            filteredLines.push(line);
+                                            previousLine = trimmedLine;
+                                        } else {
+                                            // 如果前一行不是空行，添加一个空行（用于分隔不同的代码段）
+                                            if (previousLine !== '') {
+                                                filteredLines.push('');
+                                                previousLine = '';
+                                            }
+                                        }
+                                    }
+                                    
+                                    // 移除开头和结尾的空行
+                                    while (filteredLines.length > 0 && filteredLines[0].trim() === '') {
+                                        filteredLines.shift();
+                                    }
+                                    while (filteredLines.length > 0 && filteredLines[filteredLines.length - 1].trim() === '') {
+                                        filteredLines.pop();
+                                    }
+                                    
+                                    // 重新组合内容
+                                    codeContent = filteredLines.join('<br>');
+                                    
+                                    // 更新代码内容
+                                    codeLinesDiv.innerHTML = codeContent;
+                                    
+                                    // 设置CSS样式，确保文本能正确换行
+                                    codeLinesDiv.style.whiteSpace = 'pre-wrap';
+                                    codeLinesDiv.style.wordBreak = 'break-word';
+                                    codeLinesDiv.style.display = 'block';
+                                    codeLinesDiv.style.textAlign = 'left';
+                                }
+                            });
                             return;
                         }
                         
