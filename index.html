@@ -123,6 +123,40 @@
             background-clip: text;
         }
         
+        /* 自定义动画 */
+        @keyframes pulse-slow {
+            0%, 100% {
+                opacity: 0.75;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse-slow 3s ease-in-out infinite;
+        }
+        
+        /* 增强阴影效果 */
+        .shadow-2xl {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .shadow-3xl {
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.6);
+        }
+        
+        /* 自定义阴影颜色 */
+        .shadow-cyan-500\/30 {
+            box-shadow: 0 35px 60px -15px rgba(6, 182, 212, 0.3);
+        }
+        
+        .shadow-cyan-500\/20 {
+            box-shadow: 0 25px 50px -12px rgba(6, 182, 212, 0.2);
+        }
+        
         .code-font {
             font-family: 'JetBrains Mono', monospace;
         }
@@ -340,46 +374,44 @@
     <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
         <div id="p5-canvas-container" class="absolute inset-0"></div>
         
+        <!-- 装饰性光效 -->
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-cyan-500 rounded-full blur-[100px] opacity-20"></div>
+        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500 rounded-full blur-[100px] opacity-20"></div>
+        
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="mb-8">
+            <div class="mb-12">
                 <!-- 维特根斯坦名言 -->
-                <div class="mb-20 opacity-0" id="wittgenstein">
+                <div class="mb-16 opacity-0" id="wittgenstein">
                     <div class="relative">
-                        <h3 class="text-3xl md:text-4xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-pink-500 text-center">“语言的边界，即是世界的边界”</h3>
-                        <p class="text-sm md:text-lg bg-clip-text text-transparent bg-gradient-to-r from-slate-400 to-gray-500 italic absolute left-1/2 transform translate-x-[120px] md:translate-x-[180px] mt-1 whitespace-nowrap">- 维根斯坦</p>
+                        <h3 class="text-3xl md:text-4xl lg:text-5xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 text-center">“语言的边界，即是世界的边界”</h3>
+                        <p class="text-sm md:text-lg bg-clip-text text-transparent bg-gradient-to-r from-slate-400 to-gray-500 italic absolute left-1/2 transform translate-x-[120px] md:translate-x-[180px] lg:translate-x-[220px] mt-1 whitespace-nowrap">- 维根斯坦</p>
                     </div>
                 </div>
                 
-                <h1 class="hero-title text-3xl md:text-5xl font-bold mb-6 mt-32 opacity-0" id="main-title">
-                    Hello 编程语言
+                <h1 class="hero-title text-5xl md:text-7xl lg:text-8xl font-black mb-8 mt-24 opacity-0 animate-pulse-slow" id="main-title">
+                    <span class="block bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 leading-tight">
+                        Hello
+                    </span>
+                    <span class="block mt-2 bg-clip-text text-transparent bg-gradient-to-l from-cyan-400 via-blue-500 to-purple-500 leading-tight">
+                        编程语言
+                    </span>
                 </h1>
-                <p class="text-xl md:text-2xl text-gray-300 mb-4 max-w-3xl mx-auto opacity-0" id="subtitle">
-                    一站式多语言编程学习平台<br/>
-                    掌握20+种主流编程语言的完整语法体系
+                <p class="text-2xl md:text-3xl lg:text-4xl text-gray-300 mb-10 max-w-3xl mx-auto opacity-0 leading-relaxed animate-pulse-slow" id="subtitle">
+                    <span class="block text-cyan-300">一站式多语言编程学习平台</span>
+                    <span class="block mt-2">掌握20+种主流编程语言的完整语法体系</span>
                 </p>
                 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center opacity-0" id="hero-buttons">
-                    <a href="tutorials.html" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105">
+                <div class="flex flex-col sm:flex-row gap-8 justify-center opacity-0" id="hero-buttons">
+                    <a href="tutorials.html" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-12 py-5 rounded-xl font-bold text-xl hover:from-cyan-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-3xl hover:shadow-cyan-500/30 animate-pulse-slow">
                         开始学习
                     </a>
-                </div>
-            </div>
-            
-            <!-- 统计数据 -->
-            <div class="flex justify-center items-center gap-8 mt-16 opacity-0" id="stats">
-                <div class="text-center">
-                    <div class="stats-number" data-count="20">0+</div>
-                    <p class="text-gray-400">编程语言</p>
-                </div>
-                <div class="text-center">
-                    <div class="stats-number" data-count="200">0+</div>
-                    <p class="text-gray-400">语法示例</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 支持的编程语言 -->
+    
+<!-- 支持的编程语言 -->
     <section class="py-20 bg-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">

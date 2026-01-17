@@ -91,12 +91,64 @@
             document.head.appendChild(fallbackStyles);
         }
         
-        // 加载 Tailwind CSS
+// 加载 Tailwind CSS
         loadTailwindCSS();
+</script>
+    
+    <!-- 内置动画系统 -->
+    <style>
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes scaleIn { from { transform: scale(0); } to { transform: scale(1); } }
+        @keyframes scaleInRotate { from { transform: scale(0) rotate(-180deg); } to { transform: scale(1) rotate(0deg); } }
+        @keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        @keyframes slideInLeft { from { transform: translateX(-50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideInRight { from { transform: translateX(50px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes slideInTop { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes slideInBottom { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+        @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.4); } 100% { transform: scale(1); } }
+        @keyframes highlight { 0% { background: #3B82F6; } 50% { background: #F87171; } 100% { background: #3B82F6; } }
+        
+        .anim-fade-in { animation: fadeIn 0.5s ease-out; }
+        .anim-scale-in { animation: scaleIn 0.5s ease-out; }
+        .anim-scale-in-rotate { animation: scaleInRotate 0.6s ease-out; }
+        .anim-bounce { animation: bounce 0.4s ease-in-out; }
+        .anim-slide-left { animation: slideInLeft 0.4s ease-out; }
+        .anim-slide-right { animation: slideInRight 0.4s ease-out; }
+        .anim-slide-top { animation: slideInTop 0.4s ease-out; }
+        .anim-shake { animation: shake 0.4s ease-in-out; }
+        .anim-pulse { animation: pulse 0.4s ease-in-out; }
+        .anim-pop { animation: pop 0.3s ease-in-out; }
+    </style>
+    
+    <script>
+        // 简单动画控制器
+
+        
+
+        
+
+        
+
+        
+
+
+        
+
+        
+
+        
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM加载完成');
+        });
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+
     <style>
         * {
             font-family: 'Noto Sans SC', sans-serif;
@@ -131,8 +183,368 @@
             padding: 2px 4px;
             border-radius: 3px;
         }
-        .language-content.hidden {
+.language-content.hidden {
             display: none;
+        }
+        
+        /* 动画相关样式 */
+        .animation-container {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+
+        
+        .array-element {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            color: white;
+            margin: 0 4px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .array-element:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .array-element.highlight {
+            background: linear-gradient(135deg, #F87171, #EF4444);
+            transform: scale(1.15);
+            box-shadow: 0 0 20px rgba(248, 113, 113, 0.6);
+        }
+        
+        .array-element.compare {
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            animation: comparePulse 0.6s ease-in-out;
+        }
+        
+        .array-element.swap {
+            animation: elementSwap 0.8s ease-in-out;
+        }
+        
+        .array-element.found {
+            background: linear-gradient(135deg, #10B981, #059669);
+            animation: foundBounce 0.8s ease-in-out;
+        }
+        
+        @keyframes comparePulse {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            50% { 
+                transform: scale(1.25); 
+                box-shadow: 0 0 25px rgba(251, 191, 36, 0.8);
+            }
+        }
+        
+        @keyframes elementSwap {
+            0% { transform: translateX(0) rotate(0deg); }
+            25% { transform: translateX(30px) rotate(5deg); }
+            50% { transform: translateX(30px) rotate(-5deg); }
+            75% { transform: translateX(-30px) rotate(5deg); }
+            100% { transform: translateX(0) rotate(0deg); }
+        }
+        
+        @keyframes foundBounce {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.3) rotate(10deg); }
+            50% { transform: scale(1.1) rotate(-10deg); }
+            75% { transform: scale(1.2) rotate(5deg); }
+        }
+        
+        .stack-container {
+            display: inline-block;
+            vertical-align: bottom;
+            width: 150px;
+            background: rgba(30, 41, 59, 0.8);
+            border: 3px solid #3B82F6;
+            border-radius: 12px;
+            min-height: 300px;
+            position: relative;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+            overflow: hidden;
+        }
+        
+        .stack-container::before {
+            content: 'STACK';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #3B82F6;
+            font-weight: 600;
+            font-size: 16px;
+            opacity: 1;
+        }
+        
+        .stack-element {
+            position: absolute;
+            bottom: 20px;
+            width: 130px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            color: white;
+            margin: 0 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        
+        .stack-element:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stack-element.highlight {
+            background: linear-gradient(135deg, #F87171, #EF4444);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 20px rgba(248, 113, 113, 0.6);
+        }
+        
+        .queue-container {
+            display: inline-block;
+            width: 400px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+            border: 3px solid #3B82F6;
+            border-radius: 12px;
+            padding: 10px;
+            min-height: 60px;
+            position: relative;
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.2);
+        }
+        
+        .queue-container::before {
+            content: 'QUEUE (FIFO)';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #3B82F6;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .queue-element {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            color: white;
+            margin: 0 3px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .queue-element:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        
+        .queue-element.highlight {
+            background: linear-gradient(135deg, #F87171, #EF4444);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 0 20px rgba(248, 113, 113, 0.6);
+        }
+        
+        .queue-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: #3B82F6;
+            font-weight: bold;
+        }
+        
+        .queue-arrow.left {
+            left: -30px;
+        }
+        
+        .queue-arrow.right {
+            right: -30px;
+        }
+        
+        .tree-node {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+            border-radius: 50%;
+            margin: 5px;
+            position: relative;
+        }
+        
+        .tree-edge {
+            position: absolute;
+            background: #64748B;
+            transform-origin: left center;
+        }
+        
+        .control-buttons {
+            margin: 1.5rem 0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        
+        .control-button {
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            color: white;
+            border: none;
+            padding: 0.85rem 1.75rem;
+            margin: 0.25rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+        
+        .control-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .control-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .control-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        }
+        
+        .control-button:active {
+            transform: translateY(-1px);
+        }
+        
+        .control-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .control-button.primary {
+            background: linear-gradient(135deg, #10B981, #059669);
+        }
+        
+        .control-button.danger {
+            background: linear-gradient(135deg, #F87171, #EF4444);
+        }
+        
+        .control-button.warning {
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+        }
+        
+        .speed-control {
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .speed-slider {
+            width: 150px;
+            height: 6px;
+            background: linear-gradient(90deg, #3B82F6, #8B5CF6);
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        .speed-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border: 3px solid #3B82F6;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .speed-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+        
+        .stats-panel {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 0.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .stat-label {
+            color: #94A3B8;
+            font-size: 12px;
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat-value {
+            color: #3B82F6;
+            font-size: 18px;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -174,7 +586,33 @@
                         <a href="#section-29" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">29. 枚举</a>
                         <a href="#section-31" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">31. 异步编程</a>
                         <a href="#section-32" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">32. 高级类型</a>
-                        <a href="#section-33" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">33. 元编程</a>
+<a href="#section-33" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">33. 元编程</a>
+                    </div>
+                    <h3 class="text-lg font-bold text-purple-400 mb-4 mt-6">数据结构</h3>
+                    <div class="space-y-2">
+                        <a href="#section-34" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">34. 数组和动态数组</a>
+                        <a href="#section-35" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">35. 链表</a>
+                        <a href="#section-36" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">36. 栈</a>
+                        <a href="#section-37" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">37. 队列</a>
+                        <a href="#section-38" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">38. 二叉树</a>
+                        <a href="#section-39" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">39. 二叉搜索树</a>
+                        <a href="#section-40" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">40. AVL树</a>
+                        <a href="#section-41" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">41. 堆</a>
+                        <a href="#section-42" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">42. 哈希表</a>
+                        <a href="#section-43" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">43. 图</a>
+                    </div>
+                    <h3 class="text-lg font-bold text-purple-400 mb-4 mt-6">算法</h3>
+                    <div class="space-y-2">
+                        <a href="#section-44" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">44. 冒泡排序</a>
+                        <a href="#section-45" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">45. 快速排序</a>
+                        <a href="#section-46" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">46. 归并排序</a>
+                        <a href="#section-47" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">47. 堆排序</a>
+                        <a href="#section-48" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">48. 线性搜索</a>
+                        <a href="#section-49" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">49. 二分搜索</a>
+                        <a href="#section-50" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">50. 动态规划</a>
+                        <a href="#section-51" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">51. 贪心算法</a>
+                        <a href="#section-52" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">52. 回溯算法</a>
+                        <a href="#section-53" class="block py-2 px-3 text-slate-300 hover:bg-purple-900 hover:text-purple-300 rounded-lg transition-colors duration-200">53. 图算法</a>
                     </div>
             </nav>
 
@@ -231,6 +669,8 @@
                         <span class="text-blue-300">empty</span> = <span class="text-purple-300">None</span>
                     </div>
                 </div>
+                
+
             </div>
         </section>
         <!-- 3. 字符串操作 -->
@@ -1280,6 +1720,1455 @@
                             </div>
                         </div>
                     </div>
+</section>
+        
+        <!-- 34. 数组和动态数组 -->
+        <section id="section-34" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">34. 数组和动态数组</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 数组和动态数组实现</h4>
+                <p class="text-slate-300 mb-4">特点：数组是固定大小的连续内存空间，动态数组可以自动扩容。Python的list就是动态数组。注意事项：数组插入删除操作复杂度为O(n)，访问操作为O(1)。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 使用array模块实现固定大小数组</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">import</span> <span class="text-blue-300">array</span>
+                        <br>
+                        <span class="text-comment"># 创建整数数组</span><br>
+                        <span class="text-blue-300">arr</span> = <span class="text-blue-300">array</span>.<span class="text-blue-300">array</span>(<span class="text-green-300">'i'</span>, [<span class="text-yellow-300">1, 2, 3, 4, 5</span>])<br>
+                        <span class="text-green-300">print</span>(<span class="text-blue-300">arr</span>) <span class="text-slate-500"># array('i', [1, 2, 3, 4, 5])</span>
+                        <br>
+                        <span class="text-comment"># 数组操作</span><br>
+                        <span class="text-blue-300">arr</span>.append(<span class="text-yellow-300">6</span>)<br>
+                        <span class="text-blue-300">arr</span>.insert(<span class="text-yellow-300">0</span>, <span class="text-yellow-300">0</span>)<br>
+                        <span class="text-blue-300">arr</span>.remove(<span class="text-yellow-300">3</span>)<br>
+                        <span class="text-green-300">print</span>(<span class="text-blue-300">arr</span>[<span class="text-yellow-300">2</span>]) <span class="text-slate-500"># 2</span>
+                    </div>
+                </div>
+                
+                <!-- 数组动画演示 -->
+                <div class="animation-container">
+
+                    
+                    <div class="text-slate-400 mt-4 mb-2"># 自定义动态数组类</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">DynamicArray</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">capacity</span>=<span class="text-yellow-300">10</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.capacity = <span class="text-blue-300">capacity</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.size = <span class="text-yellow-300">0</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.array = [<span class="text-purple-300">None</span>] * <span class="text-blue-300">self</span>.capacity<br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">append</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">item</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">self</span>.size >= <span class="text-blue-300">self</span>.capacity:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>._resize(<span class="text-yellow-300">2</span> * <span class="text-blue-300">self</span>.capacity)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.array[<span class="text-blue-300">self</span>.size] = <span class="text-blue-300">item</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.size += <span class="text-yellow-300">1</span><br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">_resize</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">new_capacity</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_array</span> = [<span class="text-purple-300">None</span>] * <span class="text-blue-300">new_capacity</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">i</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-blue-300">self</span>.size):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_array</span>[<span class="text-blue-300">i</span>] = <span class="text-blue-300">self</span>.array[<span class="text-blue-300">i</span>]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.array = <span class="text-blue-300">new_array</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.capacity = <span class="text-blue-300">new_capacity</span>
+                    </div>
+                </div>
+                
+
+            </div>
+        </section>
+        
+        <!-- 35. 链表 -->
+        <section id="section-35" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">35. 链表</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 链表实现</h4>
+                <p class="text-slate-300 mb-4">特点：链表是由节点组成的线性数据结构，每个节点包含数据和指向下一个节点的指针。支持单向链表、双向链表和循环链表。注意事项：链表插入删除操作复杂度为O(1)，访问操作为O(n)。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 单向链表节点类</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">ListNode</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">val</span>=<span class="text-yellow-300">0</span>, <span class="text-blue-300">next</span>=<span class="text-purple-300">None</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.val = <span class="text-blue-300">val</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.next = <span class="text-blue-300">next</span>
+                        <br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">LinkedList</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.head = <span class="text-purple-300">None</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.size = <span class="text-yellow-300">0</span>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">add_at_head</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">val</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_node</span> = <span class="text-blue-300">ListNode</span>(<span class="text-blue-300">val</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_node</span>.next = <span class="text-blue-300">self</span>.head<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.head = <span class="text-blue-300">new_node</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.size += <span class="text-yellow-300">1</span>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">add_at_tail</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">val</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-300">not</span> <span class="text-blue-300">self</span>.head:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.add_at_head(<span class="text-blue-300">val</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current</span> = <span class="text-blue-300">self</span>.head<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while</span> <span class="text-blue-300">current</span>.next:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current</span> = <span class="text-blue-300">current</span>.next<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current</span>.next = <span class="text-blue-300">ListNode</span>(<span class="text-blue-300">val</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.size += <span class="text-yellow-300">1</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2"># 双向链表节点类</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">DListNode</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">val</span>=<span class="text-yellow-300">0</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.val = <span class="text-blue-300">val</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.prev = <span class="text-purple-300">None</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.next = <span class="text-purple-300">None</span>
+                    </div>
+                </div>
+                
+                <!-- 链表结构图示 -->
+                <div class="mt-8 mb-8 text-center">
+                    <h5 class="text-lg font-medium mb-4 text-purple-400">单向链表结构示意图</h5>
+                    <svg width="400" height="100" viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 节点样式 -->
+                        <defs>
+                            <rect id="node-rect" width="60" height="40" rx="5" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+                            <polygon id="arrow" points="0,0 10,5 0,10" fill="#64748B"/>
+                        </defs>
+                        
+                        <!-- 节点1 -->
+                        <use href="#node-rect" x="50" y="30"/>
+                        <text x="80" y="55" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1" text-anchor="middle">1</text>
+                        
+                        <!-- 箭头1-2 -->
+                        <line x1="110" y1="50" x2="130" y2="50" stroke="#64748B" stroke-width="2"/>
+                        <use href="#arrow" x="130" y="45"/>
+                        
+                        <!-- 节点2 -->
+                        <use href="#node-rect" x="150" y="30"/>
+                        <text x="180" y="55" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1" text-anchor="middle">2</text>
+                        
+                        <!-- 箭头2-3 -->
+                        <line x1="210" y1="50" x2="230" y2="50" stroke="#64748B" stroke-width="2"/>
+                        <use href="#arrow" x="230" y="45"/>
+                        
+                        <!-- 节点3 -->
+                        <use href="#node-rect" x="250" y="30"/>
+                        <text x="280" y="55" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1" text-anchor="middle">3</text>
+                        
+                        <!-- 空指针 -->
+                        <line x1="310" y1="50" x2="330" y2="50" stroke="#64748B" stroke-width="2" stroke-dasharray="5,5"/>
+                    </svg>
+                    <p class="text-sm text-slate-400 mt-2">图：一个简单的单向链表，包含3个节点</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 36. 栈 -->
+        <section id="section-36" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">36. 栈</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 栈实现</h4>
+                <p class="text-slate-300 mb-4">特点：栈是后进先出(LIFO)的数据结构，支持push、pop、peek等操作。可以用数组或链表实现。注意事项：栈的插入删除操作复杂度为O(1)，适用于函数调用、表达式求值等场景。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 使用列表实现栈</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">stack</span> = []<br>
+                        <span class="text-blue-300">stack</span>.append(<span class="text-yellow-300">1</span>)  <span class="text-slate-500"># push</span><br>
+                        <span class="text-blue-300">stack</span>.append(<span class="text-yellow-300">2</span>)<br>
+                        <span class="text-blue-300">stack</span>.append(<span class="text-yellow-300">3</span>)<br>
+                        <span class="text-green-300">print</span>(<span class="text-blue-300">stack</span>.pop())  <span class="text-slate-500"># pop: 3</span><br>
+                        <span class="text-green-300">print</span>(<span class="text-blue-300">stack</span>[-<span class="text-yellow-300">1</span>]) <span class="text-slate-500"># peek: 2</span>
+                    </div>
+                </div>
+                
+                <!-- 栈结构图示 -->
+                <div class="mt-8 mb-8 text-center">
+                    <h5 class="text-lg font-medium mb-4 text-purple-400">栈结构示意图 (LIFO)</h5>
+                    <svg width="200" height="250" viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 栈容器 -->
+                        <rect x="60" y="50" width="80" height="150" fill="none" stroke="#64748B" stroke-width="2" rx="5"/>
+                        
+                        <!-- 栈元素 -->
+                        <rect x="70" y="170" width="60" height="40" rx="3" fill="#3B82F6" stroke="#93C5FD" stroke-width="2"/>
+                        <text x="100" y="197" font-family="'JetBrains Mono', monospace" font-size="16" fill="white" text-anchor="middle">3</text>
+                        
+                        <rect x="70" y="120" width="60" height="40" rx="3" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+                        <text x="100" y="147" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1" text-anchor="middle">2</text>
+                        
+                        <rect x="70" y="70" width="60" height="40" rx="3" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+                        <text x="100" y="97" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1" text-anchor="middle">1</text>
+                        
+                        <!-- 栈顶标识 -->
+                        <text x="100" y="40" font-family="'JetBrains Mono', monospace" font-size="14" fill="#F87171" text-anchor="middle">栈顶 (Top)</text>
+                        
+                        <!-- 箭头 -->
+                        <line x1="100" y1="35" x2="100" y2="50" stroke="#F87171" stroke-width="2" stroke-dasharray="3,3"/>
+                        <text x="140" y="110" font-family="'JetBrains Mono', monospace" font-size="12" fill="#F87171" text-anchor="start">出栈方向</text>
+                        <line x1="130" y1="115" x2="110" y2="115" stroke="#F87171" stroke-width="2"/>
+                        <polygon points="110,105 110,125 100,115" fill="#F87171"/>
+                        
+                        <text x="140" y="180" font-family="'JetBrains Mono', monospace" font-size="12" fill="#10B981" text-anchor="start">入栈方向</text>
+                        <line x1="130" y1="185" x2="110" y2="185" stroke="#10B981" stroke-width="2"/>
+                        <polygon points="110,175 110,195 100,185" fill="#10B981"/>
+                    </svg>
+                    <p class="text-sm text-slate-400 mt-2">图：一个包含3个元素的栈，展示后进先出(LIFO)特性</p>
+                </div>
+                
+                <!-- 栈操作 -->
+                <div class="animation-container">
+                    
+                    <div class="text-slate-400 mt-4 mb-2"># 自定义栈类</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Stack</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.items = []<br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">is_empty</span>(<span class="text-blue-300">self</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-purple-400">len</span>(<span class="text-blue-300">self</span>.items) == <span class="text-yellow-300">0</span><br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">push</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">item</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.items.append(<span class="text-blue-300">item</span>)<br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">pop</span>(<span class="text-blue-300">self</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-300">not</span> <span class="text-blue-300">self</span>.is_empty():<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">self</span>.items.pop()<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise</span> <span class="text-purple-400">IndexError</span>(<span class="text-green-300">"Stack is empty"</span>)<br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">peek</span>(<span class="text-blue-300">self</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-300">not</span> <span class="text-blue-300">self</span>.is_empty():<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">self</span>.items[-<span class="text-yellow-300">1</span>]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise</span> <span class="text-purple-400">IndexError</span>(<span class="text-green-300">"Stack is empty"</span>)
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 37. 队列 -->
+        <section id="section-37" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">37. 队列</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 队列实现</h4>
+                <p class="text-slate-300 mb-4">特点：队列是先进先出(FIFO)的数据结构，支持enqueue、dequeue、peek等操作。可以用数组、链表或collections.deque实现。注意事项：队列的插入删除操作复杂度为O(1)，适用于任务调度、广度优先搜索等场景。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 使用collections.deque实现队列</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">from</span> <span class="text-blue-300">collections</span> <span class="text-purple-400">import</span> <span class="text-blue-300">deque</span>
+                        <br>
+                        <span class="text-blue-300">queue</span> = <span class="text-blue-300">deque</span>()<br>
+                        <span class="text-blue-300">queue</span>.append(<span class="text-yellow-300">1</span>)  <span class="text-slate-500"># enqueue</span><br>
+                        <span class="text-blue-300">queue</span>.append(<span class="text-yellow-300">2</span>)<br>
+                        <span class="text-blue-300">queue</span>.append(<span class="text-yellow-300">3</span>)<br>
+                        <span class="text-green-300">print</span>(<span class="text-blue-300">queue</span>.popleft())  <span class="text-slate-500"># dequeue: 1</span><br>
+                        <span class="text-green-300">print</span>(<span class="text-blue-300">queue</span>[<span class="text-yellow-300">0</span>])  <span class="text-slate-500"># peek: 2</span>
+                    </div>
+                </div>
+                
+                <!-- 队列结构图示 -->
+                <div class="mt-8 mb-8 text-center">
+                    <h5 class="text-lg font-medium mb-4 text-purple-400">队列结构示意图 (FIFO)</h5>
+                    <svg width="300" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 队列容器 -->
+                        <rect x="50" y="50" width="200" height="50" fill="none" stroke="#64748B" stroke-width="2" rx="5"/>
+                        
+                        <!-- 队列元素 -->
+                        <rect x="60" y="60" width="50" height="30" rx="3" fill="#3B82F6" stroke="#93C5FD" stroke-width="2"/>
+                        <text x="85" y="82" font-family="'JetBrains Mono', monospace" font-size="14" fill="white" text-anchor="middle">1</text>
+                        
+                        <rect x="115" y="60" width="50" height="30" rx="3" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+                        <text x="140" y="82" font-family="'JetBrains Mono', monospace" font-size="14" fill="#cbd5e1" text-anchor="middle">2</text>
+                        
+                        <rect x="170" y="60" width="50" height="30" rx="3" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+                        <text x="195" y="82" font-family="'JetBrains Mono', monospace" font-size="14" fill="#cbd5e1" text-anchor="middle">3</text>
+                        
+                        <rect x="225" y="60" width="50" height="30" rx="3" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+                        <text x="250" y="82" font-family="'JetBrains Mono', monospace" font-size="14" fill="#cbd5e1" text-anchor="middle">4</text>
+                        
+                        <!-- 队首和队尾标识 -->
+                        <text x="85" y="40" font-family="'JetBrains Mono', monospace" font-size="12" fill="#F87171" text-anchor="middle">队首 (Front)</text>
+                        <text x="250" y="40" font-family="'JetBrains Mono', monospace" font-size="12" fill="#10B981" text-anchor="middle">队尾 (Rear)</text>
+                        
+                        <!-- 入队和出队方向 -->
+                        <text x="280" y="82" font-family="'JetBrains Mono', monospace" font-size="12" fill="#10B981" text-anchor="start">入队方向</text>
+                        <line x1="280" y1="85" x2="275" y2="85" stroke="#10B981" stroke-width="2"/>
+                        <polygon points="275,75 275,95 265,85" fill="#10B981"/>
+                        
+                        <text x="20" y="82" font-family="'JetBrains Mono', monospace" font-size="12" fill="#F87171" text-anchor="end">出队方向</text>
+                        <line x1="20" y1="85" x2="25" y2="85" stroke="#F87171" stroke-width="2"/>
+                        <polygon points="25,75 25,95 35,85" fill="#F87171"/>
+                    </svg>
+                    <p class="text-sm text-slate-400 mt-2">图：一个包含4个元素的队列，展示先进先出(FIFO)特性</p>
+                </div>
+                
+                <!-- 队列操作 -->
+                <div class="animation-container">
+                    
+                    <div class="text-slate-400 mt-4 mb-2"># 自定义队列类</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Queue</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.items = <span class="text-blue-300">deque</span>()<br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">is_empty</span>(<span class="text-blue-300">self</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-purple-400">len</span>(<span class="text-blue-300">self</span>.items) == <span class="text-yellow-300">0</span><br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">enqueue</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">item</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.items.append(<span class="text-blue-300">item</span>)<br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">dequeue</span>(<span class="text-blue-300">self</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-300">not</span> <span class="text-blue-300">self</span>.is_empty():<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">self</span>.items.popleft()<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise</span> <span class="text-purple-400">IndexError</span>(<span class="text-green-300">"Queue is empty"</span>)
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 38. 二叉树 -->
+        <section id="section-38" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">38. 二叉树</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 二叉树实现</h4>
+                <p class="text-slate-300 mb-4">特点：二叉树是每个节点最多有两个子节点的树结构，支持前序、中序、后序遍历。注意事项：二叉树的遍历操作复杂度为O(n)，查找操作复杂度为O(n)。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 二叉树节点类</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">TreeNode</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">val</span>=<span class="text-yellow-300">0</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.val = <span class="text-blue-300">val</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.left = <span class="text-purple-300">None</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.right = <span class="text-purple-300">None</span>
+                        <br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">BinaryTree</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.root = <span class="text-purple-300">None</span>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">preorder_traversal</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">node</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-300">not</span> <span class="text-blue-300">node</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> []<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> [<span class="text-blue-300">node</span>.val] + <span class="text-blue-300">self</span>.preorder_traversal(<span class="text-blue-300">node</span>.left) + <span class="text-blue-300">self</span>.preorder_traversal(<span class="text-blue-300">node</span>.right)
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">inorder_traversal</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">node</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-300">not</span> <span class="text-blue-300">node</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> []<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">self</span>.inorder_traversal(<span class="text-blue-300">node</span>.left) + [<span class="text-blue-300">node</span>.val] + <span class="text-blue-300">self</span>.inorder_traversal(<span class="text-blue-300">node</span>.right)
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">postorder_traversal</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">node</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-300">not</span> <span class="text-blue-300">node</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> []<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">self</span>.postorder_traversal(<span class="text-blue-300">node</span>.left) + <span class="text-blue-300">self</span>.postorder_traversal(<span class="text-blue-300">node</span>.right) + [<span class="text-blue-300">node</span>.val]
+                    </div>
+                </div>
+                
+                <!-- 二叉树结构图示 -->                <div class="mt-8 mb-8 text-center">                    <h5 class="text-lg font-medium mb-4 text-purple-400">二叉树结构示意图</h5>                    <svg width="400" height="200" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 节点样式 -->
+                        <defs>
+                            <circle id="node" cx="25" cy="25" r="25" fill="#1E293B" stroke="#3B82F6" stroke-width="3"/>
+                        </defs>
+                        
+                        <!-- 连接线 -->
+                        <line x1="250" y1="50" x2="150" y2="150" stroke="#64748B" stroke-width="2"/>
+                        <line x1="250" y1="50" x2="350" y2="150" stroke="#64748B" stroke-width="2"/>
+                        <line x1="150" y1="150" x2="100" y2="250" stroke="#64748B" stroke-width="2"/>
+                        <line x1="150" y1="150" x2="200" y2="250" stroke="#64748B" stroke-width="2"/>
+                        <line x1="350" y1="150" x2="300" y2="250" stroke="#64748B" stroke-width="2"/>
+                        <line x1="350" y1="150" x2="400" y2="250" stroke="#64748B" stroke-width="2"/>
+                        
+                        <!-- 节点 -->
+                        <use href="#node" x="225" y="25"/>
+                        <text x="250" y="50" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">1</text>
+                        
+                        <use href="#node" x="125" y="125"/>
+                        <text x="150" y="150" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">2</text>
+                        
+                        <use href="#node" x="325" y="125"/>
+                        <text x="350" y="150" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">3</text>
+                        
+                        <use href="#node" x="75" y="225"/>
+                        <text x="100" y="250" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">4</text>
+                        
+                        <use href="#node" x="175" y="225"/>
+                        <text x="200" y="250" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">5</text>
+                        
+                        <use href="#node" x="275" y="225"/>
+                        <text x="300" y="250" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">6</text>
+                        
+                        <use href="#node" x="375" y="225"/>
+                        <text x="400" y="250" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">7</text>
+                    </svg>
+                    <p class="text-sm text-slate-400 mt-2">图：一个简单的二叉树结构，展示了节点和子节点的关系</p>
+                </div>
+                
+                <!-- 二叉树遍历算法可视化 -->                <div class="mt-12 mb-8">                    <h5 class="text-lg font-medium mb-6 text-purple-400 text-center">二叉树遍历算法可视化</h5>                    <div class="flex flex-wrap justify-center gap-4">                    <!-- 前序遍历图示 -->                    <div class="flex-1 min-w-[300px] mb-8">                        <h6 class="text-md font-medium mb-4 text-blue-400 text-center">1. 前序遍历 (Pre-order: 根 → 左 → 右)</h6>                        <div class="text-center">                            <svg width="300" height="200" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+                                <!-- 节点样式 -->
+                                <defs>
+                                    <circle id="node-pre" cx="25" cy="25" r="25" fill="#1E293B" stroke="#3B82F6" stroke-width="3"/>
+                                </defs>
+                                
+                                <!-- 连接线 -->
+                                <line x1="250" y1="50" x2="150" y2="150" stroke="#64748B" stroke-width="2"/>
+                                <line x1="250" y1="50" x2="350" y2="150" stroke="#64748B" stroke-width="2"/>
+                                <line x1="150" y1="150" x2="100" y2="250" stroke="#64748B" stroke-width="2"/>
+                                <line x1="150" y1="150" x2="200" y2="250" stroke="#64748B" stroke-width="2"/>
+                                <line x1="350" y1="150" x2="300" y2="250" stroke="#64748B" stroke-width="2"/>
+                                <line x1="350" y1="150" x2="400" y2="250" stroke="#64748B" stroke-width="2"/>
+                                
+                                <!-- 遍历路径 -->
+                                <path d="M250 50 L250 150 L150 250 L100 250 L150 150 L150 250 L200 250 L250 150 L250 50 L350 150 L350 250 L300 250 L350 150 L350 250 L400 250" 
+                                      stroke="#F87171" stroke-width="3" fill="none" stroke-dasharray="5,5"/>
+                                
+                                <!-- 节点 -->
+                                <use href="#node-pre" x="225" y="25"/>
+                                <text x="250" y="50" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">1</text>
+                                <circle cx="250" cy="50" r="32" fill="none" stroke="#F87171" stroke-width="2"/>
+                                
+                                <use href="#node-pre" x="125" y="125"/>                                <text x="150" y="150" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">2</text>                                <circle cx="150" cy="150" r="32" fill="none" stroke="#F87171" stroke-width="2"/>
+                                
+                                <use href="#node-pre" x="75" y="225"/>
+                                <text x="100" y="250" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">4</text>
+                                <circle cx="100" cy="250" r="32" fill="none" stroke="#F87171" stroke-width="2"/>
+                                
+                                <use href="#node-pre" x="175" y="225"/>
+                                <text x="200" y="250" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">5</text>
+                                <circle cx="200" cy="250" r="32" fill="none" stroke="#F87171" stroke-width="2"/>
+                                
+                                <use href="#node-pre" x="325" y="125"/>
+                                <text x="350" y="150" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">3</text>
+                                <circle cx="350" cy="150" r="32" fill="none" stroke="#F87171" stroke-width="2"/>
+                                
+                                <use href="#node-pre" x="275" y="225"/>
+                                <text x="300" y="250" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">6</text>
+                                <circle cx="300" cy="250" r="32" fill="none" stroke="#F87171" stroke-width="2"/>
+                                
+                                <use href="#node-pre" x="375" y="225"/>
+                                <text x="400" y="250" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">7</text>
+                                <circle cx="400" cy="250" r="32" fill="none" stroke="#F87171" stroke-width="2"/>
+                                
+                                <!-- 遍历顺序标记 -->
+                                <circle cx="250" cy="80" r="12" fill="#F87171"/>
+                                <text x="250" y="85" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">1</text>
+                                
+                                <circle cx="150" cy="180" r="12" fill="#F87171"/>
+                                <text x="150" y="185" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">2</text>
+                                
+                                <circle cx="100" cy="280" r="12" fill="#F87171"/>
+                                <text x="100" y="285" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">3</text>
+                                
+                                <circle cx="200" cy="280" r="12" fill="#F87171"/>
+                                <text x="200" y="285" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">4</text>
+                                
+                                <circle cx="350" cy="180" r="12" fill="#F87171"/>
+                                <text x="350" y="185" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">5</text>
+                                
+                                <circle cx="300" cy="280" r="12" fill="#F87171"/>
+                                <text x="300" y="285" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">6</text>
+                                
+                                <circle cx="400" cy="280" r="12" fill="#F87171"/>
+                                <text x="400" y="285" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">7</text>
+                            </svg>
+                            <p class="text-sm text-slate-400 mt-2">遍历顺序：1 → 2 → 4 → 5 → 3 → 6 → 7</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 中序遍历图示 -->                    <div class="flex-1 min-w-[300px] mb-8">                        <h6 class="text-md font-medium mb-4 text-blue-400 text-center">2. 中序遍历 (In-order: 左 → 根 → 右)</h6>                        <div class="text-center">                            <svg width="300" height="200" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+                                <!-- 节点样式 -->
+                                <defs>
+                                    <circle id="node-in" cx="25" cy="25" r="25" fill="#1E293B" stroke="#3B82F6" stroke-width="3"/>
+                                </defs>
+                                
+                                <!-- 连接线 -->
+                                <line x1="250" y1="50" x2="150" y2="150" stroke="#64748B" stroke-width="2"/>
+                                <line x1="250" y1="50" x2="350" y2="150" stroke="#64748B" stroke-width="2"/>
+                                <line x1="150" y1="150" x2="100" y2="250" stroke="#64748B" stroke-width="2"/>
+                                <line x1="150" y1="150" x2="200" y2="250" stroke="#64748B" stroke-width="2"/>
+                                <line x1="350" y1="150" x2="300" y2="250" stroke="#64748B" stroke-width="2"/>
+                                <line x1="350" y1="150" x2="400" y2="250" stroke="#64748B" stroke-width="2"/>
+                                
+                                <!-- 遍历路径 -->
+                                <path d="M100 250 L150 150 L200 250 L150 150 L250 50 L300 250 L350 150 L400 250 L350 150 L250 50" 
+                                      stroke="#34D399" stroke-width="3" fill="none" stroke-dasharray="5,5"/>
+                                
+                                <!-- 节点 -->
+                                <use href="#node-in" x="225" y="25"/>
+                                <text x="250" y="50" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">1</text>
+                                <circle cx="250" cy="50" r="32" fill="none" stroke="#34D399" stroke-width="2"/>
+                                
+                                <use href="#node-in" x="125" y="125"/>
+                                <text x="150" y="150" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">2</text>
+                                <circle cx="150" cy="150" r="32" fill="none" stroke="#34D399" stroke-width="2"/>
+                                
+                                <use href="#node-in" x="75" y="225"/>
+                                <text x="100" y="250" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">4</text>
+                                <circle cx="100" cy="250" r="32" fill="none" stroke="#34D399" stroke-width="2"/>
+                                
+                                <use href="#node-in" x="175" y="225"/>
+                                <text x="200" y="250" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">5</text>
+                                <circle cx="200" cy="250" r="32" fill="none" stroke="#34D399" stroke-width="2"/>
+                                
+                                <use href="#node-in" x="325" y="125"/>
+                                <text x="350" y="150" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">3</text>
+                                <circle cx="350" cy="150" r="32" fill="none" stroke="#34D399" stroke-width="2"/>
+                                
+                                <use href="#node-in" x="275" y="225"/>
+                                <text x="300" y="250" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">6</text>
+                                <circle cx="300" cy="250" r="32" fill="none" stroke="#34D399" stroke-width="2"/>
+                                
+                                <use href="#node-in" x="375" y="225"/>
+                                <text x="400" y="250" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">7</text>
+                                <circle cx="400" cy="250" r="32" fill="none" stroke="#34D399" stroke-width="2"/>
+                                
+                                <!-- 遍历顺序标记 -->
+                                <circle cx="100" cy="280" r="12" fill="#34D399"/>
+                                <text x="100" y="285" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">1</text>
+                                
+                                <circle cx="150" cy="180" r="12" fill="#34D399"/>
+                                <text x="150" y="185" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">2</text>
+                                
+                                <circle cx="200" cy="280" r="12" fill="#34D399"/>
+                                <text x="200" y="285" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">3</text>
+                                
+                                <circle cx="250" cy="80" r="12" fill="#34D399"/>
+                                <text x="250" y="85" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">4</text>
+                                
+                                <circle cx="300" cy="280" r="12" fill="#34D399"/>
+                                <text x="300" y="285" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">5</text>
+                                
+                                <circle cx="350" cy="180" r="12" fill="#34D399"/>
+                                <text x="350" y="185" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">6</text>
+                                
+                                <circle cx="400" cy="280" r="12" fill="#34D399"/>
+                                <text x="400" y="285" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">7</text>
+                            </svg>
+                            <p class="text-sm text-slate-400 mt-2">遍历顺序：4 → 2 → 5 → 1 → 6 → 3 → 7</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 后序遍历图示 -->                    <div class="flex-1 min-w-[300px] mb-8">                        <h6 class="text-md font-medium mb-4 text-blue-400 text-center">3. 后序遍历 (Post-order: 左 → 右 → 根)</h6>                        <div class="text-center">                            <svg width="300" height="200" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg">
+                                <!-- 节点样式 -->
+                                <defs>
+                                    <circle id="node-post" cx="25" cy="25" r="25" fill="#1E293B" stroke="#3B82F6" stroke-width="3"/>
+                                </defs>
+                                
+                                <!-- 连接线 -->
+                                <line x1="250" y1="50" x2="150" y2="150" stroke="#64748B" stroke-width="2"/>
+                                <line x1="250" y1="50" x2="350" y2="150" stroke="#64748B" stroke-width="2"/>
+                                <line x1="150" y1="150" x2="100" y2="250" stroke="#64748B" stroke-width="2"/>
+                                <line x1="150" y1="150" x2="200" y2="250" stroke="#64748B" stroke-width="2"/>
+                                <line x1="350" y1="150" x2="300" y2="250" stroke="#64748B" stroke-width="2"/>
+                                <line x1="350" y1="150" x2="400" y2="250" stroke="#64748B" stroke-width="2"/>
+                                
+                                <!-- 遍历路径 -->                                <path d="M250 50 L150 150 L100 250 L150 150 L200 250 L150 150 L250 50 L350 150 L300 250 L350 150 L400 250 L350 150 L250 50"                                      stroke="#8B5CF6" stroke-width="3" fill="none" stroke-dasharray="5,5"/>
+                                
+                                <!-- 节点 -->
+                                <use href="#node-post" x="225" y="25"/>
+                                <text x="250" y="50" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">1</text>
+                                <circle cx="250" cy="50" r="32" fill="none" stroke="#8B5CF6" stroke-width="2"/>
+                                
+                                <use href="#node-post" x="125" y="125"/>
+                                <text x="150" y="150" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">2</text>
+                                <circle cx="150" cy="150" r="32" fill="none" stroke="#8B5CF6" stroke-width="2"/>
+                                
+                                <use href="#node-post" x="75" y="225"/>
+                                <text x="100" y="250" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">4</text>
+                                <circle cx="100" cy="250" r="32" fill="none" stroke="#8B5CF6" stroke-width="2"/>
+                                
+                                <use href="#node-post" x="175" y="225"/>
+                                <text x="200" y="250" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">5</text>
+                                <circle cx="200" cy="250" r="32" fill="none" stroke="#8B5CF6" stroke-width="2"/>
+                                
+                                <use href="#node-post" x="325" y="125"/>
+                                <text x="350" y="150" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">3</text>
+                                <circle cx="350" cy="150" r="32" fill="none" stroke="#8B5CF6" stroke-width="2"/>
+                                
+                                <use href="#node-post" x="275" y="225"/>
+                                <text x="300" y="250" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">6</text>
+                                <circle cx="300" cy="250" r="32" fill="none" stroke="#8B5CF6" stroke-width="2"/>
+                                
+                                <use href="#node-post" x="375" y="225"/>
+                                <text x="400" y="250" font-family="'JetBrains Mono', monospace" font-size="18" fill="#cbd5e1">7</text>
+                                <circle cx="400" cy="250" r="32" fill="none" stroke="#8B5CF6" stroke-width="2"/>
+                                
+                                <!-- 遍历顺序标记 -->
+                                <circle cx="100" cy="280" r="12" fill="#8B5CF6"/>
+                                <text x="100" y="285" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">1</text>
+                                
+                                <circle cx="200" cy="280" r="12" fill="#8B5CF6"/>
+                                <text x="200" y="285" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">2</text>
+                                
+                                <circle cx="150" cy="180" r="12" fill="#8B5CF6"/>
+                                <text x="150" y="185" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">3</text>
+                                
+                                <circle cx="300" cy="280" r="12" fill="#8B5CF6"/>
+                                <text x="300" y="285" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">4</text>
+                                
+                                <circle cx="400" cy="280" r="12" fill="#8B5CF6"/>
+                                <text x="400" y="285" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">5</text>
+                                
+                                <circle cx="350" cy="180" r="12" fill="#8B5CF6"/>
+                                <text x="350" y="185" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">6</text>
+                                
+                                <circle cx="250" cy="80" r="12" fill="#8B5CF6"/>
+                                <text x="250" y="85" font-family="'JetBrains Mono', monospace" font-size="12" fill="white">7</text>
+                            </svg>
+                            <p class="text-sm text-slate-400 mt-2">遍历顺序：4 → 5 → 2 → 6 → 7 → 3 → 1</p>                        </div>                    </div>                    </div>                </div>
+            </div>
+        </section>
+        
+        <!-- 39. 二叉搜索树 -->
+        <section id="section-39" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">39. 二叉搜索树</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 二叉搜索树实现</h4>
+                <p class="text-slate-300 mb-4">特点：二叉搜索树是左子树所有节点值小于根节点，右子树所有节点值大于根节点的二叉树。支持高效的查找、插入、删除操作。注意事项：最坏情况下（退化为链表）操作复杂度为O(n)，平均情况下为O(log n)。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 二叉搜索树类</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">BST</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.root = <span class="text-purple-300">None</span>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">insert</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">val</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-300">not</span> <span class="text-blue-300">self</span>.root:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.root = <span class="text-blue-300">TreeNode</span>(<span class="text-blue-300">val</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>._insert(<span class="text-blue-300">self</span>.root, <span class="text-blue-300">val</span>)
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">_insert</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">node</span>, <span class="text-blue-300">val</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">val</span> < <span class="text-blue-300">node</span>.val:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-300">not</span> <span class="text-blue-300">node</span>.left:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node</span>.left = <span class="text-blue-300">TreeNode</span>(<span class="text-blue-300">val</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>._insert(<span class="text-blue-300">node</span>.left, <span class="text-blue-300">val</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif</span> <span class="text-blue-300">val</span> > <span class="text-blue-300">node</span>.val:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-300">not</span> <span class="text-blue-300">node</span>.right:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node</span>.right = <span class="text-blue-300">TreeNode</span>(<span class="text-blue-300">val</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>._insert(<span class="text-blue-300">node</span>.right, <span class="text-blue-300">val</span>)
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">search</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">val</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">self</span>._search(<span class="text-blue-300">self</span>.root, <span class="text-blue-300">val</span>)
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">_search</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">node</span>, <span class="text-blue-300">val</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-300">not</span> <span class="text-blue-300">node</span> <span class="text-purple-400">or</span> <span class="text-blue-300">node</span>.val == <span class="text-blue-300">val</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">node</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">val</span> < <span class="text-blue-300">node</span>.val:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">self</span>._search(<span class="text-blue-300">node</span>.left, <span class="text-blue-300">val</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">self</span>._search(<span class="text-blue-300">node</span>.right, <span class="text-blue-300">val</span>)
+                    </div>
+                </div>
+                
+                <!-- 二叉搜索树结构图示 -->
+                <div class="mt-8 mb-8 text-center">
+                    <h5 class="text-lg font-medium mb-4 text-purple-400">二叉搜索树结构示意图</h5>
+                    <svg width="400" height="250" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 节点样式 -->
+                        <defs>
+                            <circle id="node-bst" cx="25" cy="25" r="25" fill="#1E293B" stroke="#3B82F6" stroke-width="3"/>
+                        </defs>
+                        
+                        <!-- 连接线 -->
+                        <line x1="200" y1="50" x2="100" y2="120" stroke="#64748B" stroke-width="2"/>
+                        <line x1="200" y1="50" x2="300" y2="120" stroke="#64748B" stroke-width="2"/>
+                        <line x1="100" y1="120" x2="50" y2="190" stroke="#64748B" stroke-width="2"/>
+                        <line x1="100" y1="120" x2="150" y2="190" stroke="#64748B" stroke-width="2"/>
+                        <line x1="150" y1="190" x2="125" y2="240" stroke="#64748B" stroke-width="2"/>
+                        <line x1="150" y1="190" x2="175" y2="240" stroke="#64748B" stroke-width="2"/>
+                        <line x1="300" y1="120" x2="250" y2="190" stroke="#64748B" stroke-width="2"/>
+                        <line x1="300" y1="120" x2="350" y2="190" stroke="#64748B" stroke-width="2"/>
+                        <line x1="350" y1="190" x2="325" y2="240" stroke="#64748B" stroke-width="2"/>
+                        
+                        <!-- 节点 -->
+                        <use href="#node-bst" x="175" y="25"/>
+                        <text x="200" y="50" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">8</text>
+                        
+                        <use href="#node-bst" x="75" y="95"/>
+                        <text x="100" y="120" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">3</text>
+                        
+                        <use href="#node-bst" x="275" y="95"/>
+                        <text x="300" y="120" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">10</text>
+                        
+                        <use href="#node-bst" x="25" y="165"/>
+                        <text x="50" y="190" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">1</text>
+                        
+                        <use href="#node-bst" x="125" y="165"/>
+                        <text x="150" y="190" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">6</text>
+                        
+                        <use href="#node-bst" x="225" y="165"/>
+                        <text x="250" y="190" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">9</text>
+                        
+                        <use href="#node-bst" x="325" y="165"/>
+                        <text x="350" y="190" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">14</text>
+                        
+                        <use href="#node-bst" x="100" y="215"/>
+                        <text x="125" y="240" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">4</text>
+                        
+                        <use href="#node-bst" x="150" y="215"/>
+                        <text x="175" y="240" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">7</text>
+                        
+                        <use href="#node-bst" x="300" y="215"/>
+                        <text x="325" y="240" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">13</text>
+                        
+                        <!-- BST特性说明 -->
+                        <text x="200" y="20" font-family="'JetBrains Mono', monospace" font-size="14" fill="#F87171" text-anchor="middle">二叉搜索树特性</text>
+                        <text x="100" y="70" font-family="'JetBrains Mono', monospace" font-size="12" fill="#10B981" text-anchor="middle">左子树 < 根</text>
+                        <text x="300" y="70" font-family="'JetBrains Mono', monospace" font-size="12" fill="#8B5CF6" text-anchor="middle">右子树 > 根</text>
+                    </svg>
+                    <p class="text-sm text-slate-400 mt-2">图：一个包含10个节点的二叉搜索树，展示了左子树值小于根节点，右子树值大于根节点的特性</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 40. AVL树 -->
+        <section id="section-40" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">40. AVL树</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - AVL树实现</h4>
+                <p class="text-slate-300 mb-4">特点：AVL树是自平衡的二叉搜索树，任何节点的两个子树的高度差不超过1。支持旋转操作来维持平衡。注意事项：AVL树的插入删除操作复杂度为O(log n)，适用于需要严格平衡的场景。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># AVL树节点类</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">AVLNode</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">val</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.val = <span class="text-blue-300">val</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.left = <span class="text-purple-300">None</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.right = <span class="text-purple-300">None</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.height = <span class="text-yellow-300">1</span>
+                        <br>
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">AVLTree</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">get_height</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">node</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-300">not</span> <span class="text-blue-300">node</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-yellow-300">0</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">node</span>.height
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">get_balance</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">node</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-300">not</span> <span class="text-blue-300">node</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-yellow-300">0</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">self</span>.get_height(<span class="text-blue-300">node</span>.left) - <span class="text-blue-300">self</span>.get_height(<span class="text-blue-300">node</span>.right)
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">right_rotate</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">y</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x</span> = <span class="text-blue-300">y</span>.left<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T2</span> = <span class="text-blue-300">x</span>.right<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x</span>.right = <span class="text-blue-300">y</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y</span>.left = <span class="text-blue-300">T2</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y</span>.height = <span class="text-yellow-300">1</span> + <span class="text-purple-400">max</span>(<span class="text-blue-300">self</span>.get_height(<span class="text-blue-300">y</span>.left), <span class="text-blue-300">self</span>.get_height(<span class="text-blue-300">y</span>.right))<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x</span>.height = <span class="text-yellow-300">1</span> + <span class="text-purple-400">max</span>(<span class="text-blue-300">self</span>.get_height(<span class="text-blue-300">x</span>.left), <span class="text-blue-300">self</span>.get_height(<span class="text-blue-300">x</span>.right))<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">x</span>
+                    </div>
+                </div>
+                
+                <!-- AVL树结构图示 -->
+                <div class="mt-8 mb-8 text-center">
+                    <h5 class="text-lg font-medium mb-4 text-purple-400">AVL树结构示意图（带平衡因子）</h5>
+                    <svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 节点样式 -->
+                        <defs>
+                            <circle id="node-avl" cx="25" cy="25" r="25" fill="#1E293B" stroke="#3B82F6" stroke-width="3"/>
+                        </defs>
+                        
+                        <!-- 连接线 -->
+                        <line x1="200" y1="50" x2="100" y2="120" stroke="#64748B" stroke-width="2"/>
+                        <line x1="200" y1="50" x2="300" y2="120" stroke="#64748B" stroke-width="2"/>
+                        <line x1="100" y1="120" x2="50" y2="190" stroke="#64748B" stroke-width="2"/>
+                        <line x1="100" y1="120" x2="150" y2="190" stroke="#64748B" stroke-width="2"/>
+                        <line x1="300" y1="120" x2="250" y2="190" stroke="#64748B" stroke-width="2"/>
+                        <line x1="300" y1="120" x2="350" y2="190" stroke="#64748B" stroke-width="2"/>
+                        <line x1="150" y1="190" x2="100" y2="260" stroke="#64748B" stroke-width="2"/>
+                        <line x1="150" y1="190" x2="200" y2="260" stroke="#64748B" stroke-width="2"/>
+                        
+                        <!-- 节点 -->
+                        <use href="#node-avl" x="175" y="25"/>
+                        <text x="200" y="50" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">8</text>
+                        <circle cx="180" cy="35" r="8" fill="#10B981"/>
+                        <text x="180" y="38" font-family="'JetBrains Mono', monospace" font-size="10" fill="white" text-anchor="middle">0</text>
+                        
+                        <use href="#node-avl" x="75" y="95"/>
+                        <text x="100" y="120" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">3</text>
+                        <circle cx="85" cy="105" r="8" fill="#10B981"/>
+                        <text x="85" y="108" font-family="'JetBrains Mono', monospace" font-size="10" fill="white" text-anchor="middle">1</text>
+                        
+                        <use href="#node-avl" x="275" y="95"/>
+                        <text x="300" y="120" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">12</text>
+                        <circle cx="285" cy="105" r="8" fill="#10B981"/>
+                        <text x="285" y="108" font-family="'JetBrains Mono', monospace" font-size="10" fill="white" text-anchor="middle">0</text>
+                        
+                        <use href="#node-avl" x="25" y="165"/>
+                        <text x="50" y="190" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">1</text>
+                        <circle cx="35" cy="175" r="8" fill="#10B981"/>
+                        <text x="35" y="178" font-family="'JetBrains Mono', monospace" font-size="10" fill="white" text-anchor="middle">0</text>
+                        
+                        <use href="#node-avl" x="125" y="165"/>
+                        <text x="150" y="190" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">6</text>
+                        <circle cx="135" cy="175" r="8" fill="#10B981"/>
+                        <text x="135" y="178" font-family="'JetBrains Mono', monospace" font-size="10" fill="white" text-anchor="middle">1</text>
+                        
+                        <use href="#node-avl" x="225" y="165"/>
+                        <text x="250" y="190" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">10</text>
+                        <circle cx="235" cy="175" r="8" fill="#10B981"/>
+                        <text x="235" y="178" font-family="'JetBrains Mono', monospace" font-size="10" fill="white" text-anchor="middle">0</text>
+                        
+                        <use href="#node-avl" x="325" y="165"/>
+                        <text x="350" y="190" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">14</text>
+                        <circle cx="335" cy="175" r="8" fill="#10B981"/>
+                        <text x="335" y="178" font-family="'JetBrains Mono', monospace" font-size="10" fill="white" text-anchor="middle">0</text>
+                        
+                        <use href="#node-avl" x="75" y="235"/>
+                        <text x="100" y="260" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">4</text>
+                        <circle cx="85" cy="245" r="8" fill="#10B981"/>
+                        <text x="85" y="248" font-family="'JetBrains Mono', monospace" font-size="10" fill="white" text-anchor="middle">0</text>
+                        
+                        <use href="#node-avl" x="175" y="235"/>
+                        <text x="200" y="260" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">7</text>
+                        <circle cx="185" cy="245" r="8" fill="#10B981"/>
+                        <text x="185" y="248" font-family="'JetBrains Mono', monospace" font-size="10" fill="white" text-anchor="middle">0</text>
+                        
+                        <!-- AVL树特性说明 -->
+                        <text x="200" y="20" font-family="'JetBrains Mono', monospace" font-size="14" fill="#F87171" text-anchor="middle">AVL树特性</text>
+                        <text x="100" y="70" font-family="'JetBrains Mono', monospace" font-size="12" fill="#10B981" text-anchor="middle">平衡因子 ∈ {-1, 0, 1}</text>
+                        <text x="300" y="70" font-family="'JetBrains Mono', monospace" font-size="12" fill="#8B5CF6" text-anchor="middle">通过旋转维持平衡</text>
+                        
+                        <!-- 旋转示例说明 -->
+                        <rect x="50" y="270" width="300" height="30" rx="5" fill="#1E293B" stroke="#8B5CF6" stroke-width="2"/>
+                        <text x="200" y="290" font-family="'JetBrains Mono', monospace" font-size="12" fill="#cbd5e1" text-anchor="middle">节点旁的绿色数字表示平衡因子（左子树高度 - 右子树高度）</text>
+                    </svg>
+                    <p class="text-sm text-slate-400 mt-2">图：一个包含9个节点的AVL树，展示了所有节点的平衡因子都在允许范围内（-1, 0, 1）</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 41. 堆 -->
+        <section id="section-41" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">41. 堆</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 堆实现</h4>
+                <p class="text-slate-300 mb-4">特点：堆是完全二叉树，分为最大堆和最小堆。支持高效的插入和删除最大/最小值操作。注意事项：堆的插入删除操作复杂度为O(log n)，适用于优先队列、堆排序等场景。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 使用heapq模块实现最小堆</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">import</span> <span class="text-blue-300">heapq</span>
+                        <br>
+                        <span class="text-blue-300">heap</span> = []<br>
+                        <span class="text-blue-300">heapq</span>.heappush(<span class="text-blue-300">heap</span>, <span class="text-yellow-300">5</span>)<br>
+                        <span class="text-blue-300">heapq</span>.heappush(<span class="text-blue-300">heap</span>, <span class="text-yellow-300">3</span>)<br>
+                        <span class="text-blue-300">heapq</span>.heappush(<span class="text-blue-300">heap</span>, <span class="text-yellow-300">7</span>)<br>
+                        <span class="text-blue-300">heapq</span>.heappush(<span class="text-blue-300">heap</span>, <span class="text-yellow-300">1</span>)<br>
+                        <span class="text-green-300">print</span>(<span class="text-blue-300">heap</span>) <span class="text-slate-500"># [1, 3, 7, 5]</span><br>
+                        <span class="text-green-300">print</span>(<span class="text-blue-300">heapq</span>.heappop(<span class="text-blue-300">heap</span>)) <span class="text-slate-500"># 1</span><br>
+                        <span class="text-green-300">print</span>(<span class="text-blue-300">heap</span>[<span class="text-yellow-300">0</span>]) <span class="text-slate-500"># 3</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2"># 自定义最大堆类</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">MaxHeap</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.heap = []<br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">push</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">val</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.heap.append(<span class="text-blue-300">val</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>._heapify_up(<span class="text-purple-400">len</span>(<span class="text-blue-300">self</span>.heap) - <span class="text-yellow-300">1</span>)<br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">pop</span>(<span class="text-blue-300">self</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-400">len</span>(<span class="text-blue-300">self</span>.heap) == <span class="text-yellow-300">0</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise</span> <span class="text-purple-400">IndexError</span>(<span class="text-green-300">"Heap is empty"</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max_val</span> = <span class="text-blue-300">self</span>.heap[<span class="text-yellow-300">0</span>]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.heap[<span class="text-yellow-300">0</span>] = <span class="text-blue-300">self</span>.heap[-<span class="text-yellow-300">1</span>]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.heap.pop()<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>._heapify_down(<span class="text-yellow-300">0</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">max_val</span>
+                    </div>
+                </div>
+                
+                <!-- 堆结构图示 -->
+                <div class="mt-8 mb-8 text-center">
+                    <h5 class="text-lg font-medium mb-4 text-purple-400">堆结构示意图（最大堆）</h5>
+                    <svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 节点样式 -->
+                        <defs>
+                            <circle id="node-heap" cx="25" cy="25" r="25" fill="#1E293B" stroke="#3B82F6" stroke-width="3"/>
+                        </defs>
+                        
+                        <!-- 连接线 -->
+                        <line x1="200" y1="50" x2="100" y2="120" stroke="#64748B" stroke-width="2"/>
+                        <line x1="200" y1="50" x2="300" y2="120" stroke="#64748B" stroke-width="2"/>
+                        <line x1="100" y1="120" x2="50" y2="190" stroke="#64748B" stroke-width="2"/>
+                        <line x1="100" y1="120" x2="150" y2="190" stroke="#64748B" stroke-width="2"/>
+                        <line x1="300" y1="120" x2="250" y2="190" stroke="#64748B" stroke-width="2"/>
+                        <line x1="300" y1="120" x2="350" y2="190" stroke="#64748B" stroke-width="2"/>
+                        <line x1="50" y1="190" x2="25" y2="260" stroke="#64748B" stroke-width="2"/>
+                        <line x1="50" y1="190" x2="75" y2="260" stroke="#64748B" stroke-width="2"/>
+                        
+                        <!-- 节点 -->
+                        <use href="#node-heap" x="175" y="25"/>
+                        <text x="200" y="50" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">100</text>
+                        
+                        <use href="#node-heap" x="75" y="95"/>
+                        <text x="100" y="120" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">75</text>
+                        
+                        <use href="#node-heap" x="275" y="95"/>
+                        <text x="300" y="120" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">50</text>
+                        
+                        <use href="#node-heap" x="25" y="165"/>
+                        <text x="50" y="190" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">40</text>
+                        
+                        <use href="#node-heap" x="125" y="165"/>
+                        <text x="150" y="190" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">30</text>
+                        
+                        <use href="#node-heap" x="225" y="165"/>
+                        <text x="250" y="190" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">25</text>
+                        
+                        <use href="#node-heap" x="325" y="165"/>
+                        <text x="350" y="190" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">20</text>
+                        
+                        <use href="#node-heap" x="0" y="235"/>
+                        <text x="25" y="260" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">15</text>
+                        
+                        <use href="#node-heap" x="50" y="235"/>
+                        <text x="75" y="260" font-family="'JetBrains Mono', monospace" font-size="16" fill="#cbd5e1">10</text>
+                        
+                        <!-- 堆特性说明 -->
+                        <text x="200" y="20" font-family="'JetBrains Mono', monospace" font-size="14" fill="#F87171" text-anchor="middle">最大堆特性</text>
+                        <text x="100" y="70" font-family="'JetBrains Mono', monospace" font-size="12" fill="#10B981" text-anchor="middle">父节点 ≥ 子节点</text>
+                        <text x="300" y="70" font-family="'JetBrains Mono', monospace" font-size="12" fill="#8B5CF6" text-anchor="middle">完全二叉树结构</text>
+                        
+                        <!-- 数组表示 -->
+                        <rect x="50" y="270" width="300" height="30" rx="5" fill="#1E293B" stroke="#8B5CF6" stroke-width="2"/>
+                        <text x="200" y="290" font-family="'JetBrains Mono', monospace" font-size="12" fill="#cbd5e1" text-anchor="middle">数组表示：[100, 75, 50, 40, 30, 25, 20, 15, 10]</text>
+                    </svg>
+                    <p class="text-sm text-slate-400 mt-2">图：一个包含9个节点的最大堆，展示了父节点值大于等于子节点值的特性</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 42. 哈希表 -->
+        <section id="section-42" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">42. 哈希表</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 哈希表实现</h4>
+                <p class="text-slate-300 mb-4">特点：哈希表是通过哈希函数将键映射到值的数据结构，支持高效的插入、删除、查找操作。Python的dict就是哈希表。注意事项：哈希冲突会影响性能，最坏情况下操作复杂度为O(n)，平均情况下为O(1)。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 使用Python内置字典</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-blue-300">hash_table</span> = {}<br>
+                        <span class="text-blue-300">hash_table</span>[<span class="text-green-300">"name"</span>] = <span class="text-green-300">"张三"</span><br>
+                        <span class="text-blue-300">hash_table</span>[<span class="text-green-300">"age"</span>] = <span class="text-yellow-300">25</span><br>
+                        <span class="text-green-300">print</span>(<span class="text-blue-300">hash_table</span>[<span class="text-green-300">"name"</span>]) <span class="text-slate-500"># 张三</span><br>
+                        <span class="text-green-300">print</span>(<span class="text-green-300">"age"</span> <span class="text-purple-400">in</span> <span class="text-blue-300">hash_table</span>) <span class="text-slate-500"># True</span>
+                    </div>
+                    
+                    <div class="text-slate-400 mt-4 mb-2"># 自定义哈希表类（链地址法）</div>
+                    <div class="text-sm leading-6 mt-2">
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">HashTable</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">size</span>=<span class="text-yellow-300">10</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.size = <span class="text-blue-300">size</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.table = [[] <span class="text-purple-400">for</span> _ <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-blue-300">self</span>.size)]<br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">_hash</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">key</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-purple-400">hash</span>(<span class="text-blue-300">key</span>) % <span class="text-blue-300">self</span>.size<br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">put</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">key</span>, <span class="text-blue-300">value</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hash_index</span> = <span class="text-blue-300">self</span>._hash(<span class="text-blue-300">key</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">i</span>, (<span class="text-blue-300">k</span>, <span class="text-blue-300">v</span>) <span class="text-purple-400">in</span> <span class="text-purple-400">enumerate</span>(<span class="text-blue-300">self</span>.table[<span class="text-blue-300">hash_index</span>]):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">k</span> == <span class="text-blue-300">key</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.table[<span class="text-blue-300">hash_index</span>][<span class="text-blue-300">i</span>] = (<span class="text-blue-300">key</span>, <span class="text-blue-300">value</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.table[<span class="text-blue-300">hash_index</span>].append((<span class="text-blue-300">key</span>, <span class="text-blue-300">value</span>))
+                    </div>
+                </div>
+                
+                <!-- 哈希表结构图示 -->
+                <div class="mt-8 mb-8 text-center">
+                    <h5 class="text-lg font-medium mb-4 text-purple-400">哈希表结构示意图（链地址法）</h5>
+                    <svg width="500" height="300" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- 哈希桶 -->
+                        <rect x="50" y="50" width="80" height="200" rx="5" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+                        <rect x="150" y="50" width="80" height="200" rx="5" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+                        <rect x="250" y="50" width="80" height="200" rx="5" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+                        <rect x="350" y="50" width="80" height="200" rx="5" fill="#1E293B" stroke="#3B82F6" stroke-width="2"/>
+                        
+                        <!-- 桶编号 -->
+                        <text x="90" y="30" font-family="'JetBrains Mono', monospace" font-size="14" fill="#cbd5e1" text-anchor="middle">桶0</text>
+                        <text x="190" y="30" font-family="'JetBrains Mono', monospace" font-size="14" fill="#cbd5e1" text-anchor="middle">桶1</text>
+                        <text x="290" y="30" font-family="'JetBrains Mono', monospace" font-size="14" fill="#cbd5e1" text-anchor="middle">桶2</text>
+                        <text x="390" y="30" font-family="'JetBrains Mono', monospace" font-size="14" fill="#cbd5e1" text-anchor="middle">桶3</text>
+                        
+                        <!-- 桶0中的键值对 -->
+                        <rect x="60" y="70" width="60" height="40" rx="3" fill="#1E40AF" stroke="#3B82F6" stroke-width="1"/>
+                        <text x="90" y="90" font-family="'JetBrains Mono', monospace" font-size="10" fill="#cbd5e1" text-anchor="middle">"Alice"</text>
+                        <text x="90" y="110" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10B981" text-anchor="middle">25</text>
+                        
+                        <!-- 桶1中的键值对 -->
+                        <rect x="160" y="70" width="60" height="40" rx="3" fill="#1E40AF" stroke="#3B82F6" stroke-width="1"/>
+                        <text x="190" y="90" font-family="'JetBrains Mono', monospace" font-size="10" fill="#cbd5e1" text-anchor="middle">"Bob"</text>
+                        <text x="190" y="110" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10B981" text-anchor="middle">30</text>
+                        
+                        <rect x="160" y="120" width="60" height="40" rx="3" fill="#1E40AF" stroke="#3B82F6" stroke-width="1"/>
+                        <text x="190" y="140" font-family="'JetBrains Mono', monospace" font-size="10" fill="#cbd5e1" text-anchor="middle">"Charlie"</text>
+                        <text x="190" y="160" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10B981" text-anchor="middle">35</text>
+                        
+                        <rect x="160" y="170" width="60" height="40" rx="3" fill="#1E40AF" stroke="#3B82F6" stroke-width="1"/>
+                        <text x="190" y="190" font-family="'JetBrains Mono', monospace" font-size="10" fill="#cbd5e1" text-anchor="middle">"David"</text>
+                        <text x="190" y="210" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10B981" text-anchor="middle">40</text>
+                        
+                        <!-- 桶2中的键值对 -->
+                        <rect x="260" y="70" width="60" height="40" rx="3" fill="#1E40AF" stroke="#3B82F6" stroke-width="1"/>
+                        <text x="290" y="90" font-family="'JetBrains Mono', monospace" font-size="10" fill="#cbd5e1" text-anchor="middle">"Eve"</text>
+                        <text x="290" y="110" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10B981" text-anchor="middle">28</text>
+                        
+                        <!-- 桶3中的键值对 -->
+                        <rect x="360" y="70" width="60" height="40" rx="3" fill="#1E40AF" stroke="#3B82F6" stroke-width="1"/>
+                        <text x="390" y="90" font-family="'JetBrains Mono', monospace" font-size="10" fill="#cbd5e1" text-anchor="middle">"Frank"</text>
+                        <text x="390" y="110" font-family="'JetBrains Mono', monospace" font-size="10" fill="#10B981" text-anchor="middle">32</text>
+                        
+                        <!-- 链表连接 -->
+                        <line x1="220" y1="90" x2="220" y2="120" stroke="#3B82F6" stroke-width="2"/>
+                        <line x1="220" y1="140" x2="220" y2="170" stroke="#3B82F6" stroke-width="2"/>
+                        
+                        <!-- 哈希函数说明 -->
+                        <rect x="50" y="270" width="400" height="30" rx="5" fill="#1E293B" stroke="#8B5CF6" stroke-width="2"/>
+                        <text x="250" y="290" font-family="'JetBrains Mono', monospace" font-size="12" fill="#cbd5e1" text-anchor="middle">哈希函数：hash(key) % 4</text>
+                    </svg>
+                    <p class="text-sm text-slate-400 mt-2">图：一个包含4个桶的哈希表，使用链地址法解决哈希冲突，桶1中存在3个键值对</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 43. 图 -->
+        <section id="section-43" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">43. 图</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 图实现</h4>
+                <p class="text-slate-300 mb-4">特点：图是由顶点和边组成的数据结构，分为有向图和无向图。支持邻接矩阵和邻接表两种表示方法。注意事项：图的遍历操作复杂度为O(V+E)，适用于网络分析、路径查找等场景。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 使用邻接表表示无向图</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">class</span> <span class="text-blue-300">Graph</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">__init__</span>(<span class="text-blue-300">self</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.adj_list = {}<br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">add_vertex</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">vertex</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">vertex</span> <span class="text-purple-400">not</span> <span class="text-purple-400">in</span> <span class="text-blue-300">self</span>.adj_list:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.adj_list[<span class="text-blue-300">vertex</span>] = []<br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">add_edge</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">v1</span>, <span class="text-blue-300">v2</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">v1</span> <span class="text-purple-400">in</span> <span class="text-blue-300">self</span>.adj_list <span class="text-purple-400">and</span> <span class="text-blue-300">v2</span> <span class="text-purple-400">in</span> <span class="text-blue-300">self</span>.adj_list:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.adj_list[<span class="text-blue-300">v1</span>].append(<span class="text-blue-300">v2</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.adj_list[<span class="text-blue-300">v2</span>].append(<span class="text-blue-300">v1</span>)<br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;def</span> <span class="text-blue-300">bfs</span>(<span class="text-blue-300">self</span>, <span class="text-blue-300">start</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visited</span> = <span class="text-purple-400">set</span>()<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queue</span> = [<span class="text-blue-300">start</span>]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visited.add(<span class="text-blue-300">start</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result</span> = []<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while</span> <span class="text-blue-300">queue</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vertex</span> = <span class="text-blue-300">queue</span>.pop(<span class="text-yellow-300">0</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result</span>.append(<span class="text-blue-300">vertex</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">neighbor</span> <span class="text-purple-400">in</span> <span class="text-blue-300">self</span>.adj_list[<span class="text-blue-300">vertex</span>]:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">neighbor</span> <span class="text-purple-400">not</span> <span class="text-purple-400">in</span> <span class="text-blue-300">visited</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visited</span>.add(<span class="text-blue-300">neighbor</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;queue</span>.append(<span class="text-blue-300">neighbor</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">result</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 44. 冒泡排序 -->
+        <section id="section-44" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">44. 冒泡排序</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 冒泡排序实现</h4>
+                <p class="text-slate-300 mb-4">特点：通过重复遍历数组，比较相邻元素并交换位置来排序。时间复杂度O(n²)，空间复杂度O(1)。适用于小规模数据或教学演示。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 基本冒泡排序</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">bubble_sort</span>(<span class="text-blue-300">arr</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;n</span> = <span class="text-purple-400">len</span>(<span class="text-blue-300">arr</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">i</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-blue-300">n</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">j</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-yellow-300">0</span>, <span class="text-blue-300">n</span> - <span class="text-blue-300">i</span> - <span class="text-yellow-300">1</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">arr</span>[<span class="text-blue-300">j</span>] > <span class="text-blue-300">arr</span>[<span class="text-blue-300">j</span> + <span class="text-yellow-300">1</span>]:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr</span>[<span class="text-blue-300">j</span>], <span class="text-blue-300">arr</span>[<span class="text-blue-300">j</span> + <span class="text-yellow-300">1</span>] = <span class="text-blue-300">arr</span>[<span class="text-blue-300">j</span> + <span class="text-yellow-300">1</span>], <span class="text-blue-300">arr</span>[<span class="text-blue-300">j</span>]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">arr</span>
+                        <br>
+                        <span class="text-comment"># 优化版冒泡排序（提前终止）</span><br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">bubble_sort_optimized</span>(<span class="text-blue-300">arr</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;n</span> = <span class="text-purple-400">len</span>(<span class="text-blue-300">arr</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">i</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-blue-300">n</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swapped</span> = <span class="text-purple-300">False</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">j</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-yellow-300">0</span>, <span class="text-blue-300">n</span> - <span class="text-blue-300">i</span> - <span class="text-yellow-300">1</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">arr</span>[<span class="text-blue-300">j</span>] > <span class="text-blue-300">arr</span>[<span class="text-blue-300">j</span> + <span class="text-yellow-300">1</span>]:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr</span>[<span class="text-blue-300">j</span>], <span class="text-blue-300">arr</span>[<span class="text-blue-300">j</span> + <span class="text-yellow-300">1</span>] = <span class="text-blue-300">arr</span>[<span class="text-blue-300">j</span> + <span class="text-yellow-300">1</span>], <span class="text-blue-300">arr</span>[<span class="text-blue-300">j</span>]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;swapped</span> = <span class="text-purple-300">True</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-400">not</span> <span class="text-blue-300">swapped</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">arr</span>
+                    </div>
+                </div>
+                
+
+            </div>
+        </section>
+        
+        <!-- 45. 快速排序 -->
+        <section id="section-45" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">45. 快速排序</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 快速排序实现</h4>
+                <p class="text-slate-300 mb-4">特点：通过选择基准元素将数组分为两部分，递归排序。平均时间复杂度O(n log n)，最坏O(n²)，空间复杂度O(log n)。是实际应用中最常用的排序算法。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 基本快速排序</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">quick_sort</span>(<span class="text-blue-300">arr</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-400">len</span>(<span class="text-blue-300">arr</span>) <= <span class="text-yellow-300">1</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">arr</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;pivot</span> = <span class="text-blue-300">arr</span>[<span class="text-purple-400">len</span>(<span class="text-blue-300">arr</span>) // <span class="text-yellow-300">2</span>]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;left</span> = [<span class="text-blue-300">x</span> <span class="text-purple-400">for</span> <span class="text-blue-300">x</span> <span class="text-purple-400">in</span> <span class="text-blue-300">arr</span> <span class="text-purple-400">if</span> <span class="text-blue-300">x</span> < <span class="text-blue-300">pivot</span>]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;middle</span> = [<span class="text-blue-300">x</span> <span class="text-purple-400">for</span> <span class="text-blue-300">x</span> <span class="text-purple-400">in</span> <span class="text-blue-300">arr</span> <span class="text-purple-400">if</span> <span class="text-blue-300">x</span> == <span class="text-blue-300">pivot</span>]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;right</span> = [<span class="text-blue-300">x</span> <span class="text-purple-400">for</span> <span class="text-blue-300">x</span> <span class="text-purple-400">in</span> <span class="text-blue-300">arr</span> <span class="text-purple-400">if</span> <span class="text-blue-300">x</span> > <span class="text-blue-300">pivot</span>]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">quick_sort</span>(<span class="text-blue-300">left</span>) + <span class="text-blue-300">middle</span> + <span class="text-blue-300">quick_sort</span>(<span class="text-blue-300">right</span>)
+                        <br>
+                        <span class="text-comment"># 原地快速排序</span><br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">quick_sort_inplace</span>(<span class="text-blue-300">arr</span>, <span class="text-blue-300">low</span>, <span class="text-blue-300">high</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">low</span> < <span class="text-blue-300">high</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pi</span> = <span class="text-blue-300">self</span>._partition(<span class="text-blue-300">arr</span>, <span class="text-blue-300">low</span>, <span class="text-blue-300">high</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.quick_sort_inplace(<span class="text-blue-300">arr</span>, <span class="text-blue-300">low</span>, <span class="text-blue-300">pi</span> - <span class="text-yellow-300">1</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self</span>.quick_sort_inplace(<span class="text-blue-300">arr</span>, <span class="text-blue-300">pi</span> + <span class="text-yellow-300">1</span>, <span class="text-blue-300">high</span>)
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 46. 归并排序 -->
+        <section id="section-46" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">46. 归并排序</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 归并排序实现</h4>
+                <p class="text-slate-300 mb-4">特点：采用分治法，将数组递归分割后合并。时间复杂度O(n log n)，空间复杂度O(n)。稳定排序，适用于大规模数据。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 归并排序</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">merge_sort</span>(<span class="text-blue-300">arr</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-400">len</span>(<span class="text-blue-300">arr</span>) <= <span class="text-yellow-300">1</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">arr</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;mid</span> = <span class="text-purple-400">len</span>(<span class="text-blue-300">arr</span>) // <span class="text-yellow-300">2</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;left</span> = <span class="text-blue-300">merge_sort</span>(<span class="text-blue-300">arr</span>[:<span class="text-blue-300">mid</span>])<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;right</span> = <span class="text-blue-300">merge_sort</span>(<span class="text-blue-300">arr</span>[<span class="text-blue-300">mid</span>:])<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">merge</span>(<span class="text-blue-300">left</span>, <span class="text-blue-300">right</span>)
+                        <br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">merge</span>(<span class="text-blue-300">left</span>, <span class="text-blue-300">right</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;result</span> = []<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;i</span> = <span class="text-blue-300">j</span> = <span class="text-yellow-300">0</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;while</span> <span class="text-blue-300">i</span> < <span class="text-purple-400">len</span>(<span class="text-blue-300">left</span>) <span class="text-purple-400">and</span> <span class="text-blue-300">j</span> < <span class="text-purple-400">len</span>(<span class="text-blue-300">right</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">left</span>[<span class="text-blue-300">i</span>] <= <span class="text-blue-300">right</span>[<span class="text-blue-300">j</span>]:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result</span>.append(<span class="text-blue-300">left</span>[<span class="text-blue-300">i</span>])<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i</span> += <span class="text-yellow-300">1</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result</span>.append(<span class="text-blue-300">right</span>[<span class="text-blue-300">j</span>])<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j</span> += <span class="text-yellow-300">1</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;result</span>.extend(<span class="text-blue-300">left</span>[<span class="text-blue-300">i</span>:])<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;result</span>.extend(<span class="text-blue-300">right</span>[<span class="text-blue-300">j</span>:])<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">result</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 47. 堆排序 -->
+        <section id="section-47" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">47. 堆排序</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 堆排序实现</h4>
+                <p class="text-slate-300 mb-4">特点：利用堆数据结构进行排序。时间复杂度O(n log n)，空间复杂度O(1)。不稳定排序，适用于需要原地排序的场景。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 堆排序</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">heap_sort</span>(<span class="text-blue-300">arr</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;n</span> = <span class="text-purple-400">len</span>(<span class="text-blue-300">arr</span>)<br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;# 构建最大堆</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">i</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-blue-300">n</span> // <span class="text-yellow-300">2</span> - <span class="text-yellow-300">1</span>, -<span class="text-yellow-300">1</span>, -<span class="text-yellow-300">1</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;heapify</span>(<span class="text-blue-300">arr</span>, <span class="text-blue-300">n</span>, <span class="text-blue-300">i</span>)<br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;# 逐个提取元素</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">i</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-blue-300">n</span> - <span class="text-yellow-300">1</span>, <span class="text-yellow-300">0</span>, -<span class="text-yellow-300">1</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr</span>[<span class="text-yellow-300">0</span>], <span class="text-blue-300">arr</span>[<span class="text-blue-300">i</span>] = <span class="text-blue-300">arr</span>[<span class="text-blue-300">i</span>], <span class="text-blue-300">arr</span>[<span class="text-yellow-300">0</span>]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;heapify</span>(<span class="text-blue-300">arr</span>, <span class="text-blue-300">i</span>, <span class="text-yellow-300">0</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">arr</span>
+                        <br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">heapify</span>(<span class="text-blue-300">arr</span>, <span class="text-blue-300">n</span>, <span class="text-blue-300">i</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;largest</span> = <span class="text-blue-300">i</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;left</span> = <span class="text-yellow-300">2</span> * <span class="text-blue-300">i</span> + <span class="text-yellow-300">1</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;right</span> = <span class="text-yellow-300">2</span> * <span class="text-blue-300">i</span> + <span class="text-yellow-300">2</span><br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">left</span> < <span class="text-blue-300">n</span> <span class="text-purple-400">and</span> <span class="text-blue-300">arr</span>[<span class="text-blue-300">left</span>] > <span class="text-blue-300">arr</span>[<span class="text-blue-300">largest</span>]:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;largest</span> = <span class="text-blue-300">left</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">right</span> < <span class="text-blue-300">n</span> <span class="text-purple-400">and</span> <span class="text-blue-300">arr</span>[<span class="text-blue-300">right</span>] > <span class="text-blue-300">arr</span>[<span class="text-blue-300">largest</span>]:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;largest</span> = <span class="text-blue-300">right</span><br>
+                        <br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">largest</span> != <span class="text-blue-300">i</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arr</span>[<span class="text-blue-300">i</span>], <span class="text-blue-300">arr</span>[<span class="text-blue-300">largest</span>] = <span class="text-blue-300">arr</span>[<span class="text-blue-300">largest</span>], <span class="text-blue-300">arr</span>[<span class="text-blue-300">i</span>]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;heapify</span>(<span class="text-blue-300">arr</span>, <span class="text-blue-300">n</span>, <span class="text-blue-300">largest</span>)
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 48. 线性搜索 -->
+        <section id="section-48" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">48. 线性搜索</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 线性搜索实现</h4>
+                <p class="text-slate-300 mb-4">特点：逐个检查数组中的元素直到找到目标。时间复杂度O(n)，空间复杂度O(1)。适用于无序数组或小规模数据。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 基本线性搜索</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">linear_search</span>(<span class="text-blue-300">arr</span>, <span class="text-blue-300">target</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">i</span>, <span class="text-blue-300">value</span> <span class="text-purple-400">in</span> <span class="text-purple-400">enumerate</span>(<span class="text-blue-300">arr</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">value</span> == <span class="text-blue-300">target</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">i</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> -<span class="text-yellow-300">1</span>
+                        <br>
+                        <span class="text-comment"># 返回所有匹配项的索引</span><br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">linear_search_all</span>(<span class="text-blue-300">arr</span>, <span class="text-blue-300">target</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;result</span> = []<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">i</span>, <span class="text-blue-300">value</span> <span class="text-purple-400">in</span> <span class="text-purple-400">enumerate</span>(<span class="text-blue-300">arr</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">value</span> == <span class="text-blue-300">target</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result</span>.append(<span class="text-blue-300">i</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">result</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 49. 二分搜索 -->
+        <section id="section-49" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">49. 二分搜索</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 二分搜索实现</h4>
+                <p class="text-slate-300 mb-4">特点：在有序数组中通过比较中间元素来缩小搜索范围。时间复杂度O(log n)，空间复杂度O(1)。适用于有序数组的大规模搜索。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 迭代版二分搜索</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">binary_search</span>(<span class="text-blue-300">arr</span>, <span class="text-blue-300">target</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;left</span>, <span class="text-blue-300">right</span> = <span class="text-yellow-300">0</span>, <span class="text-purple-400">len</span>(<span class="text-blue-300">arr</span>) - <span class="text-yellow-300">1</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;while</span> <span class="text-blue-300">left</span> <= <span class="text-blue-300">right</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mid</span> = <span class="text-blue-300">left</span> + (<span class="text-blue-300">right</span> - <span class="text-blue-300">left</span>) // <span class="text-yellow-300">2</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">arr</span>[<span class="text-blue-300">mid</span>] == <span class="text-blue-300">target</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">mid</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif</span> <span class="text-blue-300">arr</span>[<span class="text-blue-300">mid</span>] < <span class="text-blue-300">target</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left</span> = <span class="text-blue-300">mid</span> + <span class="text-yellow-300">1</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right</span> = <span class="text-blue-300">mid</span> - <span class="text-yellow-300">1</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> -<span class="text-yellow-300">1</span>
+                        <br>
+                        <span class="text-comment"># 递归版二分搜索</span><br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">binary_search_recursive</span>(<span class="text-blue-300">arr</span>, <span class="text-blue-300">target</span>, <span class="text-blue-300">left</span>=<span class="text-yellow-300">0</span>, <span class="text-blue-300">right</span>=<span class="text-purple-300">None</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">right</span> <span class="text-purple-400">is</span> <span class="text-purple-300">None</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right</span> = <span class="text-purple-400">len</span>(<span class="text-blue-300">arr</span>) - <span class="text-yellow-300">1</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">left</span> > <span class="text-blue-300">right</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> -<span class="text-yellow-300">1</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;mid</span> = <span class="text-blue-300">left</span> + (<span class="text-blue-300">right</span> - <span class="text-blue-300">left</span>) // <span class="text-yellow-300">2</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">arr</span>[<span class="text-blue-300">mid</span>] == <span class="text-blue-300">target</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">mid</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;elif</span> <span class="text-blue-300">arr</span>[<span class="text-blue-300">mid</span>] < <span class="text-blue-300">target</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">binary_search_recursive</span>(<span class="text-blue-300">arr</span>, <span class="text-blue-300">target</span>, <span class="text-blue-300">mid</span> + <span class="text-yellow-300">1</span>, <span class="text-blue-300">right</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;else</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">binary_search_recursive</span>(<span class="text-blue-300">arr</span>, <span class="text-blue-300">target</span>, <span class="text-blue-300">left</span>, <span class="text-blue-300">mid</span> - <span class="text-yellow-300">1</span>)
+                    </div>
+                </div>
+                
+
+            </div>
+        </section>
+        
+        <!-- 50. 动态规划 -->
+        <section id="section-50" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">50. 动态规划</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 动态规划实现</h4>
+                <p class="text-slate-300 mb-4">特点：通过将复杂问题分解为子问题并存储结果来避免重复计算。适用于最优化问题，如斐波那契数列、背包问题等。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 斐波那契数列（动态规划）</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">fibonacci_dp</span>(<span class="text-blue-300">n</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">n</span> <= <span class="text-yellow-300">1</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">n</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;dp</span> = [<span class="text-yellow-300">0</span>] * (<span class="text-blue-300">n</span> + <span class="text-yellow-300">1</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;dp</span>[<span class="text-yellow-300">0</span>], <span class="text-blue-300">dp</span>[<span class="text-yellow-300">1</span>] = <span class="text-yellow-300">0</span>, <span class="text-yellow-300">1</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">i</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-yellow-300">2</span>, <span class="text-blue-300">n</span> + <span class="text-yellow-300">1</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dp</span>[<span class="text-blue-300">i</span>] = <span class="text-blue-300">dp</span>[<span class="text-blue-300">i</span> - <span class="text-yellow-300">1</span>] + <span class="text-blue-300">dp</span>[<span class="text-blue-300">i</span> - <span class="text-yellow-300">2</span>]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">dp</span>[<span class="text-blue-300">n</span>]
+                        <br>
+                        <span class="text-comment"># 背包问题（0-1背包）</span><br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">knapsack_01</span>(<span class="text-blue-300">weights</span>, <span class="text-blue-300">values</span>, <span class="text-blue-300">capacity</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;n</span> = <span class="text-purple-400">len</span>(<span class="text-blue-300">weights</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;dp</span> = [[<span class="text-yellow-300">0</span> <span class="text-purple-400">for</span> _ <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-blue-300">capacity</span> + <span class="text-yellow-300">1</span>)] <span class="text-purple-400">for</span> _ <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-blue-300">n</span> + <span class="text-yellow-300">1</span>)]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">i</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-yellow-300">1</span>, <span class="text-blue-300">n</span> + <span class="text-yellow-300">1</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">w</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-yellow-300">1</span>, <span class="text-blue-300">capacity</span> + <span class="text-yellow-300">1</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">weights</span>[<span class="text-blue-300">i</span> - <span class="text-yellow-300">1</span>] <= <span class="text-blue-300">w</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dp</span>[<span class="text-blue-300">i</span>][<span class="text-blue-300">w</span>] = <span class="text-purple-400">max</span>(<span class="text-blue-300">dp</span>[<span class="text-blue-300">i</span> - <span class="text-yellow-300">1</span>][<span class="text-blue-300">w</span>], <span class="text-blue-300">values</span>[<span class="text-blue-300">i</span> - <span class="text-yellow-300">1</span>] + <span class="text-blue-300">dp</span>[<span class="text-blue-300">i</span> - <span class="text-yellow-300">1</span>][<span class="text-blue-300">w</span> - <span class="text-blue-300">weights</span>[<span class="text-blue-300">i</span> - <span class="text-yellow-300">1</span>]])<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dp</span>[<span class="text-blue-300">i</span>][<span class="text-blue-300">w</span>] = <span class="text-blue-300">dp</span>[<span class="text-blue-300">i</span> - <span class="text-yellow-300">1</span>][<span class="text-blue-300">w</span>]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">dp</span>[<span class="text-blue-300">n</span>][<span class="text-blue-300">capacity</span>]
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 51. 贪心算法 -->
+        <section id="section-51" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">51. 贪心算法</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 贪心算法实现</h4>
+                <p class="text-slate-300 mb-4">特点：在每一步选择中都采取当前状态下最优的选择，期望通过局部最优解得到全局最优解。适用于活动选择、哈夫曼编码等。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 活动选择问题</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">activity_selection</span>(<span class="text-blue-300">start</span>, <span class="text-blue-300">end</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;n</span> = <span class="text-purple-400">len</span>(<span class="text-blue-300">start</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;activities</span> = <span class="text-purple-400">list</span>(<span class="text-purple-400">zip</span>(<span class="text-blue-300">start</span>, <span class="text-blue-300">end</span>))<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;activities</span>.sort(<span class="text-purple-400">key</span>=<span class="text-purple-400">lambda</span> <span class="text-blue-300">x</span>: <span class="text-blue-300">x</span>[<span class="text-yellow-300">1</span>])<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;result</span> = []<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;last_end</span> = -<span class="text-purple-400">float</span>(<span class="text-green-300">'inf'</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">s</span>, <span class="text-blue-300">e</span> <span class="text-purple-400">in</span> <span class="text-blue-300">activities</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">s</span> >= <span class="text-blue-300">last_end</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result</span>.append((<span class="text-blue-300">s</span>, <span class="text-blue-300">e</span>))<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;last_end</span> = <span class="text-blue-300">e</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">result</span>
+                        <br>
+                        <span class="text-comment"># 硬币找零问题</span><br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">coin_change</span>(<span class="text-blue-300">coins</span>, <span class="text-blue-300">amount</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;coins</span>.sort(<span class="text-purple-400">reverse</span>=<span class="text-purple-300">True</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;result</span> = []<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">coin</span> <span class="text-purple-400">in</span> <span class="text-blue-300">coins</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while</span> <span class="text-blue-300">amount</span> >= <span class="text-blue-300">coin</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result</span>.append(<span class="text-blue-300">coin</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amount</span> -= <span class="text-blue-300">coin</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">result</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 52. 回溯算法 -->
+        <section id="section-52" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">52. 回溯算法</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 回溯算法实现</h4>
+                <p class="text-slate-300 mb-4">特点：通过探索所有可能的候选解来找出所有解，如果发现当前路径不可能得到解就回溯。适用于N皇后、数独、全排列等。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># 全排列问题</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">permute</span>(<span class="text-blue-300">nums</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;result</span> = []<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;used</span> = [<span class="text-purple-300">False</span>] * <span class="text-purple-400">len</span>(<span class="text-blue-300">nums</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;backtrack</span>(<span class="text-blue-300">nums</span>, [], <span class="text-blue-300">used</span>, <span class="text-blue-300">result</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">result</span>
+                        <br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">backtrack</span>(<span class="text-blue-300">nums</span>, <span class="text-blue-300">path</span>, <span class="text-blue-300">used</span>, <span class="text-blue-300">result</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-purple-400">len</span>(<span class="text-blue-300">path</span>) == <span class="text-purple-400">len</span>(<span class="text-blue-300">nums</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result</span>.append(<span class="text-blue-300">path</span>[:])<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">i</span> <span class="text-purple-400">in</span> <span class="text-purple-400">range</span>(<span class="text-purple-400">len</span>(<span class="text-blue-300">nums</span>)):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">used</span>[<span class="text-blue-300">i</span>]:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used</span>[<span class="text-blue-300">i</span>] = <span class="text-purple-300">True</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path</span>.append(<span class="text-blue-300">nums</span>[<span class="text-blue-300">i</span>])<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;backtrack</span>(<span class="text-blue-300">nums</span>, <span class="text-blue-300">path</span>, <span class="text-blue-300">used</span>, <span class="text-blue-300">result</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;path</span>.pop()<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;used</span>[<span class="text-blue-300">i</span>] = <span class="text-purple-300">False</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 53. 图算法 -->
+        <section id="section-53" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">
+                <span class="gradient-text">53. 图算法</span>
+            </h2>
+            
+            <div class="language-content" data-lang="python">
+                <h4 class="text-lg font-medium mb-4 text-purple-400">Python - 图算法实现</h4>
+                <p class="text-slate-300 mb-4">特点：图算法用于处理图结构数据，包括最短路径、最小生成树、拓扑排序等。适用于网络分析、路径规划等场景。</p>
+                <div class="code-block rounded-lg p-4 code-font text-sm">
+                    <div class="text-slate-400 mb-2"># Dijkstra最短路径算法</div>
+                    <div class="text-sm leading-6">
+                        <span class="text-purple-400">import</span> <span class="text-blue-300">heapq</span>
+                        <br>
+                        <span class="text-purple-400">def</span> <span class="text-blue-300">dijkstra</span>(<span class="text-blue-300">graph</span>, <span class="text-blue-300">start</span>):<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;distances</span> = {<span class="text-blue-300">node</span>: <span class="text-purple-400">float</span>(<span class="text-green-300">'inf'</span>) <span class="text-purple-400">for</span> <span class="text-blue-300">node</span> <span class="text-purple-400">in</span> <span class="text-blue-300">graph</span>}<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;distances</span>[<span class="text-blue-300">start</span>] = <span class="text-yellow-300">0</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;pq</span> = [(<span class="text-yellow-300">0</span>, <span class="text-blue-300">start</span>)]<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;visited</span> = <span class="text-purple-400">set</span>()<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;while</span> <span class="text-blue-300">pq</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;current_dist</span>, <span class="text-blue-300">current_node</span> = <span class="text-blue-300">heapq</span>.heappop(<span class="text-blue-300">pq</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">current_node</span> <span class="text-purple-400">in</span> <span class="text-blue-300">visited</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;visited</span>.add(<span class="text-blue-300">current_node</span>)<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for</span> <span class="text-blue-300">neighbor</span>, <span class="text-blue-300">weight</span> <span class="text-purple-400">in</span> <span class="text-blue-300">graph</span>[<span class="text-blue-300">current_node</span>].items():<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">neighbor</span> <span class="text-purple-400">in</span> <span class="text-blue-300">visited</span>:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;distance</span> = <span class="text-blue-300">current_dist</span> + <span class="text-blue-300">weight</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if</span> <span class="text-blue-300">distance</span> < <span class="text-blue-300">distances</span>[<span class="text-blue-300">neighbor</span>]:<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;distances</span>[<span class="text-blue-300">neighbor</span>] = <span class="text-blue-300">distance</span><br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;heapq</span>.heappush(<span class="text-blue-300">pq</span>, (<span class="text-blue-300">distance</span>, <span class="text-blue-300">neighbor</span>))<br>
+                        <span class="text-green-300">&nbsp;&nbsp;&nbsp;&nbsp;return</span> <span class="text-blue-300">distances</span>
+                    </div>
+                </div>
+            </div>
         </section>
      
     </main>
