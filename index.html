@@ -421,50 +421,50 @@
                 </p>
             </div>
             
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6">
-                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6" id="language-cards">
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center cursor-pointer hover:scale-105 transition-transform duration-300" onclick="window.location.href='tutorials.html?lang=python'">
                     <div class="language-icon python">Py</div>
                     <h3 class="text-lg font-bold text-white mb-2">Python</h3>
                     <p class="text-gray-400 text-sm">简洁易学</p>
                 </div>
                 
-                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center cursor-pointer hover:scale-105 transition-transform duration-300" onclick="window.location.href='tutorials.html?lang=javascript'">
                     <div class="language-icon javascript">JS</div>
                     <h3 class="text-lg font-bold text-white mb-2">JavaScript</h3>
                     <p class="text-gray-400 text-sm">Web开发</p>
                 </div>
                 
-                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center cursor-pointer hover:scale-105 transition-transform duration-300" onclick="window.location.href='tutorials.html?lang=typescript'">
                     <div class="language-icon typescript">TS</div>
                     <h3 class="text-lg font-bold text-white mb-2">TypeScript</h3>
                     <p class="text-gray-400 text-sm">类型安全</p>
                 </div>
                 
-                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center cursor-pointer hover:scale-105 transition-transform duration-300" onclick="window.location.href='tutorials.html?lang=java'">
                     <div class="language-icon java">Ja</div>
                     <h3 class="text-lg font-bold text-white mb-2">Java</h3>
                     <p class="text-gray-400 text-sm">企业级</p>
                 </div>
                 
-                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center cursor-pointer hover:scale-105 transition-transform duration-300" onclick="window.location.href='tutorials.html?lang=cpp'">
                     <div class="language-icon cpp">C++</div>
                     <h3 class="text-lg font-bold text-white mb-2">C++</h3>
                     <p class="text-gray-400 text-sm">高性能</p>
                 </div>
                 
-                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center cursor-pointer hover:scale-105 transition-transform duration-300" onclick="window.location.href='tutorials.html?lang=csharp'">
                     <div class="language-icon csharp">C#</div>
                     <h3 class="text-lg font-bold text-white mb-2">C#</h3>
                     <p class="text-gray-400 text-sm">.NET生态</p>
                 </div>
                 
-                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center cursor-pointer hover:scale-105 transition-transform duration-300" onclick="window.location.href='tutorials.html?lang=go'">
                     <div class="language-icon go">Go</div>
                     <h3 class="text-lg font-bold text-white mb-2">Go</h3>
                     <p class="text-gray-400 text-sm">并发编程</p>
                 </div>
                 
-                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center">
+                <div class="card-hover bg-slate-700 rounded-xl p-6 text-center cursor-pointer hover:scale-105 transition-transform duration-300" onclick="window.location.href='tutorials.html?lang=rust'">
                     <div class="language-icon rust">Ru</div>
                     <h3 class="text-lg font-bold text-white mb-2">Rust</h3>
                     <p class="text-gray-400 text-sm">系统编程</p>
@@ -845,5 +845,69 @@ int main() {
     </footer>
 
     <script src="main.js"></script>
+    
+    <script>
+        // 语言名称到语言代码的映射
+        const languageMap = {
+            'Python': 'python',
+            'JavaScript': 'javascript',
+            'TypeScript': 'typescript',
+            'Java': 'java',
+            'C++': 'cpp',
+            'C#': 'csharp',
+            'Go': 'go',
+            'Rust': 'rust',
+            'Swift': 'swift',
+            'Kotlin': 'kotlin',
+            'Dart': 'dart',
+            'Ruby': 'ruby',
+            'C': 'c',
+            'PHP': 'php',
+            'HTML/CSS': 'htmlcss',
+            'SQL': 'sql',
+            'R': 'r',
+            'Scala': 'scala',
+            'Julia': 'julia',
+            'Lua': 'lua',
+            'Scratch': 'scratch',
+            'Shell/Bash': 'shell',
+            'Perl': 'perl',
+            'Lisp': 'lisp',
+            'Zig': 'zig',
+            'Scheme': 'scheme',
+            'Erlang': 'erlang',
+            'Haskell': 'haskell'
+        };
+        
+        // 获取语言卡片容器
+        const languageCardsContainer = document.getElementById('language-cards');
+        
+        // 添加点击事件监听器
+        languageCardsContainer.addEventListener('click', function(e) {
+            // 找到被点击的卡片元素
+            const card = e.target.closest('.card-hover');
+            if (card) {
+                // 获取语言名称
+                const languageName = card.querySelector('h3').textContent;
+                // 获取语言代码
+                const languageCode = languageMap[languageName];
+                // 跳转到对应语言的教程页面
+                window.location.href = `tutorials.html?lang=${languageCode}`;
+            }
+        });
+        
+        // 为所有语言卡片添加光标样式和悬停效果
+        const languageCards = document.querySelectorAll('.card-hover');
+        languageCards.forEach(card => {
+            card.style.cursor = 'pointer';
+            card.style.transition = 'transform 0.3s ease';
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
 
 </body></html>

@@ -1016,9 +1016,32 @@
             });
         });
         
-        // Load default language (Python) on page load
+        // 获取URL参数
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+        
+        // Load language based on URL parameter or default to Python
         document.addEventListener('DOMContentLoaded', function() {
-            loadLanguageContent('python');
+            // 获取URL中的语言参数
+            const langParam = getUrlParameter('lang');
+            // 如果参数存在且有效，则加载对应的语言教程，否则默认加载Python教程
+            const defaultLang = langParam && languageFiles[langParam] ? langParam : 'python';
+            
+            loadLanguageContent(defaultLang);
+            
+            // 激活对应的语言标签
+            const languageTabs = document.querySelectorAll('.language-tab');
+            languageTabs.forEach(tab => {
+                if (tab.dataset.lang === defaultLang) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
             
             // 初始化主题
             initTheme();
